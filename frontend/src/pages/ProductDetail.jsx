@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import API from "../api";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import SmartSizeFinder from "../components/SmartSizeFinder";
+
 import {
   Heart,
   ShoppingCart,
@@ -21,6 +23,7 @@ export default function ProductDetail() {
   const [activeImg, setActiveImg] = useState("");
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
+  const [sizeFinderOpen, setSizeFinderOpen] = useState(false);
 
   useEffect(() => {
     API.get(`/products/${slug}`).then((res) => {
@@ -173,6 +176,12 @@ export default function ProductDetail() {
               <Heart size={20} fill={liked ? "currentColor" : "none"} />
             </button>
           </div>
+          <button
+  onClick={() => setSizeFinderOpen(true)}
+  className="mt-4 text-cyan-700 font-bold hover:underline"
+>
+  Find My Size
+</button>
 
           {/* Description */}
           <div className="mt-8 text-gray-600 leading-7">
@@ -181,6 +190,12 @@ export default function ProductDetail() {
           </div>
         </section>
       </div>
+<SmartSizeFinder
+  open={sizeFinderOpen}
+  onClose={() => setSizeFinderOpen(false)}
+  onSelectSize={(selectedSize) => setSize(selectedSize)}
+  product={product}
+/>
     </main>
   );
 }
