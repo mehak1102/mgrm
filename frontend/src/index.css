@@ -230,3 +230,16 @@ html {
     transform: translateX(-50%);
   }
 }
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

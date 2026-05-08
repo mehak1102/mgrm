@@ -79,14 +79,15 @@ export default function Shop() {
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-          <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24">
+          {/* <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24"> */}
+          <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] sticky top-24 h-[calc(100vh-110px)] overflow-hidden">
             <div className="p-5 border-b flex justify-between items-center">
               <h2 className="text-xl font-black">Filters</h2>
               <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
                 Clear All
               </button>
             </div>
-
+<div className="h-[calc(100%-72px)] overflow-y-auto custom-scroll">
             <div className="p-5 border-b">
               <div className="flex justify-between font-black text-sm mb-4">
                 BODY PART <ChevronDown size={16} />
@@ -169,6 +170,7 @@ export default function Shop() {
                   </button>
                 ))}
               </div>
+          
             </div>
 
             <div className="p-5">
@@ -186,6 +188,7 @@ export default function Shop() {
                 className="w-full accent-purple-600"
               />
             </div>
+              </div>
           </aside>
 
           <section>
