@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+// import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Heart,
   Grid2X2,
@@ -18,6 +19,7 @@ const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"]
 
 export default function Shop() {
   const [params] = useSearchParams();
+  const navigate = useNavigate();
   const { addToCart } = useCart();
   // const { wishlist, toggleWishlist } = useWishlist();
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -62,12 +64,13 @@ export default function Shop() {
     return list;
   }, [products, sort, maxPrice]);
 
-  const clearFilters = () => {
-    setActiveCategory("");
-    setSelectedColor("");
-    setSelectedSize("");
-    setMaxPrice(5000);
-  };
+const clearFilters = () => {
+  setActiveCategory("");
+  setSelectedColor("");
+  setSelectedSize("");
+  setSort("popularity");
+  navigate("/shop", { replace: true });
+};
 
   const isLiked = (product) => wishlist?.some((x) => x._id === product._id);
 
@@ -95,7 +98,13 @@ export default function Shop() {
 
               <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
                 <button
-                  onClick={() => setActiveCategory("")}
+                  // onClick={() => setActiveCategory("")}
+  onClick={() => {
+  setActiveCategory("");
+  setSelectedColor("");
+  setSelectedSize("");
+  navigate("/shop", { replace: true });
+}}
                   className={`text-left px-3 py-2 rounded-xl font-semibold ${
                     !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
                   }`}
@@ -106,7 +115,11 @@ export default function Shop() {
                 {bodyCategories.map((cat) => (
                   <button
                     key={cat.name}
-                    onClick={() => setActiveCategory(cat.query)}
+                    // onClick={() => setActiveCategory(cat.query)}
+onClick={() => {
+  setActiveCategory(cat.query);
+  navigate(`/shop?category=${encodeURIComponent(cat.query)}`);
+}}
                     className={`text-left px-3 py-2 rounded-xl font-semibold ${
                       activeCategory === cat.query ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
                     }`}

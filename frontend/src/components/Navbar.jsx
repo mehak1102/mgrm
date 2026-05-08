@@ -136,13 +136,18 @@ export default function Navbar() {
 
 
 
+const handleSearch = (e) => {
+  e.preventDefault();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const q = e.target.search.value.trim();
-    navigate(q ? `/shop?search=${encodeURIComponent(q)}` : "/shop");
-  };
+  const q = e.target.search.value.trim();
 
+  if (!q) {
+    navigate("/shop");
+    return;
+  }
+
+  navigate(`/shop?search=${encodeURIComponent(q)}`);
+};
   
 
   return (
