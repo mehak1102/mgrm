@@ -598,8 +598,10 @@ export default function Home() {
       <div className="relative z-10">
         {/* HERO */}
         <section className="relative min-h-[92vh] pt-10 pb-20 overflow-hidden">
+        {/* <section className="relative min-h-screen pt-10 pb-20 overflow-hidden bg-white"> */}
           <video
             className="absolute inset-0 w-full h-full object-cover opacity-[0.90]"
+      
             src="/videos/hero.mp4"
             autoPlay
             muted
@@ -608,6 +610,7 @@ export default function Home() {
           />
 
           <div className="absolute inset-0 bg-gradient-to-b from-white/78 via-white/60 to-white/82" />
+
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
           <div className="relative max-w-[1500px] mx-auto px-6">
@@ -615,6 +618,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-[42px] md:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 max-w-6xl pt-4"
+              // className="text-[34px] sm:text-[46px] md:text-[64px] xl:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 max-w-6xl pt-4"
             >
               <span className="text-red-500">248</span> top certified products
             </motion.h1>

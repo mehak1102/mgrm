@@ -156,7 +156,7 @@ export default function Navbar() {
       e.currentTarget.style.display = "none";
     }}
     alt="MGRM Medicare"
-    className="h-12 w-auto object-contain"
+      className="h-14 md:h-16 w-auto object-contain hover:scale-105 transition duration-300"
   />
 </Link>
 
