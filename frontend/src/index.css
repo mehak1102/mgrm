@@ -211,3 +211,22 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+.marquee-cert {
+  animation: certScroll 28s linear infinite;
+}
+
+.marquee-cert:hover {
+  animation-play-state: paused;
+}
+
+@keyframes certScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}

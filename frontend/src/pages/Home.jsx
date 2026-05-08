@@ -506,6 +506,8 @@ import {
   Truck,
   RotateCcw,
   BadgeCheck,
+  Award,
+  CheckCircle2,
 } from "lucide-react";
 import API from "../api";
 import ProductCard from "../components/ProductCard";
@@ -520,6 +522,39 @@ export default function Home() {
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
+
+  const certifications = [
+  {
+    title: "ISO Certified",
+    subtitle: "International quality standards",
+    image: "/certifications/iso.png",
+    glow: "cyan",
+  },
+  {
+    title: "WHO-GMP",
+    subtitle: "Global manufacturing compliance",
+    image: "/certifications/who-gmp.png",
+    glow: "emerald",
+  },
+  {
+    title: "FDA Approved",
+    subtitle: "Trusted medical safety",
+    image: "/certifications/fda.png",
+    glow: "fuchsia",
+  },
+  {
+    title: "Quality Brands",
+    subtitle: "Recognized healthcare excellence",
+    image: "/certifications/quality.png",
+    glow: "orange",
+  },
+  {
+    title: "CE Certified",
+    subtitle: "European conformity standards",
+    image: "/certifications/ce.png",
+    glow: "slate",
+  },
+];
 
   useEffect(() => {
     API.get("/products")
@@ -767,6 +802,107 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+
+        {/* GLOBAL CERTIFICATIONS */}
+<section className="relative max-w-[1500px] mx-auto px-6 py-20 overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 rounded-[50px]" />
+
+  <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-14 items-center">
+    
+    {/* LEFT */}
+    <div className="overflow-hidden">
+      <div className="flex gap-7 w-max marquee-cert py-4">
+        {[...certifications, ...certifications].map((item, i) => {
+          // const Icon = item.icon;
+
+          return (
+            <motion.div
+              key={`${item.title}-${i}`}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: (i % certifications.length) * 0.08 }}
+              className="w-[280px] shrink-0 rounded-[34px] bg-white/85 backdrop-blur-xl border border-white shadow-[0_25px_70px_rgba(15,23,42,0.10)] p-7 group hover:-translate-y-2 transition duration-500"
+            >
+              {/* <div
+                className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition`}
+              >
+                <Icon size={38} strokeWidth={2.3} />
+              </div> */}
+<div
+  // className="w-24 h-24 rounded-3xl bg-white shadow-xl flex items-center justify-center border border-slate-100 group-hover:scale-110 transition"
+  className="w-28 h-28 rounded-[30px] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 group-hover:scale-110 transition"
+>
+  <img
+    src={item.image}
+    alt={item.title}
+    // className="w-16 h-16 object-contain"
+    className="w-20 h-20 object-contain"
+  />
+</div>
+              <h3 className="mt-6 text-2xl font-black text-slate-900">
+                {item.title}
+              </h3>
+
+              <p className="mt-3 text-slate-500 leading-7">
+                {item.subtitle}
+              </p>
+
+              <div className="mt-5 flex items-center gap-2 text-emerald-600 font-black text-sm">
+                <CheckCircle2 size={16} />
+                Verified Standard
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+
+    {/* RIGHT */}
+    <div className="relative">
+      <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
+      <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
+
+      <div className="relative bg-white/80 backdrop-blur-xl rounded-[40px] p-10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] border border-white">
+        <p className="text-emerald-600 font-black tracking-[0.25em] text-sm">
+          TRUST & SAFETY
+        </p>
+
+        <h2 className="text-5xl font-black mt-4 leading-tight text-slate-900">
+          Expect The <br /> Best
+        </h2>
+
+        <p className="mt-6 text-lg text-slate-500 leading-8">
+          MGRM’s strong focus on quality ensures every orthopedic and
+          recovery product meets internationally recognized healthcare
+          standards for comfort, durability and safety.
+        </p>
+
+        <div className="mt-8 grid grid-cols-2 gap-4">
+          {[
+            "Medical Grade Quality",
+            "International Standards",
+            "Premium Materials",
+            "Trusted Recovery",
+          ].map((text) => (
+            <div
+              key={text}
+              className="flex items-center gap-3 bg-slate-50 rounded-2xl px-4 py-4"
+            >
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                <CheckCircle2 size={18} />
+              </div>
+
+              <span className="font-bold text-slate-700 text-sm">
+                {text}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* BEST SELLERS */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-20 overflow-hidden">
