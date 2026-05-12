@@ -243,3 +243,39 @@ html {
 .custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+
+.marquee-premium {
+  animation: premium-marquee 35s linear infinite;
+}
+
+.marquee-premium:hover {
+  animation-play-state: paused;
+}
+
+@keyframes premium-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-premium {
+  animation: premiumMarquee 35s linear infinite;
+}
+
+.marquee-premium:hover {
+  animation-play-state: paused;
+}
+
+@keyframes premiumMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -121,7 +121,7 @@
 // }
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Search, ShoppingCart, Heart, User, LogOut, ChevronDown } from "lucide-react";
+import { Search, ShoppingCart, HeartPulse , User, LogOut, ChevronDown } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
@@ -172,7 +172,7 @@ const handleSearch = (e) => {
 
         <nav className="hidden lg:flex items-center gap-6 font-bold text-sm">
           <div className="group py-5">
-            <button className="flex items-center gap-1">Shop By Body Part <ChevronDown size={15} /></button>
+            <button className="flex items-center gap-1">Find Support By Body Area <ChevronDown size={15} /></button>
             <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-white/95 backdrop-blur-xl shadow-2xl border-t">
               <div className="max-w-7xl mx-auto grid grid-cols-5 gap-5 p-6">
                 {bodyCategories.map((cat) => (
@@ -276,7 +276,7 @@ const handleSearch = (e) => {
   onClick={() => navigate("/wishlist")}
   className="p-2 rounded-full hover:bg-gray-100 relative"
 >
-  <Heart size={20} />
+  <HeartPulse  size={20} />
 
   {wishlist.length > 0 && (
     <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-5 h-5 grid place-items-center">

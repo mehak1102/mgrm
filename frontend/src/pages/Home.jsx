@@ -908,6 +908,452 @@ export default function Home() {
   </div>
 </section>
 
+
+{/* ========================= MGRM PREMIUM STORY SECTION ========================= */}
+{/* <section className="relative max-w-[1550px] mx-auto px-6 py-28 overflow-hidden">
+
+
+  <div className="absolute inset-0 rounded-[55px] overflow-hidden">
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover scale-105"
+      src="/videos/medical-bg.mp4"
+    />
+  
+    <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/72 to-cyan-50/40" />
+  
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_35%)]" />
+  </div>
+
+
+  <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-cyan-400/20 blur-3xl" />
+  <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-fuchsia-500/20 blur-3xl" />
+
+  <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-20 items-center">
+
+    <div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        <span className="inline-flex items-center gap-2 bg-white/65 backdrop-blur-xl border border-white/60 rounded-full px-5 py-2 text-cyan-600 font-bold tracking-widest text-sm">
+          GLOBAL MEDICAL BRAND
+        </span>
+
+        <h2 className="mt-7 text-slate-900 text-[56px] leading-[0.95] font-black max-w-3xl">
+          BANDAGE TO SPLINTAGE™
+        </h2>
+
+        <h3 className="mt-3 text-cyan-600 text-3xl font-bold">
+          Physical Rehabilitation Splints & Aids
+        </h3>
+
+        <p className="mt-7 text-slate-500 text-lg leading-9 max-w-2xl">
+          MGRM products are scientifically designed to limit harmful and
+          dangerous movement during soft tissue injuries. We provide
+          internationally trusted orthopedic supports, rehabilitation aids
+          and recovery solutions for hospitals, athletes and home care.
+        </p>
+
+        <div className="mt-10 flex flex-wrap gap-5">
+          <Link
+            to="/shop"
+            // className="group relative overflow-hidden rounded-full bg-cyan-500 px-8 py-4 font-black text-slate-900 shadow-[0_20px_60px_rgba(0,255,255,0.35)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-8 py-4 font-black text-white shadow-[0_15px_40px_rgba(34,211,238,0.35)] hover:scale-105 transition"
+          >
+            <span className="relative z-10">Discover Products</span>
+
+            <span className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition duration-500" />
+          </Link>
+
+          <Link
+            to="/support"
+            // className="rounded-full border border-white/20 bg-white/65 backdrop-blur-xl px-8 py-4 font-black text-slate-900 hover:bg-white hover:text-slate-900 transition"
+            className="rounded-full border border-cyan-100 bg-white/80 backdrop-blur-xl px-8 py-4 font-black text-slate-700 shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:bg-cyan-500 hover:text-white transition"
+          >
+            Become Partner
+          </Link>
+        </div>
+      </motion.div>
+
+
+      <div className="grid grid-cols-3 gap-5 mt-16">
+
+        {[
+          ["248+", "Products"],
+          ["40+", "Countries"],
+          ["25+", "Years"],
+        ].map(([num, text], i) => (
+          <motion.div
+            key={text}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            // className="rounded-[28px] bg-white/65 backdrop-blur-2xl border border-white/60 p-7 shadow-[0_20px_60px_rgba(0,0,0,0.18)] hover:-translate-y-2 transition"
+            className="rounded-[28px] bg-gradient-to-br from-cyan-50/90 via-white/90 to-blue-50/90 backdrop-blur-2xl border border-white shadow-[0_15px_45px_rgba(15,23,42,0.08)] hover:-translate-y-2 transition"
+          >
+            <h3 className="text-5xl font-black text-slate-900">{num}</h3>
+            <p className="text-slate-500 mt-2 font-semibold">{text}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+
+    <div className="relative h-[760px] flex items-center justify-center -ml-10">
+
+  
+      <motion.div
+        animate={{ y: [0, -18, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="relative w-[480px] rounded-[40px] overflow-hidden border border-white/60 bg-gradient-to-br from-cyan-50/90 via-white/90 to-blue-50/90 backdrop-blur-2xl shadow-[0_25px_80px_rgba(15,23,42,0.10)]"
+        
+      >
+        <img
+          src="/banners/bandage.png"
+          className="w-full h-[600px] object-cover"
+          onError={(e) => {
+            e.currentTarget.src =
+              "https://images.unsplash.com/photo-1588776814546-bc2c4d0f3f30?auto=format&fit=crop&w=900&q=80";
+          }}
+        />
+
+        <div className="p-8 bg-gradient-to-b from-black/0 to-black/60 absolute inset-0 flex flex-col justify-end">
+          <span className="text-cyan-600 font-black tracking-widest text-sm">
+            PREMIUM ORTHOPEDIC SUPPORT
+          </span>
+
+          <h3 className="text-slate-900 text-4xl font-black mt-3">
+            Expect The Best
+          </h3>
+
+          <p className="text-slate-200 mt-4 leading-7">
+            Internationally certified recovery and rehabilitation products
+            designed for maximum comfort and support.
+          </p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute -left-6 top-20 w-64 rounded-[30px] bg-white/65 backdrop-blur-2xl border border-white/60 p-6 shadow-[0_25px_80px_rgba(0,0,0,0.30)]"
+      >
+        <p className="text-cyan-600 font-black tracking-widest text-xs">
+          GLOBAL PRESENCE
+        </p>
+
+        <h4 className="text-slate-900 text-3xl font-black mt-3">
+          40+ Countries
+        </h4>
+
+        <p className="text-slate-500 mt-3 leading-7 text-sm">
+          Expanding partnerships with hospitals, distributors and healthcare
+          providers worldwide.
+        </p>
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute -right-8 bottom-14 w-72 rounded-[30px] bg-white/65 backdrop-blur-2xl border border-white/60 p-7 shadow-[0_25px_80px_rgba(0,0,0,0.30)]"
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-cyan-500 text-slate-900 flex items-center justify-center text-2xl font-black">
+            ✓
+          </div>
+
+          <div>
+            <h4 className="text-slate-900 font-black text-2xl">
+              WHO-GMP
+            </h4>
+
+            <p className="text-slate-500 text-sm">
+              Certified manufacturing quality
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5 h-2 rounded-full bg-white/65 overflow-hidden">
+          <div className="w-[92%] h-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 rounded-full" />
+        </div>
+      </motion.div>
+    </div>
+  </div>
+
+
+  <div className="relative mt-24 overflow-hidden">
+
+    <div className="flex gap-8 w-max marquee-premium">
+
+      {[
+        "WELCOME TO MGRM",
+        "GLOBAL PRESENCE",
+        "EXPECT THE BEST",
+        "PARTNER PROGRAM",
+        "ORTHOPEDIC SUPPORT",
+        "REHABILITATION PRODUCTS",
+        "INTERNATIONAL QUALITY",
+        "MEDICAL GRADE",
+        "HEALTHCARE SOLUTIONS",
+      ]
+        .concat([
+          "WELCOME TO MGRM",
+          "GLOBAL PRESENCE",
+          "EXPECT THE BEST",
+          "PARTNER PROGRAM",
+          "ORTHOPEDIC SUPPORT",
+          "REHABILITATION PRODUCTS",
+          "INTERNATIONAL QUALITY",
+          "MEDICAL GRADE",
+          "HEALTHCARE SOLUTIONS",
+        ])
+        .map((item, i) => (
+          <div
+            key={i}
+            className="rounded-full px-8 py-4 bg-white/65 backdrop-blur-xl border border-white/60 text-slate-900 font-black tracking-wide whitespace-nowrap shadow-lg"
+          >
+            {item}
+          </div>
+        ))}
+    </div>
+  </div>
+</section> */}
+
+{/* ========================= PREMIUM MGRM SECTION ========================= */}
+<section className="relative max-w-[1550px] mx-auto px-6 py-28 overflow-hidden">
+
+  {/* BACKGROUND */}
+  <div className="absolute inset-0 rounded-[55px] overflow-hidden">
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover scale-105"
+      src="/videos/medical-bg.mp4"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/72 to-cyan-50/40" />
+
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_35%)]" />
+  </div>
+
+  {/* BLURS */}
+  <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-cyan-400/10 blur-3xl" />
+  <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-blue-400/10 blur-3xl" />
+
+  {/* <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-20 items-center"> */}
+  <div className="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+
+    {/* LEFT */}
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        <span className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-xl border border-white rounded-full px-5 py-2 text-cyan-700 font-black tracking-[0.25em] text-xs shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
+          GLOBAL MEDICAL BRAND
+        </span>
+
+        <h2 className="mt-7 text-slate-900 text-[58px] leading-[0.95] font-black max-w-3xl">
+          BANDAGE TO SPLINTAGE™
+        </h2>
+
+        <h3 className="mt-3 text-cyan-600 text-3xl font-black">
+          Physical Rehabilitation Splints & Aids
+        </h3>
+
+        <p className="mt-7 text-slate-600 text-lg leading-9 max-w-2xl">
+          MGRM products are scientifically designed to limit harmful and
+          dangerous movement during soft tissue injuries. We provide
+          internationally trusted orthopedic supports, rehabilitation aids
+          and recovery solutions for hospitals, athletes and home care.
+        </p>
+
+        {/* BUTTONS */}
+        <div className="mt-10 flex flex-wrap gap-5">
+
+          <Link
+            to="/shop"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-8 py-4 font-black text-white shadow-[0_15px_40px_rgba(34,211,238,0.35)] hover:scale-105 transition"
+          >
+            <span className="relative z-10">
+              Discover Products
+            </span>
+
+            <span className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition duration-500" />
+          </Link>
+
+          <Link
+            to="/supoort"
+            className="rounded-full border border-cyan-100 bg-white/80 backdrop-blur-xl px-8 py-4 font-black text-slate-700 shadow-[0_10px_35px_rgba(15,23,42,0.06)] hover:bg-cyan-500 hover:text-white transition"
+          >
+            Become Partner
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* STATS */}
+      <div className="grid grid-cols-3 gap-5 mt-16">
+
+        {[
+          ["248+", "Products"],
+          ["40+", "Countries"],
+          ["25+", "Years"],
+        ].map(([num, text], i) => (
+          <motion.div
+            key={text}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="rounded-[28px] bg-white/75 backdrop-blur-2xl border border-white shadow-[0_15px_45px_rgba(15,23,42,0.08)] p-7 hover:-translate-y-2 transition"
+          >
+            <h3 className="text-5xl font-black text-slate-900">
+              {num}
+            </h3>
+
+            <p className="text-slate-500 mt-2 font-semibold">
+              {text}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+
+    {/* RIGHT */}
+    <div className="relative h-[760px] flex items-center justify-center -ml-10">
+
+      {/* MAIN CARD */}
+      <motion.div
+        animate={{ y: [0, -18, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="relative w-[480px] before:absolute before:inset-0 before:rounded-[40px] before:p-[1px] before:bg-gradient-to-br before:from-cyan-200 before:to-blue-200 before:-z-10 rounded-[40px] overflow-hidden border border-white bg-gradient-to-br from-cyan-50/90 via-white/90 to-blue-50/90 shadow-[0_25px_80px_rgba(15,23,42,0.10)]"
+      >
+
+        <img
+          src="/banners/bandage.png"
+          className="w-full h-[600px] object-cover"
+          onError={(e) => {
+            e.currentTarget.src =
+              "https://images.unsplash.com/photo-1588776814546-bc2c4d0f3f30?auto=format&fit=crop&w=900&q=80";
+          }}
+        />
+
+        <div className="p-8 bg-gradient-to-b from-transparent to-white/95 absolute inset-0 flex flex-col justify-end">
+
+          <span className="text-cyan-600 font-black tracking-widest text-sm">
+            PREMIUM ORTHOPEDIC SUPPORT
+          </span>
+
+          <h3 className="text-slate-900 text-4xl font-black mt-3">
+            Expect The Best
+          </h3>
+
+          <p className="text-slate-600 mt-4 leading-7">
+            Internationally certified recovery and rehabilitation products
+            designed for maximum comfort and support.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* FLOATING CARD */}
+      <motion.div
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute -left-10 top-20 w-64 rounded-[30px] bg-gradient-to-br from-white/95 to-cyan-50/90 backdrop-blur-2xl border border-white p-6 shadow-[0_25px_80px_rgba(15,23,42,0.10)]"
+      >
+
+        <p className="text-cyan-600 font-black tracking-widest text-xs">
+          GLOBAL PRESENCE
+        </p>
+
+        <h4 className="text-slate-900 text-3xl font-black mt-3">
+          40+ Countries
+        </h4>
+
+        <p className="text-slate-500 mt-3 leading-7 text-sm">
+          Expanding partnerships with hospitals, distributors and healthcare
+          providers worldwide.
+        </p>
+      </motion.div>
+
+      {/* FLOATING CARD 2 */}
+      <motion.div
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute -right-8 bottom-14 w-72 rounded-[30px] bg-gradient-to-br from-white/95 to-cyan-50/90 backdrop-blur-2xl border border-white p-7 shadow-[0_25px_80px_rgba(15,23,42,0.10)]"
+      >
+
+        <div className="flex items-center gap-4">
+
+          <div className="w-16 h-16 rounded-2xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-2xl font-black">
+            ✓
+          </div>
+
+          <div>
+            <h4 className="text-slate-900 font-black text-2xl">
+              WHO-GMP
+            </h4>
+
+            <p className="text-slate-500 text-sm">
+              Certified manufacturing quality
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5 h-2 rounded-full bg-slate-100 overflow-hidden">
+          <div className="w-[92%] h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
+        </div>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* MOVING TAGS */}
+  <div className="relative mt-24 overflow-hidden">
+
+    <div className="flex gap-8 w-max marquee-premium">
+
+      {[
+        "WELCOME TO MGRM",
+        "GLOBAL PRESENCE",
+        "EXPECT THE BEST",
+        "PARTNER PROGRAM",
+        "ORTHOPEDIC SUPPORT",
+        "REHABILITATION PRODUCTS",
+        "INTERNATIONAL QUALITY",
+        "MEDICAL GRADE",
+        "HEALTHCARE SOLUTIONS",
+      ]
+        .concat([
+          "WELCOME TO MGRM",
+          "GLOBAL PRESENCE",
+          "EXPECT THE BEST",
+          "PARTNER PROGRAM",
+          "ORTHOPEDIC SUPPORT",
+          "REHABILITATION PRODUCTS",
+          "INTERNATIONAL QUALITY",
+          "MEDICAL GRADE",
+          "HEALTHCARE SOLUTIONS",
+        ])
+        .map((item, i) => (
+          <div
+            key={i}
+            className="rounded-full px-8 py-4 bg-gradient-to-r from-cyan-50 to-white backdrop-blur-xl border border-white text-slate-700 font-black tracking-wide whitespace-nowrap shadow-[0_10px_35px_rgba(15,23,42,0.06)]"
+          >
+            {item}
+          </div>
+        ))}
+    </div>
+  </div>
+</section>
+
+
         {/* BEST SELLERS */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-20 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-[50px]" />

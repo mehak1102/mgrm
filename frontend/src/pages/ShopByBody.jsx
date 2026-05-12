@@ -48,7 +48,7 @@ export default function ShopByBody() {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-black"
             >
-              <Sparkles size={16} /> Shop By Body Part
+              <Sparkles size={16} /> Find Support By Body Area
             </motion.div>
 
             <motion.h1
