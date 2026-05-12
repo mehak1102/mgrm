@@ -1125,9 +1125,8 @@ export default function Home() {
 </section> */}
 
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="relative max-w-[1550px] mx-auto px-6 py-28 overflow-hidden">
+{/* <section className="relative max-w-[1550px] mx-auto px-6 py-28 overflow-hidden">
 
-  {/* BACKGROUND */}
   <div className="absolute inset-0 rounded-[55px] overflow-hidden">
     <video
       autoPlay
@@ -1138,19 +1137,21 @@ export default function Home() {
       src="/videos/medical-bg.mp4"
     />
 
-    <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/72 to-cyan-50/40" />
+  
+    <div className="absolute inset-0 bg-gradient-to-r from-white/78 via-white/45 to-cyan-50/20" />
 
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.10),transparent_35%)]" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.06),transparent_40%)]" />
   </div>
 
-  {/* BLURS */}
-  <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-cyan-400/10 blur-3xl" />
-  <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-blue-400/10 blur-3xl" />
 
-  {/* <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-20 items-center"> */}
+  <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-cyan-400/5 blur-3xl" />
+
+  <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-blue-400/5 blur-3xl" />
+
+
   <div className="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
 
-    {/* LEFT */}
+   
     <div>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -1176,7 +1177,6 @@ export default function Home() {
           and recovery solutions for hospitals, athletes and home care.
         </p>
 
-        {/* BUTTONS */}
         <div className="mt-10 flex flex-wrap gap-5">
 
           <Link
@@ -1199,7 +1199,6 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* STATS */}
       <div className="grid grid-cols-3 gap-5 mt-16">
 
         {[
@@ -1226,10 +1225,9 @@ export default function Home() {
       </div>
     </div>
 
-    {/* RIGHT */}
     <div className="relative h-[760px] flex items-center justify-center -ml-10">
 
-      {/* MAIN CARD */}
+   
       <motion.div
         animate={{ y: [0, -18, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
@@ -1262,7 +1260,7 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* FLOATING CARD */}
+
       <motion.div
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
@@ -1283,7 +1281,7 @@ export default function Home() {
         </p>
       </motion.div>
 
-      {/* FLOATING CARD 2 */}
+   
       <motion.div
         animate={{ y: [0, -15, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
@@ -1314,7 +1312,7 @@ export default function Home() {
     </div>
   </div>
 
-  {/* MOVING TAGS */}
+ 
   <div className="relative mt-24 overflow-hidden">
 
     <div className="flex gap-8 w-max marquee-premium">
@@ -1345,6 +1343,262 @@ export default function Home() {
           <div
             key={i}
             className="rounded-full px-8 py-4 bg-gradient-to-r from-cyan-50 to-white backdrop-blur-xl border border-white text-slate-700 font-black tracking-wide whitespace-nowrap shadow-[0_10px_35px_rgba(15,23,42,0.06)]"
+          >
+            {item}
+          </div>
+        ))}
+    </div>
+  </div>
+</section> */}
+
+{/* ========================= PREMIUM MGRM SECTION ========================= */}
+<section className="relative max-w-[1600px] mx-auto px-6 py-32 overflow-hidden">
+
+  {/* BACKGROUND */}
+  <div className="absolute inset-0 rounded-[60px] overflow-hidden">
+
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover scale-110 opacity-[0.88]"
+      src="/videos/medical-bg.mp4"
+    />
+
+    {/* cinematic overlay */}
+    <div className="absolute inset-0 bg-gradient-to-r from-white/82 via-white/38 to-cyan-50/10" />
+
+    {/* light effect */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.08),transparent_38%)]" />
+
+    {/* edge blur */}
+    <div className="absolute inset-0 backdrop-blur-[1px]" />
+  </div>
+
+  {/* FLOATING BLURS */}
+  <div className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full bg-cyan-300/10 blur-[120px]" />
+  <div className="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-blue-300/10 blur-[120px]" />
+
+  {/* CONTENT */}
+  <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+
+    {/* LEFT SIDE */}
+    <div className="max-w-3xl">
+
+      <motion.div
+        initial={{ opacity: 0, y: 35 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+
+        {/* TOP BADGE */}
+        <div className="inline-flex items-center gap-3 rounded-full border border-white/70 bg-white/65 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)]">
+
+          <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
+
+          <span className="text-[11px] tracking-[0.35em] font-black text-cyan-700">
+            GLOBAL MEDICAL BRAND
+          </span>
+        </div>
+
+        {/* TITLE */}
+        <h2 className="mt-8 text-[68px] leading-[0.92] font-black text-slate-900">
+          BANDAGE TO
+          <br />
+          SPLINTAGE™
+        </h2>
+
+        {/* SUBTITLE */}
+        <h3 className="mt-5 text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+          Physical Rehabilitation Splints & Aids
+        </h3>
+
+        {/* DESC */}
+        <p className="mt-8 text-lg leading-9 text-slate-600 max-w-2xl">
+          MGRM products are scientifically engineered to stabilize,
+          support and accelerate recovery during injuries and
+          rehabilitation. Trusted by hospitals, physiotherapists,
+          athletes and healthcare providers globally.
+        </p>
+
+        {/* BUTTONS */}
+        <div className="mt-12 flex flex-wrap gap-5">
+
+          <Link
+            to="/shop"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-9 py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300"
+          >
+            <span className="relative z-10">
+              Discover Products
+            </span>
+
+            <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition duration-500" />
+          </Link>
+
+          <Link
+            to="/support"
+            className="rounded-full bg-white/78 backdrop-blur-2xl border border-white px-9 py-4 text-slate-700 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300"
+          >
+            Partner Program
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* STATS */}
+      <div className="grid grid-cols-3 gap-5 mt-16">
+
+        {[
+          ["248+", "Products"],
+          ["40+", "Countries"],
+          ["25+", "Years"],
+        ].map(([num, text], i) => (
+
+          <motion.div
+            key={text}
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08 }}
+            className="rounded-[30px] bg-white/70 backdrop-blur-2xl border border-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] p-7 hover:-translate-y-2 hover:bg-white/85 transition duration-500"
+          >
+
+            <h3 className="text-5xl font-black text-slate-900">
+              {num}
+            </h3>
+
+            <p className="mt-2 text-slate-500 font-semibold">
+              {text}
+            </p>
+
+          </motion.div>
+        ))}
+      </div>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="relative h-[780px] flex items-center justify-start -ml-16">
+
+      {/* MAIN IMAGE CARD */}
+      <motion.div
+        animate={{ y: [0, -18, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="relative w-[500px] rounded-[42px] overflow-hidden border border-white/70 bg-white/40 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)]"
+      >
+
+        <img
+          src="/banners/bandage.png"
+          className="w-full h-[650px] object-cover"
+        />
+
+        {/* gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95" />
+
+        {/* content */}
+        <div className="absolute bottom-0 left-0 right-0 p-8">
+
+          <span className="text-cyan-600 text-sm tracking-[0.3em] font-black">
+            PREMIUM ORTHOPEDIC SUPPORT
+          </span>
+
+          <h3 className="mt-3 text-4xl font-black text-slate-900">
+            Expect The Best
+          </h3>
+
+          <p className="mt-4 text-slate-600 leading-7">
+            Internationally certified recovery and rehabilitation
+            products designed for premium support and comfort.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* FLOATING CARD */}
+      <motion.div
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute -left-24 top-20 w-72 rounded-[34px] bg-white/80 backdrop-blur-2xl border border-white shadow-[0_30px_90px_rgba(15,23,42,0.12)] p-7"
+      >
+
+        <p className="text-xs font-black tracking-[0.3em] text-cyan-600">
+          GLOBAL PRESENCE
+        </p>
+
+        <h4 className="mt-3 text-4xl font-black text-slate-900">
+          40+
+        </h4>
+
+        <p className="text-lg font-bold text-slate-700 mt-1">
+          Countries
+        </p>
+
+        <p className="mt-4 text-sm leading-7 text-slate-500">
+          Expanding partnerships with healthcare providers,
+          distributors and hospitals worldwide.
+        </p>
+      </motion.div>
+
+      {/* FLOATING CARD 2 */}
+      <motion.div
+        animate={{ y: [0, -16, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute right-8 bottom-16 w-80 rounded-[34px] bg-white/82 backdrop-blur-2xl border border-white shadow-[0_30px_90px_rgba(15,23,42,0.12)] p-7"
+      >
+
+        <div className="flex items-center gap-4">
+
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-700 flex items-center justify-center text-2xl font-black">
+            ✓
+          </div>
+
+          <div>
+            <h4 className="text-2xl font-black text-slate-900">
+              WHO-GMP
+            </h4>
+
+            <p className="text-sm text-slate-500">
+              Certified Manufacturing
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 h-2 rounded-full bg-slate-100 overflow-hidden">
+          <div className="w-[92%] h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+        </div>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* MOVING TAGS */}
+  <div className="relative mt-24 overflow-hidden">
+
+    <div className="flex gap-6 w-max marquee-premium">
+
+      {[
+        "WELCOME TO MGRM",
+        "GLOBAL PRESENCE",
+        "EXPECT THE BEST",
+        "PARTNER PROGRAM",
+        "ORTHOPEDIC SUPPORT",
+        "MEDICAL GRADE",
+        "REHABILITATION PRODUCTS",
+        "HEALTHCARE SOLUTIONS",
+        "INTERNATIONAL QUALITY",
+      ]
+        .concat([
+          "WELCOME TO MGRM",
+          "GLOBAL PRESENCE",
+          "EXPECT THE BEST",
+          "PARTNER PROGRAM",
+          "ORTHOPEDIC SUPPORT",
+          "MEDICAL GRADE",
+          "REHABILITATION PRODUCTS",
+          "HEALTHCARE SOLUTIONS",
+          "INTERNATIONAL QUALITY",
+        ])
+        .map((item, i) => (
+
+          <div
+            key={i}
+            className="rounded-full bg-white/70 backdrop-blur-2xl border border-white px-8 py-4 text-slate-700 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] hover:bg-cyan-500 hover:text-white transition duration-300"
           >
             {item}
           </div>
