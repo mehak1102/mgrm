@@ -126,6 +126,8 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
 import { bodyCategories, activities } from "../data/siteData";
+// import Logo3D from "./Logo3D";
+import Logo3D from "./Logo3D";
 
 // export default function Navbar({ theme, setTheme }) {
 export default function Navbar() {
@@ -161,7 +163,7 @@ const handleSearch = (e) => {
     
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-5">
-       <Link to="/" className="flex items-center gap-3 shrink-0">
+       {/* <Link to="/" className="flex items-center gap-3 shrink-0">
   <img
     src="/logo.png"
     onError={(e) => {
@@ -170,7 +172,8 @@ const handleSearch = (e) => {
     alt="MGRM Medicare"
       className="h-14 md:h-16 w-auto object-contain hover:scale-105 transition duration-300"
   />
-</Link>
+</Link> */}
+<Logo3D />
 
         <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-xl relative">
           <Search className="absolute left-4 top-3.5 text-gray-400" size={18} />
