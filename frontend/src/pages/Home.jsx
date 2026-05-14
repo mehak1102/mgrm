@@ -1403,7 +1403,8 @@ export default function Home() {
         </div>
 
         {/* TITLE */}
-        <h2 className="mt-8 text-[68px] leading-[0.92] font-black text-slate-900">
+        {/* <h2 className="mt-8 text-[68px] leading-[0.92] font-black text-slate-900"> */}
+        <h2 className="mt-6 text-5xl md:text-6xl font-black leading-tight">
           BANDAGE TO
           <br />
           SPLINTAGE™
@@ -1476,7 +1477,7 @@ export default function Home() {
     </div>
 
     {/* RIGHT SIDE */}
-    <div className="relative h-[780px] flex items-center justify-start -ml-16">
+    <div className="relative h-[620px] flex items-center justify-start -ml-16">
 
       {/* MAIN IMAGE CARD */}
       <motion.div

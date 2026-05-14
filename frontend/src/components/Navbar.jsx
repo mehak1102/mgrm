@@ -134,7 +134,14 @@ export default function Navbar() {
   const { wishlist } = useWishlist();
   const { user, logout } = useAuth();
 
-
+const aboutLinks = [
+  "Our History",
+  "Achievements",
+  "Quality Certifications",
+  "MGRM Timelines",
+  "Leadership",
+  "Testimonials",
+];
 
 const handleSearch = (e) => {
   e.preventDefault();
@@ -257,6 +264,28 @@ const handleSearch = (e) => {
         ))}
       </div>
     </div>
+  </div>
+</div>
+
+<div className="relative group">
+  {/* <button className="text-slate-700 font-semibold hover:text-cyan-600 transition">
+    About Us
+  </button> */}
+  <Link to="/about-us">
+  About Us
+</Link>
+
+  <div className="absolute top-full left-0 mt-4 w-72 rounded-3xl bg-white shadow-[0_20px_60px_rgba(15,23,42,0.10)] border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4 z-50">
+
+    {aboutLinks.map((item) => (
+      <a
+        key={item}
+        href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+        className="block px-4 py-3 rounded-2xl hover:bg-cyan-50 text-slate-700 hover:text-cyan-700 font-medium transition"
+      >
+        {item}
+      </a>
+    ))}
   </div>
 </div>
 

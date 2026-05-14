@@ -149,6 +149,9 @@ import BlogDetail from "./pages/BlogDetail";
 import Support from "./pages/Support";
 import Wishlist from "./pages/Wishlist";
 
+
+import AboutUs from "./pages/AboutUs";
+
 import { useAuth } from "./context/AuthContext";
 
 const themes = {
@@ -238,6 +241,8 @@ export default function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/about-us" element={<AboutUs />} />
 
         <Route
           path="/admin"

@@ -279,3 +279,25 @@ html {
     transform: translateX(-50%);
   }
 }
+
+.perspective {
+  perspective: 1500px;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.timeline-line-vertical {
+  height: 0%;
+  animation: drawVertical 3s ease forwards;
+}
+
+@keyframes drawVertical {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
