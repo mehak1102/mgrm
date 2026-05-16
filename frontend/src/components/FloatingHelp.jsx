@@ -32,7 +32,7 @@ export default function FloatingHelp() {
       {showTop && (
         <button
           onClick={scrollTop}
-          className="w-12 h-12 rounded-full bg-white shadow-lg hover:scale-110 transition flex items-center justify-center"
+          className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white shadow-lg hover:scale-110 transition flex items-center justify-center"
         >
           <ArrowUp size={20} />
         </button>

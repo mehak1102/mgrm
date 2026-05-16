@@ -23,7 +23,7 @@ export default function MyOrders() {
             <div className="flex justify-between">
               <div>
                 <h3 className="font-black">Order #{order._id}</h3>
-                <p className="text-sm text-gray-500">{new Date(order.createdAt).toLocaleString()}</p>
+                <p className="text-sm text-gray-500 dark:text-zinc-400">{new Date(order.createdAt).toLocaleString()}</p>
               </div>
               <span className="btn-soft px-4 py-2 rounded-full font-bold h-fit">
                 {order.status}

@@ -36,7 +36,7 @@
 //             initial={{ opacity: 0, scale: 0.75, y: 18 }}
 //             whileInView={{ opacity: 1, scale: 1, y: 0 }}
 //             transition={{ duration: 0.55, delay: 0.35 + index * 0.08 }}
-//             className="absolute z-20 w-16 h-16 bg-white overflow-hidden shadow-md hover:scale-110 transition"
+//             className="absolute z-20 w-16 h-16 bg-white dark:bg-slate-900 overflow-hidden shadow-md hover:scale-110 transition"
 //             style={{ left: `${x}%`, top: `${y}%`, border: `2px solid ${item.color}` }}
 //           >
 //             <img src={cat.image} onError={(e) => (e.currentTarget.src = "/products/knee.png")} className="w-full h-full object-cover" />
@@ -55,18 +55,18 @@
 //   };
 
 //   return (
-//     <section className="relative bg-white py-16 overflow-hidden">
+//     <section className="relative bg-white dark:bg-slate-900 py-16 overflow-hidden">
 //       <div className="max-w-[1600px] mx-auto px-4">
 //         <motion.div initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-8">
-//           <h2 className="text-5xl md:text-7xl font-black text-gray-700">
+//           <h2 className="text-5xl md:text-7xl font-black text-gray-700 dark:text-white">
 //             <span className="text-red-500">248</span> world class certified products
 //           </h2>
-//           <p className="text-2xl md:text-4xl font-black text-gray-500 mt-2">
+//           <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
 //             to heal and rehabilitate comfortably
 //           </p>
 //         </motion.div>
 
-//         <div className="relative h-[860px] bg-white rounded-[36px] overflow-hidden">
+//         <div className="relative h-[860px] bg-white dark:bg-slate-900 rounded-[36px] overflow-hidden">
 //           <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
 //             {flowItems.map((item, index) => {
 //               const startX = item.label.x;
@@ -111,7 +111,7 @@
 //                 whileInView={{ opacity: 1, scale: 1 }}
 //                 transition={{ duration: 0.6, delay: 0.25 + index * 0.12 }}
 //                 onClick={() => go(item.query)}
-//                 className="absolute z-30 w-24 rounded-xl overflow-hidden shadow-xl hover:scale-110 transition bg-white"
+//                 className="absolute z-30 w-24 rounded-xl overflow-hidden shadow-xl hover:scale-110 transition bg-white dark:bg-slate-900"
 //                 style={{ left: `${item.label.x}%`, top: `${item.label.y}%`, border: `3px solid ${item.color}` }}
 //               >
 //                 <div className="text-[11px] font-black py-1 text-center text-black" style={{ background: item.color }}>
@@ -126,9 +126,9 @@
 //             <ThumbGrid key={item.name} item={item} />
 //           ))}
 
-//           <div className="absolute right-8 bottom-8 z-40 grid grid-cols-2 gap-3 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+//           <div className="absolute right-8 bottom-8 z-40 grid grid-cols-2 gap-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
 //             {flowItems.map((item) => (
-//               <button key={item.name} onClick={() => go(item.query)} className="flex items-center gap-2 text-sm font-semibold text-left">
+//               <button key={item.name} onClick={() => go(item.query)} className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 dark:text-gray-200">
 //                 <span className="w-4 h-4 rounded" style={{ background: item.color }} />
 //                 {item.name}
 //               </button>
@@ -186,7 +186,7 @@
 //       whileInView={{ opacity: 1, y: 0, scale: 1 }}
 //       transition={{ duration: 0.75, delay: 0.25 + index * 0.08 }}
 //       onClick={() => go(item.query)}
-//       className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] hover:scale-105 transition"
+//       className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 shadow-[0_16px_40px_rgba(15,23,42,0.12)] hover:scale-105 transition"
 //       style={{
 //         left: `${item.card.x}%`,
 //         top: `${item.card.y}%`,
@@ -212,7 +212,7 @@
 
 //         <div className="text-left">
 //           <p className="font-black text-sm">{item.name}</p>
-//           <p className="text-xs text-gray-500">{cat.count} products</p>
+//           <p className="text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
 //         </div>
 //       </div>
 //     </motion.button>
@@ -236,7 +236,7 @@
 //         whileInView={{ opacity: 1, scale: 1, y: 0 }}
 //         transition={{ duration: 0.65, delay: 0.55 + index * 0.08 }}
 //         onClick={() => window.dispatchEvent(new Event("noop"))}
-//         className="absolute z-20 w-16 h-16 bg-white overflow-hidden shadow-md hover:scale-110 transition"
+//         className="absolute z-20 w-16 h-16 bg-white dark:bg-slate-900 overflow-hidden shadow-md hover:scale-110 transition"
 //         style={{
 //           left: `${x}%`,
 //           top: `${y}%`,
@@ -264,22 +264,22 @@
 //   };
 
 //   return (
-//     <section className="relative bg-white py-16 overflow-hidden">
+//     <section className="relative bg-white dark:bg-slate-900 py-16 overflow-hidden">
 //       <div className="max-w-[1600px] mx-auto px-4">
 //         <motion.div
 //           initial={{ opacity: 0, y: 35 }}
 //           whileInView={{ opacity: 1, y: 0 }}
 //           className="text-center mb-8"
 //         >
-//           <h2 className="text-5xl md:text-7xl font-black text-gray-700">
+//           <h2 className="text-5xl md:text-7xl font-black text-gray-700 dark:text-white">
 //             Explore Support by Body Area
 //           </h2>
-//           <p className="text-xl md:text-3xl font-black text-gray-400 mt-2">
+//           <p className="text-xl md:text-3xl font-black text-gray-400 dark:text-zinc-500 mt-2">
 //             tap a body region to find the right support
 //           </p>
 //         </motion.div>
 
-//         <div className="relative h-[900px] bg-white rounded-[36px] overflow-hidden">
+//         <div className="relative h-[900px] bg-white dark:bg-slate-900 rounded-[36px] overflow-hidden">
 //           <svg
 //             className="absolute inset-0 w-full h-full z-0"
 //             viewBox="0 0 100 100"
@@ -366,12 +366,12 @@
 
          
 
-//           <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+//           <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
 //             {flowItems.map((item) => (
 //               <button
 //                 key={item.name}
 //                 onClick={() => go(item.query)}
-//                 className="flex items-center gap-2 text-sm font-semibold text-left"
+//                 className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 dark:text-gray-200"
 //               >
 //                 <span
 //                   className="w-4 h-4 rounded"
@@ -434,7 +434,7 @@ function ThumbGrid({ item }) {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.55 + index * 0.1 }}
             onClick={() => window.location.assign(`/shop?category=${encodeURIComponent(item.query)}`)}
-            className="absolute z-20 w-16 h-16 bg-white overflow-hidden shadow-md hover:scale-110 transition"
+            className="absolute z-20 w-16 h-16 bg-white dark:bg-slate-900 overflow-hidden shadow-md hover:scale-110 transition"
             style={{
               left: `${x}%`,
               top: `${y}%`,
@@ -464,7 +464,7 @@ function CategoryLabel({ item, index, go }) {
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.35 + index * 0.12 }}
       onClick={() => go(item.query)}
-      className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-white shadow-[0_18px_45px_rgba(15,23,42,0.12)] hover:scale-105 transition"
+      className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-white dark:bg-slate-900 shadow-[0_18px_45px_rgba(15,23,42,0.12)] hover:scale-105 transition"
       style={{
         left: `${item.label.x}%`,
         top: `${item.label.y}%`,
@@ -486,8 +486,8 @@ function CategoryLabel({ item, index, go }) {
           alt={item.name}
         />
         <div className="text-left">
-          <p className="text-sm font-black text-gray-900">{item.name}</p>
-          <p className="text-xs text-gray-500">{cat.count} products</p>
+          <p className="text-sm font-black text-gray-900 dark:text-zinc-100">{item.name}</p>
+          <p className="text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
         </div>
       </div>
     </motion.button>
@@ -502,24 +502,24 @@ export default function BodyFlowMap() {
   };
 
   return (
-    <section className="relative bg-white py-16 overflow-hidden">
+    <section className="relative bg-white dark:bg-slate-900 py-16 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h2 className="text-5xl md:text-7xl font-black text-gray-700">
+          <h2 className="text-5xl md:text-7xl font-black text-gray-700 dark:text-white">
             <span className="text-red-500">248</span> world class certified products
           </h2>
-          <p className="text-2xl md:text-4xl font-black text-gray-500 mt-2">
+          <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
             to heal and rehabilitate comfortably
           </p>
         </motion.div>
 
-        {/* <div className="relative h-[900px] bg-white rounded-[36px] overflow-hidden">
+        {/* <div className="relative h-[900px] bg-white dark:bg-slate-900 rounded-[36px] overflow-hidden">
          */}
-         <div className="relative h-[940px] bg-white rounded-[36px] overflow-hidden">
+         <div className="relative h-[940px] bg-white dark:bg-slate-900 rounded-[36px] overflow-hidden">
           <svg
             className="absolute inset-0 w-full h-full z-0"
             viewBox="0 0 100 100"
@@ -599,12 +599,12 @@ export default function BodyFlowMap() {
             <ThumbGrid key={`${item.name}-thumbs`} item={item} />
           ))}
 
-          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
             {flowItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => go(item.query)}
-                className="flex items-center gap-2 text-sm font-semibold text-left"
+                className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 dark:text-gray-200"
               >
                 <span
                   className="w-4 h-4 rounded"

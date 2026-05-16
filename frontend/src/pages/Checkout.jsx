@@ -119,7 +119,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#f6f7fb] overflow-hidden">
+    <main className="relative min-h-screen bg-[#f6f7fb] dark:bg-zinc-950 overflow-hidden">
       <FloatingMedicalBg />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
@@ -128,20 +128,20 @@ export default function Checkout() {
             SECURE CHECKOUT
           </p>
           <h1 className="text-5xl font-black mt-2">Checkout</h1>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 dark:text-zinc-400 mt-2">
             Pay safely using Razorpay.
           </p>
         </div>
 
         <form onSubmit={handlePayment} className="grid lg:grid-cols-[1fr_420px] gap-8">
-          <section className="bg-white rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
+          <section className="bg-white dark:bg-zinc-900 rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-purple-50 text-purple-700 rounded-2xl grid place-items-center">
                 <MapPin />
               </div>
               <div>
                 <h2 className="text-3xl font-black">Delivery Details</h2>
-                <p className="text-gray-500">Enter customer and address details.</p>
+                <p className="text-gray-500 dark:text-zinc-400">Enter customer and address details.</p>
               </div>
             </div>
 
@@ -151,7 +151,7 @@ export default function Checkout() {
                 placeholder="Full Name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -159,7 +159,7 @@ export default function Checkout() {
                 placeholder="Phone Number"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -167,7 +167,7 @@ export default function Checkout() {
                 placeholder="Email Address"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -175,7 +175,7 @@ export default function Checkout() {
                 placeholder="City"
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
-                className="bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -183,7 +183,7 @@ export default function Checkout() {
                 placeholder="Pincode"
                 value={form.pincode}
                 onChange={(e) => setForm({ ...form, pincode: e.target.value })}
-                className="bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <textarea
@@ -191,19 +191,19 @@ export default function Checkout() {
                 placeholder="Full Address"
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
-                className="md:col-span-2 bg-slate-50 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500 min-h-32"
+                className="md:col-span-2 bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500 min-h-32"
               />
             </div>
           </section>
 
-          <aside className="bg-white rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)] h-fit sticky top-24">
+          <aside className="bg-white dark:bg-zinc-900 rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)] h-fit sticky top-24">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-purple-50 text-purple-700 rounded-2xl grid place-items-center">
                 <CreditCard />
               </div>
               <div>
                 <h2 className="text-3xl font-black">Order Summary</h2>
-                <p className="text-gray-500">{cart.length} products</p>
+                <p className="text-gray-500 dark:text-zinc-400">{cart.length} products</p>
               </div>
             </div>
 
@@ -211,18 +211,18 @@ export default function Checkout() {
               {cart.map((item) => (
                 <div
                   key={`${item._id}-${item.selectedSize}`}
-                  className="flex items-center gap-3 bg-slate-50 rounded-2xl p-3"
+                  className="flex items-center gap-3 bg-slate-50 dark:bg-zinc-900 rounded-2xl p-3"
                 >
                   <img
                     src={item.image || "/products/knee.png"}
                     onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-                    className="w-16 h-16 rounded-xl object-cover bg-white"
+                    className="w-16 h-16 rounded-xl object-cover bg-white dark:bg-zinc-900"
                     alt={item.name}
                   />
 
                   <div className="flex-1">
                     <p className="font-black text-sm line-clamp-1">{item.name}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-zinc-400">
                       Qty: {item.qty} {item.selectedSize ? `• ${item.selectedSize}` : ""}
                     </p>
                   </div>
@@ -233,14 +233,14 @@ export default function Checkout() {
             </div>
 
             <div className="border-t mt-6 pt-5 space-y-3">
-              <div className="flex justify-between text-gray-500">
+              <div className="flex justify-between text-gray-500 dark:text-zinc-400">
                 <span>Subtotal</span>
-                <b className="text-slate-900">₹{cartTotal}</b>
+                <b className="text-slate-900 dark:text-zinc-100">₹{cartTotal}</b>
               </div>
 
-              <div className="flex justify-between text-gray-500">
+              <div className="flex justify-between text-gray-500 dark:text-zinc-400">
                 <span>Shipping</span>
-                <b className="text-slate-900">{shipping === 0 ? "Free" : `₹${shipping}`}</b>
+                <b className="text-slate-900 dark:text-zinc-100">{shipping === 0 ? "Free" : `₹${shipping}`}</b>
               </div>
 
               <div className="border-t pt-4 flex justify-between text-2xl">

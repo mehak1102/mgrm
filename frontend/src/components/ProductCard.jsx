@@ -13,8 +13,8 @@ export default function ProductCard({ product }) {
   const liked = isWishlisted(product);
 
   return (
-    <div className="group bg-white rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition duration-500 border border-slate-100">
-      <Link to={`/product/${product.slug}`} className="block relative h-72 bg-white overflow-hidden">
+    <div className="group bg-white dark:bg-slate-900 rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition duration-500 border border-slate-100 dark:border-white/10">
+      <Link to={`/product/${product.slug}`} className="block relative h-72 bg-white dark:bg-slate-900 overflow-hidden">
         <img
           src={image}
           onError={(e) => (e.currentTarget.src = "/products/knee.png")}
@@ -25,7 +25,7 @@ export default function ProductCard({ product }) {
 
       <button
         onClick={() => toggleWishlist(product)}
-        className={`absolute -mt-14 ml-[calc(100%-60px)] w-11 h-11 rounded-full bg-white shadow-lg grid place-items-center transition ${
+        className={`absolute -mt-14 ml-[calc(100%-60px)] w-11 h-11 rounded-full bg-white dark:bg-slate-900 shadow-lg grid place-items-center transition ${
           liked ? "text-red-500" : "text-slate-500 hover:text-red-500"
         }`}
       >
@@ -38,26 +38,26 @@ export default function ProductCard({ product }) {
         </p>
 
         <Link to={`/product/${product.slug}`}>
-          <h3 className="font-black text-lg mt-2 hover:text-purple-600 transition line-clamp-2">
+          <h3 className="font-black text-lg mt-2 text-slate-900 dark:text-white hover:text-purple-600 dark:hover:text-cyan-400 transition line-clamp-2">
             {product.name}
           </h3>
         </Link>
 
-        <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+        <p className="text-sm text-gray-500 dark:text-zinc-400 mt-2 line-clamp-2">
           {product.description || "Premium support product for comfort and recovery."}
         </p>
 
         <div className="flex items-center gap-1 text-yellow-500 mt-3">
           <Star size={16} fill="currentColor" />
           <span className="text-sm font-bold">{product.rating || 4.6}</span>
-          <span className="text-xs text-gray-400">(24)</span>
+          <span className="text-xs text-gray-400 dark:text-zinc-500">(24)</span>
         </div>
 
         <div className="flex justify-between items-end mt-5">
           <div>
-            <span className="text-2xl font-black">₹{discountPrice}</span>
+            <span className="text-2xl font-black text-slate-900 dark:text-white">₹{discountPrice}</span>
             {price > discountPrice && (
-              <span className="ml-2 line-through text-gray-400">₹{price}</span>
+              <span className="ml-2 line-through text-gray-400 dark:text-zinc-500">₹{price}</span>
             )}
           </div>
 

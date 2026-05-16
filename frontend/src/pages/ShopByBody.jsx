@@ -70,7 +70,7 @@ export default function ShopByBody() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search body part: knee, wrist, neck..."
-                className="w-full rounded-2xl bg-white text-slate-900 py-4 pl-14 pr-4 outline-none shadow-2xl"
+                className="w-full rounded-2xl bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 py-4 pl-14 pr-4 outline-none shadow-2xl"
               />
             </div>
 
@@ -106,14 +106,14 @@ export default function ShopByBody() {
 
       {/* TRUST STRIP */}
       <section className="max-w-7xl mx-auto px-5 -mt-8 relative z-10">
-        <div className="bg-white rounded-[32px] shadow-[0_30px_90px_rgba(15,23,42,0.12)] border border-slate-100 grid md:grid-cols-4 overflow-hidden">
+        <div className="bg-white dark:bg-zinc-900 rounded-[32px] shadow-[0_30px_90px_rgba(15,23,42,0.12)] border border-slate-100 dark:border-zinc-800 grid md:grid-cols-4 overflow-hidden">
           {[
             "Certified medical-grade supports",
             "Shop by exact pain area",
             "Size guide assistance",
             "Fast delivery & easy returns",
           ].map((text) => (
-            <div key={text} className="p-6 flex items-center gap-3 border-b md:border-b-0 md:border-r last:border-r-0 border-slate-100">
+            <div key={text} className="p-6 flex items-center gap-3 border-b md:border-b-0 md:border-r last:border-r-0 border-slate-100 dark:border-zinc-800">
               <ShieldCheck className="text-cyan-600" />
               <p className="font-black text-slate-800">{text}</p>
             </div>
@@ -146,7 +146,7 @@ export default function ShopByBody() {
               initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.04 }}
-              className="group relative h-[330px] rounded-[34px] overflow-hidden bg-white shadow-[0_25px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500"
+              className="group relative h-[330px] rounded-[34px] overflow-hidden bg-white dark:bg-zinc-900 shadow-[0_25px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500"
             >
               <div
                 className="absolute inset-0 opacity-20"
@@ -177,7 +177,7 @@ export default function ShopByBody() {
                   />
 
                   <div className="relative max-w-[55%]">
-                    <h3 className="text-3xl font-black text-slate-900">
+                    <h3 className="text-3xl font-black text-slate-900 dark:text-zinc-100">
                       {cat.name}
                     </h3>
                     <p className="text-slate-500 mt-2">{cat.count} products</p>
@@ -196,9 +196,9 @@ export default function ShopByBody() {
         </div>
 
         {!filtered.length && (
-          <div className="bg-white rounded-3xl p-10 text-center shadow mt-8">
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-10 text-center shadow mt-8">
             <h3 className="text-2xl font-black">No body part found</h3>
-            <p className="text-gray-500 mt-2">Try another search term.</p>
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">Try another search term.</p>
           </div>
         )}
       </section>
@@ -219,7 +219,7 @@ export default function ShopByBody() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="bg-white text-slate-950 px-6 py-4 rounded-full font-black">
+              <button className="bg-white dark:bg-zinc-900 text-slate-950 px-6 py-4 rounded-full font-black">
                 Size Guide
               </button>
               <button
@@ -239,7 +239,7 @@ export default function ShopByBody() {
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="bg-white rounded-[36px] max-w-3xl w-full overflow-hidden shadow-2xl"
+            className="bg-white dark:bg-zinc-900 rounded-[36px] max-w-3xl w-full overflow-hidden shadow-2xl"
           >
             <div className="grid md:grid-cols-2">
               <div className="relative min-h-[360px]" style={{ background: `${activeCat.color}22` }}>
@@ -254,20 +254,20 @@ export default function ShopByBody() {
               <div className="p-8">
                 <button
                   onClick={() => setActiveCat(null)}
-                  className="float-right w-10 h-10 rounded-full bg-slate-100 grid place-items-center"
+                  className="float-right w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-800 grid place-items-center"
                 >
                   <X size={18} />
                 </button>
 
                 <p className="text-cyan-600 font-black tracking-widest">BODY PART</p>
                 <h3 className="text-4xl font-black mt-2">{activeCat.name}</h3>
-                <p className="text-gray-500 mt-4">
+                <p className="text-gray-500 dark:text-zinc-400 mt-4">
                   Explore {activeCat.count} products designed for support, pain relief and recovery.
                 </p>
 
                 <div className="grid gap-3 mt-6">
                   {["Pain relief", "Support & stability", "Daily comfort"].map((x) => (
-                    <div key={x} className="flex items-center gap-3 bg-slate-50 rounded-2xl p-4">
+                    <div key={x} className="flex items-center gap-3 bg-slate-50 dark:bg-zinc-900 rounded-2xl p-4">
                       <ChevronRight className="text-cyan-600" />
                       <span className="font-bold">{x}</span>
                     </div>

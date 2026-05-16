@@ -8,8 +8,8 @@ export default function BlogDetail() {
 
   if (!blog) {
     return (
-      <main className="min-h-screen bg-[#f6f7fb] grid place-items-center">
-        <div className="bg-white rounded-3xl p-10 shadow text-center">
+      <main className="min-h-screen bg-[#f6f7fb] dark:bg-zinc-950 grid place-items-center">
+        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-10 shadow text-center">
           <h1 className="text-3xl font-black">Blog not found</h1>
           <Link to="/blogs" className="text-purple-700 font-black mt-4 inline-block">
             Back to blogs
@@ -22,14 +22,14 @@ export default function BlogDetail() {
   const content = getBlogContent(blog);
 
   return (
-    <main className="bg-[#f6f7fb] min-h-screen">
+    <main className="bg-[#f6f7fb] dark:bg-zinc-950 min-h-screen">
       <section className="max-w-5xl mx-auto px-5 py-10">
         <Link to="/blogs" className="inline-flex items-center gap-2 font-black text-purple-700">
           <ArrowLeft size={18} /> Back to Blogs
         </Link>
 
-        <article className="bg-white rounded-[34px] overflow-hidden shadow-[0_30px_90px_rgba(15,23,42,0.12)] mt-8">
-          <div className="relative h-[420px] bg-slate-100">
+        <article className="bg-white dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_30px_90px_rgba(15,23,42,0.12)] mt-8">
+          <div className="relative h-[420px] bg-slate-100 dark:bg-zinc-800">
             <img
               src={blog.image}
               onError={(e) => (e.currentTarget.src = "/products/knee.png")}
@@ -51,15 +51,15 @@ export default function BlogDetail() {
             <div className="grid gap-10">
               {content.map((block) => (
                 <section key={block.heading}>
-                  <h2 className="text-3xl font-black">{block.heading}</h2>
-                  <p className="text-gray-600 leading-8 mt-3">{block.text}</p>
+                  <h2 className="text-3xl font-black text-slate-900 dark:text-white">{block.heading}</h2>
+                  <p className="text-gray-600 dark:text-zinc-300 leading-8 mt-3">{block.text}</p>
                 </section>
               ))}
             </div>
 
-            <div className="mt-12 rounded-[28px] bg-purple-50 p-8">
-              <h3 className="text-3xl font-black">Quick tip</h3>
-              <p className="text-gray-600 leading-8 mt-3">
+            <div className="mt-12 rounded-[28px] bg-purple-50 dark:bg-slate-900 border border-purple-100 dark:border-white/10 p-8 transition-colors duration-300">
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white">Quick tip</h3>
+              <p className="text-gray-600 dark:text-zinc-300 leading-8 mt-3">
                 Always measure the affected body part before choosing size. A good support should feel snug, stable and comfortable.
               </p>
             </div>

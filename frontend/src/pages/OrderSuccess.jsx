@@ -12,9 +12,9 @@ export default function OrderSuccess() {
 
         {order && (
           <>
-            <p className="text-gray-600 mt-4">Order ID: {order.id}</p>
+            <p className="text-gray-600 dark:text-zinc-300 mt-4">Order ID: {order.id}</p>
             <p className="text-3xl font-black mt-4">₹{order.total}</p>
-            <p className="text-gray-500 mt-2">{order.status}</p>
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">{order.status}</p>
           </>
         )}
 

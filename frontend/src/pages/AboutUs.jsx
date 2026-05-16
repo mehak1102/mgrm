@@ -113,11 +113,11 @@
 //               </p>
 
 //               <div className="mt-12 flex flex-wrap gap-5">
-//                 <button className="rounded-2xl bg-white px-8 py-4 font-semibold text-[#002B5B] shadow-xl transition duration-300 hover:scale-105">
+//                 <button className="rounded-2xl bg-white dark:bg-zinc-900 px-8 py-4 font-semibold text-[#002B5B] shadow-xl transition duration-300 hover:scale-105">
 //                   Explore Company
 //                 </button>
 
-//                 <button className="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-xl transition duration-300 hover:bg-white hover:text-[#002B5B]">
+//                 <button className="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-xl transition duration-300 hover:bg-white dark:bg-zinc-900 hover:text-[#002B5B]">
 //                   Discover Products
 //                 </button>
 //               </div>
@@ -130,7 +130,7 @@
 //       <section className="relative z-10 mx-auto max-w-7xl px-4 py-24">
 //         <div className="flex flex-col gap-10 lg:flex-row">
 //           {/* SIDEBAR */}
-//           <aside className="top-28 h-fit w-full rounded-[35px] border border-white/60 bg-white/60 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl lg:sticky lg:w-[320px]">
+//           <aside className="top-28 h-fit w-full rounded-[35px] border border-white/60 bg-white/60 dark:bg-zinc-900/60 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl lg:sticky lg:w-[320px]">
 //             <h2 className="mb-8 text-3xl font-black text-[#002B5B]">
 //               About Us
 //             </h2>
@@ -140,7 +140,7 @@
 //                 <a
 //                   key={index}
 //                   href={`#section-${index}`}
-//                   className="group flex items-center justify-between rounded-2xl border border-transparent bg-white/40 px-5 py-4 text-[15px] font-medium text-gray-700 transition-all duration-300 hover:border-blue-100 hover:bg-[#002B5B] hover:text-white"
+//                   className="group flex items-center justify-between rounded-2xl border border-transparent bg-white/40 px-5 py-4 text-[15px] font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:border-blue-100 hover:bg-[#002B5B] hover:text-white"
 //                 >
 //                   {item}
 
@@ -167,7 +167,7 @@
 //                     Transforming Rehabilitation In India
 //                   </h2>
 
-//                   <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-600">
+//                   <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-600 dark:text-zinc-300">
 //                     <p>
 //                       Established in 1994, MGRM Medicare pioneered affordable
 //                       rehabilitation technologies across India and South Asia.
@@ -338,7 +338,7 @@
 //                   >
 //                     <ShieldCheck className="h-12 w-12 text-[#002B5B] transition group-hover:text-cyan-300" />
 
-//                     <h3 className="mt-6 text-2xl font-bold text-[#002B5B] transition group-hover:text-white">
+//                     <h3 className="mt-6 text-2xl font-bold text-[#002B5B] dark:text-white transition group-hover:text-white">
 //                       {item}
 //                     </h3>
 //                   </div>
@@ -375,7 +375,7 @@
 //                           {item.year}
 //                         </h3>
 
-//                         <p className="mt-4 leading-7 text-gray-600">
+//                         <p className="mt-4 leading-7 text-gray-600 dark:text-zinc-300">
 //                           {item.title}
 //                         </p>
 //                       </div>
@@ -447,7 +447,7 @@
 //                   >
 //                     <Quote className="h-14 w-14 text-cyan-300" />
 
-//                     <p className="mt-6 text-lg leading-9 text-gray-600">
+//                     <p className="mt-6 text-lg leading-9 text-gray-600 dark:text-zinc-300">
 //                       “{item.text}”
 //                     </p>
 
@@ -639,7 +639,7 @@ const famousPeople = [
 
 const AboutUs = () => {
   return (
-    <div className="relative overflow-hidden bg-[#eef7ff]">
+    <div className="relative overflow-hidden bg-[#eef7ff] dark:bg-slate-950 transition-colors duration-300">
       {/* BG */}
       <div className="absolute left-[-150px] top-[-150px] h-[450px] w-[450px] rounded-full bg-cyan-200/40 blur-3xl" />
 
@@ -696,8 +696,8 @@ const AboutUs = () => {
       <section className="relative z-10 mx-auto max-w-7xl px-4 py-24">
         <div className="flex flex-col gap-10 lg:flex-row">
           {/* SIDEBAR */}
-          <aside className="top-28 h-fit rounded-[35px] border border-white/70 bg-white/70 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl lg:sticky lg:w-[320px]">
-            <h2 className="mb-8 text-3xl font-bold text-[#002B5B]">
+          <aside className="top-28 h-fit rounded-[35px] border border-white/70 dark:border-white/10 bg-white/70 dark:bg-slate-900/80 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl lg:sticky transition-colors duration-300 lg:w-[320px]">
+            <h2 className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-white">
               About Us
             </h2>
 
@@ -706,7 +706,7 @@ const AboutUs = () => {
                 <a
                   key={index}
                   href={`#section-${index}`}
-                  className="group flex items-center justify-between rounded-2xl bg-[#f4f9ff] px-5 py-4 font-medium text-gray-700 transition-all duration-300 hover:bg-[#002B5B] hover:text-white"
+                  className="group flex items-center justify-between rounded-2xl bg-[#f4f9ff] dark:bg-slate-800 px-5 py-4 font-medium text-gray-700 dark:text-gray-200 transition-all duration-300 hover:bg-[#002B5B] hover:text-white"
                 >
                   {item}
 
@@ -721,19 +721,19 @@ const AboutUs = () => {
             {/* HISTORY */}
             <section
               id="section-0"
-              className="overflow-hidden rounded-[40px] border border-white/70 bg-white/80 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-xl"
+              className="overflow-hidden rounded-[40px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-colors duration-300"
             >
               <div className="grid lg:grid-cols-2">
                 <div className="p-10 lg:p-14">
-                  <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B]">
+                  <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] dark:text-cyan-300">
                     Our History
                   </span>
 
-                  <h2 className="mt-5 text-4xl font-bold text-[#002B5B]">
+                  <h2 className="mt-5 text-4xl font-bold text-[#002B5B] dark:text-white">
                     Transforming Rehabilitation In India
                   </h2>
 
-                  <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-600">
+                  <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-600 dark:text-zinc-300">
                     <p>
                       MGRM Medicare Private Limited was established in
                       1994 with a vision to revolutionize physical
@@ -768,13 +768,13 @@ const AboutUs = () => {
             </section>
 
             {/* PRODUCT GRID */}
-            <section className="rounded-[40px] border border-white/70 bg-white/80 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)]">
+            <section className="rounded-[40px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] transition-colors duration-300">
               <div className="mb-12">
-                <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B]">
+                <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] dark:text-cyan-300">
                   Rehabilitation Products
                 </span>
 
-                <h2 className="mt-4 text-4xl font-bold text-[#002B5B]">
+                <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-white">
                   Orthopedic Product Categories
                 </h2>
               </div>
@@ -816,7 +816,7 @@ const AboutUs = () => {
 
                       {/* BACK */}
                       <div
-                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 bg-[#dff4ff] p-8 text-center shadow-2xl"
+                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 dark:border-white/10 bg-[#dff4ff] dark:bg-slate-800 p-8 text-center transition-colors duration-300 shadow-2xl"
                         style={{
                           transform: 'rotateY(180deg)',
                           backfaceVisibility: 'hidden',
@@ -826,11 +826,11 @@ const AboutUs = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/70 to-blue-100/50 backdrop-blur-xl" />
 
                         <div className="relative z-10">
-                          <h3 className="text-3xl font-bold capitalize text-[#002B5B]">
+                          <h3 className="text-3xl font-bold capitalize text-[#002B5B] dark:text-white">
                             {image.replace('.png', '')}
                           </h3>
 
-                          <p className="mt-5 leading-8 text-[#31506f]">
+                          <p className="mt-5 leading-8 text-[#31506f] dark:text-gray-300">
                             Premium orthopedic rehabilitation support
                             designed for medical precision, recovery,
                             mobility and patient comfort.
@@ -929,13 +929,13 @@ const AboutUs = () => {
             {/* CERTIFICATIONS */}
             <section
               id="section-2"
-              className="rounded-[40px] border border-white/70 bg-white/80 p-10"
+              className="rounded-[40px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B]">
+              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] dark:text-cyan-300">
                 Certifications
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B]">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-white">
                 Global Quality Standards
               </h2>
 
@@ -943,7 +943,7 @@ const AboutUs = () => {
                 {certifications.map((item, index) => (
                   <div
                     key={index}
-                    className="group rounded-[30px] border border-blue-100 bg-[#f5fbff] p-8 text-center transition duration-300 hover:-translate-y-2 hover:bg-[#002B5B]"
+                    className="group rounded-[30px] border border-blue-100 dark:border-white/10 bg-[#f5fbff] dark:bg-slate-900 p-8 text-center transition-colors duration-300 transition duration-300 hover:-translate-y-2 hover:bg-[#002B5B]"
                   >
                     <img
                       src={item.logo}
@@ -951,7 +951,7 @@ const AboutUs = () => {
                       className="mx-auto h-16 object-contain"
                     />
 
-                    <h3 className="mt-6 text-2xl font-bold text-[#002B5B] transition group-hover:text-white">
+                    <h3 className="mt-6 text-2xl font-bold text-[#002B5B] dark:text-white transition group-hover:text-white">
                       {item.name}
                     </h3>
                   </div>
@@ -962,13 +962,13 @@ const AboutUs = () => {
             {/* TIMELINE */}
             <section
               id="section-3"
-              className="rounded-[40px] border border-white/70 bg-white/80 p-10"
+              className="rounded-[40px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B]">
+              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] dark:text-cyan-300">
                 MGRM Timeline
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B]">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-white">
                 Journey Through The Years
               </h2>
 
@@ -983,12 +983,12 @@ const AboutUs = () => {
                     >
                       <div className="h-7 w-7 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
 
-                      <div className="mt-8 rounded-[30px] bg-[#f5fbff] p-6 text-center shadow-xl transition duration-500 group-hover:-translate-y-4">
-                        <h3 className="text-3xl font-bold text-[#002B5B]">
+                      <div className="mt-8 rounded-[30px] bg-[#f5fbff] dark:bg-slate-800 p-6 text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-4">
+                        <h3 className="text-3xl font-bold text-[#002B5B] dark:text-white">
                           {item.year}
                         </h3>
 
-                        <p className="mt-4 leading-7 text-gray-600">
+                        <p className="mt-4 leading-7 text-gray-600 dark:text-zinc-300">
                           {item.title}
                         </p>
                       </div>
@@ -1021,13 +1021,13 @@ const AboutUs = () => {
             {/* TESTIMONIALS */}
             <section
               id="section-5"
-              className="rounded-[40px] border border-white/70 bg-white/80 p-10"
+              className="rounded-[40px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B]">
+              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] dark:text-cyan-300">
                 Testimonials
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B]">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-white">
                 What Medical Experts Say
               </h2>
 
@@ -1035,7 +1035,7 @@ const AboutUs = () => {
                 {testimonials.map((item, index) => (
                   <div
                     key={index}
-                    className="overflow-hidden rounded-[35px] border border-blue-100 bg-[#f8fcff] shadow-lg transition duration-300 hover:-translate-y-3"
+                    className="overflow-hidden rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-slate-900 shadow-lg transition-colors duration-300 duration-300 hover:-translate-y-3"
                   >
                     <div className="grid md:grid-cols-[220px_1fr]">
                       <img
@@ -1047,7 +1047,7 @@ const AboutUs = () => {
                       <div className="p-8">
                         <Quote className="h-14 w-14 text-cyan-300" />
 
-                        <p className="mt-6 text-lg leading-9 text-gray-600">
+                        <p className="mt-6 text-lg leading-9 text-gray-600 dark:text-zinc-300">
                           “{item.text}”
                         </p>
 

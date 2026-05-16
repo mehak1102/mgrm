@@ -75,15 +75,15 @@ const clearFilters = () => {
   const isLiked = (product) => wishlist?.some((x) => x._id === product._id);
 
   return (
-    <main className="bg-[#f7f8fb] min-h-screen">
+    <main className="bg-[#f7f8fb] dark:bg-zinc-950 min-h-screen">
       <div className="max-w-[1500px] mx-auto px-5 py-8">
-        <div className="text-sm text-gray-500 mb-6">
+        <div className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
           Home <span className="mx-2">›</span> All Products
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-          {/* <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24"> */}
-          <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] sticky top-24 h-[calc(100vh-110px)] overflow-hidden">
+          {/* <aside className="bg-white dark:bg-zinc-900 rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24"> */}
+          <aside className="bg-white dark:bg-zinc-900 rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] sticky top-24 h-[calc(100vh-110px)] overflow-hidden">
             <div className="p-5 border-b flex justify-between items-center">
               <h2 className="text-xl font-black">Filters</h2>
               <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
@@ -106,7 +106,7 @@ const clearFilters = () => {
   navigate("/shop", { replace: true });
 }}
                   className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                    !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
+                    !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                   }`}
                 >
                   All Products
@@ -121,7 +121,7 @@ onClick={() => {
   navigate(`/shop?category=${encodeURIComponent(cat.query)}`);
 }}
                     className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                      activeCategory === cat.query ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
+                      activeCategory === cat.query ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                     }`}
                   >
                     {cat.name}
@@ -141,7 +141,7 @@ onClick={() => {
                     key={color}
                     onClick={() => setSelectedColor(selectedColor === color ? "" : color)}
                     className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
-                      selectedColor === color ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
+                      selectedColor === color ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                     }`}
                   >
                     <span className="flex items-center gap-3">
@@ -209,9 +209,9 @@ onClick={() => {
               <div>
                 <h1 className="text-4xl font-black">
                   All Products{" "}
-                  <span className="text-gray-400 text-2xl">({filteredProducts.length})</span>
+                  <span className="text-gray-400 dark:text-zinc-500 text-2xl">({filteredProducts.length})</span>
                 </h1>
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 dark:text-zinc-400 mt-2">
                   Explore our wide range of support and care products.
                 </p>
               </div>
@@ -221,7 +221,7 @@ onClick={() => {
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-white border rounded-xl px-4 py-3 outline-none"
+                  className="bg-white dark:bg-zinc-900 border rounded-xl px-4 py-3 outline-none"
                 >
                   <option value="popularity">Popularity</option>
                   <option value="low">Price Low to High</option>
@@ -229,7 +229,7 @@ onClick={() => {
                   <option value="name">Name A-Z</option>
                 </select>
 
-                <div className="bg-white border rounded-xl p-1 flex">
+                <div className="bg-white dark:bg-zinc-900 border rounded-xl p-1 flex">
                   <button onClick={() => setView("grid")} className={`p-3 rounded-lg ${view === "grid" ? "bg-purple-100 text-purple-700" : ""}`}>
                     <Grid2X2 size={18} />
                   </button>
@@ -243,13 +243,13 @@ onClick={() => {
             {loading ? (
               <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="h-[430px] bg-white rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[430px] bg-white dark:bg-zinc-900 rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center shadow">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-12 text-center shadow">
                 <h2 className="text-3xl font-black">No products found</h2>
-                <p className="text-gray-500 mt-2">Try clearing filters or check product category/colors/sizes in admin.</p>
+                <p className="text-gray-500 dark:text-zinc-400 mt-2">Try clearing filters or check product category/colors/sizes in admin.</p>
               </div>
             ) : (
               <div className={view === "grid" ? "grid md:grid-cols-2 xl:grid-cols-4 gap-7" : "grid gap-5"}>
@@ -261,18 +261,18 @@ onClick={() => {
                   return (
                     <article
                       key={product._id}
-                      className={`group bg-white rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
+                      className={`group bg-white dark:bg-zinc-900 rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
                         view === "list" ? "flex" : ""
                       }`}
                     >
-                      <Link to={`/product/${product.slug}`} className={`relative bg-white block ${view === "list" ? "w-72 h-72" : "h-72"}`}>
+                      <Link to={`/product/${product.slug}`} className={`relative bg-white dark:bg-zinc-900 block ${view === "list" ? "w-72 h-72" : "h-72"}`}>
                         {save > 0 && (
                           <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
                             Save {save}%
                           </span>
                         )}
 
-                        <span className="absolute top-14 left-4 bg-white shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+                        <span className="absolute top-14 left-4 bg-white dark:bg-zinc-900 shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
                           <Star size={13} fill="#fbbf24" className="text-yellow-400" />
                           {product.rating || 4.8}
                         </span>
@@ -287,7 +287,7 @@ onClick={() => {
 
                       {/* <button
                         onClick={() => toggleWishlist(product)}
-                        className={`absolute mt-4 ml-[-52px] w-10 h-10 bg-white rounded-full shadow grid place-items-center ${
+                        className={`absolute mt-4 ml-[-52px] w-10 h-10 bg-white dark:bg-zinc-900 rounded-full shadow grid place-items-center ${
                           isWishlisted(product) ? "text-red-500" : "text-purple-600"
                         }`}
                       >
@@ -295,7 +295,7 @@ onClick={() => {
                       </button> */}
                       <button
   onClick={() => toggleWishlist(product)}
-  className={`absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow grid place-items-center ${
+  className={`absolute top-4 right-4 w-10 h-10 bg-white dark:bg-zinc-900 rounded-full shadow grid place-items-center ${
     isWishlisted(product) ? "text-red-500" : "text-purple-600"
   }`}
 >
@@ -310,11 +310,11 @@ onClick={() => {
                         <div className="mt-3">
                           <span className="text-xl font-black">₹{discountPrice}.00</span>
                           {price > discountPrice && (
-                            <span className="text-gray-400 line-through ml-2">₹{price}.00</span>
+                            <span className="text-gray-400 dark:text-zinc-500 line-through ml-2">₹{price}.00</span>
                           )}
                         </div>
 
-                        <p className="text-xs text-gray-500 mt-1">(Incl. of all Taxes)</p>
+                        <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1">(Incl. of all Taxes)</p>
 
                         <button
                           onClick={() => addToCart(product)}

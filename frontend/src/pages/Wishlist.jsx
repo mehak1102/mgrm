@@ -10,7 +10,7 @@ export default function Wishlist() {
   const validWishlist = wishlist.filter((p) => p?._id && p?.name);
 
   return (
-    <main className="relative bg-[#f6f7fb] min-h-screen overflow-hidden">
+    <main className="relative bg-[#f6f7fb] dark:bg-zinc-950 min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
@@ -25,22 +25,22 @@ export default function Wishlist() {
             <h1 className="text-3xl font-bold">
   Wishlist ({validWishlist.length})
 </h1>
-            <p className="text-gray-500 mt-2">
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">
               Products you liked are saved here
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl px-5 py-3 shadow font-bold text-gray-500">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl px-5 py-3 shadow font-bold text-gray-500 dark:text-zinc-400">
             {wishlist.length} items
           </div>
         </div>
 
         {/* EMPTY STATE */}
         {wishlist.length === 0 && (
-          <div className="bg-white rounded-[30px] p-12 text-center shadow">
+          <div className="bg-white dark:bg-zinc-900 rounded-[30px] p-12 text-center shadow">
             <Heart className="mx-auto text-purple-400" size={50} />
             <h2 className="text-3xl font-black mt-4">No liked products</h2>
-            <p className="text-gray-500 mt-2">
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">
               Start exploring and add products you love.
             </p>
 
@@ -61,7 +61,7 @@ export default function Wishlist() {
              {validWishlist.map((p) => (
             <div
               key={p._id}
-              className="group bg-white rounded-[26px] overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.08)] hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] transition duration-500"
+              className="group bg-white dark:bg-zinc-900 rounded-[26px] overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.08)] hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] transition duration-500"
             >
               {/* IMAGE */}
               <Link to={`/product/${p.slug}`} className="block h-44 overflow-hidden">
@@ -82,7 +82,7 @@ export default function Wishlist() {
                     ₹{p.discountPrice || p.price}
                   </span>
                   {p.discountPrice && (
-                    <span className="text-gray-400 line-through text-sm">
+                    <span className="text-gray-400 dark:text-zinc-500 line-through text-sm">
                       ₹{p.price}
                     </span>
                   )}

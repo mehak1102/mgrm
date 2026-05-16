@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --primary: #25319a;
   --accent: #22a7dc;
@@ -7,6 +9,28 @@
   --bg1: #f8fbff;
   --border: #dbeafe;
   --text: #101828;
+  color-scheme: light;
+}
+
+.dark {
+  --soft: #18181b;
+  --bg1: #09090b;
+  --border: #3f3f46;
+  --text: #fafafa;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
 }
 
 body {
@@ -14,6 +38,83 @@ body {
   font-family: Inter, system-ui, sans-serif;
   background: #ffffff;
   color: var(--text);
+}
+
+.dark body {
+  background: #020617;
+}
+
+.theme-panel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dark .theme-panel {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.theme-panel::placeholder {
+  color: #64748b;
+}
+
+.dark .theme-panel::placeholder {
+  color: #94a3b8;
+}
+
+.theme-panel:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 167, 220, 0.25);
+}
+
+.dark .theme-panel:focus {
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+.theme-text {
+  color: var(--primary);
+}
+
+.dark .theme-text {
+  color: #67e8f9;
+}
+
+.theme-section {
+  background: linear-gradient(135deg, #f8fbff 0%, #eef8ff 100%);
+  border: 1px solid #dbeafe;
+  color: #0f172a;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.dark .theme-section {
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.theme-accent {
+  color: #25319a;
+}
+
+.dark .theme-accent {
+  color: #22d3ee;
+}
+
+.dark .card h1,
+.dark .card h2,
+.dark .card h3,
+.dark .card .font-black {
+  color: inherit;
 }
 
 .btn-primary {
@@ -30,6 +131,11 @@ body {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--border);
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+}
+
+.dark .card {
+  background: rgba(24, 24, 27, 0.92);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
 }
 
 .reveal {
@@ -208,11 +314,6 @@ body {
   animation-play-state: paused;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-
 .marquee-cert {
   animation: certScroll 28s linear infinite;
 }
@@ -238,6 +339,10 @@ html {
 .custom-scroll::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 999px;
+}
+
+.dark .custom-scroll::-webkit-scrollbar-thumb {
+  background: #52525b;
 }
 
 .custom-scroll::-webkit-scrollbar-track {

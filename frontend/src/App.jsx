@@ -211,8 +211,8 @@ export default function App() {
   }, [theme]);
 
   return (
-    <>
-      {!hideLayout && <Navbar theme={theme} setTheme={setTheme} />}
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-zinc-100 transition-colors duration-300">
+      {!hideLayout && <Navbar />}
 
       <ScrollToTop />
 
@@ -258,7 +258,13 @@ export default function App() {
       {!hideLayout && <CartDrawer />}
       {!hideLayout && <FloatingHelp />}
 
-      <Toaster position="top-right" />
-    </>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className:
+            "!bg-white dark:bg-zinc-900 !text-slate-900 dark:!bg-zinc-800 dark:!text-zinc-100 !border !border-slate-200 dark:!border-zinc-700",
+        }}
+      />
+    </div>
   );
 }

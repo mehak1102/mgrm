@@ -346,11 +346,11 @@
 
 //   return (
 //     <div className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-//       <div className="relative w-full max-w-4xl bg-white rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
+//       <div className="relative w-full max-w-4xl bg-white dark:bg-slate-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
 //         <button
 //           type="button"
 //           onClick={onClose}
-//           className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white shadow-lg grid place-items-center hover:scale-105 transition"
+//           className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white dark:bg-slate-900 shadow-lg grid place-items-center hover:scale-105 transition"
 //         >
 //           <X size={18} />
 //         </button>
@@ -365,7 +365,7 @@
 //               AI-ASSISTED FIT
 //             </p>
 
-//             <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-950 leading-tight">
+//             <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-950 dark:text-white leading-tight">
 //               Smart Size Finder
 //             </h2>
 
@@ -373,12 +373,12 @@
 //               Upload a clear image and enter your measurement to get a quick recommended size.
 //             </p>
 
-//             <div className="mt-6 relative h-[310px] rounded-[28px] bg-white border border-slate-100 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
+//             <div className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
 //               {preview ? (
 //                 <img
 //                   src={preview}
 //                   alt="measurement preview"
-//                   className="w-full h-full object-contain bg-white"
+//                   className="w-full h-full object-contain bg-white dark:bg-slate-900"
 //                 />
 //               ) : (
 //                 <button
@@ -432,7 +432,7 @@
 //                     setPreview("");
 //                     setRecommended("");
 //                   }}
-//                   className="px-5 py-3 rounded-2xl bg-white border font-black text-sm"
+//                   className="px-5 py-3 rounded-2xl bg-white dark:bg-slate-900 border font-black text-sm"
 //                 >
 //                   Remove
 //                 </button>
@@ -453,7 +453,7 @@
 //             </div>
 
 //             <div>
-//               <h3 className="text-2xl font-black text-slate-950">Enter measurement</h3>
+//               <h3 className="text-2xl font-black text-slate-950 dark:text-white">Enter measurement</h3>
 //               <p className="text-slate-500 mt-2 text-sm leading-6">
 //                 {/* Use a measuring tape around the affected area and enter the value in centimeters. */}
 //                 Measure your {fitProfile.label} and enter the value in centimeters.
@@ -462,14 +462,14 @@
 //           </div>
 
 //           <div className="mt-7">
-//             <label className="font-black text-slate-700 text-sm">Measurement in CM</label>
+//             <label className="font-black text-slate-700 dark:text-zinc-300 text-sm">Measurement in CM</label>
 //             <input
 //               type="number"
 //               value={measurement}
 //               onChange={(e) => setMeasurement(e.target.value)}
 //             //   placeholder="Example: 38"
 //             placeholder={fitProfile.example}
-//               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 border border-slate-100 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
+//               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
 //             />
 //           </div>
 
@@ -490,7 +490,7 @@
 //               </div>
 
 //               <p className="text-slate-500 font-bold mt-4 text-sm">Recommended Size</p>
-//               <h2 className="text-5xl font-black text-slate-950 mt-1">{recommended}</h2>
+//               <h2 className="text-5xl font-black text-slate-950 dark:text-white dark:text-white mt-1">{recommended}</h2>
 
 //               <button
 //                 type="button"
@@ -598,11 +598,11 @@
 
 // //   return (
 // //     <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
-// //       <div className="w-full max-w-5xl bg-white rounded-[34px] overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
+// //       <div className="w-full max-w-5xl bg-white dark:bg-slate-900 rounded-[34px] overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
 
 // //         <button
 // //           onClick={onClose}
-// //           className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center"
+// //           className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white dark:bg-slate-900 shadow-lg flex items-center justify-center"
 // //         >
 // //           <X size={18} />
 // //         </button>
@@ -621,7 +621,7 @@
 // //             Upload image and select top & bottom points.
 // //           </p>
 
-// //           <div className="mt-6 relative h-[420px] rounded-[28px] bg-white border overflow-hidden">
+// //           <div className="mt-6 relative h-[420px] rounded-[28px] bg-white dark:bg-slate-900 border overflow-hidden">
 
 // //             {preview ? (
 // //               <div
@@ -680,7 +680,7 @@
 // //                   <Upload size={34} />
 // //                 </div>
 
-// //                 <p className="mt-5 font-black text-slate-700">
+// //                 <p className="mt-5 font-black text-slate-700 dark:text-zinc-300">
 // //                   Upload Image
 // //                 </p>
 
@@ -1173,12 +1173,12 @@ export default function SmartSizeFinder({
 
   return (
     <div className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-4xl bg-white rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
+      <div className="relative w-full max-w-4xl bg-white dark:bg-slate-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
 
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white shadow-lg grid place-items-center hover:scale-105 transition"
+          className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-white dark:bg-slate-900 shadow-lg grid place-items-center hover:scale-105 transition"
         >
           <X size={18} />
         </button>
@@ -1193,7 +1193,7 @@ export default function SmartSizeFinder({
               SMART FIT ANALYZER
             </p>
 
-            <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-950 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-950 dark:text-white leading-tight">
               Smart Size Finder
             </h2>
 
@@ -1201,12 +1201,12 @@ export default function SmartSizeFinder({
               Upload a clear image and enter your measurement to get the best recommended size.
             </p>
 
-            <div className="mt-6 relative h-[310px] rounded-[28px] bg-white border border-slate-100 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
+            <div className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
               {preview ? (
                 <img
                   src={preview}
                   alt="measurement preview"
-                  className="w-full h-full object-contain bg-white"
+                  className="w-full h-full object-contain bg-white dark:bg-slate-900"
                 />
               ) : (
                 <button
@@ -1268,7 +1268,7 @@ export default function SmartSizeFinder({
                     setPreview("");
                     setRecommended("");
                   }}
-                  className="px-5 py-3 rounded-2xl bg-white border font-black text-sm"
+                  className="px-5 py-3 rounded-2xl bg-white dark:bg-slate-900 border font-black text-sm"
                 >
                   Remove
                 </button>
@@ -1289,7 +1289,7 @@ export default function SmartSizeFinder({
             </div>
 
             <div>
-              <h3 className="text-2xl font-black text-slate-950">
+              <h3 className="text-2xl font-black text-slate-950 dark:text-white">
                 Enter measurement
               </h3>
 
@@ -1300,7 +1300,7 @@ export default function SmartSizeFinder({
           </div>
 
           <div className="mt-7">
-            <label className="font-black text-slate-700 text-sm">
+            <label className="font-black text-slate-700 dark:text-zinc-300 text-sm">
               Measurement in CM
             </label>
 
@@ -1309,7 +1309,7 @@ export default function SmartSizeFinder({
               value={measurement}
               onChange={(e) => setMeasurement(e.target.value)}
               placeholder={fitProfile.example}
-              className="mt-3 w-full h-14 rounded-2xl bg-slate-50 border border-slate-100 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
+              className="mt-3 w-full h-14 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
 
@@ -1333,7 +1333,7 @@ export default function SmartSizeFinder({
                 Recommended Size
               </p>
 
-              <h2 className="text-5xl font-black text-slate-950 mt-1">
+              <h2 className="text-5xl font-black text-slate-950 dark:text-white dark:text-white mt-1">
                 {recommended}
               </h2>
 

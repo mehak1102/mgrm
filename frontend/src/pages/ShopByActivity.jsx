@@ -102,15 +102,15 @@ export default function ShopByActivity() {
   };
 
   return (
-    <main className="bg-[#f7f8fb] min-h-screen">
+    <main className="bg-[#f7f8fb] dark:bg-zinc-950 min-h-screen">
           <FloatingMedicalBg />
       <div className="max-w-[1500px] mx-auto px-5 py-8">
-        <div className="text-sm text-gray-500 mb-6">
+        <div className="text-sm text-gray-500 dark:text-zinc-400 mb-6">
           Home <span className="mx-2">›</span> Shop By Activity
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-          <aside className="bg-white rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24">
+          <aside className="bg-white dark:bg-zinc-900 rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24">
             <div className="p-5 border-b flex justify-between items-center">
               <h2 className="text-xl font-black">Filters</h2>
               <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
@@ -127,7 +127,7 @@ export default function ShopByActivity() {
                 <button
                   onClick={() => selectActivity("")}
                   className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                    !activeActivity ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"
+                    !activeActivity ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                   }`}
                 >
                   All Activity Products
@@ -140,7 +140,7 @@ export default function ShopByActivity() {
                     className={`text-left px-3 py-2 rounded-xl font-semibold ${
                       activeActivity === item.name
                         ? "bg-purple-50 text-purple-700"
-                        : "hover:bg-gray-50"
+                        : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                     }`}
                   >
                     {item.name}
@@ -164,7 +164,7 @@ export default function ShopByActivity() {
                     className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
                       selectedColor === color
                         ? "bg-purple-50 text-purple-700"
-                        : "hover:bg-gray-50"
+                        : "hover:bg-gray-50 dark:hover:bg-zinc-800"
                     }`}
                   >
                     <span className="flex items-center gap-3">
@@ -238,11 +238,11 @@ export default function ShopByActivity() {
               <div>
                 <h1 className="text-4xl font-black">
                   Shop By Activity{" "}
-                  <span className="text-gray-400 text-2xl">
+                  <span className="text-gray-400 dark:text-zinc-500 text-2xl">
                     ({filteredProducts.length})
                   </span>
                 </h1>
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 dark:text-zinc-400 mt-2">
                   {activeActivity
                     ? `Products recommended for ${activeActivity}.`
                     : "Only activity-based products are shown here."}
@@ -254,7 +254,7 @@ export default function ShopByActivity() {
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-white border rounded-xl px-4 py-3 outline-none"
+                  className="bg-white dark:bg-zinc-900 border rounded-xl px-4 py-3 outline-none"
                 >
                   <option value="popularity">Popularity</option>
                   <option value="low">Price Low to High</option>
@@ -262,7 +262,7 @@ export default function ShopByActivity() {
                   <option value="name">Name A-Z</option>
                 </select>
 
-                <div className="bg-white border rounded-xl p-1 flex">
+                <div className="bg-white dark:bg-zinc-900 border rounded-xl p-1 flex">
                   <button
                     onClick={() => setView("grid")}
                     className={`p-3 rounded-lg ${
@@ -287,13 +287,13 @@ export default function ShopByActivity() {
             {loading ? (
               <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="h-[430px] bg-white rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[430px] bg-white dark:bg-zinc-900 rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center shadow">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-12 text-center shadow">
                 <h2 className="text-3xl font-black">No activity products found</h2>
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 dark:text-zinc-400 mt-2">
                   Admin me product ke andar activity field fill karo.
                 </p>
               </div>
@@ -316,13 +316,13 @@ export default function ShopByActivity() {
                   return (
                     <article
                       key={product._id}
-                      className={`relative group bg-white rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
+                      className={`relative group bg-white dark:bg-zinc-900 rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
                         view === "list" ? "flex" : ""
                       }`}
                     >
                       <Link
                         to={`/product/${product.slug}`}
-                        className={`relative bg-white block ${
+                        className={`relative bg-white dark:bg-zinc-900 block ${
                           view === "list" ? "w-72 h-72" : "h-72"
                         }`}
                       >
@@ -332,7 +332,7 @@ export default function ShopByActivity() {
                           </span>
                         )}
 
-                        <span className="absolute top-14 left-4 bg-white shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+                        <span className="absolute top-14 left-4 bg-white dark:bg-zinc-900 shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
                           <Star size={13} fill="#fbbf24" className="text-yellow-400" />
                           {product.rating || 4.8}
                         </span>
@@ -347,7 +347,7 @@ export default function ShopByActivity() {
 
                       <button
                         onClick={() => toggleWishlist(product)}
-                        className={`absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow grid place-items-center ${
+                        className={`absolute top-4 right-4 w-10 h-10 bg-white dark:bg-zinc-900 rounded-full shadow grid place-items-center ${
                           isWishlisted(product) ? "text-red-500" : "text-purple-600"
                         }`}
                       >
@@ -364,20 +364,20 @@ export default function ShopByActivity() {
                           </h3>
                         </Link>
 
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1">
                           {product.activity || "Activity Support"}
                         </p>
 
                         <div className="mt-3">
                           <span className="text-xl font-black">₹{discountPrice}.00</span>
                           {price > discountPrice && (
-                            <span className="text-gray-400 line-through ml-2">
+                            <span className="text-gray-400 dark:text-zinc-500 line-through ml-2">
                               ₹{price}.00
                             </span>
                           )}
                         </div>
 
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-500 dark:text-zinc-400 mt-1">
                           (Incl. of all Taxes)
                         </p>
 

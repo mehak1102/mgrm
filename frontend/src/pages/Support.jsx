@@ -60,7 +60,7 @@ export default function Support() {
   };
 
   return (
-    <main className="relative bg-[#f6f7fb] min-h-screen overflow-hidden">
+    <main className="relative bg-[#f6f7fb] dark:bg-zinc-950 min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
       <div className="relative z-10">
@@ -79,7 +79,7 @@ export default function Support() {
                 Need help choosing the right support?
               </h1>
 
-              <p className="text-gray-600 text-lg mt-6 max-w-2xl">
+              <p className="text-gray-600 dark:text-zinc-300 text-lg mt-6 max-w-2xl">
                 Ask us about product selection, sizing, orders, returns or bulk queries.
               </p>
 
@@ -89,7 +89,7 @@ export default function Support() {
                   ["Size Assistance", Ruler],
                   ["Fast Support", MessageCircle],
                 ].map(([title, Icon]) => (
-                  <div key={title} className="bg-white rounded-3xl p-5 shadow">
+                  <div key={title} className="bg-white dark:bg-zinc-900 rounded-3xl p-5 shadow">
                     <Icon className="text-purple-700" />
                     <p className="font-black mt-3">{title}</p>
                   </div>
@@ -101,7 +101,7 @@ export default function Support() {
             <form
               id="support-form"
               onSubmit={submitSupport}
-              className="bg-white rounded-[38px] p-8 shadow-xl"
+              className="bg-white dark:bg-zinc-900 rounded-[38px] p-8 shadow-xl"
             >
               <h2 className="text-3xl font-black mb-4">Contact Support</h2>
 
@@ -214,10 +214,10 @@ export default function Support() {
                   document.getElementById("support-form")?.scrollIntoView({ behavior: "smooth" }),
               },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-3xl p-6 shadow">
+              <div key={item.title} className="bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow">
                 <item.icon className="text-purple-700" />
                 <h3 className="font-black mt-4">{item.title}</h3>
-                <p className="text-gray-500 mt-2">{item.text}</p>
+                <p className="text-gray-500 dark:text-zinc-400 mt-2">{item.text}</p>
 
                 <button
                   onClick={item.onClick}
