@@ -96,7 +96,7 @@ export default function ShopByBody() {
             <div className="absolute inset-10 bg-cyan-300/20 blur-3xl rounded-full" />
             <img
               src="/products/image.png"
-              onError={(e) => (e.currentTarget.src = "/products/body.png")}
+              onError={(e) => (e.currentTarget.src = "/products/bo.png")}
               className="relative h-[560px] mx-auto object-contain drop-shadow-2xl"
               alt="Body support"
             />

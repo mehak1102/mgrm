@@ -557,7 +557,7 @@ export default function BodyFlowMap() {
             initial={{ opacity: 0, scale: 0.94 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.1 }}
-            src="/products/i.png"
+            src="/products/in.png"
             onError={(e) => {
               e.currentTarget.src = "/products/image.png";
             }}

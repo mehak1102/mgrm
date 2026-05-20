@@ -517,6 +517,10 @@ import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 
+
+const text = "248 top certified products";
+
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [productStart, setProductStart] = useState(0);
@@ -551,7 +555,7 @@ export default function Home() {
   {
     title: "CE Certified",
     subtitle: "European conformity standards",
-    image: "/certifications/ce.png",
+    image: "/certifications/cee.png",
     glow: "slate",
   },
 ];
@@ -614,14 +618,46 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
           <div className="relative max-w-[1500px] mx-auto px-6">
-            <motion.h1
+            {/* <motion.h1
               initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-[42px] md:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300"
               // className="text-[34px] sm:text-[46px] md:text-[64px] xl:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-zinc-200 max-w-6xl pt-4"
             >
               <span className="text-red-500">248</span> top certified products
-            </motion.h1>
+            </motion.h1> */}
+            <motion.h1
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.2 }}
+      className="text-[42px] md:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
+    >
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{
+            opacity: 0,
+            y: 100,
+            filter: "blur(14px)",
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+          }}
+          transition={{
+            delay: index * 0.07,
+            duration: 1.4,
+            ease: [0.19, 1, 0.22, 1],
+          }}
+          className={`inline-block will-change-transform ${
+            index < 3 ? "text-red-500" : ""
+          }`}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.h1>
 
             <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-12">
               <div className="space-y-4">
@@ -664,7 +700,7 @@ export default function Home() {
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 blur-3xl" />
 
                 <img
-                  src="/products/body.png"
+                  src="/products/bo.png"
                   onError={(e) => {
                     e.currentTarget.src =
                       "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=80";
@@ -1663,7 +1699,7 @@ export default function Home() {
 
           <div className="relative rounded-[42px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.18)]">
             <img
-              src="/products/pain-area.png"
+              src="/products/pain.png"
               onError={(e) => {
                 e.currentTarget.src = "/products/body-blue.png";
               }}
