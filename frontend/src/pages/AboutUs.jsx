@@ -599,25 +599,25 @@ const certifications = [
 
 const testimonials = [
   {
-    name: 'Dr P K Dave',
+    name: 'Dr P K Dave - AIIMS',
     text: 'MGRM products are versatile, light and extremely user friendly.',
     image:
       'https://static.medigence.com/uploads/doctor/images/80fbbc32a1070d08c2acf558ed4b9281.jpg',
   },
   {
-    name: 'Dr K K Saini',
+    name: 'Dr K K Saini - Academician',
     text: 'Excellent orthopedic supports meeting clinical requirements.',
     image:
       'https://www.drkksaini.in/images/sp.jpg',
   },
   {
-    name: 'Maj Gen B B Dutta',
+    name: 'Maj Gen B B Dutta - Academician',
     text: 'MGRM products are highly appreciated in Armed Forces.',
     image:
       'https://i.ytimg.com/vi/mQZk1n8W-14/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDmLvej3_4GO5mNjX50vacWv1iZZA',
   },
   {
-    name: 'Dr A K Singh',
+    name: 'Dr A K Singh - Neurosurgeon',
     text: 'Their cervical rehabilitation products are outstanding.',
     image:
       'https://shinonglobal.com/wp-content/uploads/2022/05/Dr.-A.K.-Singh.jpg',
@@ -652,15 +652,18 @@ const AboutUs = () => {
           muted
           loop
           playsInline
-          className="absolute inset-0 h-full w-full object-cover"
+          // className="absolute inset-0 h-full w-full object-cover"
+           className="absolute inset-0 h-full w-full object-cover brightness-100"
         >
           <source
-            src="/videos/medical-bg.mp4"
+            // src="/videos/medical-bg.mp4"
+            src='/videos/hey.mp4'
             type="video/mp4"
           />
         </video>
 
-        <div className="absolute inset-0 bg-[#00172e]/75" />
+        {/* <div className="absolute inset-0 bg-[#00172e]/75" /> */}
+        <div className="absolute inset-0 bg-[#00172e]/40" />
 
         <div className="relative z-10 flex h-full items-center">
           <div className="mx-auto max-w-7xl px-6">
