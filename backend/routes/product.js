@@ -48,19 +48,22 @@ router.get("/", async (req, res) => {
       query.activity = { $exists: true, $ne: "" };
     }
     // ✅ shop/body page => only body/category products
+// if (bodyOnly === "true") {
+//   query.category = { $exists: true, $ne: "" };
+
+//   query.$and = [
+//     ...(query.$and || []),
+//     {
+//       $or: [
+//         { activity: { $exists: false } },
+//         { activity: "" },
+//         { activity: null },
+//       ],
+//     },
+//   ];
+// }
 if (bodyOnly === "true") {
   query.category = { $exists: true, $ne: "" };
-
-  query.$and = [
-    ...(query.$and || []),
-    {
-      $or: [
-        { activity: { $exists: false } },
-        { activity: "" },
-        { activity: null },
-      ],
-    },
-  ];
 }
 
     if (color) {
@@ -141,12 +144,38 @@ router.post("/", auth, adminOnly, async (req, res) => {
   }
 });
 
+
 // UPDATE product
+// router.put("/:id", auth, adminOnly, async (req, res) => {
+//   try {
+//     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+//       returnDocument: "after",
+//     });
+
+//     if (!product) {
+//       return res.status(404).json({ msg: "Product not found" });
+//     }
+
+//     res.json(product);
+//   } catch (err) {
+//     console.error("Product update error:", err);
+//     res.status(500).json({ msg: err.message });
+//   }
+// });
 router.put("/:id", auth, adminOnly, async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      returnDocument: "after",
-    });
+    // 🔥 REMOVE empty fields so they don't overwrite DB
+    const cleanBody = Object.fromEntries(
+      Object.entries(req.body).filter(([_, v]) => v !== "")
+    );
+
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: cleanBody },
+      {
+        new: true,
+      }
+    );
 
     if (!product) {
       return res.status(404).json({ msg: "Product not found" });
