@@ -1,473 +1,3 @@
-// import React from 'react';
-// import {
-//   Award,
-//   ShieldCheck,
-//   ChevronRight,
-//   Quote,
-//   Sparkles,
-// } from 'lucide-react';
-
-// const productImages = [
-//   'abdomen.png',
-//   'ankle.png',
-//   'arm.png',
-//   'back.png',
-//   'calf.png',
-//   'collar.png',
-//   'elbow.png',
-//   'finger.png',
-//   'knee.png',
-//   'leg.png',
-//   'neck.png',
-//   'orth.png',
-//   'ribs.png',
-//   'shoulder.png',
-//   'thigh.png',
-//   'wrist.png',
-// ];
-
-// const timeline = [
-//   {
-//     year: '1994',
-//     title: 'MGRM Medicare Incorporated',
-//   },
-//   {
-//     year: '1995',
-//     title: 'Manufacturing Started',
-//   },
-//   {
-//     year: '1997',
-//     title: 'First US FDA Registration',
-//   },
-//   {
-//     year: '2005',
-//     title: 'WHO GMP Certification',
-//   },
-//   {
-//     year: '2007',
-//     title: 'NDMA Expert Committee Invitation',
-//   },
-//   {
-//     year: '2008',
-//     title: 'Steering Committee Member - NDMA',
-//   },
-// ];
-
-// const sidebarLinks = [
-//   'Our History',
-//   'Achievements',
-//   'Quality Certifications',
-//   'MGRM Timelines',
-//   'Leadership',
-//   'Testimonials',
-// ];
-
-// const AboutUs = () => {
-//   return (
-//     <div className="relative overflow-hidden bg-[#eef5fb]">
-//       {/* BG */}
-//       <div className="absolute left-[-150px] top-[-150px] h-[420px] w-[420px] rounded-full bg-cyan-200/40 blur-3xl" />
-//       <div className="absolute bottom-[-180px] right-[-180px] h-[450px] w-[450px] rounded-full bg-blue-200/40 blur-3xl" />
-
-//       {/* HERO */}
-//       <section className="relative h-screen overflow-hidden">
-//         <video
-//           autoPlay
-//           muted
-//           loop
-//           playsInline
-//           className="absolute inset-0 h-full w-full object-cover"
-//         >
-//           <source
-//             src="/videos/medical-bg.mp4"
-//             type="video/mp4"
-//           />
-//         </video>
-
-//         <div className="absolute inset-0 bg-[#001224]/70 backdrop-blur-[2px]" />
-
-//         <div className="relative z-10 flex h-full items-center">
-//           <div className="mx-auto max-w-7xl px-6">
-//             <div className="max-w-4xl">
-//               <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-2xl">
-//                 <Sparkles className="h-5 w-5 text-cyan-300" />
-
-//                 <span className="text-sm font-medium text-white">
-//                   MGRM Medicare Private Limited
-//                 </span>
-//               </div>
-
-//               <h1 className="text-5xl font-black leading-tight text-white md:text-7xl">
-//                 Revolutionizing
-//                 <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-//                   {' '}
-//                   Rehabilitation{' '}
-//                 </span>
-//                 Since 1994
-//               </h1>
-
-//               <p className="mt-10 max-w-3xl text-lg leading-9 text-gray-200 md:text-xl">
-//                 India’s leading rehabilitation and medical technology company
-//                 trusted by hospitals, doctors, institutions, defense forces and
-//                 healthcare professionals nationwide.
-//               </p>
-
-//               <div className="mt-12 flex flex-wrap gap-5">
-//                 <button className="rounded-2xl bg-white dark:bg-zinc-900 px-8 py-4 font-semibold text-[#002B5B] shadow-xl transition duration-300 hover:scale-105">
-//                   Explore Company
-//                 </button>
-
-//                 <button className="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-xl transition duration-300 hover:bg-white dark:bg-zinc-900 hover:text-[#002B5B]">
-//                   Discover Products
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* MAIN */}
-//       <section className="relative z-10 mx-auto max-w-7xl px-4 py-24">
-//         <div className="flex flex-col gap-10 lg:flex-row">
-//           {/* SIDEBAR */}
-//           <aside className="top-28 h-fit w-full rounded-[35px] border border-white/60 bg-white/60 dark:bg-zinc-900/60 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl lg:sticky lg:w-[320px]">
-//             <h2 className="mb-8 text-3xl font-black text-[#002B5B]">
-//               About Us
-//             </h2>
-
-//             <div className="space-y-4">
-//               {sidebarLinks.map((item, index) => (
-//                 <a
-//                   key={index}
-//                   href={`#section-${index}`}
-//                   className="group flex items-center justify-between rounded-2xl border border-transparent bg-white/40 px-5 py-4 text-[15px] font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:border-blue-100 hover:bg-[#002B5B] hover:text-white"
-//                 >
-//                   {item}
-
-//                   <ChevronRight className="h-5 w-5 transition group-hover:translate-x-1" />
-//                 </a>
-//               ))}
-//             </div>
-//           </aside>
-
-//           {/* CONTENT */}
-//           <div className="flex-1 space-y-10">
-//             {/* HISTORY */}
-//             <section
-//               id="section-0"
-//               className="overflow-hidden rounded-[40px] border border-white/70 bg-white/70 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-2xl"
-//             >
-//               <div className="grid items-center lg:grid-cols-2">
-//                 <div className="p-10 lg:p-14">
-//                   <span className="text-sm font-bold uppercase tracking-[5px] text-[#002B5B]">
-//                     Our History
-//                   </span>
-
-//                   <h2 className="mt-5 text-4xl font-black leading-tight text-[#002B5B]">
-//                     Transforming Rehabilitation In India
-//                   </h2>
-
-//                   <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-600 dark:text-zinc-300">
-//                     <p>
-//                       Established in 1994, MGRM Medicare pioneered affordable
-//                       rehabilitation technologies across India and South Asia.
-//                     </p>
-
-//                     <p>
-//                       During the 1980s and early 1990s rehabilitation products
-//                       were limited and mostly imported.
-//                     </p>
-
-//                     <p>
-//                       MGRM transformed the industry with innovative orthopedic
-//                       splints, emergency rehabilitation systems and advanced
-//                       patient care technologies.
-//                     </p>
-//                   </div>
-//                 </div>
-
-//                 <div className="relative h-full min-h-[550px]">
-//                   <img
-//                     src="/products/orth.png"
-//                     alt=""
-//                     className="h-full w-full object-cover"
-//                   />
-
-//                   <div className="absolute inset-0 bg-gradient-to-t from-[#00152d]/70 to-transparent" />
-//                 </div>
-//               </div>
-//             </section>
-
-//             {/* PRODUCTS */}
-//             <section className="rounded-[40px] border border-white/70 bg-white/70 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-2xl">
-//               <div className="mb-12">
-//                 <span className="text-sm font-bold uppercase tracking-[5px] text-[#002B5B]">
-//                   Rehabilitation Products
-//                 </span>
-
-//                 <h2 className="mt-4 text-4xl font-black text-[#002B5B]">
-//                   Orthopedic Product Categories
-//                 </h2>
-//               </div>
-
-//               <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-//                 {productImages.map((image, index) => (
-//                   <div
-//                     key={index}
-//                     className="group h-[360px] [perspective:1500px]"
-//                   >
-//                     <div
-//                       className="relative h-full w-full rounded-[32px] transition-all duration-700 group-hover:[transform:rotateY(180deg)]"
-//                       style={{
-//                         transformStyle: 'preserve-3d',
-//                       }}
-//                     >
-//                       {/* FRONT */}
-//                       <div
-//                         className="absolute inset-0 overflow-hidden rounded-[32px] border border-white/20"
-//                         style={{
-//                           backfaceVisibility: 'hidden',
-//                           WebkitBackfaceVisibility: 'hidden',
-//                         }}
-//                       >
-//                         <img
-//                           src={`/products/${image}`}
-//                           alt=""
-//                           className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-//                         />
-
-//                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-//                         <div className="absolute bottom-6 left-6">
-//                           <h3 className="text-2xl font-bold capitalize text-white">
-//                             {image.replace('.png', '')}
-//                           </h3>
-//                         </div>
-//                       </div>
-
-//                       {/* BACK */}
-//                       <div
-//                         className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-white/30 bg-white/10 p-8 text-center text-white shadow-2xl backdrop-blur-3xl"
-//                         style={{
-//                           transform: 'rotateY(180deg)',
-//                           backfaceVisibility: 'hidden',
-//                           WebkitBackfaceVisibility: 'hidden',
-//                         }}
-//                       >
-//                         <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-white/20 to-cyan-100/10 backdrop-blur-3xl" />
-
-//                         <div className="relative z-10">
-//                           <h3 className="text-3xl font-black capitalize text-white">
-//                             {image.replace('.png', '')}
-//                           </h3>
-
-//                           <p className="mt-5 leading-8 text-white/90">
-//                             Advanced orthopedic and rehabilitation support
-//                             designed for superior comfort, stability and medical
-//                             precision.
-//                           </p>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 ))}
-//               </div>
-//             </section>
-
-//             {/* ACHIEVEMENTS */}
-//             <section
-//               id="section-1"
-//               className="rounded-[40px] bg-gradient-to-br from-[#001a36] via-[#003a75] to-[#0059b2] p-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.12)]"
-//             >
-//               <span className="text-sm font-bold uppercase tracking-[5px] text-cyan-200">
-//                 Achievements
-//               </span>
-
-//               <h2 className="mt-4 text-4xl font-black">
-//                 Trusted Across India
-//               </h2>
-
-//               <div className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-4">
-//                 {[
-//                   'Indian Armed Forces',
-//                   'NDMA Recognition',
-//                   'Healthcare Innovation',
-//                   'National Quality Awards',
-//                 ].map((item, index) => (
-//                   <div
-//                     key={index}
-//                     className="rounded-[30px] border border-white/10 bg-white/10 p-8 backdrop-blur-2xl transition duration-300 hover:-translate-y-2"
-//                   >
-//                     <Award className="h-12 w-12 text-cyan-300" />
-
-//                     <h3 className="mt-6 text-2xl font-bold">
-//                       {item}
-//                     </h3>
-//                   </div>
-//                 ))}
-//               </div>
-//             </section>
-
-//             {/* CERTIFICATIONS */}
-//             <section
-//               id="section-2"
-//               className="rounded-[40px] border border-white/70 bg-white/70 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-2xl"
-//             >
-//               <span className="text-sm font-bold uppercase tracking-[5px] text-[#002B5B]">
-//                 Certifications
-//               </span>
-
-//               <h2 className="mt-4 text-4xl font-black text-[#002B5B]">
-//                 Global Quality Standards
-//               </h2>
-
-//               <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-//                 {[
-//                   'FDA Approval',
-//                   'CE Certification',
-//                   'WHO GMP',
-//                   'ISO 9001',
-//                   'ISO 13485',
-//                   'ISO 14001',
-//                   'OHSAS 18001',
-//                   'ANVISA',
-//                 ].map((item, index) => (
-//                   <div
-//                     key={index}
-//                     className="group rounded-[28px] border border-blue-100 bg-[#f7fbff] p-7 transition duration-300 hover:-translate-y-2 hover:bg-[#002B5B]"
-//                   >
-//                     <ShieldCheck className="h-12 w-12 text-[#002B5B] transition group-hover:text-cyan-300" />
-
-//                     <h3 className="mt-6 text-2xl font-bold text-[#002B5B] dark:text-white transition group-hover:text-white">
-//                       {item}
-//                     </h3>
-//                   </div>
-//                 ))}
-//               </div>
-//             </section>
-
-//             {/* TIMELINE */}
-//             <section
-//               id="section-3"
-//               className="rounded-[40px] border border-white/70 bg-white/70 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-2xl"
-//             >
-//               <span className="text-sm font-bold uppercase tracking-[5px] text-[#002B5B]">
-//                 MGRM Timeline
-//               </span>
-
-//               <h2 className="mt-4 text-4xl font-black text-[#002B5B]">
-//                 Journey Through The Years
-//               </h2>
-
-//               <div className="relative mt-24 overflow-x-auto pb-10">
-//                 <div className="relative flex min-w-[1100px] items-center justify-between">
-//                   <div className="absolute left-0 top-1/2 h-[5px] w-full -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-300 to-[#002B5B]" />
-
-//                   {timeline.map((item, index) => (
-//                     <div
-//                       key={index}
-//                       className="group relative z-10 flex w-[180px] flex-col items-center"
-//                     >
-//                       <div className="h-7 w-7 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
-
-//                       <div className="mt-8 rounded-[30px] border border-white/60 bg-white/70 p-6 text-center shadow-xl backdrop-blur-xl transition duration-500 group-hover:-translate-y-4">
-//                         <h3 className="text-3xl font-black text-[#002B5B]">
-//                           {item.year}
-//                         </h3>
-
-//                         <p className="mt-4 leading-7 text-gray-600 dark:text-zinc-300">
-//                           {item.title}
-//                         </p>
-//                       </div>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             </section>
-
-//             {/* LEADERSHIP */}
-//             <section
-//               id="section-4"
-//               className="rounded-[40px] bg-gradient-to-br from-[#00152d] to-[#003a75] p-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.12)]"
-//             >
-//               <span className="text-sm font-bold uppercase tracking-[5px] text-cyan-200">
-//                 Leadership
-//               </span>
-
-//               <h2 className="mt-4 text-4xl font-black">
-//                 Visionary Healthcare Leadership
-//               </h2>
-
-//               <p className="mt-8 max-w-4xl text-lg leading-9 text-gray-200">
-//                 MGRM Medicare is led by experienced healthcare professionals
-//                 with decades of expertise in rehabilitation technologies,
-//                 innovation and patient care systems.
-//               </p>
-//             </section>
-
-//             {/* TESTIMONIALS */}
-//             <section
-//               id="section-5"
-//               className="rounded-[40px] border border-white/70 bg-white/70 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] backdrop-blur-2xl"
-//             >
-//               <span className="text-sm font-bold uppercase tracking-[5px] text-[#002B5B]">
-//                 Testimonials
-//               </span>
-
-//               <h2 className="mt-4 text-4xl font-black text-[#002B5B]">
-//                 What Medical Experts Say
-//               </h2>
-
-//               <div className="mt-12 grid gap-8 md:grid-cols-2">
-//                 {[
-//                   {
-//                     name: 'Dr P K Dave',
-//                     text:
-//                       'MGRM products are versatile, light and extremely user friendly.',
-//                   },
-//                   {
-//                     name: 'Dr K K Saini',
-//                     text:
-//                       'Excellent orthopedic supports meeting clinical requirements.',
-//                   },
-//                   {
-//                     name: 'Maj Gen B B Dutta',
-//                     text:
-//                       'MGRM products are highly appreciated in Armed Forces.',
-//                   },
-//                   {
-//                     name: 'Dr A K Singh',
-//                     text:
-//                       'Their cervical rehabilitation products are outstanding.',
-//                   },
-//                 ].map((item, index) => (
-//                   <div
-//                     key={index}
-//                     className="group rounded-[35px] border border-white/70 bg-white/70 p-8 shadow-lg backdrop-blur-xl transition duration-300 hover:-translate-y-3"
-//                   >
-//                     <Quote className="h-14 w-14 text-cyan-300" />
-
-//                     <p className="mt-6 text-lg leading-9 text-gray-600 dark:text-zinc-300">
-//                       “{item.text}”
-//                     </p>
-
-//                     <h4 className="mt-7 text-2xl font-black text-[#002B5B]">
-//                       {item.name}
-//                     </h4>
-//                   </div>
-//                 ))}
-//               </div>
-//             </section>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default AboutUs;
-
-
 import React from 'react';
 import {
   Award,
@@ -476,6 +6,7 @@ import {
   Quote,
   Sparkles,
 } from 'lucide-react';
+import { motion } from "framer-motion";
 
 const productImages = [
   'abdomen.png',
@@ -530,6 +61,12 @@ const sidebarLinks = [
   'MGRM Timelines',
   'Leadership',
   'Testimonials',
+  'Cure to Care™',
+  'Autoclave Sterilizer',
+  'Specifications',
+  'Construction',
+  'Shredder Facility',
+  'Accessories',
 ];
 
 const achievements = [
@@ -636,6 +173,30 @@ const famousPeople = [
       'https://upload.wikimedia.org/wikipedia/commons/2/2c/Prime_Minister_Dr._Manmohan_Singh_in_March_2014.jpg',
   },
 ];
+// 🔥 ADD THIS COMPONENT HERE (OUTSIDE AboutUs)
+const WordByWord = ({ text }) => {
+  const letters = text.split("");
+
+  return (
+    <span className="inline-flex justify-center flex-wrap">
+      {letters.map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: i * 0.1,
+            duration: 0.4,
+            ease: "easeOut",
+          }}
+          className="inline-block"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
 
 const AboutUs = () => {
   return (
@@ -653,11 +214,11 @@ const AboutUs = () => {
           loop
           playsInline
           // className="absolute inset-0 h-full w-full object-cover"
-           className="absolute inset-0 h-full w-full object-cover brightness-100"
+           className="absolute inset-0 h-full w-full object-cover brightness-110"
         >
           <source
             // src="/videos/medical-bg.mp4"
-            src='/videos/hey.mp4'
+            src='/videos/slow.mp4'
             type="video/mp4"
           />
         </video>
@@ -667,13 +228,21 @@ const AboutUs = () => {
 
         <div className="relative z-10 flex h-full items-center">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="max-w-4xl">
+            {/* <div className="max-w-4xl"> */}
+            <div className="max-w-5xl mx-auto text-center">
               <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
                 <Sparkles className="h-5 w-5 text-cyan-300" />
 
-                <span className="text-sm font-medium text-white">
+                {/* <span className="text-sm font-medium text-white">
                   MGRM Medicare Private Limited
-                </span>
+                </span> */}
+               <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  className="text-lg md:text-xl font-semibold text-white tracking-widest text-center"
+>
+  <WordByWord text="MGRM Medicare Private Limited" />
+</motion.div>
               </div>
 
               <h1 className="text-5xl font-bold leading-tight text-white md:text-7xl">
@@ -1063,6 +632,432 @@ const AboutUs = () => {
                 ))}
               </div>
             </section>
+
+            {/* ================= CURE TO CARE SECTION ================= */}
+<section
+  id="section-6"
+  className="relative overflow-hidden rounded-[42px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] transition-colors duration-300"
+>
+
+  {/* BG GLOW */}
+  <div className="absolute -top-20 -right-20 h-[260px] w-[260px] rounded-full bg-cyan-300/20 blur-3xl" />
+
+  <div className="relative z-10 grid items-center gap-12 lg:grid-cols-2">
+
+    {/* LEFT CONTENT */}
+    <div>
+
+      <p className="text-sm font-bold uppercase tracking-[5px] text-cyan-500">
+        Cure to Care™
+      </p>
+
+      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-white">
+        Complete Eye Care &
+        Rehabilitation Solutions
+      </h2>
+
+      <p className="mt-8 text-[17px] leading-9 text-slate-600 dark:text-gray-300">
+        Under the banner of Cure to Care concept, MGRM Medicare has
+        forayed into the distribution and marketing of the complete
+        range of medicines for eye care and rehabilitation catering
+        to the four-phase treatment protocol of prevention,
+        pre-treatment, treatment and post-treatment patient care.
+      </p>
+
+      <p className="mt-6 text-[17px] leading-9 text-slate-600 dark:text-gray-300">
+        The products are available in the domestic market and over
+        50 international markets under the brand name ‘MGRM’.
+      </p>
+
+      {/* TAGS */}
+      <div className="mt-10 flex flex-wrap gap-4">
+
+        {[
+          'Eye Care',
+          'Rehabilitation',
+          'Patient Care',
+          'Global Markets',
+          'Pre & Post Treatment',
+          'Healthcare Solutions',
+        ].map((tag, i) => (
+
+          <div
+            key={i}
+            className="rounded-full border border-cyan-100 dark:border-white/10 bg-cyan-50 dark:bg-slate-800 px-5 py-3 text-sm font-bold text-[#002B5B] dark:text-white"
+          >
+            {tag}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* RIGHT IMAGE */}
+    <div className="relative">
+
+      <div className="absolute inset-0 rounded-[35px] bg-cyan-400/20 blur-3xl" />
+
+      <div className="relative overflow-hidden rounded-[35px] shadow-[0_25px_80px_rgba(34,211,238,0.18)]">
+
+        <img
+          src="/about/cure-care.jpg"
+          alt="Cure to Care"
+          // className="h-[520px] w-full object-cover transition duration-700 hover:scale-105"
+          className="h-[520px] w-full object-contain bg-[#eef7ff] dark:bg-slate-950  transition duration-700 hover:scale-[1.02]"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#00172e]/60 via-transparent to-transparent" />
+
+        {/* FLOAT CARD */}
+        <div className="absolute bottom-8 left-8 rounded-[25px] border border-white/20 bg-white/10 px-6 py-5 backdrop-blur-xl">
+
+          <h4 className="text-3xl font-black text-white">
+            50+
+          </h4>
+
+          <p className="mt-1 text-sm text-white/80">
+            International Markets
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+            {/* ================= AUTCLAVE CUM SHREDDER SECTION ================= */}
+<section    id="section-7" className="relative overflow-hidden rounded-[45px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+
+  {/* BG EFFECTS */}
+  <div className="absolute top-[-120px] right-[-120px] h-[320px] w-[320px] rounded-full bg-cyan-200/30 blur-3xl" />
+
+  <div className="absolute bottom-[-120px] left-[-120px] h-[300px] w-[300px] rounded-full bg-blue-200/20 blur-3xl" />
+
+  <div className="relative z-10 pt-6">
+
+    {/* TOP */}
+    <div className="max-w-5xl">
+
+      <p className="text-sm font-bold uppercase tracking-[5px] text-cyan-600 dark:text-cyan-300 animate-fade-up">
+        Medical Equipment and Accessories
+      </p>
+
+      {/* <h2 className="mt-5 text-4xl md:text-6xl font-black leading-tight text-[#002B5B] dark:text-white animate-fade-up">
+        Autoclave Cum <br />
+        Shredder Sterilizer
+      </h2> */}
+      <h2 className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-white">
+  Autoclave Cum <br />
+  Shredder Sterilizer
+</h2>
+
+      <p className="mt-8 max-w-4xl text-lg leading-9 text-gray-600 dark:text-gray-300 animate-fade-up">
+        The Integrated Autoclave with Shredder is designed by our
+        experts with rich experience in the medical industry making
+        use of leading technology as per the market standards.
+      </p>
+    </div>
+
+    {/* IMAGES */}
+    <div className="mt-16 grid gap-6 md:grid-cols-3">
+
+      {[
+        '/equipments/autoclave-1.jpg',
+        '/equipments/autoclave-2.jpg',
+        '/equipments/autoclave-3.jpg',
+      ].map((img, i) => (
+
+        <div
+          key={i}
+          className="group relative overflow-hidden rounded-[35px] h-[340px] bg-white dark:bg-slate-900 shadow-[0_25px_70px_rgba(0,0,0,0.08)] animate-fade-up"
+        >
+
+          <img
+            src={img}
+            alt=""
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+          <div className="absolute bottom-5 left-5 rounded-full bg-white/10 px-5 py-2 backdrop-blur-xl">
+            <p className="text-sm font-semibold text-white">
+              Hospital Grade Equipment
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* SPECIFICATIONS */}
+    <div className="mt-20 animate-fade-up " id="section-9">
+
+      <div className="flex items-center gap-4">
+        <div className="h-12 w-2 rounded-full bg-cyan-500" />
+
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-white">
+          Specifications
+        </h3>
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+
+        <table className="w-full border-collapse">
+
+          <tbody>
+
+            {[
+              [
+                'Steriliser Type',
+                'Horizontal Cylindrical High Speed Steam Steriliser',
+              ],
+              ['Chamber Capacity', '150 to 200 litre'],
+              ['Certification', 'Conforms to third party certification'],
+              [
+                'Operation',
+                'Fully automatic steam jacketed suitable for operation on electricity',
+              ],
+              [
+                'Temperature Range',
+                '121°C - 134°C',
+              ],
+              [
+                'Cycle Time',
+                'Configurable working temperature and sterilisation cycle time',
+              ],
+              [
+                'Steam Generator',
+                'Built-in electrically heated Steam Generator made of SS 316 (AISI 316) with low water protection system',
+              ],
+              [
+                'Power Supply',
+                'Works with 3 phase 400/440 V 50 Hz AC supply',
+              ],
+              [
+                'Control System',
+                'Microprocessor Controlled with preselected Sterilisation Programs',
+              ],
+            ].map((item, i) => (
+
+              <tr
+                key={i}
+                className="border-b border-slate-100 dark:border-white/10 hover:bg-cyan-50/70 dark:hover:bg-slate-800 transition duration-300"
+              >
+
+                <td className="w-[35%] px-6 py-6 text-[15px] font-bold text-[#002B5B] dark:text-cyan-300">
+                  {item[0]}
+                </td>
+
+                <td className="px-6 py-6 leading-8 text-gray-600 dark:text-gray-300">
+                  {item[1]}
+                </td>
+
+              </tr>
+            ))}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* CONSTRUCTION */}
+    <div className="mt-20 animate-fade-up" id="section-8">
+
+      <div className="flex items-center gap-4">
+        <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
+
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-white">
+          Construction
+        </h3>
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+
+        <table className="w-full border-collapse">
+
+          <tbody>
+
+            {[
+              ['Provision of Lock', 'Automatic Lock'],
+              ['Type of Door', 'Hinged type'],
+              [
+                'Display Facility',
+                'Chamber Temperature, Cycle Number, Batch Number, Time and Date, Alarm Indicator, Low Water Indicator',
+              ],
+              [
+                'Print Facility',
+                'Yes, by an inbuilt printer unit',
+              ],
+              ['Warranty Period', '3 year'],
+              ['No of Doors', '1'],
+              [
+                'User Interface',
+                'Touch screen interface',
+              ],
+              [
+                'Data Transfer Facility',
+                'Yes, through USB / RS232 port',
+              ],
+              [
+                'Air Removal System',
+                'Pressure/Vacuum pulsing for proper steam penetration',
+              ],
+            ].map((item, i) => (
+
+              <tr
+                key={i}
+                className="border-b border-slate-100 dark:border-white/10 hover:bg-blue-50/70 dark:hover:bg-slate-800 transition duration-300"
+              >
+
+                <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] dark:text-cyan-300">
+                  {item[0]}
+                </td>
+
+                <td className="px-6 py-6 leading-8 text-gray-600 dark:text-gray-300">
+                  {item[1]}
+                </td>
+
+              </tr>
+            ))}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* SHREDDER */}
+    <div className="mt-20 animate-fade-up" id="section-10">
+
+      <div className="flex items-center gap-4">
+        <div className="h-12 w-2 rounded-full bg-cyan-500" />
+
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-white">
+          Integrated Shredder Facility
+        </h3>
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-[35px] bg-gradient-to-br from-[#002B5B] via-[#004e96] to-[#0072d4] shadow-[0_25px_80px_rgba(0,91,187,0.35)]">
+
+        <table className="w-full border-collapse">
+
+          <tbody>
+
+            {[
+              [
+                'Integrated Shredder',
+                'Yes, with Microprocessor controlled',
+              ],
+              [
+                'Shredder Material',
+                'SS 316 or SS 316L',
+              ],
+              [
+                'Motor Power',
+                '>= 2 HP',
+              ],
+              [
+                'Motor Speed',
+                '>= 1000 RPM',
+              ],
+              [
+                'Motor Supply',
+                '220 V, 50 HZ AC motor',
+              ],
+              [
+                'Waste Handling',
+                'Able to deal with shredding of biomedical waste as per Steriliser capacity',
+              ],
+            ].map((item, i) => (
+
+              <tr
+                key={i}
+                className="border-b border-white/10 hover:bg-white/10 transition duration-300"
+              >
+
+                <td className="w-[35%] px-6 py-6 font-bold text-cyan-200">
+                  {item[0]}
+                </td>
+
+                <td className="px-6 py-6 leading-8 text-white/90">
+                  {item[1]}
+                </td>
+
+              </tr>
+            ))}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* ACCESSORIES */}
+    <div className="mt-20 animate-fade-up" id="section-11">
+
+      <div className="flex items-center gap-4">
+        <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
+
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-white">
+          Accessories
+        </h3>
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+
+        <table className="w-full border-collapse">
+
+          <tbody>
+
+            {[
+              ['Number of Rails', '2'],
+              ['Long Handle', '1'],
+              ['Sterilisation Carriages', '1'],
+              ['Pull out Trays/Tanks', '0'],
+              ['Floor loading carts', '2'],
+              ['Transfer carriages', '1'],
+            ].map((item, i) => (
+
+              <tr
+                key={i}
+                className="border-b border-slate-100 dark:border-white/10 hover:bg-cyan-50/70 dark:hover:bg-slate-800 transition duration-300"
+              >
+
+                <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] dark:text-cyan-300">
+                  {item[0]}
+                </td>
+
+                <td className="px-6 py-6 leading-8 text-gray-600 dark:text-gray-300">
+                  {item[1]}
+                </td>
+
+              </tr>
+            ))}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* TAGS */}
+    <div className="mt-16 flex flex-wrap gap-4 animate-fade-up">
+
+      {[
+        'Fully Automatic',
+        'Biomedical Waste Management',
+        'Steam Sterilization',
+        'Integrated Shredder',
+        'Hospital Grade',
+        'Touch Screen Interface',
+        'Microprocessor Controlled',
+        'High Speed Steriliser',
+      ].map((tag, i) => (
+
+        <div
+          key={i}
+          className="rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-6 py-3 text-sm font-bold text-[#002B5B] dark:text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+        >
+          {tag}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
           </div>
         </div>
       </section>
