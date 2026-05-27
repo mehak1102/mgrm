@@ -1,5 +1,3 @@
-
-
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -15,14 +13,14 @@ import {
 } from "lucide-react";
 import API from "../api";
 import ProductCard from "../components/ProductCard";
-// import { activities, blogs, bodyCategories } from "../data/siteData";
+
 import { activities, bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 
 
-const text = "248 top certified products";
+const text = "248 top certified products- to cure your body";
 
 
 export default function Home() {
@@ -87,7 +85,6 @@ export default function Home() {
   };
 
   const nextBlogs = () => {
-    // if (blogStart + 4 < blogs.length) {
     if (blogStart + 4 < blogPosts.length) {
       setBlogStart(blogStart + 4);
     }
@@ -106,7 +103,7 @@ export default function Home() {
       <div className="relative z-10">
         {/* HERO */}
         <section className="relative min-h-[92vh] pt-10 pb-20 overflow-hidden">
-        {/* <section className="relative min-h-screen pt-10 pb-20 overflow-hidden bg-white dark:bg-slate-900"> */}
+    
           <video
             className="absolute inset-0 w-full h-full object-cover opacity-[0.90]"
       
@@ -122,19 +119,12 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
           <div className="relative max-w-[1500px] mx-auto px-6">
-            {/* <motion.h1
-              initial={{ opacity: 0, y: 35 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-[42px] md:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300"
-              // className="text-[34px] sm:text-[46px] md:text-[64px] xl:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-zinc-200 max-w-6xl pt-4"
-            >
-              <span className="text-red-500">248</span> top certified products
-            </motion.h1> */}
+
             <motion.h1
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="text-[42px] md:text-[74px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
+      className="text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
     >
       {text.split("").map((char, index) => (
         <motion.span
@@ -314,7 +304,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.07 }}
                     onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                    className="rounded-full px-5 py-3 font-bold shadow-md hover:scale-105 transition bg-white/80 backdrop-blur border"
+                    className="rounded-full px-6 py-3 font-bold shadow-md hover:scale-105 transition bg-white/80 backdrop-blur border"
                     style={{ borderColor: `${cat.color}66`, color: cat.color }}
                   >
                     {String(index + 1).padStart(2, "0")} &nbsp; {cat.name}
@@ -328,7 +318,7 @@ export default function Home() {
         <BodyFlowMap />
 
         {/* FEATURES */}
-        <section className="max-w-7xl mx-auto px-5 py-16">
+        <section className="max-w-[1500px] mx-auto px-6 py-28">
           <div className="grid md:grid-cols-4 gap-5">
             {[
               ["Certified Products", ShieldCheck],
@@ -349,16 +339,17 @@ export default function Home() {
 
 
         {/* GLOBAL CERTIFICATIONS */}
-<section className="relative max-w-[1500px] mx-auto px-6 py-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[50px] transition-colors duration-300" />
+<section className="relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[48px] transition-colors duration-300" />
 
-  <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-14 items-center">
+
+  <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-20 items-center min-h-[720px]">
     
     {/* LEFT */}
     <div className="overflow-hidden">
       <div className="flex gap-7 w-max marquee-cert py-4">
         {[...certifications, ...certifications].map((item, i) => {
-          // const Icon = item.icon;
+         
 
           return (
             <motion.div
@@ -368,19 +359,13 @@ export default function Home() {
               transition={{ delay: (i % certifications.length) * 0.08 }}
               className="w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-slate-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
             >
-              {/* <div
-                className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${item.color} text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition`}
-              >
-                <Icon size={38} strokeWidth={2.3} />
-              </div> */}
+
 <div
-  // className="w-24 h-24 rounded-3xl bg-white dark:bg-slate-900 shadow-xl flex items-center justify-center border border-slate-100 dark:border-zinc-800 group-hover:scale-110 transition"
   className="w-28 h-28 rounded-[30px] bg-white dark:bg-slate-900 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-zinc-800 group-hover:scale-110 transition"
 >
   <img
     src={item.image}
     alt={item.title}
-    // className="w-16 h-16 object-contain"
     className="w-20 h-20 object-contain"
   />
 </div>
@@ -407,16 +392,16 @@ export default function Home() {
       <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
       <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
 
-      <div className="relative bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl rounded-[40px] p-10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
+      <div className="relative bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
         <p className="text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
           TRUST & SAFETY
         </p>
 
-        <h2 className="text-5xl font-black mt-4 leading-tight text-slate-900 dark:text-white">
+        <h2 className="text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-white">
           Expect The <br /> Best
         </h2>
 
-        <p className="mt-6 text-lg text-slate-500 dark:text-gray-300 leading-8">
+        <p className="mt-8 text-xl text-slate-500 dark:text-gray-300 leading-8">
           MGRM’s strong focus on quality ensures every orthopedic and
           recovery product meets internationally recognized healthcare
           standards for comfort, durability and safety.
@@ -448,9 +433,469 @@ export default function Home() {
   </div>
 </section>
 
+{/* ================= CARDIOLOGY AWARENESS SECTION ================= */}
 
+
+<section className="relative overflow-hidden py-28">
+
+  <div className="relative z-10 mx-auto max-w-[1500px] px-6">
+
+    {/* MAIN CARD */}
+    <div
+      className="
+        rounded-[42px]
+         min-h-[760px]
+        border
+
+        border-black/5
+        dark:border-white/10
+
+        bg-gradient-to-br
+
+        from-[#f8fbff]
+        via-[#eef4ff]
+        to-[#f3f7ff]
+
+        dark:from-[#0d1b34]
+        dark:via-[#142544]
+        dark:to-[#10203d]
+
+        p-8
+        shadow-[0_30px_100px_rgba(0,0,0,0.12)]
+        dark:shadow-[0_30px_100px_rgba(0,0,0,0.35)]
+
+        backdrop-blur-xl
+        md:p-12
+      "
+    >
+
+      {/* TOP */}
+      <div className="grid items-center gap-10 lg:grid-cols-2">
+
+        {/* LEFT */}
+        <div>
+
+          {/* ATTENTION */}
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: 100, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="
+                text-[58px]
+                font-light
+                tracking-wide
+                text-red-500
+                md:text-6xl
+              "
+            >
+              Attention
+            </motion.h2>
+          </div>
+
+          {/* CARDIOLOGISTS */}
+          <motion.h3
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
+            className="
+              mt-2
+              text-4xl
+              font-light
+
+              text-[#111827]
+              dark:text-white
+
+              md:text-6xl
+            "
+          >
+            Cardiologists
+          </motion.h3>
+
+          {/* TEXT */}
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            viewport={{ once: true }}
+            className="
+              mt-8
+              max-w-xl
+              text-base
+              leading-8
+
+              text-[#4b5563]
+              dark:text-white/70
+
+              md:text-lg
+            "
+          >
+            248 world-class certified products designed for
+            relief, recovery and rehabilitation with trusted
+            orthopedic and post-surgical support solutions.
+          </motion.p>
+
+          {/* RED LINE */}
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '160px' }}
+            transition={{ delay: 1, duration: 1 }}
+            viewport={{ once: true }}
+            className="mt-7 h-[3px] rounded-full bg-red-500"
+          />
+        </div>
+
+        {/* RIGHT HEART */}
+        <div className="relative flex items-center justify-center">
+
+          {/* GLOW */}
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="
+              absolute
+              h-[280px]
+              w-[280px]
+              rounded-full
+              bg-red-500/30
+              blur-3xl
+            "
+          />
+
+          {/* HEART */}
+          <motion.img
+            src="/cardiology/heart.png"
+            alt="heart"
+            initial={{
+              opacity: 0,
+              scale: 0.6,
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+            }}
+            whileHover={{
+              scale: 1.08,
+              rotate: 2,
+              filter:
+                'drop-shadow(0px 0px 40px rgba(255,0,0,0.9))',
+            }}
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            viewport={{ once: true }}
+            className="
+              relative
+              z-10
+              h-[260px]
+              cursor-pointer
+              object-contain
+              transition-all
+              duration-500
+              md:h-[320px]
+            "
+          />
+
+        
+<svg
+  className="
+    absolute
+    h-[340px]
+    w-[340px]
+    -rotate-90
+  "
+  viewBox="0 0 500 500"
+>
+  <motion.circle
+    cx="250"
+    cy="250"
+    r="160"
+    stroke="#ef4444"
+    strokeWidth="2.5"
+    fill="transparent"
+    strokeLinecap="round"
+
+    strokeDasharray="1005"
+    strokeDashoffset="1005"
+
+    animate={{
+      strokeDashoffset: [1005, 0],
+    }}
+
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      repeatDelay: 0.2,
+      ease: 'linear',
+    }}
+  />
+</svg>
+        </div>
+      </div>
+
+      {/* MOVING PRODUCTS */}
+      <div className="relative mt-20 overflow-hidden">
+
+        {/* LEFT FADE */}
+        <div
+          className="
+            absolute
+            left-0
+            top-0
+            z-20
+            h-full
+            w-24
+
+            bg-gradient-to-r
+
+            from-[#f8fbff]
+            dark:from-[#10203d]
+
+            to-transparent
+          "
+        />
+
+        {/* RIGHT FADE */}
+        <div
+          className="
+            absolute
+            right-0
+            top-0
+            z-20
+            h-full
+            w-24
+
+            bg-gradient-to-l
+
+            from-[#f3f7ff]
+            dark:from-[#10203d]
+
+            to-transparent
+          "
+        />
+
+        {/* TRACK */}
+        <motion.div
+          animate={{
+            x: ['0%', '-50%'],
+          }}
+          transition={{
+            duration: 80,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          className="flex w-max gap-7"
+        >
+
+          {[
+            '/products/abdomen.png',
+            '/products/ankle.png',
+            '/products/arm.png',
+            '/products/back.png',
+           
+            '/products/calf.png',
+            '/products/collar.png',
+            '/products/elbow.png',
+            '/products/finger.png',
+            '/products/knee.png',
+            '/products/leg.png',
+            '/products/neck.png',
+            '/products/orth.png',
+           
+            '/products/ribs.png',
+            '/products/shoulder.png',
+            '/products/thigh.png',
+            '/products/wrist.png',
+
+            // duplicate
+            '/products/abdomen.png',
+            '/products/ankle.png',
+            '/products/arm.png',
+            '/products/back.png',
+           
+            '/products/calf.png',
+            '/products/collar.png',
+            '/products/elbow.png',
+            '/products/finger.png',
+            '/products/knee.png',
+            '/products/leg.png',
+            '/products/neck.png',
+            '/products/orth.png',
+           
+            '/products/ribs.png',
+            '/products/shoulder.png',
+            '/products/thigh.png',
+            '/products/wrist.png',
+          ].map((image, index) => (
+
+            <motion.div
+              key={index}
+              whileHover={{
+                y: -10,
+                scale: 1.06,
+              }}
+              transition={{
+                duration: 0.4,
+              }}
+              className="
+                group
+                relative
+                flex
+                h-[150px]
+                w-[150px]
+                shrink-0
+                items-center
+                justify-center
+                overflow-hidden
+                rounded-full
+
+                border
+                border-black/5
+                dark:border-white/10
+
+                bg-black/[0.03]
+                dark:bg-white/5
+
+                backdrop-blur-xl
+
+                shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+                dark:shadow-[0_15px_50px_rgba(0,0,0,0.25)]
+              "
+            >
+
+              {/* HOVER GLOW */}
+              <div
+                className="
+                  absolute
+                  inset-0
+                  rounded-full
+                  bg-red-500/0
+                  blur-2xl
+                  transition-all
+                  duration-500
+                  group-hover:bg-red-500/20
+                "
+              />
+
+              {/* FLOATING ANIMATION */}
+              <motion.div
+                animate={{
+                  y: [0, -6, 0],
+                }}
+                transition={{
+                  duration: 3 + (index % 3),
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="h-full w-full"
+              >
+
+                {/* IMAGE */}
+                <img
+                  src={image}
+                  alt=""
+                  className="
+                    h-full
+                    w-full
+                    rounded-full
+                    object-cover
+                    transition-all
+                    duration-700
+                    group-hover:scale-110
+                    group-hover:rotate-2
+                  "
+                />
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* BOTTOM */}
+      <div
+        className="
+          mt-20
+          flex
+          flex-col
+          items-center
+          justify-between
+          gap-8
+
+          border-t
+          border-black/10
+          dark:border-white/10
+
+          pt-8
+          md:flex-row
+        "
+      >
+
+        {/* LOGO TEXT */}
+        <div>
+          <h3
+            className="
+              text-4xl
+              font-black
+              tracking-wide
+
+              text-[#0f172a]
+              dark:text-white
+            "
+          >
+            MGRM
+          </h3>
+
+          <p
+            className="
+              text-lg
+              font-semibold
+              tracking-[8px]
+              text-red-500
+            "
+          >
+            MEDICARE
+          </p>
+        </div>
+
+        {/* DESCRIPTION */}
+        <div
+          className="
+            max-w-xl
+            text-center
+            text-sm
+            leading-7
+
+            text-[#4b5563]
+            dark:text-white/60
+
+            md:text-right
+          "
+        >
+          MGRM products are designed to support recovery
+          before surgery and accelerate rehabilitation
+          after surgery.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="relative max-w-[1600px] mx-auto px-6 py-32 overflow-hidden">
+<section className="relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+
 
   {/* BACKGROUND */}
   <div className="absolute inset-0 rounded-[60px] overflow-hidden">
@@ -501,8 +946,8 @@ export default function Home() {
         </div>
 
         {/* TITLE */}
-        {/* <h2 className="mt-8 text-[68px] leading-[0.92] font-black text-slate-900 dark:text-zinc-100"> */}
-        <h2 className="mt-6 text-5xl md:text-6xl font-black leading-tight text-slate-900 dark:text-white transition-colors duration-300">
+
+        <h2 className="mt-6 text-[58px] md:text-6xl font-black leading-tight text-slate-900 dark:text-white transition-colors duration-300">
           BANDAGE TO
           <br />
           SPLINTAGE™
@@ -561,7 +1006,7 @@ export default function Home() {
             className="rounded-[30px] bg-white/70 dark:bg-slate-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-slate-800/90 transition-all duration-500"
           >
 
-            <h3 className="text-5xl font-black text-slate-900 dark:text-white">
+            <h3 className="text-[58px] font-black text-slate-900 dark:text-white">
               {num}
             </h3>
 
@@ -575,7 +1020,7 @@ export default function Home() {
     </div>
 
     {/* RIGHT SIDE */}
-    <div className="relative h-[620px] flex items-center justify-start -ml-16">
+    <div className="relative h-[680px] flex items-center justify-start -ml-16">
 
       {/* MAIN IMAGE CARD */}
       <motion.div
@@ -708,13 +1153,14 @@ export default function Home() {
 
 
         {/* BEST SELLERS */}
-        <section className="relative max-w-[1500px] mx-auto px-6 py-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[50px] transition-colors duration-300" />
+  
+        <section className="relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[48px] transition-colors duration-300" />
 
           <div className="relative flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">TOP CATEGORIES</p>
-              <h2 className="text-5xl font-black mt-2 text-slate-900 dark:text-white">Best Sellers</h2>
+              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Best Sellers</h2>
               <p className="text-gray-500 dark:text-zinc-400 mt-3">
                 Most trusted support categories for daily recovery.
               </p>
@@ -750,10 +1196,10 @@ export default function Home() {
         </section>
 
         {/* LOCATE PAIN AREA */}
-        <section className="relative max-w-[1400px] mx-auto px-6 py-20">
+        <section className="relative max-w-[1500px] mx-auto px-6 py-28">
           <div className="text-center mb-12">
             <p className="text-cyan-600 font-black tracking-widest">BODY-BASED SEARCH</p>
-            <h2 className="text-5xl font-black mt-2 text-slate-900 dark:text-white">Locate Your Pain Area</h2>
+            <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Locate Your Pain Area</h2>
             <p className="text-gray-500 dark:text-zinc-400 mt-3 text-lg">
               Get the right support where you need it
             </p>
@@ -822,11 +1268,11 @@ export default function Home() {
         </section>
 
         {/* SHOP BY ACTIVITY */}
-        <section className="max-w-[1500px] mx-auto px-6 py-20">
+        <section className="max-w-[1500px] mx-auto px-6 py-28">
           <div className="flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
-              <h2 className="text-5xl font-black mt-2 text-slate-900 dark:text-white">Shop By Activity</h2>
+              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Shop By Activity</h2>
             </div>
 
             <Link
@@ -866,13 +1312,13 @@ export default function Home() {
         </section>
 
         {/* FEATURED PRODUCTS */}
-        <section className="relative max-w-7xl mx-auto px-5 py-20 transition-colors duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 rounded-[50px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
+        <section className="relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
             <div>
               <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm">FEATURED PRODUCTS</p>
-              <h2 className="text-4xl sm:text-5xl font-black mt-2 text-slate-900 dark:text-white">Recommended Supports</h2>
+              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-white">Recommended Supports</h2>
               <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl">
                 Handpicked supports for comfort, stability and recovery.
               </p>
@@ -909,11 +1355,11 @@ export default function Home() {
         </section>
 
         {/* BLOGS */}
-        <section className="max-w-7xl mx-auto px-5 py-20">
+        <section className="max-w-7xl mx-auto px-5 py-28">
           <div className="flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">LEARN & RECOVER</p>
-              <h2 className="text-5xl font-black mt-2 text-slate-900 dark:text-white">Health Blogs & Guides</h2>
+              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Health Blogs & Guides</h2>
             </div>
 
             <div className="flex gap-3">
@@ -939,8 +1385,7 @@ export default function Home() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
-            {/* {blogs.slice(blogStart, blogStart + 4).map((blog, index) => (
-               */}
+           
                {blogPosts.slice(blogStart, blogStart + 4).map((blog, index) => (
               <motion.article
                 key={`${blog.title}-${index}`}
@@ -978,6 +1423,85 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* ================= PRINT ADS ================= */}
+<section className="relative max-w-[1500px] mx-auto px-6 mt-24 mb-10 overflow-hidden">
+
+
+{/* HEADING */}
+<div className="text-center mb-14">
+
+  <h2 className="mt-4 text-[64px] leading-[0.9] font-black text-slate-900 dark:text-white">
+    MGRM
+    <br />
+    <span className="bg-gradient-to-r bg-gradient-to-r from-[#374151] via-[#f43f5e] to-[#fb923c] bg-clip-text text-transparent">
+      Medicare
+    </span>
+  </h2>
+
+  <p className="mt-5 text-slate-500 dark:text-zinc-400 text-lg">
+    Advanced respiratory & pain relief solutions designed for everyday comfort.
+  </p>
+
+</div>
+
+{/* GRID */}
+<div className="grid md:grid-cols-2 gap-10 max-w-[1100px] mx-auto">
+
+  {/* CARD 1 */}
+  <div className="group relative rounded-[42px] overflow-hidden bg-white dark:bg-slate-900 border border-white/70 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+
+    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
+
+    <img
+      src="/ads/abc.png"
+      alt="Nebulizer Ad"
+      
+      className="w-full h-[520px] object-contain p-6 group-hover:scale-[1.03] transition duration-700"
+    />
+
+<div className="absolute top-5 right-5 text-right bg-black/40 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+
+  <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
+    Breathe Easier
+    <br />
+
+    <span className="text-cyan-300">
+      NOW
+    </span>
+  </h3>
+
+</div>
+  </div>
+
+  {/* CARD 2 */}
+  <div className="group relative rounded-[42px] overflow-hidden bg-white dark:bg-slate-900 border border-white/70 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+
+    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-lime-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
+
+    <img
+      src="/ads/def.png"
+      alt="Pain Relief Spray"
+      
+      className="w-full h-[520px] object-contain p-6 group-hover:scale-[1.03] transition duration-700"
+    />
+
+<div className="absolute top-5 left-5 bg-black/35 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+
+  <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
+    Pain Relief
+    <br />
+
+    <span className="text-lime-300">
+      Naturally
+    </span>
+  </h3>
+
+</div>
+  </div>
+
+</div>
+</section>
       </div>
     </main>
   );

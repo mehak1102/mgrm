@@ -62,6 +62,7 @@ const sidebarLinks = [
   'Leadership',
   'Testimonials',
   'Cure to Care™',
+  'Partner Program',
   'Autoclave Sterilizer',
   'Specifications',
   'Construction',
@@ -173,28 +174,45 @@ const famousPeople = [
       'https://upload.wikimedia.org/wikipedia/commons/2/2c/Prime_Minister_Dr._Manmohan_Singh_in_March_2014.jpg',
   },
 ];
-// 🔥 ADD THIS COMPONENT HERE (OUTSIDE AboutUs)
-const WordByWord = ({ text }) => {
-  const letters = text.split("");
+
+
+const WordByWord = ({ text, className = "", gradient = false }) => {
+  const words = text.split(" ");
 
   return (
-    <span className="inline-flex justify-center flex-wrap">
-      {letters.map((char, i) => (
+    <div className={`flex flex-wrap justify-center ${className}`}>
+      {words.map((word, index) => (
+  
         <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: i * 0.1,
-            duration: 0.4,
-            ease: "easeOut",
-          }}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
+  key={index}
+  initial={{
+    opacity: 0,
+    y: -120,
+    scale: 0.96,
+    filter: "blur(14px)",
+  }}
+  animate={{
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+  }}
+  transition={{
+    delay: 2.4,
+    duration: 1.8,
+    ease: [0.16, 1, 0.3, 1],
+  }}
+  className={`
+    mr-4 inline-block will-change-transform
+    ${gradient
+      ? "bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent"
+      : ""}
+  `}
+>
+  {word}
+</motion.span>
       ))}
-    </span>
+    </div>
   );
 };
 
@@ -233,32 +251,90 @@ const AboutUs = () => {
               <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
                 <Sparkles className="h-5 w-5 text-cyan-300" />
 
-                {/* <span className="text-sm font-medium text-white">
-                  MGRM Medicare Private Limited
-                </span> */}
-               <motion.div
+               {/* <motion.div
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
+  className="text-lg md:text-xl font-semibold text-white tracking-widest text-center"
+>
+  <WordByWord text="MGRM Medicare Private Limited" />
+</motion.div> */}
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1 }}
   className="text-lg md:text-xl font-semibold text-white tracking-widest text-center"
 >
   <WordByWord text="MGRM Medicare Private Limited" />
 </motion.div>
               </div>
 
-              <h1 className="text-5xl font-bold leading-tight text-white md:text-7xl">
+              {/* <h1 className="text-5xl font-bold leading-tight text-white md:text-7xl">
                 Revolutionizing
                 <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
                   {' '}
                   Rehabilitation{' '}
                 </span>
                 Since 1994
-              </h1>
+              </h1> */}
+          <h1 className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white">
 
-              <p className="mt-10 max-w-3xl text-lg leading-9 text-gray-200">
+<div className="overflow-hidden">
+  <WordByWord
+    text="Revolutionizing"
+    className="justify-center text-[52px] md:text-[88px]"
+  />
+</div>
+
+{/* <div className="overflow-hidden mt-2 flex justify-center">
+  <div className="bg-gradient-to-r from-cyan-300 via-white to-blue-300 bg-clip-text text-transparent">
+    <WordByWord
+      text="Rehabilitation"
+      className="justify-center text-[58px] md:text-[98px]"
+    />
+  </div>
+</div> */}
+ <WordByWord
+  text="Rehabilitation"
+  gradient={true}
+  className="text-[58px] md:text-[98px]"
+/>
+
+<div className="overflow-hidden mt-3">
+  <WordByWord
+    text="Since 1994"
+    className="justify-center text-[32px] md:text-[52px] tracking-[6px] text-white/85"
+  />
+</div>
+
+</h1>
+
+              {/* <p className="mt-10 max-w-3xl text-lg leading-9 text-gray-200">
                 India’s leading rehabilitation and orthopedic healthcare
                 technology company trusted by doctors, hospitals,
                 defense forces and healthcare institutions nationwide.
-              </p>
+              </p> */}
+              <motion.p
+  initial={{
+    opacity: 0,
+    y: 60,
+    filter: "blur(8px)",
+  }}
+  animate={{
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+  }}
+  transition={{
+    delay: 1.2,
+    duration: 1.2,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="mt-10 max-w-3xl text-lg leading-9 text-gray-200"
+>
+  India’s leading rehabilitation and orthopedic healthcare
+  technology company trusted by doctors, hospitals,
+  defense forces and healthcare institutions nationwide.
+</motion.p>
             </div>
           </div>
         </div>
@@ -668,6 +744,12 @@ const AboutUs = () => {
         The products are available in the domestic market and over
         50 international markets under the brand name ‘MGRM’.
       </p>
+      <div className="mt-8 border-l-4 border-cyan-400 pl-6">
+  <p className="text-2xl font-semibold italic leading-10 text-[#002B5B] dark:text-white">
+    “MGRM products are designed to support recovery before surgery
+    and accelerate rehabilitation after surgery.”
+  </p>
+</div>
 
       {/* TAGS */}
       <div className="mt-10 flex flex-wrap gap-4">
@@ -722,8 +804,193 @@ const AboutUs = () => {
     </div>
   </div>
 </section>
+
+
+{/* ================= PARTNER PROGRAM SECTION ================= */}
+{/* <section
+  id="section-7"
+  className="relative overflow-hidden rounded-[45px] bg-white dark:bg-slate-900 border border-white/60 dark:border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.08)]"
+>
+  <div className="grid lg:grid-cols-2 items-center">
+
+
+    <div className="relative h-[420px] overflow-hidden">
+
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="h-full w-full object-cover"
+      >
+        <source
+          src="/videos/handshake.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00172e]/70 to-transparent" />
+
+      
+      <div className="absolute bottom-10 left-10 max-w-md">
+        <p className="text-cyan-300 tracking-[0.3em] text-sm font-bold uppercase">
+          Global Network
+        </p>
+
+        <h3 className="mt-4 text-4xl font-black text-white leading-tight">
+          Partner <br />
+          With MGRM
+        </h3>
+
+        <p className="mt-5 text-gray-200 leading-8">
+          Expanding healthcare innovation and rehabilitation
+          solutions across India and worldwide.
+        </p>
+      </div>
+    </div>
+    <div className="p-10 lg:p-16">
+
+      <span className="text-sm font-bold uppercase tracking-[0.35em] text-cyan-600 dark:text-cyan-400">
+        PARTNER PROGRAM
+      </span>
+
+      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-white">
+        Become Our <br />
+        Distribution Partner
+      </h2>
+
+      <div className="mt-8 space-y-6 text-lg leading-9 text-slate-600 dark:text-gray-300">
+
+        <p>
+          Interested in becoming our distribution partner?
+        </p>
+
+        <p>
+          Do you want us to market your product line?
+        </p>
+
+        <p>
+          MGRM Medicare Limited has successfully launched
+          partnerships with companies all over the world and
+          we are continuously expanding our global network.
+        </p>
+
+        <p>
+          Join hands with MGRM to deliver world-class
+          rehabilitation and healthcare solutions to hospitals,
+          institutions and patients worldwide.
+        </p>
+      </div>
+    </div>
+  </div>
+</section> */}
+{/* ================= PARTNER PROGRAM SECTION ================= */}
+<section
+  id="section-7"
+  className="relative overflow-hidden rounded-[42px] border border-white/10 bg-gradient-to-br from-[#02142b] via-[#06264a] to-[#0a3d73] shadow-[0_30px_90px_rgba(2,12,27,0.35)]"
+>
+  <div className="grid lg:grid-cols-2 items-center">
+
+    {/* VIDEO SIDE */}
+    <div className="relative h-[520px] overflow-hidden">
+
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover scale-[1.12]"
+      >
+        <source
+          src="/videos/handshake.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00152d]/70 via-[#00152d]/25 to-transparent" />
+
+      {/* OPTIONAL GLOW */}
+      <div className="absolute -left-10 top-10 h-[240px] w-[240px] rounded-full bg-cyan-400/20 blur-3xl" />
+    </div>
+
+    {/* CONTENT SIDE */}
+    <div className="relative z-10 p-10 md:p-16 text-white">
+
+      <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-400/10 px-5 py-2 text-sm font-bold tracking-[0.25em] text-cyan-300 backdrop-blur-xl">
+        GLOBAL NETWORK
+      </span>
+
+      <h2 className="mt-7 text-5xl font-black leading-tight">
+        Partner <br />
+        Program
+      </h2>
+
+      <p className="mt-8 text-lg leading-9 text-white/80">
+        Interested in becoming our distribution partner?
+        Do you want us to market your product line?
+        MGRM Medicare Limited has successfully launched
+        partnerships with companies all over the world and
+        we’re always looking to expand our network.
+      </p>
+
+      <p className="mt-6 text-lg leading-9 text-cyan-200 font-medium">
+        Contact us today to learn more and become a part
+        of our growing healthcare ecosystem.
+      </p>
+
+      {/* STATS */}
+      <div className="mt-12 grid grid-cols-3 gap-5">
+
+        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <h3 className="text-4xl font-black text-cyan-300">
+            50+
+          </h3>
+
+          <p className="mt-2 text-sm text-white/70">
+            Global Markets
+          </p>
+        </div>
+
+        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <h3 className="text-4xl font-black text-cyan-300">
+            100+
+          </h3>
+
+          <p className="mt-2 text-sm text-white/70">
+            Distribution Partners
+          </p>
+        </div>
+
+        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <h3 className="text-4xl font-black text-cyan-300">
+            30+
+          </h3>
+
+          <p className="mt-2 text-sm text-white/70">
+            Years Experience
+          </p>
+        </div>
+      </div>
+
+      {/* BUTTONS */}
+      {/* <div className="mt-12 flex flex-wrap gap-5">
+
+        <button className="rounded-full bg-cyan-400 px-8 py-4 font-bold text-[#00152d] transition duration-300 hover:scale-105">
+          Become Partner
+        </button>
+
+        <button className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur-xl transition duration-300 hover:bg-white hover:text-[#00152d]">
+          Contact Us
+        </button>
+      </div> */}
+    </div>
+  </div>
+</section>
+
             {/* ================= AUTCLAVE CUM SHREDDER SECTION ================= */}
-<section    id="section-7" className="relative overflow-hidden rounded-[45px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+<section    id="section-8" className="relative overflow-hidden rounded-[45px] border border-white/70 dark:border-white/10 bg-white/80 dark:bg-slate-900/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
 
   {/* BG EFFECTS */}
   <div className="absolute top-[-120px] right-[-120px] h-[320px] w-[320px] rounded-full bg-cyan-200/30 blur-3xl" />
@@ -858,7 +1125,7 @@ const AboutUs = () => {
     </div>
 
     {/* CONSTRUCTION */}
-    <div className="mt-20 animate-fade-up" id="section-8">
+    <div className="mt-20 animate-fade-up" id="section-10">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
@@ -923,7 +1190,7 @@ const AboutUs = () => {
     </div>
 
     {/* SHREDDER */}
-    <div className="mt-20 animate-fade-up" id="section-10">
+    <div className="mt-20 animate-fade-up" id="section-11">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
@@ -988,7 +1255,7 @@ const AboutUs = () => {
     </div>
 
     {/* ACCESSORIES */}
-    <div className="mt-20 animate-fade-up" id="section-11">
+    <div className="mt-20 animate-fade-up" id="section-12">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />

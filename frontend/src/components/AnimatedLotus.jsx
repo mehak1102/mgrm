@@ -81,6 +81,7 @@ export default function AnimatedLotus() {
         >
           Premium orthopedic and recovery products crafted for movement,
           stability and everyday healing.
+          <h2>Bandage to Splintage</h2>
         </motion.p>
       </div>
     </div>
