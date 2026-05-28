@@ -302,6 +302,25 @@ export async function getHomeRecommendations({
   limit = 12,
 }) {
   const persisted = userId ? await UserBehavior.findOne({ userId }).lean() : null;
+  const purchaseOrders = userId
+    ? await Order.find({ userId }, { items: 1, _id: 0 })
+        .sort({ createdAt: -1 })
+        .limit(30)
+        .lean()
+    : [];
+
+  const purchasedItems = purchaseOrders.flatMap((order) => safeArray(order.items));
+  const purchasedProductIds = uniq(
+    purchasedItems.map((item) => String(item?._id || "")).filter(Boolean)
+  );
+  const purchasedCategories = uniq(
+    purchasedItems.map((item) => normalize(item?.category || "")).filter(Boolean)
+  );
+  const purchasedKeywords = uniq(
+    purchasedItems.flatMap((item) =>
+      tokenize(`${item?.name || ""} ${item?.category || ""} ${item?.description || ""}`)
+    )
+  );
 
   const mergedSignals = {
     searches: uniq([
@@ -319,12 +338,18 @@ export async function getHomeRecommendations({
     cartProductIds: uniq([
       ...safeArray(persisted?.cartProductIds),
       ...safeArray(guestBehavior.cartProductIds),
+      ...purchasedProductIds,
     ]),
   };
   mergedSignals.keywords = uniq([
     ...safeArray(persisted?.keywords),
     ...mergedSignals.searches.flatMap(tokenize),
     ...mergedSignals.categories.flatMap(tokenize),
+    ...purchasedKeywords,
+  ]);
+  mergedSignals.categories = uniq([
+    ...mergedSignals.categories,
+    ...purchasedCategories,
   ]);
   const expandedSignals = expandSignals(mergedSignals);
 
