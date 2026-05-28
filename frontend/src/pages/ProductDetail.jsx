@@ -1,15 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import API from "../api";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import SmartSizeFinder from "../components/SmartSizeFinder";
+import RecommendationGrid from "../components/RecommendationGrid";
+import { useProductRecommendations } from "../hooks/useRecommendations";
+import { trackViewedProduct } from "../utils/recommendationBehavior";
 
 import {
   Heart,
   ShoppingCart,
   Star,
-  Share2,
   Minus,
   Plus,
 } from "lucide-react";
@@ -24,6 +26,8 @@ export default function ProductDetail() {
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
   const [sizeFinderOpen, setSizeFinderOpen] = useState(false);
+  const { products: relatedProducts, loading: relatedLoading } =
+    useProductRecommendations(product?._id, 8);
 
   useEffect(() => {
     API.get(`/products/${slug}`).then((res) => {
@@ -31,6 +35,7 @@ export default function ProductDetail() {
       setProduct(p);
       setActiveImg(p.images?.[0] || "/products/default.png");
       setSize(p.sizes?.[0] || "");
+      if (p?._id) trackViewedProduct(p._id);
     });
   }, [slug]);
 
@@ -196,6 +201,15 @@ export default function ProductDetail() {
   onSelectSize={(selectedSize) => setSize(selectedSize)}
   product={product}
 />
+      <div className="max-w-[1400px] mx-auto px-6 pb-14">
+        <RecommendationGrid
+          title="You May Also Like"
+          subtitle="Recommendations based on category, tags, purpose and frequently viewed together products."
+          products={relatedProducts}
+          loading={relatedLoading}
+          emptyText="No similar products found right now."
+        />
+      </div>
     </main>
   );
 }

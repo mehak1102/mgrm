@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ChevronLeft,
@@ -8,11 +8,12 @@ import {
   Truck,
   RotateCcw,
   BadgeCheck,
-  Award,
   CheckCircle2,
 } from "lucide-react";
-import API from "../api";
 import ProductCard from "../components/ProductCard";
+import { useCart } from "../context/CartContext";
+import { useHomeRecommendations } from "../hooks/useRecommendations";
+import { trackCategoryClick } from "../utils/recommendationBehavior";
 
 import { activities, bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
@@ -24,10 +25,12 @@ const text = "248 top certified products- to cure your body";
 
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
+  const { cart } = useCart();
+  const { products, loading: recommendationsLoading, strategy } =
+    useHomeRecommendations({ cart, limit: 12 });
 
   const certifications = [
   {
@@ -62,13 +65,8 @@ export default function Home() {
   },
 ];
 
-  useEffect(() => {
-    API.get("/products")
-      .then((res) => setProducts(res.data.products || []))
-      .catch(() => setProducts([]));
-  }, []);
-
   const goCategory = (category) => {
+    trackCategoryClick(category);
     navigate(`/shop?category=${encodeURIComponent(category)}`);
   };
 
@@ -1326,10 +1324,14 @@ export default function Home() {
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
             <div>
-              <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm">FEATURED PRODUCTS</p>
-              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-white">Recommended Supports</h2>
+              <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm">
+                {strategy.startsWith("behavioral") ? "PERSONALIZED FOR YOU" : "TRENDING PICKS"}
+              </p>
+              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-white">
+                Recommended Supports
+              </h2>
               <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl">
-                Handpicked supports for comfort, stability and recovery.
+                Dynamic recommendations based on your search, views, categories and cart activity.
               </p>
             </div>
 
@@ -1355,12 +1357,28 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-7 px-2 sm:px-4 pb-2">
-            {products.slice(productStart, productStart + 4).map((p) => (
-              
-              <ProductCard key={p._id} product={p} />
-            ))}
-          </div>
+          {recommendationsLoading ? (
+            <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-7 px-2 sm:px-4 pb-2">
+              {[1, 2, 3, 4].map((x) => (
+                <div
+                  key={x}
+                  className="h-[430px] rounded-[30px] bg-white dark:bg-slate-900 animate-pulse"
+                />
+              ))}
+            </div>
+          ) : products.length === 0 ? (
+            <div className="bg-white dark:bg-slate-900 rounded-3xl px-6 py-12 text-center mx-2 sm:mx-4">
+              <p className="text-gray-500 dark:text-zinc-400">
+                Recommendations will appear as you browse or search products.
+              </p>
+            </div>
+          ) : (
+            <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-7 px-2 sm:px-4 pb-2">
+              {products.slice(productStart, productStart + 4).map((p) => (
+                <ProductCard key={p._id} product={p} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* BLOGS */}

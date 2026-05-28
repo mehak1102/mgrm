@@ -13,6 +13,10 @@ import API from "../api";
 import { bodyCategories } from "../data/siteData";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import {
+  trackCategoryClick,
+  trackSearch,
+} from "../utils/recommendationBehavior";
 
 const colors = ["Black", "White", "Grey", "Black & Green", "Black & Orange", "Beige", "Silver"];
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
@@ -35,6 +39,9 @@ export default function Shop() {
 
   useEffect(() => {
     setActiveCategory(params.get("category") || "");
+    if (params.get("search")) {
+      trackSearch(params.get("search"));
+    }
   }, [params]);
 
   useEffect(() => {
@@ -71,8 +78,6 @@ const clearFilters = () => {
   setSort("popularity");
   navigate("/shop", { replace: true });
 };
-
-  const isLiked = (product) => wishlist?.some((x) => x._id === product._id);
 
   return (
     <main className="bg-[#f7f8fb] dark:bg-zinc-950 min-h-screen">
@@ -118,6 +123,7 @@ const clearFilters = () => {
                     // onClick={() => setActiveCategory(cat.query)}
 onClick={() => {
   setActiveCategory(cat.query);
+  trackCategoryClick(cat.query);
   navigate(`/shop?category=${encodeURIComponent(cat.query)}`);
 }}
                     className={`text-left px-3 py-2 rounded-xl font-semibold ${

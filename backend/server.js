@@ -13,6 +13,7 @@ import orderRoutes from "./routes/order.js";
 import uploadRoutes from "./routes/upload.js";
 import supportRoutes from "./routes/support.js";
 import paymentRoutes from "./routes/payment.js";
+import recommendationRoutes from "./routes/recommendation.js";
 
 // dotenv.config();
 
@@ -31,6 +32,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/recommendations", recommendationRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

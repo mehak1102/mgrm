@@ -6,6 +6,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
 import { bodyCategories, activities } from "../data/siteData";
+import { trackSearch } from "../utils/recommendationBehavior";
 import Logo3D from "./Logo3D";
 import ThemeToggle from "./ThemeToggle";
 
@@ -65,6 +66,7 @@ const handleSearch = (e) => {
   }
 
   // OTHERWISE NORMAL PRODUCT SEARCH
+  trackSearch(q);
   navigate(`/shop?search=${encodeURIComponent(q)}`);
 };
   

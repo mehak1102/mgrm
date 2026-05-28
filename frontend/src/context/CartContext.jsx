@@ -1,6 +1,7 @@
 import API from "../api";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { trackCartProducts } from "../utils/recommendationBehavior";
 
 const CartContext = createContext(null);
 
@@ -134,6 +135,10 @@ export function CartProvider({ children }) {
       ),
     [cart]
   );
+
+  useEffect(() => {
+    trackCartProducts(cart.map((item) => item._id).filter(Boolean));
+  }, [cart]);
 
   return (
     <CartContext.Provider
