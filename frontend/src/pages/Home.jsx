@@ -193,14 +193,24 @@ export default function Home() {
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 blur-3xl" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 blur-3xl" />
 
-                <img
+                {/* <img
                   src="/products/bo.png"
                   onError={(e) => {
                     e.currentTarget.src =
                       "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=80";
                   }}
                   className="relative z-10 h-[640px] object-contain floaty"
-                />
+                /> */}
+                <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  // className="relative z-10 h-[640px] w-full object-contain floaty"
+  className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
+>
+  <source src="/videos/ty.mp4" type="video/mp4" />
+</video>
 
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
