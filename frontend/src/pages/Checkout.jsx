@@ -76,49 +76,6 @@ export default function Checkout() {
         description: "Medical support products",
         order_id: orderId,
 
-        config: {
-          display: {
-            blocks: {
-              upi: {
-                name: "Pay using UPI",
-                instruments: [
-                  {
-                    method: "upi",
-                  },
-                ],
-              },
-        
-              other: {
-                name: "Other Payment methods",
-                instruments: [
-                  {
-                    method: "card",
-                  },
-                  {
-                    method: "netbanking",
-                  },
-                  {
-                    method: "wallet",
-                  },
-                ],
-              },
-            },
-        
-            sequence: ["block.upi", "block.other"],
-        
-            preferences: {
-              show_default_blocks: false,
-            },
-          },
-        },
-
-        method: {
-          upi: true,
-          card: true,
-          netbanking: true,
-          wallet: true,
-        },
-
         prefill: {
           name: form.name,
           email: form.email,

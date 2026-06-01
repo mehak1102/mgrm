@@ -204,9 +204,10 @@ export default function Home() {
   muted
   loop
   playsInline
- className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
+  // className="relative z-10 h-[640px] w-full object-contain floaty"
+  className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
 >
-  <source src="/videos/ty.mp4" type="video/mp4" />
+  <source src="/videos/bo.mp4" type="video/mp4" />
 </video>
 
                 {bodyCategories.slice(0, 15).map((cat, index) => {
