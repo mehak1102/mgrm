@@ -35,15 +35,16 @@ router.post("/", auth, async (req, res) => {
     userName: req.user.name,
     userEmail: req.user.email,
   
+    userPhone,
     items,
     total,
     address,
   
     paymentMethod,
     paymentStatus,
+  
     razorpayPaymentId,
     razorpayOrderId,
-    userPhone,
   });
 
   res.json(order);

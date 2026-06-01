@@ -24,20 +24,27 @@ export default function Checkout() {
 
   const shipping = cartTotal >= 499 || cartTotal === 0 ? 0 : 49;
   const grandTotal = cartTotal + shipping;
+  const [paymentMethod, setPaymentMethod] = useState("Razorpay"); 
 
   const placeOrderAfterPayment = async (paymentData) => {
-    await API.post("/orders", {
+    const res = await API.post("/orders", {
       userName: form.name,
       userEmail: form.email,
       userPhone: form.phone,
       address: `${form.address}, ${form.city}, ${form.pincode}`,
       items: cart,
       total: grandTotal,
-      paymentMethod: "Razorpay",
+      paymentMethod,
       paymentStatus: "Paid",
       razorpayPaymentId: paymentData.razorpay_payment_id,
       razorpayOrderId: paymentData.razorpay_order_id,
     });
+  
+    localStorage.setItem(
+      "mgrm_last_order",
+      JSON.stringify(res.data)
+    );
+  
     toast.success("Order placed successfully");
     clearCart();
     navigate("/order-success");
@@ -45,6 +52,45 @@ export default function Checkout() {
 
   const handlePayment = async (e) => {
     e.preventDefault();
+    if (!/^[0-9]{10}$/.test(form.phone)) {
+      toast.error("Phone number must be 10 digits");
+      return;
+    }
+    
+    if (!/^[0-9]{6}$/.test(form.pincode)) {
+      toast.error("Pincode must be 6 digits");
+      return;
+    }
+    
+    if (!/\S+@\S+\.\S+/.test(form.email)) {
+      toast.error("Enter a valid email address");
+      return;
+    }
+    
+    if (paymentMethod === "COD") {
+      const res = await API.post("/orders", {
+        userName: form.name,
+        userEmail: form.email,
+        userPhone: form.phone,
+        address: `${form.address}, ${form.city}, ${form.pincode}`,
+        items: cart,
+        total: grandTotal,
+        paymentMethod: "COD",
+        paymentStatus: "Pending",
+      });
+    
+      localStorage.setItem(
+        "mgrm_last_order",
+        JSON.stringify(res.data)
+      );
+    
+      toast.success("Order placed successfully");
+    
+      clearCart();
+      navigate("/order-success");
+      return;
+    }
+   
 
     if (!cart.length) {
       alert("Cart is empty");
@@ -146,45 +192,107 @@ export default function Checkout() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-              <input
+              {/* <input
                 required
                 placeholder="Full Name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
-              />
-
+              /> */}
               <input
+  required
+  type="text"
+  placeholder="Full Name"
+  value={form.name}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      name: e.target.value.replace(/[^a-zA-Z\s]/g, ""),
+    })
+  }
+  className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+/>
+
+              {/* <input
                 required
                 placeholder="Phone Number"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
-              />
-
+              /> */}
               <input
+  required
+  type="tel"
+  placeholder="Phone Number"
+  maxLength={10}
+  pattern="[0-9]{10}"
+  value={form.phone}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      phone: e.target.value.replace(/\D/g, "").slice(0, 10),
+    })
+  }
+  className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+/>
+
+              {/* <input
                 required
                 placeholder="Email Address"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
-              />
-
+              /> */}
               <input
+  required
+  type="email"
+  placeholder="Email Address"
+  value={form.email}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      email: e.target.value,
+    })
+  }
+  className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+/>
+
+              {/* <input
                 required
                 placeholder="City"
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
                 className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
-              />
-
+              /> */}
               <input
-                required
-                placeholder="Pincode"
-                value={form.pincode}
-                onChange={(e) => setForm({ ...form, pincode: e.target.value })}
-                className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
-              />
+  required
+  type="text"
+  placeholder="City"
+  value={form.city}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      city: e.target.value.replace(/[^a-zA-Z\s]/g, ""),
+    })
+  }
+  className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+/>
+
+<input
+  required
+  type="text"
+  placeholder="Pincode"
+  maxLength={6}
+  pattern="[0-9]{6}"
+  value={form.pincode}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      pincode: e.target.value.replace(/\D/g, "").slice(0, 6),
+    })
+  }
+  className="bg-slate-50 dark:bg-zinc-900 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-purple-500"
+/>
 
               <textarea
                 required
@@ -254,11 +362,41 @@ export default function Checkout() {
               Razorpay secure payment enabled.
             </div>
 
+            <div className="mt-5 space-y-3">
+  <label className="flex items-center gap-3 p-4 rounded-2xl border cursor-pointer">
+    <input
+      type="radio"
+      name="payment"
+      value="Razorpay"
+      checked={paymentMethod === "Razorpay"}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    <span className="font-bold">Pay Online (Razorpay)</span>
+  </label>
+
+  <label className="flex items-center gap-3 p-4 rounded-2xl border cursor-pointer">
+    <input
+      type="radio"
+      name="payment"
+      value="COD"
+      checked={paymentMethod === "COD"}
+      onChange={(e) => setPaymentMethod(e.target.value)}
+    />
+    <span className="font-bold">Cash on Delivery (COD)</span>
+  </label>
+</div>
+
             <button
               disabled={loading || cart.length === 0}
               className="w-full mt-5 bg-purple-700 text-white rounded-2xl py-4 font-black hover:bg-purple-800 transition disabled:opacity-60"
             >
-              {loading ? "Processing..." : `Pay ₹${grandTotal}`}
+              {/* {loading ? "Processing..." : `Pay ₹${grandTotal}`}
+               */}
+               {loading
+  ? "Processing..."
+  : paymentMethod === "COD"
+  ? "Place Order"
+  : `Pay ₹${grandTotal}`}
             </button>
           </aside>
         </form>

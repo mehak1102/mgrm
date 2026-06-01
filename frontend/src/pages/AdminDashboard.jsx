@@ -310,6 +310,25 @@ export default function AdminDashboard() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-500 dark:text-zinc-400">{order.userName} • {order.userEmail}</p>
+                  <p className="text-sm text-gray-500">
+  Phone: {order.userPhone}
+</p>
+
+<p className="text-sm text-green-600 font-bold">
+  Payment: {order.paymentMethod}
+</p>
+
+<p className="text-sm text-blue-600">
+  Status: {order.paymentStatus}
+</p>
+
+<p className="text-xs text-gray-500 break-all">
+  Payment ID: {order.razorpayPaymentId}
+</p>
+
+<p className="text-xs text-gray-500 break-all">
+  Razorpay Order ID: {order.razorpayOrderId}
+</p>
                   <p className="font-black mt-2 text-slate-900 dark:text-white">₹{order.total}</p>
                 </div>
 

@@ -8,7 +8,6 @@ const orderSchema = new mongoose.Schema(
     userPhone: String,
 
     items: Array,
-
     total: Number,
 
     address: String,
@@ -24,7 +23,6 @@ const orderSchema = new mongoose.Schema(
     },
 
     razorpayPaymentId: String,
-
     razorpayOrderId: String,
 
     status: {
