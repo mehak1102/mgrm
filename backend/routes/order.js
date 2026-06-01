@@ -4,16 +4,46 @@ import { auth, adminOnly } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// router.post("/", auth, async (req, res) => {
+//   const { items, total, address } = req.body;
+
+//   const order = await Order.create({
+//     userId: req.user.id,
+//     userName: req.user.name,
+//     userEmail: req.user.email,
+//     items,
+//     total,
+//     address,
+//   });
+
+//   res.json(order);
+// });
 router.post("/", auth, async (req, res) => {
-  const { items, total, address } = req.body;
+  const {
+    items,
+    total,
+    address,
+    paymentMethod,
+    paymentStatus,
+    razorpayPaymentId,
+    razorpayOrderId,
+    userPhone,
+  } = req.body;
 
   const order = await Order.create({
     userId: req.user.id,
     userName: req.user.name,
     userEmail: req.user.email,
+  
     items,
     total,
     address,
+  
+    paymentMethod,
+    paymentStatus,
+    razorpayPaymentId,
+    razorpayOrderId,
+    userPhone,
   });
 
   res.json(order);

@@ -39,7 +39,8 @@ export default function Orders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await API.get("/orders");
+      // const res = await API.get("/orders");
+      const res = await API.get("/orders/my");
       setOrders(res.data || []);
     } catch {
       setOrders([]);
@@ -175,16 +176,22 @@ export default function Orders() {
                     </div>
 
                     <div className="rounded-3xl bg-cyan-50 dark:bg-cyan-500/15 border border-cyan-100 dark:border-cyan-400/20 p-5 transition-colors duration-300">
-                      <p className="text-sm text-cyan-700 dark:text-cyan-300 font-black">
-                        PAYMENT
-                      </p>
-                      <p className="font-black mt-1 text-slate-900 dark:text-white">
-                        {order.paymentMethod || "Cash / Manual"}
-                      </p>
-                      <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                        Total paid: ₹{order.total || 0}
-                      </p>
-                    </div>
+  <p className="text-sm text-cyan-700 dark:text-cyan-300 font-black">
+    PAYMENT
+  </p>
+
+  <p className="font-black mt-1 text-slate-900 dark:text-white">
+    {order.paymentMethod || "Razorpay"}
+  </p>
+
+  <p className="text-gray-500 dark:text-zinc-400 text-sm">
+    Status: {order.paymentStatus || "Paid"}
+  </p>
+
+  <p className="text-gray-500 dark:text-zinc-400 text-sm">
+    Total paid: ₹{order.total || 0}
+  </p>
+</div>
 
                     <div className="rounded-3xl bg-green-50 dark:bg-emerald-500/15 border border-green-100 dark:border-emerald-400/20 p-5 transition-colors duration-300">
                       <p className="text-sm text-green-700 dark:text-emerald-300 font-black">
