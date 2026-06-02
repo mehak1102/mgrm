@@ -19,12 +19,15 @@ import { activities, bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
-
+// import { useTheme } from "../context/ThemeContext"; // ya jaha se theme aa rhi
+import {useTheme} from "../context/ThemeContext";
 
 const text = "248 top certified products- to cure your body";
 
 
 export default function Home() {
+  // const { darkMode } = useTheme();
+  const { isDark } = useTheme();
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
@@ -191,15 +194,8 @@ export default function Home() {
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 blur-3xl" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 blur-3xl" />
 
-                {/* <img
-                  src="/products/bo.png"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=80";
-                  }}
-                  className="relative z-10 h-[640px] object-contain floaty"
-                /> */}
-                <video
+            
+                {/* <video
   autoPlay
   muted
   loop
@@ -208,7 +204,23 @@ export default function Home() {
   className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
 >
   <source src="/videos/bo.mp4" type="video/mp4" />
+</video> */}
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  key={isDark ? "dark" : "light"}
+  className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
+>
+  <source
+    src={isDark ? "/videos/new.mp4" : "/videos/bo.mp4"}
+    type="video/mp4"
+  />
 </video>
+
+
+
 
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
