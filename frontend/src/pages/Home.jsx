@@ -163,7 +163,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.08 }}
                     onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                    className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900/78 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_18px_45px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:bg-white dark:bg-slate-900 transition"
+                    className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900 backdrop-blur-xl border border-white dark:border-white/10 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
                   >
                     <span className="text-3xl font-light" style={{ color: cat.color }}>
                       {String(index + 1).padStart(2, "0")}
@@ -183,8 +183,8 @@ export default function Home() {
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-black text-gray-900 dark:text-zinc-100">{cat.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                      <h3 className="text-lg font-black text-gray-900 dark:text-white">{cat.name}</h3>
+                      <p className="text-sm text-gray-500 dark:text-slate-400">{cat.count} products</p>
                     </div>
                   </motion.button>
                 ))}
@@ -203,7 +203,7 @@ export default function Home() {
   // className="relative z-10 h-[640px] w-full object-contain floaty"
   className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
 >
-  <source src="/videos/bo.mp4" type="video/mp4" />
+  <source src="/videos/meh.mp4" type="video/mp4" />
 </video> */}
 <video
   autoPlay
@@ -218,6 +218,11 @@ export default function Home() {
     type="video/mp4"
   />
 </video>
+{/* <img
+  src="/products/bo.png"
+  alt="Body Map"
+  className="relative z-10 h-[40px] w-full object-cover rounded-[30px] floaty"
+/> */}
 
 
 
@@ -284,7 +289,7 @@ export default function Home() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}
                       onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900/78 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_18px_45px_rgba(15,23,42,0.10)] hover:-translate-y-1 hover:bg-white dark:bg-slate-900 transition"
+                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900 backdrop-blur-xl border border-white dark:border-white/10 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
                     >
                       <span className="text-3xl font-light" style={{ color: cat.color }}>
                         {String(index + 1).padStart(2, "0")}
@@ -304,8 +309,8 @@ export default function Home() {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-black text-gray-900 dark:text-zinc-100">{cat.name}</h3>
-                        <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                        <h3 className="text-lg font-black text-gray-900 dark:text-white">{cat.name}</h3>
+                        <p className="text-sm text-gray-500 dark:text-slate-400">{cat.count} products</p>
                       </div>
                     </motion.button>
                   );

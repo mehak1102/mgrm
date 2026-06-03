@@ -425,15 +425,3 @@ html{
   }
 }
 
-@keyframes fadeVideo {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fadeVideo {
-  animation: fadeVideo 0.8s ease-in-out;
-}
