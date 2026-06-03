@@ -1,0 +1,131 @@
+/**
+ * Dark theme page-level fixes only.
+ * Scoped to .dark / [data-theme="dark"] — does not affect light or blue.
+ */
+
+/* ---- Toasts (react-hot-toast) — applied via App Toaster className + dark: variants ---- */
+
+/* ---- Home: sections using light overlays on dark ---- */
+.dark main section .bg-gradient-to-b.from-white\/78,
+.dark main section .bg-gradient-to-b[class*="from-white"] {
+  --tw-gradient-from: rgb(2 6 23 / 0.88);
+  --tw-gradient-to: rgb(2 6 23 / 0.9);
+  --tw-gradient-stops: var(--tw-gradient-from), rgb(2 6 23 / 0.72), var(--tw-gradient-to);
+}
+
+/* ---- About Us sidebar ---- */
+.dark aside a.group[href^="#section"] {
+  background-color: #27272a !important;
+  color: #e4e4e7 !important;
+}
+
+.dark aside a.group[href^="#section"]:hover {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+.dark aside h2 {
+  color: #f4f4f5 !important;
+}
+
+/* ---- About Us testimonials ---- */
+.dark #section-5 h4 {
+  color: #f4f4f5 !important;
+}
+
+.dark #section-5 .bg-\[\#f8fcff\] {
+  background-color: #18181b !important;
+}
+
+/* ---- Blog quick tip ---- */
+.dark .rounded-\[28px\].bg-purple-50,
+.dark article .rounded-\[28px\][class*="bg-purple-50"] {
+  background-color: #18181b !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark article .rounded-\[28px\] h3,
+.dark article .rounded-\[28px\] p {
+  color: #e4e4e7;
+}
+
+.dark article .rounded-\[28px\] p {
+  color: #a1a1aa !important;
+}
+
+/* ---- Blogs carousel strip ---- */
+.dark .blog-strip a {
+  background-color: #18181b !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .blog-strip a span {
+  color: #f4f4f5 !important;
+}
+
+.dark section.bg-card.border-b {
+  background-color: #09090b !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ---- Smart Size Finder ---- */
+.dark .fixed.inset-0.z-\[9999\] section.bg-gradient-to-br.from-cyan-50 {
+  background: linear-gradient(135deg, #0f172a 0%, #18181b 50%, #1e1b4b 100%) !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] section.bg-gradient-to-br.from-cyan-50 h2,
+.dark .fixed.inset-0.z-\[9999\] section.bg-gradient-to-br.from-cyan-50 h3 {
+  color: #f4f4f5 !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] section.bg-gradient-to-br.from-cyan-50 p {
+  color: #a1a1aa !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] section.bg-gradient-to-br.from-cyan-50 .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] .inline-flex.bg-purple-50 {
+  background-color: #27272a !important;
+  color: #c4b5fd !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] .rounded-\[26px\].from-cyan-50 {
+  background: linear-gradient(135deg, #0f172a, #1e293b) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] input[type="number"] {
+  background-color: #27272a !important;
+  color: #f4f4f5 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .fixed.inset-0.z-\[9999\] input::placeholder {
+  color: #71717a !important;
+}
+
+/* ---- Home: cardiology / bandage light text on light var ---- */
+.dark .text-\[\#111827\].text-fg,
+.dark .text-\[\#4b5563\].text-fg\/70 {
+  color: #e4e4e7 !important;
+}
+
+.dark .text-fg\/70 {
+  color: #a1a1aa !important;
+}
+
+/* Certifications emerald label */
+.dark .text-emerald-600:not(.dark\:text-emerald-400) {
+  color: #34d399;
+}
+
+/* Product cards in recommendations */
+.dark .text-purple-700.font-black:not(.group-hover) {
+  color: #c4b5fd;
+}
+
+.dark h3.font-black.text-lg.text-fg {
+  color: #f4f4f5;
+}

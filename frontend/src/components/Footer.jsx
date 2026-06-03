@@ -36,8 +36,8 @@ export default function Footer() {
         <div>
           <h3 className="font-black mb-4">Newsletter</h3>
           <p className="text-slate-400 mb-4">Get recovery tips and product updates.</p>
-          <div className="flex bg-card rounded-xl p-1">
-            <input className="flex-1 px-3 text-fg bg-transparent outline-none placeholder:text-fg-muted" placeholder="Email" />
+          <div className="flex bg-card dark:bg-zinc-900 rounded-xl p-1">
+            <input className="flex-1 px-3 text-slate-900 dark:text-zinc-100 bg-transparent outline-none placeholder:text-gray-500 dark:text-zinc-400" placeholder="Email" />
             <button className="btn-primary px-4 py-2 rounded-lg font-bold">Join</button>
           </div>
         </div>

@@ -346,7 +346,7 @@
 
 //   return (
 //     <div className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-//       <div className="relative w-full max-w-4xl bg-card rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
+//       <div className="relative w-full max-w-4xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
 //         <button
 //           type="button"
 //           onClick={onClose}
@@ -365,7 +365,7 @@
 //               AI-ASSISTED FIT
 //             </p>
 
-//             <h2 className="text-3xl md:text-4xl font-black mt-3 text-fg leading-tight">
+//             <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight">
 //               Smart Size Finder
 //             </h2>
 
@@ -373,7 +373,7 @@
 //               Upload a clear image and enter your measurement to get a quick recommended size.
 //             </p>
 
-//             <div className="mt-6 relative h-[310px] rounded-[28px] bg-card border border-edge overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
+//             <div className="mt-6 relative h-[310px] rounded-[28px] bg-card border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
 //               {preview ? (
 //                 <img
 //                   src={preview}
@@ -462,14 +462,14 @@
 //           </div>
 
 //           <div className="mt-7">
-//             <label className="font-black text-fg text-sm">Measurement in CM</label>
+//             <label className="font-black text-slate-900 dark:text-zinc-100 text-sm">Measurement in CM</label>
 //             <input
 //               type="number"
 //               value={measurement}
 //               onChange={(e) => setMeasurement(e.target.value)}
 //             //   placeholder="Example: 38"
 //             placeholder={fitProfile.example}
-//               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-edge px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
+//               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
 //             />
 //           </div>
 
@@ -490,7 +490,7 @@
 //               </div>
 
 //               <p className="text-slate-500 font-bold mt-4 text-sm">Recommended Size</p>
-//               <h2 className="text-5xl font-black text-fg text-fg mt-1">{recommended}</h2>
+//               <h2 className="text-5xl font-black text-slate-900 dark:text-zinc-100 text-slate-900 dark:text-zinc-100 mt-1">{recommended}</h2>
 
 //               <button
 //                 type="button"
@@ -598,7 +598,7 @@
 
 // //   return (
 // //     <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
-// //       <div className="w-full max-w-5xl bg-card rounded-[34px] overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
+// //       <div className="w-full max-w-5xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
 
 // //         <button
 // //           onClick={onClose}
@@ -1173,7 +1173,7 @@ export default function SmartSizeFinder({
 
   return (
     <div className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-4xl bg-card rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
+      <div className="relative w-full max-w-4xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
 
         <button
           type="button"
@@ -1184,29 +1184,29 @@ export default function SmartSizeFinder({
         </button>
 
         {/* LEFT */}
-        <section className="relative p-7 bg-gradient-to-br from-cyan-50 via-white to-purple-50 overflow-hidden">
+        <section className="relative p-7 bg-gradient-to-br from-cyan-50 via-white to-purple-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-indigo-950 overflow-hidden">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-300/25 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-300/25 rounded-full blur-3xl" />
 
           <div className="relative z-10">
-            <p className="text-cyan-600 font-black tracking-[0.25em] text-[11px]">
+            <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.25em] text-[11px]">
               SMART FIT ANALYZER
             </p>
 
-            <h2 className="text-3xl md:text-4xl font-black mt-3 text-fg leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight">
               Smart Size Finder
             </h2>
 
-            <p className="text-slate-500 mt-3 text-sm leading-6">
+            <p className="text-slate-500 dark:text-zinc-400 mt-3 text-sm leading-6">
               Upload a clear image and enter your measurement to get the best recommended size.
             </p>
 
-            <div className="mt-6 relative h-[310px] rounded-[28px] bg-card border border-edge overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] grid place-items-center">
+            <div className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] grid place-items-center">
               {preview ? (
                 <img
                   src={preview}
                   alt="measurement preview"
-                  className="w-full h-full object-contain bg-card"
+                  className="w-full h-full object-contain bg-white dark:bg-zinc-800"
                 />
               ) : (
                 <button
@@ -1218,11 +1218,11 @@ export default function SmartSizeFinder({
                     <ImagePlus size={32} />
                   </div>
 
-                  <h3 className="text-xl font-black mt-4">
+                  <h3 className="text-xl font-black mt-4 text-slate-900 dark:text-zinc-100">
                     Upload photo
                   </h3>
 
-                  <p className="text-slate-400 mt-2 text-sm">
+                  <p className="text-slate-400 dark:text-zinc-500 mt-2 text-sm">
                     Knee, wrist, waist, neck or affected area
                   </p>
                 </button>
@@ -1279,7 +1279,7 @@ export default function SmartSizeFinder({
 
         {/* RIGHT */}
         <section className="p-7 md:p-8 flex flex-col justify-center">
-          <div className="inline-flex w-fit bg-purple-50 text-purple-700 rounded-full px-4 py-2 font-black text-xs">
+          <div className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-4 py-2 font-black text-xs">
             {product?.name || "MGRM Product"}
           </div>
 
@@ -1289,18 +1289,18 @@ export default function SmartSizeFinder({
             </div>
 
             <div>
-              <h3 className="text-2xl font-black text-fg">
+              <h3 className="text-2xl font-black text-slate-900 dark:text-zinc-100">
                 Enter measurement
               </h3>
 
-              <p className="text-slate-500 mt-2 text-sm leading-6">
+              <p className="text-slate-500 dark:text-zinc-400 mt-2 text-sm leading-6">
                 Measure your {fitProfile.label} and enter the value in centimeters.
               </p>
             </div>
           </div>
 
           <div className="mt-7">
-            <label className="font-black text-fg text-sm">
+            <label className="font-black text-slate-900 dark:text-zinc-100 text-sm">
               Measurement in CM
             </label>
 
@@ -1309,7 +1309,7 @@ export default function SmartSizeFinder({
               value={measurement}
               onChange={(e) => setMeasurement(e.target.value)}
               placeholder={fitProfile.example}
-              className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-edge px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
+              className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
 
@@ -1329,11 +1329,11 @@ export default function SmartSizeFinder({
                 Result ready
               </div>
 
-              <p className="text-slate-500 font-bold mt-4 text-sm">
+              <p className="text-slate-500 dark:text-zinc-400 font-bold mt-4 text-sm">
                 Recommended Size
               </p>
 
-              <h2 className="text-5xl font-black text-fg text-fg mt-1">
+              <h2 className="text-5xl font-black text-slate-900 dark:text-zinc-100 mt-1">
                 {recommended}
               </h2>
 

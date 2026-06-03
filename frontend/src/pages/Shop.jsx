@@ -80,7 +80,7 @@ const clearFilters = () => {
 };
 
   return (
-    <main className="bg-[#f7f8fb] bg-app min-h-screen">
+    <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
       <div className="max-w-[1500px] mx-auto px-5 py-8">
         <div className="text-sm text-fg-muted mb-6">
           Home <span className="mx-2">›</span> All Products

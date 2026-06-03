@@ -54,7 +54,7 @@ export default function Orders() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-[#f6f7fb] bg-app overflow-hidden transition-colors duration-300">
+    <main className="relative min-h-screen bg-[#f6f7fb] bg-app dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
       <FloatingMedicalBg />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
@@ -63,7 +63,7 @@ export default function Orders() {
             PURCHASE HISTORY
           </p>
           <h1 className="text-5xl font-black mt-2 text-fg">My Orders</h1>
-          <p className="text-fg-muted mt-2">
+          <p className="text-gray-500 dark:text-zinc-400 mt-2">
             Track your orders, items, payment amount and delivery status.
           </p>
         </section>
@@ -73,15 +73,15 @@ export default function Orders() {
             {[1, 2, 3].map((x) => (
               <div
                 key={x}
-                className="h-40 bg-card rounded-[30px] animate-pulse shadow"
+                className="h-40 bg-card dark:bg-zinc-900 rounded-[30px] animate-pulse shadow"
               />
             ))}
           </div>
         ) : orders.length === 0 ? (
-          <div className="bg-card rounded-[34px] p-12 text-center shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
+          <div className="bg-card dark:bg-zinc-900 rounded-[34px] p-12 text-center shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
             <ShoppingBag className="mx-auto text-purple-500" size={56} />
             <h2 className="text-3xl font-black mt-4">No orders yet</h2>
-            <p className="text-fg-muted mt-2">
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">
               Start shopping and your orders will appear here.
             </p>
             <Link
@@ -99,18 +99,18 @@ export default function Orders() {
               return (
                 <article
                   key={order._id}
-                  className="bg-white/90 bg-card/90 backdrop-blur-xl rounded-[34px] p-6 md:p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.35)] border border-white border-edge hover:-translate-y-1 transition-all duration-300"
+                  className="bg-white/90 bg-card/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[34px] p-6 md:p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.35)] border border-white border-slate-200 dark:border-white/10 hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-5 border-b pb-5">
                     <div>
-                      <p className="text-xs text-fg-muted/80 font-bold">
+                      <p className="text-xs text-gray-500 dark:text-zinc-400/80 font-bold">
                         ORDER ID
                       </p>
                       <h2 className="text-xl md:text-2xl font-black mt-1 text-fg">
                         #{order._id}
                       </h2>
 
-                      <p className="text-fg-muted mt-2 text-sm">
+                      <p className="text-gray-500 dark:text-zinc-400 mt-2 text-sm">
                         {new Date(order.createdAt || Date.now()).toLocaleString()}
                       </p>
                     </div>
@@ -119,7 +119,7 @@ export default function Orders() {
                       <span
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-black text-sm ${
                           statusStyle[order.status] ||
-                          "bg-gray-100 text-gray-700 ring-1 ring-gray-200 dark:bg-slate-700 text-fg dark:ring-white/10"
+                          "bg-gray-100 text-gray-700 ring-1 ring-gray-200 dark:bg-slate-700 text-slate-900 dark:text-zinc-100 dark:ring-white/10"
                         }`}
                       >
                         <StatusIcon size={17} />
@@ -149,7 +149,7 @@ export default function Orders() {
 
                         <div className="flex-1">
                           <h3 className="font-black text-fg">{item.name}</h3>
-                          <p className="text-sm text-fg-muted mt-1">
+                          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
                             Qty: {item.qty}{" "}
                             {item.selectedSize ? `• Size: ${item.selectedSize}` : ""}
                           </p>
@@ -170,7 +170,7 @@ export default function Orders() {
                       <p className="font-black mt-1 text-fg">
                         {order.userName || "Customer"}
                       </p>
-                      <p className="text-fg-muted text-sm">
+                      <p className="text-gray-500 dark:text-zinc-400 text-sm">
                         {order.userEmail || "No email"}
                       </p>
                     </div>
@@ -184,11 +184,11 @@ export default function Orders() {
     {order.paymentMethod || "Razorpay"}
   </p>
 
-  <p className="text-fg-muted text-sm">
+  <p className="text-gray-500 dark:text-zinc-400 text-sm">
     Status: {order.paymentStatus || "Paid"}
   </p>
 
-  <p className="text-fg-muted text-sm">
+  <p className="text-gray-500 dark:text-zinc-400 text-sm">
     Total paid: ₹{order.total || 0}
   </p>
 </div>
@@ -202,7 +202,7 @@ export default function Orders() {
                           ? "Delivered"
                           : "In progress"}
                       </p>
-                      <p className="text-fg-muted text-sm">
+                      <p className="text-gray-500 dark:text-zinc-400 text-sm">
                         We will update status soon.
                       </p>
                     </div>

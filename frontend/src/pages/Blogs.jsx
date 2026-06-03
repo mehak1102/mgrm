@@ -4,18 +4,18 @@ import FloatingMedicalBg from "../components/FloatingMedicalBg";
 
 export default function Blogs() {
   return (
-    <main className="bg-[#f6f7fb] bg-app min-h-screen">
+    <main className="bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen">
         <FloatingMedicalBg />
       {/* clean moving strip */}
 
         <div className="relative z-10">
-      <section className="bg-card border-b border-slate-200 overflow-hidden py-4">
+      <section className="bg-white dark:bg-zinc-950 border-b border-slate-200 dark:border-white/10 overflow-hidden py-4">
         <div className="blog-strip flex gap-4 w-max">
           {[...blogPosts, ...blogPosts].map((item, i) => (
             <Link
               key={`${item.slug}-${i}`}
               to={`/blogs/${item.slug}`}
-              className="shrink-0 flex items-center gap-3 bg-card border border-slate-200 border-edge rounded-full px-4 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+              className="shrink-0 flex items-center gap-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-white/10 rounded-full px-4 py-2 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
             >
               <img
                 src={item.image}
@@ -23,7 +23,7 @@ export default function Blogs() {
                 className="w-11 h-11 rounded-full object-cover"
                 alt={item.category}
               />
-              <span className="font-black text-sm text-slate-800 text-fg">
+              <span className="font-black text-sm text-slate-800 dark:text-zinc-100">
                 {item.category}
               </span>
             </Link>
@@ -37,13 +37,13 @@ export default function Blogs() {
             <p className="text-purple-700 font-black tracking-widest text-sm">
               HEALTH GUIDES
             </p>
-            <h1 className="text-5xl font-black mt-2 text-fg">Health Blogs</h1>
-            <p className="text-fg-muted mt-2">
+            <h1 className="text-5xl font-black mt-2 text-slate-900 dark:text-zinc-100">Health Blogs</h1>
+            <p className="text-gray-500 dark:text-zinc-400 mt-2">
               Product guides, recovery tips and activity support articles.
             </p>
           </div>
 
-          <div className="hidden md:block bg-card rounded-2xl px-5 py-3 shadow-sm font-bold text-fg-muted">
+          <div className="hidden md:block bg-card dark:bg-zinc-900 rounded-2xl px-5 py-3 shadow-sm font-bold text-gray-500 dark:text-zinc-400">
             {blogPosts.length} guides
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function Blogs() {
             <Link
               key={blog.slug}
               to={`/blogs/${blog.slug}`}
-              className="group bg-card rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(15,23,42,0.13)] transition duration-500"
+              className="group bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(15,23,42,0.13)] transition duration-500"
             >
               <div className="h-44 overflow-hidden bg-slate-100 bg-surface-hover">
                 <img
@@ -73,7 +73,7 @@ export default function Blogs() {
                   {blog.title}
                 </h3>
 
-                <p className="text-sm text-fg-muted mt-3 line-clamp-2">
+                <p className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-2">
                   {blog.excerpt}
                 </p>
 

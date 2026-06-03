@@ -218,7 +218,7 @@ const WordByWord = ({ text, className = "", gradient = false }) => {
 
 const AboutUs = () => {
   return (
-    <div className="relative overflow-hidden bg-[#eef7ff] bg-app transition-colors duration-300">
+    <div className="relative overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300">
       {/* BG */}
       <div className="absolute left-[-150px] top-[-150px] h-[450px] w-[450px] rounded-full bg-cyan-200/40 blur-3xl" />
 
@@ -344,8 +344,8 @@ const AboutUs = () => {
       <section className="relative z-10 mx-auto max-w-7xl px-4 py-24">
         <div className="flex flex-col gap-10 lg:flex-row">
           {/* SIDEBAR */}
-          <aside className="top-28 h-fit rounded-[35px] border border-white/70 border-edge bg-card/80 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl lg:sticky transition-colors duration-300 lg:w-[320px]">
-            <h2 className="mb-8 text-3xl font-bold text-[#002B5B] text-fg">
+          <aside className="top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl lg:sticky transition-colors duration-300 lg:w-[320px]">
+            <h2 className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100">
               About Us
             </h2>
 
@@ -354,7 +354,7 @@ const AboutUs = () => {
                 <a
                   key={index}
                   href={`#section-${index}`}
-                  className="group flex items-center justify-between rounded-2xl bg-[#f4f9ff] bg-surface-hover px-5 py-4 font-medium text-gray-700 text-fg transition-all duration-300 hover:bg-[#002B5B] hover:text-white"
+                  className="group flex items-center justify-between rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white"
                 >
                   {item}
 
@@ -369,7 +369,7 @@ const AboutUs = () => {
             {/* HISTORY */}
             <section
               id="section-0"
-              className="overflow-hidden rounded-[40px] border border-white/70 border-edge bg-card/90 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-colors duration-300"
+              className="overflow-hidden rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-colors duration-300"
             >
               <div className="grid lg:grid-cols-2">
                 <div className="p-10 lg:p-14">
@@ -377,11 +377,11 @@ const AboutUs = () => {
                     Our History
                   </span>
 
-                  <h2 className="mt-5 text-4xl font-bold text-[#002B5B] text-fg">
+                  <h2 className="mt-5 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
                     Transforming Rehabilitation In India
                   </h2>
 
-                  <div className="mt-8 space-y-6 text-[16px] leading-8 text-fg-muted">
+                  <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-500 dark:text-zinc-400">
                     <p>
                       MGRM Medicare Private Limited was established in
                       1994 with a vision to revolutionize physical
@@ -416,13 +416,13 @@ const AboutUs = () => {
             </section>
 
             {/* PRODUCT GRID */}
-            <section className="rounded-[40px] border border-white/70 border-edge bg-card/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] transition-colors duration-300">
+            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] transition-colors duration-300">
               <div className="mb-12">
                 <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                   Rehabilitation Products
                 </span>
 
-                <h2 className="mt-4 text-4xl font-bold text-[#002B5B] text-fg">
+                <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
                   Orthopedic Product Categories
                 </h2>
               </div>
@@ -464,7 +464,7 @@ const AboutUs = () => {
 
                       {/* BACK */}
                       <div
-                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 border-edge bg-[#dff4ff] bg-surface-hover p-8 text-center transition-colors duration-300 shadow-2xl"
+                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 dark:border-white/10 bg-[#dff4ff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 shadow-2xl"
                         style={{
                           transform: 'rotateY(180deg)',
                           backfaceVisibility: 'hidden',
@@ -474,11 +474,11 @@ const AboutUs = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/70 to-blue-100/50 backdrop-blur-xl" />
 
                         <div className="relative z-10">
-                          <h3 className="text-3xl font-bold capitalize text-[#002B5B] text-fg">
+                          <h3 className="text-3xl font-bold capitalize text-[#002B5B] dark:text-zinc-100">
                             {image.replace('.png', '')}
                           </h3>
 
-                          <p className="mt-5 leading-8 text-[#31506f] text-fg-muted">
+                          <p className="mt-5 leading-8 text-[#31506f] text-gray-500 dark:text-zinc-400">
                             Premium orthopedic rehabilitation support
                             designed for medical precision, recovery,
                             mobility and patient comfort.
@@ -577,13 +577,13 @@ const AboutUs = () => {
             {/* CERTIFICATIONS */}
             <section
               id="section-2"
-              className="rounded-[40px] border border-white/70 border-edge bg-card/90 p-10 transition-colors duration-300"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
               <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 Certifications
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] text-fg">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
                 Global Quality Standards
               </h2>
 
@@ -591,7 +591,7 @@ const AboutUs = () => {
                 {certifications.map((item, index) => (
                   <div
                     key={index}
-                    className="group rounded-[30px] border border-blue-100 border-edge bg-[#f5fbff] bg-card p-8 text-center transition-colors duration-300 transition duration-300 hover:-translate-y-2 hover:bg-[#002B5B]"
+                    className="group rounded-[30px] border border-blue-100 dark:border-white/10 bg-[#f5fbff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 hover:-translate-y-2 hover:bg-[#002B5B] dark:hover:bg-slate-800"
                   >
                     <img
                       src={item.logo}
@@ -599,7 +599,7 @@ const AboutUs = () => {
                       className="mx-auto h-16 object-contain"
                     />
 
-                    <h3 className="mt-6 text-2xl font-bold text-[#002B5B] text-fg transition group-hover:text-white">
+                    <h3 className="mt-6 text-2xl font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 transition group-hover:text-white">
                       {item.name}
                     </h3>
                   </div>
@@ -610,13 +610,13 @@ const AboutUs = () => {
             {/* TIMELINE */}
             <section
               id="section-3"
-              className="rounded-[40px] border border-white/70 border-edge bg-card/90 p-10 transition-colors duration-300"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
               <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 MGRM Timeline
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] text-fg">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
                 Journey Through The Years
               </h2>
 
@@ -632,11 +632,11 @@ const AboutUs = () => {
                       <div className="h-7 w-7 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
 
                       <div className="mt-8 rounded-[30px] bg-[#f5fbff] bg-surface-hover p-6 text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-4">
-                        <h3 className="text-3xl font-bold text-[#002B5B] text-fg">
+                        <h3 className="text-3xl font-bold text-[#002B5B] dark:text-zinc-100">
                           {item.year}
                         </h3>
 
-                        <p className="mt-4 leading-7 text-fg-muted">
+                        <p className="mt-4 leading-7 text-gray-500 dark:text-zinc-400">
                           {item.title}
                         </p>
                       </div>
@@ -669,13 +669,13 @@ const AboutUs = () => {
             {/* TESTIMONIALS */}
             <section
               id="section-5"
-              className="rounded-[40px] border border-white/70 border-edge bg-card/90 p-10 transition-colors duration-300"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
               <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 Testimonials
               </span>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] text-fg">
+              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
                 What Medical Experts Say
               </h2>
 
@@ -683,7 +683,7 @@ const AboutUs = () => {
                 {testimonials.map((item, index) => (
                   <div
                     key={index}
-                    className="overflow-hidden rounded-[35px] border border-blue-100 border-edge bg-[#f8fcff] bg-card shadow-lg transition-colors duration-300 duration-300 hover:-translate-y-3"
+                    className="overflow-hidden rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition-colors duration-300 hover:-translate-y-3"
                   >
                     <div className="grid md:grid-cols-[220px_1fr]">
                       <img
@@ -695,11 +695,11 @@ const AboutUs = () => {
                       <div className="p-8">
                         <Quote className="h-14 w-14 text-cyan-300" />
 
-                        <p className="mt-6 text-lg leading-9 text-fg-muted">
+                        <p className="mt-6 text-lg leading-9 text-gray-500 dark:text-zinc-400">
                           “{item.text}”
                         </p>
 
-                        <h4 className="mt-7 text-2xl font-bold text-[#002B5B]">
+                        <h4 className="mt-7 text-2xl font-bold text-[#002B5B] dark:text-zinc-100">
                           {item.name}
                         </h4>
                       </div>
@@ -712,7 +712,7 @@ const AboutUs = () => {
             {/* ================= CURE TO CARE SECTION ================= */}
 <section
   id="section-6"
-  className="relative overflow-hidden rounded-[42px] border border-white/70 border-edge bg-card/90 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] transition-colors duration-300"
+  className="relative overflow-hidden rounded-[42px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] transition-colors duration-300"
 >
 
   {/* BG GLOW */}
@@ -727,12 +727,12 @@ const AboutUs = () => {
         Cure to Care™
       </p>
 
-      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] text-fg">
+      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-zinc-100">
         Complete Eye Care &
         Rehabilitation Solutions
       </h2>
 
-      <p className="mt-8 text-[17px] leading-9 text-slate-600 text-fg-muted">
+      <p className="mt-8 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400">
         Under the banner of Cure to Care concept, MGRM Medicare has
         forayed into the distribution and marketing of the complete
         range of medicines for eye care and rehabilitation catering
@@ -740,12 +740,12 @@ const AboutUs = () => {
         pre-treatment, treatment and post-treatment patient care.
       </p>
 
-      <p className="mt-6 text-[17px] leading-9 text-slate-600 text-fg-muted">
+      <p className="mt-6 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400">
         The products are available in the domestic market and over
         50 international markets under the brand name ‘MGRM’.
       </p>
       <div className="mt-8 border-l-4 border-cyan-400 pl-6">
-  <p className="text-2xl font-semibold italic leading-10 text-[#002B5B] text-fg">
+  <p className="text-2xl font-semibold italic leading-10 text-[#002B5B] dark:text-zinc-100">
     “MGRM products are designed to support recovery before surgery
     and accelerate rehabilitation after surgery.”
   </p>
@@ -765,7 +765,7 @@ const AboutUs = () => {
 
           <div
             key={i}
-            className="rounded-full border border-cyan-100 border-edge bg-cyan-50 bg-surface-hover px-5 py-3 text-sm font-bold text-[#002B5B] text-fg"
+            className="rounded-full border border-cyan-100 border-slate-200 dark:border-white/10 bg-cyan-50 bg-surface-hover px-5 py-3 text-sm font-bold text-[#002B5B] dark:text-zinc-100"
           >
             {tag}
           </div>
@@ -784,7 +784,7 @@ const AboutUs = () => {
           src="/about/cure-care.jpg"
           alt="Cure to Care"
           // className="h-[520px] w-full object-cover transition duration-700 hover:scale-105"
-          className="h-[520px] w-full object-contain bg-[#eef7ff] bg-app  transition duration-700 hover:scale-[1.02]"
+          className="h-[520px] w-full object-contain bg-[#eef7ff] bg-app dark:bg-zinc-950  transition duration-700 hover:scale-[1.02]"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#00172e]/60 via-transparent to-transparent" />
@@ -809,7 +809,7 @@ const AboutUs = () => {
 {/* ================= PARTNER PROGRAM SECTION ================= */}
 {/* <section
   id="section-7"
-  className="relative overflow-hidden rounded-[45px] bg-card border border-white/60 border-edge shadow-[0_20px_80px_rgba(0,0,0,0.08)]"
+  className="relative overflow-hidden rounded-[45px] bg-card dark:bg-zinc-900 border border-white/60 border-slate-200 dark:border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.08)]"
 >
   <div className="grid lg:grid-cols-2 items-center">
 
@@ -855,12 +855,12 @@ const AboutUs = () => {
         PARTNER PROGRAM
       </span>
 
-      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] text-fg">
+      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-zinc-100">
         Become Our <br />
         Distribution Partner
       </h2>
 
-      <div className="mt-8 space-y-6 text-lg leading-9 text-slate-600 text-fg-muted">
+      <div className="mt-8 space-y-6 text-lg leading-9 text-slate-600 text-gray-500 dark:text-zinc-400">
 
         <p>
           Interested in becoming our distribution partner?
@@ -990,7 +990,7 @@ const AboutUs = () => {
 </section>
 
             {/* ================= AUTCLAVE CUM SHREDDER SECTION ================= */}
-<section    id="section-8" className="relative overflow-hidden rounded-[45px] border border-white/70 border-edge bg-card/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+<section    id="section-8" className="relative overflow-hidden rounded-[45px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
 
   {/* BG EFFECTS */}
   <div className="absolute top-[-120px] right-[-120px] h-[320px] w-[320px] rounded-full bg-cyan-200/30 blur-3xl" />
@@ -1006,16 +1006,16 @@ const AboutUs = () => {
         Medical Equipment and Accessories
       </p>
 
-      {/* <h2 className="mt-5 text-4xl md:text-6xl font-black leading-tight text-[#002B5B] text-fg animate-fade-up">
+      {/* <h2 className="mt-5 text-4xl md:text-6xl font-black leading-tight text-[#002B5B] text-slate-900 dark:text-zinc-100 animate-fade-up">
         Autoclave Cum <br />
         Shredder Sterilizer
       </h2> */}
-      <h2 className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-fg">
+      <h2 className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-zinc-100">
   Autoclave Cum <br />
   Shredder Sterilizer
 </h2>
 
-      <p className="mt-8 max-w-4xl text-lg leading-9 text-fg-muted animate-fade-up">
+      <p className="mt-8 max-w-4xl text-lg leading-9 text-gray-500 dark:text-zinc-400 animate-fade-up">
         The Integrated Autoclave with Shredder is designed by our
         experts with rich experience in the medical industry making
         use of leading technology as per the market standards.
@@ -1033,7 +1033,7 @@ const AboutUs = () => {
 
         <div
           key={i}
-          className="group relative overflow-hidden rounded-[35px] h-[340px] bg-card shadow-[0_25px_70px_rgba(0,0,0,0.08)] animate-fade-up"
+          className="group relative overflow-hidden rounded-[35px] h-[340px] bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.08)] animate-fade-up"
         >
 
           <img
@@ -1059,12 +1059,12 @@ const AboutUs = () => {
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] text-fg">
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
           Specifications
         </h3>
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-edge bg-card shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full border-collapse">
 
@@ -1105,14 +1105,14 @@ const AboutUs = () => {
 
               <tr
                 key={i}
-                className="border-b border-edge hover:bg-cyan-50/70 hover:bg-surface-hover transition duration-300"
+                className="border-b border-slate-200 dark:border-white/10 hover:bg-cyan-50/70 hover:bg-gray-50 dark:hover:bg-zinc-800 transition duration-300"
               >
 
                 <td className="w-[35%] px-6 py-6 text-[15px] font-bold text-[#002B5B] text-brand">
                   {item[0]}
                 </td>
 
-                <td className="px-6 py-6 leading-8 text-fg-muted">
+                <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
                   {item[1]}
                 </td>
 
@@ -1130,12 +1130,12 @@ const AboutUs = () => {
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] text-fg">
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
           Construction
         </h3>
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-edge bg-card shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full border-collapse">
 
@@ -1170,14 +1170,14 @@ const AboutUs = () => {
 
               <tr
                 key={i}
-                className="border-b border-edge hover:bg-blue-50/70 hover:bg-surface-hover transition duration-300"
+                className="border-b border-slate-200 dark:border-white/10 hover:bg-blue-50/70 hover:bg-gray-50 dark:hover:bg-zinc-800 transition duration-300"
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] text-brand">
                   {item[0]}
                 </td>
 
-                <td className="px-6 py-6 leading-8 text-fg-muted">
+                <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
                   {item[1]}
                 </td>
 
@@ -1195,7 +1195,7 @@ const AboutUs = () => {
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] text-fg">
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
           Integrated Shredder Facility
         </h3>
       </div>
@@ -1260,12 +1260,12 @@ const AboutUs = () => {
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] text-fg">
+        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
           Accessories
         </h3>
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-edge bg-card shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full border-collapse">
 
@@ -1282,14 +1282,14 @@ const AboutUs = () => {
 
               <tr
                 key={i}
-                className="border-b border-edge hover:bg-cyan-50/70 hover:bg-surface-hover transition duration-300"
+                className="border-b border-slate-200 dark:border-white/10 hover:bg-cyan-50/70 hover:bg-gray-50 dark:hover:bg-zinc-800 transition duration-300"
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] text-brand">
                   {item[0]}
                 </td>
 
-                <td className="px-6 py-6 leading-8 text-fg-muted">
+                <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
                   {item[1]}
                 </td>
 
@@ -1317,7 +1317,7 @@ const AboutUs = () => {
 
         <div
           key={i}
-          className="rounded-full border border-slate-200 border-edge bg-card px-6 py-3 text-sm font-bold text-[#002B5B] text-fg shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+          className="rounded-full border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 px-6 py-3 text-sm font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
           {tag}
         </div>

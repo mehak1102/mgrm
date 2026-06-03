@@ -53,7 +53,7 @@ export default function ProductDetail() {
   const decreaseQty = () => setQty((p) => Math.max(1, p - 1));
 
   return (
-    <main className="bg-[#f7f7f7] bg-app min-h-screen transition-colors duration-300">
+    <main className="bg-[#f7f7f7] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
       <div className="max-w-[1400px] mx-auto px-6 py-10 grid lg:grid-cols-2 gap-14">
 
         {/* ================= LEFT IMAGE ================= */}
@@ -68,7 +68,7 @@ export default function ProductDetail() {
                 className={`w-20 h-24 rounded-xl overflow-hidden border ${
                   activeImg === img
                     ? "border-purple-600"
-                    : "border-gray-200 border-edge/60"
+                    : "border-gray-200 border-slate-200 dark:border-white/10/60"
                 }`}
               >
                 <img
@@ -79,7 +79,7 @@ export default function ProductDetail() {
             ))}
           </div>
 
-       <div className="flex-1 bg-card rounded-3xl p-6 shadow-sm min-h-[620px] flex items-center justify-center overflow-hidden">
+       <div className="flex-1 bg-card dark:bg-zinc-900 rounded-3xl p-6 shadow-sm min-h-[620px] flex items-center justify-center overflow-hidden">
   <img
     src={activeImg}
     className="w-full h-[560px] object-cover rounded-2xl transition duration-500 hover:scale-105"
@@ -92,7 +92,7 @@ export default function ProductDetail() {
         <section>
 
           {/* Breadcrumb */}
-          <p className="text-sm text-fg-muted mb-4">
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">
             Home › Products › {product.name}
           </p>
 
@@ -111,7 +111,7 @@ export default function ProductDetail() {
 
           {/* Price */}
           <div className="mt-5">
-            <p className="text-fg-muted/80 line-through">
+            <p className="text-gray-500 dark:text-zinc-400/80 line-through">
               ₹{product.price}
             </p>
             <p className="text-2xl font-bold text-purple-700">
@@ -158,7 +158,7 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            <p className="text-xs mt-1 text-fg-muted">
+            <p className="text-xs mt-1 text-gray-500 dark:text-zinc-400">
               Stock: {stock}
             </p>
           </div>
@@ -189,7 +189,7 @@ export default function ProductDetail() {
 </button>
 
           {/* Description */}
-          <div className="mt-8 text-fg-muted leading-7">
+          <div className="mt-8 text-gray-500 dark:text-zinc-400 leading-7">
             {product.description ||
               "Premium orthopedic support designed for comfort and recovery."}
           </div>

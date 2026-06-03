@@ -97,7 +97,7 @@ export default function AnimatedLotus() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3.1, duration: 0.8 }}
-          className="text-fg text-5xl font-black mt-4 leading-tight transition-colors duration-300"
+          className="text-slate-900 dark:text-zinc-100 text-5xl font-black mt-4 leading-tight transition-colors duration-300"
         >
           Comfort.
           <br />
@@ -112,7 +112,7 @@ export default function AnimatedLotus() {
           transition={{ delay: 3.5, duration: 0.8 }}
           className="mt-5 max-w-md leading-7"
         >
-          <p className="text-slate-500 text-fg-muted transition-colors duration-300">
+          <p className="text-slate-500 text-gray-500 dark:text-zinc-400 transition-colors duration-300">
             Premium orthopedic and recovery products crafted for movement,
             stability and everyday healing.
           </p>

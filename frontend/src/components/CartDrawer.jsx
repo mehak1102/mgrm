@@ -42,17 +42,17 @@ export default function CartDrawer() {
             className="absolute inset-0 bg-slate-950/45 backdrop-blur-sm"
           />
 
-          <aside className="absolute right-0 top-0 h-full w-full sm:w-[470px] bg-[#f6f7fb] bg-app shadow-2xl overflow-hidden">
+          <aside className="absolute right-0 top-0 h-full w-full sm:w-[470px] bg-[#f6f7fb] bg-app dark:bg-zinc-950 shadow-2xl overflow-hidden">
             <FloatingMedicalBg />
 
             <div className="relative z-10 h-full flex flex-col">
-              <div className="bg-white/90 bg-card/90 backdrop-blur-xl border-b px-6 py-5 flex items-center justify-between">
+              <div className="bg-white/90 bg-card/90 dark:bg-zinc-900/90 backdrop-blur-xl border-b px-6 py-5 flex items-center justify-between">
                 <div>
                   <p className="text-purple-700 font-black tracking-widest text-xs">
                     SHOPPING BAG
                   </p>
                   <h2 className="text-3xl font-black">Your Cart</h2>
-                  <p className="text-fg-muted text-sm">{cartCount} items</p>
+                  <p className="text-gray-500 dark:text-zinc-400 text-sm">{cartCount} items</p>
                 </div>
 
                 <button
@@ -65,13 +65,13 @@ export default function CartDrawer() {
 
               {cart.length === 0 ? (
                 <div className="flex-1 grid place-items-center px-6">
-                  <div className="bg-white/90 bg-card/90 backdrop-blur-xl rounded-[34px] p-9 text-center shadow-[0_25px_80px_rgba(15,23,42,0.10)] border border-white">
+                  <div className="bg-white/90 bg-card/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[34px] p-9 text-center shadow-[0_25px_80px_rgba(15,23,42,0.10)] border border-white">
                     <div className="w-20 h-20 mx-auto rounded-full bg-purple-50 text-purple-700 grid place-items-center">
                       <ShoppingCart size={38} />
                     </div>
 
                     <h3 className="text-3xl font-black mt-5">Cart is empty</h3>
-                    <p className="text-fg-muted mt-2">
+                    <p className="text-gray-500 dark:text-zinc-400 mt-2">
                       Add products to start shopping.
                     </p>
 
@@ -93,7 +93,7 @@ export default function CartDrawer() {
                       return (
                         <div
                           key={`${item._id}-${item.selectedSize || "default"}`}
-                          className="bg-app/95 backdrop-blur rounded-[28px] p-4 shadow-[0_18px_55px_rgba(15,23,42,0.08)] border border-white"
+                          className="bg-app dark:bg-zinc-950/95 backdrop-blur rounded-[28px] p-4 shadow-[0_18px_55px_rgba(15,23,42,0.08)] border border-white"
                         >
                           <div className="flex gap-4">
                             <Link
@@ -131,7 +131,7 @@ export default function CartDrawer() {
                                 </button>
                               </div>
 
-                              <p className="text-sm text-fg-muted mt-1">
+                              <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
                                 {item.category || "Support Product"}
                                 {item.selectedSize ? ` • Size: ${item.selectedSize}` : ""}
                               </p>
@@ -172,7 +172,7 @@ export default function CartDrawer() {
                                 </div>
 
                                 <div className="text-right">
-                                  <p className="text-xs text-fg-muted/80">
+                                  <p className="text-xs text-gray-500 dark:text-zinc-400/80">
                                     ₹{price} × {item.qty}
                                   </p>
                                   <p className="font-black text-lg">
@@ -193,7 +193,7 @@ export default function CartDrawer() {
                     })}
                   </div>
 
-                  <div className="bg-app/95 backdrop-blur-xl border-t px-6 py-5">
+                  <div className="bg-app dark:bg-zinc-950/95 backdrop-blur-xl border-t px-6 py-5">
                     <div className="grid grid-cols-3 gap-3 mb-5">
                       {[
                         ["Certified", ShieldCheck],
@@ -202,7 +202,7 @@ export default function CartDrawer() {
                       ].map(([text, Icon]) => (
                         <div
                           key={text}
-                          className="bg-slate-50 bg-card rounded-2xl p-3 text-center"
+                          className="bg-slate-50 bg-card dark:bg-zinc-900 rounded-2xl p-3 text-center"
                         >
                           <Icon
                             size={19}
@@ -215,12 +215,12 @@ export default function CartDrawer() {
 
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-fg-muted">Subtotal</span>
+                        <span className="text-gray-500 dark:text-zinc-400">Subtotal</span>
                         <b>₹{cartTotal}</b>
                       </div>
 
                       <div className="flex justify-between">
-                        <span className="text-fg-muted">Shipping</span>
+                        <span className="text-gray-500 dark:text-zinc-400">Shipping</span>
                         <b>{shipping === 0 ? "Free" : `₹${shipping}`}</b>
                       </div>
 
@@ -247,7 +247,7 @@ export default function CartDrawer() {
 
                     <button
                       onClick={() => closeAndGo("/shop")}
-                      className="mt-3 w-full bg-slate-100 bg-surface-hover text-fg py-4 rounded-2xl font-black hover:bg-slate-200 transition"
+                      className="mt-3 w-full bg-slate-100 bg-surface-hover text-slate-900 dark:text-zinc-100 py-4 rounded-2xl font-black hover:bg-slate-200 transition"
                     >
                       Continue Shopping
                     </button>

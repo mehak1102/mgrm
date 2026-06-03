@@ -165,7 +165,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#f6f7fb] bg-app overflow-hidden">
+    <main className="relative min-h-screen bg-[#f6f7fb] bg-app dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
       <FloatingMedicalBg />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
@@ -174,13 +174,13 @@ export default function Checkout() {
             SECURE CHECKOUT
           </p>
           <h1 className="text-5xl font-black mt-2">Checkout</h1>
-          <p className="text-fg-muted mt-2">
+          <p className="text-gray-500 dark:text-zinc-400 mt-2">
             Pay safely using Razorpay.
           </p>
         </div>
 
         <form onSubmit={handlePayment} className="grid lg:grid-cols-[1fr_420px] gap-8">
-          <section className="bg-card rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
+          <section className="bg-card dark:bg-zinc-900 rounded-[34px] p-7 shadow-[0_25px_80px_rgba(15,23,42,0.09)] transition-colors duration-300">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-purple-50 text-purple-700 rounded-2xl grid place-items-center">
                 <MapPin />

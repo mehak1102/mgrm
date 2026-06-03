@@ -1,0 +1,105 @@
+/**
+ * Dark theme restoration — matches pre–Blue Theme behavior.
+ * Scoped to .dark / [data-theme="dark"] only. Does not affect light or blue.
+ */
+
+.dark,
+[data-theme="dark"] {
+  --soft: #18181b;
+  --bg1: #09090b;
+  --border: #3f3f46;
+  --text: #fafafa;
+  --primary: #25319a;
+  --accent: #22a7dc;
+  color-scheme: dark;
+
+  /* Independent dark semantic tokens (not shared with blue) */
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --card-bg: #18181b;
+  --card-elevated: #111827;
+  --card-hover: #27272a;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-primary: #22d3ee;
+  --accent-secondary: #3b82f6;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-accent: #67e8f9;
+  --gradient-from: #09090b;
+  --gradient-via: #020617;
+  --gradient-to: #18181b;
+}
+
+.dark body,
+[data-theme="dark"] body {
+  background: #020617;
+  color: #fafafa;
+}
+
+.dark .theme-panel,
+[data-theme="dark"] .theme-panel {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.dark .theme-panel::placeholder,
+[data-theme="dark"] .theme-panel::placeholder {
+  color: #94a3b8;
+}
+
+.dark .theme-panel:focus,
+[data-theme="dark"] .theme-panel:focus {
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+.dark .theme-text,
+[data-theme="dark"] .theme-text {
+  color: #67e8f9;
+}
+
+.dark .theme-section,
+[data-theme="dark"] .theme-section {
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.dark .theme-accent,
+[data-theme="dark"] .theme-accent {
+  color: #22d3ee;
+}
+
+.dark .card,
+[data-theme="dark"] .card {
+  background: rgba(24, 24, 27, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.dark .card h1,
+.dark .card h2,
+.dark .card h3,
+.dark .card .font-black,
+[data-theme="dark"] .card h1,
+[data-theme="dark"] .card h2,
+[data-theme="dark"] .card h3,
+[data-theme="dark"] .card .font-black {
+  color: inherit;
+}
+
+.dark .custom-scroll::-webkit-scrollbar-thumb,
+[data-theme="dark"] .custom-scroll::-webkit-scrollbar-thumb {
+  background: #52525b;
+}
+
+.dark .shadow-theme-lg,
+[data-theme="dark"] .shadow-theme-lg {
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+}
+
+.dark .shadow-theme-md,
+[data-theme="dark"] .shadow-theme-md {
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}

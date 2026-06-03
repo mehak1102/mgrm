@@ -61,12 +61,12 @@
 //           <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
 //             <span className="text-red-500">248</span> world class certified products
 //           </h2>
-//           <p className="text-2xl md:text-4xl font-black text-fg-muted mt-2">
+//           <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
 //             to heal and rehabilitate comfortably
 //           </p>
 //         </motion.div>
 
-//         <div className="relative h-[860px] bg-card rounded-[36px] overflow-hidden">
+//         <div className="relative h-[860px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
 //           <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
 //             {flowItems.map((item, index) => {
 //               const startX = item.label.x;
@@ -126,7 +126,7 @@
 //             <ThumbGrid key={item.name} item={item} />
 //           ))}
 
-//           <div className="absolute right-8 bottom-8 z-40 grid grid-cols-2 gap-3 bg-app/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+//           <div className="absolute right-8 bottom-8 z-40 grid grid-cols-2 gap-3 bg-app dark:bg-zinc-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
 //             {flowItems.map((item) => (
 //               <button key={item.name} onClick={() => go(item.query)} className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 text-fg">
 //                 <span className="w-4 h-4 rounded" style={{ background: item.color }} />
@@ -212,7 +212,7 @@
 
 //         <div className="text-left">
 //           <p className="font-black text-sm">{item.name}</p>
-//           <p className="text-xs text-fg-muted">{cat.count} products</p>
+//           <p className="text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
 //         </div>
 //       </div>
 //     </motion.button>
@@ -274,12 +274,12 @@
 //           <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
 //             Explore Support by Body Area
 //           </h2>
-//           <p className="text-xl md:text-3xl font-black text-fg-muted/80 mt-2">
+//           <p className="text-xl md:text-3xl font-black text-gray-500 dark:text-zinc-400/80 mt-2">
 //             tap a body region to find the right support
 //           </p>
 //         </motion.div>
 
-//         <div className="relative h-[900px] bg-card rounded-[36px] overflow-hidden">
+//         <div className="relative h-[900px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
 //           <svg
 //             className="absolute inset-0 w-full h-full z-0"
 //             viewBox="0 0 100 100"
@@ -366,7 +366,7 @@
 
          
 
-//           <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+//           <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app dark:bg-zinc-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
 //             {flowItems.map((item) => (
 //               <button
 //                 key={item.name}
@@ -487,7 +487,7 @@ function CategoryLabel({ item, index, go }) {
         />
         <div className="text-left">
           <p className="text-sm font-black text-fg">{item.name}</p>
-          <p className="text-xs text-fg-muted">{cat.count} products</p>
+          <p className="text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
         </div>
       </div>
     </motion.button>
@@ -512,14 +512,14 @@ export default function BodyFlowMap() {
           <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
             <span className="text-red-500">248</span> world class certified products
           </h2>
-          <p className="text-2xl md:text-4xl font-black text-fg-muted mt-2">
+          <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
             to heal and rehabilitate comfortably
           </p>
         </motion.div>
 
-        {/* <div className="relative h-[900px] bg-card rounded-[36px] overflow-hidden">
+        {/* <div className="relative h-[900px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
          */}
-         <div className="relative h-[940px] bg-card rounded-[36px] overflow-hidden">
+         <div className="relative h-[940px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
           <svg
             className="absolute inset-0 w-full h-full z-0"
             viewBox="0 0 100 100"
@@ -599,7 +599,7 @@ export default function BodyFlowMap() {
             <ThumbGrid key={`${item.name}-thumbs`} item={item} />
           ))}
 
-          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app dark:bg-zinc-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
             {flowItems.map((item) => (
               <button
                 key={item.name}

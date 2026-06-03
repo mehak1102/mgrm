@@ -873,7 +873,7 @@ export default function Logo3D() {
             text-[7px]
             uppercase
             tracking-[0.42em]
-            text-slate-500 text-fg-muted
+            text-slate-500 text-gray-500 dark:text-zinc-400
             mt-[2px]
           "
         >

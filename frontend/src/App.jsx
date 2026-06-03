@@ -35,7 +35,7 @@ export default function App() {
     location.pathname === "/login" || location.pathname === "/register";
 
   return (
-    <div className="min-h-screen bg-app text-fg transition-colors duration-300">
+    <div className="min-h-screen bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300">
       {!hideLayout && <Navbar />}
 
       <ScrollToTop />
@@ -85,7 +85,8 @@ export default function App() {
       <Toaster
         position="top-right"
         toastOptions={{
-          className: "!bg-card !text-fg !border !border-edge transition-colors duration-300",
+          className:
+            "!bg-card dark:!bg-slate-900 !text-fg dark:!text-white !border !border-edge dark:!border-white/10 transition-colors duration-300 [&_p]:dark:!text-slate-300",
         }}
       />
     </div>
