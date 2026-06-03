@@ -478,7 +478,7 @@ const AboutUs = () => {
                             {image.replace('.png', '')}
                           </h3>
 
-                          <p className="mt-5 leading-8 text-[#31506f] text-gray-500 dark:text-zinc-400">
+                          <p className="mt-5 leading-8 text-[#31506f] text-gray-500 dark:text-zinc-800">
                             Premium orthopedic rehabilitation support
                             designed for medical precision, recovery,
                             mobility and patient comfort.
