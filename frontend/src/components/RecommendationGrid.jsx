@@ -12,11 +12,11 @@ export default function RecommendationGrid({
   return (
     <section className={className}>
       <div className="mb-8">
-        <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-white">
+        <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-fg">
           {title}
         </h2>
         {!!subtitle && (
-          <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl">{subtitle}</p>
+          <p className="text-fg-muted mt-3 max-w-xl">{subtitle}</p>
         )}
       </div>
 
@@ -25,13 +25,13 @@ export default function RecommendationGrid({
           {[1, 2, 3, 4].map((x) => (
             <div
               key={x}
-              className="h-[430px] bg-white dark:bg-slate-900 rounded-[28px] animate-pulse"
+              className="h-[430px] bg-card rounded-[28px] animate-pulse"
             />
           ))}
         </div>
       ) : products.length === 0 ? (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-10 text-center shadow">
-          <p className="text-gray-500 dark:text-zinc-400">{emptyText}</p>
+        <div className="bg-card rounded-3xl p-10 text-center shadow">
+          <p className="text-fg-muted">{emptyText}</p>
         </div>
       ) : (
         <motion.div

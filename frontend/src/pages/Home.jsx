@@ -27,7 +27,7 @@ const text = "248 top certified products- to cure your body";
 
 export default function Home() {
   // const { darkMode } = useTheme();
-  const { isDark } = useTheme();
+  const { isDarkSurface } = useTheme();
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
+    <main className="relative overflow-hidden bg-app transition-colors duration-300">
       <FloatingMedicalBg />
 
       <div className="relative z-10">
@@ -115,7 +115,7 @@ export default function Home() {
             playsInline
           />
 
-          <div className="absolute inset-0 bg-gradient-to-b from-white/78 via-white/60 to-white/82 dark:from-zinc-950/88 dark:via-zinc-950/72 dark:to-zinc-950/90 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/78 via-white/60 to-white/82 from-[var(--bg-primary)]/88 via-[var(--bg-primary)]/72 to-[var(--bg-primary)]/90 transition-colors duration-500" />
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
@@ -125,7 +125,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-gray-700 dark:text-white max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
+      className="text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-gray-700 text-fg max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
     >
       {text.split("").map((char, index) => (
         <motion.span
@@ -163,7 +163,7 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.08 }}
                     onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                    className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900 backdrop-blur-xl border border-white dark:border-white/10 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
+                    className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 bg-card backdrop-blur-xl border border-white border-edge hover:border-[var(--accent-primary)]/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--accent-primary)_25%,transparent)] hover:-translate-y-1 hover:bg-white hover:bg-surface-hover transition-all duration-300"
                   >
                     <span className="text-3xl font-light" style={{ color: cat.color }}>
                       {String(index + 1).padStart(2, "0")}
@@ -183,14 +183,14 @@ export default function Home() {
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-black text-gray-900 dark:text-white">{cat.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-slate-400">{cat.count} products</p>
+                      <h3 className="text-lg font-black text-gray-900 text-fg">{cat.name}</h3>
+                      <p className="text-sm text-gray-500 text-fg-muted">{cat.count} products</p>
                     </div>
                   </motion.button>
                 ))}
               </div>
 
-              <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] overflow-hidden">
+              <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 bg-card/60 backdrop-blur-xl border border-white border-edge shadow-[0_35px_120px_rgba(15,23,42,0.10)] overflow-hidden">
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 blur-3xl" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 blur-3xl" />
 
@@ -210,11 +210,11 @@ export default function Home() {
   muted
   loop
   playsInline
-  key={isDark ? "dark" : "light"}
+  key={isDarkSurface ? "dark" : "light"}
   className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
 >
   <source
-    src={isDark ? "/videos/new.mp4" : "/videos/bo.mp4"}
+    src={isDarkSurface ? "/videos/new.mp4" : "/videos/bo.mp4"}
     type="video/mp4"
   />
 </video>
@@ -289,7 +289,7 @@ export default function Home() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}
                       onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-slate-900 backdrop-blur-xl border border-white dark:border-white/10 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
+                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 bg-card backdrop-blur-xl border border-white border-edge hover:border-[var(--accent-primary)]/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--accent-primary)_25%,transparent)] hover:-translate-y-1 hover:bg-white hover:bg-surface-hover transition-all duration-300"
                     >
                       <span className="text-3xl font-light" style={{ color: cat.color }}>
                         {String(index + 1).padStart(2, "0")}
@@ -309,8 +309,8 @@ export default function Home() {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-black text-gray-900 dark:text-white">{cat.name}</h3>
-                        <p className="text-sm text-gray-500 dark:text-slate-400">{cat.count} products</p>
+                        <h3 className="text-lg font-black text-gray-900 text-fg">{cat.name}</h3>
+                        <p className="text-sm text-gray-500 text-fg-muted">{cat.count} products</p>
                       </div>
                     </motion.button>
                   );
@@ -365,7 +365,7 @@ export default function Home() {
 
         {/* GLOBAL CERTIFICATIONS */}
 <section className="relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[48px] transition-colors duration-300" />
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)] rounded-[48px] transition-colors duration-300" />
 
 
   <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-20 items-center min-h-[720px]">
@@ -382,11 +382,11 @@ export default function Home() {
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: (i % certifications.length) * 0.08 }}
-              className="w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-slate-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
+              className="w-[280px] shrink-0 rounded-[34px] bg-white/85 bg-card/90 backdrop-blur-xl border border-white border-edge shadow-[0_25px_70px_rgba(15,23,42,0.10)] shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
             >
 
 <div
-  className="w-28 h-28 rounded-[30px] bg-white dark:bg-slate-900 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-zinc-800 group-hover:scale-110 transition"
+  className="w-28 h-28 rounded-[30px] bg-card shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 border-edge group-hover:scale-110 transition"
 >
   <img
     src={item.image}
@@ -394,11 +394,11 @@ export default function Home() {
     className="w-20 h-20 object-contain"
   />
 </div>
-              <h3 className="mt-6 text-2xl font-black text-slate-900 dark:text-zinc-100">
+              <h3 className="mt-6 text-2xl font-black text-fg">
                 {item.title}
               </h3>
 
-              <p className="mt-3 text-slate-500 dark:text-gray-300 leading-7">
+              <p className="mt-3 text-slate-500 text-fg-muted leading-7">
                 {item.subtitle}
               </p>
 
@@ -417,16 +417,16 @@ export default function Home() {
       <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
       <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
 
-      <div className="relative bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
-        <p className="text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
+      <div className="relative bg-card/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white border-edge transition-colors duration-300">
+        <p className="text-emerald-600 text-emerald-500 font-black tracking-[0.25em] text-sm">
           TRUST & SAFETY
         </p>
 
-        <h2 className="text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-white">
+        <h2 className="text-6xl font-black mt-5 leading-[1] text-fg">
           Expect The <br /> Best
         </h2>
 
-        <p className="mt-8 text-xl text-slate-500 dark:text-gray-300 leading-8">
+        <p className="mt-8 text-xl text-slate-500 text-fg-muted leading-8">
           MGRM’s strong focus on quality ensures every orthopedic and
           recovery product meets internationally recognized healthcare
           standards for comfort, durability and safety.
@@ -441,13 +441,13 @@ export default function Home() {
           ].map((text) => (
             <div
               key={text}
-              className="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 rounded-2xl px-4 py-4"
+              className="flex items-center gap-3 bg-slate-50 bg-card rounded-2xl px-4 py-4"
             >
               <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
                 <CheckCircle2 size={18} />
               </div>
 
-              <span className="font-bold text-slate-700 dark:text-zinc-300 text-sm">
+              <span className="font-bold text-fg text-sm">
                 {text}
               </span>
             </div>
@@ -473,7 +473,7 @@ export default function Home() {
         border
 
         border-black/5
-        dark:border-white/10
+        border-edge
 
         bg-gradient-to-br
 
@@ -481,13 +481,13 @@ export default function Home() {
         via-[#eef4ff]
         to-[#f3f7ff]
 
-        dark:from-[#0d1b34]
-        dark:via-[#142544]
-        dark:to-[#10203d]
+        from-[var(--bg-secondary)]
+        via-[var(--card-bg)]
+        to-[var(--bg-primary)]
 
         p-8
         shadow-[0_30px_100px_rgba(0,0,0,0.12)]
-        dark:shadow-[0_30px_100px_rgba(0,0,0,0.35)]
+        shadow-[0_30px_100px_rgba(0,0,0,0.35)]
 
         backdrop-blur-xl
         md:p-12
@@ -531,7 +531,7 @@ export default function Home() {
               font-light
 
               text-[#111827]
-              dark:text-white
+              text-fg
 
               md:text-6xl
             "
@@ -552,7 +552,7 @@ export default function Home() {
               leading-8
 
               text-[#4b5563]
-              dark:text-white/70
+              text-fg/70
 
               md:text-lg
             "
@@ -688,7 +688,7 @@ export default function Home() {
             bg-gradient-to-r
 
             from-[#f8fbff]
-            dark:from-[#10203d]
+            from-[var(--bg-primary)]
 
             to-transparent
           "
@@ -707,7 +707,7 @@ export default function Home() {
             bg-gradient-to-l
 
             from-[#f3f7ff]
-            dark:from-[#10203d]
+            from-[var(--bg-primary)]
 
             to-transparent
           "
@@ -790,15 +790,15 @@ export default function Home() {
 
                 border
                 border-black/5
-                dark:border-white/10
+                border-edge
 
                 bg-black/[0.03]
-                dark:bg-white/5
+                bg-card/50
 
                 backdrop-blur-xl
 
                 shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-                dark:shadow-[0_15px_50px_rgba(0,0,0,0.25)]
+                shadow-[0_15px_50px_rgba(0,0,0,0.25)]
               "
             >
 
@@ -862,7 +862,7 @@ export default function Home() {
 
           border-t
           border-black/10
-          dark:border-white/10
+          border-edge
 
           pt-8
           md:flex-row
@@ -878,7 +878,7 @@ export default function Home() {
               tracking-wide
 
               text-[#0f172a]
-              dark:text-white
+              text-fg
             "
           >
             MGRM
@@ -905,7 +905,7 @@ export default function Home() {
             leading-7
 
             text-[#4b5563]
-            dark:text-white/60
+            text-fg/60
 
             md:text-right
           "
@@ -935,7 +935,7 @@ export default function Home() {
     />
 
     {/* cinematic overlay */}
-    <div className="absolute inset-0 bg-gradient-to-r from-white/82 via-white/38 to-cyan-50/10 dark:from-slate-950/92 dark:via-slate-950/75 dark:to-slate-900/40 transition-colors duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-r from-white/82 via-white/38 to-cyan-50/10 from-[var(--bg-primary)]/92 via-[var(--bg-primary)]/75 to-[var(--bg-secondary)]/40 transition-colors duration-500" />
 
     {/* light effect */}
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.08),transparent_38%)]" />
@@ -961,30 +961,30 @@ export default function Home() {
       >
 
         {/* TOP BADGE */}
-        <div className="inline-flex items-center gap-3 rounded-full border border-white/70 dark:border-white/10 bg-white/65 dark:bg-slate-900/70 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
+        <div className="inline-flex items-center gap-3 rounded-full border border-white/70 border-edge bg-white/65 bg-card/70 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
 
           <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
 
-          <span className="text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-300">
+          <span className="text-[11px] tracking-[0.35em] font-black text-cyan-700 text-brand">
             GLOBAL MEDICAL BRAND
           </span>
         </div>
 
         {/* TITLE */}
 
-        <h2 className="mt-6 text-[58px] md:text-6xl font-black leading-tight text-slate-900 dark:text-white transition-colors duration-300">
+        <h2 className="mt-6 text-[58px] md:text-6xl font-black leading-tight text-fg transition-colors duration-300">
           BANDAGE TO
           <br />
           SPLINTAGE™
         </h2>
 
         {/* SUBTITLE */}
-        <h3 className="mt-5 text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+        <h3 className="mt-5 text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 from-[var(--accent-primary)] to-[var(--accent-secondary)] bg-clip-text text-transparent">
           Physical Rehabilitation Splints & Aids
         </h3>
 
         {/* DESC */}
-        <p className="mt-8 text-lg leading-9 text-slate-600 dark:text-gray-300 max-w-2xl transition-colors duration-300">
+        <p className="mt-8 text-lg leading-9 text-slate-600 text-fg-muted max-w-2xl transition-colors duration-300">
           MGRM products are scientifically engineered to stabilize,
           support and accelerate recovery during injuries and
           rehabilitation. Trusted by hospitals, physiotherapists,
@@ -1007,7 +1007,7 @@ export default function Home() {
 
           <Link
             to="/support"
-            className="rounded-full bg-white/78 dark:bg-slate-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-9 py-4 text-slate-700 dark:text-gray-200 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300"
+            className="rounded-full bg-white/78 bg-card/80 backdrop-blur-2xl border border-white border-edge px-9 py-4 text-slate-700 text-fg font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300"
           >
             Partner Program
           </Link>
@@ -1028,14 +1028,14 @@ export default function Home() {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-[30px] bg-white/70 dark:bg-slate-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-slate-800/90 transition-all duration-500"
+            className="rounded-[30px] bg-card/80 backdrop-blur-2xl border border-white border-edge shadow-[0_20px_50px_rgba(15,23,42,0.08)] shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-7 hover:-translate-y-2 hover:bg-white/85 hover:bg-surface-hover/90 transition-all duration-500"
           >
 
-            <h3 className="text-[58px] font-black text-slate-900 dark:text-white">
+            <h3 className="text-[58px] font-black text-fg">
               {num}
             </h3>
 
-            <p className="mt-2 text-slate-500 dark:text-gray-300 font-semibold">
+            <p className="mt-2 text-slate-500 text-fg-muted font-semibold">
               {text}
             </p>
 
@@ -1051,7 +1051,7 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, -18, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="relative w-[500px] rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white/40 dark:bg-slate-900/50 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
+        className="relative w-[500px] rounded-[42px] overflow-hidden border border-white/70 border-edge bg-white/40 bg-card/50 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)] shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
       >
 
         <img
@@ -1060,20 +1060,20 @@ export default function Home() {
         />
 
         {/* gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95 dark:to-slate-950/95 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95 to-[var(--bg-primary)]/95 transition-colors duration-500" />
 
         {/* content */}
         <div className="absolute bottom-0 left-0 right-0 p-8">
 
-          <span className="text-cyan-600 dark:text-cyan-400 text-sm tracking-[0.3em] font-black">
+          <span className="text-cyan-600 text-brand text-sm tracking-[0.3em] font-black">
             PREMIUM ORTHOPEDIC SUPPORT
           </span>
 
-          <h3 className="mt-3 text-4xl font-black text-slate-900 dark:text-white">
+          <h3 className="mt-3 text-4xl font-black text-fg">
             Expect The Best
           </h3>
 
-          <p className="mt-4 text-slate-600 dark:text-gray-300 leading-7">
+          <p className="mt-4 text-slate-600 text-fg-muted leading-7">
             Internationally certified recovery and rehabilitation
             products designed for premium support and comfort.
           </p>
@@ -1084,22 +1084,22 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
-        className="absolute -left-24 top-20 w-72 rounded-[34px] bg-white/80 dark:bg-slate-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
+        className="absolute -left-24 top-20 w-72 rounded-[34px] bg-white/80 bg-card/85 backdrop-blur-2xl border border-white border-edge shadow-[0_30px_90px_rgba(15,23,42,0.12)] shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
       >
 
-        <p className="text-xs font-black tracking-[0.3em] text-cyan-600 dark:text-cyan-400">
+        <p className="text-xs font-black tracking-[0.3em] text-cyan-600 text-brand">
           GLOBAL PRESENCE
         </p>
 
-        <h4 className="mt-3 text-4xl font-black text-slate-900 dark:text-white">
+        <h4 className="mt-3 text-4xl font-black text-fg">
           40+
         </h4>
 
-        <p className="text-lg font-bold text-slate-700 dark:text-gray-200 mt-1">
+        <p className="text-lg font-bold text-slate-700 text-fg mt-1">
           Countries
         </p>
 
-        <p className="mt-4 text-sm leading-7 text-slate-500 dark:text-gray-300">
+        <p className="mt-4 text-sm leading-7 text-slate-500 text-fg-muted">
           Expanding partnerships with healthcare providers,
           distributors and hospitals worldwide.
         </p>
@@ -1109,17 +1109,17 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, -16, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="absolute right-8 bottom-16 w-80 rounded-[34px] bg-white/82 dark:bg-slate-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
+        className="absolute right-8 bottom-16 w-80 rounded-[34px] bg-white/82 bg-card/85 backdrop-blur-2xl border border-white border-edge shadow-[0_30px_90px_rgba(15,23,42,0.12)] shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
       >
 
         <div className="flex items-center gap-4">
 
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/60 dark:to-blue-900/60 text-cyan-700 dark:text-cyan-300 flex items-center justify-center text-2xl font-black">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 from-[color-mix(in_srgb,var(--accent-primary)_40%,transparent)] to-[color-mix(in_srgb,var(--accent-secondary)_40%,transparent)] text-cyan-700 text-brand flex items-center justify-center text-2xl font-black">
             ✓
           </div>
 
           <div>
-            <h4 className="text-2xl font-black text-slate-900 dark:text-zinc-100">
+            <h4 className="text-2xl font-black text-fg">
               WHO-GMP
             </h4>
 
@@ -1129,7 +1129,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-6 h-2 rounded-full bg-slate-100 dark:bg-zinc-800 overflow-hidden">
+        <div className="mt-6 h-2 rounded-full bg-slate-100 bg-surface-hover overflow-hidden">
           <div className="w-[92%] h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
         </div>
       </motion.div>
@@ -1167,7 +1167,7 @@ export default function Home() {
 
           <div
             key={i}
-            className="rounded-full bg-white/70 dark:bg-slate-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-700 dark:text-gray-200 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] hover:bg-cyan-500 hover:text-white transition duration-300"
+            className="rounded-full bg-card/80 backdrop-blur-2xl border border-white border-edge px-8 py-4 text-slate-700 text-fg font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] hover:bg-cyan-500 hover:text-white transition duration-300"
           >
             {item}
           </div>
@@ -1180,13 +1180,13 @@ export default function Home() {
         {/* BEST SELLERS */}
   
         <section className="relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-zinc-950 rounded-[48px] transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)] rounded-[48px] transition-colors duration-300" />
 
           <div className="relative flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">TOP CATEGORIES</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Best Sellers</h2>
-              <p className="text-gray-500 dark:text-zinc-400 mt-3">
+              <h2 className="text-[58px] font-black mt-2 text-fg">Best Sellers</h2>
+              <p className="text-fg-muted mt-3">
                 Most trusted support categories for daily recovery.
               </p>
             </div>
@@ -1200,7 +1200,7 @@ export default function Home() {
                   onClick={() => goCategory(cat.query || cat.category || cat.name)}
                   className="w-52 shrink-0 text-center group"
                 >
-                  <div className="relative w-48 h-48 mx-auto rounded-full bg-white dark:bg-slate-900 shadow-[0_25px_70px_rgba(15,23,42,0.12)] overflow-hidden border border-white group-hover:-translate-y-2 transition duration-500">
+                  <div className="relative w-48 h-48 mx-auto rounded-full bg-card shadow-[0_25px_70px_rgba(15,23,42,0.12)] overflow-hidden border border-white group-hover:-translate-y-2 transition duration-500">
                     <div
                       className="absolute inset-3 rounded-full opacity-25"
                       style={{ background: cat.color }}
@@ -1212,8 +1212,8 @@ export default function Home() {
                     />
                   </div>
 
-                  <h3 className="mt-5 text-xl font-black text-slate-900 dark:text-white">{cat.name}</h3>
-                  <p className="text-gray-500 dark:text-zinc-400 mt-1">{cat.count} items</p>
+                  <h3 className="mt-5 text-xl font-black text-fg">{cat.name}</h3>
+                  <p className="text-fg-muted mt-1">{cat.count} items</p>
                 </button>
               ))}
             </div>
@@ -1224,8 +1224,8 @@ export default function Home() {
         <section className="relative max-w-[1500px] mx-auto px-6 py-28">
           <div className="text-center mb-12">
             <p className="text-cyan-600 font-black tracking-widest">BODY-BASED SEARCH</p>
-            <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Locate Your Pain Area</h2>
-            <p className="text-gray-500 dark:text-zinc-400 mt-3 text-lg">
+            <h2 className="text-[58px] font-black mt-2 text-fg">Locate Your Pain Area</h2>
+            <p className="text-fg-muted mt-3 text-lg">
               Get the right support where you need it
             </p>
           </div>
@@ -1236,7 +1236,7 @@ export default function Home() {
               onError={(e) => {
                 e.currentTarget.src = "/products/body-blue.png";
               }}
-              className="w-full h-[760px] object-contain bg-white dark:bg-slate-900"
+              className="w-full h-[760px] object-contain bg-card"
             />
 
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-950/50 via-transparent to-blue-950/35" />
@@ -1276,16 +1276,16 @@ export default function Home() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  <span className="absolute left-14 top-1 whitespace-nowrap bg-white dark:bg-slate-900 text-gray-900 dark:text-zinc-100 rounded-full px-4 py-2 font-bold text-sm opacity-0 group-hover:opacity-100 transition shadow-lg">
+                  <span className="absolute left-14 top-1 whitespace-nowrap bg-card text-fg rounded-full px-4 py-2 font-bold text-sm opacity-0 group-hover:opacity-100 transition shadow-lg">
                     {cat.name}
                   </span>
                 </button>
               ))}
 
-            <div className="absolute left-8 bottom-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl">
+            <div className="absolute left-8 bottom-8 bg-white/90 bg-card/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl">
               <p className="text-cyan-600 font-black text-sm">SMART GUIDE</p>
-              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-white">Find support faster</h3>
-              <p className="text-gray-500 dark:text-zinc-400 mt-2">
+              <h3 className="text-3xl font-black mt-1 text-fg">Find support faster</h3>
+              <p className="text-fg-muted mt-2">
                 Tap any pain point and jump directly to matching products.
               </p>
             </div>
@@ -1297,12 +1297,12 @@ export default function Home() {
           <div className="flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Shop By Activity</h2>
+              <h2 className="text-[58px] font-black mt-2 text-fg">Shop By Activity</h2>
             </div>
 
             <Link
               to="/shop-by-activity"
-              className="hidden md:block bg-white dark:bg-slate-900 shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
+              className="hidden md:block bg-card shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
             >
               View All →
             </Link>
@@ -1327,7 +1327,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
-                  <span className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
+                  <span className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-card rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
                     {item.name}
                   </span>
                 </motion.button>
@@ -1338,17 +1338,17 @@ export default function Home() {
 
         {/* FEATURED PRODUCTS */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-primary)] rounded-[48px] border border-slate-100/80 border-edge transition-colors duration-300" />
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
             <div>
-              <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm">
+              <p className="text-cyan-600 text-brand font-black tracking-widest text-sm">
                 {strategy.startsWith("behavioral") ? "PERSONALIZED FOR YOU" : "TRENDING PICKS"}
               </p>
-              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-white">
+              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-fg">
                 Recommended Supports
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl">
+              <p className="text-fg-muted mt-3 max-w-xl">
                 Dynamic recommendations based on your search, views, categories and cart activity.
               </p>
             </div>
@@ -1356,13 +1356,13 @@ export default function Home() {
             <div className="flex gap-3">
               <button
                 onClick={prevProducts}
-                className="w-12 h-12 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-slate-700 transition-all duration-300"
+                className="w-12 h-12 rounded-full bg-white bg-surface-hover border border-slate-200 border-edge text-slate-800 text-fg shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 hover:bg-surface-hover transition-all duration-300"
               >
                 <ChevronLeft size={24} />
               </button>
               <button
                 onClick={nextProducts}
-                className="w-12 h-12 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-slate-700 transition-all duration-300"
+                className="w-12 h-12 rounded-full bg-white bg-surface-hover border border-slate-200 border-edge text-slate-800 text-fg shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 hover:bg-surface-hover transition-all duration-300"
               >
                 <ChevronRight size={24} />
               </button>
@@ -1380,13 +1380,13 @@ export default function Home() {
               {[1, 2, 3, 4].map((x) => (
                 <div
                   key={x}
-                  className="h-[430px] rounded-[30px] bg-white dark:bg-slate-900 animate-pulse"
+                  className="h-[430px] rounded-[30px] bg-card animate-pulse"
                 />
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="bg-white dark:bg-slate-900 rounded-3xl px-6 py-12 text-center mx-2 sm:mx-4">
-              <p className="text-gray-500 dark:text-zinc-400">
+            <div className="bg-card rounded-3xl px-6 py-12 text-center mx-2 sm:mx-4">
+              <p className="text-fg-muted">
                 Recommendations will appear as you browse or search products.
               </p>
             </div>
@@ -1404,19 +1404,19 @@ export default function Home() {
           <div className="flex justify-between items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">LEARN & RECOVER</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-white">Health Blogs & Guides</h2>
+              <h2 className="text-[58px] font-black mt-2 text-fg">Health Blogs & Guides</h2>
             </div>
 
             <div className="flex gap-3">
               <button
                 onClick={prevBlogs}
-                className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 shadow-lg grid place-items-center hover:scale-110 transition"
+                className="w-12 h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
               >
                 <ChevronLeft size={24} />
               </button>
               <button
                 onClick={nextBlogs}
-                className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 shadow-lg grid place-items-center hover:scale-110 transition"
+                className="w-12 h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
               >
                 <ChevronRight size={24} />
               </button>
@@ -1437,7 +1437,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
-                className="group bg-white dark:bg-slate-900 rounded-[34px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 hover:bg-cyan-50 dark:hover:bg-slate-800 transition duration-500"
+                className="group bg-card rounded-[34px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 hover:bg-cyan-50 hover:bg-surface-hover transition duration-500"
               >
                 <div className="h-56 overflow-hidden">
                   <img
@@ -1454,7 +1454,7 @@ export default function Home() {
                   <h3 className="text-xl font-black mt-3 group-hover:text-cyan-600 transition">
                     {blog.title}
                   </h3>
-                  <p className="text-gray-500 dark:text-zinc-400 mt-3 line-clamp-2">
+                  <p className="text-fg-muted mt-3 line-clamp-2">
                     Learn how to choose, wear and care for your support product.
                   </p>
 <Link
@@ -1476,7 +1476,7 @@ export default function Home() {
 {/* HEADING */}
 <div className="text-center mb-14">
 
-  <h2 className="mt-4 text-[64px] leading-[0.9] font-black text-slate-900 dark:text-white">
+  <h2 className="mt-4 text-[64px] leading-[0.9] font-black text-fg">
     MGRM
     <br />
     <span className="bg-gradient-to-r bg-gradient-to-r from-[#374151] via-[#f43f5e] to-[#fb923c] bg-clip-text text-transparent">
@@ -1484,7 +1484,7 @@ export default function Home() {
     </span>
   </h2>
 
-  <p className="mt-5 text-slate-500 dark:text-zinc-400 text-lg">
+  <p className="mt-5 text-slate-500 text-fg-muted text-lg">
     Advanced respiratory & pain relief solutions designed for everyday comfort.
   </p>
 
@@ -1494,7 +1494,7 @@ export default function Home() {
 <div className="grid md:grid-cols-2 gap-10 max-w-[1100px] mx-auto">
 
   {/* CARD 1 */}
-  <div className="group relative rounded-[42px] overflow-hidden bg-white dark:bg-slate-900 border border-white/70 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+  <div className="group relative rounded-[42px] overflow-hidden bg-card border border-white/70 border-edge shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
 
     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 
@@ -1520,7 +1520,7 @@ export default function Home() {
   </div>
 
   {/* CARD 2 */}
-  <div className="group relative rounded-[42px] overflow-hidden bg-white dark:bg-slate-900 border border-white/70 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+  <div className="group relative rounded-[42px] overflow-hidden bg-card border border-white/70 border-edge shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
 
     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-lime-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 

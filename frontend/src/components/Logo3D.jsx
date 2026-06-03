@@ -858,7 +858,7 @@ export default function Logo3D() {
             font-black
             tracking-tight
             leading-none
-            text-slate-900 dark:text-white
+            text-fg
           "
           style={{
             textShadow:
@@ -873,7 +873,7 @@ export default function Logo3D() {
             text-[7px]
             uppercase
             tracking-[0.42em]
-            text-slate-500 dark:text-zinc-400
+            text-slate-500 text-fg-muted
             mt-[2px]
           "
         >

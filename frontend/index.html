@@ -4,13 +4,63 @@
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem("mgrm-color-mode");
-          var dark =
-            stored === "dark" ||
-            (stored !== "light" &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches);
-          if (dark) document.documentElement.classList.add("dark");
-          document.documentElement.style.colorScheme = dark ? "dark" : "light";
+          var stored =
+            localStorage.getItem("mgrm-theme") ||
+            localStorage.getItem("mgrm-color-mode") ||
+            localStorage.getItem("mgrm_theme");
+          var theme = stored === "light" || stored === "dark" || stored === "blue" ? stored : null;
+          if (!theme) {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          var tokens = {
+            light: {
+              "bg-primary": "#ffffff",
+              "bg-secondary": "#f7f8fb",
+              "card-bg": "#ffffff",
+              "card-hover": "#f1f5f9",
+              "border-color": "#e2e8f0",
+              "accent-primary": "#25319a",
+              "accent-secondary": "#22a7dc",
+              "text-primary": "#0f172a",
+              "text-secondary": "#64748b",
+            },
+            dark: {
+              "bg-primary": "#020617",
+              "bg-secondary": "#0f172a",
+              "card-bg": "#18181b",
+              "card-hover": "#27272a",
+              "border-color": "rgba(255, 255, 255, 0.1)",
+              "accent-primary": "#22d3ee",
+              "accent-secondary": "#3b82f6",
+              "text-primary": "#fafafa",
+              "text-secondary": "#a1a1aa",
+            },
+            blue: {
+              "bg-primary": "#EAF8FF",
+              "bg-secondary": "#D8F2FF",
+              "card-bg": "#FFFFFF",
+              "card-elevated": "#F5FCFF",
+              "card-hover": "#E6F7FF",
+              "border-color": "#BFE8FF",
+              "accent-primary": "#00B7FF",
+              "accent-secondary": "#3B82F6",
+              "text-primary": "#0F172A",
+              "text-secondary": "#475569",
+              "text-muted": "#64748B",
+              "text-accent": "#0284C7",
+              "gradient-from": "#EAF8FF",
+              "gradient-via": "#DFF5FF",
+              "gradient-to": "#CDEFFF",
+            },
+          };
+          var t = tokens[theme] || tokens.light;
+          var root = document.documentElement;
+          root.setAttribute("data-theme", theme);
+          if (theme === "dark") root.classList.add("dark");
+          root.style.colorScheme = theme === "dark" ? "dark" : "light";
+          Object.keys(t).forEach(function (k) {
+            root.style.setProperty("--" + k, t[k]);
+          });
         } catch (e) {}
       })();
     </script>

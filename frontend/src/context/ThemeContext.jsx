@@ -1,30 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-const STORAGE_KEY = "mgrm-color-mode";
+import {
+  applyThemeTokens,
+  getStoredTheme,
+  STORAGE_KEY,
+  THEME_IDS,
+} from "../theme/tokens";
 
 const ThemeContext = createContext(null);
-
-function getStoredTheme() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "light" || stored === "dark") return stored;
-  } catch {
-    /* ignore */
-  }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function applyTheme(theme) {
-  const root = document.documentElement;
-  root.classList.toggle("dark", theme === "dark");
-  root.style.colorScheme = theme;
-}
 
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(getStoredTheme);
 
   useEffect(() => {
-    applyTheme(theme);
+    applyThemeTokens(theme);
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {
@@ -33,15 +21,21 @@ export function ThemeProvider({ children }) {
   }, [theme]);
 
   const setTheme = (next) => {
-    setThemeState(typeof next === "function" ? next : next);
+    const resolved = typeof next === "function" ? next(theme) : next;
+    if (THEME_IDS.includes(resolved)) {
+      setThemeState(resolved);
+    }
   };
 
-  const toggleTheme = () => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  const isDark = theme === "dark";
+  const isBlue = theme === "blue";
+  const isLight = theme === "light";
+  const isDarkSurface = theme === "dark";
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, isDark: theme === "dark" }}>
+    <ThemeContext.Provider
+      value={{ theme, setTheme, isDark, isBlue, isLight, isDarkSurface }}
+    >
       {children}
     </ThemeContext.Provider>
   );
