@@ -385,3 +385,19 @@ body {
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
+
+.runner-image {
+  animation:
+    runFloat 2s ease-in-out infinite,
+    breathing 3s ease-in-out infinite;
+}
+
+@keyframes breathing {
+  0%,100% {
+    filter: drop-shadow(0 20px 40px rgba(34,197,94,.25));
+  }
+
+  50% {
+    filter: drop-shadow(0 30px 60px rgba(34,197,94,.45));
+  }
+}

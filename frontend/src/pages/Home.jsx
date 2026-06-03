@@ -19,15 +19,12 @@ import { activities, bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
-// import { useTheme } from "../context/ThemeContext"; // ya jaha se theme aa rhi
-import {useTheme} from "../context/ThemeContext";
+import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
 
-const text = "248 top certified products- to cure your body";
+const text = "248 top certified products - to cure your body";
 
 
 export default function Home() {
-  // const { darkMode } = useTheme();
-  const { isDarkSurface } = useTheme();
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
@@ -191,41 +188,10 @@ export default function Home() {
               </div>
 
               <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
-                <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 blur-3xl" />
-                <div className="absolute inset-x-20 top-12 h-24 bg-white/70 blur-3xl" />
+                <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
+                <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
-            
-                {/* <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  // className="relative z-10 h-[640px] w-full object-contain floaty"
-  className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
->
-  <source src="/videos/meh.mp4" type="video/mp4" />
-</video> */}
-<video
-  autoPlay
-  muted
-  loop
-  playsInline
-  key={isDarkSurface ? "dark" : "light"}
-  className="relative z-10 h-[640px] w-full object-cover rounded-[30px] floaty"
->
-  <source
-    src={isDarkSurface ? "/videos/new.mp4" : "/videos/bo.mp4"}
-    type="video/mp4"
-  />
-</video>
-{/* <img
-  src="/products/bo.png"
-  alt="Body Map"
-  className="relative z-10 h-[40px] w-full object-cover rounded-[30px] floaty"
-/> */}
-
-
-
+                <HeroAnatomicalRunner className="rounded-[30px]" />
 
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
