@@ -192,7 +192,7 @@ export default function Home() {
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
                 {/* <HeroAnatomicalRunner className="rounded-[30px]" /> */}
-                {/* <video
+                <video
   autoPlay
   muted
   loop
@@ -211,15 +211,13 @@ export default function Home() {
 
 >
   <source src="/videos/wpp.webm" type="video/webm" />
-</video> */}
+</video>
 
-<div className="relative flex items-center justify-center">
-  {/* Main Glow */}
+{/* <div className="relative flex items-center justify-center">
   <div className="absolute inset-0 flex items-center justify-center">
     <div className="h-[500px] w-[500px] rounded-full bg-cyan-400/25 blur-[100px] animate-pulse" />
   </div>
 
-  {/* Secondary Glow */}
   <div className="absolute h-[400px] w-[400px] rounded-full bg-blue-500/15 blur-[80px]" />
 
   <video
@@ -242,9 +240,9 @@ export default function Home() {
     <source src="/videos/wpp.webm" type="video/webm" />
   </video>
 
-  {/* Bottom Reflection Glow */}
+  
   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 h-20 w-[55%] rounded-full bg-cyan-400/20 blur-3xl" />
-</div>
+</div> */}
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
                     ["42%", "15%"],
