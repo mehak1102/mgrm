@@ -191,24 +191,70 @@ export default function Home() {
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
-                <HeroAnatomicalRunner className="rounded-[30px]" />
+                {/* <HeroAnatomicalRunner className="rounded-[30px]" /> */}
+                <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="
+  relative z-10
+  h-[640px]
+  w-full
+  object-cover
+  rounded-[30px]
+  brightness-120
+  contrast-110
+  saturate-125
+  drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
+  "
+>
+  <source src="/videos/wpp.webm" type="video/webm" />
+</video>
 
+{/* <div className="relative">
+
+  <div className="absolute -inset-8 rounded-[40px] bg-cyan-400/25 blur-[80px] animate-pulse" />
+
+  <div className="absolute inset-0 rounded-[30px] bg-gradient-to-tr from-cyan-400/10 via-blue-500/10 to-purple-500/10 blur-2xl" />
+
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="
+    relative z-10
+    h-[640px]
+    w-full
+    object-cover
+    rounded-[30px]
+    brightness-110
+    contrast-110
+    saturate-125
+    drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
+    "
+  >
+    <source src="/videos/wpp.webm" type="video/webm" />
+  </video>
+  <div className="pointer-events-none absolute inset-0 rounded-[30px] bg-gradient-to-tr from-white/0 via-white/10 to-white/0" />
+</div> */}
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
-                    ["51%", "13%"],
-                    ["41%", "24%"],
-                    ["58%", "25%"],
-                    ["66%", "36%"],
+                    ["42%", "15%"],
+                    ["45%", "24%"],
+                    ["58%", "28%"],
+                    ["55%", "36%"],
                     ["47%", "38%"],
-                    ["57%", "45%"],
+                    ["53%", "45%"],
                     ["61%", "62%"],
                     ["58%", "84%"],
                     ["43%", "70%"],
                     ["51%", "20%"],
-                    ["54%", "76%"],
-                    ["38%", "31%"],
+                    ["52%", "76%"],
+                    ["41%", "31%"],
                     ["45%", "60%"],
-                    ["64%", "43%"],
+                    ["54%", "55%"],
                     ["49%", "50%"],
                   ];
 
@@ -1433,6 +1479,74 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+
+        <section className="relative overflow-hidden py-24">
+  {/* Background Glow */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
+
+  <div className="container mx-auto px-6">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+      {/* Left Content */}
+      <div>
+        <span className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400">
+          Advanced Human Anatomy
+        </span>
+
+        <h2 className="mt-6 text-5xl font-black leading-tight text-slate-900 dark:text-white">
+          Precision Support
+          <span className="block text-cyan-500">
+            Backed By Human Science
+          </span>
+        </h2>
+
+        <p className="mt-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+          Every MGRM product is designed around real human anatomy,
+          ensuring targeted support, improved mobility and faster recovery.
+          From pain management to rehabilitation, our solutions are built
+          to move naturally with your body.
+        </p>
+
+        <div className="mt-8 flex flex-wrap gap-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
+            <div className="text-3xl font-bold text-cyan-500">30+</div>
+            <div className="text-sm text-slate-500 dark:text-slate-400">
+              Years Experience
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
+            <div className="text-3xl font-bold text-cyan-500">248+</div>
+            <div className="text-sm text-slate-500 dark:text-slate-400">
+              Certified Products
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Video */}
+      <div className="relative">
+        {/* Glow */}
+        <div className="absolute inset-0 rounded-[40px] bg-cyan-500/20 blur-3xl" />
+
+        <div className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            // className="w-full h-full object-cover"
+            className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl hover:scale-[1.02] transition-all duration-700"
+          >
+            <source src="/videos/de.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
         {/* ================= PRINT ADS ================= */}
 <section className="relative max-w-[1500px] mx-auto px-6 mt-24 mb-10 overflow-hidden">
