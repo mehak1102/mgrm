@@ -5,7 +5,7 @@ import { useTheme } from "../../context/ThemeContext";
 const EASE_LUXURY = [0.16, 1, 0.3, 1];
 const BREATH_DURATION = 9;
 
-/** Shared ring behavior — all themes match light */
+/** Per-theme motion & effect levels — light mostly unchanged, dark/blue calmer */
 const RING_CONFIG = {
   rotation: 72,
   particles: 96,

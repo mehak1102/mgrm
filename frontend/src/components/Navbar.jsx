@@ -129,9 +129,10 @@ import { bodyCategories, activities } from "../data/siteData";
 import { trackSearch } from "../utils/recommendationBehavior";
 import Logo3D from "./Logo3D";
 import ThemeSelector from "./ThemeSelector";
-
+import { useTheme } from "../context/ThemeContext";
 // export default function Navbar({ theme, setTheme }) {
 export default function Navbar() {
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const { cartCount, setCartOpen } = useCart();
   const { wishlist } = useWishlist();
@@ -186,7 +187,7 @@ const handleSearch = (e) => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-5">
        {/* <Link to="/" className="flex items-center gap-3 shrink-0">
   <img
-    src="/logo.png"
+    src="products/logoo.png"
     onError={(e) => {
       e.currentTarget.style.display = "none";
     }}
@@ -194,7 +195,41 @@ const handleSearch = (e) => {
       className="h-14 md:h-16 w-auto object-contain hover:scale-105 transition duration-300"
   />
 </Link> */}
-<Logo3D />
+{/* <Link to="/" className="flex items-center shrink-0 h-16">
+  <img
+    src="/products/logooo.png"
+    alt="MGRM Medicare"
+    className="
+      max-h-full
+      w-auto
+      object-contain
+      hover:scale-105
+      transition-transform
+      duration-300
+    "
+  />
+</Link> */}
+<Link to="/" className="flex items-center shrink-0 h-16">
+  <img
+    src={
+      theme === "dark"
+        ? "/products/logooo.png"
+        : theme === "blue"
+        ? "/products/logo-blue.png"
+        : "/products/logo-light.png"
+    }
+    alt="MGRM Medicare"
+    className="
+      max-h-full
+      w-auto
+      object-contain
+      hover:scale-105
+      transition-transform
+      duration-300
+    "
+  />
+</Link>
+{/* <Logo3D /> */}
 
         <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-xl relative">
           <Search className="absolute left-4 top-3.5 text-gray-400 dark:text-zinc-500" size={18} />

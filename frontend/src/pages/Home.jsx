@@ -39,6 +39,7 @@ import {
 } from "../components/motion/PremiumMotion";
 import HomeSmartSizeSection from "../components/home/HomeSmartSizeSection";
 import HomeTestimonialsSection from "../components/home/HomeTestimonialsSection";
+import HomeFeaturedCollectionsSection from "../components/home/HomeFeaturedCollectionsSection";
 
 const text = "248 top certified products - to cure your body";
 
@@ -1173,7 +1174,6 @@ export default function Home() {
 
 
         {/* BEST SELLERS */}
-  
         <section className="relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
 
@@ -1213,6 +1213,9 @@ export default function Home() {
             </div>
           </PremiumReveal>
         </section>
+
+        {/* FEATURED COLLECTIONS */}
+        <HomeFeaturedCollectionsSection />
 
         {/* LOCATE PAIN AREA */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-28">
