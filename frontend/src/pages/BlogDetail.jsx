@@ -1,6 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { blogPosts, getBlogContent } from "../data/blogData";
 import { ArrowLeft, ShoppingBag } from "lucide-react";
+import {
+  SectionHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 export default function BlogDetail() {
   const { slug } = useParams();
@@ -42,8 +46,14 @@ export default function BlogDetail() {
               <p className="font-black tracking-widest text-purple-200">
                 {blog.category}
               </p>
-              <h1 className="text-5xl font-black mt-2">{blog.title}</h1>
-              <p className="text-white/80 mt-3 max-w-2xl">{blog.excerpt}</p>
+              <SectionHeading
+                text={blog.title}
+                as="h1"
+                className="text-5xl font-black mt-2 text-white"
+              />
+              <FadeUpText className="text-white/80 mt-3 max-w-2xl">
+                {blog.excerpt}
+              </FadeUpText>
             </div>
           </div>
 

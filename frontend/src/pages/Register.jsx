@@ -6,6 +6,11 @@ import AnimatedLotus from "../components/AnimatedLotus";
 import ThemeSelector from "../components/ThemeSelector";
 import { useTheme } from "../context/ThemeContext";
 import toast from "react-hot-toast";
+import {
+  SectionLabel,
+  SectionHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 export default function Register() {
   const { theme } = useTheme();
@@ -68,13 +73,17 @@ export default function Register() {
             <img src="/logo.png" alt="MGRM Medicare" className="h-14 object-contain" />
           </Link>
 
-          <p className="text-purple-700 dark:text-cyan-400 font-black tracking-widest text-sm transition-colors duration-300">
+          <SectionLabel className="text-purple-700 dark:text-cyan-400 font-black tracking-widest text-sm transition-colors duration-300">
             CREATE ACCOUNT
-          </p>
-          <h1 className="text-5xl font-black mt-3 text-slate-950 dark:text-zinc-50">Join MGRM</h1>
-          <p className="text-gray-500 dark:text-slate-300 mt-3 transition-colors duration-300">
+          </SectionLabel>
+          <SectionHeading
+            text="Join MGRM"
+            as="h1"
+            className="text-5xl font-black mt-3 text-slate-950 dark:text-zinc-50"
+          />
+          <FadeUpText className="text-gray-500 dark:text-slate-300 mt-3 transition-colors duration-300">
             Create your account for faster checkout and order tracking.
-          </p>
+          </FadeUpText>
 
           <form onSubmit={submit} className="mt-9 space-y-4">
             <div className="relative">

@@ -15,6 +15,7 @@ import {
   Minus,
   Plus,
 } from "lucide-react";
+import { SectionHeading, FadeUpText } from "../components/typography/TypographyMotion";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -97,7 +98,11 @@ export default function ProductDetail() {
           </p>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold text-fg">{product.name}</h1>
+          <SectionHeading
+            text={product.name}
+            as="h1"
+            className="text-3xl font-bold text-fg"
+          />
 
           {/* Rating */}
           <div className="flex items-center gap-2 mt-2">
@@ -189,10 +194,10 @@ export default function ProductDetail() {
 </button>
 
           {/* Description */}
-          <div className="mt-8 text-gray-500 dark:text-zinc-400 leading-7">
+          <FadeUpText className="mt-8 text-gray-500 dark:text-zinc-400 leading-7">
             {product.description ||
               "Premium orthopedic support designed for comfort and recovery."}
-          </div>
+          </FadeUpText>
         </section>
       </div>
 <SmartSizeFinder

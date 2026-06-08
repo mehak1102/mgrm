@@ -3,16 +3,19 @@ import {
   MessageCircle,
   Phone,
   Mail,
-  MapPin,
   Ruler,
   Truck,
   RotateCcw,
   ShieldCheck,
-  Send,
-  CheckCircle2,
 } from "lucide-react";
 import API from "../api";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
+import MGRMBrandRing from "../components/brand/MGRMBrandRing";
+import {
+  SectionLabel,
+  HeroHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 const supportTypes = [
   "Product Help",
@@ -61,6 +64,9 @@ export default function Support() {
 
   return (
     <main className="relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
+      {/* Full-viewport cinematic hero — first thing users see */}
+      <MGRMBrandRing />
+
       <FloatingMedicalBg />
 
       <div className="relative z-10">
@@ -71,17 +77,18 @@ export default function Support() {
 
             {/* LEFT */}
             <div>
-              <p className="text-purple-700 font-black tracking-widest">
+              <SectionLabel className="text-purple-700 font-black tracking-widest">
                 CUSTOMER SUPPORT
-              </p>
+              </SectionLabel>
 
-              <h1 className="text-6xl md:text-8xl font-black mt-4 leading-[0.95]">
-                Need help choosing the right support?
-              </h1>
+              <HeroHeading
+                text="Need help choosing the right support?"
+                className="text-6xl md:text-8xl font-black mt-4 leading-[1.02]"
+              />
 
-              <p className="text-gray-500 dark:text-zinc-400 text-lg mt-6 max-w-2xl">
+              <FadeUpText className="text-gray-500 dark:text-zinc-400 text-lg mt-6 max-w-2xl">
                 Ask us about product selection, sizing, orders, returns or bulk queries.
-              </p>
+              </FadeUpText>
 
               <div className="grid sm:grid-cols-3 gap-4 mt-8">
                 {[

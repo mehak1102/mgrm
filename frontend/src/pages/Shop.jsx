@@ -17,6 +17,10 @@ import {
   trackCategoryClick,
   trackSearch,
 } from "../utils/recommendationBehavior";
+import {
+  SectionHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 const colors = ["Black", "White", "Grey", "Black & Green", "Black & Orange", "Beige", "Silver"];
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
@@ -213,13 +217,19 @@ onClick={() => {
           <section>
             <div className="flex flex-col md:flex-row justify-between gap-5 mb-7">
               <div>
-                <h1 className="text-4xl font-black">
-                  All Products{" "}
-                  <span className="text-fg-muted/80 text-2xl">({filteredProducts.length})</span>
-                </h1>
-                <p className="text-fg-muted mt-2">
+                <div className="flex flex-wrap items-baseline gap-x-2">
+                  <SectionHeading
+                    text="All Products"
+                    as="h1"
+                    className="text-4xl font-black"
+                  />
+                  <span className="text-fg-muted/80 text-2xl font-black">
+                    ({filteredProducts.length})
+                  </span>
+                </div>
+                <FadeUpText className="text-fg-muted mt-2">
                   Explore our wide range of support and care products.
-                </p>
+                </FadeUpText>
               </div>
 
               <div className="flex items-center gap-4">

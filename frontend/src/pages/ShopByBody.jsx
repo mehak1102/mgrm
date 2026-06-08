@@ -14,6 +14,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { bodyCategories } from "../data/siteData";
+import {
+  HeroHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 export default function ShopByBody() {
   const navigate = useNavigate();
@@ -51,18 +55,19 @@ export default function ShopByBody() {
               <Sparkles size={16} /> Find Support By Body Area
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-7xl font-black leading-[0.95] mt-6"
-            >
-              Find the right support exactly where you need it.
-            </motion.h1>
+            <HeroHeading
+              text="Find the right support exactly where you need it."
+              className="text-5xl md:text-7xl font-black leading-[1.02] mt-6 text-white"
+            />
 
-            <p className="text-white/70 text-lg mt-6 max-w-2xl">
+            <FadeUpText
+              animateOnMount
+              delay={0.35}
+              className="text-white/70 text-lg mt-6 max-w-2xl"
+            >
               Explore certified braces, splints and orthopedic aids by pain area,
               recovery need and daily movement.
-            </p>
+            </FadeUpText>
 
             <div className="relative mt-8 max-w-xl">
               <Search className="absolute left-5 top-4 text-slate-400" size={20} />

@@ -6,7 +6,21 @@ import {
   Quote,
   Sparkles,
 } from 'lucide-react';
-import { motion } from "framer-motion";
+import {
+  SectionLabel,
+  CinematicHeading,
+  HeroKineticLine,
+  HeroTitleBlock,
+  ParagraphGroup,
+  AnimatedStat,
+  StaggerReveal,
+  StaggerItem,
+  TimelineReveal,
+  TimelineItem,
+  FadeUpBlock,
+  FadeUpText,
+  FadeUpQuote,
+} from "../components/typography/TypographyMotion";
 
 const productImages = [
   'abdomen.png',
@@ -176,46 +190,6 @@ const famousPeople = [
 ];
 
 
-const WordByWord = ({ text, className = "", gradient = false }) => {
-  const words = text.split(" ");
-
-  return (
-    <div className={`flex flex-wrap justify-center ${className}`}>
-      {words.map((word, index) => (
-  
-        <motion.span
-  key={index}
-  initial={{
-    opacity: 0,
-    y: -120,
-    scale: 0.96,
-    filter: "blur(14px)",
-  }}
-  animate={{
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: "blur(0px)",
-  }}
-  transition={{
-    delay: 2.4,
-    duration: 1.8,
-    ease: [0.16, 1, 0.3, 1],
-  }}
-  className={`
-    mr-4 inline-block will-change-transform
-    ${gradient
-      ? "bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent"
-      : ""}
-  `}
->
-  {word}
-</motion.span>
-      ))}
-    </div>
-  );
-};
-
 const AboutUs = () => {
   return (
     <div className="relative overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300">
@@ -251,90 +225,47 @@ const AboutUs = () => {
               <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
                 <Sparkles className="h-5 w-5 text-cyan-300" />
 
-               {/* <motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  className="text-lg md:text-xl font-semibold text-white tracking-widest text-center"
->
-  <WordByWord text="MGRM Medicare Private Limited" />
-</motion.div> */}
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1 }}
-  className="text-lg md:text-xl font-semibold text-white tracking-widest text-center"
->
-  <WordByWord text="MGRM Medicare Private Limited" />
-</motion.div>
+              <div className="text-lg md:text-xl font-semibold text-white tracking-widest text-center">
+                <HeroKineticLine
+                  text="MGRM Medicare Private Limited"
+                  className="justify-center"
+                  delay={0.1}
+                />
+              </div>
               </div>
 
-              {/* <h1 className="text-5xl font-bold leading-tight text-white md:text-7xl">
-                Revolutionizing
-                <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                  {' '}
-                  Rehabilitation{' '}
-                </span>
-                Since 1994
-              </h1> */}
-          <h1 className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white">
+              <HeroTitleBlock
+                className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white"
+                lines={[
+                  {
+                    text: "Revolutionizing",
+                    className: "justify-center text-[52px] md:text-[88px]",
+                    delay: 0.35,
+                  },
+                  {
+                    text: "Rehabilitation",
+                    className: "justify-center text-[58px] md:text-[98px]",
+                    gradient: true,
+                    delay: 0.55,
+                  },
+                  {
+                    text: "Since 1994",
+                    className:
+                      "justify-center text-[32px] md:text-[52px] tracking-[6px] text-white/85",
+                    delay: 0.75,
+                  },
+                ]}
+              />
 
-<div className="overflow-hidden">
-  <WordByWord
-    text="Revolutionizing"
-    className="justify-center text-[52px] md:text-[88px]"
-  />
-</div>
-
-{/* <div className="overflow-hidden mt-2 flex justify-center">
-  <div className="bg-gradient-to-r from-cyan-300 via-white to-blue-300 bg-clip-text text-transparent">
-    <WordByWord
-      text="Rehabilitation"
-      className="justify-center text-[58px] md:text-[98px]"
-    />
-  </div>
-</div> */}
- <WordByWord
-  text="Rehabilitation"
-  gradient={true}
-  className="text-[58px] md:text-[98px]"
-/>
-
-<div className="overflow-hidden mt-3">
-  <WordByWord
-    text="Since 1994"
-    className="justify-center text-[32px] md:text-[52px] tracking-[6px] text-white/85"
-  />
-</div>
-
-</h1>
-
-              {/* <p className="mt-10 max-w-3xl text-lg leading-9 text-gray-200">
+              <FadeUpText
+                animateOnMount
+                delay={1.1}
+                className="mt-10 mx-auto max-w-3xl text-lg leading-9 text-gray-200"
+              >
                 India’s leading rehabilitation and orthopedic healthcare
                 technology company trusted by doctors, hospitals,
                 defense forces and healthcare institutions nationwide.
-              </p> */}
-              <motion.p
-  initial={{
-    opacity: 0,
-    y: 60,
-    filter: "blur(8px)",
-  }}
-  animate={{
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-  }}
-  transition={{
-    delay: 1.2,
-    duration: 1.2,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="mt-10 max-w-3xl text-lg leading-9 text-gray-200"
->
-  India’s leading rehabilitation and orthopedic healthcare
-  technology company trusted by doctors, hospitals,
-  defense forces and healthcare institutions nationwide.
-</motion.p>
+              </FadeUpText>
             </div>
           </div>
         </div>
@@ -345,9 +276,10 @@ const AboutUs = () => {
         <div className="flex flex-col gap-10 lg:flex-row">
           {/* SIDEBAR */}
           <aside className="top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl lg:sticky transition-colors duration-300 lg:w-[320px]">
-            <h2 className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100">
-              About Us
-            </h2>
+            <CinematicHeading
+              text="About Us"
+              className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
+            />
 
             <div className="space-y-4">
               {sidebarLinks.map((item, index) => (
@@ -373,34 +305,23 @@ const AboutUs = () => {
             >
               <div className="grid lg:grid-cols-2">
                 <div className="p-10 lg:p-14">
-                  <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+                  <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                     Our History
-                  </span>
+                  </SectionLabel>
 
-                  <h2 className="mt-5 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
-                    Transforming Rehabilitation In India
-                  </h2>
+                  <CinematicHeading
+                    text="Transforming Rehabilitation In India"
+                    className="mt-5 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                  />
 
-                  <div className="mt-8 space-y-6 text-[16px] leading-8 text-gray-500 dark:text-zinc-400">
-                    <p>
-                      MGRM Medicare Private Limited was established in
-                      1994 with a vision to revolutionize physical
-                      rehabilitation and orthopedic healthcare in India.
-                    </p>
-
-                    <p>
-                      The company pioneered innovative rehabilitation
-                      products and introduced advanced orthopedic
-                      splints and rehabilitation technologies across
-                      India and South Asia.
-                    </p>
-
-                    <p>
-                      Today, MGRM serves hospitals, defense forces,
-                      institutions, emergency services and millions of
-                      patients with world-class rehabilitation solutions.
-                    </p>
-                  </div>
+                  <ParagraphGroup
+                    className="mt-8 space-y-6 text-[16px] leading-8 text-gray-500 dark:text-zinc-400"
+                    paragraphs={[
+                      "MGRM Medicare Private Limited was established in 1994 with a vision to revolutionize physical rehabilitation and orthopedic healthcare in India.",
+                      "The company pioneered innovative rehabilitation products and introduced advanced orthopedic splints and rehabilitation technologies across India and South Asia.",
+                      "Today, MGRM serves hospitals, defense forces, institutions, emergency services and millions of patients with world-class rehabilitation solutions.",
+                    ]}
+                  />
                 </div>
 
                 <div className="relative min-h-[550px]">
@@ -417,19 +338,23 @@ const AboutUs = () => {
 
             {/* PRODUCT GRID */}
             <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] transition-colors duration-300">
-              <div className="mb-12">
-                <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+              <FadeUpBlock className="mb-12">
+                <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                   Rehabilitation Products
-                </span>
+                </SectionLabel>
 
-                <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
-                  Orthopedic Product Categories
-                </h2>
-              </div>
+                <CinematicHeading
+                  text="Orthopedic Product Categories"
+                  className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                />
+              </FadeUpBlock>
 
-              <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <StaggerReveal
+                className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                stagger={0.08}
+              >
                 {productImages.map((image, index) => (
-                  <div
+                  <StaggerItem
                     key={index}
                     className="group h-[360px] [perspective:1200px]"
                   >
@@ -486,9 +411,9 @@ const AboutUs = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerReveal>
             </section>
 
             {/* ACHIEVEMENTS */}
@@ -496,17 +421,21 @@ const AboutUs = () => {
               id="section-1"
               className="rounded-[40px] bg-gradient-to-br from-[#002B5B] via-[#003a75] to-[#0056a6] p-10 text-white"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
+              <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
                 Achievements
-              </span>
+              </SectionLabel>
 
-              <h2 className="mt-4 text-4xl font-bold">
-                Trusted Across India
-              </h2>
+              <CinematicHeading
+                text="Trusted Across India"
+                className="mt-4 text-4xl font-bold"
+              />
 
-              <div className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-4">
+              <StaggerReveal
+                className="mt-12 grid gap-7 md:grid-cols-2 xl:grid-cols-4"
+                stagger={0.1}
+              >
                 {achievements.map((item, index) => (
-                  <div
+                  <StaggerItem
                     key={index}
                     className="group overflow-hidden rounded-[30px] border border-white/10 bg-white/10 backdrop-blur-xl"
                   >
@@ -527,25 +456,27 @@ const AboutUs = () => {
                         </h3>
                       </div>
                     </div>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerReveal>
 
               {/* Famous People */}
               <div className="mt-20">
-                <h3 className="text-3xl font-bold">
-                  First Citizen to the Common Man
-                </h3>
+                <CinematicHeading
+                  text="First Citizen to the Common Man"
+                  as="h3"
+                  className="text-3xl font-bold"
+                />
 
-                <p className="mt-6 max-w-5xl text-lg leading-9 text-gray-200">
+                <FadeUpText className="mt-6 max-w-5xl text-lg leading-9 text-gray-200">
                   MGRM products have been trusted by renowned leaders,
                   healthcare experts, sports personalities and millions
                   of loyal customers across India.
-                </p>
+                </FadeUpText>
 
-                <div className="mt-10 grid gap-8 md:grid-cols-2">
+                <StaggerReveal className="mt-10 grid gap-8 md:grid-cols-2" stagger={0.12}>
                   {famousPeople.map((item, index) => (
-                    <div
+                    <StaggerItem
                       key={index}
                       className="overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
                     >
@@ -561,16 +492,16 @@ const AboutUs = () => {
                             {item.name}
                           </h4>
 
-                          <p className="mt-5 leading-8 text-gray-200">
+                          <FadeUpText className="mt-5 leading-8 text-gray-200">
                             Recognized personalities and national
                             leaders have trusted MGRM rehabilitation
                             and orthopedic products.
-                          </p>
+                          </FadeUpText>
                         </div>
                       </div>
-                    </div>
+                    </StaggerItem>
                   ))}
-                </div>
+                </StaggerReveal>
               </div>
             </section>
 
@@ -579,17 +510,21 @@ const AboutUs = () => {
               id="section-2"
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                Certifications
-              </span>
+              <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+                Quality Certifications
+              </SectionLabel>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
-                Global Quality Standards
-              </h2>
+              <CinematicHeading
+                text="Global Quality Standards"
+                className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+              />
 
-              <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              <StaggerReveal
+                className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+                stagger={0.08}
+              >
                 {certifications.map((item, index) => (
-                  <div
+                  <StaggerItem
                     key={index}
                     className="group rounded-[30px] border border-blue-100 dark:border-white/10 bg-[#f5fbff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 hover:-translate-y-2 hover:bg-[#002B5B] dark:hover:bg-slate-800"
                   >
@@ -602,9 +537,9 @@ const AboutUs = () => {
                     <h3 className="mt-6 text-2xl font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 transition group-hover:text-white">
                       {item.name}
                     </h3>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerReveal>
             </section>
 
             {/* TIMELINE */}
@@ -612,37 +547,40 @@ const AboutUs = () => {
               id="section-3"
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                MGRM Timeline
-              </span>
+              <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+                MGRM Timelines
+              </SectionLabel>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
-                Journey Through The Years
-              </h2>
+              <CinematicHeading
+                text="Journey Through The Years"
+                className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+              />
 
               <div className="relative mt-24 overflow-x-auto pb-10">
-                <div className="relative flex min-w-[1100px] items-center justify-between">
+                <TimelineReveal className="relative flex min-w-[1100px] items-center justify-between">
                   <div className="absolute left-0 top-1/2 h-[4px] w-full -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-300 to-[#002B5B]" />
 
                   {timeline.map((item, index) => (
-                    <div
+                    <TimelineItem
                       key={index}
+                      index={index}
                       className="group relative z-10 flex w-[180px] flex-col items-center"
                     >
                       <div className="h-7 w-7 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
 
                       <div className="mt-8 rounded-[30px] bg-[#f5fbff] bg-surface-hover p-6 text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-4">
-                        <h3 className="text-3xl font-bold text-[#002B5B] dark:text-zinc-100">
-                          {item.year}
-                        </h3>
+                        <AnimatedStat
+                          value={item.year}
+                          valueClassName="text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
+                        />
 
                         <p className="mt-4 leading-7 text-gray-500 dark:text-zinc-400">
                           {item.title}
                         </p>
                       </div>
-                    </div>
+                    </TimelineItem>
                   ))}
-                </div>
+                </TimelineReveal>
               </div>
             </section>
 
@@ -651,19 +589,20 @@ const AboutUs = () => {
               id="section-4"
               className="rounded-[40px] bg-gradient-to-br from-[#00172e] to-[#003a75] p-10 text-white"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
+              <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
                 Leadership
-              </span>
+              </SectionLabel>
 
-              <h2 className="mt-4 text-4xl font-bold">
-                Visionary Healthcare Leadership
-              </h2>
+              <CinematicHeading
+                text="Visionary Healthcare Leadership"
+                className="mt-4 text-4xl font-bold"
+              />
 
-              <p className="mt-8 max-w-4xl text-lg leading-9 text-gray-200">
+              <FadeUpText className="mt-8 max-w-4xl text-lg leading-9 text-gray-200">
                 MGRM Medicare is led by highly experienced healthcare
                 professionals and rehabilitation experts with decades of
                 expertise in medical technologies, innovation and patient care.
-              </p>
+              </FadeUpText>
             </section>
 
             {/* TESTIMONIALS */}
@@ -671,17 +610,18 @@ const AboutUs = () => {
               id="section-5"
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
-              <span className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+              <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 Testimonials
-              </span>
+              </SectionLabel>
 
-              <h2 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100">
-                What Medical Experts Say
-              </h2>
+              <CinematicHeading
+                text="What Medical Experts Say"
+                className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+              />
 
-              <div className="mt-12 grid gap-8 md:grid-cols-2">
+              <StaggerReveal className="mt-12 grid gap-8 md:grid-cols-2" stagger={0.12}>
                 {testimonials.map((item, index) => (
-                  <div
+                  <StaggerItem
                     key={index}
                     className="overflow-hidden rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition-colors duration-300 hover:-translate-y-3"
                   >
@@ -695,18 +635,19 @@ const AboutUs = () => {
                       <div className="p-8">
                         <Quote className="h-14 w-14 text-cyan-300" />
 
-                        <p className="mt-6 text-lg leading-9 text-gray-500 dark:text-zinc-400">
-                          “{item.text}”
-                        </p>
+                        <FadeUpQuote
+                          text={`“${item.text}”`}
+                          className="mt-6 text-lg leading-9 text-gray-500 dark:text-zinc-400"
+                        />
 
                         <h4 className="mt-7 text-2xl font-bold text-[#002B5B] dark:text-zinc-100">
                           {item.name}
                         </h4>
                       </div>
                     </div>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerReveal>
             </section>
 
             {/* ================= CURE TO CARE SECTION ================= */}
@@ -723,33 +664,29 @@ const AboutUs = () => {
     {/* LEFT CONTENT */}
     <div>
 
-      <p className="text-sm font-bold uppercase tracking-[5px] text-cyan-500">
+      <SectionLabel className="text-sm font-bold uppercase tracking-[5px] text-cyan-500">
         Cure to Care™
-      </p>
+      </SectionLabel>
 
-      <h2 className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-zinc-100">
-        Complete Eye Care &
-        Rehabilitation Solutions
-      </h2>
+      <CinematicHeading
+        text="Complete Eye Care & Rehabilitation Solutions"
+        className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-zinc-100"
+      />
 
-      <p className="mt-8 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400">
-        Under the banner of Cure to Care concept, MGRM Medicare has
-        forayed into the distribution and marketing of the complete
-        range of medicines for eye care and rehabilitation catering
-        to the four-phase treatment protocol of prevention,
-        pre-treatment, treatment and post-treatment patient care.
-      </p>
+      <ParagraphGroup
+        className="mt-8 space-y-6 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400"
+        paragraphs={[
+          "Under the banner of Cure to Care concept, MGRM Medicare has forayed into the distribution and marketing of the complete range of medicines for eye care and rehabilitation catering to the four-phase treatment protocol of prevention, pre-treatment, treatment and post-treatment patient care.",
+          "The products are available in the domestic market and over 50 international markets under the brand name ‘MGRM’.",
+        ]}
+      />
 
-      <p className="mt-6 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400">
-        The products are available in the domestic market and over
-        50 international markets under the brand name ‘MGRM’.
-      </p>
       <div className="mt-8 border-l-4 border-cyan-400 pl-6">
-  <p className="text-2xl font-semibold italic leading-10 text-[#002B5B] dark:text-zinc-100">
-    “MGRM products are designed to support recovery before surgery
-    and accelerate rehabilitation after surgery.”
-  </p>
-</div>
+        <FadeUpQuote
+          text="“MGRM products are designed to support recovery before surgery and accelerate rehabilitation after surgery.”"
+          className="text-2xl font-semibold italic leading-10 text-[#002B5B] dark:text-zinc-100"
+        />
+      </div>
 
       {/* TAGS */}
       <div className="mt-10 flex flex-wrap gap-4">
@@ -791,14 +728,12 @@ const AboutUs = () => {
 
         {/* FLOAT CARD */}
         <div className="absolute bottom-8 left-8 rounded-[25px] border border-white/20 bg-white/10 px-6 py-5 backdrop-blur-xl">
-
-          <h4 className="text-3xl font-black text-white">
-            50+
-          </h4>
-
-          <p className="mt-1 text-sm text-white/80">
-            International Markets
-          </p>
+          <AnimatedStat
+            value="50+"
+            label="International Markets"
+            valueClassName="text-3xl font-black text-white"
+            labelClassName="mt-1 text-sm text-white/80"
+          />
         </div>
       </div>
     </div>
@@ -918,61 +853,55 @@ const AboutUs = () => {
     {/* CONTENT SIDE */}
     <div className="relative z-10 p-10 md:p-16 text-white">
 
-      <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-400/10 px-5 py-2 text-sm font-bold tracking-[0.25em] text-cyan-300 backdrop-blur-xl">
+      <SectionLabel className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-400/10 px-5 py-2 text-sm font-bold tracking-[0.25em] text-cyan-300 backdrop-blur-xl">
         GLOBAL NETWORK
-      </span>
+      </SectionLabel>
 
-      <h2 className="mt-7 text-5xl font-black leading-tight">
-        Partner <br />
-        Program
-      </h2>
+      <CinematicHeading
+        text="Partner Program"
+        className="mt-7 text-5xl font-black leading-tight"
+      />
 
-      <p className="mt-8 text-lg leading-9 text-white/80">
-        Interested in becoming our distribution partner?
-        Do you want us to market your product line?
-        MGRM Medicare Limited has successfully launched
-        partnerships with companies all over the world and
-        we’re always looking to expand our network.
-      </p>
+      <ParagraphGroup
+        className="mt-8 space-y-6 text-lg leading-9 text-white/80"
+        paragraphs={[
+          "Interested in becoming our distribution partner? Do you want us to market your product line? MGRM Medicare Limited has successfully launched partnerships with companies all over the world and we’re always looking to expand our network.",
+        ]}
+      />
 
-      <p className="mt-6 text-lg leading-9 text-cyan-200 font-medium">
+      <FadeUpText className="mt-6 text-lg leading-9 text-cyan-200 font-medium">
         Contact us today to learn more and become a part
         of our growing healthcare ecosystem.
-      </p>
+      </FadeUpText>
 
-      {/* STATS */}
-      <div className="mt-12 grid grid-cols-3 gap-5">
+      <StaggerReveal className="mt-12 grid grid-cols-3 gap-5" stagger={0.12}>
+        <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <AnimatedStat
+            value="50+"
+            label="Global Markets"
+            valueClassName="text-4xl font-black text-cyan-300"
+            labelClassName="mt-2 text-sm text-white/70"
+          />
+        </StaggerItem>
 
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-          <h3 className="text-4xl font-black text-cyan-300">
-            50+
-          </h3>
+        <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <AnimatedStat
+            value="100+"
+            label="Distribution Partners"
+            valueClassName="text-4xl font-black text-cyan-300"
+            labelClassName="mt-2 text-sm text-white/70"
+          />
+        </StaggerItem>
 
-          <p className="mt-2 text-sm text-white/70">
-            Global Markets
-          </p>
-        </div>
-
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-          <h3 className="text-4xl font-black text-cyan-300">
-            100+
-          </h3>
-
-          <p className="mt-2 text-sm text-white/70">
-            Distribution Partners
-          </p>
-        </div>
-
-        <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-          <h3 className="text-4xl font-black text-cyan-300">
-            30+
-          </h3>
-
-          <p className="mt-2 text-sm text-white/70">
-            Years Experience
-          </p>
-        </div>
-      </div>
+        <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <AnimatedStat
+            value="30+"
+            label="Years Experience"
+            valueClassName="text-4xl font-black text-cyan-300"
+            labelClassName="mt-2 text-sm text-white/70"
+          />
+        </StaggerItem>
+      </StaggerReveal>
 
       {/* BUTTONS */}
       {/* <div className="mt-12 flex flex-wrap gap-5">
@@ -1002,28 +931,24 @@ const AboutUs = () => {
     {/* TOP */}
     <div className="max-w-5xl">
 
-      <p className="text-sm font-bold uppercase tracking-[5px] text-cyan-600 text-brand animate-fade-up">
+      <SectionLabel className="text-sm font-bold uppercase tracking-[5px] text-cyan-600 text-brand">
         Medical Equipment and Accessories
-      </p>
+      </SectionLabel>
 
-      {/* <h2 className="mt-5 text-4xl md:text-6xl font-black leading-tight text-[#002B5B] text-slate-900 dark:text-zinc-100 animate-fade-up">
-        Autoclave Cum <br />
-        Shredder Sterilizer
-      </h2> */}
-      <h2 className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-zinc-100">
-  Autoclave Cum <br />
-  Shredder Sterilizer
-</h2>
+      <CinematicHeading
+        text="Autoclave Cum Shredder Sterilizer"
+        className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-zinc-100"
+      />
 
-      <p className="mt-8 max-w-4xl text-lg leading-9 text-gray-500 dark:text-zinc-400 animate-fade-up">
+      <FadeUpText className="mt-8 max-w-4xl text-lg leading-9 text-gray-500 dark:text-zinc-400">
         The Integrated Autoclave with Shredder is designed by our
         experts with rich experience in the medical industry making
         use of leading technology as per the market standards.
-      </p>
+      </FadeUpText>
     </div>
 
     {/* IMAGES */}
-    <div className="mt-16 grid gap-6 md:grid-cols-3">
+    <StaggerReveal className="mt-16 grid gap-6 md:grid-cols-3" stagger={0.1}>
 
       {[
         '/equipments/autoclave-1.jpg',
@@ -1031,9 +956,9 @@ const AboutUs = () => {
         '/equipments/autoclave-3.jpg',
       ].map((img, i) => (
 
-        <div
+        <StaggerItem
           key={i}
-          className="group relative overflow-hidden rounded-[35px] h-[340px] bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.08)] animate-fade-up"
+          className="group relative overflow-hidden rounded-[35px] h-[340px] bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.08)]"
         >
 
           <img
@@ -1049,19 +974,21 @@ const AboutUs = () => {
               Hospital Grade Equipment
             </p>
           </div>
-        </div>
+        </StaggerItem>
       ))}
-    </div>
+    </StaggerReveal>
 
     {/* SPECIFICATIONS */}
-    <div className="mt-20 animate-fade-up " id="section-9">
+    <FadeUpBlock className="mt-20" id="section-9">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
-          Specifications
-        </h3>
+        <CinematicHeading
+          text="Specifications"
+          as="h3"
+          className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
+        />
       </div>
 
       <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
@@ -1122,17 +1049,19 @@ const AboutUs = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </FadeUpBlock>
 
     {/* CONSTRUCTION */}
-    <div className="mt-20 animate-fade-up" id="section-10">
+    <FadeUpBlock className="mt-20" id="section-10">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
-          Construction
-        </h3>
+        <CinematicHeading
+          text="Construction"
+          as="h3"
+          className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
+        />
       </div>
 
       <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
@@ -1187,17 +1116,19 @@ const AboutUs = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </FadeUpBlock>
 
     {/* SHREDDER */}
-    <div className="mt-20 animate-fade-up" id="section-11">
+    <FadeUpBlock className="mt-20" id="section-11">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
-          Integrated Shredder Facility
-        </h3>
+        <CinematicHeading
+          text="Integrated Shredder Facility"
+          as="h3"
+          className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
+        />
       </div>
 
       <div className="mt-10 overflow-hidden rounded-[35px] bg-gradient-to-br from-[#002B5B] via-[#004e96] to-[#0072d4] shadow-[0_25px_80px_rgba(0,91,187,0.35)]">
@@ -1252,17 +1183,19 @@ const AboutUs = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </FadeUpBlock>
 
     {/* ACCESSORIES */}
-    <div className="mt-20 animate-fade-up" id="section-12">
+    <FadeUpBlock className="mt-20" id="section-12">
 
       <div className="flex items-center gap-4">
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
-        <h3 className="text-4xl font-black text-[#002B5B] dark:text-zinc-100">
-          Accessories
-        </h3>
+        <CinematicHeading
+          text="Accessories"
+          as="h3"
+          className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
+        />
       </div>
 
       <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
@@ -1299,10 +1232,10 @@ const AboutUs = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </FadeUpBlock>
 
     {/* TAGS */}
-    <div className="mt-16 flex flex-wrap gap-4 animate-fade-up">
+    <StaggerReveal className="mt-16 flex flex-wrap gap-4" stagger={0.06}>
 
       {[
         'Fully Automatic',
@@ -1315,14 +1248,14 @@ const AboutUs = () => {
         'High Speed Steriliser',
       ].map((tag, i) => (
 
-        <div
+        <StaggerItem
           key={i}
           className="rounded-full border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 px-6 py-3 text-sm font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
           {tag}
-        </div>
+        </StaggerItem>
       ))}
-    </div>
+    </StaggerReveal>
   </div>
 </section>
           </div>

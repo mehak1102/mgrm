@@ -796,6 +796,7 @@
 
 
 import { useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   X,
   Upload,
@@ -805,6 +806,11 @@ import {
   ImagePlus,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import {
+  FadeUpSlow,
+  FadeUpMedium,
+  StaggerContainer,
+} from "./motion/PremiumMotion";
 
 export default function SmartSizeFinder({
   open,
@@ -818,8 +824,7 @@ export default function SmartSizeFinder({
   const [measurement, setMeasurement] = useState("");
   const [loading, setLoading] = useState(false);
   const [recommended, setRecommended] = useState("");
-
-  if (!open) return null;
+  const reduce = useReducedMotion();
 
   const availableSizes = product?.sizes?.length
     ? product.sizes
@@ -1171,9 +1176,25 @@ export default function SmartSizeFinder({
     onClose();
   };
 
+  const FormBlock = reduce ? "div" : motion.div;
+
   return (
-    <div className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-4xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]">
+    <AnimatePresence>
+      {open && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45 }}
+      className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4"
+    >
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
+        animate={reduce ? false : { opacity: 1, y: 0, scale: 1 }}
+        exit={reduce ? false : { opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-4xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]"
+      >
 
         <button
           type="button"
@@ -1188,20 +1209,39 @@ export default function SmartSizeFinder({
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-300/25 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-300/25 rounded-full blur-3xl" />
 
-          <div className="relative z-10">
-            <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.25em] text-[11px]">
+          <FormBlock
+            className="relative z-10"
+            {...(!reduce && {
+              initial: "hidden",
+              animate: "visible",
+              variants: StaggerContainer(0.14, 0.1),
+            })}
+          >
+            <motion.p
+              {...(!reduce && { variants: FadeUpMedium })}
+              className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.25em] text-[11px]"
+            >
               SMART FIT ANALYZER
-            </p>
+            </motion.p>
 
-            <h2 className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight">
+            <motion.h2
+              {...(!reduce && { variants: FadeUpSlow })}
+              className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight"
+            >
               Smart Size Finder
-            </h2>
+            </motion.h2>
 
-            <p className="text-slate-500 dark:text-zinc-400 mt-3 text-sm leading-6">
+            <motion.p
+              {...(!reduce && { variants: FadeUpMedium })}
+              className="text-slate-500 dark:text-zinc-400 mt-3 text-sm leading-6"
+            >
               Upload a clear image and enter your measurement to get the best recommended size.
-            </p>
+            </motion.p>
 
-            <div className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] grid place-items-center">
+            <motion.div
+              {...(!reduce && { variants: FadeUpSlow })}
+              className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] grid place-items-center"
+            >
               {preview ? (
                 <img
                   src={preview}
@@ -1241,7 +1281,7 @@ export default function SmartSizeFinder({
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
 
             <input
               ref={fileRef}
@@ -1251,11 +1291,14 @@ export default function SmartSizeFinder({
               onChange={handleUpload}
             />
 
-            <div className="mt-5 flex gap-3">
+            <motion.div
+              {...(!reduce && { variants: FadeUpMedium })}
+              className="mt-5 flex gap-3"
+            >
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="inline-flex items-center gap-2 bg-slate-950 text-white px-5 py-3 rounded-2xl font-black text-sm hover:scale-105 transition"
+                className="inline-flex items-center gap-2 bg-slate-950 text-white px-5 py-3 rounded-2xl font-black text-sm hover:scale-[1.02] transition duration-500"
               >
                 <Upload size={17} />
                 {preview ? "Change Image" : "Upload Image"}
@@ -1273,17 +1316,31 @@ export default function SmartSizeFinder({
                   Remove
                 </button>
               )}
-            </div>
-          </div>
+            </motion.div>
+          </FormBlock>
         </section>
 
         {/* RIGHT */}
         <section className="p-7 md:p-8 flex flex-col justify-center">
-          <div className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-4 py-2 font-black text-xs">
+          <FormBlock
+            className="flex flex-col"
+            {...(!reduce && {
+              initial: "hidden",
+              animate: "visible",
+              variants: StaggerContainer(0.16, 0.25),
+            })}
+          >
+          <motion.div
+            {...(!reduce && { variants: FadeUpMedium })}
+            className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-4 py-2 font-black text-xs"
+          >
             {product?.name || "MGRM Product"}
-          </div>
+          </motion.div>
 
-          <div className="mt-7 flex items-start gap-4">
+          <motion.div
+            {...(!reduce && { variants: FadeUpSlow })}
+            className="mt-7 flex items-start gap-4"
+          >
             <div className="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-700 grid place-items-center shrink-0">
               <Ruler />
             </div>
@@ -1297,9 +1354,12 @@ export default function SmartSizeFinder({
                 Measure your {fitProfile.label} and enter the value in centimeters.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="mt-7">
+          <motion.div
+            {...(!reduce && { variants: FadeUpMedium })}
+            className="mt-7"
+          >
             <label className="font-black text-slate-900 dark:text-zinc-100 text-sm">
               Measurement in CM
             </label>
@@ -1311,19 +1371,25 @@ export default function SmartSizeFinder({
               placeholder={fitProfile.example}
               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
             />
-          </div>
+          </motion.div>
 
-          <button
+          <motion.button
             type="button"
             onClick={analyze}
             disabled={loading}
-            className="mt-5 h-14 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-700 text-white font-black shadow-xl hover:scale-[1.02] transition disabled:opacity-60"
+            {...(!reduce && { variants: FadeUpSlow })}
+            className="mt-5 h-14 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-700 text-white font-black shadow-xl hover:scale-[1.02] transition duration-500 disabled:opacity-60"
           >
             {loading ? "Analyzing..." : "Analyze Size"}
-          </button>
+          </motion.button>
 
           {recommended && (
-            <div className="mt-6 rounded-[26px] bg-gradient-to-br from-cyan-50 to-purple-50 border border-cyan-100 p-6">
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={reduce ? false : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 rounded-[26px] bg-gradient-to-br from-cyan-50 to-purple-50 border border-cyan-100 p-6"
+            >
               <div className="flex items-center gap-2 text-green-600 font-black text-sm">
                 <CheckCircle2 size={18} />
                 Result ready
@@ -1344,10 +1410,13 @@ export default function SmartSizeFinder({
               >
                 Use This Size
               </button>
-            </div>
+            </motion.div>
           )}
+          </FormBlock>
         </section>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

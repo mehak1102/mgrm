@@ -20,6 +20,25 @@ import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
+import {
+  HeroHeading,
+  SectionHeading,
+  SectionLabel,
+  FadeUpText,
+  cardRevealTransition,
+} from "../components/typography/TypographyMotion";
+import {
+  PremiumWordHeader,
+  PremiumStagger,
+  PremiumStaggerItem,
+  ProductRevealCard,
+  BlogCardEditorial,
+  ScaleReveal,
+  PremiumReveal,
+  FadeUpSlow,
+} from "../components/motion/PremiumMotion";
+import HomeSmartSizeSection from "../components/home/HomeSmartSizeSection";
+import HomeTestimonialsSection from "../components/home/HomeTestimonialsSection";
 
 const text = "248 top certified products - to cure your body";
 
@@ -151,48 +170,53 @@ export default function Home() {
       ))}
     </motion.h1>
 
-            <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-12">
-              <div className="space-y-4">
+            <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-14 mb-2">
+              <SectionLabel className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
+                TOP CATEGORIES
+              </SectionLabel>
+            </PremiumReveal>
+
+            <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-6">
+              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.2}>
                 {bodyCategories.slice(0, 5).map((cat, index) => (
-                  <motion.button
-                    key={cat.name}
-                    initial={{ opacity: 0, x: -35 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.08 }}
-                    onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                    className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-300"
-                  >
-                    <span className="text-3xl font-light" style={{ color: cat.color }}>
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <div
-                      className="w-16 h-16 rounded-2xl grid place-items-center"
-                      style={{ background: `${cat.color}22` }}
+                  <PremiumStaggerItem key={cat.name}>
+                    <button
+                      type="button"
+                      onClick={() => goCategory(cat.query || cat.category || cat.name)}
+                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
                     >
-                      <img
-                        src={cat.image}
-                        onError={(e) => {
-                          e.currentTarget.src = "/products/knee.png";
-                        }}
-                        className="w-14 h-14 object-cover rounded-xl"
-                      />
-                    </div>
+                      <span className="text-3xl font-light" style={{ color: cat.color }}>
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
 
-                    <div>
-                      <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
-                    </div>
-                  </motion.button>
+                      <div
+                        className="w-16 h-16 rounded-2xl grid place-items-center"
+                        style={{ background: `${cat.color}22` }}
+                      >
+                        <img
+                          src={cat.image}
+                          onError={(e) => {
+                            e.currentTarget.src = "/products/knee.png";
+                          }}
+                          className="w-14 h-14 object-cover rounded-xl"
+                        />
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
+                        <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                      </div>
+                    </button>
+                  </PremiumStaggerItem>
                 ))}
-              </div>
+              </PremiumStagger>
 
               <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
-                {/* <HeroAnatomicalRunner className="rounded-[30px]" /> */}
-                <video
+                <HeroAnatomicalRunner className="rounded-[30px]" />
+{/* <video
   autoPlay
   muted
   loop
@@ -203,7 +227,7 @@ export default function Home() {
   w-full
   object-cover
   rounded-[30px]
-  brightness-120
+  brightness-110
   contrast-110
   saturate-125
   drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
@@ -211,7 +235,7 @@ export default function Home() {
 
 >
   <source src="/videos/wpp.webm" type="video/webm" />
-</video>
+</video> */}
 
 {/* <div className="relative flex items-center justify-center">
   <div className="absolute inset-0 flex items-center justify-center">
@@ -294,65 +318,63 @@ export default function Home() {
                 })}
               </div>
 
-              <div className="space-y-4">
+              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.35}>
                 {bodyCategories.slice(5, 10).map((cat, i) => {
                   const index = i + 5;
 
                   return (
-                    <motion.button
-                      key={cat.name}
-                      initial={{ opacity: 0, x: 35 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.08 }}
-                      onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-300"
-                    >
-                      <span className="text-3xl font-light" style={{ color: cat.color }}>
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <div
-                        className="w-16 h-16 rounded-2xl grid place-items-center"
-                        style={{ background: `${cat.color}22` }}
+                    <PremiumStaggerItem key={cat.name}>
+                      <button
+                        type="button"
+                        onClick={() => goCategory(cat.query || cat.category || cat.name)}
+                        className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
                       >
-                        <img
-                          src={cat.image}
-                          onError={(e) => {
-                            e.currentTarget.src = "/products/knee.png";
-                          }}
-                          className="w-14 h-14 object-cover rounded-xl"
-                        />
-                      </div>
+                        <span className="text-3xl font-light" style={{ color: cat.color }}>
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
 
-                      <div>
-                        <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                        <p className="text-sm text-gray-500 text-gray-500 dark:text-zinc-400">{cat.count} products</p>
-                      </div>
-                    </motion.button>
+                        <div
+                          className="w-16 h-16 rounded-2xl grid place-items-center"
+                          style={{ background: `${cat.color}22` }}
+                        >
+                          <img
+                            src={cat.image}
+                            onError={(e) => {
+                              e.currentTarget.src = "/products/knee.png";
+                            }}
+                            className="w-14 h-14 object-cover rounded-xl"
+                          />
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
+                          <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                        </div>
+                      </button>
+                    </PremiumStaggerItem>
                   );
                 })}
-              </div>
+              </PremiumStagger>
             </div>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <PremiumStagger className="mt-10 flex flex-wrap justify-center gap-3" stagger={0.1} delay={0.5}>
               {bodyCategories.slice(10).map((cat, i) => {
                 const index = i + 10;
 
                 return (
-                  <motion.button
-                    key={cat.name}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.07 }}
-                    onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                    className="rounded-full px-6 py-3 font-bold shadow-md hover:scale-105 transition bg-white/80 backdrop-blur border"
-                    style={{ borderColor: `${cat.color}66`, color: cat.color }}
-                  >
-                    {String(index + 1).padStart(2, "0")} &nbsp; {cat.name}
-                  </motion.button>
+                  <PremiumStaggerItem key={cat.name}>
+                    <button
+                      type="button"
+                      onClick={() => goCategory(cat.query || cat.category || cat.name)}
+                      className="rounded-full px-6 py-3 font-bold shadow-md hover:scale-105 transition duration-500 bg-white/80 backdrop-blur border"
+                      style={{ borderColor: `${cat.color}66`, color: cat.color }}
+                    >
+                      {String(index + 1).padStart(2, "0")} &nbsp; {cat.name}
+                    </button>
+                  </PremiumStaggerItem>
                 );
               })}
-            </div>
+            </PremiumStagger>
           </div>
         </section>
 
@@ -360,22 +382,21 @@ export default function Home() {
 
         {/* FEATURES */}
         <section className="max-w-[1500px] mx-auto px-6 py-28">
-          <div className="grid md:grid-cols-4 gap-5">
+          <PremiumStagger className="grid md:grid-cols-4 gap-5" stagger={0.12}>
             {[
               ["Certified Products", ShieldCheck],
               ["Free Shipping", Truck],
               ["Easy Returns", RotateCcw],
               ["Original MGRM", BadgeCheck],
-            ].map(([text, Icon]) => (
-              <div
-                key={text}
-                className="card rounded-3xl p-6 flex items-center gap-4 hover:-translate-y-1 transition"
-              >
-                <Icon className="text-cyan-600" />
-                <b>{text}</b>
-              </div>
+            ].map(([label, Icon]) => (
+              <PremiumStaggerItem key={label}>
+                <div className="card rounded-3xl p-6 flex items-center gap-4 hover:-translate-y-1 transition duration-500">
+                  <Icon className="text-cyan-600" />
+                  <b>{label}</b>
+                </div>
+              </PremiumStaggerItem>
             ))}
-          </div>
+          </PremiumStagger>
         </section>
 
 
@@ -395,9 +416,7 @@ export default function Home() {
           return (
             <motion.div
               key={`${item.title}-${i}`}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: (i % certifications.length) * 0.08 }}
+              {...cardRevealTransition(i % certifications.length)}
               className="w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
             >
 
@@ -434,19 +453,20 @@ export default function Home() {
       <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
 
       <div className="relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
-        <p className="text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
+        <SectionLabel className="text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
           TRUST & SAFETY
-        </p>
+        </SectionLabel>
 
-        <h2 className="text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100">
-          Expect The <br /> Best
-        </h2>
+        <SectionHeading
+          text="Expect The Best"
+          className="text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
+        />
 
-        <p className="mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
+        <FadeUpText className="mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
           MGRM’s strong focus on quality ensures every orthopedic and
           recovery product meets internationally recognized healthcare
           standards for comfort, durability and safety.
-        </p>
+        </FadeUpText>
 
         <div className="mt-8 grid grid-cols-2 gap-4">
           {[
@@ -515,75 +535,35 @@ export default function Home() {
         {/* LEFT */}
         <div>
 
-          {/* ATTENTION */}
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-              className="
-                text-[58px]
-                font-light
-                tracking-wide
-                text-red-500
-                md:text-6xl
-              "
-            >
-              Attention
-            </motion.h2>
-          </div>
+          <SectionHeading
+            text="Attention"
+            as="h2"
+            className="text-[58px] font-light tracking-wide text-red-500 md:text-6xl"
+          />
 
-          {/* CARDIOLOGISTS */}
-          <motion.h3
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 1 }}
-            viewport={{ once: true }}
-            className="
-              mt-2
-              text-4xl
-              font-light
+          <SectionHeading
+            text="Cardiologists"
+            as="h3"
+            delay={0.15}
+            className="mt-2 text-4xl font-light text-slate-900 dark:text-zinc-100 md:text-6xl"
+          />
 
-              text-slate-900
-              dark:text-zinc-100
-
-              md:text-6xl
-            "
-          >
-            Cardiologists
-          </motion.h3>
-
-          {/* TEXT */}
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            viewport={{ once: true }}
-            className="
-              mt-8
-              max-w-xl
-              text-base
-              leading-8
-
-              text-slate-600
-              dark:text-zinc-400
-
-              md:text-lg
-            "
+          <FadeUpText
+            delay={0.25}
+            className="mt-8 max-w-xl text-base leading-8 text-slate-600 dark:text-zinc-400 md:text-lg"
           >
             248 world-class certified products designed for
             relief, recovery and rehabilitation with trusted
             orthopedic and post-surgical support solutions.
-          </motion.p>
+          </FadeUpText>
 
-          {/* RED LINE */}
           <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: '160px' }}
-            transition={{ delay: 1, duration: 1 }}
-            viewport={{ once: true }}
-            className="mt-7 h-[3px] rounded-full bg-red-500"
+            initial={{ scaleX: 0, opacity: 0 }}
+            whileInView={{ scaleX: 1, opacity: 1 }}
+            transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.25 }}
+            style={{ transformOrigin: "left center" }}
+            className="mt-7 h-[3px] w-[160px] rounded-full bg-red-500"
           />
         </div>
 
@@ -1198,16 +1178,15 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
 
           <div className="relative flex justify-between items-end mb-10">
-            <div>
-              <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest">TOP CATEGORIES</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Best Sellers</h2>
-              <p className="text-gray-500 dark:text-zinc-400 mt-3">
-                Most trusted support categories for daily recovery.
-              </p>
-            </div>
+            <PremiumWordHeader
+              label="BEST SELLERS"
+              title="Most Trusted Supports"
+              description="Most trusted support categories for daily recovery."
+              style="slideLeft"
+            />
           </div>
 
-          <div className="relative overflow-hidden">
+          <PremiumReveal variant={ScaleReveal} className="relative overflow-hidden">
             <div className="flex gap-10 w-max marquee py-4">
               {[...bodyCategories, ...bodyCategories].map((cat, i) => (
                 <button
@@ -1232,7 +1211,7 @@ export default function Home() {
                 </button>
               ))}
             </div>
-          </div>
+          </PremiumReveal>
         </section>
 
         {/* LOCATE PAIN AREA */}
@@ -1356,17 +1335,13 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
-            <div>
-              <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm">
-                {strategy.startsWith("behavioral") ? "PERSONALIZED FOR YOU" : "TRENDING PICKS"}
-              </p>
-              <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">
-                Recommended Supports
-              </h2>
-              <p className="text-gray-500 dark:text-zinc-400 mt-3 max-w-xl">
-                Dynamic recommendations based on your search, views, categories and cart activity.
-              </p>
-            </div>
+            <PremiumWordHeader
+              label={strategy.startsWith("behavioral") ? "PERSONALIZED FOR YOU" : "TRENDING PICKS"}
+              title="Recommended Supports"
+              description="Dynamic recommendations based on your search, views, categories and cart activity."
+              style="slideRight"
+              titleClassName="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100"
+            />
 
             <div className="flex gap-3">
               <button
@@ -1407,20 +1382,26 @@ export default function Home() {
             </div>
           ) : (
             <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-7 px-2 sm:px-4 pb-2">
-              {products.slice(productStart, productStart + 4).map((p) => (
-                <ProductCard key={p._id} product={p} />
+              {products.slice(productStart, productStart + 4).map((p, i) => (
+                <ProductRevealCard key={p._id} index={i}>
+                  <ProductCard product={p} />
+                </ProductRevealCard>
               ))}
             </div>
           )}
         </section>
 
+        <HomeSmartSizeSection />
+        <HomeTestimonialsSection />
+
         {/* BLOGS */}
         <section className="max-w-7xl mx-auto px-5 py-28">
           <div className="flex justify-between items-end mb-10">
-            <div>
-              <p className="text-cyan-600 font-black tracking-widest">LEARN & RECOVER</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Health Blogs & Guides</h2>
-            </div>
+            <PremiumWordHeader
+              label="LEARN & RECOVER"
+              title="Health Blogs & Guides"
+              style="fadeUp"
+            />
 
             <div className="flex gap-3">
               <button
@@ -1445,41 +1426,8 @@ export default function Home() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
-           
-               {blogPosts.slice(blogStart, blogStart + 4).map((blog, index) => (
-              <motion.article
-                key={`${blog.title}-${index}`}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.08 }}
-                className="group bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 hover:bg-cyan-50 hover:bg-gray-50 dark:hover:bg-zinc-800 transition duration-500"
-              >
-                <div className="h-56 overflow-hidden">
-                  <img
-                    src={blog.image}
-                    onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <span className="text-cyan-600 font-black text-sm">
-                    {blog.tag || blog.category || "Guide"}
-                  </span>
-                  <h3 className="text-xl font-black mt-3 group-hover:text-cyan-600 transition">
-                    {blog.title}
-                  </h3>
-                  <p className="text-gray-500 dark:text-zinc-400 mt-3 line-clamp-2">
-                    Learn how to choose, wear and care for your support product.
-                  </p>
-<Link
-  to={`/blogs/${blog.slug}`}
-  className="mt-5 inline-block font-black text-cyan-600"
->
-  Read guide →
-</Link>
-                </div>
-              </motion.article>
+            {blogPosts.slice(blogStart, blogStart + 4).map((blog, index) => (
+              <BlogCardEditorial key={`${blog.slug}-${index}`} blog={blog} index={index} />
             ))}
           </div>
         </section>
