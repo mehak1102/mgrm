@@ -15,7 +15,7 @@ import { useCart } from "../context/CartContext";
 import { useHomeRecommendations } from "../hooks/useRecommendations";
 import { trackCategoryClick } from "../utils/recommendationBehavior";
 
-import { activities, bodyCategories } from "../data/siteData";
+import { bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
 import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
@@ -40,6 +40,7 @@ import {
 import HomeSmartSizeSection from "../components/home/HomeSmartSizeSection";
 import HomeTestimonialsSection from "../components/home/HomeTestimonialsSection";
 import HomeFeaturedCollectionsSection from "../components/home/HomeFeaturedCollectionsSection";
+import HomeShopByActivitySection from "../components/home/HomeShopByActivitySection";
 
 const text = "248 top certified products - to cure your body";
 
@@ -1290,48 +1291,7 @@ export default function Home() {
         </section>
 
         {/* SHOP BY ACTIVITY */}
-        <section className="max-w-[1500px] mx-auto px-6 py-28">
-          <div className="flex justify-between items-end mb-10">
-            <div>
-              <p className="text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
-              <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Shop By Activity</h2>
-            </div>
-
-            <Link
-              to="/shop-by-activity"
-              className="hidden md:block bg-card shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
-            >
-              View All →
-            </Link>
-          </div>
-
-          <div className="activity-mask overflow-hidden relative">
-            <div className="activity-track flex gap-8 w-max marquee-activity py-8 snap-x snap-mandatory">
-              {[...activities, ...activities].map((item, index) => (
-                <motion.button
-                  key={`${item.name}-${index}`}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (index % activities.length) * 0.04 }}
-                  onClick={() =>
-                    navigate(`/shop-by-activity?activity=${encodeURIComponent(item.name)}`)
-                  }
-                  className="activity-card relative h-72 w-[280px] shrink-0 snap-center rounded-[32px] overflow-hidden group shadow-[0_30px_90px_rgba(15,23,42,0.16)]"
-                >
-                  <img
-                    src={item.image}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-
-                  <span className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
-                    {item.name}
-                  </span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </section>
+        <HomeShopByActivitySection />
 
         {/* FEATURED PRODUCTS */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
