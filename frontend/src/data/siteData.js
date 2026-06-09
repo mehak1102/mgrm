@@ -18,7 +18,7 @@ export const mgrmCategories = [
 
 export const bodyCategories = mgrmCategories;
 
-export const activities = [
+export const activitiess = [
   { name: "Aerobics", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=700&q=80" },
   { name: "Athletics", image: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=700&q=80" },
   { name: "Badminton", image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=700&q=80" },
@@ -35,6 +35,25 @@ export const activities = [
   { name: "Yoga", image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80" },
   { name: "Sleep", image: "https://plus.unsplash.com/premium_photo-1661397087554-2774b7e7332f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { name: "Office", image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80" },
+];
+
+export const activities = [
+  { name: "Aerobics", video: "/shop/aerobics.mp4" },
+  { name: "Athletics", video: "/shop/athletics.mp4" },
+  { name: "Badminton", video: "/shop/badminton.mp4" },
+  { name: "Basketball", video: "/shop/basketball.mp4" },
+  { name: "Cricket", video: "/shop/cricket.mp4" },
+  { name: "Cycling", video: "/shop/cycling.mp4" },
+  { name: "Football", video: "/shop/football.mp4" },
+  { name: "Golf", video: "/shop/golf.mp4" },
+  { name: "Gym", video: "/shop/gym.mp4" },
+  { name: "Running", video: "/shop/running.mp4" },
+  { name: "Tennis", video: "/shop/tennis.mp4" },
+  { name: "Volleyball", video: "/shop/volleyball.mp4" },
+  { name: "Walking", video: "/shop/walking.mp4" },
+  { name: "Yoga", video: "/shop/yoga.mp4" },
+  { name: "Sleep", video: "/shop/sleep.mp4" },
+  { name: "Office", video: "/shop/office.mp4" },
 ];
 
 export const blogs = [

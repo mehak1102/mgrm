@@ -40,11 +40,11 @@ export default function HomeShopByActivitySection() {
         `/products?activity=${encodeURIComponent(activityName)}`,
         { signal: controller.signal }
       );
-      const apiProducts = (res.data.products || []).slice(0, 2).map((p) => normalizeProduct(p, "/products/knee.png"));
+      const apiProducts = (res.data.products || []).slice(0, 3).map((p) => normalizeProduct(p, "/products/knee.png"));
       const merged =
-        apiProducts.length >= 1
+        apiProducts.length >= 2
           ? apiProducts
-          : getActivityFallbackProducts(activityName, 2).map((p) => ({
+          : getActivityFallbackProducts(activityName, 3).map((p) => ({
               ...p,
               image: p.image || "/products/knee.png",
             }));
@@ -53,7 +53,7 @@ export default function HomeShopByActivitySection() {
       setProductMap((prev) => ({ ...prev, [activityName]: merged }));
     } catch (err) {
       if (err?.name === "CanceledError" || err?.code === "ERR_CANCELED") return;
-      const fallback = getActivityFallbackProducts(activityName, 2);
+      const fallback = getActivityFallbackProducts(activityName, 3);
       cacheRef.current[activityName] = fallback;
       setProductMap((prev) => ({ ...prev, [activityName]: fallback }));
     }
@@ -123,11 +123,22 @@ export default function HomeShopByActivitySection() {
                 }
                 className="activity-card relative h-72 w-[280px] shrink-0 rounded-[32px] overflow-hidden group shadow-[0_30px_90px_rgba(15,23,42,0.16)]"
               >
-                <img
+                {/* <img
                   src={item.image}
                   alt=""
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                />
+                /> */}
+                <video
+  src={item.video}
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+>
+  Your browser does not support the video tag.
+</video>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
                 <span className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">

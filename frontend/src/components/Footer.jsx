@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTheme } from "../context/ThemeContext";
 
 const PAYMENT_LOGOS = [
-  { name: "Mastercard", src: "/products/mastercard.png" },
-  { name: "Visa", src: "/products/visa.png" },
   { name: "UPI", src: "/products/upi.png" },
   { name: "RuPay", src: "/products/rupay.png" },
   { name: "Net Banking", src: "/products/netbanking.png" },
+  { name: "Mastercard", src: "/products/mastercard.png" },
+  { name: "Visa", src: "/products/visa.png" },
 ];
+
+const PAYMENT_STAGGER = 0.1;
+const PAYMENT_REVEAL = 0.5;
+const PAYMENT_EASE = [0, 0, 0.2, 1];
 
 const QUICK_LINKS = [
   { label: "Home", to: "/" },
@@ -88,14 +92,41 @@ function surfaceCardClass(theme) {
 
 function paymentCardClass(theme) {
   const base =
-    "flex h-[70px] min-w-[92px] shrink-0 items-center justify-center rounded-2xl border px-4 transition-all duration-300";
+    "group/pay flex h-[76px] w-[108px] shrink-0 items-center justify-center rounded-2xl border px-3 transition-[box-shadow,border-color] duration-300 ease-out";
   if (theme === "dark") {
-    return `${base} border-white/10 bg-white/5 backdrop-blur-xl shadow-md hover:shadow-[0_0_20px_rgba(34,211,238,0.25)]`;
+    return `${base} border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.28)] hover:border-white/18 hover:shadow-[0_14px_32px_rgba(0,0,0,0.35),0_0_24px_rgba(34,211,238,0.14)]`;
   }
   if (theme === "blue") {
-    return `${base} border-[var(--border-color)] bg-white/60 backdrop-blur-sm shadow-md hover:shadow-[0_0_20px_rgba(0,183,255,0.22)]`;
+    return `${base} border-[var(--border-color)] bg-white/65 backdrop-blur-sm shadow-[0_8px_24px_rgba(2,132,199,0.08)] hover:border-[var(--accent-primary)]/30 hover:shadow-[0_14px_32px_rgba(2,132,199,0.12),0_0_22px_rgba(0,183,255,0.12)]`;
   }
-  return `${base} border-edge bg-card shadow-md hover:shadow-[0_6px_20px_rgba(15,23,42,0.1)]`;
+  return `${base} border-edge bg-card shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:border-[color-mix(in_srgb,var(--accent-primary)_25%,var(--border-color))] hover:shadow-[0_14px_32px_rgba(15,23,42,0.1),0_0_22px_rgba(34,211,238,0.1)]`;
+}
+
+function PaymentMethodCard({ logo, index, theme, reduce }) {
+  const cardClass = paymentCardClass(theme);
+
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 18 }}
+      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-48px" }}
+      transition={{
+        duration: PAYMENT_REVEAL,
+        ease: PAYMENT_EASE,
+        delay: index * PAYMENT_STAGGER,
+      }}
+      whileHover={reduce ? undefined : { y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
+      className={cardClass}
+      title={logo.name}
+    >
+      <img
+        src={logo.src}
+        alt={logo.name}
+        className="h-9 w-auto max-w-[4.5rem] object-contain transition-transform duration-300 ease-out group-hover/pay:scale-[1.03]"
+        loading="lazy"
+      />
+    </motion.div>
+  );
 }
 
 function socialBtnClass(theme) {
@@ -123,9 +154,9 @@ function FooterLink({ to, children, className = "" }) {
 
 export default function Footer() {
   const { theme } = useTheme();
+  const reduce = useReducedMotion();
   const [email, setEmail] = useState("");
   const surfaceCard = surfaceCardClass(theme);
-  const paymentCard = paymentCardClass(theme);
   const socialBtn = socialBtnClass(theme);
 
   const handleSubscribe = (e) => {
@@ -331,27 +362,33 @@ export default function Footer() {
         </section>
 
         {/* Payment methods + bottom bar */}
-        <div className="border-t border-edge pt-6 pb-5 sm:pb-6">
-          <div
-            className="flex flex-wrap items-center justify-center gap-4 md:gap-5 mb-6"
-            aria-label="Accepted payment methods"
-          >
-            {PAYMENT_LOGOS.map((logo) => (
-              <motion.div
-                key={logo.name}
-                whileHover={{ scale: 1.06 }}
-                transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                className={paymentCard}
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="h-10 w-auto max-w-[3.5rem] object-contain"
-                  loading="lazy"
+        <div className="border-t border-edge pt-8 pb-5 sm:pb-6">
+          <section aria-labelledby="footer-payment-heading" className="mb-8">
+            <motion.h3
+              id="footer-payment-heading"
+              initial={reduce ? false : { opacity: 0, y: 14 }}
+              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-48px" }}
+              transition={{ duration: PAYMENT_REVEAL, ease: PAYMENT_EASE }}
+              className="text-center text-sm font-black uppercase tracking-[0.2em] text-brand"
+            >
+              Secure Payment Methods
+            </motion.h3>
+            <div
+              className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+              aria-label="Accepted payment methods"
+            >
+              {PAYMENT_LOGOS.map((logo, index) => (
+                <PaymentMethodCard
+                  key={logo.name}
+                  logo={logo}
+                  index={index}
+                  theme={theme}
+                  reduce={reduce}
                 />
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </section>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-fg-muted text-center sm:text-left">
