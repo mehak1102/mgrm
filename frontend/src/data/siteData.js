@@ -38,22 +38,22 @@ export const activitiess = [
 ];
 
 export const activities = [
-  { name: "Aerobics", video: "/shop/aerobics2.mp4" },
-  { name: "Athletics", video: "/shop/athletics2.mp4" },
-  { name: "Badminton", video: "/shop/badminton2.mp4" },
-  { name: "Basketball", video: "/shop/basketball2.mp4" },
-  { name: "Cricket", video: "/shop/cricket2.mp4" },
-  { name: "Cycling", video: "/shop/cycling2.mp4" },
-  { name: "Football", video: "/shop/football2.mp4" },
-  { name: "Golf", video: "/shop/golf2.mp4" },
-  { name: "Gym", video: "/shop/gym2.mp4" },
-  { name: "Running", video: "/shop/running2.mp4" },
-  { name: "Tennis", video: "/shop/tennis2.mp4" },
-  { name: "Volleyball", video: "/shop/volleyball2.mp4" },
-  { name: "Walking", video: "/shop/walking2.mp4" },
-  { name: "Yoga", video: "/shop/yoga2.mp4" },
-  { name: "Sleep", video: "/shop/sleep2.mp4" },
-  { name: "Office", video: "/shop/office2.mp4" },
+  { name: "Aerobics", video: "/shop/aerobics3.mp4" },
+  { name: "Athletics", video: "/shop/athletics3.mp4" },
+  { name: "Badminton", video: "/shop/badminton3.mp4" },
+  { name: "Basketball", video: "/shop/basketball3.mp4" },
+  { name: "Cricket", video: "/shop/cricket3.mp4" },
+  { name: "Cycling", video: "/shop/cycling3.mp4" },
+  { name: "Football", video: "/shop/football3.mp4" },
+  { name: "Golf", video: "/shop/golf3.mp4" },
+  { name: "Gym", video: "/shop/gym3.mp4" },
+  { name: "Running", video: "/shop/running3.mp4" },
+  { name: "Tennis", video: "/shop/tennis3.mp4" },
+  { name: "Volleyball", video: "/shop/volleyball3.mp4" },
+  { name: "Walking", video: "/shop/walking3.mp4" },
+  { name: "Yoga", video: "/shop/yoga3.mp4" },
+  { name: "Sleep", video: "/shop/sleep3.mp4" },
+  { name: "Office", video: "/shop/office3.mp4" },
 ];
 
 export const blogs = [
