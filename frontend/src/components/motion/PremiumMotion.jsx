@@ -279,23 +279,34 @@ export function TestimonialCard({ item, index = 0 }) {
 
 export function BlogCardEditorial({ blog, index = 0 }) {
   const enabled = usePremiumMotion();
+  const isBodyPart = blog.type === "bodyPart";
+  const coverSrc = blog.coverImage || blog.image;
 
   const cardInner = (
     <>
-      <div className="h-44 overflow-hidden bg-slate-100 bg-surface-hover">
+      <div className="h-44 overflow-hidden bg-slate-100 bg-surface-hover relative">
+        {isBodyPart && blog.color && (
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[1]"
+            style={{
+              background: `radial-gradient(ellipse at 50% 100%, ${blog.color}22 0%, transparent 70%)`,
+            }}
+          />
+        )}
         {enabled ? (
           <motion.img
             variants={ScaleReveal}
-            src={blog.image}
+            src={coverSrc}
             onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-            className="w-full h-full object-cover transition duration-[1.2s] ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.03]"
             alt={blog.title}
           />
         ) : (
           <img
-            src={blog.image}
+            src={coverSrc}
             onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-            className="w-full h-full object-cover transition duration-[1.2s] ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.03]"
             alt={blog.title}
           />
         )}
@@ -317,10 +328,18 @@ export function BlogCardEditorial({ blog, index = 0 }) {
             </motion.h3>
             <motion.p
               variants={FadeUpMedium}
-              className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-2"
+              className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed"
             >
               {blog.excerpt}
             </motion.p>
+            {blog.readTime && (
+              <motion.p
+                variants={FadeUpMedium}
+                className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2"
+              >
+                {blog.readTime} min read
+              </motion.p>
+            )}
             <motion.span
               variants={FadeUpMedium}
               className="inline-flex mt-5 font-black text-sm text-purple-700"
@@ -336,9 +355,14 @@ export function BlogCardEditorial({ blog, index = 0 }) {
             <h3 className="font-black mt-2 text-lg leading-tight group-hover:text-purple-700 transition">
               {blog.title}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-2">
+            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed">
               {blog.excerpt}
             </p>
+            {blog.readTime && (
+              <p className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2">
+                {blog.readTime} min read
+              </p>
+            )}
             <span className="inline-flex mt-5 font-black text-sm text-purple-700">
               Read article →
             </span>
@@ -348,11 +372,27 @@ export function BlogCardEditorial({ blog, index = 0 }) {
     </>
   );
 
+  const hoverShadow = isBodyPart
+    ? "hover:shadow-[0_28px_80px_rgba(15,23,42,0.14)]"
+    : "hover:shadow-[0_28px_80px_rgba(15,23,42,0.13),0_0_36px_rgba(147,51,234,0.1)]";
+
   const card = (
     <Link
       to={`/blogs/${blog.slug}`}
-      className="group block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-2 hover:shadow-[0_28px_80px_rgba(15,23,42,0.13)] transition duration-500"
+      className={`group relative block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 ${hoverShadow} transition duration-500`}
+      style={
+        isBodyPart && blog.color
+          ? { "--body-glow": blog.color }
+          : undefined
+      }
     >
+      {isBodyPart && blog.color && (
+        <div
+          aria-hidden
+          className="absolute -inset-px rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{ boxShadow: `0 0 32px ${blog.color}30` }}
+        />
+      )}
       {cardInner}
     </Link>
   );
