@@ -23,22 +23,22 @@ import {
 } from "../components/typography/TypographyMotion";
 
 const productImages = [
-  'abdomen.png',
-  'ankle.png',
-  'arm.png',
-  'back.png',
-  'calf.png',
-  'collar.png',
-  'elbow.png',
-  'finger.png',
-  'knee.png',
-  'leg.png',
-  'neck.png',
-  'orth.png',
-  'ribs.png',
-  'shoulder.png',
-  'thigh.png',
-  'wrist.png',
+  'abdomen2.png',
+  'ankle2.png',
+  'arm2.png',
+  'back2.png',
+  'calf2.png',
+  'collar2.png',
+  'elbow2.png',
+  'finger2.png',
+  'knee2.png',
+  'leg2.png',
+  'neck2.png',
+  'orth2.png',
+  'ribs2.png',
+  'shoulder2.png',
+  'thigh2.png',
+  'wrist2.png',
 ];
 
 const timeline = [
@@ -326,7 +326,7 @@ const AboutUs = () => {
 
                 <div className="relative min-h-[550px]">
                   <img
-                    src="/products/orth.png"
+                    src="/products/orth2.png"
                     alt=""
                     className="h-full w-full object-cover"
                   />
