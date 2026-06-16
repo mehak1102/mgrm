@@ -238,7 +238,7 @@ export default function HomeFeaturedCollectionsSection() {
   }, [activeId]);
 
   return (
-    <section className="relative max-w-[1500px] mx-auto px-4 sm:px-6 py-28 overflow-hidden">
+    <section className="relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-4 sm:px-6 py-28 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-white to-cyan-50/70 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 [data-theme=blue]:from-[var(--gradient-from)] [data-theme=blue]:via-[var(--gradient-via)] [data-theme=blue]:to-[var(--gradient-to)] rounded-[48px] border border-slate-100/60 dark:border-white/5 [data-theme=blue]:border-[var(--border-color)] transition-colors duration-300" />
 
       <div className="relative mb-12 sm:mb-14 px-2">

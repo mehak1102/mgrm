@@ -12,9 +12,12 @@ import {
 } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import FloatingMedicalBg from "./FloatingMedicalBg";
+import { useTheme } from "../context/ThemeContext";
+import { productPriceSaleProps } from "../utils/productPriceStyle";
 
 export default function CartDrawer() {
   const navigate = useNavigate();
+  const { isBlue } = useTheme();
   const {
     cart,
     cartOpen,
@@ -175,7 +178,9 @@ export default function CartDrawer() {
                                   <p className="text-xs text-gray-500 dark:text-zinc-400/80">
                                     ₹{price} × {item.qty}
                                   </p>
-                                  <p className="font-black text-lg">
+                                  <p
+                                    {...productPriceSaleProps(isBlue, "font-black text-lg")}
+                                  >
                                     ₹{price * item.qty}
                                   </p>
                                 </div>
@@ -216,7 +221,7 @@ export default function CartDrawer() {
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-500 dark:text-zinc-400">Subtotal</span>
-                        <b>₹{cartTotal}</b>
+                        <b {...productPriceSaleProps(isBlue)}>₹{cartTotal}</b>
                       </div>
 
                       <div className="flex justify-between">
@@ -232,7 +237,9 @@ export default function CartDrawer() {
 
                       <div className="border-t pt-3 flex justify-between text-xl">
                         <span className="font-black">Total</span>
-                        <span className="font-black text-purple-700">
+                        <span
+                          {...productPriceSaleProps(isBlue, "font-black text-purple-700")}
+                        >
                           ₹{grandTotal}
                         </span>
                       </div>

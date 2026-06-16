@@ -192,7 +192,7 @@ const famousPeople = [
 
 const AboutUs = () => {
   return (
-    <div className="relative overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300">
+    <div className="about-us-page relative overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300">
       {/* BG */}
       <div className="absolute left-[-150px] top-[-150px] h-[450px] w-[450px] rounded-full bg-cyan-200/40 blur-3xl" />
 

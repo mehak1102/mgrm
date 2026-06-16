@@ -268,16 +268,16 @@ export default function HomeShopByActivitySection() {
   };
 
   return (
-    <section className="max-w-[1500px] mx-auto px-6 py-28">
+    <section className="home-activity-section max-w-[1500px] mx-auto px-6 py-28">
       <div className="flex justify-between items-end mb-10">
         <div>
-          <p className="text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
-          <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Shop By Activity</h2>
+          <p className="home-activity-label text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
+          <h2 className="home-activity-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Shop By Activity</h2>
         </div>
 
         <Link
           to="/shop-by-activity"
-          className="hidden md:block bg-card shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
+          className="home-activity-cta hidden md:block bg-card shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
         >
           View All →
         </Link>
@@ -359,7 +359,7 @@ export default function HomeShopByActivitySection() {
 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
-                <span className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
+                <span className="home-activity-chip absolute bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
                   {item.name}
                 </span>
               </motion.button>

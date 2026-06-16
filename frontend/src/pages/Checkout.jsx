@@ -4,6 +4,8 @@ import { CreditCard, MapPin, ShieldCheck } from "lucide-react";
 import API from "../api";
 import { useCart } from "../context/CartContext";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
+import { useTheme } from "../context/ThemeContext";
+import { productPriceSaleProps } from "../utils/productPriceStyle";
 import { loadRazorpay } from "../utils/loadRazorpay";
 import toast from "react-hot-toast";
 import {
@@ -30,6 +32,7 @@ const paymentOptionClass =
 export default function Checkout() {
   const navigate = useNavigate();
   const { cart, cartTotal, clearCart } = useCart();
+  const { isBlue } = useTheme();
 
   const [loading, setLoading] = useState(false);
 
@@ -320,7 +323,9 @@ export default function Checkout() {
                     </p>
                   </div>
 
-                  <b className="text-fg shrink-0">
+                  <b
+                    {...productPriceSaleProps(isBlue, "text-fg shrink-0")}
+                  >
                     ₹{Number(item.discountPrice || item.price || 0) * Number(item.qty || 1)}
                   </b>
                 </div>
@@ -330,7 +335,7 @@ export default function Checkout() {
             <div className="border-t border-edge dark:border-white/10 mt-6 pt-5 space-y-3">
               <div className="flex justify-between text-fg-muted">
                 <span>Subtotal</span>
-                <b className="text-fg">₹{cartTotal}</b>
+                <b {...productPriceSaleProps(isBlue, "text-fg")}>₹{cartTotal}</b>
               </div>
 
               <div className="flex justify-between text-fg-muted">
@@ -340,7 +345,9 @@ export default function Checkout() {
 
               <div className="border-t border-edge dark:border-white/10 pt-4 flex justify-between text-2xl">
                 <span className="font-black text-fg">Total</span>
-                <span className="font-black theme-text">₹{grandTotal}</span>
+                <span {...productPriceSaleProps(isBlue, "font-black theme-text")}>
+                  ₹{grandTotal}
+                </span>
               </div>
             </div>
 

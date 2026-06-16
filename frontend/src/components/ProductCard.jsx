@@ -2,10 +2,16 @@ import { Link } from "react-router-dom";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { useTheme } from "../context/ThemeContext";
+import {
+  productPriceOriginalProps,
+  productPriceSaleProps,
+} from "../utils/productPriceStyle";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isBlue } = useTheme();
 
   const image = product.images?.[0] || product.image || "/products/knee.png";
   const price = Number(product.price || 0);
@@ -55,9 +61,23 @@ export default function ProductCard({ product }) {
 
         <div className="flex justify-between items-end mt-5">
           <div>
-            <span className="text-2xl font-black text-slate-900 dark:text-zinc-100">₹{discountPrice}</span>
+            <span
+              {...productPriceSaleProps(
+                isBlue,
+                "text-2xl font-black text-slate-900 dark:text-zinc-100"
+              )}
+            >
+              ₹{discountPrice}
+            </span>
             {price > discountPrice && (
-              <span className="ml-2 line-through text-gray-500 dark:text-zinc-400/80">₹{price}</span>
+              <span
+                {...productPriceOriginalProps(
+                  isBlue,
+                  "ml-2 line-through text-gray-500 dark:text-zinc-400/80"
+                )}
+              >
+                ₹{price}
+              </span>
             )}
           </div>
 

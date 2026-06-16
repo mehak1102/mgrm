@@ -3,6 +3,11 @@ import { useParams } from "react-router-dom";
 import API from "../api";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { useTheme } from "../context/ThemeContext";
+import {
+  productPriceOriginalProps,
+  productPriceSaleProps,
+} from "../utils/productPriceStyle";
 import SmartSizeFinder from "../components/SmartSizeFinder";
 import RecommendationGrid from "../components/RecommendationGrid";
 import { useProductRecommendations } from "../hooks/useRecommendations";
@@ -21,6 +26,7 @@ export default function ProductDetail() {
   const { slug } = useParams();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isBlue } = useTheme();
 
   const [product, setProduct] = useState(null);
   const [activeImg, setActiveImg] = useState("");
@@ -116,10 +122,17 @@ export default function ProductDetail() {
 
           {/* Price */}
           <div className="mt-5">
-            <p className="text-gray-500 dark:text-zinc-400/80 line-through">
+            <p
+              {...productPriceOriginalProps(
+                isBlue,
+                "text-gray-500 dark:text-zinc-400/80 line-through"
+              )}
+            >
               ₹{product.price}
             </p>
-            <p className="text-2xl font-bold text-purple-700">
+            <p
+              {...productPriceSaleProps(isBlue, "text-2xl font-bold text-purple-700")}
+            >
               ₹{product.discountPrice}
             </p>
           </div>

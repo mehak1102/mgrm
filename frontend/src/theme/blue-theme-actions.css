@@ -1,0 +1,204 @@
+/**
+ * Blue theme — FULL filled luxury gold (#FFD700) CTAs only.
+ */
+
+[data-theme="blue"] {
+  --action-primary: #ffd700;
+  --action-hover: #ffe45a;
+  --action-pressed: #e8c100;
+  --action-text: #003262;
+  --action-link-hover: #d4a900;
+  --action-soft: rgba(255, 215, 0, 0.14);
+  --action-badge: rgba(255, 215, 0, 0.18);
+  --action-shadow: 0 10px 28px rgba(255, 215, 0, 0.22);
+  --action-shadow-hover: 0 12px 32px rgba(255, 215, 0, 0.28);
+}
+
+/* ── Primary filled buttons ── */
+[data-theme="blue"] .btn-primary,
+[data-theme="blue"] button.btn-primary,
+[data-theme="blue"] a.btn-primary,
+[data-theme="blue"] button.bg-purple-700,
+[data-theme="blue"] a.bg-purple-700,
+[data-theme="blue"] button.bg-purple-600,
+[data-theme="blue"] a.bg-purple-600,
+[data-theme="blue"] button.border-purple-500,
+[data-theme="blue"] a.border-purple-500,
+[data-theme="blue"] button.border-purple-600,
+[data-theme="blue"] button[class*="border-purple-5"],
+[data-theme="blue"] button[class*="border-purple-6"],
+[data-theme="blue"] button.bg-slate-900.rounded-full,
+[data-theme="blue"] a.bg-slate-900.rounded-full,
+[data-theme="blue"] button.bg-slate-950.rounded-full,
+[data-theme="blue"] a.bg-slate-950.rounded-full,
+[data-theme="blue"] a.rounded-full.font-black.bg-gradient-to-r,
+[data-theme="blue"] button.rounded-full.font-black.bg-gradient-to-r,
+[data-theme="blue"] a.rounded-full[class*="accent-primary"],
+[data-theme="blue"] button.rounded-full[class*="accent-primary"],
+[data-theme="blue"] a.rounded-full[class*="--accent-primary"],
+[data-theme="blue"] button.rounded-full[class*="--accent-primary"],
+[data-theme="blue"] button.rounded-full[class*="bg-slate-900"],
+[data-theme="blue"] a.rounded-full[class*="bg-slate-900"],
+[data-theme="blue"] button.rounded-full.bg-cyan-400,
+[data-theme="blue"] button.w-full.border.font-black,
+[data-theme="blue"] button.flex-1.bg-purple-700,
+[data-theme="blue"] button.mt-5.w-full.border {
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.16) !important;
+  font-weight: 800;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease !important;
+}
+
+[data-theme="blue"] .btn-primary:hover,
+[data-theme="blue"] button.btn-primary:hover,
+[data-theme="blue"] a.btn-primary:hover,
+[data-theme="blue"] button.bg-purple-700:hover,
+[data-theme="blue"] a.bg-purple-700:hover,
+[data-theme="blue"] button.bg-purple-600:hover,
+[data-theme="blue"] button.border-purple-500:hover,
+[data-theme="blue"] a.border-purple-500:hover,
+[data-theme="blue"] button.border-purple-600:hover,
+[data-theme="blue"] button[class*="border-purple-5"]:hover,
+[data-theme="blue"] button.bg-slate-900.rounded-full:hover,
+[data-theme="blue"] a.bg-slate-900.rounded-full:hover,
+[data-theme="blue"] a.rounded-full.font-black.bg-gradient-to-r:hover,
+[data-theme="blue"] button.rounded-full.font-black.bg-gradient-to-r:hover,
+[data-theme="blue"] a.rounded-full[class*="accent-primary"]:hover,
+[data-theme="blue"] button.rounded-full[class*="accent-primary"]:hover,
+[data-theme="blue"] button.rounded-full[class*="bg-slate-900"]:hover,
+[data-theme="blue"] a.rounded-full[class*="bg-slate-900"]:hover,
+[data-theme="blue"] button.rounded-full.bg-cyan-400:hover,
+[data-theme="blue"] button.w-full.border.font-black:hover,
+[data-theme="blue"] button.flex-1.bg-purple-700:hover,
+[data-theme="blue"] button.mt-5.w-full.border:hover {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #003262 !important;
+  border: 2px solid #ffd700 !important;
+  transform: none;
+  box-shadow: none !important;
+}
+
+[data-theme="blue"] .btn-primary:active,
+[data-theme="blue"] button.bg-purple-700:active,
+[data-theme="blue"] button.border-purple-500:active,
+[data-theme="blue"] button.flex-1.bg-purple-700:active,
+[data-theme="blue"] button.mt-5.w-full.border:active {
+  background: #e8c100 !important;
+  transform: translateY(0);
+}
+
+[data-theme="blue"] .btn-primary:focus,
+[data-theme="blue"] .btn-primary:focus-visible,
+[data-theme="blue"] button.btn-primary:focus,
+[data-theme="blue"] button.btn-primary:focus-visible,
+[data-theme="blue"] a.btn-primary:focus,
+[data-theme="blue"] a.btn-primary:focus-visible {
+  outline: none !important;
+  box-shadow: var(--action-shadow), 0 0 0 3px rgba(255, 215, 0, 0.45) !important;
+}
+
+/* Product cards — full-width Add to Cart */
+[data-theme="blue"] article.bg-card button.w-full,
+[data-theme="blue"] article.bg-card button.mt-5 {
+  width: 100% !important;
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: none !important;
+  font-weight: 800 !important;
+}
+
+[data-theme="blue"] article.bg-card button.w-full:hover,
+[data-theme="blue"] article.bg-card button.mt-5:hover {
+  background: #ffe45a !important;
+  transform: translateY(-1px);
+}
+
+/* Outlined secondary — btn-soft only (not primary CTAs) */
+[data-theme="blue"] .btn-soft {
+  background: rgba(255, 255, 255, 0.45) !important;
+  color: #003262 !important;
+  border: 1.5px solid #ffd700 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="blue"] .btn-soft:hover {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border-color: #ffe45a !important;
+}
+
+/* Hero secondary glass CTA — outlined, not primary */
+[data-theme="blue"] a.rounded-full.font-black[class*="bg-white/"]:not(.btn-primary) {
+  background: rgba(255, 255, 255, 0.45) !important;
+  color: #003262 !important;
+  border: 1.5px solid #ffd700 !important;
+  box-shadow: none !important;
+}
+
+[data-theme="blue"] a.rounded-full.font-black[class*="bg-white/"]:not(.btn-primary):hover {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border-color: #ffe45a !important;
+}
+
+/* Link-style action text on cards */
+[data-theme="blue"] .bg-card button.font-bold.text-purple-700,
+[data-theme="blue"] .bg-card a.font-bold.text-purple-700,
+[data-theme="blue"] aside button.font-bold.text-purple-700 {
+  color: #003262 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="blue"] .bg-card button.font-bold.text-purple-700:hover,
+[data-theme="blue"] aside button.font-bold.text-purple-700:hover {
+  color: #d4a900 !important;
+  transform: none !important;
+}
+
+/* Navbar active */
+[data-theme="blue"] header nav a.active,
+[data-theme="blue"] header nav a[aria-current="page"] {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #003262 !important;
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+}
+
+/* Filter / chip active states */
+[data-theme="blue"] .bg-purple-50.text-purple-700,
+[data-theme="blue"] .bg-purple-100.text-purple-700,
+[data-theme="blue"] button.bg-purple-50.text-purple-700,
+[data-theme="blue"] button.bg-purple-100.text-purple-700,
+[data-theme="blue"] .border-purple-600.bg-purple-50 {
+  background: rgba(255, 215, 0, 0.18) !important;
+  color: #003262 !important;
+  border-color: rgba(255, 215, 0, 0.35) !important;
+}
+
+[data-theme="blue"] button.rounded-full[class*="border-[var(--accent-primary)]"] {
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: none !important;
+}
+
+/* Icon / carousel controls — NOT gold */
+[data-theme="blue"] button.p-2.rounded-full,
+[data-theme="blue"] button.w-12.h-12.rounded-full.grid,
+[data-theme="blue"] button.w-10.h-10.rounded-full {
+  background: rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-weight: inherit !important;
+}
+
+[data-theme="blue"] button.p-2.rounded-full:hover,
+[data-theme="blue"] button.w-12.h-12.rounded-full:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+  transform: none !important;
+}

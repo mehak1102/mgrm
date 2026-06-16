@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
@@ -44,6 +44,91 @@ import HomeShopByActivitySection from "../components/home/HomeShopByActivitySect
 
 const text = "248 top certified products - to cure your body";
 
+function hexToRgbTuple(hex) {
+  const n = hex.replace("#", "");
+  return `${parseInt(n.slice(0, 2), 16)}, ${parseInt(n.slice(2, 4), 16)}, ${parseInt(n.slice(4, 6), 16)}`;
+}
+
+const TRUSTED_RING_RADIUS = 48.75;
+const TRUSTED_RING_CIRCUMFERENCE = 2 * Math.PI * TRUSTED_RING_RADIUS;
+
+function TrustedSupportCategoryRing({ cat, staggerIndex }) {
+  const delay = staggerIndex * 0.06;
+  const categoryRgb = hexToRgbTuple(cat.color);
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <div className="trusted-support-ring relative mx-auto h-48 w-48 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+      <motion.div
+        className="relative h-full w-full"
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.65, delay, ease: "easeOut" }}
+      >
+        <div
+          className="relative h-full w-full overflow-hidden rounded-full bg-white dark:bg-zinc-900"
+          style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.10)" }}
+        >
+          <img
+            src={cat.image}
+            alt={cat.name}
+            onError={(e) => {
+              e.currentTarget.src = "/products/knee2.png";
+            }}
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        <div
+          className="trusted-support-ring__glow pointer-events-none absolute inset-0 rounded-full"
+          style={{ "--category-rgb": categoryRgb }}
+          aria-hidden="true"
+        />
+
+        <svg
+          className="trusted-support-ring__svg pointer-events-none absolute inset-0 h-full w-full -rotate-90"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+        >
+          <circle
+            className="trusted-support-ring__base"
+            cx="50"
+            cy="50"
+            r={TRUSTED_RING_RADIUS}
+            fill="transparent"
+            stroke={cat.color}
+            strokeWidth="3"
+            strokeOpacity="0.55"
+            vectorEffect="non-scaling-stroke"
+          />
+          <motion.circle
+            className="trusted-support-ring__draw"
+            cx="50"
+            cy="50"
+            r={TRUSTED_RING_RADIUS}
+            fill="transparent"
+            stroke={cat.color}
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeDasharray={TRUSTED_RING_CIRCUMFERENCE}
+            strokeDashoffset={TRUSTED_RING_CIRCUMFERENCE}
+            vectorEffect="non-scaling-stroke"
+            animate={
+              reduceMotion
+                ? { strokeDashoffset: 0 }
+                : { strokeDashoffset: [TRUSTED_RING_CIRCUMFERENCE, 0] }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { duration: 8, repeat: Infinity, ease: "linear" }
+            }
+          />
+        </svg>
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [productStart, setProductStart] = useState(0);
@@ -143,7 +228,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
+      className="home-hero-title text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
     >
       {text.split("").map((char, index) => (
         <motion.span
@@ -164,7 +249,7 @@ export default function Home() {
             ease: [0.19, 1, 0.22, 1],
           }}
           className={`inline-block will-change-transform ${
-            index < 3 ? "text-red-500" : ""
+            index < 3 ? "text-red-500 home-hero-num" : "home-hero-tail"
           }`}
         >
           {char === " " ? "\u00A0" : char}
@@ -173,7 +258,7 @@ export default function Home() {
     </motion.h1>
 
             <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-14 mb-2">
-              <SectionLabel className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
+              <SectionLabel className="blue-theme-section-label text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
                 TOP CATEGORIES
               </SectionLabel>
             </PremiumReveal>
@@ -185,7 +270,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
+                      className="home-hero-cat-card w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
                     >
                       <span className="text-3xl font-light" style={{ color: cat.color }}>
                         {String(index + 1).padStart(2, "0")}
@@ -206,7 +291,7 @@ export default function Home() {
 
                       <div>
                         <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                        <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                        <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
                       </div>
                     </button>
                   </PremiumStaggerItem>
@@ -329,7 +414,7 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                        className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
+                        className="home-hero-cat-card w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
                       >
                         <span className="text-3xl font-light" style={{ color: cat.color }}>
                           {String(index + 1).padStart(2, "0")}
@@ -350,7 +435,7 @@ export default function Home() {
 
                         <div>
                           <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                          <p className="text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                          <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
                         </div>
                       </button>
                     </PremiumStaggerItem>
@@ -403,7 +488,7 @@ export default function Home() {
 
 
         {/* GLOBAL CERTIFICATIONS */}
-<section className="relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+<section className="home-expect-best-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
 
 
@@ -499,7 +584,7 @@ export default function Home() {
 {/* ================= CARDIOLOGY AWARENESS SECTION ================= */}
 
 
-<section className="relative overflow-hidden py-28">
+<section className="home-cardiology-section relative overflow-hidden py-28">
 
   <div className="relative z-10 mx-auto max-w-[1500px] px-6">
 
@@ -916,7 +1001,7 @@ export default function Home() {
   </div>
 </section>
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+<section className="home-bandage-section home-expect-best-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
 
 
   {/* BACKGROUND */}
@@ -1028,7 +1113,7 @@ export default function Home() {
             className="rounded-[30px] bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-zinc-800/90 transition-all duration-500"
           >
 
-            <h3 className="text-[58px] font-black text-slate-900 dark:text-zinc-100">
+            <h3 className="home-expect-stat-num text-[58px] font-black text-slate-900 dark:text-zinc-100">
               {num}
             </h3>
 
@@ -1066,7 +1151,7 @@ export default function Home() {
             PREMIUM ORTHOPEDIC SUPPORT
           </span>
 
-          <h3 className="mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
+          <h3 className="home-expect-highlight-title mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
             Expect The Best
           </h3>
 
@@ -1088,7 +1173,7 @@ export default function Home() {
           GLOBAL PRESENCE
         </p>
 
-        <h4 className="mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
+        <h4 className="home-expect-stat-num mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
           40+
         </h4>
 
@@ -1164,7 +1249,7 @@ export default function Home() {
 
           <div
             key={i}
-            className="rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
+            className="home-expect-tag rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
           >
             {item}
           </div>
@@ -1175,7 +1260,7 @@ export default function Home() {
 
 
         {/* BEST SELLERS */}
-        <section className="relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
+        <section className="home-trusted-supports-section relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
 
           <div className="relative flex justify-between items-end mb-10">
@@ -1195,20 +1280,13 @@ export default function Home() {
                   onClick={() => goCategory(cat.query || cat.category || cat.name)}
                   className="w-52 shrink-0 text-center group"
                 >
-                  <div className="relative w-48 h-48 mx-auto rounded-full bg-white dark:bg-zinc-900 shadow-[0_25px_70px_rgba(15,23,42,0.12)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] overflow-hidden border border-white dark:border-white/10 group-hover:-translate-y-2 transition duration-500">
-                    <div
-                      className="absolute inset-3 rounded-full opacity-25"
-                      style={{ background: cat.color }}
-                    />
-                    <img
-                      src={cat.image}
-                      onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-                      className="relative w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                    />
-                  </div>
+                  <TrustedSupportCategoryRing
+                    cat={cat}
+                    staggerIndex={i % bodyCategories.length}
+                  />
 
                   <h3 className="mt-5 text-xl font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                  <p className="text-gray-500 dark:text-zinc-400 mt-1">{cat.count} items</p>
+                  <span className="home-trusted-count-pill">{cat.count} items</span>
                 </button>
               ))}
             </div>
@@ -1219,11 +1297,13 @@ export default function Home() {
         <HomeFeaturedCollectionsSection />
 
         {/* LOCATE PAIN AREA */}
-        <section className="relative max-w-[1500px] mx-auto px-6 py-28">
+        <section className="home-locate-pain-section relative max-w-[1500px] mx-auto px-6 py-28">
           <div className="text-center mb-12">
-            <p className="text-cyan-600 dark:text-cyan-400 font-black tracking-widest">BODY-BASED SEARCH</p>
-            <h2 className="text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Locate Your Pain Area</h2>
-            <p className="text-gray-500 dark:text-zinc-400 mt-3 text-lg">
+            <p className="home-locate-label text-cyan-600 dark:text-cyan-400 font-black tracking-widest">BODY-BASED SEARCH</p>
+            <h2 className="home-locate-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">
+              Locate Your <span className="highlight">Pain Area</span>
+            </h2>
+            <p className="home-locate-desc text-gray-500 dark:text-zinc-400 mt-3 text-lg">
               Get the right support where you need it
             </p>
           </div>
@@ -1256,7 +1336,7 @@ export default function Home() {
                 <button
                   key={cat.name}
                   onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                  className="absolute group"
+                  className="home-pain-pin absolute group"
                   style={{
                     left: ["50%", "46%", "58%", "52%", "44%", "55%", "54%", "55%", "45%", "51%"][i],
                     top: ["12%", "26%", "30%", "43%", "56%", "63%", "77%", "90%", "69%", "20%"][i],
@@ -1274,13 +1354,13 @@ export default function Home() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  <span className="absolute left-14 top-1 whitespace-nowrap bg-card text-slate-900 dark:text-zinc-100 rounded-full px-4 py-2 font-bold text-sm opacity-0 group-hover:opacity-100 transition shadow-lg">
+                  <span className="home-pain-tooltip absolute left-14 top-1 whitespace-nowrap bg-card text-slate-900 dark:text-zinc-100 rounded-full px-4 py-2 font-bold text-sm opacity-0 group-hover:opacity-100 transition shadow-lg">
                     {cat.name}
                   </span>
                 </button>
               ))}
 
-            <div className="absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10">
+            <div className="home-locate-smart-guide absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10">
               <p className="text-cyan-600 dark:text-cyan-400 font-black text-sm">SMART GUIDE</p>
               <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100">Find support faster</h3>
               <p className="text-gray-500 dark:text-zinc-400 mt-2">

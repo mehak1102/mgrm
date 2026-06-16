@@ -1,0 +1,83 @@
+/**
+ * Blue theme text — card islands + glass sections only.
+ * No site-wide white text overrides; use section-scoped rules in blue-theme-polish.css.
+ */
+
+[data-theme="blue"] {
+  --text-on-card: #12324a;
+  --text-on-card-muted: #4f6980;
+  --text-on-card-heading: #12324a;
+}
+
+/* Card / glass islands — dark text inside white surfaces */
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    .theme-panel,
+    .theme-section,
+    aside.bg-card,
+    article.bg-card,
+    form.bg-card,
+    .home-cardiology-section .rounded-\[42px\].min-h-\[760px\]
+  ) {
+  color: var(--text-on-card);
+}
+
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card, .theme-panel, .theme-section)
+  :is(h1, h2, h3, h4, h5, h6, .font-black, .font-bold) {
+  color: #12324a !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card, .theme-panel, .theme-section)
+  :is(p, li, .text-gray-500, .text-fg-muted, .text-slate-600, .text-slate-500, .text-slate-700) {
+  color: #4f6980 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card)
+  :is(.text-slate-900, .text-slate-800, .text-fg, .text-zinc-900) {
+  color: #12324a !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card) input,
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card) textarea,
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card) select {
+  color: #12324a !important;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card) input::placeholder,
+[data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card) textarea::placeholder {
+  color: #6b8499 !important;
+  opacity: 1 !important;
+}
+
+/* Rounded glass section panels — dark text on light glass (not blue-surface home sections) */
+[data-theme="blue"] section:has(> .absolute.inset-0[class*="rounded-"]):not(
+    .home-bandage-section,
+    .home-trusted-supports-section,
+    .home-smart-size-section
+  ) > .relative {
+  color: #12324a;
+}
+
+[data-theme="blue"] section:has(> .absolute.inset-0[class*="rounded-"]):not(
+    .home-bandage-section,
+    .home-trusted-supports-section,
+    .home-smart-size-section
+  ) > .relative
+  :is(h1, h2, h3, h4, h5, h6, .font-black) {
+  color: #12324a !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] section:has(> .absolute.inset-0[class*="rounded-"]):not(
+    .home-bandage-section,
+    .home-trusted-supports-section,
+    .home-smart-size-section
+  ) > .relative
+  :is(p, .text-gray-500, .text-fg-muted, .text-slate-500) {
+  color: #4f6980 !important;
+  opacity: 1 !important;
+}

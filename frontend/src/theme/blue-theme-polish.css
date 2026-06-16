@@ -1,0 +1,365 @@
+/**
+ * Blue theme polish — #003262 + #FFD700 accents.
+ * Yellow styling (buttons/borders/badges) + section-scoped text visibility only.
+ */
+
+/* ── Top hero: 248 red, certified products tail yellow ── */
+[data-theme="blue"] .home-hero-title .home-hero-num,
+[data-theme="blue"] .home-hero-title .text-red-500 {
+  color: #ef4444 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-hero-title .home-hero-tail {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blue-theme-gold-accent,
+[data-theme="blue"] .blue-theme-section-label {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 28px rgba(255, 215, 0, 0.22);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-brand,
+[data-theme="blue"] .text-brand-alt {
+  color: #ffd700 !important;
+}
+
+/* ── Save XX% / discount badges → yellow ── */
+[data-theme="blue"] .bg-purple-600.text-white.text-xs,
+[data-theme="blue"] span.bg-purple-600.text-white,
+[data-theme="blue"] article .absolute.top-4.left-4.bg-purple-600 {
+  background: #ffd700 !important;
+  color: #12344f !important;
+  border: none !important;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.24) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .bg-purple-600.text-white.text-xs:hover,
+[data-theme="blue"] article .absolute.top-4.left-4.bg-purple-600:hover {
+  background: #ffe45a !important;
+}
+
+/* ── Hero category cards ── */
+[data-theme="blue"] .home-hero-cat-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="blue"] .home-hero-cat-card h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-hero-cat-card .home-hero-cat-count {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-hero-cat-card img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* ── Expect The Best — yellow accents ── */
+[data-theme="blue"] .home-expect-best-section .home-expect-stat-num,
+[data-theme="blue"] .home-expect-best-section h4.text-4xl.font-black,
+[data-theme="blue"] .home-expect-best-section .home-expect-highlight-title {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-expect-best-section [class*="tracking-"],
+[data-theme="blue"] .home-expect-best-section .text-cyan-600,
+[data-theme="blue"] .home-expect-best-section .text-cyan-700,
+[data-theme="blue"] .home-expect-best-section .text-cyan-400 {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 28px rgba(255, 215, 0, 0.22);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-expect-best-section .text-emerald-600,
+[data-theme="blue"] .home-expect-best-section .text-emerald-600 svg,
+[data-theme="blue"] .home-expect-best-section .bg-emerald-100 {
+  color: #ffd700 !important;
+  background: rgba(255, 215, 0, 0.14) !important;
+}
+
+[data-theme="blue"] .home-expect-best-section .home-expect-tag {
+  color: #ffffff !important;
+  border-color: rgba(255, 215, 0, 0.35) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-expect-best-section .home-expect-tag:hover {
+  background: #ffd700 !important;
+  color: #12344f !important;
+  border-color: #ffd700 !important;
+}
+
+[data-theme="blue"] .home-expect-best-section .w-2\.5.bg-cyan-500 {
+  background: #ffd700 !important;
+}
+
+[data-theme="blue"] .home-expect-best-section .from-cyan-400,
+[data-theme="blue"] .home-expect-best-section [class*="from-cyan"] {
+  --tw-gradient-from: #ffd700 !important;
+  --tw-gradient-to: #ffe45a !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   TEXT VISIBILITY ONLY (section-scoped — no button/border changes)
+   ══════════════════════════════════════════════════════════ */
+
+/* 1. Bandage to Splintage™ */
+[data-theme="blue"] .home-bandage-section .absolute.inset-0.rounded-\[60px\] > .absolute.inset-0.bg-gradient-to-r,
+[data-theme="blue"] .home-bandage-section .absolute.inset-0.bg-gradient-to-r {
+  background: linear-gradient(
+    to right,
+    rgba(0, 32, 62, 0.78),
+    rgba(0, 32, 62, 0.52),
+    rgba(0, 32, 62, 0.22)
+  ) !important;
+}
+
+[data-theme="blue"] .home-bandage-section .absolute.inset-0.rounded-\[60px\] > .absolute.inset-0.bg-\[radial-gradient\] {
+  opacity: 0.35 !important;
+}
+
+[data-theme="blue"] .home-bandage-section .max-w-3xl h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-bandage-section .max-w-3xl h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-bandage-section .max-w-3xl p {
+  color: rgba(255, 255, 255, 0.82) !important;
+  opacity: 1 !important;
+}
+
+/* 2. Best Sellers header text */
+[data-theme="blue"] .home-trusted-supports-section > .absolute.inset-0 {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .home-trusted-supports-section > .relative :is([class*="tracking-widest"], [class*="tracking-["], .text-cyan-600) {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-trusted-supports-section > .relative :is(h1, h2, h3, h4):not([class*="tracking-"]) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-trusted-supports-section > .relative .font-black:not([class*="tracking-"]) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-trusted-supports-section > .relative p,
+[data-theme="blue"] .home-trusted-supports-section > .relative .text-gray-500,
+[data-theme="blue"] .home-trusted-supports-section > .relative .text-fg-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+  opacity: 1 !important;
+}
+
+/* 3. Smart Size Finder header text */
+[data-theme="blue"] .home-smart-size-section > .absolute.inset-0 {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .home-smart-size-section > .relative > *:first-child :is([class*="tracking-"], .text-cyan-600) {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-smart-size-section > .relative > *:first-child :is(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-smart-size-section > .relative > *:first-child p,
+[data-theme="blue"] .home-smart-size-section > .relative > *:first-child .text-gray-500,
+[data-theme="blue"] .home-smart-size-section > .relative > *:first-child .text-fg-muted {
+  color: rgba(255, 255, 255, 0.85) !important;
+  opacity: 1 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   YELLOW ACCENTS (restored — not text-visibility pass)
+   ══════════════════════════════════════════════════════════ */
+
+/* Best Sellers count pills */
+[data-theme="blue"] .home-trusted-count-pill {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: #ffd700;
+  color: #003262;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 22px rgba(255, 215, 0, 0.18);
+  transition: all 300ms ease;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-trusted-supports-section .group:hover .home-trusted-count-pill {
+  background: rgba(255, 215, 0, 0.12);
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  box-shadow: none;
+}
+
+/* Locate Your Pain Area — yellow highlights */
+[data-theme="blue"] .home-locate-smart-guide {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  color: #003262 !important;
+}
+
+[data-theme="blue"] .home-locate-smart-guide :is(p, h3, span, .text-gray-500, .text-cyan-600, .text-slate-900, [class*="text-zinc"], [class*="text-cyan"]) {
+  color: #003262 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-locate-pain-section .home-locate-label {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 28px rgba(255, 215, 0, 0.22);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-locate-pain-section .home-locate-heading span.highlight {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .home-locate-pain-section .home-pain-pin:hover > span.relative.w-12,
+[data-theme="blue"] .home-locate-pain-section .home-pain-pin:focus-visible > span.relative.w-12 {
+  background: rgba(255, 215, 0, 0.16) !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+[data-theme="blue"] .home-locate-pain-section .home-pain-tooltip {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #12344f !important;
+  border: 1px solid rgba(255, 215, 0, 0.35) !important;
+}
+
+/* Shop By Activity — yellow chips + hover border */
+[data-theme="blue"] .home-activity-section .home-activity-label {
+  color: #ffd700 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 28px rgba(255, 215, 0, 0.22);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-activity-section span.home-activity-chip,
+[data-theme="blue"] .home-activity-section .home-activity-chip.bg-card,
+[data-theme="blue"] .home-activity-section .home-activity-chip[class*="bg-card"] {
+  background-color: #ffd700 !important;
+  background: #ffd700 !important;
+}
+
+[data-theme="blue"] .home-activity-section .home-activity-chip {
+  color: #003262 !important;
+  font-weight: 800 !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.16) !important;
+  transition: all 300ms ease !important;
+}
+
+[data-theme="blue"] .home-activity-section .activity-card:hover .home-activity-chip,
+[data-theme="blue"] .home-activity-section .activity-card:focus-within .home-activity-chip,
+[data-theme="blue"] .home-activity-section .activity-card:active .home-activity-chip {
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: 2px solid #ffd700 !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.18) !important;
+  transform: scale(1.02);
+}
+
+[data-theme="blue"] .home-activity-section .home-activity-cta {
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.16) !important;
+  transition: all 300ms ease !important;
+}
+
+[data-theme="blue"] .home-activity-section .home-activity-cta:hover {
+  background: #ffd700 !important;
+  border: 2px solid #ffd700 !important;
+  color: #003262 !important;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.18) !important;
+  transform: scale(1.02);
+}
+
+/* Product page — size selector active + action buttons */
+[data-theme="blue"] button.border-purple-700.text-purple-700,
+[data-theme="blue"] button.border-purple-600.text-purple-700 {
+  background: #ffd700 !important;
+  color: #12344f !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.28) !important;
+}
+
+[data-theme="blue"] .flex.gap-3 button.rounded-lg.border:not(.border-purple-700):hover,
+[data-theme="blue"] .flex.gap-3 button.rounded-lg.border:not(.text-purple-700):hover {
+  border-color: rgba(255, 215, 0, 0.55) !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.22) !important;
+}
+
+/* Smart Size Finder modal — yellow accents (CTAs handled in blue-theme-actions.css) */
+[data-theme="blue"] .smart-size-finder-modal {
+  background: #003262 !important;
+  border: 1px solid rgba(255, 215, 0, 0.22) !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal [class*="tracking-"],
+[data-theme="blue"] .smart-size-finder-modal .text-cyan-600,
+[data-theme="blue"] .smart-size-finder-modal .text-cyan-700 {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal .rounded-\[26px\] h2 {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal .bg-purple-50,
+[data-theme="blue"] .smart-size-finder-modal .text-purple-700 {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal button.bg-gradient-to-r,
+[data-theme="blue"] .smart-size-finder-modal button.bg-slate-950,
+[data-theme="blue"] .smart-size-finder-modal .mt-5.w-full.bg-slate-950 {
+  background: #ffd700 !important;
+  color: #003262 !important;
+  border: none !important;
+}

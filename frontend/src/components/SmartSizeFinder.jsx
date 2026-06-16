@@ -1193,7 +1193,7 @@ export default function SmartSizeFinder({
         animate={reduce ? false : { opacity: 1, y: 0, scale: 1 }}
         exit={reduce ? false : { opacity: 0, y: 16, scale: 0.98 }}
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-4xl bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]"
+        className="relative w-full max-w-4xl smart-size-finder-modal bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]"
       >
 
         <button

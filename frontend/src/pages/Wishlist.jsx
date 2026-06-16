@@ -3,10 +3,16 @@ import { Heart, Trash2, ShoppingCart } from "lucide-react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
+import { useTheme } from "../context/ThemeContext";
+import {
+  productPriceOriginalProps,
+  productPriceSaleProps,
+} from "../utils/productPriceStyle";
 
 export default function Wishlist() {
   const { wishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const { isBlue } = useTheme();
   const validWishlist = wishlist.filter((p) => p?._id && p?.name);
 
   return (
@@ -78,11 +84,18 @@ export default function Wishlist() {
                 </h3>
 
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="font-black text-purple-700">
+                  <span
+                    {...productPriceSaleProps(isBlue, "font-black text-purple-700")}
+                  >
                     ₹{p.discountPrice || p.price}
                   </span>
                   {p.discountPrice && (
-                    <span className="text-gray-500 dark:text-zinc-400/80 line-through text-sm">
+                    <span
+                      {...productPriceOriginalProps(
+                        isBlue,
+                        "text-gray-500 dark:text-zinc-400/80 line-through text-sm"
+                      )}
+                    >
                       ₹{p.price}
                     </span>
                   )}

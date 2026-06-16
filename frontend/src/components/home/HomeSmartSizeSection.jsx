@@ -36,7 +36,7 @@ export default function HomeSmartSizeSection() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative max-w-[1500px] mx-auto px-6 py-28">
+    <section className="home-smart-size-section relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-6 py-28">
       <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-cyan-50/80 via-white to-blue-50/60 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 border border-slate-100/80 dark:border-white/10" />
 
       <div className="relative grid lg:grid-cols-2 gap-14 items-center px-4 sm:px-8">

@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "./theme/dark-theme.css";
 @import "./theme/dark-theme-pages.css";
+@import "./theme/blue-theme.css";
+@import "./theme/blue-theme-pages.css";
+@import "./theme/blue-theme-text.css";
+@import "./theme/blue-theme-contrast.css";
+@import "./theme/blue-theme-actions.css";
+@import "./theme/blue-theme-polish.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -33,29 +39,43 @@
 
 /* Dark theme tokens & overrides: see theme/dark-theme.css */
 
-/* Premium healthcare blue — light surfaces, dark readable text */
+/* Deep corporate blue (#003262) — see theme/blue-theme.css for full overrides */
 [data-theme="blue"] {
-  --bg-primary: #eaf8ff;
-  --bg-secondary: #d8f2ff;
-  --card-bg: #ffffff;
-  --card-elevated: #f5fcff;
-  --card-hover: #e6f7ff;
-  --border-color: #bfe8ff;
-  --accent-primary: #00b7ff;
-  --accent-secondary: #3b82f6;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --text-accent: #0284c7;
-  --gradient-from: #eaf8ff;
-  --gradient-via: #dff5ff;
-  --gradient-to: #cdefff;
-  --primary: #0284c7;
-  --accent: #3b82f6;
-  --soft: #f5fcff;
-  --bg1: #eaf8ff;
-  --border: #bfe8ff;
-  --text: #0f172a;
+  --bg-primary: #003262;
+  --bg-secondary: #00284e;
+  --bg-elevated: #003875;
+  --card-bg: rgba(255, 255, 255, 0.84);
+  --card-elevated: rgba(255, 255, 255, 0.9);
+  --card-hover: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(255, 255, 255, 0.28);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 215, 0, 0.35);
+  --accent-primary: #003262;
+  --accent-secondary: #ffd700;
+  --accent-soft: rgba(255, 215, 0, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.74);
+  --text-accent: #ffd700;
+  --gradient-from: #003262;
+  --gradient-via: #003262;
+  --gradient-to: #00284e;
+  --section-gradient: linear-gradient(180deg, #003262 0%, #00284e 100%);
+  --primary: #003262;
+  --accent: #ffd700;
+  --soft: rgba(255, 215, 0, 0.12);
+  --bg1: #003262;
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #ffffff;
+  --action-primary: #ffd700;
+  --action-hover: #ffe45a;
+  --action-pressed: #e8c100;
+  --action-text: #12344f;
+  --action-link-hover: #ffd700;
+  --action-soft: rgba(255, 215, 0, 0.14);
+  --action-badge: rgba(255, 215, 0, 0.18);
+  --action-shadow: 0 10px 28px rgba(255, 215, 0, 0.22);
+  --action-shadow-hover: 0 12px 32px rgba(255, 215, 0, 0.28);
   color-scheme: light;
 }
 
@@ -109,30 +129,12 @@ body {
   );
 }
 
-[data-theme="blue"] .theme-section {
-  background: linear-gradient(135deg, var(--gradient-from) 0%, var(--gradient-to) 100%);
-  border-color: var(--border-color);
-  color: var(--text-primary);
-}
-
-[data-theme="blue"] .theme-panel:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 28%, transparent);
-}
-
 .shadow-theme-lg {
   box-shadow: 0 40px 120px rgba(15, 23, 42, 0.12);
 }
 
-[data-theme="blue"] .shadow-theme-lg {
-  box-shadow: 0 40px 100px rgba(2, 132, 199, 0.14);
-}
-
 .shadow-theme-md {
   box-shadow: 0 30px 90px rgba(15, 23, 42, 0.1);
-}
-
-[data-theme="blue"] .shadow-theme-md {
-  box-shadow: 0 30px 80px rgba(2, 132, 199, 0.1);
 }
 
 .theme-panel {
@@ -146,18 +148,8 @@ body {
     box-shadow 0.3s ease;
 }
 
-[data-theme="blue"] .theme-panel {
-  background: var(--card-bg);
-  border-color: var(--border-color);
-  color: var(--text-primary);
-}
-
 .theme-panel::placeholder {
   color: #64748b;
-}
-
-[data-theme="blue"] .theme-panel::placeholder {
-  color: var(--text-muted);
 }
 
 .theme-panel:focus {
@@ -167,10 +159,6 @@ body {
 
 .theme-text {
   color: var(--primary);
-}
-
-[data-theme="blue"] .theme-text {
-  color: var(--text-accent);
 }
 
 .theme-section {
@@ -185,10 +173,6 @@ body {
 
 .theme-accent {
   color: #25319a;
-}
-
-[data-theme="blue"] .theme-accent {
-  color: var(--accent-primary);
 }
 
 .btn-primary {
@@ -209,10 +193,6 @@ body {
     background-color 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
-}
-
-[data-theme="blue"] .card {
-  box-shadow: 0 20px 60px rgba(2, 132, 199, 0.08);
 }
 
 .reveal {
@@ -378,6 +358,39 @@ body {
 @keyframes drawVertical {
   from { height: 0%; }
   to { height: 100%; }
+}
+
+/* Best Sellers — premium category glow (draw animation unchanged) */
+.trusted-support-ring__glow {
+  box-shadow:
+    0 0 16px rgba(var(--category-rgb), 0.16),
+    0 0 32px rgba(var(--category-rgb), 0.08),
+    inset 0 0 10px rgba(255, 255, 255, 0.06);
+  transition: box-shadow 450ms ease-out;
+}
+
+.group:hover .trusted-support-ring__glow {
+  box-shadow:
+    0 0 24px rgba(var(--category-rgb), 0.22),
+    0 0 42px rgba(var(--category-rgb), 0.12),
+    0 0 70px rgba(var(--category-rgb), 0.06);
+}
+
+.trusted-support-ring__base,
+.trusted-support-ring__draw {
+  transition: stroke-width 0.45s ease;
+}
+
+.group:hover .trusted-support-ring__base,
+.group:hover .trusted-support-ring__draw {
+  stroke-width: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-support-ring__draw {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
 }
 
 @keyframes float {

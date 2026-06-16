@@ -13,6 +13,11 @@ import { activities } from "../data/siteData";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
+import { useTheme } from "../context/ThemeContext";
+import {
+  productPriceOriginalProps,
+  productPriceSaleProps,
+} from "../utils/productPriceStyle";
 
 const colors = [
   "Black",
@@ -30,6 +35,7 @@ export default function ShopByActivity() {
   const [params, setParams] = useSearchParams();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isBlue } = useTheme();
 
   const [products, setProducts] = useState([]);
   const [activeActivity, setActiveActivity] = useState(params.get("activity") || "");
@@ -369,9 +375,16 @@ export default function ShopByActivity() {
                         </p>
 
                         <div className="mt-3">
-                          <span className="text-xl font-black">₹{discountPrice}.00</span>
+                          <span {...productPriceSaleProps(isBlue, "text-xl font-black")}>
+                            ₹{discountPrice}.00
+                          </span>
                           {price > discountPrice && (
-                            <span className="text-fg-muted/80 line-through ml-2">
+                            <span
+                              {...productPriceOriginalProps(
+                                isBlue,
+                                "text-fg-muted/80 line-through ml-2"
+                              )}
+                            >
                               ₹{price}.00
                             </span>
                           )}

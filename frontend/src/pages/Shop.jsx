@@ -17,6 +17,11 @@ import {
   trackCategoryClick,
   trackSearch,
 } from "../utils/recommendationBehavior";
+import { useTheme } from "../context/ThemeContext";
+import {
+  productPriceOriginalProps,
+  productPriceSaleProps,
+} from "../utils/productPriceStyle";
 import {
   SectionHeading,
   FadeUpText,
@@ -31,6 +36,7 @@ export default function Shop() {
   const { addToCart } = useCart();
   // const { wishlist, toggleWishlist } = useWishlist();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isBlue } = useTheme();
 
   const [products, setProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState(params.get("category") || "");
@@ -324,9 +330,18 @@ onClick={() => {
                         </Link>
 
                         <div className="mt-3">
-                          <span className="text-xl font-black">₹{discountPrice}.00</span>
+                          <span {...productPriceSaleProps(isBlue, "text-xl font-black")}>
+                            ₹{discountPrice}.00
+                          </span>
                           {price > discountPrice && (
-                            <span className="text-fg-muted/80 line-through ml-2">₹{price}.00</span>
+                            <span
+                              {...productPriceOriginalProps(
+                                isBlue,
+                                "text-fg-muted/80 line-through ml-2"
+                              )}
+                            >
+                              ₹{price}.00
+                            </span>
                           )}
                         </div>
 

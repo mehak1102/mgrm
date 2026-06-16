@@ -1,0 +1,477 @@
+/**
+ * Blue theme contrast QA — section-specific fixes on #003262.
+ * Global text: blue-theme-text.css | Buttons: blue-theme-actions.css
+ */
+
+/* ── HOME: Attention Cardiologists (blue theme only) ── */
+[data-theme="blue"] .home-cardiology-section .rounded-\[42px\].min-h-\[760px\] {
+  background: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 12px 40px rgba(18, 50, 74, 0.07) !important;
+}
+
+[data-theme="blue"] .home-cardiology-section h3,
+[data-theme="blue"] .home-cardiology-section .text-slate-900 {
+  color: #10304a !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-cardiology-section h2.text-red-500 {
+  color: #ef4444 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-cardiology-section p,
+[data-theme="blue"] .home-cardiology-section .text-slate-600 {
+  color: #4e6a80 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-cardiology-section h2 span,
+[data-theme="blue"] .home-cardiology-section h3 span {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* Marquee edge fades — match glass card, not sky fill */
+[data-theme="blue"] .home-cardiology-section .from-\[var\(--bg-primary\)\] {
+  --tw-gradient-from: rgba(255, 255, 255, 0.84) !important;
+}
+
+[data-theme="blue"] .home-cardiology-section .from-\[\#f8fbff\],
+[data-theme="blue"] .home-cardiology-section .from-\[\#f3f7ff\] {
+  --tw-gradient-from: rgba(255, 255, 255, 0.84) !important;
+}
+
+/* Product orbit pills */
+[data-theme="blue"] .home-cardiology-section .rounded-full.border-slate-200 {
+  background: rgba(255, 255, 255, 0.84) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
+}
+
+/* ── HOME: Featured Collections glass panels ── */
+[data-theme="blue"] section.max-w-\[1500px\] .rounded-\[48px\] {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+[data-theme="blue"] section.max-w-\[1500px\] [class*="--card-bg"],
+[data-theme="blue"] section.max-w-\[1500px\] [class*="bg-white"] {
+  background-color: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* White text only where dark badge overlays exist */
+[data-theme="blue"] .bg-black\/40 h3.text-white,
+[data-theme="blue"] .bg-black\/35 h3.text-white,
+[data-theme="blue"] .bg-black\/80 {
+  color: #ffffff !important;
+}
+
+/* ── ABOUT US: Hero video overlay (all h-screen heroes) ── */
+[data-theme="blue"] section.h-screen > video + div {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 31, 52, 0.6),
+    rgba(12, 31, 52, 0.28)
+  ) !important;
+}
+
+/* ── ABOUT US: full page readability (.about-us-page) ── */
+[data-theme="blue"] .about-us-page {
+  background: #003262 !important;
+  color: #ffffff;
+}
+
+[data-theme="blue"] .about-us-page > .absolute.rounded-full {
+  opacity: 0.12 !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen > .absolute.inset-0:not(.relative) {
+  background: rgba(0, 20, 45, 0.62) !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen .text-cyan-300,
+[data-theme="blue"] .about-us-page section.h-screen .Sparkles {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen h1,
+[data-theme="blue"] .about-us-page section.h-screen h2,
+[data-theme="blue"] .about-us-page section.h-screen .font-black {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen .text-white\/85,
+[data-theme="blue"] .about-us-page section.h-screen .text-gray-200 {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen [class*="bg-clip-text"] {
+  -webkit-text-fill-color: #ffd700 !important;
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page aside {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="blue"] .about-us-page aside h2,
+[data-theme="blue"] .about-us-page aside h3,
+[data-theme="blue"] .about-us-page aside .font-bold {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page aside a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page aside a:hover {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #ffd700 !important;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+}
+
+[data-theme="blue"] .about-us-page aside a:hover svg {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7),
+[data-theme="blue"] .about-us-page .flex-1 > section.rounded-\[40px\]:not([id^="section-"]) {
+  background: rgba(255, 255, 255, 0.11) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18) !important;
+}
+
+[data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7) :is(h1, h2, h3, h4, .font-black, .font-bold),
+[data-theme="blue"] .about-us-page .flex-1 > section.rounded-\[40px\]:not([id^="section-"]) :is(h1, h2, h3, h4, .font-black, .font-bold),
+[data-theme="blue"] .about-us-page .text-\[\#002B5B\],
+[data-theme="blue"] .about-us-page .text-slate-900 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page .text-brand,
+[data-theme="blue"] .about-us-page [class*="tracking-"][class*="uppercase"],
+[data-theme="blue"] .about-us-page .text-cyan-500,
+[data-theme="blue"] .about-us-page .text-cyan-600 {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page p,
+[data-theme="blue"] .about-us-page li,
+[data-theme="blue"] .about-us-page .text-gray-500,
+[data-theme="blue"] .about-us-page .text-slate-600,
+[data-theme="blue"] .about-us-page .text-slate-700 {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page .text-gray-400,
+[data-theme="blue"] .about-us-page .text-zinc-400,
+[data-theme="blue"] .about-us-page .text-white\/70,
+[data-theme="blue"] .about-us-page .text-white\/80 {
+  color: rgba(255, 255, 255, 0.72) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-0 .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(0, 20, 45, 0.72), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page .group [class*="bg-[#dff4ff]"],
+[data-theme="blue"] .about-us-page .group [class*="bg-[#f5fbff]"],
+[data-theme="blue"] .about-us-page .group [class*="bg-[#f8fcff]"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page .group [class*="bg-[#dff4ff]"] h3,
+[data-theme="blue"] .about-us-page .group [class*="bg-[#dff4ff]"] p,
+[data-theme="blue"] .about-us-page .group [class*="text-[#31506f]"] {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page .group .bg-gradient-to-t.from-black\/70 {
+  background: linear-gradient(to top, rgba(0, 20, 45, 0.75), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-1 {
+  background: linear-gradient(180deg, #003262, #00284e) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-1 .text-cyan-200,
+[data-theme="blue"] .about-us-page #section-1 .text-cyan-300,
+[data-theme="blue"] .about-us-page #section-1 .Award {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-1 .group .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(0, 15, 35, 0.82), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-2 .group.rounded-\[30px\] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-2 .group:hover {
+  background: rgba(255, 215, 0, 0.14) !important;
+  border-color: rgba(255, 215, 0, 0.35) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-2 .group h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .about-us-page #section-2 .group:hover h3 {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-3 .bg-gradient-to-r.from-cyan-300 {
+  background: linear-gradient(to right, #ffd700, rgba(255, 215, 0, 0.35)) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-3 .rounded-full.border-4 {
+  background: #ffd700 !important;
+  border-color: #003262 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-3 .rounded-\[30px\].bg-\[\#f5fbff\],
+[data-theme="blue"] .about-us-page #section-3 .bg-surface-hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="blue"] .about-us-page #section-3 [class*="text-3xl"] {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-4 {
+  background: linear-gradient(135deg, #003262, #00284e) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-4 .text-cyan-200 {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-5 .Quote {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-5 .rounded-\[35px\] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-6 .border-cyan-400 {
+  border-color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-6 .rounded-full.border-cyan-100,
+[data-theme="blue"] .about-us-page #section-6 .bg-cyan-50 {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 215, 0, 0.22) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-6 .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(0, 20, 45, 0.68), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-6 img {
+  background: rgba(0, 50, 98, 0.35) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-7 {
+  background: linear-gradient(135deg, #00284e, #003262) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-7 .bg-gradient-to-r {
+  background: linear-gradient(to right, rgba(0, 15, 35, 0.78), rgba(0, 15, 35, 0.25), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-7 .text-cyan-300,
+[data-theme="blue"] .about-us-page #section-7 .text-cyan-200,
+[data-theme="blue"] .about-us-page #section-7 [class*="text-cyan-3"] {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-7 .text-4xl.font-black {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-7 .rounded-\[24px\] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8,
+[data-theme="blue"] .about-us-page #section-9,
+[data-theme="blue"] .about-us-page #section-10,
+[data-theme="blue"] .about-us-page #section-12 {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8 h3,
+[data-theme="blue"] .about-us-page #section-9 h3,
+[data-theme="blue"] .about-us-page #section-10 h3,
+[data-theme="blue"] .about-us-page #section-12 h3 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8 p,
+[data-theme="blue"] .about-us-page #section-9 td,
+[data-theme="blue"] .about-us-page #section-10 td,
+[data-theme="blue"] .about-us-page #section-12 td {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8 .bg-cyan-500,
+[data-theme="blue"] .about-us-page #section-11 .bg-cyan-500 {
+  background: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8 .rounded-\[35px\],
+[data-theme="blue"] .about-us-page #section-9 table,
+[data-theme="blue"] .about-us-page #section-10 table {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 td.text-brand,
+[data-theme="blue"] .about-us-page #section-10 td.text-brand,
+[data-theme="blue"] .about-us-page table td.font-bold {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-8 .bg-gradient-to-t,
+[data-theme="blue"] .about-us-page #section-8 .from-black\/50 {
+  background: linear-gradient(to top, rgba(0, 20, 45, 0.72), transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page tr {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="blue"] .about-us-page tr:hover {
+  background: rgba(255, 215, 0, 0.08) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .bg-gradient-to-br.from-\[\#002B5B\] {
+  background: linear-gradient(135deg, #00284e, #003262) !important;
+  border: 1px solid rgba(255, 215, 0, 0.18) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 td.text-cyan-200,
+[data-theme="blue"] .about-us-page #section-11 td.font-bold {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 td.text-white\/90 {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 tr:hover {
+  background: rgba(255, 215, 0, 0.1) !important;
+}
+
+[data-theme="blue"] .about-us-page [class*="text-3xl"][class*="font-black"],
+[data-theme="blue"] .about-us-page [class*="text-4xl"][class*="font-black"] {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page .absolute.bottom-8 .text-white,
+[data-theme="blue"] .about-us-page .absolute.bottom-5 .text-white {
+  color: #ffffff !important;
+}
+
+/* ── SUPPORT PAGE ── */
+[data-theme="blue"] main.bg-app {
+  color: #ffffff;
+}
+
+[data-theme="blue"] main.bg-app section h1,
+[data-theme="blue"] main.bg-app section h2,
+[data-theme="blue"] main.bg-app section h3,
+[data-theme="blue"] main.bg-app section .font-black {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] main.bg-app section p,
+[data-theme="blue"] main.bg-app section .text-gray-500 {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] main.bg-app .bg-card,
+[data-theme="blue"] main.bg-app form.bg-card {
+  background: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 28px rgba(18, 50, 74, 0.06) !important;
+}
+
+[data-theme="blue"] main.bg-app .bg-card h2,
+[data-theme="blue"] main.bg-app .bg-card h3,
+[data-theme="blue"] main.bg-app .bg-card .font-black,
+[data-theme="blue"] main.bg-app form.bg-card h2 {
+  color: #12324a !important;
+}
+
+[data-theme="blue"] main.bg-app .bg-card p,
+[data-theme="blue"] main.bg-app form.bg-card input {
+  color: #12324a !important;
+}
+
+[data-theme="blue"] main.bg-app .shadow {
+  box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
+}
+
+[data-theme="blue"] main.bg-app input,
+[data-theme="blue"] main.bg-app textarea,
+[data-theme="blue"] main.bg-app select {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #12324a !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] main.bg-app input::placeholder,
+[data-theme="blue"] main.bg-app textarea::placeholder {
+  color: #4f6980 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] main.bg-app .bg-green-50 {
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #166534 !important;
+  opacity: 1 !important;
+}
