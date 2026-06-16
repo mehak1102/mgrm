@@ -29,20 +29,20 @@
   color: #ffd700 !important;
 }
 
-/* ── Save XX% / discount badges → yellow ── */
+/* ── Save XX% / discount badges → green (#80b918) ── */
 [data-theme="blue"] .bg-purple-600.text-white.text-xs,
 [data-theme="blue"] span.bg-purple-600.text-white,
 [data-theme="blue"] article .absolute.top-4.left-4.bg-purple-600 {
-  background: #ffd700 !important;
-  color: #12344f !important;
+  background: #80b918 !important;
+  color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.24) !important;
+  box-shadow: 0 8px 24px rgba(128, 185, 24, 0.28) !important;
   opacity: 1 !important;
 }
 
 [data-theme="blue"] .bg-purple-600.text-white.text-xs:hover,
 [data-theme="blue"] article .absolute.top-4.left-4.bg-purple-600:hover {
-  background: #ffe45a !important;
+  background: #96cc1f !important;
 }
 
 /* ── Hero category cards ── */

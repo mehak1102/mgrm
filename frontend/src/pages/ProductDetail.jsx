@@ -122,19 +122,22 @@ export default function ProductDetail() {
 
           {/* Price */}
           <div className="mt-5">
-            <p
+            <span
               {...productPriceOriginalProps(
                 isBlue,
-                "text-gray-500 dark:text-zinc-400/80 line-through"
+                "block text-gray-500 dark:text-zinc-400/80 line-through"
               )}
             >
               ₹{product.price}
-            </p>
-            <p
-              {...productPriceSaleProps(isBlue, "text-2xl font-bold text-purple-700")}
+            </span>
+            <span
+              {...productPriceSaleProps(
+                isBlue,
+                "block text-2xl font-bold text-purple-700"
+              )}
             >
               ₹{product.discountPrice}
-            </p>
+            </span>
           </div>
 
           {/* Size */}
