@@ -4,13 +4,20 @@ import crypto from "crypto";
 
 const router = express.Router();
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+export const getRazorpay = () => {
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    throw new Error("Missing Razorpay credentials");
+  }
+
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+};
 
 router.post("/create-order", async (req, res) => {
   try {
+    const razorpay = getRazorpay();
     const { amount } = req.body;
 
     if (!amount || Number(amount) <= 0) {
@@ -39,6 +46,10 @@ router.post("/create-order", async (req, res) => {
 
 router.post("/verify", async (req, res) => {
   try {
+    if (!process.env.RAZORPAY_KEY_SECRET) {
+      return res.status(503).json({ msg: "Razorpay is not configured" });
+    }
+
     const {
       razorpay_order_id,
       razorpay_payment_id,

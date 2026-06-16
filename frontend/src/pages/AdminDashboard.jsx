@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import API from "../api";
+import AdminRecoveryPanel from "../components/admin/AdminRecoveryPanel";
 
 
 const emptyForm = {
@@ -171,12 +172,15 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="flex gap-3 mb-6">
+      <div className="flex gap-3 mb-6 flex-wrap">
         <button onClick={() => setTab("products")} className={`px-5 py-3 rounded-2xl font-black ${tab === "products" ? "btn-primary" : "btn-soft"}`}>
           Products
         </button>
         <button onClick={() => setTab("orders")} className={`px-5 py-3 rounded-2xl font-black ${tab === "orders" ? "btn-primary" : "btn-soft"}`}>
           Orders
+        </button>
+        <button onClick={() => setTab("recovery")} className={`px-5 py-3 rounded-2xl font-black ${tab === "recovery" ? "btn-primary" : "btn-soft"}`}>
+          Recovery Stories
         </button>
       </div>
 
@@ -352,6 +356,8 @@ export default function AdminDashboard() {
           ))}
         </div>
       )}
+
+      {tab === "recovery" && <AdminRecoveryPanel />}
     </main>
   );
 }

@@ -1,33 +1,16 @@
 import express from "express";
 import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
-import streamifier from "streamifier";
-import dotenv from "dotenv";
 import { auth, adminOnly } from "../middleware/auth.js";
-
-dotenv.config();
+import { uploadBufferToCloudinary } from "../utils/cloudinaryUpload.js";
 
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 8 * 1024 * 1024 },
+});
 
-function configureCloudinary() {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  });
-
-  console.log("Cloudinary config check:", {
-    cloud: process.env.CLOUDINARY_CLOUD_NAME,
-    key: Boolean(process.env.CLOUDINARY_API_KEY),
-    secret: Boolean(process.env.CLOUDINARY_API_SECRET),
-  });
-}
-
-router.post("/", auth, adminOnly, upload.single("image"), async (req, res) => {
+async function handleUpload(req, res, folder) {
   try {
-    configureCloudinary();
-
     if (!process.env.CLOUDINARY_API_KEY) {
       return res.status(500).json({
         msg: "Cloudinary env missing. Check backend/.env",
@@ -38,17 +21,7 @@ router.post("/", auth, adminOnly, upload.single("image"), async (req, res) => {
       return res.status(400).json({ msg: "No image uploaded" });
     }
 
-    const result = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { folder: "mgrm-products" },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
-        }
-      );
-
-      streamifier.createReadStream(req.file.buffer).pipe(stream);
-    });
+    const result = await uploadBufferToCloudinary(req.file.buffer, folder);
 
     res.json({
       url: result.secure_url,
@@ -58,6 +31,30 @@ router.post("/", auth, adminOnly, upload.single("image"), async (req, res) => {
     console.error("Cloudinary upload error:", err);
     res.status(500).json({ msg: err.message });
   }
-});
+}
+
+// Admin product images
+router.post("/", auth, adminOnly, upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-products")
+);
+
+// Authenticated users — review photos
+router.post("/review", auth, upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-reviews")
+);
+
+// Authenticated users — profile + recovery photos
+router.post("/profile", auth, upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-profiles")
+);
+
+router.post("/recovery-user", auth, upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-recovery")
+);
+
+// Admin — recovery story images
+router.post("/recovery", auth, adminOnly, upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-recovery")
+);
 
 export default router;

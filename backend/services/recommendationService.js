@@ -467,3 +467,95 @@ export async function getProductRecommendations({ productId, limit = 8 }) {
 
   return { products: diverseRanked, strategy: "related-content-diverse" };
 }
+
+export async function getPeopleAlsoBought({ productId, limit = 8 }) {
+  const seedProduct = await Product.findById(productId).lean();
+  if (!seedProduct) return { products: [], strategy: "not-found" };
+
+  const relatedOrders = await Order.find(
+    { "items._id": String(productId) },
+    { items: 1, _id: 0 }
+  )
+    .sort({ createdAt: -1 })
+    .limit(200)
+    .lean();
+
+  const coPurchaseCounts = new Map();
+  relatedOrders.forEach((order) => {
+    const items = safeArray(order.items).map((item) => String(item?._id || ""));
+    if (!items.includes(String(productId))) return;
+    items.forEach((id) => {
+      if (!id || id === String(productId)) return;
+      coPurchaseCounts.set(id, (coPurchaseCounts.get(id) || 0) + 1);
+    });
+  });
+
+  const coPurchaseIds = [...coPurchaseCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([id]) => id);
+
+  const seedCategory = normalize(seedProduct.category);
+  const seedKeywords = deriveProductKeywords(seedProduct);
+
+  const candidateOr = [
+    ...(coPurchaseIds.length ? [{ _id: { $in: coPurchaseIds } }] : []),
+    ...(seedCategory ? [{ category: new RegExp(seedCategory, "i") }] : []),
+    {
+      $or: [
+        { name: { $in: seedKeywords.map((w) => new RegExp(w, "i")) } },
+        { description: { $in: seedKeywords.map((w) => new RegExp(w, "i")) } },
+      ],
+    },
+  ];
+
+  const candidates = await Product.find({
+    _id: { $ne: productId },
+    $or: candidateOr,
+  })
+    .limit(120)
+    .lean();
+
+  const ranked = candidates
+    .map((item) => {
+      let score = 0;
+      const reasons = [];
+      const id = String(item._id);
+
+      const coCount = coPurchaseCounts.get(id) || 0;
+      if (coCount) {
+        score += 70 + coCount * 8;
+        reasons.push("bought-together");
+      }
+
+      if (normalize(item.category) === seedCategory) {
+        score += 45;
+        reasons.push("same-category");
+      }
+
+      const itemKeywords = deriveProductKeywords(item);
+      const matches = itemKeywords.filter((w) => seedKeywords.includes(w));
+      if (matches.length) {
+        score += Math.min(25, matches.length * 6);
+        reasons.push("similar");
+      }
+
+      score += Number(item.rating || 0);
+      if (item.isBestSeller) score += 5;
+
+      return { ...item, _score: score, _reasons: reasons };
+    })
+    .filter((item) => item._score > 0)
+    .sort((a, b) => b._score - a._score);
+
+  const diverseRanked = diversifyRankedProducts(ranked, limit, 2);
+
+  if (!diverseRanked.length) {
+    const fallback = await Product.find({ _id: { $ne: productId } })
+      .sort({ isBestSeller: -1, rating: -1, createdAt: -1 })
+      .limit(limit)
+      .lean();
+    return { products: fallback, strategy: "trending-fallback" };
+  }
+
+  return { products: diverseRanked, strategy: "people-also-bought" };
+}

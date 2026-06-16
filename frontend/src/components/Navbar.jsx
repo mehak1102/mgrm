@@ -270,7 +270,11 @@ const handleSearch = (e) => {
 </button>
 
           {user?.role === "admin" && <Link to="/admin" className="font-bold text-sm theme-text">Admin</Link>}
-          {user && <Link to="/orders" className="font-bold text-sm theme-text">Orders</Link>}
+          {user && (
+            <Link to="/dashboard" className="font-bold text-sm theme-text hidden sm:inline">
+              Dashboard
+            </Link>
+          )}
 
           {user ? (
             <button onClick={logout} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"><LogOut size={20} /></button>

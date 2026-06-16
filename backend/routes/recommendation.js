@@ -3,6 +3,7 @@ import { optionalAuth } from "../middleware/auth.js";
 import {
   getHomeRecommendations,
   getProductRecommendations,
+  getPeopleAlsoBought,
   saveUserBehavior,
 } from "../services/recommendationService.js";
 
@@ -34,6 +35,20 @@ router.get("/home", optionalAuth, async (req, res) => {
   } catch (err) {
     console.error("Home recommendation error:", err);
     res.status(500).json({ msg: "Failed to load recommendations" });
+  }
+});
+
+router.get("/product/:id/also-bought", async (req, res) => {
+  try {
+    const limit = Number(req.query.limit || 8);
+    const payload = await getPeopleAlsoBought({
+      productId: req.params.id,
+      limit,
+    });
+    res.json(payload);
+  } catch (err) {
+    console.error("Also-bought error:", err);
+    res.status(500).json({ msg: "Failed to load also-bought products" });
   }
 });
 

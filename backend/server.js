@@ -14,8 +14,23 @@ import uploadRoutes from "./routes/upload.js";
 import supportRoutes from "./routes/support.js";
 import paymentRoutes from "./routes/payment.js";
 import recommendationRoutes from "./routes/recommendation.js";
+import reviewRoutes from "./routes/reviews.js";
+import recoveryStoryRoutes from "./routes/recoveryStories.js";
+import userRoutes from "./routes/users.js";
 
 // dotenv.config();
+console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
+if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+  console.warn("Razorpay env missing");
+}
+
+process.on("uncaughtException", (err) => {
+  console.error("uncaughtException:", err);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("unhandledRejection:", reason);
+});
 
 const app = express();
 app.use(express.json());
@@ -33,13 +48,23 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/recommendations", recommendationRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/recovery-stories", recoveryStoryRoutes);
+app.use("/api/users", userRoutes);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
+async function bootstrap() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Mongo Connected");
-    app.listen(process.env.PORT || 5000, () =>
-      console.log("Server running on port", process.env.PORT || 5000)
-    );
-  })
-  .catch((err) => console.log("Mongo Error:", err.message));
+
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log("Server running on port", port);
+    });
+  } catch (err) {
+    console.error("Startup failed:", err);
+    process.exit(1);
+  }
+}
+
+bootstrap();

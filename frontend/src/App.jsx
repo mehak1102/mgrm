@@ -23,6 +23,7 @@ import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Support from "./pages/Support";
 import Wishlist from "./pages/Wishlist";
+import UserDashboard from "./pages/UserDashboard";
 import AboutUs from "./pages/AboutUs";
 
 import { useAuth } from "./context/AuthContext";
@@ -55,6 +56,10 @@ export default function App() {
 
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/orders" element={<Orders />} />
+        <Route
+          path="/dashboard"
+          element={user ? <UserDashboard /> : <Navigate to="/login" replace />}
+        />
 
         <Route path="/wishlist" element={<Wishlist />} />
 
