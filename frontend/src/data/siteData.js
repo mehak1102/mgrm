@@ -41,7 +41,7 @@ export const activities = [
   { name: "Aerobics", video: "/shop/aerobics3.mp4" },
   { name: "Athletics", video: "/shop/athletics3.mp4" },
   { name: "Badminton", video: "/shop/badminton3.mp4" },
-  { name: "Basketball", video: "/shop/basketball3.mp4" },
+  { name: "Basketball", video: "/shop/basketball4.mp4" },
   { name: "Cricket", video: "/shop/cricket3.mp4" },
   { name: "Cycling", video: "/shop/cycling3.mp4" },
   { name: "Football", video: "/shop/football3.mp4" },

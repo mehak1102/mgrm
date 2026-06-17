@@ -302,7 +302,7 @@ export default function Home() {
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
-                {/* <HeroAnatomicalRunner className="rounded-[30px]" /> */}
+                <HeroAnatomicalRunner className="rounded-[30px]" />
 {/* <video
   autoPlay
   muted
@@ -324,7 +324,7 @@ export default function Home() {
   <source src="/videos/wpp.webm" type="video/webm" />
 </video> */}
 
-<div className="relative flex items-center justify-center">
+{/* <div className="relative flex items-center justify-center">
   <div className="absolute inset-0 flex items-center justify-center">
     <div className="h-[500px] w-[500px] rounded-full bg-cyan-400/25 blur-[100px] animate-pulse" />
   </div>
@@ -342,7 +342,7 @@ export default function Home() {
       w-full
       object-cover
       rounded-[30px]
-      brightness-120
+      brightness-100
       contrast-110
       saturate-125
       drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
@@ -353,7 +353,7 @@ export default function Home() {
 
   
   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 h-20 w-[55%] rounded-full bg-cyan-400/20 blur-3xl" />
-</div>
+</div> */}
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
                     ["42%", "15%"],

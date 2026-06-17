@@ -2,7 +2,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, HeartPulse , User, LogOut, ChevronDown } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-import { useAuth } from "../context/AuthContext";    
+import { useAuth } from "../context/AuthContext";
+import { useDashboard } from "../context/DashboardContext";
 import { bodyCategories, activitiess } from "../data/siteData";
 import { trackSearch } from "../utils/recommendationBehavior";
 import Logo3D from "./Logo3D";
@@ -16,6 +17,7 @@ export default function Navbar() {
   const { cartCount, setCartOpen } = useCart();
   const { wishlist } = useWishlist();
   const { user, logout } = useAuth();
+  const { openDashboard } = useDashboard();
 
 const aboutLinks = [
   "Our History",
@@ -271,9 +273,13 @@ const handleSearch = (e) => {
 
           {user?.role === "admin" && <Link to="/admin" className="font-bold text-sm theme-text">Admin</Link>}
           {user && (
-            <Link to="/dashboard" className="font-bold text-sm theme-text hidden sm:inline">
+            <button
+              type="button"
+              onClick={() => openDashboard()}
+              className="font-bold text-sm theme-text hidden sm:inline hover:opacity-80 transition"
+            >
               Dashboard
-            </Link>
+            </button>
           )}
 
           {user ? (

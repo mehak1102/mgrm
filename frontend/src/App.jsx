@@ -23,10 +23,12 @@ import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Support from "./pages/Support";
 import Wishlist from "./pages/Wishlist";
-import UserDashboard from "./pages/UserDashboard";
 import AboutUs from "./pages/AboutUs";
+import DashboardRedirect from "./pages/DashboardRedirect";
 
 import { useAuth } from "./context/AuthContext";
+import UserDashboardOverlay from "./components/dashboard/UserDashboardOverlay";
+import { useDashboard } from "./context/DashboardContext";
 
 export default function App() {
   const location = useLocation();
@@ -58,7 +60,7 @@ export default function App() {
         <Route path="/orders" element={<Orders />} />
         <Route
           path="/dashboard"
-          element={user ? <UserDashboard /> : <Navigate to="/login" replace />}
+          element={user ? <DashboardRedirect /> : <Navigate to="/login" replace />}
         />
 
         <Route path="/wishlist" element={<Wishlist />} />
@@ -94,6 +96,7 @@ export default function App() {
             "!bg-card dark:!bg-slate-900 !text-fg dark:!text-white !border !border-edge dark:!border-white/10 transition-colors duration-300 [&_p]:dark:!text-slate-300",
         }}
       />
+      <UserDashboardOverlay />
     </div>
   );
 }
