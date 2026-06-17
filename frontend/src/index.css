@@ -347,6 +347,39 @@ body {
   to { transform: translateX(-50%); }
 }
 
+.dashboard-shop-carousel-wrap {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 12%,
+    black 88%,
+    transparent 100%
+  );
+}
+
+.dashboard-shop-carousel {
+  animation: dashboardShopCarousel 72s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.dashboard-shop-carousel-wrap:hover .dashboard-shop-carousel {
+  animation-play-state: paused;
+}
+
+@keyframes dashboardShopCarousel {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
 .perspective {
   perspective: 1500px;
 }

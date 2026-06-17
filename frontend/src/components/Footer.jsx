@@ -308,7 +308,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className={`relative overflow-hidden rounded-[28px] p-8 sm:p-10 lg:p-12 ${surfaceCard} !border-[var(--accent-primary)]/20`}
+            className={`footer-newsletter-card relative overflow-hidden rounded-[28px] p-8 sm:p-10 lg:p-12 ${surfaceCard} !border-[var(--accent-primary)]/20`}
           >
             <div
               className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[color-mix(in_srgb,var(--accent-primary)_15%,transparent)] blur-3xl"
@@ -324,10 +324,10 @@ export default function Footer() {
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand">
                   Newsletter
                 </p>
-                <h3 className="mt-2 text-2xl sm:text-3xl font-black text-fg">
+                <h3 className="footer-newsletter-title mt-2 text-2xl sm:text-3xl font-black text-fg">
                   Stay Updated With MGRM
                 </h3>
-                <p className="mt-3 text-sm text-fg-muted leading-relaxed">
+                <p className="footer-newsletter-copy mt-3 text-sm text-fg-muted leading-relaxed">
                   Recovery tips, new product launches, and exclusive offers — delivered to your inbox.
                 </p>
               </div>

@@ -180,7 +180,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className="relative min-h-screen bg-app-gradient dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
+    <main className="checkout-page relative min-h-screen bg-app-gradient dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
       <FloatingMedicalBg />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
@@ -191,7 +191,7 @@ export default function Checkout() {
           <SectionHeading
             text="Checkout"
             as="h1"
-            className="text-5xl font-black mt-2 text-fg"
+            className="checkout-page-heading text-5xl font-black mt-2 text-fg"
           />
           <FadeUpText className="text-fg-muted mt-2">
             Pay safely using Razorpay.
