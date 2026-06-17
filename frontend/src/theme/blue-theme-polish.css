@@ -339,6 +339,48 @@
   transform: scale(1.02);
 }
 
+/* Navbar About dropdown links — force bright readable white */
+[data-theme="blue"] .about-nav-dropdown .about-nav-dropdown-link {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 0 0 transparent !important;
+}
+
+/* Blue theme only: body-area dropdown pills text should be black */
+[data-theme="blue"] .body-area-chip .body-area-chip-label,
+[data-theme="blue"] .body-area-chip .body-area-chip-count {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* Blogs top pill strip text */
+[data-theme="blue"] .blog-strip .blog-strip-label {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* Blog detail hero readability on dark cover image */
+[data-theme="blue"] .blog-detail-page .blog-detail-hero-content,
+[data-theme="blue"] .blog-detail-page .blog-detail-hero-content :is(h1, h2, h3, .font-black),
+[data-theme="blue"] .blog-detail-page .blog-detail-hero-content .blog-detail-hero-category,
+[data-theme="blue"] .blog-detail-page .blog-detail-hero-content .blog-detail-hero-excerpt,
+[data-theme="blue"] .blog-detail-page .blog-detail-hero-content .blog-detail-hero-meta {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Blog detail: only quote and takeaways cards text */
+[data-theme="blue"] .blog-detail-page .blog-detail-quote-block :is(p, footer, .font-medium, .font-bold),
+[data-theme="blue"] .blog-detail-page .blog-detail-takeaways-block li {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
 /* Product page — size selector active + action buttons */
 [data-theme="blue"] button.border-purple-700.text-purple-700,
 [data-theme="blue"] button.border-purple-600.text-purple-700 {

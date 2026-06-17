@@ -51,7 +51,7 @@ export default function Blogs() {
                     alt={item.name}
                     loading="lazy"
                   />
-                  <span className="font-black text-sm text-slate-800 dark:text-zinc-100">
+                  <span className="blog-strip-label font-black text-sm text-slate-800 dark:text-zinc-100">
                     {item.name}
                   </span>
                 </Link>

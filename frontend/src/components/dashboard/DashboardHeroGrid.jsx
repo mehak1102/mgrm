@@ -26,13 +26,13 @@ function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
       {imgs.map((src, i) => (
         <div
           key={i}
-          className="flex items-center justify-center rounded-xl bg-white/5 min-h-0 p-1.5"
+          className="flex items-center justify-center rounded-xl min-h-0 p-0 overflow-hidden"
         >
           <img
             src={src}
             alt=""
             loading="lazy"
-            className="max-w-full max-h-full w-auto h-auto object-contain
+            className="w-full h-full object-cover
               drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-transform duration-500
               group-hover:scale-[1.03]"
           />

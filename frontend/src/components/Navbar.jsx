@@ -127,13 +127,13 @@ const handleSearch = (e) => {
             <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10">
               <div className="max-w-7xl mx-auto grid grid-cols-5 gap-5 p-6">
                 {bodyCategories.map((cat) => (
-                  <button key={cat.name} onClick={() => navigate(`/shop?category=${cat.query}`)} className="group/card flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition text-left">
+                  <button key={cat.name} onClick={() => navigate(`/shop?category=${cat.query}`)} className="body-area-chip group/card flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition text-left">
                     <div className="w-12 h-12 rounded-xl grid place-items-center" style={{ background: `${cat.color}22` }}>
                       <img src={cat.image} onError={(e) => (e.currentTarget.src = "/products/knee.png")} className="w-10 h-10 object-cover rounded-lg" />
                     </div>
                     <div>
-                      <p className="font-black group-hover/card:text-cyan-600">{cat.name}</p>
-                      <p className="text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                      <p className="body-area-chip-label font-black group-hover/card:text-cyan-600">{cat.name}</p>
+                      <p className="body-area-chip-count text-xs text-gray-500 dark:text-zinc-400">{cat.count} products</p>
                     </div>
                   </button>
                 ))}
@@ -231,13 +231,13 @@ const handleSearch = (e) => {
   About Us
 </Link>
 
-  <div className="absolute top-full left-0 mt-4 w-72 rounded-3xl bg-card dark:bg-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.10)] border border-slate-100 dark:border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4 z-50">
+  <div className="about-nav-dropdown absolute top-full left-0 mt-4 w-72 rounded-3xl bg-white/95 dark:bg-slate-900/96 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] border border-slate-200 dark:border-white/14 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4 z-50">
 
     {aboutLinks.map((item) => (
    <Link
    key={item}
    to={`/about-us#${item.toLowerCase().replace(/\s+/g, "-")}`}
-        className="block px-4 py-3 rounded-2xl hover:bg-cyan-50 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 hover:text-cyan-700 dark:hover:text-cyan-400 font-medium transition"
+        className="about-nav-dropdown-link block px-4 py-3 rounded-2xl hover:bg-cyan-50 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-200 hover:text-cyan-700 dark:hover:text-cyan-300 font-medium transition"
       >
         {item}
         </Link>

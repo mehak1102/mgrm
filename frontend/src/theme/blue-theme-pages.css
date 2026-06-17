@@ -144,7 +144,35 @@
 }
 
 [data-theme="blue"] .blog-strip a span {
-  color: var(--text-on-card-heading) !important;
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* About Us navbar dropdown readability */
+[data-theme="blue"] .about-nav-dropdown {
+  background: rgba(6, 22, 44, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .about-nav-dropdown-link {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .about-nav-dropdown-link:hover,
+[data-theme="blue"] .about-nav-dropdown-link:focus-visible {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #ffd700 !important;
+}
+
+/* Navbar body-area pills (Neck, Shoulder, etc.) */
+[data-theme="blue"] .body-area-chip .body-area-chip-label {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .body-area-chip .body-area-chip-count {
+  color: #1f2937 !important;
   opacity: 1 !important;
 }
 

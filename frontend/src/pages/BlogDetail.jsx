@@ -62,7 +62,7 @@ export default function BlogDetail() {
 
   return (
 
-    <main className="bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen">
+    <main className="blog-detail-page bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen">
 
       <section className="max-w-5xl mx-auto px-5 py-10">
 
@@ -94,9 +94,9 @@ export default function BlogDetail() {
 
 
 
-            <div className="absolute left-8 bottom-8 right-8 text-white">
+            <div className="blog-detail-hero-content absolute left-8 bottom-8 right-8 text-white">
 
-              <p className="font-black tracking-widest text-purple-200">
+              <p className="blog-detail-hero-category font-black tracking-widest text-purple-200">
 
                 {blog.category}
 
@@ -112,13 +112,13 @@ export default function BlogDetail() {
 
               />
 
-              <FadeUpText className="text-white/80 mt-3 max-w-2xl text-lg leading-relaxed">
+              <FadeUpText className="blog-detail-hero-excerpt text-white/80 mt-3 max-w-2xl text-lg leading-relaxed">
 
                 {blog.excerpt}
 
               </FadeUpText>
 
-              <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white/70">
+              <p className="blog-detail-hero-meta mt-4 inline-flex items-center gap-2 text-sm font-bold text-white/70">
 
                 <Clock size={16} />
 

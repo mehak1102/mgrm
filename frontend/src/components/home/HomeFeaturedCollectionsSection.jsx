@@ -290,8 +290,8 @@ export default function HomeFeaturedCollectionsSection() {
                   className={[
                     "block text-base sm:text-lg lg:text-xl font-black tracking-tight transition-colors duration-400",
                     isActive
-                      ? "text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-[var(--text-primary)]"
-                      : "text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] group-hover:text-slate-800 dark:group-hover:text-zinc-200",
+                      ? "text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-black"
+                      : "text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-black group-hover:text-slate-800 dark:group-hover:text-zinc-200 [data-theme=blue]:group-hover:text-black",
                   ].join(" ")}
                 >
                   {cat.label}

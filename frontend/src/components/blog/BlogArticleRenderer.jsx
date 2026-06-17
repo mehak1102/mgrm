@@ -135,7 +135,7 @@ function BlockDivider() {
 
 function QuoteBlock({ text, attribution }) {
   return (
-    <blockquote className="my-12 relative overflow-hidden rounded-3xl border border-purple-100/80 dark:border-purple-500/15 bg-gradient-to-br from-purple-50/90 via-white to-purple-50/40 dark:from-purple-950/30 dark:via-zinc-900 dark:to-purple-950/10 px-8 py-9 md:px-10 md:py-11">
+    <blockquote className="blog-detail-quote-block my-12 relative overflow-hidden rounded-3xl border border-purple-100/80 dark:border-purple-500/15 bg-gradient-to-br from-purple-50/90 via-white to-purple-50/40 dark:from-purple-950/30 dark:via-zinc-900 dark:to-purple-950/10 px-8 py-9 md:px-10 md:py-11">
       <Quote className="text-purple-300/60 dark:text-purple-500/40 mb-5" size={28} aria-hidden />
       <p className="text-xl md:text-2xl font-medium text-slate-800 dark:text-zinc-100 leading-[1.55] tracking-[-0.01em]">
         "{text}"
@@ -420,7 +420,7 @@ function FaqBlock({ items }) {
 
 function TakeawaysBlock({ items }) {
   return (
-    <div className="my-8 rounded-3xl bg-gradient-to-br from-purple-50/90 via-white to-purple-50/50 dark:from-purple-950/25 dark:via-zinc-900 dark:to-purple-950/10 border border-purple-100/80 dark:border-purple-500/15 p-8 md:p-11">
+    <div className="blog-detail-takeaways-block my-8 rounded-3xl bg-gradient-to-br from-purple-50/90 via-white to-purple-50/50 dark:from-purple-950/25 dark:via-zinc-900 dark:to-purple-950/10 border border-purple-100/80 dark:border-purple-500/15 p-8 md:p-11">
       <ul className="space-y-5">
         {items.map((item) => (
           <li

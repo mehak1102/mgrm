@@ -10,7 +10,7 @@
 }
 
 [data-theme="blue"] .blogs-page .blog-strip a span {
-  color: var(--text-on-card-heading) !important;
+  color: #000000 !important;
   opacity: 1 !important;
 }
 
