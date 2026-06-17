@@ -10,6 +10,7 @@
 @import "./theme/blue-theme-aboutus.css";
 @import "./theme/blue-theme-actions.css";
 @import "./theme/blue-theme-polish.css";
+@import "./theme/responsive.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

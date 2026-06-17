@@ -1,0 +1,222 @@
+/* Site-wide responsive helpers — desktop layout unchanged above lg where noted */
+
+html {
+  overflow-x: clip;
+}
+
+/* Navbar */
+@media (max-width: 1023px) {
+  .nav-activity-panel {
+    width: min(980px, calc(100vw - 2rem));
+  }
+
+  .nav-body-panel .nav-body-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav-body-panel .nav-body-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Shop grid — mobile 2, tablet 3, desktop 4, large 5 */
+.shop-product-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .shop-product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shop-product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .shop-product-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.shop-product-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.shop-product-card .shop-product-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Product detail mobile CTA */
+@media (max-width: 1023px) {
+  .product-mobile-cta {
+    position: sticky;
+    bottom: 0;
+    z-index: 40;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding: 0.75rem 1.5rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .product-gallery-main {
+    min-height: min(420px, 55vh) !important;
+  }
+
+  .product-gallery-main img {
+    height: min(380px, 50vh) !important;
+  }
+
+  .product-gallery-layout {
+    flex-direction: column;
+  }
+
+  .product-thumb-rail {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* Home hero — stack on small screens */
+@media (max-width: 1023px) {
+  .home-hero-bento {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .home-hero-map-wrap {
+    min-height: clamp(320px, 52vh, 520px);
+    height: auto !important;
+  }
+
+  .home-hero-side-cats {
+    display: none;
+  }
+
+  .home-hero-title {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-hero-title {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem) !important;
+    line-height: 1.05 !important;
+  }
+}
+
+/* Equal-height cards in common grids */
+.responsive-card-grid > * {
+  min-height: 100%;
+}
+
+/* Home activity + section headings */
+@media (max-width: 767px) {
+  .home-activity-heading {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+  }
+
+  .home-activity-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Wishlist header */
+@media (max-width: 639px) {
+  .wishlist-page-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+}
+
+/* Support + About stacked grids */
+@media (max-width: 1023px) {
+  .support-hero-grid,
+  .about-content-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Blogs grid */
+.blogs-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .blogs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .blogs-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Checkout */
+@media (max-width: 1023px) {
+  .checkout-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Shop by body / activity */
+.body-shop-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .body-shop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .body-shop-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1536px) {
+  .body-shop-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Admin tables scroll */
+.admin-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Footer newsletter */
+@media (max-width: 767px) {
+  .footer-newsletter-inner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}

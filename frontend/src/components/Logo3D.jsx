@@ -673,8 +673,8 @@ export default function Logo3D() {
         flex
         items-center
         justify-center
-        w-[215px]
-        h-[64px]
+        w-[clamp(130px,38vw,215px)]
+        h-[clamp(44px,11vw,64px)]
         overflow-hidden
       "
     >
@@ -706,7 +706,7 @@ export default function Logo3D() {
       <motion.svg
         viewBox="0 0 300 120"
         fill="none"
-        className="absolute w-[185px] h-[72px]"
+        className="absolute w-[86%] h-[86%] max-w-[185px] max-h-[72px]"
       >
         {/* STATIC LIGHT BASE */}
         <path
