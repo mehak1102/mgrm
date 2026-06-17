@@ -4,7 +4,10 @@
 @import "./theme/blue-theme.css";
 @import "./theme/blue-theme-pages.css";
 @import "./theme/blue-theme-text.css";
+@import "./theme/blue-theme-global-readability.css";
+@import "./theme/blue-theme-blogs.css";
 @import "./theme/blue-theme-contrast.css";
+@import "./theme/blue-theme-aboutus.css";
 @import "./theme/blue-theme-actions.css";
 @import "./theme/blue-theme-polish.css";
 
@@ -57,6 +60,8 @@
   --text-secondary: rgba(255, 255, 255, 0.9);
   --text-muted: rgba(255, 255, 255, 0.74);
   --text-accent: #ffd700;
+  --text-on-card: #12324a;
+  --text-on-card-muted: #4f6980;
   --gradient-from: #003262;
   --gradient-via: #003262;
   --gradient-to: #00284e;

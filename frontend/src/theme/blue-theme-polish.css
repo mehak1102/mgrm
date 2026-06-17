@@ -269,6 +269,26 @@
   border: 1px solid rgba(255, 215, 0, 0.35) !important;
 }
 
+/* Body-map labels should be hidden by default and only appear on interaction */
+[data-theme="blue"] .home-hero-map-tooltip,
+[data-theme="blue"] .home-locate-pain-section .home-pain-tooltip {
+  opacity: 0 !important;
+  transform: translateY(4px) scale(0.98);
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease !important;
+}
+
+[data-theme="blue"] .group:hover .home-hero-map-tooltip,
+[data-theme="blue"] .group:focus-visible .home-hero-map-tooltip,
+[data-theme="blue"] .home-locate-pain-section .home-pain-pin:hover .home-pain-tooltip,
+[data-theme="blue"] .home-locate-pain-section .home-pain-pin:focus-visible .home-pain-tooltip,
+[data-theme="blue"] .home-locate-pain-section .home-pain-pin:active .home-pain-tooltip {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1);
+}
+
 /* Shop By Activity — yellow chips + hover border */
 [data-theme="blue"] .home-activity-section .home-activity-label {
   color: #ffd700 !important;

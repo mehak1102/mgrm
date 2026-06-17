@@ -1,0 +1,141 @@
+/**
+ * Blue theme — About Us page readability pass.
+ * Keeps page-specific contrast stable regardless of generic theme overrides.
+ */
+
+[data-theme="blue"] .about-us-page {
+  color: #ffffff;
+}
+
+/* Hard rule: all headings in About Us must be white in blue theme */
+[data-theme="blue"] .about-us-page :is(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="blue"] .about-us-page :is(.font-black, .font-bold) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Explicit heading list requested for About Us */
+[data-theme="blue"] .about-us-page #section-0 h2,   /* Transforming Rehabilitation In India */
+[data-theme="blue"] .about-us-page section:not([id]) h2, /* Orthopedic Product Categories */
+[data-theme="blue"] .about-us-page #section-2 h2,   /* Global Quality Standards */
+[data-theme="blue"] .about-us-page #section-3 h2,   /* Journey Through The Years */
+[data-theme="blue"] .about-us-page #section-5 h2,   /* What Medical Experts Say */
+[data-theme="blue"] .about-us-page #section-6 h2,   /* Complete Eye Care & Rehabilitation Solutions */
+[data-theme="blue"] .about-us-page #section-8 h2,   /* Autoclave Cum Shredder Sterilizer */
+[data-theme="blue"] .about-us-page #section-9 h3,   /* Specifications */
+[data-theme="blue"] .about-us-page #section-10 h3,  /* Construction */
+[data-theme="blue"] .about-us-page #section-11 h3,  /* Integrated Shredder Facility */
+[data-theme="blue"] .about-us-page #section-12 h3   /* Accessories */ {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero copy */
+[data-theme="blue"] .about-us-page section.h-screen :is(h1, h2, h3, .font-black) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page section.h-screen :is(p, .text-gray-200, .text-white\/85) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  opacity: 1 !important;
+}
+
+/* Sidebar */
+[data-theme="blue"] .about-us-page aside {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff;
+}
+
+[data-theme="blue"] .about-us-page aside :is(h2, h3, .font-bold) {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .about-us-page aside a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="blue"] .about-us-page aside a:hover,
+[data-theme="blue"] .about-us-page aside a:focus-visible {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #ffd700 !important;
+  border-color: rgba(255, 215, 0, 0.35) !important;
+}
+
+/* Main content cards */
+[data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7) {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+[data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7)
+  :is(h1, h2, h3, h4, .font-black, .font-bold, .text-slate-900, .text-\[\#002B5B\]) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Explicit fix: "Global Quality Standards" heading visibility */
+[data-theme="blue"] .about-us-page #section-2 h2,
+[data-theme="blue"] .about-us-page #section-2 .text-4xl.font-bold {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7)
+  :is(p, li, .text-gray-500, .text-slate-600, .text-slate-700) {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page .text-brand,
+[data-theme="blue"] .about-us-page .text-cyan-500,
+[data-theme="blue"] .about-us-page .text-cyan-600 {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+/* Product flip card back text */
+[data-theme="blue"] .about-us-page .group [class*="bg-\[\#dff4ff\]"] :is(h3, p, .text-\[\#31506f\], .text-gray-500) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  opacity: 1 !important;
+}
+
+/* Table sections */
+[data-theme="blue"] .about-us-page #section-9 table,
+[data-theme="blue"] .about-us-page #section-10 table,
+[data-theme="blue"] .about-us-page #section-12 table {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 td,
+[data-theme="blue"] .about-us-page #section-10 td,
+[data-theme="blue"] .about-us-page #section-12 td {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 td.text-brand,
+[data-theme="blue"] .about-us-page #section-10 td.text-brand,
+[data-theme="blue"] .about-us-page #section-12 td.text-brand,
+[data-theme="blue"] .about-us-page table td.font-bold {
+  color: #ffd700 !important;
+}
+
+/* Preserve dark-on-dark sections */
+[data-theme="blue"] .about-us-page #section-1,
+[data-theme="blue"] .about-us-page #section-4,
+[data-theme="blue"] .about-us-page #section-7,
+[data-theme="blue"] .about-us-page #section-11 {
+  color: #ffffff !important;
+}

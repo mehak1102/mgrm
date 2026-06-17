@@ -1,0 +1,449 @@
+/**
+ * Blue theme — global typography & contrast system.
+ * Surface (#003262): light text via --text-primary / --text-secondary / --text-muted
+ * Card/glass islands: dark text via --text-on-card / --text-on-card-muted
+ */
+
+[data-theme="blue"] {
+  --text-on-card-heading: #12324a;
+  --text-on-card-body: #4f6980;
+  --text-on-card-muted: #6b8499;
+  --text-link: var(--text-accent);
+  --text-link-hover: var(--action-link-hover);
+}
+
+/* ── Card / glass islands (shared selector) ── */
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    article.bg-card,
+    aside.bg-card,
+    form.bg-card,
+    .theme-panel,
+    .theme-section,
+    [class*="bg-card/"],
+    [class*="bg-surface"],
+    [class*="bg-white/8"],
+    [class*="bg-white/9"],
+    footer [class*="bg-card"],
+    footer [class*="bg-white/"]
+  ) {
+  color: var(--text-on-card);
+}
+
+/* ── Default surface typography (deep blue backgrounds) ── */
+[data-theme="blue"] main,
+[data-theme="blue"] section:not(:is(.about-us-page *)) {
+  color: var(--text-primary);
+}
+
+[data-theme="blue"] main :is(h1, h2, h3, h4, h5, h6),
+[data-theme="blue"] section :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+[data-theme="blue"] .font-black,
+[data-theme="blue"] .font-bold:not(button):not(a.btn-primary):not(a.rounded-full) {
+  opacity: 1;
+}
+
+/* Tailwind slate/gray/zinc on blue surfaces → readable light text */
+[data-theme="blue"] .text-slate-900,
+[data-theme="blue"] .text-slate-800,
+[data-theme="blue"] .text-gray-900,
+[data-theme="blue"] .text-gray-800,
+[data-theme="blue"] .text-zinc-900,
+[data-theme="blue"] .text-zinc-800,
+[data-theme="blue"] .text-black {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-slate-700,
+[data-theme="blue"] .text-slate-600,
+[data-theme="blue"] .text-gray-700,
+[data-theme="blue"] .text-gray-600,
+[data-theme="blue"] .text-zinc-700,
+[data-theme="blue"] .text-zinc-600 {
+  color: rgba(255, 255, 255, 0.9) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-slate-500,
+[data-theme="blue"] .text-gray-500,
+[data-theme="blue"] .text-zinc-500 {
+  color: rgba(255, 255, 255, 0.78) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-slate-400,
+[data-theme="blue"] .text-gray-400,
+[data-theme="blue"] .text-zinc-400 {
+  color: rgba(255, 255, 255, 0.65) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-slate-300,
+[data-theme="blue"] .text-gray-300,
+[data-theme="blue"] .text-zinc-300 {
+  color: rgba(255, 255, 255, 0.55) !important;
+  opacity: 1 !important;
+}
+
+/* Brand / accent labels on blue surfaces */
+[data-theme="blue"] .text-purple-700,
+[data-theme="blue"] .text-purple-600,
+[data-theme="blue"] .text-cyan-600,
+[data-theme="blue"] .text-cyan-700,
+[data-theme="blue"] .text-cyan-500,
+[data-theme="blue"] .text-blue-600,
+[data-theme="blue"] .text-blue-700,
+[data-theme="blue"] .text-emerald-600,
+[data-theme="blue"] .text-emerald-700 {
+  color: var(--text-accent) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-white,
+[data-theme="blue"] .text-white\/90,
+[data-theme="blue"] .text-white\/85,
+[data-theme="blue"] .text-white\/80 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-white\/70,
+[data-theme="blue"] .text-white\/60 {
+  color: rgba(255, 255, 255, 0.78) !important;
+  opacity: 1 !important;
+}
+
+/* ── Card island overrides (dark text on glass) ── */
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    article.bg-card,
+    aside.bg-card,
+    form.bg-card,
+    .theme-panel,
+    .theme-section,
+    [class*="bg-card/"],
+    [class*="bg-surface"],
+    [class*="bg-white/8"],
+    [class*="bg-white/9"],
+    footer [class*="bg-card"],
+    footer [class*="bg-white/"]
+  )
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .font-black,
+    .font-bold,
+    .text-slate-900,
+    .text-slate-800,
+    .text-gray-900,
+    .text-gray-800,
+    .text-zinc-900,
+    .text-zinc-800,
+    .text-black,
+    .text-fg
+  ) {
+  color: var(--text-on-card-heading) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    article.bg-card,
+    aside.bg-card,
+    form.bg-card,
+    .theme-panel,
+    .theme-section,
+    [class*="bg-card/"],
+    [class*="bg-surface"],
+    [class*="bg-white/8"],
+    [class*="bg-white/9"],
+    footer [class*="bg-card"],
+    footer [class*="bg-white/"]
+  )
+  :is(
+    p,
+    li,
+    span,
+    label,
+    td,
+    th,
+    .text-slate-700,
+    .text-slate-600,
+    .text-gray-700,
+    .text-gray-600,
+    .text-zinc-700,
+    .text-zinc-600,
+    .text-slate-500,
+    .text-gray-500,
+    .text-zinc-500,
+    .text-fg-muted
+  ) {
+  color: var(--text-on-card-body) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    article.bg-card,
+    aside.bg-card,
+    form.bg-card,
+    .theme-panel,
+    .theme-section,
+    [class*="bg-card/"],
+    [class*="bg-white/8"],
+    [class*="bg-white/9"]
+  )
+  :is(.text-slate-400, .text-gray-400, .text-zinc-400) {
+  color: var(--text-on-card-muted) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] :is(
+    .card,
+    .bg-card,
+    article.bg-card,
+    aside.bg-card,
+    form.bg-card,
+    .theme-panel,
+    .theme-section,
+    [class*="bg-card/"],
+    [class*="bg-white/8"],
+    [class*="bg-white/9"]
+  )
+  :is(
+    .text-purple-700,
+    .text-purple-600,
+    .text-cyan-600,
+    .text-cyan-700,
+    .text-blue-600,
+    .text-brand,
+    .text-brand-alt
+  ) {
+  color: #003262 !important;
+  opacity: 1 !important;
+}
+
+/* ── Links ── */
+[data-theme="blue"] a:not(.btn-primary):not([class*="btn-primary"]):not(.rounded-full.font-black) {
+  color: var(--text-link);
+}
+
+[data-theme="blue"] a:not(.btn-primary):not([class*="btn-primary"]):hover {
+  color: var(--text-link-hover);
+}
+
+[data-theme="blue"] :is(.card, .bg-card, .theme-panel, .theme-section, [class*="bg-card/"])
+  a:not(.btn-primary):not([class*="rounded-full"]) {
+  color: #003262 !important;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, .theme-panel, .theme-section, [class*="bg-card/"])
+  a:not(.btn-primary):not([class*="rounded-full"]):hover {
+  color: var(--text-link-hover) !important;
+}
+
+[data-theme="blue"] footer a {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="blue"] footer a:hover {
+  color: var(--text-accent);
+}
+
+/* ── Form controls ── */
+[data-theme="blue"] input,
+[data-theme="blue"] textarea,
+[data-theme="blue"] select {
+  color: var(--text-on-card-heading);
+}
+
+[data-theme="blue"] input::placeholder,
+[data-theme="blue"] textarea::placeholder {
+  color: var(--text-on-card-muted);
+  opacity: 1;
+}
+
+[data-theme="blue"] input:focus,
+[data-theme="blue"] textarea:focus,
+[data-theme="blue"] select:focus {
+  color: var(--text-on-card-heading);
+}
+
+[data-theme="blue"] input:disabled,
+[data-theme="blue"] textarea:disabled,
+[data-theme="blue"] select:disabled,
+[data-theme="blue"] button:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed;
+}
+
+[data-theme="blue"] label {
+  color: inherit;
+  opacity: 1;
+}
+
+/* ── Tables ── */
+[data-theme="blue"] table {
+  color: var(--text-primary);
+}
+
+[data-theme="blue"] :is(.card, .bg-card, .theme-section) table {
+  color: var(--text-on-card-heading);
+}
+
+[data-theme="blue"] table th {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, .theme-section) table th {
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] table td {
+  color: rgba(255, 255, 255, 0.88);
+  opacity: 1;
+}
+
+[data-theme="blue"] :is(.card, .bg-card, .theme-section) table td {
+  color: var(--text-on-card-body) !important;
+}
+
+/* ── Badges & alerts on surface ── */
+[data-theme="blue"] .bg-green-50,
+[data-theme="blue"] .bg-emerald-50 {
+  color: #166534 !important;
+}
+
+[data-theme="blue"] .bg-red-50 {
+  color: #b91c1c !important;
+}
+
+[data-theme="blue"] .bg-amber-50 {
+  color: #92400e !important;
+}
+
+[data-theme="blue"] .bg-blue-50 {
+  color: #1e40af !important;
+}
+
+/* Status pills in admin / orders */
+[data-theme="blue"] .bg-blue-50.text-blue-700,
+[data-theme="blue"] .bg-amber-50.text-amber-800,
+[data-theme="blue"] .bg-purple-50.text-purple-700,
+[data-theme="blue"] .bg-emerald-50.text-emerald-700,
+[data-theme="blue"] .bg-red-50.text-red-700 {
+  opacity: 1 !important;
+}
+
+/* ── Navbar mega menu & dropdowns ── */
+[data-theme="blue"] header.sticky [class*="group-hover:visible"],
+[data-theme="blue"] header.sticky [class*="group-hover\\:visible"] {
+  color: #ffffff;
+}
+
+[data-theme="blue"] header.sticky [class*="group-hover:visible"] h3,
+[data-theme="blue"] header.sticky [class*="group-hover:visible"] .font-black {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] header.sticky [class*="group-hover:visible"] p,
+[data-theme="blue"] header.sticky [class*="group-hover:visible"] .text-gray-500 {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+/* ── Cart drawer ── */
+[data-theme="blue"] aside.absolute[class*="bg-app"] {
+  color: #ffffff;
+}
+
+[data-theme="blue"] aside.absolute[class*="bg-app"] [class*="bg-card/"] {
+  color: var(--text-on-card);
+}
+
+/* ── Tooltips & popovers ── */
+[data-theme="blue"] [role="tooltip"],
+[data-theme="blue"] .home-pain-tooltip {
+  color: var(--text-on-card-heading);
+}
+
+/* ── Focus rings (accessibility) ── */
+[data-theme="blue"] :focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+[data-theme="blue"] :is(.card, .bg-card) :focus-visible {
+  outline-color: #003262;
+}
+
+/* ── Selected / active tab text (non-button) ── */
+[data-theme="blue"] [aria-selected="true"]:not(button):not(a) {
+  color: var(--text-accent);
+}
+
+/* Preserve intentional semantic colors */
+[data-theme="blue"] .text-red-500,
+[data-theme="blue"] .text-red-600,
+[data-theme="blue"] .text-red-700 {
+  color: #ef4444 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-yellow-500,
+[data-theme="blue"] .text-amber-500 {
+  color: #f59e0b !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .text-green-600,
+[data-theme="blue"] .text-emerald-600 {
+  color: #16a34a !important;
+  opacity: 1 !important;
+}
+
+/* ── Toasts (react-hot-toast) ── */
+[data-theme="blue"] [class*="react-hot-toast"],
+[data-theme="blue"] div[role="status"] {
+  color: var(--text-on-card-heading);
+}
+
+[data-theme="blue"] [class*="react-hot-toast"] p {
+  color: var(--text-on-card-body) !important;
+  opacity: 1 !important;
+}
+
+/* Product sale prices — keep orange (inline style from productPriceStyle) */
+[data-theme="blue"] [style*="color: rgb(255, 136, 0)"],
+[data-theme="blue"] [style*="color:#FF8800"],
+[data-theme="blue"] [style*="color: #FF8800"] {
+  color: #ff8800 !important;
+}
+
+/* Dark modals on blue — white body text (overrides card-island dark text) */
+[data-theme="blue"] .smart-size-finder-modal {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal :is(p, li, span, label, .text-gray-500, .text-slate-600, .text-fg-muted) {
+  color: rgba(255, 255, 255, 0.88) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .smart-size-finder-modal :is(h1, h2, h3, h4, .font-black) {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}

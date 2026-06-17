@@ -103,13 +103,13 @@
 [data-theme="blue"] select {
   background-color: var(--card-bg);
   border-color: var(--card-border);
-  color: var(--text-primary);
+  color: var(--text-on-card);
   backdrop-filter: blur(12px);
 }
 
 [data-theme="blue"] input::placeholder,
 [data-theme="blue"] textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--text-on-card-muted);
 }
 
 [data-theme="blue"] input:focus,
@@ -144,7 +144,8 @@
 }
 
 [data-theme="blue"] .blog-strip a span {
-  color: var(--text-primary) !important;
+  color: var(--text-on-card-heading) !important;
+  opacity: 1 !important;
 }
 
 [data-theme="blue"] section.bg-card.border-b {
@@ -170,12 +171,28 @@
   color: rgba(255, 255, 255, 0.82) !important;
 }
 
+/* Toast / elements that combine bg-card + text-fg on same node */
+[data-theme="blue"] [class*="bg-card"].text-fg,
+[data-theme="blue"] [class*="bg-card"] .text-fg,
+[data-theme="blue"] .bg-card.text-fg {
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] [class*="bg-card"] .text-fg-muted,
+[data-theme="blue"] [class*="bg-card"].text-fg-muted {
+  color: var(--text-on-card-body) !important;
+}
+
 [data-theme="blue"] .bg-card .text-fg,
-[data-theme="blue"] .card .text-fg {
+[data-theme="blue"] .card .text-fg,
+[data-theme="blue"] .theme-section .text-fg,
+[data-theme="blue"] .theme-panel .text-fg {
   color: #12324a !important;
 }
 
 [data-theme="blue"] .bg-card .text-fg-muted,
-[data-theme="blue"] .card .text-fg-muted {
+[data-theme="blue"] .card .text-fg-muted,
+[data-theme="blue"] .theme-section .text-fg-muted,
+[data-theme="blue"] .theme-panel .text-fg-muted {
   color: #4f6980 !important;
 }

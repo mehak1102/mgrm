@@ -1,0 +1,118 @@
+/**
+ * Blue theme — Blogs listing page readability (#003262 + glass cards)
+ */
+
+/* ── Category marquee strip ── */
+[data-theme="blue"] .blogs-page .blog-strip a {
+  background: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  color: var(--text-on-card-heading);
+}
+
+[data-theme="blue"] .blogs-page .blog-strip a span {
+  color: var(--text-on-card-heading) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page section.border-b[class*="bg-white"] {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* ── Hero copy on deep blue ── */
+[data-theme="blue"] .blogs-page .text-slate-900,
+[data-theme="blue"] .blogs-page h1.text-slate-900 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page .text-gray-500,
+[data-theme="blue"] .blogs-page .text-slate-700 {
+  color: rgba(255, 255, 255, 0.82) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page .text-purple-700 {
+  color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+/* Guides count pill */
+[data-theme="blue"] .blogs-page .rounded-2xl.bg-card {
+  color: var(--text-on-card-body) !important;
+  background: var(--card-bg) !important;
+}
+
+[data-theme="blue"] .blogs-page .rounded-2xl.bg-card .text-gray-500 {
+  color: var(--text-on-card-body) !important;
+}
+
+/* ── Filter chips ── */
+[data-theme="blue"] .blogs-page button.bg-card,
+[data-theme="blue"] .blogs-page button[class*="bg-card"]:not(.bg-purple-700) {
+  color: var(--text-on-card-heading) !important;
+  background: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page button.bg-card:hover {
+  border-color: var(--border-hover) !important;
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] .blogs-page button.bg-purple-700.text-white {
+  background: var(--action-primary) !important;
+  color: var(--action-text) !important;
+  border-color: transparent !important;
+}
+
+/* ── Section headings on blue surface ── */
+[data-theme="blue"] .blogs-page section > .mb-10 h2,
+[data-theme="blue"] .blogs-page section h2.text-slate-900 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* ── Editorial & featured cards (glass islands) ── */
+[data-theme="blue"] .blogs-page a.bg-card,
+[data-theme="blue"] .blogs-page a[class*="bg-card"] {
+  color: var(--text-on-card-heading);
+  background: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+}
+
+[data-theme="blue"] .blogs-page a.bg-card :is(h2, h3, .font-black),
+[data-theme="blue"] .blogs-page a[class*="bg-card"] :is(h2, h3, .font-black) {
+  color: var(--text-on-card-heading) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page a.bg-card .text-slate-900,
+[data-theme="blue"] .blogs-page a[class*="bg-card"] .text-slate-900 {
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] .blogs-page a.bg-card :is(.text-gray-500, .text-gray-400),
+[data-theme="blue"] .blogs-page a[class*="bg-card"] :is(.text-gray-500, .text-gray-400) {
+  color: var(--text-on-card-body) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page a.bg-card .text-purple-700,
+[data-theme="blue"] .blogs-page a[class*="bg-card"] .text-purple-700,
+[data-theme="blue"] .blogs-page a.bg-card:hover h3,
+[data-theme="blue"] .blogs-page a.bg-card.group:hover h3 {
+  color: #003262 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .blogs-page a.bg-card:hover .text-purple-700,
+[data-theme="blue"] .blogs-page a.bg-card.group:hover .text-purple-700 {
+  color: #d4a900 !important;
+}
+
+/* Empty state */
+[data-theme="blue"] .blogs-page .text-slate-700 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}

@@ -30,7 +30,7 @@ export default function Blogs() {
   } = useBlogs(filterType);
 
   return (
-    <main className="bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen">
+    <main className="blogs-page bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen">
       <FloatingMedicalBg />
 
       <div className="relative z-10">

@@ -72,6 +72,8 @@ export const THEME_TOKENS = {
     "text-secondary": "rgba(255, 255, 255, 0.82)",
     "text-muted": "rgba(255, 255, 255, 0.65)",
     "text-accent": "#FFD700",
+    "text-on-card": "#12324a",
+    "text-on-card-muted": "#4f6980",
     "gradient-from": "#003262",
     "gradient-via": "#003262",
     "gradient-to": "#00284E",

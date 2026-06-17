@@ -397,7 +397,7 @@ export default function Home() {
                         {String(index + 1).padStart(2, "0")}
                       </span>
 
-                      <span className="absolute left-8 top-0 whitespace-nowrap rounded-full bg-black/80 text-white text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition">
+                      <span className="home-hero-map-tooltip absolute left-8 top-0 whitespace-nowrap rounded-full bg-black/80 text-white text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition">
                         {cat.name}
                       </span>
                     </motion.button>
