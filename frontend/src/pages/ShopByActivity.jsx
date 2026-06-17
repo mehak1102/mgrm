@@ -110,7 +110,7 @@ export default function ShopByActivity() {
   return (
     <main className="bg-[#f7f8fb] bg-app min-h-screen">
           <FloatingMedicalBg />
-      <div className="max-w-[1500px] mx-auto px-5 py-8">
+      <div className="max-w-[1500px] mx-auto px-3 sm:px-5 py-6 sm:py-8">
         <div className="text-sm text-fg-muted mb-6">
           Home <span className="mx-2">›</span> Shop By Activity
         </div>
@@ -291,7 +291,7 @@ export default function ShopByActivity() {
             </div>
 
             {loading ? (
-              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
+              <div className="shop-product-grid">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
                   <div key={x} className="h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
@@ -304,13 +304,7 @@ export default function ShopByActivity() {
                 </p>
               </div>
             ) : (
-              <div
-                className={
-                  view === "grid"
-                    ? "grid md:grid-cols-2 xl:grid-cols-4 gap-7"
-                    : "grid gap-5"
-                }
-              >
+              <div className={view === "grid" ? "shop-product-grid responsive-card-grid" : "grid gap-5"}>
                 {filteredProducts.map((product) => {
                   const price = Number(product.price || 0);
                   const discountPrice = Number(product.discountPrice || product.price || 0);

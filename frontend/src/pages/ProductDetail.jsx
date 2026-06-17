@@ -85,14 +85,14 @@ export default function ProductDetail() {
 
   return (
     <main className="bg-[#f7f7f7] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
-      <div className="max-w-[1400px] mx-auto px-6 py-10 grid lg:grid-cols-2 gap-14">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-10 grid lg:grid-cols-2 gap-8 lg:gap-14">
         <motion.section
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45 }}
-          className="flex gap-6"
+          className="product-gallery-layout flex gap-4 sm:gap-6 min-w-0"
         >
-          <div className="flex flex-col gap-4">
+          <div className="product-thumb-rail flex flex-col gap-3 sm:gap-4 shrink-0">
             {images.map((img) => (
               <button
                 key={img}
@@ -109,10 +109,10 @@ export default function ProductDetail() {
             ))}
           </div>
 
-          <div className="flex-1 bg-card dark:bg-zinc-900 rounded-3xl p-6 shadow-sm min-h-[620px] flex items-center justify-center overflow-hidden">
+          <div className="product-gallery-main flex-1 bg-card dark:bg-zinc-900 rounded-3xl p-4 sm:p-6 shadow-sm min-h-[min(420px,55vh)] lg:min-h-[620px] flex items-center justify-center overflow-hidden min-w-0">
             <img
               src={activeImg}
-              className="w-full h-[560px] object-cover rounded-2xl transition duration-500 hover:scale-105"
+              className="w-full max-h-[min(380px,50vh)] lg:max-h-[560px] h-auto object-contain rounded-2xl transition duration-500 hover:scale-105"
               alt={product.name}
             />
           </div>
@@ -189,7 +189,7 @@ export default function ProductDetail() {
             <p className="text-xs mt-1 text-gray-500 dark:text-zinc-400">Stock: {stock}</p>
           </div>
 
-          <div className="flex gap-3 mt-6">
+          <div className="hidden lg:flex gap-3 mt-6">
             <button
               type="button"
               onClick={() => addToCart(product, qty, size)}
@@ -201,6 +201,25 @@ export default function ProductDetail() {
               type="button"
               onClick={() => toggleWishlist(product)}
               className={`w-14 flex items-center justify-center border rounded-xl transition ${
+                liked ? "text-red-500 border-red-300" : "border-edge"
+              }`}
+            >
+              <Heart size={20} fill={liked ? "currentColor" : "none"} />
+            </button>
+          </div>
+
+          <div className="product-mobile-cta lg:hidden flex gap-2">
+            <button
+              type="button"
+              onClick={() => addToCart(product, qty, size)}
+              className="flex-1 bg-purple-700 text-white py-3 rounded-xl font-semibold flex justify-center gap-2"
+            >
+              <ShoppingCart size={18} /> Add To Cart
+            </button>
+            <button
+              type="button"
+              onClick={() => toggleWishlist(product)}
+              className={`w-12 shrink-0 flex items-center justify-center border rounded-xl ${
                 liked ? "text-red-500 border-red-300" : "border-edge"
               }`}
             >

@@ -19,10 +19,10 @@ export default function Wishlist() {
     <main className="relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-5 py-8 sm:py-12">
 
         {/* HEADER */}
-        <div className="flex justify-between items-end mb-10">
+        <div className="wishlist-page-header flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-10">
           <div>
             <p className="text-purple-700 font-black tracking-widest text-sm">
               YOUR FAVORITES

@@ -222,7 +222,7 @@ export default function Home() {
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
-          <div className="relative max-w-[1500px] mx-auto px-6">
+          <div className="relative max-w-[1500px] mx-auto px-4 sm:px-6">
 
             <motion.h1
       initial={{ opacity: 0 }}
@@ -263,8 +263,8 @@ export default function Home() {
               </SectionLabel>
             </PremiumReveal>
 
-            <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-6">
-              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.2}>
+            <div className="home-hero-bento grid lg:grid-cols-[330px_1fr_330px] gap-6 lg:gap-10 items-center mt-6">
+              <PremiumStagger className="home-hero-side-cats space-y-4" stagger={0.14} delay={0.2}>
                 {bodyCategories.slice(0, 5).map((cat, index) => (
                   <PremiumStaggerItem key={cat.name}>
                     <button
@@ -298,7 +298,7 @@ export default function Home() {
                 ))}
               </PremiumStagger>
 
-              <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
+              <div className="home-hero-map-wrap relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden min-w-0">
                 <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
                 <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
@@ -405,7 +405,7 @@ export default function Home() {
                 })}
               </div>
 
-              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.35}>
+              <PremiumStagger className="home-hero-side-cats space-y-4" stagger={0.14} delay={0.35}>
                 {bodyCategories.slice(5, 10).map((cat, i) => {
                   const index = i + 5;
 

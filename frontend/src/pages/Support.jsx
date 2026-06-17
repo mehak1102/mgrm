@@ -72,8 +72,8 @@ export default function Support() {
       <div className="relative z-10">
 
         {/* HERO + FORM */}
-        <section className="relative py-20">
-          <div className="max-w-7xl mx-auto px-5 grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
+        <section className="relative py-16 sm:py-20">
+          <div className="support-hero-grid max-w-7xl mx-auto px-4 sm:px-5 grid lg:grid-cols-[0.95fr_1.05fr] gap-8 lg:gap-10 items-center">
 
             {/* LEFT */}
             <div>
