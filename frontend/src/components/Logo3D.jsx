@@ -673,8 +673,8 @@ export default function Logo3D() {
         flex
         items-center
         justify-center
-        w-[215px]
-        h-[64px]
+        w-[150px] sm:w-[180px] lg:w-[215px]
+        h-[52px] sm:h-[58px] lg:h-[64px]
         overflow-hidden
       "
     >

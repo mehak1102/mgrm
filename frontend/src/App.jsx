@@ -38,7 +38,7 @@ export default function App() {
     location.pathname === "/login" || location.pathname === "/register";
 
   return (
-    <div className="min-h-screen bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300">
+    <div className="min-h-screen bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300 overflow-x-clip max-w-[100vw]">
       {!hideLayout && <Navbar />}
 
       <ScrollToTop />
