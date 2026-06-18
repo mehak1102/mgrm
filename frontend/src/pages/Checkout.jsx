@@ -198,7 +198,7 @@ export default function Checkout() {
           </FadeUpText>
         </div>
 
-        <form onSubmit={handlePayment} className="checkout-layout grid lg:grid-cols-[1fr_420px] gap-6 lg:gap-8">
+        <form onSubmit={handlePayment} className="grid lg:grid-cols-[1fr_420px] gap-8">
           <section className={sectionCard}>
             <div className="flex items-center gap-3 mb-6">
               <div className={iconWrap}>

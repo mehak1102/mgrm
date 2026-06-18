@@ -41,26 +41,6 @@ const productImages = [
   'wrist2.png',
 ];
 
-/** Unique pastel theme per product category card */
-const PRODUCT_CARD_PASTELS = [
-  { front: '#dff4ff', back: '#c8ecff', text: '#0c4a6e', muted: '#31506f', border: '#bae6fd' },
-  { front: '#fce7f3', back: '#fbcfe8', text: '#9d174d', muted: '#831843', border: '#f9a8d4' },
-  { front: '#ede9fe', back: '#ddd6fe', text: '#5b21b6', muted: '#4c1d95', border: '#c4b5fd' },
-  { front: '#dcfce7', back: '#bbf7d0', text: '#166534', muted: '#14532d', border: '#86efac' },
-  { front: '#fef3c7', back: '#fde68a', text: '#92400e', muted: '#78350f', border: '#fcd34d' },
-  { front: '#ffe4e6', back: '#fecdd3', text: '#9f1239', muted: '#881337', border: '#fda4af' },
-  { front: '#e0f2fe', back: '#bae6fd', text: '#075985', muted: '#0c4a6e', border: '#7dd3fc' },
-  { front: '#f3e8ff', back: '#e9d5ff', text: '#6b21a8', muted: '#581c87', border: '#d8b4fe' },
-  { front: '#ecfccb', back: '#d9f99d', text: '#3f6212', muted: '#365314', border: '#bef264' },
-  { front: '#ccfbf1', back: '#99f6e4', text: '#115e59', muted: '#134e4a', border: '#5eead4' },
-  { front: '#fff1f2', back: '#ffe4e6', text: '#be123c', muted: '#9f1239', border: '#fecdd3' },
-  { front: '#f0f9ff', back: '#e0f2fe', text: '#0369a1', muted: '#075985', border: '#bae6fd' },
-  { front: '#faf5ff', back: '#f3e8ff', text: '#7e22ce', muted: '#6b21a8', border: '#e9d5ff' },
-  { front: '#fff7ed', back: '#ffedd5', text: '#c2410c', muted: '#9a3412', border: '#fdba74' },
-  { front: '#f0fdf4', back: '#dcfce7', text: '#15803d', muted: '#166534', border: '#bbf7d0' },
-  { front: '#fdf2f8', back: '#fce7f3', text: '#be185d', muted: '#9d174d', border: '#f9a8d4' },
-];
-
 const timeline = [
   {
     year: '1994',
@@ -373,14 +353,9 @@ const AboutUs = () => {
                 className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                 stagger={0.08}
               >
-                {productImages.map((image, index) => {
-                  const theme =
-                    PRODUCT_CARD_PASTELS[index % PRODUCT_CARD_PASTELS.length];
-                  const label = image.replace('.png', '');
-
-                  return (
+                {productImages.map((image, index) => (
                   <StaggerItem
-                    key={image}
+                    key={index}
                     className="group h-[360px] [perspective:1200px]"
                   >
                     <div
@@ -399,7 +374,7 @@ const AboutUs = () => {
                       >
                         <img
                           src={`/products/${image}`}
-                          alt={label}
+                          alt=""
                           className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                         />
 
@@ -407,41 +382,28 @@ const AboutUs = () => {
 
                         <div className="absolute bottom-6 left-6">
                           <h3 className="text-2xl font-bold capitalize text-white">
-                            {label}
+                            {image.replace('.png', '')}
                           </h3>
                         </div>
                       </div>
 
                       {/* BACK */}
                       <div
-                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border p-8 text-center shadow-2xl transition-colors duration-300"
+                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 dark:border-white/10 bg-[#dff4ff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 shadow-2xl"
                         style={{
                           transform: 'rotateY(180deg)',
                           backfaceVisibility: 'hidden',
                           WebkitBackfaceVisibility: 'hidden',
-                          backgroundColor: theme.back,
-                          borderColor: theme.border,
                         }}
                       >
-                        <div
-                          className="absolute inset-0 opacity-90"
-                          style={{
-                            background: `linear-gradient(135deg, ${theme.front}ee, ${theme.back}f5)`,
-                          }}
-                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/70 to-blue-100/50 backdrop-blur-xl" />
 
                         <div className="relative z-10">
-                          <h3
-                            className="text-3xl font-bold capitalize"
-                            style={{ color: theme.text }}
-                          >
-                            {label}
+                          <h3 className="text-3xl font-bold capitalize text-[#002B5B] dark:text-zinc-100">
+                            {image.replace('.png', '')}
                           </h3>
 
-                          <p
-                            className="mt-5 leading-8"
-                            style={{ color: theme.muted }}
-                          >
+                          <p className="mt-5 leading-8 text-[#31506f] text-gray-500 dark:text-zinc-800">
                             Premium orthopedic rehabilitation support
                             designed for medical precision, recovery,
                             mobility and patient comfort.
@@ -450,8 +412,7 @@ const AboutUs = () => {
                       </div>
                     </div>
                   </StaggerItem>
-                  );
-                })}
+                ))}
               </StaggerReveal>
             </section>
 

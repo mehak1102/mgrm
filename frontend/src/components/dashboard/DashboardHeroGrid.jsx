@@ -10,6 +10,54 @@ import { useTheme } from "../../context/ThemeContext";
 import { bodyCategories } from "../../data/siteData";
 import { getPosterCardTheme, getPosterWash, POSTER_GLOW } from "./dashboardTheme";
 
+/** Slow horizontal marquee — all products in one row, clickable with hover glow */
+function ProductCarousel({ items, textZone = "32%", onItemClick }) {
+  const list = items.filter((p) => p?.image && p?.slug);
+  if (!list.length) return null;
+
+  const loop = [...list, ...list];
+  const duration = Math.max(48, list.length * 2.2);
+
+  return (
+    <div
+      className="absolute inset-x-0 top-0 z-20 overflow-hidden dashboard-shop-carousel-mask"
+      style={{ bottom: textZone }}
+    >
+      <div
+        className="flex h-full items-stretch gap-2.5 sm:gap-3 w-max dashboard-shop-carousel py-3 px-3"
+        style={{ animationDuration: `${duration}s` }}
+      >
+        {loop.map((item, i) => (
+          <button
+            key={`${item.slug}-${i}`}
+            type="button"
+            title={item.name}
+            onClick={(e) => {
+              e.stopPropagation();
+              onItemClick?.(item.slug);
+            }}
+            className="dashboard-carousel-card group/card relative h-full shrink-0 w-[clamp(88px,22%,148px)]
+              rounded-xl overflow-hidden cursor-pointer border border-white/20
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2"
+          >
+            <img
+              src={item.image}
+              alt={item.name || "Product"}
+              loading="lazy"
+              draggable={false}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-[1.06]"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300
+                group-hover/card:opacity-100 bg-gradient-to-t from-violet-600/25 via-transparent to-cyan-400/15"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /** Clean straight grid — no rotation, equal cells */
 function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
   const imgs = sources.filter(Boolean).slice(0, cols * rows);
@@ -26,13 +74,13 @@ function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
       {imgs.map((src, i) => (
         <div
           key={i}
-          className="flex items-center justify-center rounded-xl bg-white/5 min-h-0 p-1.5"
+          className="flex items-center justify-center rounded-xl min-h-0 p-0 overflow-hidden"
         >
           <img
             src={src}
             alt=""
             loading="lazy"
-            className="max-w-full max-h-full w-auto h-auto object-contain
+            className="w-full h-full object-cover
               drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-transform duration-500
               group-hover:scale-[1.03]"
           />
@@ -79,6 +127,8 @@ function PosterTile({
   title,
   subtitle,
   collage,
+  carousel,
+  onCarouselItemClick,
   gridCols = 2,
   gridRows = 2,
   splitImages,
@@ -105,8 +155,15 @@ function PosterTile({
   const textZone = size === "sm" ? "34%" : size === "md" ? "36%" : "32%";
 
   return (
-    <motion.button
-      type="button"
+    <motion.div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick?.();
+        }
+      }}
       onClick={onClick}
       initial={{ opacity: 0, y: 24, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -114,7 +171,7 @@ function PosterTile({
       whileHover={{ scale: 1.01, y: -2 }}
       whileTap={{ scale: 0.99 }}
       style={{ boxShadow: glow, x, y }}
-      className={`relative overflow-hidden rounded-[28px] sm:rounded-[32px] text-left
+      className={`relative overflow-hidden rounded-[28px] sm:rounded-[32px] text-left cursor-pointer
         group h-full min-h-0 w-full ${cardTheme.border} border ${className}`}
     >
       <div
@@ -123,7 +180,15 @@ function PosterTile({
       />
       <div className={`absolute inset-0 z-0 ${cardTheme.bgOverlay}`} />
 
-      {collage && (
+      {carousel && (
+        <ProductCarousel
+          items={carousel}
+          textZone={textZone}
+          onItemClick={onCarouselItemClick}
+        />
+      )}
+
+      {collage && !carousel && (
         <ProductGrid
           sources={collage}
           cols={gridCols}
@@ -172,7 +237,7 @@ function PosterTile({
       </div>
 
       {children}
-    </motion.button>
+    </motion.div>
   );
 }
 
@@ -214,15 +279,13 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     [products]
   );
 
-  const shopCollage = useMemo(() => {
-    const fromFeatured = productImages(featured);
-    if (fromFeatured.length >= 4) return fromFeatured.slice(0, 4);
-    const fallback = productImages(products.slice(0, 4));
-    while (fallback.length < 4 && products.length) {
-      fallback.push(products[fallback.length % products.length]?.images?.[0]);
-    }
-    return fallback.filter(Boolean).slice(0, 4);
-  }, [featured, products]);
+  const shopCarouselItems = useMemo(
+    () =>
+      products
+        .filter((p) => p?.images?.[0] && p?.slug)
+        .map((p) => ({ slug: p.slug, image: p.images[0], name: p.name })),
+    [products]
+  );
 
   const featuredCollage = useMemo(() => {
     const imgs = productImages(featured);
@@ -287,9 +350,8 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           label="Explore"
           title="Shop Products"
           subtitle={`${products.length || "—"} medical supports`}
-          collage={shopCollage}
-          gridCols={2}
-          gridRows={2}
+          carousel={shopCarouselItems}
+          onCarouselItemClick={(slug) => onRoute(`/product/${slug}`)}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}

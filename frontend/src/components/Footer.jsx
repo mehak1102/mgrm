@@ -319,7 +319,7 @@ export default function Footer() {
               aria-hidden
             />
 
-            <div className="footer-newsletter-inner relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-md">
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand">
                   Newsletter

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, X } from "lucide-react";
+import API from "../../api";
 import { useDashboard } from "../../context/DashboardContext";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
@@ -23,6 +24,70 @@ const ACCOUNT_SECTIONS = new Set([
 
 const ease = [0.22, 1, 0.36, 1];
 
+function isCountChar(text, index) {
+  const firstSpace = text.indexOf(" ");
+  if (firstSpace === -1) return text[index] !== " ";
+  return index < firstSpace && text[index] !== " ";
+}
+
+function FlowingLetterText({ text, countColor, textColor }) {
+  const [visible, setVisible] = useState(0);
+
+  useEffect(() => {
+    if (!text) return;
+    let count = 0;
+    let timer;
+
+    const step = () => {
+      if (count <= text.length) {
+        setVisible(count);
+        count += 1;
+        timer = setTimeout(step, 88);
+      } else {
+        timer = setTimeout(() => {
+          count = 0;
+          setVisible(0);
+          timer = setTimeout(step, 500);
+        }, 2600);
+      }
+    };
+
+    step();
+    return () => clearTimeout(timer);
+  }, [text]);
+
+  return (
+    <p className="text-base sm:text-xl font-semibold tracking-tight mt-0.5" aria-label={text}>
+      {text.split("").map((char, i) => {
+        const shown = i < visible;
+        const isCount = isCountChar(text, i);
+
+        return (
+          <span
+            key={`${char}-${i}`}
+            className={`dashboard-flow-letter ${isCount ? "font-black" : "font-semibold"}`}
+            style={{
+              opacity: shown ? 1 : 0,
+              transform: shown ? "translateX(0)" : "translateX(-8px)",
+              transitionDelay: shown ? `${i * 18}ms` : "0ms",
+              color: isCount ? countColor : textColor,
+            }}
+          >
+            {char === " " ? "\u00A0" : char}
+          </span>
+        );
+      })}
+      <span
+        className="dashboard-flow-caret ml-0.5 inline-block w-[2px] h-[0.85em] align-[-0.12em] rounded-full"
+        style={{
+          backgroundColor: textColor,
+          opacity: visible > 0 && visible < text.length ? 1 : 0.35,
+        }}
+      />
+    </p>
+  );
+}
+
 export default function UserDashboardOverlay() {
   const { isOpen, closeDashboard, scrollTarget, setScrollTarget } = useDashboard();
   const { user } = useAuth();
@@ -33,6 +98,14 @@ export default function UserDashboardOverlay() {
   const [view, setView] = useState("hero");
   const [activeSection, setActiveSection] = useState(null);
   const [isZooming, setIsZooming] = useState(false);
+  const [productCount, setProductCount] = useState(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    API.get("/products")
+      .then((r) => setProductCount((r.data.products || []).length))
+      .catch(() => setProductCount(null));
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -128,36 +201,50 @@ export default function UserDashboardOverlay() {
               transition={{ duration: 0.5, delay: 0.2, ease }}
               className={`relative z-20 flex shrink-0 items-center justify-between px-5 sm:px-10 py-3.5 border-b ${dt.headerBorder} backdrop-blur-2xl ${dt.headerBg}`}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0 flex-1">
                 {view === "section" && (
                   <button
                     type="button"
                     onClick={backToHero}
-                    className={`w-10 h-10 rounded-full grid place-items-center ${dt.closeBtn}`}
+                    className={`w-10 h-10 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
                     aria-label="Back to grid"
                   >
                     <ArrowLeft size={18} />
                   </button>
                 )}
-                <div>
+                <div className="min-w-0">
                   <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${dt.accent}`}>
                     MGRM Medicare
                   </p>
-                  <h1 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
-                    {view === "section"
-                      ? SECTION_LABELS[activeSection] || "Account"
-                      : `Hello, ${user.name?.split(" ")[0] || "there"}`}
-                  </h1>
+                  {view === "section" ? (
+                    <h1 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
+                      {SECTION_LABELS[activeSection] || "Account"}
+                    </h1>
+                  ) : (
+                    <FlowingLetterText
+                      text={`${productCount ?? "—"} MGRM medical supports`}
+                      countColor={dt.flowCountColor}
+                      textColor={dt.flowTextColor}
+                    />
+                  )}
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={closeDashboard}
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full grid place-items-center ${dt.closeBtn}`}
-                aria-label="Close dashboard"
-              >
-                <X size={20} />
-              </button>
+
+              <div className="flex items-center gap-3 sm:gap-5 shrink-0">
+                {view === "hero" && (
+                  <p className={`text-sm sm:text-xl font-semibold tracking-tight whitespace-nowrap ${dt.stat}`}>
+                    Hello, {user.name?.split(" ")[0] || "there"}
+                  </p>
+                )}
+                <button
+                  type="button"
+                  onClick={closeDashboard}
+                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full grid place-items-center ${dt.closeBtn}`}
+                  aria-label="Close dashboard"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </motion.header>
 
             <div className="relative z-10 flex-1 min-h-0 overflow-hidden">

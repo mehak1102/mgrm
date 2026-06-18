@@ -120,7 +120,7 @@ export default function Blogs() {
               </h2>
             </PremiumReveal>
 
-            <div className="shop-product-grid responsive-card-grid">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
               {bodyPartBlogs
                 .filter((b) => b.slug !== featuredBlog?.slug)
                 .map((blog, index) => (
@@ -142,7 +142,7 @@ export default function Blogs() {
               </h2>
             </PremiumReveal>
 
-            <div className="shop-product-grid responsive-card-grid">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
               {activityBlogs.map((blog, index) => (
                 <BlogCardEditorial key={blog.slug} blog={blog} index={index} />
               ))}

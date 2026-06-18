@@ -144,7 +144,7 @@ export default function ShopByBody() {
           </button>
         </div>
 
-        <div className="body-shop-grid responsive-card-grid">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {filtered.map((cat, index) => (
             <motion.article
               key={cat.name}

@@ -10,7 +10,6 @@
 @import "./theme/blue-theme-aboutus.css";
 @import "./theme/blue-theme-actions.css";
 @import "./theme/blue-theme-polish.css";
-@import "./theme/responsive.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -316,6 +315,62 @@ body {
   animation-play-state: paused;
 }
 
+.dashboard-shop-carousel {
+  animation: dashboardShopCarousel linear infinite;
+}
+
+@keyframes dashboardShopCarousel {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.dashboard-shop-carousel-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.group:hover .dashboard-shop-carousel {
+  animation-play-state: paused;
+}
+
+.dashboard-carousel-card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    filter 0.35s ease;
+}
+
+.dashboard-carousel-card:hover {
+  transform: scale(1.06) translateY(-2px);
+  z-index: 10;
+  border-color: rgba(255, 255, 255, 0.55);
+  filter: brightness(1.06) saturate(1.08);
+  box-shadow:
+    0 0 18px rgba(124, 58, 237, 0.55),
+    0 0 36px rgba(34, 167, 220, 0.4),
+    0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.dashboard-shop-carousel:hover {
+  animation-play-state: paused;
+}
+
+.dashboard-flow-letter {
+  display: inline-block;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.dashboard-flow-caret {
+  animation: dashboardFlowCaret 1.05s ease-in-out infinite;
+}
+
+@keyframes dashboardFlowCaret {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
 @keyframes certScroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -346,39 +401,6 @@ body {
 @keyframes premiumMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-
-.dashboard-shop-carousel-wrap {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 12%,
-    black 88%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 12%,
-    black 88%,
-    transparent 100%
-  );
-}
-
-.dashboard-shop-carousel {
-  animation: dashboardShopCarousel 72s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
-.dashboard-shop-carousel-wrap:hover .dashboard-shop-carousel {
-  animation-play-state: paused;
-}
-
-@keyframes dashboardShopCarousel {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .perspective {

@@ -8,8 +8,6 @@ import {
   Star,
   ShoppingCart,
   ChevronDown,
-  SlidersHorizontal,
-  X,
 } from "lucide-react";
 import API from "../api";
 import { bodyCategories } from "../data/siteData";
@@ -48,7 +46,6 @@ export default function Shop() {
   const [view, setView] = useState("grid");
   const [maxPrice, setMaxPrice] = useState(5000);
   const [loading, setLoading] = useState(true);
-  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     setActiveCategory(params.get("category") || "");
@@ -94,42 +91,19 @@ const clearFilters = () => {
 
   return (
     <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
-      <div className="max-w-[1500px] mx-auto px-3 sm:px-5 py-6 sm:py-8">
+      <div className="max-w-[1500px] mx-auto px-5 py-8">
         <div className="text-sm text-fg-muted mb-6">
           Home <span className="mx-2">›</span> All Products
         </div>
 
-        <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
-          {filtersOpen && (
-            <button
-              type="button"
-              aria-label="Close filters"
-              className="lg:hidden fixed inset-0 z-40 bg-black/40"
-              onClick={() => setFiltersOpen(false)}
-            />
-          )}
-          <aside
-            className={`bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)]
-              lg:sticky lg:top-24 lg:h-[calc(100vh-110px)] lg:overflow-hidden
-              fixed lg:relative inset-y-0 left-0 z-50 w-[min(100%,320px)] h-full lg:h-auto
-              transform transition-transform duration-300
-              ${filtersOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
-          >
+        <div className="grid lg:grid-cols-[280px_1fr] gap-8">
+          {/* <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24"> */}
+          <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] sticky top-24 h-[calc(100vh-110px)] overflow-hidden">
             <div className="p-5 border-b flex justify-between items-center">
               <h2 className="text-xl font-black">Filters</h2>
-              <div className="flex items-center gap-2">
-                <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
-                  Clear All
-                </button>
-                <button
-                  type="button"
-                  className="lg:hidden p-1 rounded-lg hover:bg-surface-hover"
-                  onClick={() => setFiltersOpen(false)}
-                  aria-label="Close filters"
-                >
-                  <X size={18} />
-                </button>
-              </div>
+              <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
+                Clear All
+              </button>
             </div>
 <div className="h-[calc(100%-72px)] overflow-y-auto custom-scroll">
             <div className="p-5 border-b">
@@ -246,38 +220,30 @@ onClick={() => {
               </div>
           </aside>
 
-          <section className="min-w-0">
-            <div className="flex flex-col md:flex-row justify-between gap-4 sm:gap-5 mb-6 sm:mb-7">
-              <div className="min-w-0">
+          <section>
+            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7">
+              <div>
                 <div className="flex flex-wrap items-baseline gap-x-2">
                   <SectionHeading
                     text="All Products"
                     as="h1"
-                    className="text-2xl sm:text-4xl font-black"
+                    className="text-4xl font-black"
                   />
-                  <span className="text-fg-muted/80 text-xl sm:text-2xl font-black">
+                  <span className="text-fg-muted/80 text-2xl font-black">
                     ({filteredProducts.length})
                   </span>
                 </div>
-                <FadeUpText className="text-fg-muted mt-2 text-sm sm:text-base">
+                <FadeUpText className="text-fg-muted mt-2">
                   Explore our wide range of support and care products.
                 </FadeUpText>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                <button
-                  type="button"
-                  onClick={() => setFiltersOpen(true)}
-                  className="lg:hidden inline-flex items-center gap-2 bg-card border rounded-xl px-4 py-2.5 text-sm font-bold"
-                >
-                  <SlidersHorizontal size={16} />
-                  Filters
-                </button>
-                <label className="text-sm font-semibold shrink-0">Sort By:</label>
+              <div className="flex items-center gap-4">
+                <label className="text-sm font-semibold">Sort By:</label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-card border rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 outline-none text-sm min-w-0 max-w-full"
+                  className="bg-card border rounded-xl px-4 py-3 outline-none"
                 >
                   <option value="popularity">Popularity</option>
                   <option value="low">Price Low to High</option>
@@ -297,18 +263,18 @@ onClick={() => {
             </div>
 
             {loading ? (
-              <div className="shop-product-grid">
+              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="min-h-[380px] sm:min-h-[430px] bg-card rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow">
-                <h2 className="text-2xl sm:text-3xl font-black">No products found</h2>
+              <div className="bg-card rounded-2xl p-12 text-center shadow">
+                <h2 className="text-3xl font-black">No products found</h2>
                 <p className="text-fg-muted mt-2">Try clearing filters or check product category/colors/sizes in admin.</p>
               </div>
             ) : (
-              <div className={view === "grid" ? "shop-product-grid responsive-card-grid" : "grid gap-5"}>
+              <div className={view === "grid" ? "grid md:grid-cols-2 xl:grid-cols-4 gap-7" : "grid gap-5"}>
                 {filteredProducts.map((product) => {
                   const price = product.price || 0;
                   const discountPrice = product.discountPrice || product.price || 0;
@@ -317,11 +283,11 @@ onClick={() => {
                   return (
                     <article
                       key={product._id}
-                      className={`shop-product-card group bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
-                        view === "list" ? "flex flex-col sm:flex-row" : ""
+                      className={`group bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
+                        view === "list" ? "flex" : ""
                       }`}
                     >
-                      <Link to={`/product/${product.slug}`} className={`relative bg-card block ${view === "list" ? "sm:w-72 h-56 sm:h-72 shrink-0" : "h-56 sm:h-72"}`}>
+                      <Link to={`/product/${product.slug}`} className={`relative bg-card block ${view === "list" ? "w-72 h-72" : "h-72"}`}>
                         {save > 0 && (
                           <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
                             Save {save}%
@@ -358,7 +324,7 @@ onClick={() => {
   <Heart size={18} fill={isWishlisted(product) ? "currentColor" : "none"} />
 </button>
 
-                      <div className="shop-product-card-body p-4 sm:p-5 flex-1">
+                      <div className="p-5 flex-1">
                         <Link to={`/product/${product.slug}`}>
                           <h3 className="font-black line-clamp-2 hover:text-purple-600 transition">{product.name}</h3>
                         </Link>

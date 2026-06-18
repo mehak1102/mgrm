@@ -69,6 +69,8 @@ export function getDashboardTheme(theme) {
     input:
       "w-full rounded-xl px-3 py-2.5 text-sm bg-black/20 border border-white/16 text-white placeholder:text-white/55 focus:border-cyan-300/55 focus:ring-2 focus:ring-cyan-300/20 outline-none",
     subtleAction: "text-cyan-200 hover:text-cyan-100 hover:bg-cyan-300/10",
+    flowCountColor: "#ef4444",
+    flowTextColor: "#ffffff",
     blobs: vibrantBlobs,
     poster: getPosterCardTheme("dark"),
   };
@@ -91,6 +93,8 @@ export function getDashboardTheme(theme) {
       input:
         "w-full rounded-xl px-3 py-2.5 text-sm bg-[#081a34]/78 border border-cyan-300/25 text-white placeholder:text-white/55 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/25 outline-none",
       subtleAction: "text-cyan-200 hover:text-cyan-100 hover:bg-cyan-300/10",
+      flowCountColor: "#ff5555",
+      flowTextColor: "#f1f5f9",
       poster: getPosterCardTheme("blue"),
     };
   }
@@ -100,6 +104,8 @@ export function getDashboardTheme(theme) {
       shell: "bg-[#050508]",
       ...base,
       accent: "text-amber-300",
+      flowCountColor: "#f87171",
+      flowTextColor: "#f8fafc",
       poster: getPosterCardTheme("dark"),
       blobs: [
         { color: "rgba(255,136,0,0.28)", x: "8%", y: "8%", size: 460 },
@@ -127,6 +133,8 @@ export function getDashboardTheme(theme) {
     input:
       "w-full rounded-xl px-3 py-2.5 text-sm bg-white/90 border border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 outline-none",
     subtleAction: "text-indigo-600 hover:text-indigo-700 hover:bg-indigo-100",
+    flowCountColor: "#dc2626",
+    flowTextColor: "#0f172a",
     blobs: lightBlobs,
     poster: getPosterCardTheme("light"),
   };
