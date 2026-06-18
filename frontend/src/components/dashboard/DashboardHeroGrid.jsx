@@ -10,129 +10,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { bodyCategories } from "../../data/siteData";
 import { getPosterCardTheme, getPosterWash, POSTER_GLOW } from "./dashboardTheme";
 
-/** Fallback shots when highlight products are not in the catalog yet */
-const SHOP_TILE_IMAGES = ["/products/abdomen2.png", "/products/wrist2.png"];
-
-function findProductByTerms(products, terms) {
-  const normalized = terms.map((t) => t.toLowerCase());
-  return products.find((p) => {
-    const name = p.name?.toLowerCase() || "";
-    const slug = p.slug?.toLowerCase() || "";
-    return normalized.some(
-      (term) => name.includes(term) || slug.includes(term.replace(/\s+/g, "-"))
-    );
-  });
-}
-
-function getShopHighlightProducts(products) {
-  const withImage = products.filter((p) => p?.images?.[0] && p?.slug);
-  const slimTrimBelt = findProductByTerms(withImage, [
-    "slim trim belt",
-    "slim-trim-belt",
-    "slim trim",
-  ]);
-  const wristWrap = findProductByTerms(withImage, ["wrist wrap", "wrist-wrap"]);
-  const highlights = [];
-  if (slimTrimBelt) highlights.push(slimTrimBelt);
-  if (wristWrap && wristWrap.slug !== slimTrimBelt?.slug) highlights.push(wristWrap);
-  return highlights;
-}
-
-/** Slow horizontal strip — all products, seamless loop, clickable tiles */
-function ProductCarouselStrip({ products, onProductClick }) {
-  const items = products.filter((p) => p?.images?.[0] && p?.slug);
-  if (!items.length) return null;
-
-  const loop = items.length > 1 ? [...items, ...items] : items;
-
-  return (
-    <div className="relative flex-[1.2] min-h-0 overflow-hidden rounded-xl dashboard-shop-carousel-wrap pointer-events-auto">
-      <div
-        className={`flex h-full w-max gap-3 py-1 ${items.length > 1 ? "dashboard-shop-carousel" : ""}`}
-      >
-        {loop.map((product, i) => (
-          <button
-            key={`${product.slug}-${i}`}
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onProductClick?.(product.slug);
-            }}
-            className="dashboard-carousel-item group/item relative h-full aspect-[5/4] shrink-0 overflow-hidden rounded-xl
-              border border-white/25 bg-white/10
-              transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-              hover:border-sky-300/70
-              hover:shadow-[0_0_36px_rgba(125,211,252,0.75),0_0_64px_rgba(59,130,246,0.45),0_16px_40px_rgba(37,99,235,0.35)]
-              hover:scale-[1.06] hover:z-10
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/90
-              active:scale-[0.98]"
-            aria-label={product.name ? `View ${product.name}` : "View product"}
-          >
-            <img
-              src={product.images[0]}
-              alt={product.name || ""}
-              loading="lazy"
-              draggable={false}
-              className="w-full h-full object-cover object-[center_28%] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                group-hover/item:scale-[1.08] group-hover/item:brightness-[1.08] group-hover/item:saturate-[1.05]"
-            />
-            <div
-              className="absolute inset-0 opacity-0 group-hover/item:opacity-100 transition-opacity duration-700 pointer-events-none
-                bg-gradient-to-t from-sky-500/30 via-blue-400/10 to-white/15"
-            />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ProductGridRow({ sources, cols, rows }) {
-  const imgs = sources.filter(Boolean).slice(0, cols * rows);
-
-  return (
-    <div
-      className="flex-1 min-h-0 grid gap-2 sm:gap-2.5"
-      style={{
-        gridTemplateColumns: `repeat(${cols}, 1fr)`,
-        gridTemplateRows: `repeat(${rows}, 1fr)`,
-      }}
-    >
-      {imgs.map((src, i) => (
-        <div
-          key={i}
-          className="flex items-center justify-center rounded-xl min-h-0 overflow-hidden"
-        >
-          <img
-            src={src}
-            alt=""
-            loading="lazy"
-            className="w-full h-full object-cover object-[center_28%]
-              drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-transform duration-500
-              group-hover:scale-[1.03]"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function CarouselWithGrid({ carousel, collage, gridCols, gridRows, textZone, onProductClick }) {
-  return (
-    <div
-      className="absolute inset-x-3 top-3 z-20 flex flex-col gap-2 sm:gap-2.5"
-      style={{ bottom: textZone }}
-    >
-      <ProductCarouselStrip products={carousel} onProductClick={onProductClick} />
-      {collage?.length > 0 && (
-        <div className="pointer-events-none flex-1 min-h-0">
-          <ProductGridRow sources={collage} cols={gridCols} rows={gridRows} />
-        </div>
-      )}
-    </div>
-  );
-}
-
 /** Clean straight grid — no rotation, equal cells */
 function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
   const imgs = sources.filter(Boolean).slice(0, cols * rows);
@@ -149,13 +26,13 @@ function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
       {imgs.map((src, i) => (
         <div
           key={i}
-          className="flex items-center justify-center rounded-xl min-h-0 p-0 overflow-hidden"
+          className="flex items-center justify-center rounded-xl bg-white/5 min-h-0 p-1.5"
         >
           <img
             src={src}
             alt=""
             loading="lazy"
-            className="w-full h-full object-cover
+            className="max-w-full max-h-full w-auto h-auto object-contain
               drop-shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-transform duration-500
               group-hover:scale-[1.03]"
           />
@@ -202,7 +79,6 @@ function PosterTile({
   title,
   subtitle,
   collage,
-  carousel,
   gridCols = 2,
   gridRows = 2,
   splitImages,
@@ -214,7 +90,6 @@ function PosterTile({
   cardTheme,
   siteTheme,
   children,
-  onProductClick,
 }) {
   const x = useTransform(parallaxX, (v) => v * depth);
   const y = useTransform(parallaxY, (v) => v * depth);
@@ -229,23 +104,9 @@ function PosterTile({
         : "text-lg sm:text-xl lg:text-2xl";
   const textZone = size === "sm" ? "34%" : size === "md" ? "36%" : "32%";
 
-  const TileWrapper = carousel ? motion.div : motion.button;
-  const tileProps = carousel
-    ? {
-        role: "button",
-        tabIndex: 0,
-        onKeyDown: (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            onClick?.();
-          }
-        },
-      }
-    : { type: "button" };
-
   return (
-    <TileWrapper
-      {...tileProps}
+    <motion.button
+      type="button"
       onClick={onClick}
       initial={{ opacity: 0, y: 24, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -262,24 +123,13 @@ function PosterTile({
       />
       <div className={`absolute inset-0 z-0 ${cardTheme.bgOverlay}`} />
 
-      {collage && carousel ? (
-        <CarouselWithGrid
-          carousel={carousel}
-          collage={collage}
-          gridCols={gridCols}
-          gridRows={gridRows}
+      {collage && (
+        <ProductGrid
+          sources={collage}
+          cols={gridCols}
+          rows={gridRows}
           textZone={textZone}
-          onProductClick={onProductClick}
         />
-      ) : (
-        collage && (
-          <ProductGrid
-            sources={collage}
-            cols={gridCols}
-            rows={gridRows}
-            textZone={textZone}
-          />
-        )
       )}
 
       {splitImages && (
@@ -322,7 +172,7 @@ function PosterTile({
       </div>
 
       {children}
-    </TileWrapper>
+    </motion.button>
   );
 }
 
@@ -364,37 +214,15 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     [products]
   );
 
-  const shopHighlights = useMemo(() => getShopHighlightProducts(products), [products]);
-
-  const shopCarouselProducts = useMemo(() => {
-    const withImage = products.filter((p) => p?.images?.[0] && p?.slug);
-    if (!withImage.length) return [];
-
-    const highlightSlugs = new Set(shopHighlights.map((p) => p.slug));
-    const rest = withImage.filter((p) => !highlightSlugs.has(p.slug));
-    const ordered = [...shopHighlights, ...rest];
-
-    return ordered.map((product, index) => {
-      const isHighlight = highlightSlugs.has(product.slug);
-      const image = isHighlight
-        ? product.images[0]
-        : product.images?.[1] ||
-          SHOP_TILE_IMAGES[index % SHOP_TILE_IMAGES.length] ||
-          product.images[0];
-      return { ...product, images: [image] };
-    });
-  }, [products, shopHighlights]);
-
-  const shopBottomRow = useMemo(() => {
-    const imgs = shopHighlights.map((p) => p.images[0]).filter(Boolean);
-    if (imgs.length >= 2) return imgs.slice(0, 2);
-    const fallback = [...imgs];
-    for (const src of SHOP_TILE_IMAGES) {
-      if (fallback.length >= 2) break;
-      fallback.push(src);
+  const shopCollage = useMemo(() => {
+    const fromFeatured = productImages(featured);
+    if (fromFeatured.length >= 4) return fromFeatured.slice(0, 4);
+    const fallback = productImages(products.slice(0, 4));
+    while (fallback.length < 4 && products.length) {
+      fallback.push(products[fallback.length % products.length]?.images?.[0]);
     }
-    return fallback.slice(0, 2);
-  }, [shopHighlights]);
+    return fallback.filter(Boolean).slice(0, 4);
+  }, [featured, products]);
 
   const featuredCollage = useMemo(() => {
     const imgs = productImages(featured);
@@ -459,11 +287,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           label="Explore"
           title="Shop Products"
           subtitle={`${products.length || "—"} medical supports`}
-          carousel={shopCarouselProducts}
-          onProductClick={(slug) => onRoute(`/product/${slug}`)}
-          collage={shopBottomRow}
+          collage={shopCollage}
           gridCols={2}
-          gridRows={1}
+          gridRows={2}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
