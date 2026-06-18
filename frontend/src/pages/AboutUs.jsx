@@ -28,10 +28,10 @@ function CategoryFlipCard({ image, index }) {
   const { theme } = useTheme();
   const palette = ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length][theme]
     || ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length].light;
-  const label = image.replace('.png', '');
+  const label = image.replace('.png', '').replace(/2$/, '');
 
   return (
-    <StaggerItem className="about-category-flip h-[360px]">
+    <StaggerItem className="about-category-flip min-w-0 w-full h-[260px] sm:h-[280px] md:h-[300px] lg:h-[320px] xl:h-[360px]">
       <div className="about-category-flip__inner">
         <div className="about-category-flip__face about-category-flip__front">
           <img
@@ -40,8 +40,10 @@ function CategoryFlipCard({ image, index }) {
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <div className="absolute bottom-6 left-6">
-            <h3 className="text-2xl font-bold capitalize text-white">{label}</h3>
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold capitalize text-white break-words">
+              {label}
+            </h3>
           </div>
         </div>
 
@@ -57,10 +59,11 @@ function CategoryFlipCard({ image, index }) {
         >
           <div className="about-category-flip__back-glow" aria-hidden />
           <div className="about-category-flip__back-content">
-            <h3 className="text-3xl font-bold capitalize">{label}</h3>
-            <p className="mt-5 leading-8">
-              Premium orthopedic rehabilitation support designed for medical
-              precision, recovery, mobility and patient comfort.
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold capitalize break-words">
+              {label}
+            </h3>
+            <p className="about-category-flip__back-text mt-3 sm:mt-4">
+              Premium orthopedic support for recovery, mobility and patient comfort.
             </p>
           </div>
         </div>
@@ -384,20 +387,20 @@ const AboutUs = () => {
             </section>
 
             {/* PRODUCT GRID */}
-            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 transition-colors duration-300 min-w-0">
-              <FadeUpBlock className="mb-12">
+            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 transition-colors duration-300 min-w-0 overflow-hidden">
+              <FadeUpBlock className="mb-8 sm:mb-12">
                 <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                   Rehabilitation Products
                 </SectionLabel>
 
                 <CinematicHeading
                   text="Orthopedic Product Categories"
-                  className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                  className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
                 />
               </FadeUpBlock>
 
               <StaggerReveal
-                className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
                 stagger={0.08}
               >
                 {productImages.map((image, index) => (
@@ -464,25 +467,27 @@ const AboutUs = () => {
                   of loyal customers across India.
                 </FadeUpText>
 
-                <StaggerReveal className="mt-10 grid gap-8 md:grid-cols-2" stagger={0.12}>
+                <StaggerReveal className="mt-10 grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" stagger={0.12}>
                   {famousPeople.map((item, index) => (
                     <StaggerItem
                       key={index}
-                      className="overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
+                      className="min-w-0 overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
                     >
-                      <div className="grid md:grid-cols-2">
-                        <img
-                          src={item.image}
-                          alt=""
-                          className="h-full w-full object-cover"
-                        />
+                      <div className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
+                        <div className="relative h-52 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-40 md:w-48">
+                          <img
+                            src={item.image}
+                            alt=""
+                            className="absolute inset-0 h-full w-full object-cover object-top"
+                          />
+                        </div>
 
-                        <div className="flex flex-col justify-center p-8">
-                          <h4 className="text-3xl font-bold">
+                        <div className="min-w-0 flex-1 flex flex-col justify-center p-5 sm:p-6 md:p-8">
+                          <h4 className="text-xl sm:text-2xl md:text-3xl font-bold break-words">
                             {item.name}
                           </h4>
 
-                          <FadeUpText className="mt-5 leading-8 text-gray-200">
+                          <FadeUpText className="mt-4 sm:mt-5 text-base sm:leading-8 text-gray-200 break-words">
                             Recognized personalities and national
                             leaders have trusted MGRM rehabilitation
                             and orthopedic products.
@@ -535,7 +540,7 @@ const AboutUs = () => {
             {/* TIMELINE */}
             <section
               id="section-3"
-              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 lg:p-10 transition-colors duration-300 min-w-0"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 MGRM Timelines
@@ -543,36 +548,31 @@ const AboutUs = () => {
 
               <CinematicHeading
                 text="Journey Through The Years"
-                className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
-              <div className="relative mt-12 lg:mt-24 max-w-full overflow-x-auto pb-10">
-                <TimelineReveal className="relative flex flex-col gap-10 lg:flex-row lg:min-w-[1100px] lg:items-center lg:justify-between">
-                  <div className="absolute left-4 top-0 bottom-0 w-[4px] rounded-full bg-gradient-to-b from-cyan-300 to-[#002B5B] lg:hidden" />
-                  <div className="absolute left-0 top-1/2 hidden h-[4px] w-full -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-300 to-[#002B5B] lg:block" />
+              <TimelineReveal className="about-timeline-grid relative mt-10 sm:mt-12">
+                {timeline.map((item, index) => (
+                  <TimelineItem
+                    key={index}
+                    index={index}
+                    className="about-timeline-item group relative z-10 flex min-w-0 flex-col items-center text-center"
+                  >
+                    <div className="about-timeline-dot h-7 w-7 shrink-0 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
 
-                  {timeline.map((item, index) => (
-                    <TimelineItem
-                      key={index}
-                      index={index}
-                      className="group relative z-10 flex w-full max-w-md lg:w-[180px] flex-row lg:flex-col items-start gap-4 pl-8 lg:items-center lg:pl-0 lg:gap-0"
-                    >
-                      <div className="absolute left-[13px] top-2 h-7 w-7 shrink-0 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125 lg:static" />
+                    <div className="about-timeline-card mt-5 w-full min-w-0 rounded-[24px] sm:rounded-[30px] bg-[#f5fbff] bg-surface-hover p-4 sm:p-6 shadow-xl transition duration-500 group-hover:-translate-y-1">
+                      <AnimatedStat
+                        value={item.year}
+                        valueClassName="text-2xl sm:text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
+                      />
 
-                      <div className="flex-1 min-w-0 rounded-[30px] bg-[#f5fbff] bg-surface-hover p-5 sm:p-6 text-left lg:text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-1 lg:mt-8 lg:group-hover:-translate-y-4">
-                        <AnimatedStat
-                          value={item.year}
-                          valueClassName="text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
-                        />
-
-                        <p className="mt-4 leading-7 text-gray-500 dark:text-zinc-400">
-                          {item.title}
-                        </p>
-                      </div>
-                    </TimelineItem>
-                  ))}
-                </TimelineReveal>
-              </div>
+                      <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-gray-500 dark:text-zinc-400 break-words">
+                        {item.title}
+                      </p>
+                    </div>
+                  </TimelineItem>
+                ))}
+              </TimelineReveal>
             </section>
 
             {/* LEADERSHIP */}
@@ -599,7 +599,7 @@ const AboutUs = () => {
             {/* TESTIMONIALS */}
             <section
               id="section-5"
-              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 lg:p-10 transition-colors duration-300 min-w-0"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                 Testimonials
@@ -607,31 +607,33 @@ const AboutUs = () => {
 
               <CinematicHeading
                 text="What Medical Experts Say"
-                className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
-              <StaggerReveal className="mt-12 grid gap-8 md:grid-cols-2" stagger={0.12}>
+              <StaggerReveal className="mt-8 sm:mt-12 grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8" stagger={0.12}>
                 {testimonials.map((item, index) => (
                   <StaggerItem
                     key={index}
-                    className="overflow-hidden rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition-colors duration-300 hover:-translate-y-3"
+                    className="about-testimonial-card min-w-0 overflow-hidden rounded-[28px] sm:rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition duration-300 hover:-translate-y-2"
                   >
-                    <div className="grid md:grid-cols-[220px_1fr]">
-                      <img
-                        src={item.image}
-                        alt=""
-                        className="h-full w-full object-cover"
-                      />
+                    <div className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
+                      <div className="relative h-52 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-36 md:w-44 lg:w-48">
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="absolute inset-0 h-full w-full object-cover object-top"
+                        />
+                      </div>
 
-                      <div className="p-8">
-                        <Quote className="h-14 w-14 text-cyan-300" />
+                      <div className="min-w-0 flex-1 p-5 sm:p-6">
+                        <Quote className="h-10 w-10 shrink-0 text-cyan-300 sm:h-12 sm:w-12" />
 
                         <FadeUpQuote
                           text={`“${item.text}”`}
-                          className="mt-6 text-lg leading-9 text-gray-500 dark:text-zinc-400"
+                          className="mt-4 text-base sm:text-lg leading-relaxed text-gray-500 dark:text-zinc-400 break-words"
                         />
 
-                        <h4 className="mt-7 text-2xl font-bold text-[#002B5B] dark:text-zinc-100">
+                        <h4 className="mt-5 text-lg sm:text-xl font-bold text-[#002B5B] dark:text-zinc-100 break-words">
                           {item.name}
                         </h4>
                       </div>
