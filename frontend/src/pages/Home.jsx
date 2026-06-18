@@ -1001,11 +1001,11 @@ export default function Home() {
   </div>
 </section>
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="home-bandage-section home-expect-best-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+<section className="home-bandage-section home-expect-best-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-28 overflow-x-clip overflow-hidden min-w-0">
 
 
   {/* BACKGROUND */}
-  <div className="absolute inset-0 rounded-[60px] overflow-hidden">
+  <div className="absolute inset-0 rounded-[28px] sm:rounded-[40px] lg:rounded-[60px] overflow-hidden">
 
     <video
       autoPlay
@@ -1027,14 +1027,14 @@ export default function Home() {
   </div>
 
   {/* FLOATING BLURS */}
-  <div className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full bg-cyan-300/10 blur-[120px]" />
-  <div className="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-blue-300/10 blur-[120px]" />
+  <div className="absolute top-0 left-0 w-[280px] sm:w-[360px] lg:w-[420px] h-[280px] sm:h-[360px] lg:h-[420px] rounded-full bg-cyan-300/10 blur-[120px]" />
+  <div className="absolute bottom-0 right-0 w-[280px] sm:w-[360px] lg:w-[420px] h-[280px] sm:h-[360px] lg:h-[420px] rounded-full bg-blue-300/10 blur-[120px]" />
 
   {/* CONTENT */}
-  <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+  <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center min-w-0">
 
     {/* LEFT SIDE */}
-    <div className="max-w-3xl">
+    <div className="max-w-3xl min-w-0">
 
       <motion.div
         initial={{ opacity: 0, y: 35 }}
@@ -1054,14 +1054,14 @@ export default function Home() {
 
         {/* TITLE */}
 
-        <h2 className="mt-6 text-[58px] md:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300">
+        <h2 className="mt-6 text-4xl sm:text-5xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
           BANDAGE TO
           <br />
           SPLINTAGE™
         </h2>
 
         {/* SUBTITLE */}
-        <h3 className="mt-5 text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
+        <h3 className="mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
           Physical Rehabilitation Splints & Aids
         </h3>
 
@@ -1074,11 +1074,11 @@ export default function Home() {
         </p>
 
         {/* BUTTONS */}
-        <div className="mt-12 flex flex-wrap gap-5">
+        <div className="mt-12 flex flex-wrap gap-4 sm:gap-5">
 
           <Link
             to="/shop"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-9 py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-7 sm:px-9 py-3.5 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
             <span className="relative z-10">
               Discover Products
@@ -1089,7 +1089,7 @@ export default function Home() {
 
           <Link
             to="/support"
-            className="rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-9 py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300"
+            className="rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-7 sm:px-9 py-3.5 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
             Partner Program
           </Link>
@@ -1097,7 +1097,7 @@ export default function Home() {
       </motion.div>
 
       {/* STATS */}
-      <div className="grid grid-cols-3 gap-5 mt-16">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
 
         {[
           ["248+", "Products"],
@@ -1110,10 +1110,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-[30px] bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-zinc-800/90 transition-all duration-500"
+            className="rounded-[30px] bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-5 sm:p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-zinc-800/90 transition-all duration-500 min-w-0"
           >
 
-            <h3 className="home-expect-stat-num text-[58px] font-black text-slate-900 dark:text-zinc-100">
+            <h3 className="home-expect-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
               {num}
             </h3>
 
@@ -1127,31 +1127,32 @@ export default function Home() {
     </div>
 
     {/* RIGHT SIDE */}
-    <div className="relative h-[680px] flex items-center justify-start -ml-16">
+    <div className="relative w-full min-w-0 mt-8 lg:mt-0 min-h-[360px] sm:min-h-[480px] lg:h-[680px] flex items-center justify-center lg:justify-start lg:-ml-16">
 
       {/* MAIN IMAGE CARD */}
       <motion.div
         animate={{ y: [0, -18, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="relative w-[500px] rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white/40 dark:bg-zinc-900/50 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
+        className="relative w-full max-w-[500px] mx-auto lg:mx-0 rounded-[32px] sm:rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white/40 dark:bg-zinc-900/50 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
       >
 
         <img
           src="/banners/bandage.png"
-          className="w-full h-[650px] object-cover"
+          alt="Premium orthopedic support"
+          className="w-full h-[300px] sm:h-[420px] lg:h-[650px] object-cover"
         />
 
         {/* gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95 dark:to-slate-950/95 transition-colors duration-500" />
 
         {/* content */}
-        <div className="absolute bottom-0 left-0 right-0 p-8">
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
 
-          <span className="text-cyan-600 dark:text-cyan-400 text-sm tracking-[0.3em] font-black">
+          <span className="text-cyan-600 dark:text-cyan-400 text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-black">
             PREMIUM ORTHOPEDIC SUPPORT
           </span>
 
-          <h3 className="home-expect-highlight-title mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
+          <h3 className="home-expect-highlight-title mt-2 sm:mt-3 text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-zinc-100">
             Expect The Best
           </h3>
 
@@ -1166,7 +1167,7 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
-        className="absolute -left-24 top-20 w-72 rounded-[34px] bg-white/80 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
+        className="hidden md:block absolute md:-left-12 lg:-left-24 top-10 lg:top-20 w-56 lg:w-72 rounded-[34px] bg-white/80 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-5 lg:p-7 transition-colors duration-300"
       >
 
         <p className="text-xs font-black tracking-[0.3em] text-cyan-600 dark:text-cyan-400">
@@ -1191,7 +1192,7 @@ export default function Home() {
       <motion.div
         animate={{ y: [0, -16, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="absolute right-8 bottom-16 w-80 rounded-[34px] bg-white/82 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-7 transition-colors duration-300"
+        className="hidden md:block absolute right-0 lg:right-8 bottom-8 lg:bottom-16 w-64 lg:w-80 max-w-[calc(100%-1rem)] rounded-[34px] bg-white/82 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-5 lg:p-7 transition-colors duration-300"
       >
 
         <div className="flex items-center gap-4">
