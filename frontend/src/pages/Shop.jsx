@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-// import { Link, useSearchParams } from "react-router-dom";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Heart,
@@ -8,6 +7,8 @@ import {
   Star,
   ShoppingCart,
   ChevronDown,
+  SlidersHorizontal,
+  X,
 } from "lucide-react";
 import API from "../api";
 import { bodyCategories } from "../data/siteData";
@@ -30,11 +31,162 @@ import {
 const colors = ["Black", "White", "Grey", "Black & Green", "Black & Orange", "Beige", "Silver"];
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
 
+function ShopFiltersPanel({
+  activeCategory,
+  setActiveCategory,
+  selectedColor,
+  setSelectedColor,
+  selectedSize,
+  setSelectedSize,
+  maxPrice,
+  setMaxPrice,
+  clearFilters,
+  navigate,
+  scrollClass = "h-[calc(100%-72px)]",
+  onClose,
+}) {
+  return (
+    <>
+      <div className="p-5 border-b flex justify-between items-center gap-3 shrink-0">
+        <h2 className="text-xl font-black">Filters</h2>
+        <div className="flex items-center gap-2 shrink-0">
+          <button type="button" onClick={clearFilters} className="text-purple-600 text-sm font-bold">
+            Clear All
+          </button>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-surface-hover lg:hidden"
+              aria-label="Close filters"
+            >
+              <X size={18} />
+            </button>
+          )}
+        </div>
+      </div>
+      <div className={`${scrollClass} overflow-y-auto custom-scroll overscroll-contain`}>
+        <div className="p-5 border-b">
+          <div className="flex justify-between font-black text-sm mb-4">
+            BODY PART <ChevronDown size={16} />
+          </div>
+
+          <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveCategory("");
+                setSelectedColor("");
+                setSelectedSize("");
+                navigate("/shop", { replace: true });
+              }}
+              className={`text-left px-3 py-2 rounded-xl font-semibold ${
+                !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
+              }`}
+            >
+              All Products
+            </button>
+
+            {bodyCategories.map((cat) => (
+              <button
+                key={cat.name}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(cat.query);
+                  trackCategoryClick(cat.query);
+                  navigate(`/shop?category=${encodeURIComponent(cat.query)}`);
+                }}
+                className={`text-left px-3 py-2 rounded-xl font-semibold ${
+                  activeCategory === cat.query ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5 border-b">
+          <div className="flex justify-between font-black text-sm mb-4">
+            COLOR <ChevronDown size={16} />
+          </div>
+
+          <div className="grid gap-3">
+            {colors.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() => setSelectedColor(selectedColor === color ? "" : color)}
+                className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
+                  selectedColor === color ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
+                }`}
+              >
+                <span className="flex items-center gap-3 min-w-0">
+                  <span
+                    className="w-4 h-4 rounded-full border shrink-0"
+                    style={{
+                      background:
+                        color === "Black" ? "#000" :
+                        color === "White" ? "#fff" :
+                        color === "Grey" ? "#bbb" :
+                        color === "Beige" ? "#ead5b7" :
+                        color === "Silver" ? "#c0c0c0" : "#111",
+                    }}
+                  />
+                  <span className="truncate">{color}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5 border-b">
+          <div className="flex justify-between font-black text-sm mb-4">
+            SIZE <ChevronDown size={16} />
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {sizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => setSelectedSize(selectedSize === size ? "" : size)}
+                className={`px-4 py-2 rounded-lg border text-sm font-bold ${
+                  selectedSize === size
+                    ? "border-purple-600 bg-purple-50 text-purple-700"
+                    : "hover:border-purple-500 hover:text-purple-600"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5">
+          <div className="flex justify-between font-black text-sm mb-4">
+            PRICE <ChevronDown size={16} />
+          </div>
+
+          <p className="text-sm mb-3">₹100 - ₹{maxPrice}</p>
+          <input
+            type="range"
+            min="100"
+            max="5000"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
+            className="w-full accent-purple-600"
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function Shop() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  // const { wishlist, toggleWishlist } = useWishlist();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { isBlue } = useTheme();
 
@@ -46,6 +198,7 @@ export default function Shop() {
   const [view, setView] = useState("grid");
   const [maxPrice, setMaxPrice] = useState(5000);
   const [loading, setLoading] = useState(true);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     setActiveCategory(params.get("category") || "");
@@ -71,6 +224,14 @@ export default function Shop() {
       .finally(() => setLoading(false));
   }, [activeCategory, selectedColor, selectedSize, params]);
 
+  useEffect(() => {
+    if (!filtersOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [filtersOpen]);
+
   const filteredProducts = useMemo(() => {
     let list = products.filter((p) => Number(p.discountPrice || p.price || 0) <= maxPrice);
 
@@ -81,155 +242,49 @@ export default function Shop() {
     return list;
   }, [products, sort, maxPrice]);
 
-const clearFilters = () => {
-  setActiveCategory("");
-  setSelectedColor("");
-  setSelectedSize("");
-  setSort("popularity");
-  navigate("/shop", { replace: true });
-};
+  const clearFilters = () => {
+    setActiveCategory("");
+    setSelectedColor("");
+    setSelectedSize("");
+    setSort("popularity");
+    navigate("/shop", { replace: true });
+  };
+
+  const filterProps = {
+    activeCategory,
+    setActiveCategory,
+    selectedColor,
+    setSelectedColor,
+    selectedSize,
+    setSelectedSize,
+    maxPrice,
+    setMaxPrice,
+    clearFilters,
+    navigate,
+  };
 
   return (
-    <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
-      <div className="max-w-[1500px] mx-auto px-5 py-8">
-        <div className="text-sm text-fg-muted mb-6">
+    <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300 overflow-x-clip">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-5 py-8 min-w-0">
+        <div className="text-sm text-fg-muted mb-6 break-words">
           Home <span className="mx-2">›</span> All Products
         </div>
 
-        <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-          {/* <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24"> */}
-          <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] sticky top-24 h-[calc(100vh-110px)] overflow-hidden">
-            <div className="p-5 border-b flex justify-between items-center">
-              <h2 className="text-xl font-black">Filters</h2>
-              <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
-                Clear All
-              </button>
-            </div>
-<div className="h-[calc(100%-72px)] overflow-y-auto custom-scroll">
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                BODY PART <ChevronDown size={16} />
-              </div>
-
-              <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
-                <button
-                  // onClick={() => setActiveCategory("")}
-  onClick={() => {
-  setActiveCategory("");
-  setSelectedColor("");
-  setSelectedSize("");
-  navigate("/shop", { replace: true });
-}}
-                  className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                    !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
-                  }`}
-                >
-                  All Products
-                </button>
-
-                {bodyCategories.map((cat) => (
-                  <button
-                    key={cat.name}
-                    // onClick={() => setActiveCategory(cat.query)}
-onClick={() => {
-  setActiveCategory(cat.query);
-  trackCategoryClick(cat.query);
-  navigate(`/shop?category=${encodeURIComponent(cat.query)}`);
-}}
-                    className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                      activeCategory === cat.query ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
-                    }`}
-                  >
-                    {cat.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                COLOR <ChevronDown size={16} />
-              </div>
-
-              <div className="grid gap-3">
-                {colors.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(selectedColor === color ? "" : color)}
-                    className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
-                      selectedColor === color ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
-                    }`}
-                  >
-                    <span className="flex items-center gap-3">
-                      <span
-                        className="w-4 h-4 rounded-full border"
-                        style={{
-                          background:
-                            color === "Black" ? "#000" :
-                            color === "White" ? "#fff" :
-                            color === "Grey" ? "#bbb" :
-                            color === "Beige" ? "#ead5b7" :
-                            color === "Silver" ? "#c0c0c0" : "#111",
-                        }}
-                      />
-                      {color}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                SIZE <ChevronDown size={16} />
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(selectedSize === size ? "" : size)}
-                    className={`px-4 py-2 rounded-lg border text-sm font-bold ${
-                      selectedSize === size
-                        ? "border-purple-600 bg-purple-50 text-purple-700"
-                        : "hover:border-purple-500 hover:text-purple-600"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-          
-            </div>
-
-            <div className="p-5">
-              <div className="flex justify-between font-black text-sm mb-4">
-                PRICE <ChevronDown size={16} />
-              </div>
-
-              <p className="text-sm mb-3">₹100 - ₹{maxPrice}</p>
-              <input
-                type="range"
-                min="100"
-                max="5000"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-purple-600"
-              />
-            </div>
-              </div>
+        <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 min-w-0">
+          <aside className="hidden lg:block bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] lg:sticky lg:top-24 lg:h-[calc(100vh-110px)] overflow-hidden min-w-0">
+            <ShopFiltersPanel {...filterProps} />
           </aside>
 
-          <section>
-            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7">
-              <div>
-                <div className="flex flex-wrap items-baseline gap-x-2">
+          <section className="min-w-0">
+            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7 min-w-0">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <SectionHeading
                     text="All Products"
                     as="h1"
-                    className="text-4xl font-black"
+                    className="text-3xl sm:text-4xl font-black"
                   />
-                  <span className="text-fg-muted/80 text-2xl font-black">
+                  <span className="text-fg-muted/80 text-xl sm:text-2xl font-black">
                     ({filteredProducts.length})
                   </span>
                 </div>
@@ -238,12 +293,21 @@ onClick={() => {
                 </FadeUpText>
               </div>
 
-              <div className="flex items-center gap-4">
-                <label className="text-sm font-semibold">Sort By:</label>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 min-w-0">
+                <button
+                  type="button"
+                  onClick={() => setFiltersOpen(true)}
+                  className="lg:hidden inline-flex items-center gap-2 bg-card border rounded-xl px-4 py-3 text-sm font-bold shrink-0"
+                >
+                  <SlidersHorizontal size={18} />
+                  Filters
+                </button>
+
+                <label className="text-sm font-semibold shrink-0">Sort By:</label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-card border rounded-xl px-4 py-3 outline-none"
+                  className="bg-card border rounded-xl px-3 sm:px-4 py-3 outline-none min-w-0 max-w-full flex-1 sm:flex-none"
                 >
                   <option value="popularity">Popularity</option>
                   <option value="low">Price Low to High</option>
@@ -251,11 +315,21 @@ onClick={() => {
                   <option value="name">Name A-Z</option>
                 </select>
 
-                <div className="bg-card border rounded-xl p-1 flex">
-                  <button onClick={() => setView("grid")} className={`p-3 rounded-lg ${view === "grid" ? "bg-purple-100 text-purple-700" : ""}`}>
+                <div className="bg-card border rounded-xl p-1 flex shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setView("grid")}
+                    className={`p-3 rounded-lg ${view === "grid" ? "bg-purple-100 text-purple-700" : ""}`}
+                    aria-label="Grid view"
+                  >
                     <Grid2X2 size={18} />
                   </button>
-                  <button onClick={() => setView("list")} className={`p-3 rounded-lg ${view === "list" ? "bg-purple-100 text-purple-700" : ""}`}>
+                  <button
+                    type="button"
+                    onClick={() => setView("list")}
+                    className={`p-3 rounded-lg ${view === "list" ? "bg-purple-100 text-purple-700" : ""}`}
+                    aria-label="List view"
+                  >
                     <List size={18} />
                   </button>
                 </div>
@@ -263,18 +337,24 @@ onClick={() => {
             </div>
 
             {loading ? (
-              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
                   <div key={x} className="h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="bg-card rounded-2xl p-12 text-center shadow">
-                <h2 className="text-3xl font-black">No products found</h2>
+              <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow">
+                <h2 className="text-2xl sm:text-3xl font-black">No products found</h2>
                 <p className="text-fg-muted mt-2">Try clearing filters or check product category/colors/sizes in admin.</p>
               </div>
             ) : (
-              <div className={view === "grid" ? "grid md:grid-cols-2 xl:grid-cols-4 gap-7" : "grid gap-5"}>
+              <div
+                className={
+                  view === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7"
+                    : "grid gap-5"
+                }
+              >
                 {filteredProducts.map((product) => {
                   const price = product.price || 0;
                   const discountPrice = product.discountPrice || product.price || 0;
@@ -283,11 +363,16 @@ onClick={() => {
                   return (
                     <article
                       key={product._id}
-                      className={`group bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
-                        view === "list" ? "flex" : ""
+                      className={`group relative bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
+                        view === "list" ? "flex flex-col sm:flex-row" : ""
                       }`}
                     >
-                      <Link to={`/product/${product.slug}`} className={`relative bg-card block ${view === "list" ? "w-72 h-72" : "h-72"}`}>
+                      <Link
+                        to={`/product/${product.slug}`}
+                        className={`relative bg-card block shrink-0 ${
+                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-72"
+                        }`}
+                      >
                         {save > 0 && (
                           <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
                             Save {save}%
@@ -301,35 +386,33 @@ onClick={() => {
 
                         <img
                           src={product.images?.[0] || product.image || "/products/knee.png"}
-                          onError={(e) => (e.currentTarget.src = "/products/knee.png")}
+                          onError={(e) => {
+                            e.currentTarget.src = "/products/knee.png";
+                          }}
                           className="w-full h-full object-contain p-5 group-hover:scale-105 transition duration-500"
                           alt={product.name}
                         />
                       </Link>
 
-                      {/* <button
+                      <button
+                        type="button"
                         onClick={() => toggleWishlist(product)}
-                        className={`absolute mt-4 ml-[-52px] w-10 h-10 bg-card rounded-full shadow grid place-items-center ${
+                        className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center z-10 ${
                           isWishlisted(product) ? "text-red-500" : "text-purple-600"
                         }`}
+                        aria-label="Toggle wishlist"
                       >
                         <Heart size={18} fill={isWishlisted(product) ? "currentColor" : "none"} />
-                      </button> */}
-                      <button
-  onClick={() => toggleWishlist(product)}
-  className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center ${
-    isWishlisted(product) ? "text-red-500" : "text-purple-600"
-  }`}
->
-  <Heart size={18} fill={isWishlisted(product) ? "currentColor" : "none"} />
-</button>
+                      </button>
 
-                      <div className="p-5 flex-1">
+                      <div className="p-5 flex-1 min-w-0">
                         <Link to={`/product/${product.slug}`}>
-                          <h3 className="font-black line-clamp-2 hover:text-purple-600 transition">{product.name}</h3>
+                          <h3 className="font-black line-clamp-2 hover:text-purple-600 transition break-words">
+                            {product.name}
+                          </h3>
                         </Link>
 
-                        <div className="mt-3">
+                        <div className="mt-3 flex flex-wrap items-baseline gap-x-2">
                           <span {...productPriceSaleProps(isBlue, "text-xl font-black")}>
                             ₹{discountPrice}.00
                           </span>
@@ -337,7 +420,7 @@ onClick={() => {
                             <span
                               {...productPriceOriginalProps(
                                 isBlue,
-                                "text-fg-muted/80 line-through ml-2"
+                                "text-fg-muted/80 line-through"
                               )}
                             >
                               ₹{price}.00
@@ -348,6 +431,7 @@ onClick={() => {
                         <p className="text-xs text-fg-muted mt-1">(Incl. of all Taxes)</p>
 
                         <button
+                          type="button"
                           onClick={() => addToCart(product)}
                           className="mt-5 w-full border border-purple-500 text-purple-600 rounded-lg py-3 font-black hover:bg-purple-600 hover:text-white transition flex items-center justify-center gap-2"
                         >
@@ -362,6 +446,20 @@ onClick={() => {
           </section>
         </div>
       </div>
+
+      {filtersOpen && (
+        <div className="lg:hidden fixed inset-0 z-[110]">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            aria-label="Close filters"
+            onClick={() => setFiltersOpen(false)}
+          />
+          <aside className="absolute left-0 top-0 bottom-0 w-[min(100vw-2.5rem,320px)] bg-card shadow-2xl flex flex-col overflow-hidden">
+            <ShopFiltersPanel {...filterProps} scrollClass="flex-1" onClose={() => setFiltersOpen(false)} />
+          </aside>
+        </div>
+      )}
     </main>
   );
 }
