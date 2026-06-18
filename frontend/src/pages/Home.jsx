@@ -17,9 +17,10 @@ import { trackCategoryClick } from "../utils/recommendationBehavior";
 
 import { bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
-import BodyFlowMap from "../components/BodyFlowMap";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
+import ViewportVideo from "../components/media/ViewportVideo";
+import DeferredSection from "../components/performance/DeferredSection";
 import {
   HeroHeading,
   SectionHeading,
@@ -37,10 +38,12 @@ import {
   PremiumReveal,
   FadeUpSlow,
 } from "../components/motion/PremiumMotion";
-import HomeSmartSizeSection from "../components/home/HomeSmartSizeSection";
-import HomeTestimonialsSection from "../components/home/HomeTestimonialsSection";
-import HomeFeaturedCollectionsSection from "../components/home/HomeFeaturedCollectionsSection";
-import HomeShopByActivitySection from "../components/home/HomeShopByActivitySection";
+
+const loadBodyFlowMap = () => import("../components/BodyFlowMap");
+const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCollectionsSection");
+const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
+const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
+const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 
 const text = "248 top certified products - to cure your body";
 
@@ -208,10 +211,11 @@ export default function Home() {
         {/* HERO */}
         <section className="relative min-h-[92vh] pt-10 pb-20 overflow-hidden">
     
-          <video
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.90]"
-      
+          <ViewportVideo
+            eager
             src="/videos/hero.mp4"
+            poster="/banners/bandage.png"
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.90]"
             autoPlay
             muted
             loop
@@ -465,7 +469,7 @@ export default function Home() {
           </div>
         </section>
 
-        <BodyFlowMap />
+        <DeferredSection loader={loadBodyFlowMap} minHeight={520} />
 
         {/* FEATURES */}
         <section className="max-w-[1500px] mx-auto px-6 py-28">
@@ -1007,13 +1011,14 @@ export default function Home() {
   {/* BACKGROUND */}
   <div className="absolute inset-0 rounded-[28px] sm:rounded-[40px] lg:rounded-[60px] overflow-hidden">
 
-    <video
+    <ViewportVideo
       autoPlay
       muted
       loop
       playsInline
-      className="w-full h-full object-cover scale-110 opacity-[0.88]"
+      poster="/banners/bandage.png"
       src="/videos/medical-bg.mp4"
+      className="w-full h-full object-cover scale-110 opacity-[0.88]"
     />
 
     {/* cinematic overlay */}
@@ -1295,7 +1300,7 @@ export default function Home() {
         </section>
 
         {/* FEATURED COLLECTIONS */}
-        <HomeFeaturedCollectionsSection />
+        <DeferredSection loader={loadFeaturedCollections} minHeight={760} />
 
         {/* LOCATE PAIN AREA */}
         <section className="home-locate-pain-section relative max-w-[1500px] mx-auto px-6 py-28">
@@ -1372,7 +1377,7 @@ export default function Home() {
         </section>
 
         {/* SHOP BY ACTIVITY */}
-        <HomeShopByActivitySection />
+        <DeferredSection loader={loadShopByActivity} minHeight={480} />
 
         {/* FEATURED PRODUCTS */}
         <section className="relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
@@ -1435,8 +1440,8 @@ export default function Home() {
           )}
         </section>
 
-        <HomeSmartSizeSection />
-        <HomeTestimonialsSection />
+        <DeferredSection loader={loadSmartSize} minHeight={560} />
+        <DeferredSection loader={loadTestimonials} minHeight={520} />
 
         {/* BLOGS */}
         <section className="max-w-7xl mx-auto px-5 py-28">
@@ -1527,16 +1532,15 @@ export default function Home() {
         <div className="absolute inset-0 rounded-[40px] bg-cyan-500/20 blur-3xl" />
 
         <div className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl">
-          <video
+          <ViewportVideo
             autoPlay
             muted
             loop
             playsInline
-            // className="w-full h-full object-cover"
+            poster="/products/knee2.png"
+            sources={[{ src: "/videos/de.mp4", type: "video/mp4" }]}
             className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl hover:scale-[1.02] transition-all duration-700"
-          >
-            <source src="/videos/de.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
       </div>
 

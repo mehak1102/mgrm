@@ -5,6 +5,7 @@ import {
   STORAGE_KEY,
   THEME_IDS,
 } from "../theme/tokens";
+import { loadThemeStyles } from "../theme/loadThemeStyles";
 
 const ThemeContext = createContext(null);
 
@@ -13,6 +14,7 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     applyThemeTokens(theme);
+    loadThemeStyles(theme);
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {

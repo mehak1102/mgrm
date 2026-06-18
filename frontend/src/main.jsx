@@ -8,19 +8,27 @@ import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { DashboardProvider } from "./context/DashboardContext";
+import { getStoredTheme } from "./theme/tokens";
+import { loadThemeStyles } from "./theme/loadThemeStyles";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
- <BrowserRouter>
-  <ThemeProvider>
-    <AuthProvider>
-      <DashboardProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <App />
-        </WishlistProvider>
-      </CartProvider>
-      </DashboardProvider>
-    </AuthProvider>
-  </ThemeProvider>
-</BrowserRouter>
-);
+async function bootstrap() {
+  await loadThemeStyles(getStoredTheme());
+
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <BrowserRouter>
+      <ThemeProvider>
+        <AuthProvider>
+          <DashboardProvider>
+            <CartProvider>
+              <WishlistProvider>
+                <App />
+              </WishlistProvider>
+            </CartProvider>
+          </DashboardProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
+
+bootstrap();

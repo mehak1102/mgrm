@@ -1,16 +1,4 @@
 @import "tailwindcss";
-@import "./theme/dark-theme.css";
-@import "./theme/dark-theme-pages.css";
-@import "./theme/blue-theme.css";
-@import "./theme/blue-theme-pages.css";
-@import "./theme/blue-theme-text.css";
-@import "./theme/blue-theme-global-readability.css";
-@import "./theme/blue-theme-blogs.css";
-@import "./theme/blue-theme-contrast.css";
-@import "./theme/blue-theme-aboutus.css";
-@import "./theme/about-category-flip.css";
-@import "./theme/blue-theme-actions.css";
-@import "./theme/blue-theme-polish.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

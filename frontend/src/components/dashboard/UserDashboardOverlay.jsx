@@ -8,10 +8,10 @@ import { useDashboard } from "../../context/DashboardContext";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getDashboardTheme, SECTION_LABELS } from "./dashboardTheme";
-import DashboardBackground from "./DashboardBackground";
-import DashboardHeroGrid from "./DashboardHeroGrid";
 
 const DashboardSections = lazy(() => import("./DashboardSections"));
+const DashboardBackground = lazy(() => import("./DashboardBackground"));
+const DashboardHeroGrid = lazy(() => import("./DashboardHeroGrid"));
 
 const ACCOUNT_SECTIONS = new Set([
   "profile",
@@ -192,7 +192,9 @@ export default function UserDashboardOverlay() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="absolute inset-0"
             >
-              <DashboardBackground dt={dt} />
+              <Suspense fallback={null}>
+                <DashboardBackground dt={dt} />
+              </Suspense>
             </motion.div>
 
             <motion.header
@@ -264,7 +266,9 @@ export default function UserDashboardOverlay() {
                   animate={isZooming ? { scale: 1.02 } : { scale: 1 }}
                   transition={{ duration: 0.28, ease }}
                 >
-                  <DashboardHeroGrid onSection={openSection} onRoute={goRoute} />
+                  <Suspense fallback={null}>
+                    <DashboardHeroGrid onSection={openSection} onRoute={goRoute} />
+                  </Suspense>
                 </motion.div>
               </motion.div>
 

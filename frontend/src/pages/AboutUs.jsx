@@ -23,6 +23,8 @@ import {
 } from "../components/typography/TypographyMotion";
 import { useTheme } from "../context/ThemeContext";
 import { ABOUT_CATEGORY_PASTELS } from "../data/aboutCategoryPastels";
+import "../theme/about-category-flip.css";
+import ViewportVideo from "../components/media/ViewportVideo";
 
 function CategoryFlipCard({ image, index }) {
   const { theme } = useTheme();
@@ -250,20 +252,16 @@ const AboutUs = () => {
 
       {/* HERO */}
       <section className="relative h-screen overflow-hidden">
-        <video
+        <ViewportVideo
+          eager
           autoPlay
           muted
           loop
           playsInline
-          // className="absolute inset-0 h-full w-full object-cover"
-           className="absolute inset-0 h-full w-full object-cover brightness-110"
-        >
-          <source
-            // src="/videos/medical-bg.mp4"
-            src='/videos/slow.mp4'
-            type="video/mp4"
-          />
-        </video>
+          poster="/products/orth2.png"
+          sources={[{ src: "/videos/slow.mp4", type: "video/mp4" }]}
+          className="absolute inset-0 h-full w-full object-cover brightness-110"
+        />
 
         {/* <div className="absolute inset-0 bg-[#00172e]/75" /> */}
         <div className="absolute inset-0 bg-[#00172e]/40" />
@@ -823,18 +821,15 @@ const AboutUs = () => {
     {/* VIDEO SIDE */}
     <div className="relative h-[520px] overflow-hidden">
 
-      <video
+      <ViewportVideo
         autoPlay
         muted
         loop
         playsInline
+        poster="/products/logo-mark.png"
+        sources={[{ src: "/videos/handshake.mp4", type: "video/mp4" }]}
         className="absolute inset-0 h-full w-full object-cover scale-[1.12]"
-      >
-        <source
-          src="/videos/handshake.mp4"
-          type="video/mp4"
-        />
-      </video>
+      />
 
       {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#00152d]/70 via-[#00152d]/25 to-transparent" />

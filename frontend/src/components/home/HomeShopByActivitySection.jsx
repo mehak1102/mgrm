@@ -302,6 +302,9 @@ export default function HomeShopByActivitySection() {
     handleEnter(item.name, e.currentTarget);
 
     const video = e.currentTarget.querySelector("video");
+    if (video && !video.getAttribute("src") && video.dataset.src) {
+      video.setAttribute("src", video.dataset.src);
+    }
     video?.play();
   }}
   onMouseLeave={(e) => {
@@ -349,7 +352,7 @@ export default function HomeShopByActivitySection() {
   />
 
   <video
-    src={item.video}
+    data-src={item.video}
     muted
     loop
     playsInline
