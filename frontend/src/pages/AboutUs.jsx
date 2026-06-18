@@ -192,7 +192,7 @@ const famousPeople = [
 
 const AboutUs = () => {
   return (
-    <div className="about-us-page relative overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300">
+    <div className="about-us-page relative overflow-x-clip overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300 max-w-[100vw]">
       {/* BG */}
       <div className="absolute left-[-150px] top-[-150px] h-[450px] w-[450px] rounded-full bg-cyan-200/40 blur-3xl" />
 
@@ -239,19 +239,19 @@ const AboutUs = () => {
                 lines={[
                   {
                     text: "Revolutionizing",
-                    className: "justify-center text-[52px] md:text-[88px]",
+                    className: "justify-center max-sm:text-[36px] text-[52px] md:text-[88px]",
                     delay: 0.35,
                   },
                   {
                     text: "Rehabilitation",
-                    className: "justify-center text-[58px] md:text-[98px]",
+                    className: "justify-center max-sm:text-[40px] text-[58px] md:text-[98px]",
                     gradient: true,
                     delay: 0.55,
                   },
                   {
                     text: "Since 1994",
                     className:
-                      "justify-center text-[32px] md:text-[52px] tracking-[6px] text-white/85",
+                      "justify-center max-sm:text-[22px] text-[32px] md:text-[52px] tracking-[4px] sm:tracking-[6px] text-white/85",
                     delay: 0.75,
                   },
                 ]}
@@ -272,10 +272,10 @@ const AboutUs = () => {
       </section>
 
       {/* MAIN */}
-      <section className="relative z-10 mx-auto max-w-7xl px-4 py-24">
-        <div className="flex flex-col gap-10 lg:flex-row">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-24 min-w-0">
+        <div className="flex flex-col gap-10 lg:flex-row min-w-0">
           {/* SIDEBAR */}
-          <aside className="top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl lg:sticky transition-colors duration-300 lg:w-[320px]">
+          <aside className="w-full shrink-0 lg:sticky lg:top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-5 sm:p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-colors duration-300 lg:w-[320px]">
             <CinematicHeading
               text="About Us"
               className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
@@ -286,9 +286,9 @@ const AboutUs = () => {
                 <a
                   key={index}
                   href={`#section-${index}`}
-                  className="group flex items-center justify-between rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white"
+                  className="group flex items-center justify-between gap-2 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
                 >
-                  {item}
+                  <span className="min-w-0 truncate">{item}</span>
 
                   <ChevronRight className="h-5 w-5 transition group-hover:translate-x-1" />
                 </a>
@@ -297,21 +297,21 @@ const AboutUs = () => {
           </aside>
 
           {/* CONTENT */}
-          <div className="flex-1 space-y-10">
+          <div className="flex-1 min-w-0 space-y-10">
             {/* HISTORY */}
             <section
               id="section-0"
               className="overflow-hidden rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-colors duration-300"
             >
-              <div className="grid lg:grid-cols-2">
-                <div className="p-10 lg:p-14">
+              <div className="grid min-w-0 lg:grid-cols-2">
+                <div className="p-6 sm:p-10 lg:p-14 min-w-0">
                   <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                     Our History
                   </SectionLabel>
 
                   <CinematicHeading
                     text="Transforming Rehabilitation In India"
-                    className="mt-5 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                    className="mt-5 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100 break-words"
                   />
 
                   <ParagraphGroup
@@ -324,7 +324,7 @@ const AboutUs = () => {
                   />
                 </div>
 
-                <div className="relative min-h-[550px]">
+                <div className="relative min-h-[240px] sm:min-h-[360px] lg:min-h-[550px]">
                   <img
                     src="/products/orth2.png"
                     alt=""
@@ -337,7 +337,7 @@ const AboutUs = () => {
             </section>
 
             {/* PRODUCT GRID */}
-            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] transition-colors duration-300">
+            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 transition-colors duration-300 min-w-0">
               <FadeUpBlock className="mb-12">
                 <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                   Rehabilitation Products
@@ -556,19 +556,20 @@ const AboutUs = () => {
                 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
-              <div className="relative mt-24 overflow-x-auto pb-10">
-                <TimelineReveal className="relative flex min-w-[1100px] items-center justify-between">
-                  <div className="absolute left-0 top-1/2 h-[4px] w-full -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-300 to-[#002B5B]" />
+              <div className="relative mt-12 lg:mt-24 max-w-full overflow-x-auto pb-10">
+                <TimelineReveal className="relative flex flex-col gap-10 lg:flex-row lg:min-w-[1100px] lg:items-center lg:justify-between">
+                  <div className="absolute left-4 top-0 bottom-0 w-[4px] rounded-full bg-gradient-to-b from-cyan-300 to-[#002B5B] lg:hidden" />
+                  <div className="absolute left-0 top-1/2 hidden h-[4px] w-full -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-300 to-[#002B5B] lg:block" />
 
                   {timeline.map((item, index) => (
                     <TimelineItem
                       key={index}
                       index={index}
-                      className="group relative z-10 flex w-[180px] flex-col items-center"
+                      className="group relative z-10 flex w-full max-w-md lg:w-[180px] flex-row lg:flex-col items-start gap-4 pl-8 lg:items-center lg:pl-0 lg:gap-0"
                     >
-                      <div className="h-7 w-7 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
+                      <div className="absolute left-[13px] top-2 h-7 w-7 shrink-0 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125 lg:static" />
 
-                      <div className="mt-8 rounded-[30px] bg-[#f5fbff] bg-surface-hover p-6 text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-4">
+                      <div className="flex-1 min-w-0 rounded-[30px] bg-[#f5fbff] bg-surface-hover p-5 sm:p-6 text-left lg:text-center shadow-xl transition-colors duration-300 transition duration-500 group-hover:-translate-y-1 lg:mt-8 lg:group-hover:-translate-y-4">
                         <AnimatedStat
                           value={item.year}
                           valueClassName="text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
@@ -874,7 +875,7 @@ const AboutUs = () => {
         of our growing healthcare ecosystem.
       </FadeUpText>
 
-      <StaggerReveal className="mt-12 grid grid-cols-3 gap-5" stagger={0.12}>
+      <StaggerReveal className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-5" stagger={0.12}>
         <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <AnimatedStat
             value="50+"
@@ -991,9 +992,9 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
-        <table className="w-full border-collapse">
+        <table className="w-full min-w-[520px] border-collapse">
 
           <tbody>
 
@@ -1064,9 +1065,9 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
-        <table className="w-full border-collapse">
+        <table className="w-full min-w-[520px] border-collapse">
 
           <tbody>
 
@@ -1198,9 +1199,9 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
-        <table className="w-full border-collapse">
+        <table className="w-full min-w-[520px] border-collapse">
 
           <tbody>
 
