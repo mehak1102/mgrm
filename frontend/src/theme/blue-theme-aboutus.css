@@ -105,12 +105,6 @@
   opacity: 1 !important;
 }
 
-/* Product flip card back text */
-[data-theme="blue"] .about-us-page .group [class*="bg-\[\#dff4ff\]"] :is(h3, p, .text-\[\#31506f\], .text-gray-500) {
-  color: rgba(255, 255, 255, 0.9) !important;
-  opacity: 1 !important;
-}
-
 /* Table sections */
 [data-theme="blue"] .about-us-page #section-9 table,
 [data-theme="blue"] .about-us-page #section-10 table,

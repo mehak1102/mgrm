@@ -491,3 +491,21 @@
 [data-theme="blue"] .mobile-nav-drawer button.text-purple-600 {
   color: #7c3aed !important;
 }
+
+/* About Us — category flip backs keep per-card pastels in blue theme */
+[data-theme="blue"] .about-us-page .about-category-flip__back {
+  background: var(--ac-bg) !important;
+  border-color: color-mix(in srgb, var(--ac-title) 14%, transparent) !important;
+}
+
+[data-theme="blue"] .about-us-page .about-category-flip__back h3 {
+  color: var(--ac-title) !important;
+  -webkit-text-fill-color: var(--ac-title) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page .about-category-flip__back p {
+  color: var(--ac-text) !important;
+  -webkit-text-fill-color: var(--ac-text) !important;
+  opacity: 1 !important;
+}

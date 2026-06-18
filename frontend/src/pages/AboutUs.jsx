@@ -21,6 +21,53 @@ import {
   FadeUpText,
   FadeUpQuote,
 } from "../components/typography/TypographyMotion";
+import { useTheme } from "../context/ThemeContext";
+import { ABOUT_CATEGORY_PASTELS } from "../data/aboutCategoryPastels";
+
+function CategoryFlipCard({ image, index }) {
+  const { theme } = useTheme();
+  const palette = ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length][theme]
+    || ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length].light;
+  const label = image.replace('.png', '');
+
+  return (
+    <StaggerItem className="about-category-flip h-[360px]">
+      <div className="about-category-flip__inner">
+        <div className="about-category-flip__face about-category-flip__front">
+          <img
+            src={`/products/${image}`}
+            alt={label}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-6 left-6">
+            <h3 className="text-2xl font-bold capitalize text-white">{label}</h3>
+          </div>
+        </div>
+
+        <div
+          className="about-category-flip__face about-category-flip__back"
+          style={{
+            '--ac-bg': palette.bg,
+            '--ac-from': palette.from,
+            '--ac-to': palette.to,
+            '--ac-title': palette.title,
+            '--ac-text': palette.text,
+          }}
+        >
+          <div className="about-category-flip__back-glow" aria-hidden />
+          <div className="about-category-flip__back-content">
+            <h3 className="text-3xl font-bold capitalize">{label}</h3>
+            <p className="mt-5 leading-8">
+              Premium orthopedic rehabilitation support designed for medical
+              precision, recovery, mobility and patient comfort.
+            </p>
+          </div>
+        </div>
+      </div>
+    </StaggerItem>
+  );
+}
 
 const productImages = [
   'abdomen2.png',
@@ -354,64 +401,7 @@ const AboutUs = () => {
                 stagger={0.08}
               >
                 {productImages.map((image, index) => (
-                  <StaggerItem
-                    key={index}
-                    className="group h-[360px] [perspective:1200px]"
-                  >
-                    <div
-                      className="relative h-full w-full rounded-[32px] transition-all duration-700 group-hover:[transform:rotateY(180deg)]"
-                      style={{
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      {/* FRONT */}
-                      <div
-                        className="absolute inset-0 overflow-hidden rounded-[32px]"
-                        style={{
-                          backfaceVisibility: 'hidden',
-                          WebkitBackfaceVisibility: 'hidden',
-                        }}
-                      >
-                        <img
-                          src={`/products/${image}`}
-                          alt=""
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-                        <div className="absolute bottom-6 left-6">
-                          <h3 className="text-2xl font-bold capitalize text-white">
-                            {image.replace('.png', '')}
-                          </h3>
-                        </div>
-                      </div>
-
-                      {/* BACK */}
-                      <div
-                        className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden rounded-[32px] border border-cyan-100 dark:border-white/10 bg-[#dff4ff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 shadow-2xl"
-                        style={{
-                          transform: 'rotateY(180deg)',
-                          backfaceVisibility: 'hidden',
-                          WebkitBackfaceVisibility: 'hidden',
-                        }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-100/70 to-blue-100/50 backdrop-blur-xl" />
-
-                        <div className="relative z-10">
-                          <h3 className="text-3xl font-bold capitalize text-[#002B5B] dark:text-zinc-100">
-                            {image.replace('.png', '')}
-                          </h3>
-
-                          <p className="mt-5 leading-8 text-[#31506f] text-gray-500 dark:text-zinc-800">
-                            Premium orthopedic rehabilitation support
-                            designed for medical precision, recovery,
-                            mobility and patient comfort.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </StaggerItem>
+                  <CategoryFlipCard key={image} image={image} index={index} />
                 ))}
               </StaggerReveal>
             </section>

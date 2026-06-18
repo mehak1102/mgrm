@@ -1,0 +1,116 @@
+/* About Us — orthopedic category flip cards with per-card pastel backs */
+
+.about-category-flip {
+  perspective: 1200px;
+}
+
+.about-category-flip__inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-category-flip:hover .about-category-flip__inner,
+.about-category-flip:focus-within .about-category-flip__inner {
+  transform: rotateY(180deg);
+}
+
+.about-category-flip__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 32px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.about-category-flip__front {
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+  transition: box-shadow 0.45s ease;
+}
+
+.about-category-flip__front img {
+  transition: transform 0.5s ease;
+}
+
+.about-category-flip:hover .about-category-flip__front img,
+.about-category-flip:focus-within .about-category-flip__front img {
+  transform: scale(1.06);
+}
+
+.about-category-flip:hover .about-category-flip__front,
+.about-category-flip:focus-within .about-category-flip__front {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 16px 48px rgba(15, 23, 42, 0.2);
+}
+
+.about-category-flip__back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  transform: rotateY(180deg);
+  background: var(--ac-bg);
+  border: 1px solid color-mix(in srgb, var(--ac-title) 12%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ac-title) 8%, transparent),
+    0 20px 50px color-mix(in srgb, var(--ac-title) 18%, transparent);
+}
+
+.about-category-flip__back-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--ac-from) 85%, white) 0%,
+    color-mix(in srgb, var(--ac-to) 75%, white) 100%
+  );
+  opacity: 0.95;
+}
+
+.about-category-flip__back-content {
+  position: relative;
+  z-index: 1;
+}
+
+.about-category-flip__back h3 {
+  color: var(--ac-title) !important;
+  -webkit-text-fill-color: var(--ac-title);
+}
+
+.about-category-flip__back p {
+  color: var(--ac-text) !important;
+  -webkit-text-fill-color: var(--ac-text);
+  opacity: 1 !important;
+}
+
+/* Keep pastel backs readable in blue theme — do not force white text */
+[data-theme="blue"] .about-us-page .about-category-flip__back h3,
+[data-theme="blue"] .about-us-page .about-category-flip__back p {
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-category-flip:hover .about-category-flip__front,
+[data-theme="blue"] .about-category-flip:focus-within .about-category-flip__front {
+  box-shadow:
+    0 0 0 1px rgba(255, 215, 0, 0.25),
+    0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .about-category-flip:hover .about-category-flip__front,
+[data-theme="dark"] .about-category-flip:focus-within .about-category-flip__front {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-category-flip__inner {
+    transition: none;
+  }
+}
