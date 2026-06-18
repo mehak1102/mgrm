@@ -480,3 +480,14 @@
   color: #003262 !important;
   border: none !important;
 }
+
+/* Mobile nav drawer — dark text on glass card in blue theme */
+[data-theme="blue"] .mobile-nav-drawer,
+[data-theme="blue"] .mobile-nav-drawer button,
+[data-theme="blue"] .mobile-nav-drawer span {
+  color: #12324a !important;
+}
+
+[data-theme="blue"] .mobile-nav-drawer button.text-purple-600 {
+  color: #7c3aed !important;
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Search, ShoppingCart, HeartPulse, User, LogOut, ChevronDown, Menu, X } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -78,8 +79,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 min-w-0">
+    <>
+    <header className="sticky top-0 z-50 bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 min-w-0 overflow-x-clip">
         <Logo3D />
 
         <form onSubmit={handleSearch} className="hidden md:flex flex-1 min-w-0 max-w-xl relative">
@@ -288,168 +290,171 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-[120]">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            aria-label="Close menu"
-            onClick={() => setMobileOpen(false)}
-          />
-          <aside
-            className="absolute right-0 top-0 bottom-0 w-[min(100vw-3rem,340px)] bg-app dark:bg-slate-950 border-l border-slate-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden"
-            aria-label="Mobile navigation"
-          >
-            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-white/10 shrink-0">
-              <span className="font-bold text-sm text-slate-800 dark:text-zinc-100">Menu</span>
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
-                aria-label="Close menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto custom-scroll overscroll-contain px-4 py-4 space-y-4">
-              <form onSubmit={handleSearch} className="md:hidden relative">
-                <Search className="absolute left-3 top-3 text-gray-400 dark:text-zinc-500" size={18} />
-                <input
-                  name="search"
-                  placeholder="Search products..."
-                  className="w-full min-w-0 theme-panel rounded-2xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15"
-                />
-              </form>
-
-              <div className="space-y-1 font-bold text-sm">
-                <button
-                  type="button"
-                  onClick={() => setMobileBodyOpen((v) => !v)}
-                  className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left"
-                >
-                  Find by Body Area
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform ${mobileBodyOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {mobileBodyOpen && (
-                  <div className="pl-2 pb-2 space-y-1 max-h-52 overflow-y-auto custom-scroll">
-                    <button
-                      type="button"
-                      onClick={() => go("/shop-by-body")}
-                      className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
-                    >
-                      View all body areas
-                    </button>
-                    {bodyCategories.map((cat) => (
-                      <button
-                        key={cat.name}
-                        type="button"
-                        onClick={() => go(`/shop?category=${encodeURIComponent(cat.query)}`)}
-                        className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium"
-                      >
-                        {cat.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => go("/shop-by-activity")}
-                  className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover"
-                >
-                  Shop By Activity
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setMobileAboutOpen((v) => !v)}
-                  className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left"
-                >
-                  About Us
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform ${mobileAboutOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {mobileAboutOpen && (
-                  <div className="pl-2 pb-2 space-y-1">
-                    <button
-                      type="button"
-                      onClick={() => go("/about-us")}
-                      className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
-                    >
-                      About overview
-                    </button>
-                    {aboutLinks.map((item) => (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() =>
-                          go(`/about-us#${item.toLowerCase().replace(/\s+/g, "-")}`)
-                        }
-                        className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium"
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => go("/blogs")}
-                  className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover"
-                >
-                  Blogs
-                </button>
-                <button
-                  type="button"
-                  onClick={() => go("/support")}
-                  className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover"
-                >
-                  Support
-                </button>
-                <button
-                  type="button"
-                  onClick={() => go("/shop")}
-                  className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover"
-                >
-                  Shop
-                </button>
-              </div>
-
-              <div className="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2">
-                {user?.role === "admin" && (
-                  <button
-                    type="button"
-                    onClick={() => go("/admin")}
-                    className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover"
-                  >
-                    Admin
-                  </button>
-                )}
-                {user && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      openDashboard();
-                      setMobileOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover"
-                  >
-                    Dashboard
-                  </button>
-                )}
-              </div>
-            </div>
-          </aside>
-        </div>
-      )}
     </header>
+
+      {mobileOpen &&
+        createPortal(
+          <div className="lg:hidden fixed inset-0 z-[400]">
+            <button
+              type="button"
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+            />
+            <aside
+              className="mobile-nav-drawer absolute right-0 top-0 bottom-0 w-[min(100vw-3rem,340px)] bg-card dark:bg-slate-950 border-l border-slate-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden z-10 text-fg"
+              aria-label="Mobile navigation"
+            >
+              <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-white/10 shrink-0">
+                <span className="font-bold text-sm text-slate-800 dark:text-zinc-100">Menu</span>
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 rounded-full hover:bg-surface-hover text-slate-800 dark:text-zinc-100"
+                  aria-label="Close menu"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="flex-1 min-h-0 overflow-y-auto custom-scroll overscroll-contain px-4 py-4 space-y-4">
+                <form onSubmit={handleSearch} className="md:hidden relative">
+                  <Search className="absolute left-3 top-3 text-gray-400 dark:text-zinc-500" size={18} />
+                  <input
+                    name="search"
+                    placeholder="Search products..."
+                    className="w-full min-w-0 theme-panel rounded-2xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15"
+                  />
+                </form>
+
+                <div className="space-y-1 font-bold text-sm text-slate-800 dark:text-zinc-100">
+                  <button
+                    type="button"
+                    onClick={() => setMobileBodyOpen((v) => !v)}
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
+                  >
+                    Find by Body Area
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${mobileBodyOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {mobileBodyOpen && (
+                    <div className="pl-2 pb-2 space-y-1 max-h-52 overflow-y-auto custom-scroll">
+                      <button
+                        type="button"
+                        onClick={() => go("/shop-by-body")}
+                        className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
+                      >
+                        View all body areas
+                      </button>
+                      {bodyCategories.map((cat) => (
+                        <button
+                          key={cat.name}
+                          type="button"
+                          onClick={() => go(`/shop?category=${encodeURIComponent(cat.query)}`)}
+                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium text-inherit"
+                        >
+                          {cat.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => go("/shop-by-activity")}
+                    className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
+                  >
+                    Shop By Activity
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setMobileAboutOpen((v) => !v)}
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
+                  >
+                    About Us
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${mobileAboutOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {mobileAboutOpen && (
+                    <div className="pl-2 pb-2 space-y-1">
+                      <button
+                        type="button"
+                        onClick={() => go("/about-us")}
+                        className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
+                      >
+                        About overview
+                      </button>
+                      {aboutLinks.map((item) => (
+                        <button
+                          key={item}
+                          type="button"
+                          onClick={() =>
+                            go(`/about-us#${item.toLowerCase().replace(/\s+/g, "-")}`)
+                          }
+                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium text-inherit"
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => go("/blogs")}
+                    className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
+                  >
+                    Blogs
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => go("/support")}
+                    className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
+                  >
+                    Support
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => go("/shop")}
+                    className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
+                  >
+                    Shop
+                  </button>
+                </div>
+
+                <div className="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2 text-slate-800 dark:text-zinc-100">
+                  {user?.role === "admin" && (
+                    <button
+                      type="button"
+                      onClick={() => go("/admin")}
+                      className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover text-inherit"
+                    >
+                      Admin
+                    </button>
+                  )}
+                  {user && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        openDashboard();
+                        setMobileOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover text-inherit"
+                    >
+                      Dashboard
+                    </button>
+                  )}
+                </div>
+              </div>
+            </aside>
+          </div>,
+          document.body
+        )}
+    </>
   );
 }
