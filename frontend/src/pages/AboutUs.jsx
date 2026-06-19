@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Award,
   ShieldCheck,
@@ -243,6 +244,23 @@ const famousPeople = [
 
 
 const AboutUs = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash?.replace("#", "");
+    if (!hash) return undefined;
+
+    const timer = window.setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.classList.add("about-anchor-highlight");
+      window.setTimeout(() => el.classList.remove("about-anchor-highlight"), 2400);
+    }, 120);
+
+    return () => window.clearTimeout(timer);
+  }, [location.pathname, location.hash]);
+
   return (
     <div className="about-us-page relative overflow-x-clip overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300 max-w-[100vw]">
       {/* BG */}
@@ -385,7 +403,10 @@ const AboutUs = () => {
             </section>
 
             {/* PRODUCT GRID */}
-            <section className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 transition-colors duration-300 min-w-0 overflow-hidden">
+            <section
+              id="orthopedic-product-categories"
+              className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 transition-colors duration-300 min-w-0 overflow-hidden scroll-mt-28"
+            >
               <FadeUpBlock className="mb-8 sm:mb-12">
                 <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
                   Rehabilitation Products
@@ -452,7 +473,7 @@ const AboutUs = () => {
               </StaggerReveal>
 
               {/* Famous People */}
-              <div className="mt-20">
+              <div id="first-citizen" className="mt-20 scroll-mt-28">
                 <CinematicHeading
                   text="First Citizen to the Common Man"
                   as="h3"

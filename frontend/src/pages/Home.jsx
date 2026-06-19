@@ -21,6 +21,7 @@ import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
 import ViewportVideo from "../components/media/ViewportVideo";
 import DeferredSection from "../components/performance/DeferredSection";
+import HomeAboutPreview from "../components/home/HomeAboutPreview";
 import {
   HeroHeading,
   SectionHeading,
@@ -1626,6 +1627,8 @@ export default function Home() {
 
 </div>
 </section>
+
+        <HomeAboutPreview />
       </div>
     </main>
   );
