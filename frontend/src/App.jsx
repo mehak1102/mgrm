@@ -36,7 +36,7 @@ function RouteFallback() {
 }
 
 function DashboardHost() {
-  const { user } = useAuth();
+  const { user, authReady } = useAuth();
   const { isOpen } = useDashboard();
   const [mounted, setMounted] = useState(false);
 
@@ -44,7 +44,7 @@ function DashboardHost() {
     if (isOpen) setMounted(true);
   }, [isOpen]);
 
-  if (!user || !mounted) return null;
+  if (!authReady || !user || !mounted) return null;
 
   return (
     <Suspense fallback={null}>
@@ -55,10 +55,15 @@ function DashboardHost() {
 
 export default function App() {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, authReady } = useAuth();
 
   const hideLayout =
     location.pathname === "/login" || location.pathname === "/register";
+
+  const requireAuth = (element) => {
+    if (!authReady) return <RouteFallback />;
+    return user ? element : <Navigate to="/login" replace />;
+  };
 
   return (
     <div className="min-h-screen bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300 overflow-x-clip max-w-[100vw]">
@@ -75,17 +80,11 @@ export default function App() {
 
           <Route path="/product/:slug" element={<ProductDetail />} />
 
-          <Route
-            path="/checkout"
-            element={user ? <Checkout /> : <Navigate to="/login" replace />}
-          />
+          <Route path="/checkout" element={requireAuth(<Checkout />)} />
 
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/orders" element={<Orders />} />
-          <Route
-            path="/dashboard"
-            element={user ? <DashboardRedirect /> : <Navigate to="/login" replace />}
-          />
+          <Route path="/dashboard" element={requireAuth(<DashboardRedirect />)} />
 
           <Route path="/wishlist" element={<Wishlist />} />
 

@@ -25,8 +25,8 @@ export default function Navbar() {
   const location = useLocation();
   const { cartCount, setCartOpen } = useCart();
   const { wishlist } = useWishlist();
-  const { user, logout } = useAuth();
-  const { openDashboard } = useDashboard();
+  const { user, logout, authReady } = useAuth();
+  const { openDashboard, closeDashboard } = useDashboard();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileBodyOpen, setMobileBodyOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
@@ -44,6 +44,12 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const handleLogout = async () => {
+    closeDashboard();
+    setMobileOpen(false);
+    await logout();
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -234,12 +240,12 @@ export default function Navbar() {
             )}
           </button>
 
-          {user?.role === "admin" && (
+          {authReady && user?.role === "admin" && (
             <Link to="/admin" className="font-bold text-sm theme-text hidden md:inline whitespace-nowrap">
               Admin
             </Link>
           )}
-          {user && (
+          {authReady && user && (
             <button
               type="button"
               onClick={() => openDashboard()}
@@ -249,10 +255,10 @@ export default function Navbar() {
             </button>
           )}
 
-          {user ? (
+          {!authReady ? null : user ? (
             <button
               type="button"
-              onClick={logout}
+              onClick={handleLogout}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
               aria-label="Log out"
             >
@@ -428,7 +434,7 @@ export default function Navbar() {
                 </div>
 
                 <div className="border-t border-slate-200 dark:border-white/10 pt-4 space-y-2 text-slate-800 dark:text-zinc-100">
-                  {user?.role === "admin" && (
+                  {authReady && user?.role === "admin" && (
                     <button
                       type="button"
                       onClick={() => go("/admin")}
@@ -437,7 +443,7 @@ export default function Navbar() {
                       Admin
                     </button>
                   )}
-                  {user && (
+                  {authReady && user && (
                     <button
                       type="button"
                       onClick={() => {

@@ -2,10 +2,11 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedAdmin({ children }) {
-  const { user } = useAuth();
+  const { user, authReady } = useAuth();
 
-  if (!user) return <Navigate to="/login" />;
-  if (user.role !== "admin") return <Navigate to="/" />;
+  if (!authReady) return null;
+  if (!user) return <Navigate to="/login" replace />;
+  if (user.role !== "admin") return <Navigate to="/" replace />;
 
   return children;
 }

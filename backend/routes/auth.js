@@ -6,6 +6,21 @@ import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
+const AUTH_COOKIE_NAMES = ["token", "accessToken", "refreshToken", "auth"];
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  path: "/",
+};
+
+function clearAuthCookies(res) {
+  AUTH_COOKIE_NAMES.forEach((name) => {
+    res.clearCookie(name, cookieOptions);
+  });
+}
+
 function createToken(user) {
   return jwt.sign(
     { id: user._id, role: user.role, email: user.email, name: user.name },
@@ -59,7 +74,17 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  res.json(req.user);
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email,
+    role: req.user.role,
+  });
+});
+
+router.post("/logout", (_req, res) => {
+  clearAuthCookies(res);
+  res.json({ ok: true });
 });
 
 export default router;
