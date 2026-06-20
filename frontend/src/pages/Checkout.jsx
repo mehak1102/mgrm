@@ -6,6 +6,7 @@ import { useCart } from "../context/CartContext";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import { useTheme } from "../context/ThemeContext";
 import { productPriceSaleProps } from "../utils/productPriceStyle";
+import DeliveryTrustBadge from "../components/DeliveryTrustBadge";
 import { loadRazorpay } from "../utils/loadRazorpay";
 import toast from "react-hot-toast";
 import {
@@ -331,6 +332,8 @@ export default function Checkout() {
                 </div>
               ))}
             </div>
+
+            <DeliveryTrustBadge seed="checkout-summary" className="mt-5" />
 
             <div className="border-t border-edge dark:border-white/10 mt-6 pt-5 space-y-3">
               <div className="flex justify-between text-fg-muted">

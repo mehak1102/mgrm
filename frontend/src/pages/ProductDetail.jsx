@@ -25,6 +25,7 @@ import {
   Plus,
 } from "lucide-react";
 import { SectionHeading, FadeUpText } from "../components/typography/TypographyMotion";
+import DeliveryTrustBadge from "../components/DeliveryTrustBadge";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -154,6 +155,11 @@ export default function ProductDetail() {
               ₹{product.discountPrice}
             </span>
           </div>
+
+          <DeliveryTrustBadge
+            seed={product.slug || product._id}
+            className="mt-4"
+          />
 
           {!!product.sizes?.length && (
             <div className="mt-6">

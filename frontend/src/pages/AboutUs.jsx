@@ -848,7 +848,7 @@ const AboutUs = () => {
         loop
         playsInline
         poster="/products/logo-mark.png"
-        sources={[{ src: "/videos/handshake.mp4", type: "video/mp4" }]}
+        sources={[{ src: "/videos/pp.mp4", type: "video/mp4" }]}
         className="absolute inset-0 h-full w-full object-cover scale-[1.12]"
       />
 

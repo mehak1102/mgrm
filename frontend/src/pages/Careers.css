@@ -1,0 +1,385 @@
+/* Careers page — professional corporate styling */
+
+.careers-hero-bg {
+  transform: translateY(var(--careers-parallax, 0px));
+  transition: transform 0.1s linear;
+  will-change: transform;
+  object-position: 72% center;
+}
+
+.careers-hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.35) 0%,
+    rgba(15, 23, 42, 0.78) 100%
+  );
+}
+
+.careers-hero-overlay--left {
+  background: linear-gradient(
+    105deg,
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(15, 23, 42, 0.62) 38%,
+    rgba(15, 23, 42, 0.22) 58%,
+    rgba(15, 23, 42, 0.05) 72%,
+    transparent 100%
+  );
+}
+
+.dark .careers-hero-overlay--left,
+[data-theme="dark"] .careers-hero-overlay--left {
+  background: linear-gradient(
+    105deg,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.55) 38%,
+    rgba(0, 0, 0, 0.18) 58%,
+    transparent 100%
+  );
+}
+
+[data-theme="blue"] .careers-hero-overlay--left {
+  background: linear-gradient(
+    105deg,
+    rgba(0, 50, 98, 0.88) 0%,
+    rgba(0, 50, 98, 0.58) 40%,
+    rgba(0, 50, 98, 0.12) 65%,
+    transparent 100%
+  );
+}
+
+.dark .careers-hero-overlay,
+[data-theme="dark"] .careers-hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+}
+
+[data-theme="blue"] .careers-hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 50, 98, 0.45) 0%,
+    rgba(0, 50, 98, 0.88) 100%
+  );
+}
+
+.careers-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms ease,
+    border-color 350ms ease;
+}
+
+.careers-pastel-lavender {
+  border-color: rgba(167, 139, 250, 0.42);
+}
+
+.careers-pastel-sky {
+  border-color: rgba(56, 189, 248, 0.42);
+}
+
+.careers-pastel-mint {
+  border-color: rgba(52, 211, 153, 0.42);
+}
+
+.careers-pastel-peach {
+  border-color: rgba(251, 146, 60, 0.42);
+}
+
+.careers-pastel-rose {
+  border-color: rgba(244, 114, 182, 0.42);
+}
+
+.careers-pastel-lemon {
+  border-color: rgba(250, 204, 21, 0.45);
+}
+
+.careers-pastel-lavender:hover {
+  border-color: rgba(167, 139, 250, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(167, 139, 250, 0.22);
+}
+
+.careers-pastel-sky:hover {
+  border-color: rgba(56, 189, 248, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(56, 189, 248, 0.22);
+}
+
+.careers-pastel-mint:hover {
+  border-color: rgba(52, 211, 153, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(52, 211, 153, 0.22);
+}
+
+.careers-pastel-peach:hover {
+  border-color: rgba(251, 146, 60, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(251, 146, 60, 0.22);
+}
+
+.careers-pastel-rose:hover {
+  border-color: rgba(244, 114, 182, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(244, 114, 182, 0.22);
+}
+
+.careers-pastel-lemon:hover {
+  border-color: rgba(250, 204, 21, 0.72);
+  box-shadow:
+    0 18px 44px rgba(15, 23, 42, 0.08),
+    0 0 36px rgba(250, 204, 21, 0.2);
+}
+
+.dark .careers-pastel-lavender {
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.dark .careers-pastel-sky {
+  border-color: rgba(34, 211, 238, 0.32);
+}
+
+.dark .careers-pastel-mint {
+  border-color: rgba(52, 211, 153, 0.32);
+}
+
+.dark .careers-pastel-peach {
+  border-color: rgba(251, 146, 60, 0.32);
+}
+
+.dark .careers-pastel-rose {
+  border-color: rgba(244, 114, 182, 0.3);
+}
+
+.dark .careers-pastel-lemon {
+  border-color: rgba(250, 204, 21, 0.28);
+}
+
+[data-theme="dark"] .careers-pastel-lavender {
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+[data-theme="dark"] .careers-pastel-sky {
+  border-color: rgba(34, 211, 238, 0.32);
+}
+
+[data-theme="dark"] .careers-pastel-mint {
+  border-color: rgba(52, 211, 153, 0.32);
+}
+
+[data-theme="dark"] .careers-pastel-peach {
+  border-color: rgba(251, 146, 60, 0.32);
+}
+
+[data-theme="dark"] .careers-pastel-rose {
+  border-color: rgba(244, 114, 182, 0.3);
+}
+
+[data-theme="dark"] .careers-pastel-lemon {
+  border-color: rgba(250, 204, 21, 0.28);
+}
+
+.dark .careers-card,
+[data-theme="dark"] .careers-card {
+  background: rgba(24, 24, 27, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="blue"] .careers-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(0, 50, 98, 0.12);
+}
+
+.careers-card:hover {
+  transform: translateY(-4px);
+}
+
+.careers-strip-card {
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.careers-strip-body {
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.dark .careers-strip-body,
+[data-theme="dark"] .careers-strip-body {
+  background: rgba(24, 24, 27, 0.96);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.careers-job-card {
+  min-height: 100%;
+}
+
+.careers-dept-badge {
+  background: color-mix(in srgb, var(--color-brand, #7c3aed) 10%, transparent);
+  color: var(--color-brand, #7c3aed);
+  border: 1px solid color-mix(in srgb, var(--color-brand, #7c3aed) 18%, transparent);
+}
+
+.careers-icon-chip {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--color-brand, #7c3aed) 10%, transparent);
+  color: var(--color-brand, #7c3aed);
+}
+
+.careers-step-num {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: color-mix(in srgb, var(--color-brand, #7c3aed) 12%, transparent);
+  color: var(--color-brand, #7c3aed);
+  border: 1px solid color-mix(in srgb, var(--color-brand, #7c3aed) 20%, transparent);
+}
+
+.careers-benefit-card {
+  min-height: 148px;
+}
+
+.careers-culture-card {
+  min-height: 140px;
+}
+
+.careers-glass-panel {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+}
+
+.dark .careers-glass-panel,
+[data-theme="dark"] .careers-glass-panel {
+  background: rgba(24, 24, 27, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.careers-modal {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.18);
+}
+
+.dark .careers-modal,
+[data-theme="dark"] .careers-modal {
+  background: rgba(24, 24, 27, 0.98);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.careers-skeleton {
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .careers-hero-bg {
+    transform: none !important;
+    transition: none;
+  }
+
+  .careers-card:hover {
+    transform: none;
+  }
+}
+
+/* Blue theme — light cards on navy page need dark text */
+[data-theme="blue"] .careers-page {
+  color: var(--text-primary);
+}
+
+[data-theme="blue"] .careers-page .careers-section-head :is(h2, h3, .text-fg) {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="blue"] .careers-page .careers-section-head :is(p, .text-fg-muted) {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="blue"] .careers-page .careers-section-head :is(.text-brand, svg.text-brand) {
+  color: var(--text-accent) !important;
+}
+
+[data-theme="blue"] .careers-page :is(
+  .careers-card,
+  .careers-glass-panel,
+  .careers-modal,
+  .careers-strip-body
+) {
+  color: var(--text-on-card);
+}
+
+[data-theme="blue"] .careers-page :is(
+  .careers-card,
+  .careers-glass-panel,
+  .careers-modal,
+  .careers-strip-body
+) :is(h1, h2, h3, h4, p, span, summary, .font-black, .font-bold, .text-fg) {
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] .careers-page :is(
+  .careers-card,
+  .careers-glass-panel,
+  .careers-modal,
+  .careers-strip-body
+) :is(.text-fg-muted, p.text-sm) {
+  color: var(--text-on-card-body) !important;
+}
+
+[data-theme="blue"] .careers-page :is(.careers-card, .careers-glass-panel, .careers-modal) :is(.text-brand, svg.text-brand) {
+  color: #003262 !important;
+}
+
+[data-theme="blue"] .careers-page .careers-dept-badge {
+  background: rgba(0, 50, 98, 0.08);
+  color: #003262;
+  border-color: rgba(0, 50, 98, 0.18);
+}
+
+[data-theme="blue"] .careers-page .careers-icon-chip,
+[data-theme="blue"] .careers-page .careers-step-num {
+  background: rgba(255, 215, 0, 0.16);
+  color: #003262;
+  border-color: rgba(255, 215, 0, 0.35);
+}
+
+[data-theme="blue"] .careers-page .careers-modal :is(input, textarea) {
+  color: var(--text-on-card-heading) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(0, 50, 98, 0.16) !important;
+}
+
+[data-theme="blue"] .careers-page .careers-strip-body {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+[data-theme="blue"] .careers-page .careers-glass-panel {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(255, 215, 0, 0.28);
+}
+
+[data-theme="blue"] .careers-page .careers-modal {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(255, 215, 0, 0.28);
+}

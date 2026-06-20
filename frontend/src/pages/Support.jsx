@@ -11,6 +11,7 @@ import {
 import API from "../api";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import MGRMBrandRing from "../components/brand/MGRMBrandRing";
+import SupportCallPopup from "../components/support/SupportCallPopup";
 import {
   SectionLabel,
   HeroHeading,
@@ -47,6 +48,7 @@ export default function Support() {
       await API.post("/support", form);
 
       setSuccess("Your request has been submitted. Our team will contact you soon.");
+      window.dispatchEvent(new Event("mgrm:support-submitted"));
 
       setForm({
         name: "",
@@ -238,6 +240,7 @@ export default function Support() {
         </section>
 
       </div>
+      <SupportCallPopup />
     </main>
   );
 }

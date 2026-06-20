@@ -9,11 +9,11 @@ export function configureCloudinary() {
   });
 }
 
-export function uploadBufferToCloudinary(buffer, folder = "mgrm-products") {
+export function uploadBufferToCloudinary(buffer, folder = "mgrm-products", options = {}) {
   configureCloudinary();
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder },
+      { folder, ...options },
       (error, result) => {
         if (error) reject(error);
         else resolve(result);

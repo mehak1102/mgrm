@@ -3,6 +3,7 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useTheme } from "../context/ThemeContext";
+import DeliveryTrustBadge from "./DeliveryTrustBadge";
 import {
   productPriceOriginalProps,
   productPriceSaleProps,
@@ -58,6 +59,12 @@ export default function ProductCard({ product }) {
           <span className="text-sm font-bold">{product.rating || 4.6}</span>
           <span className="text-xs text-gray-500 dark:text-zinc-400/80">(24)</span>
         </div>
+
+        <DeliveryTrustBadge
+          seed={product.slug || product._id || product.name}
+          compact
+          className="mt-3"
+        />
 
         <div className="flex justify-between items-end mt-5">
           <div>

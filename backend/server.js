@@ -17,6 +17,7 @@ import recommendationRoutes from "./routes/recommendation.js";
 import reviewRoutes from "./routes/reviews.js";
 import recoveryStoryRoutes from "./routes/recoveryStories.js";
 import userRoutes from "./routes/users.js";
+import careerRoutes from "./routes/careers.js";
 
 // dotenv.config();
 console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
@@ -56,6 +57,7 @@ app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/recovery-stories", recoveryStoryRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/careers", careerRoutes);
 
 async function bootstrap() {
   try {

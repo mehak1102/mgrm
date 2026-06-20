@@ -28,6 +28,7 @@ const BlogDetail = lazy(() => import("./pages/BlogDetail"));
 const Support = lazy(() => import("./pages/Support"));
 const Wishlist = lazy(() => import("./pages/Wishlist"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
+const Careers = lazy(() => import("./pages/Careers"));
 const DashboardRedirect = lazy(() => import("./pages/DashboardRedirect"));
 const UserDashboardOverlay = lazy(() => import("./components/dashboard/UserDashboardOverlay"));
 
@@ -97,6 +98,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
 
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/careers" element={<Careers />} />
 
           <Route
             path="/admin"
