@@ -67,7 +67,162 @@ export default function Support() {
   return (
     <main className="relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
       {/* Full-viewport cinematic hero — first thing users see */}
-      <MGRMBrandRing />
+      {/* <MGRMBrandRing /> */}
+
+
+      {/* HERO VIDEO */}
+<section className="relative overflow-hidden rounded-[42px] mx-5 mt-6 shadow-[0_40px_120px_rgba(0,0,0,0.12)]">
+
+<div className="relative min-h-[720px]">
+
+  {/* VIDEO */}
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="metadata"
+    className="
+      absolute
+      inset-0
+      w-full
+      h-full
+      object-cover
+      scale-[1.02]
+      animate-[supportZoom_12s_ease-in-out_infinite_alternate]
+    "
+  >
+    <source src="/videos/support.mp4" type="video/mp4" />
+  </video>
+
+  {/* OVERLAY */}
+  <div
+    className="
+      absolute
+      inset-0
+      bg-gradient-to-r
+      from-black/72
+      via-black/38
+      to-transparent
+    "
+  />
+
+  {/* SOFT GLOW */}
+  <div
+    className="
+      absolute
+      inset-0
+      bg-[radial-gradient(circle_at_20%_50%,rgba(0,174,255,.18),transparent_45%)]
+    "
+  />
+
+  {/* CONTENT */}
+  <div className="relative z-10 max-w-7xl mx-auto px-5 py-24">
+
+    <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-center">
+
+      {/* LEFT */}
+      <div className="max-w-2xl">
+
+        <div
+          className="
+            inline-flex
+            rounded-full
+            px-4
+            py-2
+            bg-white/10
+            backdrop-blur-xl
+            text-cyan-300
+            text-sm
+            tracking-[0.28em]
+            font-black
+          "
+        >
+          CUSTOMER SUPPORT
+        </div>
+
+        <h1
+          className="
+            mt-6
+            text-white
+            text-5xl
+            md:text-7xl
+            font-black
+            leading-[0.96]
+          "
+        >
+          Need Help
+          <br />
+          Choosing The
+          <br />
+          Right Support?
+        </h1>
+
+        <p
+          className="
+            mt-6
+            text-white/80
+            text-lg
+            max-w-xl
+          "
+        >
+          Ask us about product selection,
+          sizing, delivery, returns,
+          recovery and bulk orders.
+        </p>
+
+        {/* CHIPS */}
+        <div className="flex flex-wrap gap-4 mt-10">
+
+          {[
+            "Certified Products",
+            "Size Assistance",
+            "Fast Support",
+          ].map((item) => (
+            <div
+              key={item}
+              className="
+                px-5
+                py-3
+                rounded-full
+                bg-white/10
+                backdrop-blur-xl
+                border
+                border-white/15
+                text-white
+                font-semibold
+              "
+            >
+              ✓ {item}
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+      {/* RIGHT FORM */}
+      <form
+        id="support-form"
+        onSubmit={submitSupport}
+        className="
+          bg-white/88
+          dark:bg-zinc-900/88
+          backdrop-blur-3xl
+          rounded-[38px]
+          p-8
+          shadow-2xl
+        "
+      >
+        {/* KEEP EXISTING FORM */}
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
 
       <FloatingMedicalBg />
 
