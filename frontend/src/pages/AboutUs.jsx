@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Award,
   ShieldCheck,
@@ -24,28 +24,84 @@ import {
 } from "../components/typography/TypographyMotion";
 import { useTheme } from "../context/ThemeContext";
 import { ABOUT_CATEGORY_PASTELS } from "../data/aboutCategoryPastels";
+import { bodyCategories } from "../data/siteData";
+import API from "../api";
 import "../theme/about-category-flip.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 
-function CategoryFlipCard({ image, index }) {
+const CATEGORY_IMAGE_QUERIES = {
+  'abdomen2.png': 'Abdominal',
+  'ankle2.png': 'Ankle And Foot',
+  'arm2.png': 'Arm',
+  'back2.png': 'Back',
+  'calf2.png': 'Shin And Calf',
+  'collar2.png': 'Neck',
+  'elbow2.png': 'Elbow',
+  'finger2.png': 'Finger',
+  'knee2.png': 'Knee',
+  'leg2.png': 'Leg',
+  'neck2.png': 'Neck',
+  'orth2.png': 'Orthopedic Aids',
+  'ribs2.png': 'Chest',
+  'shoulder2.png': 'Shoulder',
+  'thigh2.png': 'Thigh',
+  'wrist2.png': 'Wrist',
+};
+
+const BACK_PRODUCT_LINES = 5;
+
+const CATEGORY_NUMBER_FILLS = [
+  "#bae6fd", "#fbcfe8", "#ddd6fe", "#fed7aa", "#bbf7d0", "#a5f3fc",
+  "#fef08a", "#fecdd3", "#c7d2fe", "#99f6e4", "#d9f99d", "#e9d5ff",
+  "#bfdbfe", "#a7f3d0", "#fde68a", "#ffd6e8",
+];
+
+const CATEGORY_NUMBER_BORDERS = [
+  "#38bdf8", "#f472b6", "#a78bfa", "#fb923c", "#4ade80", "#22d3ee",
+  "#facc15", "#fb7185", "#818cf8", "#2dd4bf", "#a3e635", "#c084fc",
+  "#60a5fa", "#34d399", "#fbbf24", "#f472b6",
+];
+
+function getCategoryNumberColors(index) {
+  const i = index % CATEGORY_NUMBER_FILLS.length;
+  return {
+    fill: CATEGORY_NUMBER_FILLS[i],
+    border: CATEGORY_NUMBER_BORDERS[i],
+  };
+}
+
+function CategoryFlipCard({ image, index, categoryName, categoryQuery, products, productsLoaded }) {
   const { theme } = useTheme();
   const palette = ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length][theme]
     || ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length].light;
-  const label = image.replace('.png', '').replace(/2$/, '');
+  const badgeColors = getCategoryNumberColors(index);
+  const productCount = products.length;
+  const previewProducts = products.slice(0, BACK_PRODUCT_LINES);
 
   return (
     <StaggerItem className="about-category-flip min-w-0 w-full h-[260px] sm:h-[280px] md:h-[300px] lg:h-[320px] xl:h-[360px]">
       <div className="about-category-flip__inner">
         <div className="about-category-flip__face about-category-flip__front">
+          <span
+            className="about-category-flip__front-num"
+            aria-hidden="true"
+            style={{
+              background: badgeColors.fill,
+              borderColor: badgeColors.border,
+              '--badge-glow': badgeColors.border,
+            }}
+          >
+            {index + 1}
+          </span>
           <img
             src={`/products/${image}`}
-            alt={label}
+            alt={categoryName}
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6">
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold capitalize text-white break-words">
-              {label}
+              {categoryName}
             </h3>
           </div>
         </div>
@@ -63,11 +119,35 @@ function CategoryFlipCard({ image, index }) {
           <div className="about-category-flip__back-glow" aria-hidden />
           <div className="about-category-flip__back-content">
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold capitalize break-words">
-              {label}
+              {categoryName}
             </h3>
-            <p className="about-category-flip__back-text mt-3 sm:mt-4">
-              Premium orthopedic support for recovery, mobility and patient comfort.
+            <p className="about-category-flip__back-count">
+              {productCount} product{productCount === 1 ? '' : 's'}
             </p>
+
+            {productsLoaded && previewProducts.length > 0 ? (
+              <ol className="about-category-flip__back-list">
+                {previewProducts.map((product, productIndex) => (
+                  <li key={product._id || product.slug || `${product.name}-${productIndex}`}>
+                    <span className="about-category-flip__back-num">{productIndex + 1}.</span>
+                    <span className="about-category-flip__back-name">{product.name}</span>
+                  </li>
+                ))}
+              </ol>
+            ) : productsLoaded ? (
+              <p className="about-category-flip__back-empty">Open the shop to explore this category.</p>
+            ) : (
+              <p className="about-category-flip__back-empty" aria-hidden="true">
+                &nbsp;
+              </p>
+            )}
+
+            <Link
+              to={`/shop?category=${encodeURIComponent(categoryQuery)}`}
+              className="about-category-flip__back-btn btn-primary"
+            >
+              View Products
+            </Link>
           </div>
         </div>
       </div>
@@ -245,6 +325,35 @@ const famousPeople = [
 
 const AboutUs = () => {
   const location = useLocation();
+  const [categoryProducts, setCategoryProducts] = useState({});
+
+  useEffect(() => {
+    let ignore = false;
+    const queries = [
+      ...new Set(
+        productImages
+          .map((image) => CATEGORY_IMAGE_QUERIES[image])
+          .filter(Boolean)
+      ),
+    ];
+
+    Promise.all(
+      queries.map((query) =>
+        API.get(`/products?category=${encodeURIComponent(query)}&bodyOnly=true`)
+          .then((res) => ({ query, products: res.data.products || [] }))
+          .catch(() => ({ query, products: [] }))
+      )
+    ).then((results) => {
+      if (ignore) return;
+      setCategoryProducts(
+        Object.fromEntries(results.map((result) => [result.query, result.products]))
+      );
+    });
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   useEffect(() => {
     const hash = location.hash?.replace("#", "");
@@ -422,9 +531,25 @@ const AboutUs = () => {
                 className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
                 stagger={0.08}
               >
-                {productImages.map((image, index) => (
-                  <CategoryFlipCard key={image} image={image} index={index} />
-                ))}
+                {productImages.map((image, index) => {
+                  const categoryQuery = CATEGORY_IMAGE_QUERIES[image];
+                  const categoryMeta = bodyCategories.find((cat) => cat.query === categoryQuery);
+                  const categoryName =
+                    categoryMeta?.name ||
+                    image.replace('.png', '').replace(/2$/, '');
+
+                  return (
+                    <CategoryFlipCard
+                      key={image}
+                      image={image}
+                      index={index}
+                      categoryName={categoryName}
+                      categoryQuery={categoryQuery}
+                      products={categoryProducts[categoryQuery] || []}
+                      productsLoaded={Object.prototype.hasOwnProperty.call(categoryProducts, categoryQuery)}
+                    />
+                  );
+                })}
               </StaggerReveal>
             </section>
 
