@@ -10,6 +10,50 @@ import { useTheme } from "../../context/ThemeContext";
 import { bodyCategories } from "../../data/siteData";
 import { getPosterCardTheme, getPosterWash, POSTER_GLOW } from "./dashboardTheme";
 
+const PRODUCT_NUMBER_COLORS = [
+  "#bae6fd",
+  "#fbcfe8",
+  "#ddd6fe",
+  "#fed7aa",
+  "#bbf7d0",
+  "#a5f3fc",
+  "#fef08a",
+  "#fecdd3",
+  "#c7d2fe",
+  "#99f6e4",
+  "#d9f99d",
+  "#e9d5ff",
+  "#bfdbfe",
+  "#a7f3d0",
+  "#fde68a",
+];
+
+const PRODUCT_NUMBER_BORDERS = [
+  "#38bdf8",
+  "#f472b6",
+  "#a78bfa",
+  "#fb923c",
+  "#4ade80",
+  "#22d3ee",
+  "#facc15",
+  "#fb7185",
+  "#818cf8",
+  "#2dd4bf",
+  "#a3e635",
+  "#c084fc",
+  "#60a5fa",
+  "#34d399",
+  "#fbbf24",
+];
+
+function getProductNumberColor(number) {
+  const index = (number - 1) % PRODUCT_NUMBER_COLORS.length;
+  return {
+    fill: PRODUCT_NUMBER_COLORS[index],
+    border: PRODUCT_NUMBER_BORDERS[index],
+  };
+}
+
 /** Slow horizontal marquee — all products in one row, clickable with hover glow */
 function ProductCarousel({ items, textZone = "32%", onItemClick }) {
   const list = items.filter((p) => p?.image && p?.slug);
@@ -27,7 +71,10 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
         className="flex h-full items-stretch gap-2.5 sm:gap-3 w-max dashboard-shop-carousel py-3 px-3"
         style={{ animationDuration: `${duration}s` }}
       >
-        {loop.map((item, i) => (
+        {loop.map((item, i) => {
+          const badgeColors = getProductNumberColor(item.number);
+
+          return (
           <button
             key={`${item.slug}-${i}`}
             type="button"
@@ -40,6 +87,19 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
               rounded-xl overflow-hidden cursor-pointer border border-white/20
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2"
           >
+            <span
+              className="dashboard-carousel-number absolute top-2 left-2 z-10 flex h-9 w-9 items-center justify-center
+                rounded-full text-[11px] font-black leading-none text-slate-800
+                border-2 backdrop-blur-sm pointer-events-none"
+              style={{
+                background: badgeColors.fill,
+                borderColor: badgeColors.border,
+                "--badge-glow": badgeColors.border,
+              }}
+              aria-hidden="true"
+            >
+              {item.number}
+            </span>
             <img
               src={item.image}
               alt={item.name || "Product"}
@@ -52,7 +112,8 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
                 group-hover/card:opacity-100 bg-gradient-to-t from-violet-600/25 via-transparent to-cyan-400/15"
             />
           </button>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -283,7 +344,12 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     () =>
       products
         .filter((p) => p?.images?.[0] && p?.slug)
-        .map((p) => ({ slug: p.slug, image: p.images[0], name: p.name })),
+        .map((p, index) => ({
+          slug: p.slug,
+          image: p.images[0],
+          name: p.name,
+          number: index + 1,
+        })),
     [products]
   );
 

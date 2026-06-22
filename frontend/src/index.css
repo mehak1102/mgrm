@@ -346,6 +346,26 @@ body {
     0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
+.dashboard-carousel-number {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+    0 4px 14px rgba(0, 0, 0, 0.16);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.dashboard-carousel-card:hover .dashboard-carousel-number,
+.dashboard-carousel-card:focus-visible .dashboard-carousel-number {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.65) inset,
+    0 0 12px color-mix(in srgb, var(--badge-glow) 72%, transparent),
+    0 0 26px color-mix(in srgb, var(--badge-glow) 48%, transparent),
+    0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
 .dashboard-shop-carousel:hover {
   animation-play-state: paused;
 }

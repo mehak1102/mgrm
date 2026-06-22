@@ -347,11 +347,23 @@
   text-shadow: 0 0 0 transparent !important;
 }
 
-/* Blue theme only: body-area dropdown pills text should be black */
-[data-theme="blue"] .body-area-chip .body-area-chip-label,
+/* Blue theme only: body-area dropdown pills */
+[data-theme="blue"] .body-area-chip .body-area-chip-label {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .body-area-chip:hover .body-area-chip-label,
+[data-theme="blue"] .body-area-chip:focus-visible .body-area-chip-label {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 [data-theme="blue"] .body-area-chip .body-area-chip-count {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   opacity: 1 !important;
 }
 

@@ -57,7 +57,10 @@ function FlowingLetterText({ text, countColor, textColor }) {
   }, [text]);
 
   return (
-    <p className="text-base sm:text-xl font-semibold tracking-tight mt-0.5" aria-label={text}>
+    <h1
+      className="text-2xl sm:text-3xl lg:text-[2.75rem] font-bold tracking-tight mt-1 leading-[1.05]"
+      aria-label={text}
+    >
       {text.split("").map((char, i) => {
         const shown = i < visible;
         const isCount = isCountChar(text, i);
@@ -65,7 +68,7 @@ function FlowingLetterText({ text, countColor, textColor }) {
         return (
           <span
             key={`${char}-${i}`}
-            className={`dashboard-flow-letter ${isCount ? "font-black" : "font-semibold"}`}
+            className={`dashboard-flow-letter ${isCount ? "font-black" : "font-bold"}`}
             style={{
               opacity: shown ? 1 : 0,
               transform: shown ? "translateX(0)" : "translateX(-8px)",
@@ -78,13 +81,13 @@ function FlowingLetterText({ text, countColor, textColor }) {
         );
       })}
       <span
-        className="dashboard-flow-caret ml-0.5 inline-block w-[2px] h-[0.85em] align-[-0.12em] rounded-full"
+        className="dashboard-flow-caret ml-0.5 inline-block w-[3px] h-[0.82em] align-[-0.1em] rounded-full"
         style={{
           backgroundColor: textColor,
           opacity: visible > 0 && visible < text.length ? 1 : 0.35,
         }}
       />
-    </p>
+    </h1>
   );
 }
 
@@ -219,9 +222,9 @@ export default function UserDashboardOverlay() {
                     MGRM Medicare
                   </p>
                   {view === "section" ? (
-                    <h1 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
+                    <h2 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
                       {SECTION_LABELS[activeSection] || "Account"}
-                    </h1>
+                    </h2>
                   ) : (
                     <FlowingLetterText
                       text={`${productCount ?? "—"} MGRM medical supports`}

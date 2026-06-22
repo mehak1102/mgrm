@@ -45,6 +45,7 @@ const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCol
 const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
 const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
+const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
 
 const text = "248 top certified products - to cure your body";
 
@@ -1628,6 +1629,7 @@ export default function Home() {
 </div>
 </section>
 
+        <DeferredSection loader={loadFrequentlyUsedProducts} minHeight={720} />
         <HomeAboutPreview />
       </div>
     </main>
