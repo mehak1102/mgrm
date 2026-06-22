@@ -1069,7 +1069,7 @@ export default function Home() {
 
         {/* SUBTITLE */}
         <h3 className="mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
-          Physical Rehabilitation Splints & Aids
+          Braces • Splintage • Bandage Care
         </h3>
 
         {/* DESC */}
