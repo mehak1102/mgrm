@@ -1,0 +1,398 @@
+/* ── Recommended By Physiotherapist — theme-aware editorial page ── */
+
+.therapy-page {
+  --therapy-bg: var(--bg-secondary, #f7f8fb);
+  --therapy-surface: var(--card-bg, #ffffff);
+  --therapy-elevated: var(--card-elevated, #ffffff);
+  --therapy-ink: var(--text-primary, #0f172a);
+  --therapy-secondary: var(--text-secondary, #64748b);
+  --therapy-muted: var(--text-muted, #94a3b8);
+  --therapy-line: var(--border-color, #e2e8f0);
+  --therapy-chip-bg: rgba(15, 23, 42, 0.04);
+  --therapy-chip-border: rgba(15, 23, 42, 0.08);
+  --therapy-specimen-bg: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+  --therapy-specimen-border: rgba(15, 23, 42, 0.08);
+  --therapy-specimen-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --therapy-card-bg: linear-gradient(145deg, #f8fbff 0%, #eef4ff 48%, #f3f7ff 100%);
+  --therapy-card-border: rgba(15, 23, 42, 0.06);
+  --therapy-card-shadow: 0 30px 100px rgba(15, 23, 42, 0.1);
+  --therapy-nav-bg: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.72) 100%);
+  --therapy-shelf-panel-bg: rgba(255, 255, 255, 0.55);
+  --therapy-hero-gradient: linear-gradient(135deg, #f0f7ff 0%, #e8f0fa 50%, #f5f8fc 100%);
+
+  background: var(--therapy-bg);
+  color: var(--therapy-ink);
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+}
+
+[data-theme="dark"] .therapy-page {
+  --therapy-bg: var(--bg-secondary, #0f172a);
+  --therapy-surface: var(--card-bg, #18181b);
+  --therapy-elevated: var(--card-elevated, #111827);
+  --therapy-ink: var(--text-primary, #fafafa);
+  --therapy-secondary: var(--text-secondary, #a1a1aa);
+  --therapy-muted: var(--text-muted, #71717a);
+  --therapy-line: rgba(255, 255, 255, 0.1);
+  --therapy-chip-bg: rgba(255, 255, 255, 0.04);
+  --therapy-chip-border: rgba(255, 255, 255, 0.1);
+  --therapy-specimen-bg: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  --therapy-specimen-border: rgba(255, 255, 255, 0.1);
+  --therapy-specimen-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --therapy-card-bg: linear-gradient(145deg, #18181b 0%, #0f172a 50%, #09090b 100%);
+  --therapy-card-border: rgba(255, 255, 255, 0.08);
+  --therapy-card-shadow: 0 30px 100px rgba(0, 0, 0, 0.4);
+  --therapy-nav-bg: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 100%);
+  --therapy-shelf-panel-bg: rgba(0, 0, 0, 0.25);
+  --therapy-hero-gradient: linear-gradient(135deg, #0f172a 0%, #020617 50%, #18181b 100%);
+}
+
+[data-theme="blue"] .therapy-page {
+  --therapy-bg: var(--bg-primary, #003262);
+  --therapy-surface: var(--card-bg, rgba(255, 255, 255, 0.84));
+  --therapy-elevated: var(--card-elevated, rgba(255, 255, 255, 0.9));
+  --therapy-ink: var(--text-primary, #ffffff);
+  --therapy-secondary: var(--text-secondary, rgba(255, 255, 255, 0.82));
+  --therapy-muted: var(--text-muted, rgba(255, 255, 255, 0.65));
+  --therapy-line: rgba(255, 255, 255, 0.14);
+  --therapy-chip-bg: rgba(255, 255, 255, 0.08);
+  --therapy-chip-border: rgba(255, 255, 255, 0.18);
+  --therapy-specimen-bg: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  --therapy-specimen-border: rgba(255, 255, 255, 0.2);
+  --therapy-specimen-shadow: 0 24px 60px rgba(0, 20, 50, 0.35);
+  --therapy-card-bg: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(0, 50, 98, 0.4) 100%
+  );
+  --therapy-card-border: rgba(255, 255, 255, 0.18);
+  --therapy-card-shadow: 0 30px 80px rgba(0, 20, 50, 0.45);
+  --therapy-nav-bg: linear-gradient(90deg, rgba(0, 50, 98, 0.95) 0%, rgba(0, 50, 98, 0.65) 100%);
+  --therapy-shelf-panel-bg: rgba(255, 255, 255, 0.06);
+  --therapy-hero-gradient: linear-gradient(135deg, #003875 0%, #003262 50%, #00284e 100%);
+}
+
+.therapy-text-primary { color: var(--therapy-ink); }
+.therapy-text-secondary { color: var(--therapy-secondary); }
+.therapy-text-muted { color: var(--therapy-muted); }
+.therapy-border { border-color: var(--therapy-line); }
+
+.therapy-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.therapy-scroll {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+.therapy-snap {
+  scroll-snap-align: start;
+}
+
+.therapy-hero {
+  background: var(--therapy-hero-gradient);
+  min-height: 100svh;
+}
+
+.therapy-hero-grid {
+  background-image:
+    linear-gradient(var(--therapy-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--therapy-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 15%, transparent 72%);
+  opacity: 0.5;
+}
+
+.therapy-hero-title-accent {
+  background: linear-gradient(120deg, var(--therapy-ink) 0%, var(--therapy-secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme="blue"] .therapy-hero-title-accent {
+  background: linear-gradient(120deg, #ffffff 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.therapy-nav-rail {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 1rem 0.65rem 1rem 0.85rem;
+  border-right: 1px solid var(--therapy-line);
+  background: var(--therapy-nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@media (min-width: 1100px) {
+  .therapy-nav-rail { display: flex; }
+}
+
+.therapy-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.55rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  opacity: 0.42;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.therapy-nav-btn:hover { opacity: 0.8; background: var(--therapy-chip-bg); }
+.therapy-nav-btn.is-active { opacity: 1; background: var(--therapy-chip-bg); }
+
+.therapy-nav-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.therapy-nav-btn.is-active .therapy-nav-dot {
+  transform: scale(1.5);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.therapy-nav-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--therapy-muted);
+  white-space: nowrap;
+}
+
+.therapy-nav-btn.is-active .therapy-nav-label { color: var(--therapy-ink); }
+
+.therapy-mobile-nav {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  padding: 0.65rem 1rem;
+  scrollbar-width: none;
+  background: var(--therapy-nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--therapy-line);
+}
+
+.therapy-mobile-nav::-webkit-scrollbar { display: none; }
+
+@media (min-width: 1100px) {
+  .therapy-mobile-nav { display: none; }
+}
+
+.therapy-pill {
+  flex-shrink: 0;
+  padding: 0.38rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--therapy-line);
+  background: transparent;
+  color: var(--therapy-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.therapy-pill.is-active {
+  color: var(--therapy-ink);
+  border-color: var(--therapy-chip-border);
+  background: var(--therapy-chip-bg);
+}
+
+.therapy-chapter-card {
+  background: var(--therapy-card-bg);
+  border-color: var(--therapy-card-border);
+  box-shadow: var(--therapy-card-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.therapy-chapter-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.therapy-chapter-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.2;
+  animation: therapy-orb-drift 16s ease-in-out infinite alternate;
+}
+
+@keyframes therapy-orb-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(3%, -5%) scale(1.1); }
+}
+
+.therapy-story {
+  color: var(--therapy-muted);
+  border-left: 2px solid var(--chapter-accent, #0ea5e9);
+  padding-left: 0.85rem;
+}
+
+.therapy-chip {
+  background: var(--therapy-chip-bg);
+  border: 1px solid var(--therapy-chip-border);
+  color: var(--therapy-secondary);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.therapy-chip:hover {
+  border-color: var(--chapter-accent, #0ea5e9);
+  color: var(--therapy-ink);
+}
+
+.therapy-cta-link {
+  color: var(--therapy-ink);
+  border-bottom: 1px solid var(--therapy-line);
+  padding-bottom: 2px;
+}
+
+.therapy-cta-link:hover {
+  border-color: var(--chapter-accent, #0ea5e9);
+}
+
+.therapy-shelf-panel {
+  background: var(--therapy-shelf-panel-bg);
+  border-color: var(--therapy-line);
+  backdrop-filter: blur(12px);
+}
+
+.therapy-specimen {
+  background: var(--therapy-specimen-bg);
+  border: 1px solid var(--therapy-specimen-border);
+  box-shadow: var(--therapy-specimen-shadow);
+  backdrop-filter: blur(16px);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+}
+
+.therapy-specimen:hover {
+  border-color: var(--therapy-chip-border);
+  box-shadow: var(--therapy-specimen-shadow), 0 0 40px var(--specimen-glow, transparent);
+}
+
+.therapy-specimen-foot {
+  border-top: 1px solid var(--therapy-line);
+}
+
+.therapy-specimen-cta {
+  border: 1px solid var(--therapy-line);
+  color: var(--therapy-muted);
+  transition: all 0.35s ease;
+}
+
+.therapy-specimen-cta:hover {
+  color: var(--therapy-ink);
+  border-color: var(--therapy-chip-border);
+  background: var(--therapy-chip-bg);
+}
+
+.therapy-shelf-mask-left {
+  background: linear-gradient(90deg, var(--therapy-bg) 0%, transparent 100%);
+}
+
+.therapy-shelf-mask-right {
+  background: linear-gradient(270deg, var(--therapy-bg) 0%, transparent 100%);
+}
+
+.therapy-ring {
+  --ring-color: #0ea5e9;
+  box-shadow: 0 0 0 2px var(--ring-color);
+}
+
+.therapy-category-group + .therapy-category-group {
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--therapy-line);
+}
+
+.therapy-mood-vital .therapy-chapter-orb { opacity: 0.28; }
+.therapy-mood-delicate .therapy-chapter-card { border-radius: 40px; }
+.therapy-mood-grounded .therapy-chapter-orb { filter: blur(70px); }
+.therapy-mood-precision .therapy-chapter-card {
+  box-shadow: var(--therapy-card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.therapy-scroll-hint {
+  animation: therapy-bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes therapy-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.45; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.therapy-footer {
+  border-top: 1px solid var(--therapy-line);
+}
+
+[data-theme="blue"] .therapy-specimen h4,
+[data-theme="blue"] .therapy-specimen .therapy-text-primary {
+  color: var(--text-on-card, #12324a);
+}
+
+[data-theme="blue"] .therapy-specimen .therapy-text-muted {
+  color: var(--text-on-card-muted, #4f6980);
+}
+
+[data-theme="blue"] .therapy-chapter-card .therapy-text-primary,
+[data-theme="blue"] .therapy-chapter-card h2 {
+  color: var(--text-primary, #fff);
+}
+
+[data-theme="blue"] .therapy-chapter-card .therapy-text-secondary,
+[data-theme="blue"] .therapy-chapter-card .therapy-story {
+  color: var(--text-secondary, rgba(255, 255, 255, 0.82));
+}
+
+[data-theme="blue"] .therapy-shelf-panel .therapy-text-primary,
+[data-theme="blue"] .therapy-shelf-panel h3 {
+  color: var(--text-on-card, #12324a);
+}
+
+[data-theme="blue"] .therapy-shelf-panel .therapy-text-muted {
+  color: var(--text-on-card-muted, #4f6980);
+}

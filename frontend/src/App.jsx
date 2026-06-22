@@ -11,6 +11,7 @@ import ProtectedAdmin from "./components/ProtectedAdmin";
 
 import { useAuth } from "./context/AuthContext";
 import { useDashboard } from "./context/DashboardContext";
+import { RecommendedByPhysiotherapist } from "./routes.jsx";
 
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
@@ -99,6 +100,7 @@ export default function App() {
 
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/recommended-by-physiotherapist" element={<RecommendedByPhysiotherapist />} />
 
           <Route
             path="/admin"

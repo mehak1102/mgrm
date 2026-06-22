@@ -335,11 +335,6 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
       .catch(() => {});
   }, []);
 
-  const featured = useMemo(
-    () => products.filter((p) => p.isFeatured || p.isBestSeller).slice(0, 4),
-    [products]
-  );
-
   const shopCarouselItems = useMemo(
     () =>
       products
@@ -352,11 +347,6 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
         })),
     [products]
   );
-
-  const featuredCollage = useMemo(() => {
-    const imgs = productImages(featured);
-    return (imgs.length >= 3 ? imgs : productImages(products.slice(0, 3))).slice(0, 3);
-  }, [featured, products]);
 
   const recoCollage = useMemo(() => {
     const imgs = productImages(recommended);
@@ -388,6 +378,14 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     }
     return ["/products/knee2.png", "/products/shoulder2.png"];
   }, [recoveryPreview]);
+
+  const therapyCollage = useMemo(() => {
+    const queries = ["Thigh", "Knee", "Shin And Calf"];
+    return queries
+      .map((q) => bodyCategories.find((c) => c.query === q)?.image)
+      .filter(Boolean)
+      .slice(0, 3);
+  }, []);
 
   const profileImg = profile?.profileImage || user?.profileImage || "/products/logo-mark.png";
   const addressCollage = ["/products/back2.png", "/products/knee2.png", "/products/ankle2.png", "/products/wrist2.png"];
@@ -451,17 +449,17 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.24}
           washKey="featured"
           glow={POSTER_GLOW.featured}
-          label="Curated"
-          title="Featured Supports"
-          subtitle={`${featured.length} bestsellers`}
-          collage={featuredCollage}
+          label="Therapy"
+          title="Recommended By Physiotherapist"
+          subtitle="Discover supports organized by recovery specialty. Explore →"
+          collage={therapyCollage}
           gridCols={3}
           gridRows={1}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
-          onClick={() => onRoute("/shop?featured=true")}
+          onClick={() => onRoute("/recommended-by-physiotherapist")}
         >
           <Star size={15} className={`absolute top-4 right-4 z-30 ${cardTheme.iconStar}`} fill="currentColor" />
         </PosterTile>
