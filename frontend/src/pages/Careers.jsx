@@ -116,6 +116,37 @@ const PASTEL_BORDERS = [
 
 const pastelBorder = (index) => PASTEL_BORDERS[index % PASTEL_BORDERS.length];
 
+const WHY_JOIN_PASTELS = [
+  "careers-section-why-lavender",
+  "careers-section-why-sky",
+  "careers-section-why-mint",
+];
+
+const BENEFITS_PASTELS = [
+  "careers-section-benefits-peach",
+  "careers-section-benefits-rose",
+  "careers-section-benefits-lemon",
+  "careers-section-benefits-sky",
+  "careers-section-benefits-mint",
+  "careers-section-benefits-lavender",
+];
+
+const PROCESS_PASTELS = [
+  "careers-section-process-ice",
+  "careers-section-process-lilac",
+  "careers-section-process-aqua",
+  "careers-section-process-apricot",
+];
+
+const CULTURE_PASTELS = [
+  "careers-section-culture-rose",
+  "careers-section-culture-mint",
+  "careers-section-culture-sky",
+  "careers-section-culture-lemon",
+];
+
+const sectionPastel = (palette, index) => palette[index % palette.length];
+
 const emptyApply = {
   name: "",
   email: "",
@@ -363,7 +394,9 @@ export default function Careers() {
             const Icon = item.icon;
             return (
               <StaggerItem key={item.title}>
-                <div className={`careers-card rounded-3xl p-6 h-full ${pastelBorder(index)}`}>
+                <div
+                  className={`careers-card rounded-3xl p-6 h-full ${sectionPastel(WHY_JOIN_PASTELS, index)}`}
+                >
                   <div className="careers-icon-chip mb-4">
                     <Icon size={20} />
                   </div>
@@ -387,7 +420,7 @@ export default function Careers() {
             return (
               <StaggerItem key={item.title}>
                 <div
-                  className={`careers-card careers-benefit-card rounded-3xl p-5 flex flex-col ${pastelBorder(index)}`}
+                  className={`careers-card careers-benefit-card rounded-3xl p-5 flex flex-col ${sectionPastel(BENEFITS_PASTELS, index)}`}
                 >
                   <Icon size={18} className="text-brand mb-3" />
                   <p className="font-black text-fg">{item.title}</p>
@@ -407,7 +440,7 @@ export default function Careers() {
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {PROCESS.map((item, index) => (
             <StaggerItem key={item.step}>
-              <div className={`careers-card rounded-3xl p-5 h-full ${pastelBorder(index)}`}>
+              <div className={`careers-card rounded-3xl p-5 h-full ${sectionPastel(PROCESS_PASTELS, index)}`}>
                 <div className="careers-step-num mb-3">{index + 1}</div>
                 <p className="font-black text-fg text-lg">{item.step}</p>
                 <p className="text-sm text-fg-muted mt-2">{item.text}</p>
@@ -426,7 +459,9 @@ export default function Careers() {
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {CULTURE.map((item, index) => (
             <StaggerItem key={item.title}>
-              <div className={`careers-card careers-culture-card rounded-3xl p-6 ${pastelBorder(index)}`}>
+              <div
+                className={`careers-card careers-culture-card rounded-3xl p-6 ${sectionPastel(CULTURE_PASTELS, index)}`}
+              >
                 <HeartHandshake className="text-brand mb-3" size={22} />
                 <p className="font-black text-fg">{item.title}</p>
               </div>
