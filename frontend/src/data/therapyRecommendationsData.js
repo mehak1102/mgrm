@@ -25,7 +25,7 @@ export const therapySections = [
     categories: ["Abdominal", "Shin And Calf", "Thigh"].map((q) => meta(q).query),
     accent: meta("Thigh").color,
     mood: "dynamic",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/sports.png",
   },
   {
     id: "upper-limb",
@@ -36,7 +36,7 @@ export const therapySections = [
     categories: ["Arm", "Elbow"].map((q) => meta(q).query),
     accent: meta("Arm").color,
     mood: "fluid",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/upperlimb.png",
   },
   {
     id: "lower-limb",
@@ -47,7 +47,7 @@ export const therapySections = [
     categories: ["Ankle And Foot", "Leg"].map((q) => meta(q).query),
     accent: meta("Leg").color,
     mood: "grounded",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/lower.png",
   },
   {
     id: "musculoskeletal",
@@ -58,7 +58,7 @@ export const therapySections = [
     categories: ["Back"].map((q) => meta(q).query),
     accent: meta("Back").color,
     mood: "structural",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/back.png",
   },
   {
     id: "cardio-respiratory",
@@ -69,7 +69,7 @@ export const therapySections = [
     categories: ["Chest"].map((q) => meta(q).query),
     accent: meta("Chest").color,
     mood: "vital",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/cardio.png",
   },
   {
     id: "orthopedic",
@@ -80,7 +80,7 @@ export const therapySections = [
     categories: ["Knee"].map((q) => meta(q).query),
     accent: meta("Knee").color,
     mood: "precision",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/orth.png",
   },
   {
     id: "spine-posture",
@@ -91,7 +91,7 @@ export const therapySections = [
     categories: ["Neck"].map((q) => meta(q).query),
     accent: meta("Neck").color,
     mood: "aligned",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/spine.png",
   },
   {
     id: "hand-therapy",
@@ -102,7 +102,7 @@ export const therapySections = [
     categories: ["Finger"].map((q) => meta(q).query),
     accent: meta("Finger").color,
     mood: "delicate",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/hand.png",
   },
   {
     id: "shoulder-rehab",
@@ -113,7 +113,7 @@ export const therapySections = [
     categories: ["Shoulder"].map((q) => meta(q).query),
     accent: meta("Shoulder").color,
     mood: "elevated",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/shoulder.png",
   },
   {
     id: "hand-wrist",
@@ -124,7 +124,7 @@ export const therapySections = [
     categories: ["Wrist"].map((q) => meta(q).query),
     accent: meta("Wrist").color,
     mood: "articulate",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/wrist.png",
   },
   {
     id: "core-rehab",
@@ -135,7 +135,7 @@ export const therapySections = [
     categories: ["Abdominal"].map((q) => meta(q).query),
     accent: meta("Abdominal").color,
     mood: "centered",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/core.png",
   },
   {
     id: "general-orthopedic",
@@ -146,7 +146,7 @@ export const therapySections = [
     categories: ["Orthopedic Aids"].map((q) => meta(q).query),
     accent: meta("Orthopedic Aids").color,
     mood: "assistive",
-    heroImage: "/cardiology/heart.png",
+    heroImage: "/cardiology/gor.png",
   },
 ];
 

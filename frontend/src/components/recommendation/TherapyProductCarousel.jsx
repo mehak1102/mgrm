@@ -52,7 +52,7 @@ function GroupSkeleton({ slidesPerView }) {
   );
 }
 
-const ShelfSpecimen = memo(function ShelfSpecimen({ product, accentRgb, reduce, index }) {
+const ShelfSpecimen = memo(function ShelfSpecimen({ product, accent, accentRgb, reduce, index }) {
   const { isBlue } = useTheme();
   const image = product.images?.[0] || product.image || "/products/knee.png";
   const price = Number(product.price || 0);
@@ -67,7 +67,8 @@ const ShelfSpecimen = memo(function ShelfSpecimen({ product, accentRgb, reduce, 
       whileHover={reduce ? undefined : { y: -8, transition: { duration: 0.4, ease: SHELF_EASE } }}
       className="therapy-specimen group/spec relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl sm:min-h-[300px]"
       style={{
-        "--specimen-glow": `rgba(${accentRgb}, 0.25)`,
+        "--specimen-accent": accent,
+        "--specimen-glow": `rgba(${accentRgb}, 0.3)`,
         contentVisibility: "auto",
         containIntrinsicSize: "300px",
       }}
@@ -193,6 +194,7 @@ function CategoryCarousel({ group, slidesPerView, reduce }) {
               <div key={`${id}-${index}`} className="shrink-0" style={{ width: slideWidth }}>
                 <ShelfSpecimen
                   product={product}
+                  accent={group.color}
                   accentRgb={accentRgb}
                   reduce={reduce}
                   index={index % products.length}

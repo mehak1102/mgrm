@@ -115,6 +115,176 @@
   min-height: 100svh;
 }
 
+.therapy-hero-orb {
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  animation: therapy-hero-orb-float 14s ease-in-out infinite alternate;
+}
+
+.therapy-hero-orb-a {
+  width: min(42vw, 420px);
+  height: min(42vw, 420px);
+  top: 8%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, transparent 70%);
+}
+
+.therapy-hero-orb-b {
+  width: min(36vw, 360px);
+  height: min(36vw, 360px);
+  bottom: 12%;
+  left: 4%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.28) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+
+@keyframes therapy-hero-orb-float {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-3%, 4%) scale(1.08); }
+}
+
+.therapy-hero-panel {
+  background: var(--therapy-card-bg);
+  border-color: var(--therapy-card-border);
+  box-shadow: var(--therapy-card-shadow);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+}
+
+.therapy-hero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #ef4444 6%, transparent) 0%,
+    transparent 42%,
+    color-mix(in srgb, #0ea5e9 5%, transparent) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.therapy-hero-badge {
+  background: var(--therapy-chip-bg);
+  border: 1px solid var(--therapy-chip-border);
+  color: var(--therapy-secondary);
+}
+
+.therapy-hero-badge-dot {
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.65);
+  animation: therapy-badge-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes therapy-badge-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.85); }
+}
+
+.therapy-hero-stat {
+  background: var(--therapy-chip-bg);
+  border: 1px solid var(--therapy-line);
+  backdrop-filter: blur(8px);
+}
+
+.therapy-hero-cta-primary {
+  background: var(--therapy-ink);
+  color: var(--therapy-bg);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--therapy-ink) 22%, transparent);
+}
+
+[data-theme="blue"] .therapy-hero-cta-primary {
+  background: var(--action-primary, #ffd700);
+  color: var(--action-text, #003262);
+}
+
+.therapy-hero-cta-secondary {
+  border: 1px solid var(--therapy-line);
+  color: var(--therapy-secondary);
+  background: var(--therapy-chip-bg);
+}
+
+.therapy-hero-cta-secondary:hover {
+  color: var(--therapy-ink);
+  border-color: var(--therapy-chip-border);
+}
+
+.therapy-hero-visual-wrap {
+  min-height: 280px;
+}
+
+.therapy-hero-visual-ring {
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, #ef4444 35%, transparent);
+  animation: therapy-ring-spin 48s linear infinite;
+  transform: scale(1.08);
+}
+
+@keyframes therapy-ring-spin {
+  from { transform: scale(1.08) rotate(0deg); }
+  to { transform: scale(1.08) rotate(360deg); }
+}
+
+.therapy-visual-frame {
+  position: relative;
+  padding: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid color-mix(in srgb, var(--chapter-accent, #ef4444) 30%, transparent);
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--chapter-accent, #ef4444) 10%, transparent) 0%,
+    transparent 68%
+  );
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--chapter-accent, #ef4444) 18%, transparent);
+}
+
+.therapy-hero-visual {
+  padding: 1.25rem 1.5rem;
+}
+
+.therapy-anatomy {
+  min-width: 240px;
+  min-height: 240px;
+}
+
+.therapy-hero-spectrum-seg {
+  cursor: pointer;
+}
+
+.therapy-hero-spectrum-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.therapy-hero-spectrum-link:hover {
+  color: var(--therapy-ink) !important;
+  opacity: 1;
+}
+
+.therapy-hero-spectrum-seg:first-child {
+  border-radius: 999px 0 0 999px;
+}
+
+.therapy-hero-spectrum-seg:last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+.therapy-hero-scroll-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.therapy-hero-scroll-btn:hover .therapy-text-muted {
+  color: var(--therapy-ink);
+}
+
 .therapy-hero-grid {
   background-image:
     linear-gradient(var(--therapy-line) 1px, transparent 1px),
@@ -303,15 +473,22 @@
 
 .therapy-specimen {
   background: var(--therapy-specimen-bg);
-  border: 1px solid var(--therapy-specimen-border);
+  border: 2px solid var(--specimen-accent, var(--therapy-specimen-border));
   box-shadow: var(--therapy-specimen-shadow);
   backdrop-filter: blur(16px);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease,
+    border-color 0.35s ease,
+    border-width 0.25s ease;
 }
 
 .therapy-specimen:hover {
-  border-color: var(--therapy-chip-border);
-  box-shadow: var(--therapy-specimen-shadow), 0 0 40px var(--specimen-glow, transparent);
+  border-width: 3px;
+  border-color: var(--specimen-accent, var(--therapy-specimen-border));
+  box-shadow:
+    var(--therapy-specimen-shadow),
+    0 0 32px var(--specimen-glow, transparent);
 }
 
 .therapy-specimen-foot {
