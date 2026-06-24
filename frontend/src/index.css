@@ -326,6 +326,39 @@ body {
   animation-play-state: paused;
 }
 
+.dashboard-category-carousel-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+.dashboard-category-track {
+  width: max-content;
+  animation: dashboardCategoryCarousel linear infinite;
+  animation-timing-function: linear;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes dashboardCategoryCarousel {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-25%, 0, 0); }
+}
+
+.group:hover .dashboard-category-track {
+  animation-play-state: paused;
+}
+
+.dashboard-category-chip {
+  min-width: 88px;
+}
+
+@media (min-width: 640px) {
+  .dashboard-category-chip {
+    min-width: 100px;
+  }
+}
+
 .dashboard-carousel-card {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
   transition:

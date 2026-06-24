@@ -514,12 +514,16 @@ export default function Home() {
             >
 
 <div
-  className="w-28 h-28 rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition"
+  className={`rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition ${
+    item.image.includes("fda.png") ? "w-36 h-36" : "w-28 h-28"
+  }`}
 >
   <img
     src={item.image}
     alt={item.title}
-    className="w-20 h-20 object-contain"
+    className={`object-contain ${
+      item.image.includes("fda.png") ? "w-32 h-32" : "w-20 h-20"
+    }`}
   />
 </div>
               <h3 className="mt-6 text-2xl font-black text-slate-900 dark:text-zinc-100">

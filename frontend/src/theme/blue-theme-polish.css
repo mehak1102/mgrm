@@ -521,3 +521,30 @@
   -webkit-text-fill-color: var(--ac-text) !important;
   opacity: 1 !important;
 }
+
+/* Theme selector dropdown — white text on blue surfaces */
+[data-theme="blue"] .theme-selector [role="listbox"] button,
+[data-theme="blue"] .theme-selector [role="listbox"] .text-fg,
+[data-theme="blue"] .theme-selector [role="listbox"] .text-brand,
+[data-theme="blue"] .theme-selector [role="listbox"] .bg-card .text-fg {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .theme-selector [role="listbox"] {
+  background: rgba(0, 50, 98, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(12px);
+}
+
+[data-theme="blue"] .theme-selector [role="listbox"] button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="blue"] .theme-selector li[aria-selected="true"] button {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .theme-selector [role="listbox"] .text-gray-500 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}

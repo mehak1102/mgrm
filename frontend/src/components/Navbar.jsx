@@ -86,7 +86,7 @@ export default function Navbar() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
+    <header className="sticky top-0 z-50 relative bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 min-w-0 overflow-x-clip">
         <Logo3D />
 
@@ -140,14 +140,14 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="group relative py-5">
+          <div className="group py-5">
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
               Shop By Activity <ChevronDown size={15} />
             </button>
 
-            <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-1/2 -translate-x-1/2 top-full w-[980px] max-w-[calc(100vw-2rem)] bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.15)] border border-gray-100 dark:border-white/10 rounded-3xl z-[999] transition-all duration-300">
-              <div className="px-6 py-6">
-                <div className="flex justify-between items-center mb-5">
+            <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999]">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+                <div className="flex justify-between items-center mb-5 gap-4">
                   <div>
                     <p className="text-xs font-bold tracking-widest text-purple-600">
                       SHOP BY ACTIVITY
@@ -160,14 +160,14 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => navigate("/shop-by-activity")}
-                    className="text-sm font-bold text-purple-600 hover:text-purple-800"
+                    className="text-sm font-bold text-purple-600 hover:text-purple-800 shrink-0"
                   >
                     View All →
                   </button>
                 </div>
 
-                <div className="grid grid-cols-4 gap-4">
-                  {activitiess.slice(0, 12).map((item) => (
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4">
+                  {activitiess.map((item) => (
                     <button
                       key={item.name}
                       type="button"

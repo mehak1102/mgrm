@@ -21,7 +21,7 @@ export default function ThemeSelector({ className = "" }) {
   }, []);
 
   return (
-    <div ref={rootRef} className={`relative ${className}`}>
+    <div ref={rootRef} className={`theme-selector relative ${className}`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

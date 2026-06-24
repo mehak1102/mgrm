@@ -227,7 +227,7 @@ export default function UserDashboardOverlay() {
                     </h2>
                   ) : (
                     <FlowingLetterText
-                      text={`${productCount ?? "—"} MGRM medical supports`}
+                      text={`${productCount ?? "—"} MGRM medicare products | Braces | Bandage | Splintage`}
                       countColor={dt.flowCountColor}
                       textColor={dt.flowTextColor}
                     />

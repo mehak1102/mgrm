@@ -244,8 +244,7 @@ const achievements = [
 const certifications = [
   {
     name: 'FDA Approval',
-    logo:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxuxDCZ_iuM5tE9EH4EhICYdC9do0fDiyxew&s',
+    logo: '/certifications/fda.png',
   },
   {
     name: 'CE Certification',
@@ -464,11 +463,19 @@ const AboutUs = () => {
                 <a
                   key={index}
                   href={`#section-${index}`}
-                  className="group flex items-center justify-between gap-2 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
+                  className="group flex items-center justify-between gap-3 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
                 >
-                  <span className="min-w-0 truncate">{item}</span>
+                  <span className="flex min-w-0 items-center gap-3">
+                    <span
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#002B5B]/10 text-[11px] font-bold tabular-nums text-[#002B5B] transition-colors duration-300 group-hover:bg-white/15 group-hover:text-white dark:bg-cyan-400/10 dark:text-cyan-300 dark:group-hover:bg-white/15 dark:group-hover:text-white"
+                      aria-hidden
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0 truncate">{item}</span>
+                  </span>
 
-                  <ChevronRight className="h-5 w-5 transition group-hover:translate-x-1" />
+                  <ChevronRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
                 </a>
               ))}
             </div>
@@ -673,7 +680,9 @@ const AboutUs = () => {
                     <img
                       src={item.logo}
                       alt=""
-                      className="mx-auto h-16 object-contain"
+                      className={`mx-auto object-contain ${
+                        item.logo.includes("fda.png") ? "h-24 sm:h-28" : "h-16"
+                      }`}
                     />
 
                     <h3 className="mt-6 text-2xl font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 transition group-hover:text-white">

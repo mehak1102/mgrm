@@ -71,10 +71,7 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
         className="flex h-full items-stretch gap-2.5 sm:gap-3 w-max dashboard-shop-carousel py-3 px-3"
         style={{ animationDuration: `${duration}s` }}
       >
-        {loop.map((item, i) => {
-          const badgeColors = getProductNumberColor(item.number);
-
-          return (
+        {loop.map((item, i) => (
           <button
             key={`${item.slug}-${i}`}
             type="button"
@@ -87,6 +84,7 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
               rounded-xl overflow-hidden cursor-pointer border border-white/20
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2"
           >
+            {/* Product index badges (1–68) — disabled per design
             <span
               className="dashboard-carousel-number absolute top-2 left-2 z-10 flex h-9 w-9 items-center justify-center
                 rounded-full text-[11px] font-black leading-none text-slate-800
@@ -100,6 +98,7 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
             >
               {item.number}
             </span>
+            */}
             <img
               src={item.image}
               alt={item.name || "Product"}
@@ -112,8 +111,45 @@ function ProductCarousel({ items, textZone = "32%", onItemClick }) {
                 group-hover/card:opacity-100 bg-gradient-to-t from-violet-600/25 via-transparent to-cyan-400/15"
             />
           </button>
-          );
-        })}
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Auto-marquee of all body category images — 4× duplicate for gapless loop */
+function CategoryMarquee({ categories, textZone = "32%" }) {
+  const items = categories.filter((c) => c?.image);
+  if (!items.length) return null;
+
+  const copies = 4;
+  const loop = Array.from({ length: copies }, () => items).flat();
+  const duration = Math.max(52, items.length * 3.8);
+
+  return (
+    <div
+      className="absolute inset-x-0 top-0 z-20 overflow-hidden dashboard-category-carousel-mask pointer-events-none"
+      style={{ bottom: textZone }}
+    >
+      <div
+        className="dashboard-category-track flex h-full flex-nowrap items-stretch gap-2.5 sm:gap-3 py-3 pl-2"
+        style={{ animationDuration: `${duration}s` }}
+      >
+        {loop.map((cat, i) => (
+          <div
+            key={`${cat.query}-${i}`}
+            className="dashboard-category-chip relative h-full w-[88px] shrink-0 overflow-hidden rounded-xl border border-white/25 shadow-[0_8px_20px_rgba(0,0,0,0.14)] sm:w-[100px]"
+            title={cat.name}
+          >
+            <img
+              src={cat.image}
+              alt={cat.name}
+              loading="lazy"
+              draggable={false}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -188,6 +224,7 @@ function PosterTile({
   title,
   subtitle,
   collage,
+  categoryMarquee,
   carousel,
   onCarouselItemClick,
   gridCols = 2,
@@ -201,6 +238,7 @@ function PosterTile({
   cardTheme,
   siteTheme,
   ctaLabel,
+  subtitleLines = 1,
   children,
 }) {
   const x = useTransform(parallaxX, (v) => v * depth);
@@ -250,7 +288,11 @@ function PosterTile({
         />
       )}
 
-      {collage && !carousel && (
+      {categoryMarquee && !carousel && (
+        <CategoryMarquee categories={categoryMarquee} textZone={textZone} />
+      )}
+
+      {collage && !carousel && !categoryMarquee && (
         <ProductGrid
           sources={collage}
           cols={gridCols}
@@ -292,7 +334,11 @@ function PosterTile({
           </h3>
         )}
         {subtitle && (
-          <p className={`text-[11px] sm:text-xs ${cardTheme.subtitle} mt-0.5 line-clamp-1 font-medium`}>
+          <p
+            className={`text-[11px] sm:text-xs ${cardTheme.subtitle} mt-0.5 font-medium ${
+              subtitleLines > 1 ? "line-clamp-2 leading-snug" : "line-clamp-1"
+            }`}
+          >
             {subtitle}
           </p>
         )}
@@ -360,11 +406,11 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     () =>
       products
         .filter((p) => p?.images?.[0] && p?.slug)
-        .map((p, index) => ({
+        .map((p) => ({
           slug: p.slug,
           image: p.images[0],
           name: p.name,
-          number: index + 1,
+          // number: index + 1, // index badges disabled
         })),
     [products]
   );
@@ -391,7 +437,8 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
     return productImages(products.slice(0, 4));
   }, [orders, products]);
 
-  const categoryCollage = bodyCategories.slice(0, 6).map((c) => c.image);
+  const productCountLabel = (count) =>
+    `${count || "—"} MGRM medicare products | Braces | Bandage | Splintage`;
 
   const recoverySplit = useMemo(() => {
     if (recoveryPreview?.beforeImage && recoveryPreview?.afterImage) {
@@ -434,7 +481,8 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           glow={POSTER_GLOW.shop}
           label="Explore"
           title="Shop Products"
-          subtitle={`${products.length || "—"} medical supports`}
+          subtitle={productCountLabel(products.length)}
+          subtitleLines={2}
           carousel={shopCarouselItems}
           onCarouselItemClick={(slug) => onRoute(`/product/${slug}`)}
           cardTheme={cardTheme}
@@ -454,9 +502,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           label="Body Parts"
           title="Categories"
           subtitle={`${bodyCategories.length} regions`}
-          collage={categoryCollage}
-          gridCols={3}
-          gridRows={2}
+          categoryMarquee={bodyCategories}
           ctaLabel="Explore regions"
           cardTheme={cardTheme}
           siteTheme={siteTheme}
