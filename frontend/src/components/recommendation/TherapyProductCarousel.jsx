@@ -11,34 +11,34 @@ import { useTheme } from "../../context/ThemeContext";
 
 const SHELF_EASE = [0.22, 1, 0.36, 1];
 
-const PASTEL_PALETTE = [
-  { bg: "#fde8ec", border: "#f9a8b8", accent: "#e11d48" },
-  { bg: "#e0f2fe", border: "#7dd3fc", accent: "#0284c7" },
-  { bg: "#dcfce7", border: "#86efac", accent: "#16a34a" },
-  { bg: "#fef3c7", border: "#fcd34d", accent: "#d97706" },
-  { bg: "#ede9fe", border: "#c4b5fd", accent: "#7c3aed" },
-  { bg: "#fce7f3", border: "#f9a8d4", accent: "#db2777" },
-  { bg: "#ccfbf1", border: "#5eead4", accent: "#0d9488" },
-  { bg: "#e0e7ff", border: "#a5b4fc", accent: "#4f46e5" },
-  { bg: "#ffedd5", border: "#fdba74", accent: "#ea580c" },
-  { bg: "#f3e8ff", border: "#d8b4fe", accent: "#9333ea" },
-  { bg: "#ecfccb", border: "#bef264", accent: "#65a30d" },
-  { bg: "#cffafe", border: "#67e8f9", accent: "#0891b2" },
+const BORDER_PALETTE = [
+  { border: "#f9a8b8", accent: "#e11d48" },
+  { border: "#7dd3fc", accent: "#0284c7" },
+  { border: "#86efac", accent: "#16a34a" },
+  { border: "#fcd34d", accent: "#d97706" },
+  { border: "#c4b5fd", accent: "#7c3aed" },
+  { border: "#f9a8d4", accent: "#db2777" },
+  { border: "#5eead4", accent: "#0d9488" },
+  { border: "#a5b4fc", accent: "#4f46e5" },
+  { border: "#fdba74", accent: "#ea580c" },
+  { border: "#d8b4fe", accent: "#9333ea" },
+  { border: "#bef264", accent: "#65a30d" },
+  { border: "#67e8f9", accent: "#0891b2" },
 ];
 
-const PASTEL_PALETTE_DARK = [
-  { bg: "rgba(225, 29, 72, 0.14)", border: "rgba(251, 113, 133, 0.45)", accent: "#fb7185" },
-  { bg: "rgba(2, 132, 199, 0.14)", border: "rgba(56, 189, 248, 0.45)", accent: "#38bdf8" },
-  { bg: "rgba(22, 163, 74, 0.14)", border: "rgba(74, 222, 128, 0.45)", accent: "#4ade80" },
-  { bg: "rgba(217, 119, 6, 0.14)", border: "rgba(251, 191, 36, 0.45)", accent: "#fbbf24" },
-  { bg: "rgba(124, 58, 237, 0.14)", border: "rgba(167, 139, 250, 0.45)", accent: "#a78bfa" },
-  { bg: "rgba(219, 39, 119, 0.14)", border: "rgba(244, 114, 182, 0.45)", accent: "#f472b6" },
-  { bg: "rgba(13, 148, 136, 0.14)", border: "rgba(45, 212, 191, 0.45)", accent: "#2dd4bf" },
-  { bg: "rgba(79, 70, 229, 0.14)", border: "rgba(129, 140, 248, 0.45)", accent: "#818cf8" },
-  { bg: "rgba(234, 88, 12, 0.14)", border: "rgba(251, 146, 60, 0.45)", accent: "#fb923c" },
-  { bg: "rgba(147, 51, 234, 0.14)", border: "rgba(192, 132, 252, 0.45)", accent: "#c084fc" },
-  { bg: "rgba(101, 163, 13, 0.14)", border: "rgba(163, 230, 53, 0.45)", accent: "#a3e635" },
-  { bg: "rgba(8, 145, 178, 0.14)", border: "rgba(34, 211, 238, 0.45)", accent: "#22d3ee" },
+const BORDER_PALETTE_DARK = [
+  { border: "rgba(251, 113, 133, 0.55)", accent: "#fb7185" },
+  { border: "rgba(56, 189, 248, 0.55)", accent: "#38bdf8" },
+  { border: "rgba(74, 222, 128, 0.55)", accent: "#4ade80" },
+  { border: "rgba(251, 191, 36, 0.55)", accent: "#fbbf24" },
+  { border: "rgba(167, 139, 250, 0.55)", accent: "#a78bfa" },
+  { border: "rgba(244, 114, 182, 0.55)", accent: "#f472b6" },
+  { border: "rgba(45, 212, 191, 0.55)", accent: "#2dd4bf" },
+  { border: "rgba(129, 140, 248, 0.55)", accent: "#818cf8" },
+  { border: "rgba(251, 146, 60, 0.55)", accent: "#fb923c" },
+  { border: "rgba(192, 132, 252, 0.55)", accent: "#c084fc" },
+  { border: "rgba(163, 230, 53, 0.55)", accent: "#a3e635" },
+  { border: "rgba(34, 211, 238, 0.55)", accent: "#22d3ee" },
 ];
 
 function hashString(str) {
@@ -49,9 +49,9 @@ function hashString(str) {
   return hash;
 }
 
-function getPastelForProduct(product, index, isDark) {
+function getBorderForProduct(product, index, isDark) {
   const key = String(product.slug || product._id || product.name || index);
-  const palette = isDark ? PASTEL_PALETTE_DARK : PASTEL_PALETTE;
+  const palette = isDark ? BORDER_PALETTE_DARK : BORDER_PALETTE;
   return palette[hashString(key) % palette.length];
 }
 
@@ -96,9 +96,9 @@ function GroupSkeleton({ slidesPerView }) {
   );
 }
 
-const ShelfSpecimen = memo(function ShelfSpecimen({ product, pastel, reduce, index }) {
+const ShelfSpecimen = memo(function ShelfSpecimen({ product, borderTone, reduce, index }) {
   const { isBlue } = useTheme();
-  const accentRgb = hexToRgb(pastel.accent);
+  const accentRgb = hexToRgb(borderTone.accent);
   const image = product.images?.[0] || product.image || "/products/knee.png";
   const price = Number(product.price || 0);
   const sale = Number(product.discountPrice || product.price || 0);
@@ -112,10 +112,9 @@ const ShelfSpecimen = memo(function ShelfSpecimen({ product, pastel, reduce, ind
       whileHover={reduce ? undefined : { y: -8, transition: { duration: 0.4, ease: SHELF_EASE } }}
       className="therapy-specimen group/spec relative flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl sm:min-h-[300px]"
       style={{
-        "--specimen-accent": pastel.accent,
-        "--specimen-pastel-bg": pastel.bg,
-        "--specimen-pastel-border": pastel.border,
-        "--specimen-glow": `rgba(${accentRgb}, 0.28)`,
+        "--specimen-accent": borderTone.accent,
+        "--specimen-pastel-border": borderTone.border,
+        "--specimen-glow": `rgba(${accentRgb}, 0.22)`,
         contentVisibility: "auto",
         containIntrinsicSize: "300px",
       }}
@@ -132,7 +131,7 @@ const ShelfSpecimen = memo(function ShelfSpecimen({ product, pastel, reduce, ind
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/spec:opacity-100"
           style={{
-            background: `radial-gradient(ellipse at 50% 35%, rgba(${accentRgb}, 0.12) 0%, transparent 68%)`,
+            background: `radial-gradient(ellipse at 50% 35%, rgba(${accentRgb}, 0.06) 0%, transparent 68%)`,
           }}
         />
         <img
@@ -237,12 +236,12 @@ function CategoryCarousel({ group, slidesPerView, reduce }) {
         <motion.div className="flex w-max gap-4" animate={controls}>
           {loop.map((product, index) => {
             const id = product._id || product.slug;
-            const pastel = getPastelForProduct(product, index, isDark);
+            const borderTone = getBorderForProduct(product, index, isDark);
             return (
               <div key={`${id}-${index}`} className="shrink-0" style={{ width: slideWidth }}>
                 <ShelfSpecimen
                   product={product}
-                  pastel={pastel}
+                  borderTone={borderTone}
                   reduce={reduce}
                   index={index % products.length}
                 />

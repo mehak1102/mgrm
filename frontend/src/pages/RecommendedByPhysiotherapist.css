@@ -472,11 +472,7 @@
 }
 
 .therapy-specimen {
-  background: linear-gradient(
-    165deg,
-    var(--specimen-pastel-bg, var(--therapy-specimen-bg)) 0%,
-    color-mix(in srgb, var(--specimen-pastel-bg, #ffffff) 82%, #ffffff) 100%
-  );
+  background: var(--therapy-specimen-bg);
   border: 2px solid var(--specimen-pastel-border, var(--specimen-accent, var(--therapy-specimen-border)));
   box-shadow: var(--therapy-specimen-shadow);
   backdrop-filter: blur(16px);
@@ -484,8 +480,7 @@
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.5s ease,
     border-color 0.35s ease,
-    border-width 0.25s ease,
-    background 0.35s ease;
+    border-width 0.25s ease;
 }
 
 .therapy-specimen:hover {
@@ -493,25 +488,25 @@
   border-color: var(--specimen-accent, var(--specimen-pastel-border, var(--therapy-specimen-border)));
   box-shadow:
     var(--therapy-specimen-shadow),
-    0 0 32px var(--specimen-glow, transparent);
+    0 0 24px var(--specimen-glow, transparent);
 }
 
 .therapy-specimen-foot {
-  border-top: 1px solid color-mix(in srgb, var(--specimen-pastel-border, var(--therapy-line)) 55%, transparent);
-  background: color-mix(in srgb, var(--specimen-pastel-bg, transparent) 40%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--specimen-pastel-border, var(--therapy-line)) 45%, transparent);
+  background: transparent;
 }
 
 .therapy-specimen-cta {
-  border: 1px solid color-mix(in srgb, var(--specimen-pastel-border, var(--therapy-line)) 70%, transparent);
+  border: 1px solid var(--specimen-pastel-border, var(--therapy-line));
   color: var(--specimen-accent, var(--therapy-muted));
-  background: color-mix(in srgb, var(--specimen-pastel-bg, transparent) 50%, transparent);
+  background: transparent;
   transition: all 0.35s ease;
 }
 
 .therapy-specimen-cta:hover {
   color: var(--specimen-accent, var(--therapy-ink));
   border-color: var(--specimen-accent, var(--therapy-chip-border));
-  background: color-mix(in srgb, var(--specimen-pastel-bg, var(--therapy-chip-bg)) 75%, #ffffff);
+  background: color-mix(in srgb, var(--specimen-accent, #0ea5e9) 10%, transparent);
 }
 
 .therapy-shelf-mask-left {
