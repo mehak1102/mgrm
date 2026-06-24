@@ -21,18 +21,18 @@
 }
 
 /*
- * Stack above FloatingHelp (bottom-6 + chat h-14 + gap-3 + scroll h-12 + gap).
- * Keeps bubble/widget clear of chat + back-to-top buttons.
+ * Stack above FloatingHelp (logo + chat + gaps + scroll).
+ * Keeps bubble/widget clear of floating logo, chat + back-to-top buttons.
  */
 .support-call-shell--open,
 .support-call-shell--bubble {
-  bottom: calc(1.5rem + 3.5rem + 0.75rem + 3rem + 0.75rem);
+  bottom: calc(1.5rem + 3.25rem + 0.25rem + 0.75rem + 3.5rem + 0.75rem + 3rem + 0.75rem);
 }
 
 @media (min-width: 768px) {
   .support-call-shell--open,
   .support-call-shell--bubble {
-    bottom: calc(1.5rem + 3.5rem + 0.75rem + 3rem + 0.75rem + 0.5rem);
+    bottom: calc(1.5rem + 3.5rem + 0.375rem + 0.875rem + 3.5rem + 0.875rem + 3rem + 0.75rem + 0.5rem);
   }
 }
 
