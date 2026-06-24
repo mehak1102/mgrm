@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Sparkles, Star, Settings } from "lucide-react";
+import { Sparkles, Star, Settings, ArrowUpRight } from "lucide-react";
 import API from "../../api";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -200,6 +200,7 @@ function PosterTile({
   size = "lg",
   cardTheme,
   siteTheme,
+  ctaLabel,
   children,
 }) {
   const x = useTransform(parallaxX, (v) => v * depth);
@@ -294,6 +295,26 @@ function PosterTile({
           <p className={`text-[11px] sm:text-xs ${cardTheme.subtitle} mt-0.5 line-clamp-1 font-medium`}>
             {subtitle}
           </p>
+        )}
+        {ctaLabel && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick?.();
+            }}
+            className={`pointer-events-auto mt-2.5 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1.5
+              text-[10px] font-bold uppercase tracking-[0.14em] backdrop-blur-md transition-all duration-300
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 focus-visible:ring-offset-2
+              ${
+                cardTheme.isLight
+                  ? "border-slate-200/90 bg-white/95 text-slate-800 shadow-sm hover:bg-white hover:shadow-md"
+                  : "border-white/25 bg-white/15 text-white hover:bg-white/25"
+              }`}
+          >
+            {ctaLabel}
+            <ArrowUpRight size={12} strokeWidth={2.25} />
+          </button>
         )}
       </div>
 
@@ -436,6 +457,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           collage={categoryCollage}
           gridCols={3}
           gridRows={2}
+          ctaLabel="Explore regions"
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
@@ -451,10 +473,11 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           glow={POSTER_GLOW.featured}
           label="Therapy"
           title="Recommended By Physiotherapist"
-          subtitle="Discover supports organized by recovery specialty. Explore →"
+          subtitle="Supports organized by recovery specialty"
           collage={therapyCollage}
           gridCols={3}
           gridRows={1}
+          ctaLabel="Explore"
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}

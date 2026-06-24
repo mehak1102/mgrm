@@ -55,15 +55,13 @@ function OrbitRing({ orbit, reduceMotion }) {
   );
 }
 
-export default function Logo3D() {
+export default function Logo3D({ asStatic = false, hideBranding = false, className = "" }) {
   const reduceMotion = useReducedMotion();
 
-  return (
-    <Link
-      to="/"
-      aria-label="MGRM Medicare home"
-      className="relative shrink-0 flex items-center justify-center w-[150px] sm:w-[180px] lg:w-[215px] h-[52px] sm:h-[58px] lg:h-[64px] overflow-visible"
-    >
+  const wrapperClass = `relative shrink-0 flex items-center justify-center w-[150px] sm:w-[180px] lg:w-[215px] h-[52px] sm:h-[58px] lg:h-[64px] overflow-visible ${className}`;
+
+  const inner = (
+    <>
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={
@@ -109,17 +107,29 @@ export default function Logo3D() {
         />
       </div>
 
-      <div className="relative z-20 text-center px-1">
-        <h1
-          className="text-[21px] sm:text-[23px] lg:text-[24px] font-black tracking-tight leading-none text-fg"
-          style={{ textShadow: "0 2px 12px rgba(15,23,42,0.08)" }}
-        >
-          MGRM
-        </h1>
-        <p className="text-[7px] sm:text-[7.5px] uppercase tracking-[0.38em] sm:tracking-[0.42em] text-slate-500 dark:text-zinc-400 mt-[2px] font-bold">
-          Medicare
-        </p>
-      </div>
+      {!hideBranding && (
+        <div className="relative z-20 text-center px-1">
+          <h1
+            className="text-[21px] sm:text-[23px] lg:text-[24px] font-black tracking-tight leading-none text-fg"
+            style={{ textShadow: "0 2px 12px rgba(15,23,42,0.08)" }}
+          >
+            MGRM
+          </h1>
+          <p className="text-[7px] sm:text-[7.5px] uppercase tracking-[0.38em] sm:tracking-[0.42em] text-slate-500 dark:text-zinc-400 mt-[2px] font-bold">
+            Medicare
+          </p>
+        </div>
+      )}
+    </>
+  );
+
+  if (asStatic) {
+    return <div className={wrapperClass}>{inner}</div>;
+  }
+
+  return (
+    <Link to="/" aria-label="MGRM Medicare home" className={wrapperClass}>
+      {inner}
     </Link>
   );
 }
