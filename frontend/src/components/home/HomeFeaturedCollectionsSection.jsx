@@ -7,6 +7,7 @@ import { featuredCollectionCategories } from "../../data/featuredCollectionsData
 import { PremiumWordHeader } from "../motion/PremiumMotion";
 import { trackCategoryClick } from "../../utils/recommendationBehavior";
 import { useTheme } from "../../context/ThemeContext";
+import "../../theme/featured-collections.css";
 
 const REVEAL_DURATION = 0.5;
 const STAGGER_MS = 0.12;
@@ -164,7 +165,7 @@ function ProductCard({ product, category, index, reduce }) {
           ? undefined
           : { y: -7, transition: { duration: 0.35, ease: HOVER_EASE } }
       }
-      className="group/card relative self-start w-full"
+      className="featured-collection-card-wrap group/card relative self-start w-full"
       style={{
         "--pastel-border": pastel.border,
         "--pastel-glow": pastel.glow,
@@ -172,18 +173,17 @@ function ProductCard({ product, category, index, reduce }) {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-2 rounded-[36px] opacity-0 blur-2xl transition-opacity duration-[380ms] ease-out group-hover/card:opacity-90"
+        className="featured-collection-card__halo pointer-events-none absolute inset-0 rounded-[32px] opacity-0 blur-2xl transition-opacity duration-[380ms] ease-out group-hover/card:opacity-90"
         style={{
           background: `radial-gradient(ellipse at 50% 48%, rgba(${pastel.glow}, 0.22) 0%, rgba(${pastel.glow}, 0.08) 45%, transparent 72%)`,
         }}
       />
 
       <div
-        className="featured-collection-card relative flex min-h-[420px] flex-col overflow-hidden rounded-[32px] border-2 bg-white/95 shadow-[0_16px_48px_rgba(15,23,42,0.08)] transition-[box-shadow,border-color,transform] duration-[380ms] ease-out dark:bg-zinc-900/90 dark:shadow-[0_16px_48px_rgba(0,0,0,0.28)] [data-theme=blue]:!bg-white sm:min-h-[440px] group-hover/card:shadow-[0_24px_56px_rgba(15,23,42,0.12)] dark:group-hover/card:shadow-[0_24px_56px_rgba(0,0,0,0.38)]"
-        style={{ borderColor: pastel.border }}
+        className="featured-collection-card relative flex min-h-[420px] flex-col overflow-hidden rounded-[32px] bg-white dark:bg-zinc-900/90 sm:min-h-[440px]"
       >
         {/* Image zone — ~70% of card */}
-        <div className="relative flex-[7] min-h-[280px] overflow-hidden bg-white dark:bg-zinc-900/85 [data-theme=blue]:!bg-white sm:min-h-[300px]">
+        <div className="featured-collection-card__media relative flex-[7] min-h-[280px] overflow-hidden bg-white dark:bg-zinc-900/85 sm:min-h-[300px]">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-[380ms] ease-out group-hover/card:opacity-100"
@@ -198,14 +198,14 @@ function ProductCard({ product, category, index, reduce }) {
               onError={(e) => {
                 e.currentTarget.src = category.image || "/products/knee.png";
               }}
-              className="h-full max-h-[250px] w-full rounded-2xl object-contain object-center drop-shadow-[0_12px_28px_rgba(15,23,42,0.1)] transition-transform duration-[380ms] ease-out group-hover/card:scale-[1.05] sm:max-h-[270px]"
+              className="h-full max-h-[250px] w-full object-contain object-center drop-shadow-[0_12px_28px_rgba(15,23,42,0.1)] transition-transform duration-[380ms] ease-out group-hover/card:scale-[1.05] sm:max-h-[270px]"
             />
           </div>
         </div>
 
         {/* Content zone — ~30% of card */}
         <div
-          className="relative flex flex-[3] flex-col justify-center border-t px-5 py-5 sm:px-6 sm:py-6"
+          className="featured-collection-card__body relative flex flex-[3] flex-col justify-center border-t px-5 py-5 sm:px-6 sm:py-6"
           style={{ borderTopColor: `rgba(${pastel.glow}, 0.22)` }}
         >
           <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-[var(--text-primary)] leading-snug line-clamp-2 transition-colors duration-[350ms] group-hover/card:text-slate-800 dark:group-hover/card:text-white">
@@ -278,7 +278,7 @@ export default function HomeFeaturedCollectionsSection() {
   }, [activeId]);
 
   return (
-    <section className="relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-4 sm:px-6 py-28 overflow-hidden">
+    <section className="home-featured-collections-section relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-4 sm:px-6 py-28 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-white to-cyan-50/70 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 [data-theme=blue]:from-[var(--gradient-from)] [data-theme=blue]:via-[var(--gradient-via)] [data-theme=blue]:to-[var(--gradient-to)] rounded-[48px] border border-slate-100/60 dark:border-white/5 [data-theme=blue]:border-[var(--border-color)] transition-colors duration-300" />
 
       <div className="relative mb-12 sm:mb-14 px-2">

@@ -1,0 +1,72 @@
+/* Featured Collections — card borders + corners (section only) */
+.home-featured-collections-section .featured-collection-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 2rem;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 16px 48px rgba(15, 23, 42, 0.08);
+  transition:
+    box-shadow 380ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 380ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.home-featured-collections-section .featured-collection-card-wrap:hover .featured-collection-card {
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 24px 56px rgba(15, 23, 42, 0.12),
+    0 0 40px rgba(var(--pastel-glow), 0.28);
+}
+
+.home-featured-collections-section .featured-collection-card__media,
+.home-featured-collections-section .featured-collection-card__body {
+  background: #ffffff;
+}
+
+.dark .home-featured-collections-section .featured-collection-card,
+[data-theme="dark"] .home-featured-collections-section .featured-collection-card {
+  background: rgba(24, 24, 27, 0.9);
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+.dark .home-featured-collections-section .featured-collection-card-wrap:hover .featured-collection-card,
+[data-theme="dark"] .home-featured-collections-section .featured-collection-card-wrap:hover .featured-collection-card {
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 24px 56px rgba(0, 0, 0, 0.38),
+    0 0 40px rgba(var(--pastel-glow), 0.24);
+}
+
+.dark .home-featured-collections-section .featured-collection-card__media,
+.dark .home-featured-collections-section .featured-collection-card__body,
+[data-theme="dark"] .home-featured-collections-section .featured-collection-card__media,
+[data-theme="dark"] .home-featured-collections-section .featured-collection-card__body {
+  background: rgba(24, 24, 27, 0.85);
+}
+
+[data-theme="blue"] .home-featured-collections-section .featured-collection-card,
+[data-theme="blue"] .home-featured-collections-section .featured-collection-card__media,
+[data-theme="blue"] .home-featured-collections-section .featured-collection-card__body {
+  background: #ffffff !important;
+}
+
+[data-theme="blue"] .home-featured-collections-section .featured-collection-card {
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 16px 48px rgba(0, 40, 80, 0.1) !important;
+}
+
+[data-theme="blue"] .home-featured-collections-section .featured-collection-card-wrap:hover .featured-collection-card {
+  box-shadow:
+    0 0 0 2px var(--pastel-border),
+    0 24px 56px rgba(0, 40, 80, 0.14),
+    0 0 44px rgba(var(--pastel-glow), 0.32) !important;
+}
+
+.home-featured-collections-section .featured-collection-card__halo {
+  z-index: -1;
+}
