@@ -675,17 +675,19 @@ const AboutUs = () => {
                 {certifications.map((item, index) => (
                   <StaggerItem
                     key={index}
-                    className="group rounded-[30px] border border-blue-100 dark:border-white/10 bg-[#f5fbff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 hover:-translate-y-2 hover:bg-[#002B5B] dark:hover:bg-slate-800"
+                    className="about-cert-card group rounded-[30px] border border-blue-100 dark:border-white/10 bg-[#f5fbff] dark:bg-zinc-800 p-8 text-center transition-colors duration-300 hover:-translate-y-2 hover:bg-[#002B5B] dark:hover:bg-slate-800"
                   >
-                    <img
-                      src={item.logo}
-                      alt=""
-                      className={`mx-auto object-contain ${
-                        item.logo.includes("fda.png") ? "h-24 sm:h-28" : "h-16"
-                      }`}
-                    />
+                    <div className="about-cert-card__logo">
+                      <img
+                        src={item.logo}
+                        alt=""
+                        className={`mx-auto object-contain ${
+                          item.logo.includes("fda.png") ? "h-24 sm:h-28" : "h-16"
+                        }`}
+                      />
+                    </div>
 
-                    <h3 className="mt-6 text-2xl font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 transition group-hover:text-white">
+                    <h3 className="about-cert-card__title mt-6 text-2xl font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 transition group-hover:text-white">
                       {item.name}
                     </h3>
                   </StaggerItem>
@@ -876,12 +878,12 @@ const AboutUs = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#00172e]/60 via-transparent to-transparent" />
 
         {/* FLOAT CARD */}
-        <div className="absolute bottom-8 left-8 rounded-[25px] border border-white/20 bg-white/10 px-6 py-5 backdrop-blur-xl">
+        <div className="about-cure-markets-card absolute bottom-8 left-8 rounded-[25px] border border-white/20 bg-white/10 px-6 py-5 backdrop-blur-xl">
           <AnimatedStat
             value="50+"
             label="International Markets"
-            valueClassName="text-3xl font-black text-white"
-            labelClassName="mt-1 text-sm text-white/80"
+            valueClassName="about-cure-markets-card__value text-3xl font-black text-white"
+            labelClassName="about-cure-markets-card__label mt-1 text-sm text-white/80"
           />
         </div>
       </div>
@@ -1115,8 +1117,8 @@ const AboutUs = () => {
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          <div className="absolute bottom-5 left-5 rounded-full bg-white/10 px-5 py-2 backdrop-blur-xl">
-            <p className="text-sm font-semibold text-white">
+          <div className="about-autoclave-badge absolute bottom-5 left-5 rounded-full bg-white/10 px-5 py-2 backdrop-blur-xl">
+            <p className="about-autoclave-badge__text text-sm font-semibold text-white">
               Hospital Grade Equipment
             </p>
           </div>
