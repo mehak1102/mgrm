@@ -467,7 +467,7 @@ const AboutUs = () => {
                 >
                   <span className="flex min-w-0 items-center gap-3">
                     <span
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#002B5B]/10 text-[11px] font-bold tabular-nums text-[#002B5B] transition-colors duration-300 group-hover:bg-white/15 group-hover:text-white dark:bg-cyan-400/10 dark:text-cyan-300 dark:group-hover:bg-white/15 dark:group-hover:text-white"
+                      className="about-sidebar-nav-num flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#002B5B]/10 text-[11px] font-bold tabular-nums text-[#002B5B] transition-colors duration-300 group-hover:bg-white/15 group-hover:text-white dark:bg-cyan-400/10 dark:text-cyan-300 dark:group-hover:bg-white/15 dark:group-hover:text-white"
                       aria-hidden
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -625,7 +625,7 @@ const AboutUs = () => {
                   {famousPeople.map((item, index) => (
                     <StaggerItem
                       key={index}
-                      className="min-w-0 overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
+                      className="about-famous-person-card min-w-0 overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
                     >
                       <div className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
                         <div className="relative h-52 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-40 md:w-48">
@@ -636,12 +636,12 @@ const AboutUs = () => {
                           />
                         </div>
 
-                        <div className="min-w-0 flex-1 flex flex-col justify-center p-5 sm:p-6 md:p-8">
+                        <div className="about-famous-person-card__body min-w-0 flex-1 flex flex-col justify-center p-5 sm:p-6 md:p-8">
                           <h4 className="text-xl sm:text-2xl md:text-3xl font-bold break-words">
                             {item.name}
                           </h4>
 
-                          <FadeUpText className="mt-4 sm:mt-5 text-base sm:leading-8 text-gray-200 break-words">
+                          <FadeUpText className="about-famous-person-card__text mt-4 sm:mt-5 text-base sm:leading-8 text-gray-200 break-words">
                             Recognized personalities and national
                             leaders have trusted MGRM rehabilitation
                             and orthopedic products.
@@ -1137,7 +1137,7 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="about-spec-table mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full min-w-[520px] border-collapse">
 
@@ -1210,7 +1210,7 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="about-spec-table mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full min-w-[520px] border-collapse">
 
@@ -1277,7 +1277,7 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-[35px] bg-gradient-to-br from-[#002B5B] via-[#004e96] to-[#0072d4] shadow-[0_25px_80px_rgba(0,91,187,0.35)]">
+      <div className="about-shredder-table mt-10 overflow-hidden rounded-[35px] bg-gradient-to-br from-[#002B5B] via-[#004e96] to-[#0072d4] shadow-[0_25px_80px_rgba(0,91,187,0.35)]">
 
         <table className="w-full border-collapse">
 
@@ -1312,7 +1312,7 @@ const AboutUs = () => {
 
               <tr
                 key={i}
-                className="border-b border-white/10 hover:bg-white/10 transition duration-300"
+                className="about-shredder-table__row border-b border-white/10 hover:bg-white/10 transition duration-300"
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-cyan-200">
@@ -1344,7 +1344,7 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
+      <div className="about-spec-table mt-10 max-w-full overflow-x-auto rounded-[35px] border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 shadow-[0_25px_70px_rgba(0,0,0,0.06)]">
 
         <table className="w-full min-w-[520px] border-collapse">
 

@@ -72,6 +72,20 @@
   border-color: rgba(255, 215, 0, 0.35) !important;
 }
 
+[data-theme="blue"] .about-us-page aside a .about-sidebar-nav-num {
+  background: #ffffff !important;
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page aside a:hover .about-sidebar-nav-num,
+[data-theme="blue"] .about-us-page aside a:focus-visible .about-sidebar-nav-num {
+  background: #ffffff !important;
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
 /* Main content cards */
 [data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7) {
   background: rgba(255, 255, 255, 0.12) !important;
@@ -132,4 +146,123 @@
 [data-theme="blue"] .about-us-page #section-7,
 [data-theme="blue"] .about-us-page #section-11 {
   color: #ffffff !important;
+}
+
+/* ── Blue theme: light panels need dark text (section-scoped only) ── */
+
+/* Leadership / famous people cards — section-1 */
+[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  backdrop-filter: none !important;
+}
+
+[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card :is(h4, p, .about-famous-person-card__text) {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
+}
+
+/* Medical experts testimonials — section-5 */
+[data-theme="blue"] .about-us-page #section-5 .about-testimonial-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-5 .about-testimonial-card :is(h4, p, blockquote, span) {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-5 .about-testimonial-card .text-gray-500,
+[data-theme="blue"] .about-us-page #section-5 .about-testimonial-card .dark\:text-zinc-400 {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+}
+
+/* Specifications / construction / accessories tables */
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table table,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table table,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table table {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table td,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table td,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table td {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table td.text-brand,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table td.text-brand,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table td.text-brand,
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table td.font-bold,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table td.font-bold,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table td.font-bold {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table tr,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table tr,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table tr {
+  border-color: rgba(0, 50, 98, 0.12) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-9 .about-spec-table tr:hover,
+[data-theme="blue"] .about-us-page #section-10 .about-spec-table tr:hover,
+[data-theme="blue"] .about-us-page #section-12 .about-spec-table tr:hover {
+  background: rgba(255, 215, 0, 0.08) !important;
+}
+
+/* Integrated shredder table — section-11 */
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table {
+  background: rgba(255, 255, 255, 0.95) !important;
+  background-image: none !important;
+  box-shadow: 0 25px 80px rgba(0, 40, 80, 0.12) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table table {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table td {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table td.font-bold,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table td.text-cyan-200 {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr {
+  border-color: rgba(0, 50, 98, 0.12) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr:hover,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table .about-shredder-table__row:hover {
+  background: rgba(255, 215, 0, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr:hover td,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table .about-shredder-table__row:hover td,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr:hover td.font-bold,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr:hover td.text-cyan-200,
+[data-theme="blue"] .about-us-page #section-11 .about-shredder-table tr:hover td.text-white\/90 {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
 }
