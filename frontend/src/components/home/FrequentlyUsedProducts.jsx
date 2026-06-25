@@ -26,7 +26,44 @@ const categoryMetaByQuery = Object.fromEntries(
 
 function hexToRgb(hex) {
   const n = hex.replace("#", "");
+  if (n.length < 6) return "14, 165, 233";
   return `${parseInt(n.slice(0, 2), 16)}, ${parseInt(n.slice(2, 4), 16)}, ${parseInt(n.slice(4, 6), 16)}`;
+}
+
+const PASTEL_PALETTE = [
+  { border: "#f9a8b8", glow: "225, 29, 72" },
+  { border: "#7dd3fc", glow: "2, 132, 199" },
+  { border: "#86efac", glow: "22, 163, 74" },
+  { border: "#fcd34d", glow: "217, 119, 6" },
+  { border: "#c4b5fd", glow: "124, 58, 237" },
+  { border: "#f9a8d4", glow: "219, 39, 119" },
+  { border: "#5eead4", glow: "13, 148, 136" },
+  { border: "#a5b4fc", glow: "79, 70, 229" },
+];
+
+const PASTEL_PALETTE_DARK = [
+  { border: "rgba(251, 113, 133, 0.62)", glow: "251, 113, 133" },
+  { border: "rgba(56, 189, 248, 0.62)", glow: "56, 189, 248" },
+  { border: "rgba(74, 222, 128, 0.62)", glow: "74, 222, 128" },
+  { border: "rgba(251, 191, 36, 0.62)", glow: "251, 191, 36" },
+  { border: "rgba(167, 139, 250, 0.62)", glow: "167, 139, 250" },
+  { border: "rgba(244, 114, 182, 0.62)", glow: "244, 114, 182" },
+  { border: "rgba(45, 212, 191, 0.62)", glow: "45, 212, 191" },
+  { border: "rgba(129, 140, 248, 0.62)", glow: "129, 140, 248" },
+];
+
+function hashString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+function getPastelForProduct(product, index, isDark) {
+  const key = String(product.slug || product._id || product.name || index);
+  const palette = isDark ? PASTEL_PALETTE_DARK : PASTEL_PALETTE;
+  return palette[hashString(key) % palette.length];
 }
 
 function normalizeProduct(product, categoryQuery) {
@@ -87,11 +124,13 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
   product,
   index,
   isBlue,
+  isDark,
   onAddToCart,
 }) {
   const price = Number(product.price || 0);
   const discountPrice = Number(product.discountPrice || product.price || 0);
   const glowRgb = hexToRgb(product._categoryColor);
+  const pastel = getPastelForProduct(product, index, isDark);
 
   return (
     <motion.article
@@ -101,9 +140,13 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
       animate="visible"
       exit="exit"
       custom={index}
-      className="fup-card rounded-[34px] p-4 sm:p-5"
-      style={{ "--fup-glow-rgb": glowRgb }}
+      className="fup-card group/fup rounded-[34px] p-4 sm:p-5"
+      style={{
+        "--fup-pastel-border": pastel.border,
+        "--fup-pastel-glow": pastel.glow,
+      }}
     >
+      <div className="fup-card__halo" aria-hidden="true" />
       <div className="fup-card__spotlight" aria-hidden="true" />
 
       <div className="fup-card__image-wrap mb-4">
@@ -203,7 +246,7 @@ function LoadingGrid() {
 
 export default function FrequentlyUsedProducts() {
   const { addToCart } = useCart();
-  const { isBlue } = useTheme();
+  const { isBlue, isDark } = useTheme();
   const reduceMotion = useReducedMotion();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -301,6 +344,7 @@ export default function FrequentlyUsedProducts() {
                     product={product}
                     index={index}
                     isBlue={isBlue}
+                    isDark={isDark}
                     onAddToCart={handleAddToCart}
                   />
                 ))}

@@ -13,16 +13,22 @@ const STEPS = [
     icon: Ruler,
     title: "Enter your measurement",
     text: "Add circumference or length for accurate brace sizing.",
+    iconWrap: "bg-sky-500 text-white shadow-[0_10px_28px_rgba(14,165,233,0.38)]",
+    iconFill: false,
   },
   {
     icon: ScanLine,
     title: "AI-assisted recommendation",
     text: "Our smart finder suggests the best size for your product.",
+    iconWrap: "bg-violet-500 text-white shadow-[0_10px_28px_rgba(139,92,246,0.38)]",
+    iconFill: false,
   },
   {
     icon: CheckCircle2,
     title: "Shop with confidence",
     text: "Add to cart knowing your support will fit properly.",
+    iconWrap: "bg-emerald-500 text-white shadow-[0_10px_28px_rgba(16,185,129,0.38)]",
+    iconFill: true,
   },
 ];
 
@@ -48,11 +54,18 @@ export default function HomeSmartSizeSection() {
         />
 
         <PremiumStagger className="space-y-4" stagger={0.16}>
-          {STEPS.map(({ icon: Icon, title, text }) => (
+          {STEPS.map(({ icon: Icon, title, text, iconWrap, iconFill }) => (
             <PremiumStaggerItem key={title}>
               <div className="flex gap-5 rounded-[28px] border border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)]">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-                  <Icon size={26} />
+                <div
+                  className={`home-smart-size-step-icon flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${iconWrap}`}
+                >
+                  <Icon
+                    size={26}
+                    strokeWidth={iconFill ? 1.75 : 2.25}
+                    fill={iconFill ? "currentColor" : "none"}
+                    aria-hidden
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-slate-900 dark:text-zinc-100">{title}</h3>

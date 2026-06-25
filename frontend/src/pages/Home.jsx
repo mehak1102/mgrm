@@ -567,21 +567,39 @@ export default function Home() {
 
         <div className="mt-8 grid grid-cols-2 gap-4">
           {[
-            "Medical Grade Quality",
-            "International Standards",
-            "Premium Materials",
-            "Trusted Recovery",
-          ].map((text) => (
+            {
+              text: "Medical Grade Quality",
+              card: "bg-emerald-50 dark:bg-emerald-950/35 border-2 border-emerald-700/35 dark:border-emerald-400/45",
+              icon: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400",
+            },
+            {
+              text: "International Standards",
+              card: "bg-sky-50 dark:bg-sky-950/35 border-2 border-sky-700/35 dark:border-sky-400/45",
+              icon: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400",
+            },
+            {
+              text: "Premium Materials",
+              card: "bg-violet-50 dark:bg-violet-950/35 border-2 border-violet-700/35 dark:border-violet-400/45",
+              icon: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400",
+            },
+            {
+              text: "Trusted Recovery",
+              card: "bg-amber-50 dark:bg-amber-950/35 border-2 border-amber-700/40 dark:border-amber-400/45",
+              icon: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400",
+            },
+          ].map((item) => (
             <div
-              key={text}
-              className="flex items-center gap-3 bg-slate-50 dark:bg-zinc-800 rounded-2xl px-4 py-4"
+              key={item.text}
+              className={`flex items-center gap-3 rounded-2xl px-4 py-4 ${item.card}`}
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+              <div
+                className={`flex h-10 w-10 items-center justify-center rounded-xl ${item.icon}`}
+              >
                 <CheckCircle2 size={18} />
               </div>
 
-              <span className="font-bold text-slate-900 dark:text-zinc-100 text-sm">
-                {text}
+              <span className="text-sm font-bold text-slate-900 dark:text-zinc-100">
+                {item.text}
               </span>
             </div>
           ))}
@@ -1372,10 +1390,10 @@ export default function Home() {
                 </button>
               ))}
 
-            <div className="home-locate-smart-guide absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10">
-              <p className="text-cyan-600 dark:text-cyan-400 font-black text-sm">SMART GUIDE</p>
-              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100">Find support faster</h3>
-              <p className="text-gray-500 dark:text-zinc-400 mt-2">
+            <div className="home-locate-smart-guide absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10 [data-theme=blue]:bg-white/95">
+              <p className="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-black font-black text-sm">SMART GUIDE</p>
+              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-black">Find support faster</h3>
+              <p className="text-gray-500 dark:text-zinc-400 [data-theme=blue]:text-black/80 mt-2">
                 Tap any pain point and jump directly to matching products.
               </p>
             </div>
@@ -1583,12 +1601,15 @@ export default function Home() {
 
     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 
-    <img
-      src="/ads/abc.png"
-      alt="Nebulizer Ad"
-      
-      className="w-full h-[520px] object-contain p-6 group-hover:scale-[1.03] transition duration-700"
-    />
+    <div className="p-5 sm:p-6">
+      <div className="overflow-hidden rounded-[28px] sm:rounded-[36px]">
+        <img
+          src="/ads/abc.png"
+          alt="Nebulizer Ad"
+          className="block h-[460px] w-full object-cover transition duration-700 group-hover:scale-[1.05] sm:h-[480px]"
+        />
+      </div>
+    </div>
 
 <div className="absolute top-5 right-5 text-right bg-black/40 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 
@@ -1609,12 +1630,15 @@ export default function Home() {
 
     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-lime-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 
-    <img
-      src="/ads/def.png"
-      alt="Pain Relief Spray"
-      
-      className="w-full h-[520px] object-contain p-6 group-hover:scale-[1.03] transition duration-700"
-    />
+    <div className="p-5 sm:p-6">
+      <div className="overflow-hidden rounded-[28px] sm:rounded-[36px]">
+        <img
+          src="/ads/def.png"
+          alt="Pain Relief Spray"
+          className="block h-[460px] w-full object-cover transition duration-700 group-hover:scale-[1.05] sm:h-[480px]"
+        />
+      </div>
+    </div>
 
 <div className="absolute top-5 left-5 bg-black/35 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 

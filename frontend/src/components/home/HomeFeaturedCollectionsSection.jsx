@@ -6,6 +6,7 @@ import API from "../../api";
 import { featuredCollectionCategories } from "../../data/featuredCollectionsData";
 import { PremiumWordHeader } from "../motion/PremiumMotion";
 import { trackCategoryClick } from "../../utils/recommendationBehavior";
+import { useTheme } from "../../context/ThemeContext";
 
 const REVEAL_DURATION = 0.5;
 const STAGGER_MS = 0.12;
@@ -14,18 +15,49 @@ const EASE_IN = [0.4, 0, 1, 1];
 const HOVER_EASE = [0.25, 0.1, 0.25, 1];
 const PANEL_HEIGHT = "h-[700px]";
 
-/** Subtle category-based ambient glow on card hover */
-const CATEGORY_HOVER_GLOW = {
-  back: { rgb: "59, 130, 246", label: "Soft Blue" },
-  neck: { rgb: "34, 211, 238", label: "Soft Cyan" },
-  knee: { rgb: "52, 211, 153", label: "Soft Emerald" },
-  ankle: { rgb: "251, 191, 36", label: "Soft Amber" },
-  shoulder: { rgb: "167, 139, 250", label: "Soft Violet" },
-  wrist: { rgb: "56, 189, 248", label: "Soft Sky Blue" },
-};
+const PASTEL_PALETTE = [
+  { border: "#f9a8b8", glow: "225, 29, 72" },
+  { border: "#7dd3fc", glow: "2, 132, 199" },
+  { border: "#86efac", glow: "22, 163, 74" },
+  { border: "#fcd34d", glow: "217, 119, 6" },
+  { border: "#c4b5fd", glow: "124, 58, 237" },
+  { border: "#f9a8d4", glow: "219, 39, 119" },
+  { border: "#5eead4", glow: "13, 148, 136" },
+  { border: "#a5b4fc", glow: "79, 70, 229" },
+  { border: "#fdba74", glow: "234, 88, 12" },
+  { border: "#d8b4fe", glow: "147, 51, 234" },
+  { border: "#bef264", glow: "101, 163, 13" },
+  { border: "#67e8f9", glow: "8, 145, 178" },
+];
 
-const getCategoryGlow = (categoryId) =>
-  CATEGORY_HOVER_GLOW[categoryId] || CATEGORY_HOVER_GLOW.back;
+const PASTEL_PALETTE_DARK = [
+  { border: "rgba(251, 113, 133, 0.62)", glow: "251, 113, 133" },
+  { border: "rgba(56, 189, 248, 0.62)", glow: "56, 189, 248" },
+  { border: "rgba(74, 222, 128, 0.62)", glow: "74, 222, 128" },
+  { border: "rgba(251, 191, 36, 0.62)", glow: "251, 191, 36" },
+  { border: "rgba(167, 139, 250, 0.62)", glow: "167, 139, 250" },
+  { border: "rgba(244, 114, 182, 0.62)", glow: "244, 114, 182" },
+  { border: "rgba(45, 212, 191, 0.62)", glow: "45, 212, 191" },
+  { border: "rgba(129, 140, 248, 0.62)", glow: "129, 140, 248" },
+  { border: "rgba(251, 146, 60, 0.62)", glow: "251, 146, 60" },
+  { border: "rgba(192, 132, 252, 0.62)", glow: "192, 132, 252" },
+  { border: "rgba(163, 230, 53, 0.62)", glow: "163, 230, 53" },
+  { border: "rgba(34, 211, 238, 0.62)", glow: "34, 211, 238" },
+];
+
+function hashString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+function getPastelForProduct(product, index, isDark) {
+  const key = String(product.slug || product._id || product.name || index);
+  const palette = isDark ? PASTEL_PALETTE_DARK : PASTEL_PALETTE;
+  return palette[hashString(key) % palette.length];
+}
 
 /** Card n → (n - 1) × 120ms — 0, 120, 240, 360, 480, 600… */
 const cardRevealDelay = (index) => index * STAGGER_MS;
@@ -120,7 +152,8 @@ function RatingStars({ rating }) {
 }
 
 function ProductCard({ product, category, index, reduce }) {
-  const glow = getCategoryGlow(category.id);
+  const { isDark } = useTheme();
+  const pastel = getPastelForProduct(product, index, isDark);
 
   return (
     <motion.article
@@ -132,42 +165,49 @@ function ProductCard({ product, category, index, reduce }) {
           : { y: -7, transition: { duration: 0.35, ease: HOVER_EASE } }
       }
       className="group/card relative self-start w-full"
+      style={{
+        "--pastel-border": pastel.border,
+        "--pastel-glow": pastel.glow,
+      }}
     >
-      {/* Category ambient glow — visible on hover only */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-2 rounded-[36px] opacity-0 blur-2xl transition-opacity duration-[380ms] ease-out group-hover/card:opacity-100"
+        className="pointer-events-none absolute -inset-2 rounded-[36px] opacity-0 blur-2xl transition-opacity duration-[380ms] ease-out group-hover/card:opacity-90"
         style={{
-          background: `radial-gradient(ellipse at 50% 42%, rgba(${glow.rgb}, 0.38) 0%, rgba(${glow.rgb}, 0.12) 42%, transparent 72%)`,
+          background: `radial-gradient(ellipse at 50% 48%, rgba(${pastel.glow}, 0.22) 0%, rgba(${pastel.glow}, 0.08) 45%, transparent 72%)`,
         }}
       />
 
       <div
-        className="relative flex flex-col min-h-[420px] sm:min-h-[440px] overflow-hidden rounded-[32px] border border-slate-100/90 dark:border-white/8 [data-theme=blue]:border-[var(--border-color)] bg-white/95 dark:bg-zinc-900/90 [data-theme=blue]:bg-[var(--card-elevated)] shadow-[0_16px_48px_rgba(15,23,42,0.08)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.28)] transition-[box-shadow,border-color] duration-[380ms] ease-out group-hover/card:border-slate-200/90 dark:group-hover/card:border-white/18 group-hover/card:shadow-[0_28px_70px_rgba(15,23,42,0.14),0_0_52px_var(--card-glow)] dark:group-hover/card:shadow-[0_28px_70px_rgba(0,0,0,0.42),0_0_52px_var(--card-glow)]"
-        style={{ "--card-glow": `rgba(${glow.rgb}, 0.2)` }}
+        className="featured-collection-card relative flex min-h-[420px] flex-col overflow-hidden rounded-[32px] border-2 bg-white/95 shadow-[0_16px_48px_rgba(15,23,42,0.08)] transition-[box-shadow,border-color,transform] duration-[380ms] ease-out dark:bg-zinc-900/90 dark:shadow-[0_16px_48px_rgba(0,0,0,0.28)] [data-theme=blue]:!bg-white sm:min-h-[440px] group-hover/card:shadow-[0_24px_56px_rgba(15,23,42,0.12)] dark:group-hover/card:shadow-[0_24px_56px_rgba(0,0,0,0.38)]"
+        style={{ borderColor: pastel.border }}
       >
         {/* Image zone — ~70% of card */}
-        <div className="relative flex-[7] min-h-[280px] sm:min-h-[300px] overflow-hidden bg-gradient-to-b from-slate-50/95 via-white to-slate-50/40 dark:from-zinc-800/90 dark:via-zinc-900 dark:to-zinc-950/70 [data-theme=blue]:from-[var(--soft)] [data-theme=blue]:via-[var(--card-bg)] [data-theme=blue]:to-[var(--bg-secondary)]">
+        <div className="relative flex-[7] min-h-[280px] overflow-hidden bg-white dark:bg-zinc-900/85 [data-theme=blue]:!bg-white sm:min-h-[300px]">
           <div
-            className="absolute inset-0 opacity-30 pointer-events-none transition-opacity duration-[380ms] group-hover/card:opacity-50"
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-[380ms] ease-out group-hover/card:opacity-100"
             style={{
-              background: `radial-gradient(circle at 50% 48%, rgba(${glow.rgb}, 0.22) 0%, transparent 68%)`,
+              background: `linear-gradient(180deg, rgba(${pastel.glow}, 0.1) 0%, rgba(${pastel.glow}, 0.03) 38%, transparent 100%)`,
             }}
           />
-          <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4">
+          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-5">
             <img
               src={product.image}
               alt={product.name}
               onError={(e) => {
                 e.currentTarget.src = category.image || "/products/knee.png";
               }}
-              className="w-full h-full object-contain object-center drop-shadow-[0_20px_44px_rgba(15,23,42,0.14)] transition-transform duration-[380ms] ease-out group-hover/card:scale-[1.07]"
+              className="h-full max-h-[250px] w-full rounded-2xl object-contain object-center drop-shadow-[0_12px_28px_rgba(15,23,42,0.1)] transition-transform duration-[380ms] ease-out group-hover/card:scale-[1.05] sm:max-h-[270px]"
             />
           </div>
         </div>
 
         {/* Content zone — ~30% of card */}
-        <div className="relative flex-[3] flex flex-col justify-center px-5 sm:px-6 py-5 sm:py-6 border-t border-slate-100/80 dark:border-white/6 [data-theme=blue]:border-[var(--border-color)]">
+        <div
+          className="relative flex flex-[3] flex-col justify-center border-t px-5 py-5 sm:px-6 sm:py-6"
+          style={{ borderTopColor: `rgba(${pastel.glow}, 0.22)` }}
+        >
           <h4 className="text-base sm:text-lg font-black text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-[var(--text-primary)] leading-snug line-clamp-2 transition-colors duration-[350ms] group-hover/card:text-slate-800 dark:group-hover/card:text-white">
             {product.name}
           </h4>

@@ -1,0 +1,189 @@
+/**
+ * Store Locator, Warranty, and Support dropdown — blue theme readability.
+ */
+
+/* ── Hero / page surface (deep blue background) ── */
+[data-theme="blue"] .support-page > section :is(h1, h2, h3, h4, .font-black):not(.card *) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-theme="blue"] .support-page > section > div > p:not(.card *),
+[data-theme="blue"] .support-page > section > p:not(.card *) {
+  color: rgba(255, 255, 255, 0.88) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-theme="blue"] .support-page [class*="tracking-"]:not(.card *):not(.support-glass *) {
+  color: #ffd700 !important;
+  -webkit-text-fill-color: #ffd700 !important;
+}
+
+[data-theme="blue"] .support-page .text-brand {
+  color: #ffd700 !important;
+  -webkit-text-fill-color: #ffd700 !important;
+}
+
+/* ── Glass panels & cards (dark text on light glass) ── */
+[data-theme="blue"] .support-page .support-glass,
+[data-theme="blue"] .support-page .card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+[data-theme="blue"] .support-page :is(.support-glass, .card)
+  :is(h1, h2, h3, h4, h5, h6, .font-black, .text-fg) {
+  color: var(--text-on-card-heading) !important;
+  -webkit-text-fill-color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] .support-page :is(.support-glass, .card)
+  :is(p, span, li, label, .text-fg-muted) {
+  color: var(--text-on-card-muted) !important;
+  -webkit-text-fill-color: var(--text-on-card-muted) !important;
+}
+
+[data-theme="blue"] .support-page :is(.support-glass, .card) .text-brand {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+/* Colourful warranty coverage icons — keep vivid on all themes */
+[data-theme="blue"] .support-page .warranty-coverage-icon {
+  box-shadow: 0 8px 20px rgba(0, 50, 98, 0.12);
+}
+
+[data-theme="blue"] .support-page .policy-accordion-icon {
+  box-shadow: 0 8px 20px rgba(0, 50, 98, 0.12);
+}
+
+[data-theme="blue"] .support-page .warranty-coverage-icon-svg,
+[data-theme="blue"] .support-page .policy-accordion-icon-svg,
+[data-theme="blue"] .support-page .warranty-coverage-icon .text-white,
+[data-theme="blue"] .support-page .policy-accordion-icon .text-white {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-theme="blue"] .support-page :is(.support-glass, .card) svg.text-brand,
+[data-theme="blue"] .support-page :is(.support-glass, .card) .text-cyan-600 {
+  color: #003262 !important;
+}
+
+/* Map illustration badge */
+[data-theme="blue"] .support-map-badge .support-map-badge-label {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .support-map-badge .support-map-badge-title {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+}
+
+/* Floating labels inside glass forms */
+/* Floating labels — hide placeholder ghost text in all themes */
+.support-field-input::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+[data-theme="blue"] .support-page .support-field input,
+[data-theme="blue"] .support-page .support-field textarea,
+[data-theme="blue"] .support-page .support-field select {
+  color: var(--text-on-card-heading) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(0, 50, 98, 0.15) !important;
+}
+
+[data-theme="blue"] .support-page .support-field-input::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="blue"] .support-page .support-field label {
+  color: var(--text-on-card-muted) !important;
+  -webkit-text-fill-color: var(--text-on-card-muted) !important;
+}
+
+[data-theme="blue"] .support-page .support-field label.text-brand,
+[data-theme="blue"] .support-page .support-field .peer:focus ~ label {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+/* Policy accordion chevron */
+[data-theme="blue"] .support-page .policy-accordion-item .text-fg-muted {
+  color: var(--text-on-card-muted) !important;
+}
+
+/* Warranty carousel cards */
+[data-theme="blue"] .warranty-carousel-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-theme="blue"] .warranty-carousel-card :is(h4, .font-black, .text-fg) {
+  color: var(--text-on-card-heading) !important;
+}
+
+[data-theme="blue"] .warranty-carousel-card .text-brand {
+  color: #003262 !important;
+}
+
+/* Navbar Support dropdown */
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-link {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+  background: transparent !important;
+}
+
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-link:hover,
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-link--active {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  background: rgba(255, 215, 0, 0.22) !important;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.12);
+}
+
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-link:hover .support-nav-dropdown-icon,
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-link--active .support-nav-dropdown-icon {
+  background: rgba(255, 215, 0, 0.35) !important;
+  color: #003262 !important;
+}
+
+[data-theme="blue"] .support-nav-dropdown .support-nav-dropdown-icon {
+  background: rgba(0, 50, 98, 0.06) !important;
+  color: #12324a !important;
+}
+
+[data-theme="blue"] header .support-nav-dropdown {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Store cards — keep pastel borders visible on blue theme */
+[data-theme="blue"] .support-page .store-card-pastel {
+  border-color: var(--store-border) !important;
+}
+
+[data-theme="blue"] .support-page .store-card-pastel:hover {
+  border-color: var(--store-border-hover) !important;
+  box-shadow:
+    0 28px 60px var(--store-glow),
+    0 12px 28px rgba(0, 50, 98, 0.12),
+    0 0 0 1px var(--store-border-hover) !important;
+}
+
+/* Store card image overlay text stays white */
+[data-theme="blue"] .support-store-card .store-card-overlay,
+[data-theme="blue"] .support-store-card .store-card-overlay * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Select options in search panel */
+[data-theme="blue"] .support-page .support-glass select option {
+  color: #12324a;
+  background: #ffffff;
+}

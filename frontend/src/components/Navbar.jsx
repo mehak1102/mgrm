@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Search, ShoppingCart, HeartPulse, User, LogOut, ChevronDown, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, HeartPulse, User, LogOut, ChevronDown, Menu, X, Briefcase, MapPin, ShieldCheck } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
@@ -20,6 +20,12 @@ const aboutLinks = [
   "Testimonials",
 ];
 
+const supportLinks = [
+  { label: "Careers", to: "/careers", Icon: Briefcase },
+  { label: "Store Locator", to: "/support/store-locator", Icon: MapPin },
+  { label: "Warranty Information", to: "/support/warranty", Icon: ShieldCheck },
+];
+
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,11 +36,13 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileBodyOpen, setMobileBodyOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileSupportOpen, setMobileSupportOpen] = useState(false);
 
   useEffect(() => {
     setMobileOpen(false);
     setMobileBodyOpen(false);
     setMobileAboutOpen(false);
+    setMobileSupportOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -219,9 +227,41 @@ export default function Navbar() {
           <NavLink to="/blogs" className="whitespace-nowrap">
             Blogs
           </NavLink>
-          <NavLink to="/support" className="whitespace-nowrap">
-            Support
-          </NavLink>
+
+          <div className="relative group py-5">
+            <NavLink
+              to="/support"
+              className={({ isActive }) =>
+                `flex items-center gap-1 whitespace-nowrap transition ${
+                  isActive || location.pathname.startsWith("/support/")
+                    ? "text-cyan-600 dark:text-cyan-400"
+                    : ""
+                }`
+              }
+            >
+              Support <ChevronDown size={15} className="transition-transform duration-250 group-hover:rotate-180" />
+            </NavLink>
+
+            <div className="support-nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-[22px] bg-white/90 dark:bg-slate-900/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] border border-slate-200/80 dark:border-white/14 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] p-3 z-50">
+              {supportLinks.map(({ label, to, Icon }) => {
+                const active = location.pathname === to;
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`support-nav-dropdown-link flex items-center gap-3 px-4 py-3.5 rounded-[18px] font-medium transition-all duration-250 ${
+                      active ? "support-nav-dropdown-link--active" : ""
+                    }`}
+                  >
+                    <span className="support-nav-dropdown-icon w-9 h-9 rounded-xl grid place-items-center shrink-0 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-400">
+                      <Icon size={18} />
+                    </span>
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </nav>
 
         <div className="flex gap-1 sm:gap-2 ml-auto items-center shrink-0">
@@ -417,13 +457,40 @@ export default function Navbar() {
                   >
                     Blogs
                   </button>
+
                   <button
                     type="button"
-                    onClick={() => go("/support")}
-                    className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
+                    onClick={() => setMobileSupportOpen((v) => !v)}
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
                   >
                     Support
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-250 ${mobileSupportOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
+                  {mobileSupportOpen && (
+                    <div className="pl-2 pb-2 space-y-1">
+                      <button
+                        type="button"
+                        onClick={() => go("/support")}
+                        className="w-full text-left px-3 py-2 rounded-lg text-cyan-600 font-bold"
+                      >
+                        Contact Support
+                      </button>
+                      {supportLinks.map(({ label, to, Icon }) => (
+                        <button
+                          key={to}
+                          type="button"
+                          onClick={() => go(to)}
+                          className="w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium text-inherit"
+                        >
+                          <Icon size={16} className="text-cyan-600 shrink-0" />
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   <button
                     type="button"
                     onClick={() => go("/shop")}

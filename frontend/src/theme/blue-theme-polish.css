@@ -204,6 +204,23 @@
   opacity: 1 !important;
 }
 
+[data-theme="blue"] .home-smart-size-section .home-smart-size-step-icon {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-smart-size-section .home-smart-size-step-icon.bg-sky-500 {
+  background: #0ea5e9 !important;
+}
+
+[data-theme="blue"] .home-smart-size-section .home-smart-size-step-icon.bg-violet-500 {
+  background: #8b5cf6 !important;
+}
+
+[data-theme="blue"] .home-smart-size-section .home-smart-size-step-icon.bg-emerald-500 {
+  background: #10b981 !important;
+}
+
 /* ══════════════════════════════════════════════════════════
    YELLOW ACCENTS (restored — not text-visibility pass)
    ══════════════════════════════════════════════════════════ */
@@ -232,15 +249,17 @@
   box-shadow: none;
 }
 
-/* Locate Your Pain Area — yellow highlights */
+/* Locate Your Pain Area — smart guide card (dark text on white glass) */
 [data-theme="blue"] .home-locate-smart-guide {
   background: rgba(255, 255, 255, 0.96) !important;
   border-color: rgba(255, 255, 255, 0.9) !important;
-  color: #003262 !important;
+  color: #000000 !important;
 }
 
-[data-theme="blue"] .home-locate-smart-guide :is(p, h3, span, .text-gray-500, .text-cyan-600, .text-slate-900, [class*="text-zinc"], [class*="text-cyan"]) {
-  color: #003262 !important;
+[data-theme="blue"] .home-locate-smart-guide :is(p, h3, span, .font-black, .text-gray-500, .text-cyan-600, .text-slate-900, [class*="text-zinc"], [class*="text-cyan"]) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-image: none !important;
   opacity: 1 !important;
 }
 

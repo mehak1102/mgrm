@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import { MessageCircle, ArrowUp } from "lucide-react";
 import Logo3D from "./Logo3D";
 
+const supportPhone =
+  import.meta.env.VITE_SUPPORT_PHONE ||
+  import.meta.env.VITE_SUPPORT_CALL_NUMBER ||
+  "+919876543210";
+
+const whatsappNumber =
+  import.meta.env.VITE_SUPPORT_WHATSAPP || supportPhone.replace(/\D/g, "");
+
+const whatsappHref = `https://wa.me/${whatsappNumber}`;
+
 export default function FloatingHelp() {
   const [showTop, setShowTop] = useState(false);
 
@@ -29,14 +39,16 @@ export default function FloatingHelp() {
         </div>
       </div>
 
-      {/* Chat button */}
-      <button
-        type="button"
-        className="w-14 h-14 shrink-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg hover:scale-110 transition"
-        aria-label="Open chat support"
+      {/* WhatsApp */}
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex w-14 h-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg transition hover:scale-110"
+        aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="mx-auto" />
-      </button>
+      </a>
 
       {/* Back to top */}
       {showTop && (

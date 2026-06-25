@@ -27,6 +27,8 @@ const ShopByActivity = lazy(() => import("./pages/ShopByActivity"));
 const Blogs = lazy(() => import("./pages/Blogs"));
 const BlogDetail = lazy(() => import("./pages/BlogDetail"));
 const Support = lazy(() => import("./pages/Support"));
+const StoreLocator = lazy(() => import("./pages/StoreLocator"));
+const WarrantyInformation = lazy(() => import("./pages/WarrantyInformation"));
 const Wishlist = lazy(() => import("./pages/Wishlist"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Careers = lazy(() => import("./pages/Careers"));
@@ -94,6 +96,8 @@ export default function App() {
           <Route path="/blogs/:slug" element={<BlogDetail />} />
 
           <Route path="/support" element={<Support />} />
+          <Route path="/support/store-locator" element={<StoreLocator />} />
+          <Route path="/support/warranty" element={<WarrantyInformation />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -57,4 +57,9 @@ router.post("/recovery", auth, adminOnly, upload.single("image"), (req, res) =>
   handleUpload(req, res, "mgrm-recovery")
 );
 
+// Public — warranty claim photos
+router.post("/warranty", upload.single("image"), (req, res) =>
+  handleUpload(req, res, "mgrm-warranty")
+);
+
 export default router;

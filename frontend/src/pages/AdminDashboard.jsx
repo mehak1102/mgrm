@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import API from "../api";
 import AdminRecoveryPanel from "../components/admin/AdminRecoveryPanel";
 import AdminRecruitmentPanel from "../components/admin/AdminRecruitmentPanel";
+import AdminSupportPanel from "../components/admin/AdminSupportPanel";
 
 
 const emptyForm = {
@@ -186,6 +187,9 @@ export default function AdminDashboard() {
         <button onClick={() => setTab("recruitment")} className={`px-5 py-3 rounded-2xl font-black ${tab === "recruitment" ? "btn-primary" : "btn-soft"}`}>
           Recruitment
         </button>
+        <button onClick={() => setTab("support-mgmt")} className={`px-5 py-3 rounded-2xl font-black ${tab === "support-mgmt" ? "btn-primary" : "btn-soft"}`}>
+          Support Management
+        </button>
       </div>
 
       {tab === "products" && (
@@ -363,6 +367,7 @@ export default function AdminDashboard() {
 
       {tab === "recovery" && <AdminRecoveryPanel />}
       {tab === "recruitment" && <AdminRecruitmentPanel />}
+      {tab === "support-mgmt" && <AdminSupportPanel />}
     </main>
   );
 }
