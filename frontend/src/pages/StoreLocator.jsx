@@ -13,7 +13,6 @@ import {
 import toast from "react-hot-toast";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import FloatingLabelField from "../components/support/FloatingLabelField";
-import { useTheme } from "../context/ThemeContext";
 import { HeroHeading, FadeUpBlock } from "../components/typography/TypographyMotion";
 import { PremiumReveal } from "../components/motion/PremiumMotion";
 import {
@@ -28,8 +27,6 @@ import API from "../api";
 
 function MapIllustration() {
   const reduced = useReducedMotion();
-  const { theme } = useTheme();
-  const isBlue = theme === "blue";
   const pins = [
     { top: "18%", left: "42%", delay: 0 },
     { top: "35%", left: "28%", delay: 0.15 },
@@ -39,66 +36,48 @@ function MapIllustration() {
   ];
 
   return (
-    <div className="support-map-frame relative w-full max-w-md mx-auto">
-      <div
-        className={`support-map-illustration relative w-full aspect-square rounded-[36px] overflow-hidden isolate shadow-[0_30px_80px_rgba(6,182,212,0.15)] ${
-          isBlue
-            ? "border border-white/40 bg-white"
-            : "border border-white/60 dark:border-white/10 bg-white dark:bg-slate-900/40"
-        }`}
-      >
-        <div
-          className="support-map-image-layer absolute inset-0 z-0 bg-white"
-          style={{
-            backgroundImage: `url("${STORE_MAP_BG}")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+    <div className="relative w-full aspect-square max-w-md mx-auto">
+      <div className="absolute inset-0 rounded-[36px] overflow-hidden border border-white/60 dark:border-white/10 shadow-[0_30px_80px_rgba(6,182,212,0.15)]">
+        {/* Background image from /products */}
+        <img
+          src={STORE_MAP_BG}
+          alt="MGRM India network map"
+          className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.currentTarget.src = "/products/pain-area.png";
           }}
-          role="img"
-          aria-label="MGRM India network map"
         />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/25 via-white/20 to-purple-500/20 dark:from-cyan-950/50 dark:via-slate-900/40 dark:to-purple-950/40" />
+        <div className="absolute inset-0 backdrop-blur-[2px]" />
 
-        {!isBlue && (
-          <>
-            <div className="support-map-overlay absolute inset-0 z-[1] pointer-events-none bg-gradient-to-br from-cyan-500/20 via-white/15 to-purple-500/15 dark:from-cyan-950/40 dark:via-slate-900/30 dark:to-purple-950/35" />
-            <svg
-              viewBox="0 0 400 400"
-              className="absolute inset-0 z-[1] w-full h-full opacity-20 dark:opacity-15 pointer-events-none"
-            >
-              <path
-                d="M50 200 Q120 80 200 120 T350 180 T280 320 T120 300 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="text-cyan-500/50"
-              />
-            </svg>
-          </>
-        )}
+        <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full opacity-20 dark:opacity-15 pointer-events-none">
+          <path
+            d="M50 200 Q120 80 200 120 T350 180 T280 320 T120 300 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-cyan-500/50"
+          />
+        </svg>
 
         {pins.map((pin, i) => (
           <motion.div
             key={i}
-            className="absolute z-[2] support-map-pin"
+            className="absolute"
             style={{ top: pin.top, left: pin.left }}
             animate={reduced ? undefined : { y: [0, -8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, delay: pin.delay, ease: "easeInOut" }}
           >
             <div className="relative">
-              <div className="support-map-pin-pulse absolute -inset-3 rounded-full bg-red-500/25 animate-ping" />
-              <MapPin
-                className="support-map-pin-icon text-red-500 drop-shadow-lg relative"
-                size={28}
-                fill="currentColor"
-              />
+              <div className="absolute -inset-3 rounded-full bg-red-500/20 animate-ping" />
+              <MapPin className="text-red-500 drop-shadow-lg relative" size={28} fill="currentColor" />
             </div>
           </motion.div>
         ))}
 
-        <div className="absolute bottom-6 left-6 right-6 z-[3] rounded-2xl bg-white/90 dark:bg-slate-900/70 backdrop-blur-md px-4 py-3 border border-white/50 dark:border-white/10 support-map-badge shadow-lg">
+        <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur-md px-4 py-3 border border-white/50 dark:border-white/10 support-map-badge">
           <p className="text-xs font-bold text-brand tracking-widest support-map-badge-label">INDIA NETWORK</p>
-          <p className="text-sm font-black text-[#12324a] support-map-badge-title">{STORE_LOCATIONS.length} Locations</p>
+          <p className="text-sm font-black text-fg support-map-badge-title">{STORE_LOCATIONS.length} Locations</p>
         </div>
       </div>
     </div>
@@ -252,9 +231,9 @@ export default function StoreLocator() {
               </button>
             </FadeUpBlock>
           </div>
-          <div className="support-map-hero-slot">
+          <FadeUpBlock delay={0.2}>
             <MapIllustration />
-          </div>
+          </FadeUpBlock>
         </div>
       </section>
 

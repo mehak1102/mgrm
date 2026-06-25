@@ -70,58 +70,15 @@
   color: #003262 !important;
 }
 
-/* Map illustration — force visible on deep-blue hero */
-[data-theme="blue"] .support-page .support-map-frame,
-[data-theme="blue"] .support-page .support-map-hero-slot {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-[data-theme="blue"] .support-page .support-map-illustration {
-  background: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.45) !important;
-  box-shadow:
-    0 30px 80px rgba(0, 50, 98, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.2) !important;
-}
-
-[data-theme="blue"] .support-page .support-map-image-layer {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  background-color: #ffffff !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-}
-
-[data-theme="blue"] .support-page .support-map-pin-icon,
-[data-theme="blue"] .support-page .support-map-pin .text-red-500 {
-  color: #ef4444 !important;
-  fill: #ef4444 !important;
-}
-
-[data-theme="blue"] .support-page .support-map-pin-pulse {
-  background: rgba(239, 68, 68, 0.28) !important;
-}
-
 /* Map illustration badge */
 [data-theme="blue"] .support-map-badge .support-map-badge-label {
   color: #003262 !important;
   -webkit-text-fill-color: #003262 !important;
 }
 
-[data-theme="blue"] .support-map-badge .support-map-badge-title,
-[data-theme="blue"] .support-page .support-map-badge .support-map-badge-title {
+[data-theme="blue"] .support-map-badge .support-map-badge-title {
   color: #12324a !important;
   -webkit-text-fill-color: #12324a !important;
-}
-
-[data-theme="blue"] .support-page .support-map-badge {
-  background: rgba(255, 255, 255, 0.94) !important;
-  border-color: rgba(0, 50, 98, 0.12) !important;
 }
 
 /* Floating labels inside glass forms */

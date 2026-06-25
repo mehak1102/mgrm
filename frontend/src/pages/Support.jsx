@@ -65,7 +65,7 @@ export default function Support() {
   };
 
   return (
-    <main className="support-page relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
+    <main className="relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
       {/* Full-viewport cinematic hero — first thing users see */}
       {/* <MGRMBrandRing /> */}
 

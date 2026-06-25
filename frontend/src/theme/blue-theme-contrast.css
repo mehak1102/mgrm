@@ -57,19 +57,6 @@
   box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
 }
 
-[data-theme="blue"] .home-cardiology-section .home-cardiology-brand-title {
-  color: #003262 !important;
-  -webkit-text-fill-color: #003262 !important;
-  text-shadow: none !important;
-  opacity: 1 !important;
-}
-
-[data-theme="blue"] .home-cardiology-section .home-cardiology-brand-tagline {
-  color: #ef4444 !important;
-  -webkit-text-fill-color: #ef4444 !important;
-  opacity: 1 !important;
-}
-
 /* ── HOME: Featured Collections glass panels ── */
 [data-theme="blue"] section.max-w-\[1500px\] .rounded-\[48px\] {
   background: rgba(255, 255, 255, 0.72) !important;
@@ -426,64 +413,64 @@
 }
 
 /* ── SUPPORT PAGE ── */
-[data-theme="blue"] main.support-page {
+[data-theme="blue"] main.bg-app {
   color: #ffffff;
 }
 
-[data-theme="blue"] main.support-page section h1,
-[data-theme="blue"] main.support-page section h2,
-[data-theme="blue"] main.support-page section h3,
-[data-theme="blue"] main.support-page section .font-black {
+[data-theme="blue"] main.bg-app section h1,
+[data-theme="blue"] main.bg-app section h2,
+[data-theme="blue"] main.bg-app section h3,
+[data-theme="blue"] main.bg-app section .font-black {
   color: #ffffff !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] main.support-page section p,
-[data-theme="blue"] main.support-page section .text-gray-500 {
+[data-theme="blue"] main.bg-app section p,
+[data-theme="blue"] main.bg-app section .text-gray-500 {
   color: rgba(255, 255, 255, 0.88) !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] main.support-page .bg-card,
-[data-theme="blue"] main.support-page form.bg-card {
+[data-theme="blue"] main.bg-app .bg-card,
+[data-theme="blue"] main.bg-app form.bg-card {
   background: rgba(255, 255, 255, 0.84) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 28px rgba(18, 50, 74, 0.06) !important;
 }
 
-[data-theme="blue"] main.support-page .bg-card h2,
-[data-theme="blue"] main.support-page .bg-card h3,
-[data-theme="blue"] main.support-page .bg-card .font-black,
-[data-theme="blue"] main.support-page form.bg-card h2 {
+[data-theme="blue"] main.bg-app .bg-card h2,
+[data-theme="blue"] main.bg-app .bg-card h3,
+[data-theme="blue"] main.bg-app .bg-card .font-black,
+[data-theme="blue"] main.bg-app form.bg-card h2 {
   color: #12324a !important;
 }
 
-[data-theme="blue"] main.support-page .bg-card p,
-[data-theme="blue"] main.support-page form.bg-card input {
+[data-theme="blue"] main.bg-app .bg-card p,
+[data-theme="blue"] main.bg-app form.bg-card input {
   color: #12324a !important;
 }
 
-[data-theme="blue"] main.support-page .shadow {
+[data-theme="blue"] main.bg-app .shadow {
   box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
 }
 
-[data-theme="blue"] main.support-page input,
-[data-theme="blue"] main.support-page textarea,
-[data-theme="blue"] main.support-page select {
+[data-theme="blue"] main.bg-app input,
+[data-theme="blue"] main.bg-app textarea,
+[data-theme="blue"] main.bg-app select {
   background: rgba(255, 255, 255, 0.9) !important;
   color: #12324a !important;
   border-color: rgba(255, 255, 255, 0.35) !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] main.support-page input::placeholder,
-[data-theme="blue"] main.support-page textarea::placeholder {
+[data-theme="blue"] main.bg-app input::placeholder,
+[data-theme="blue"] main.bg-app textarea::placeholder {
   color: #4f6980 !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] main.support-page .bg-green-50 {
+[data-theme="blue"] main.bg-app .bg-green-50 {
   background: rgba(255, 255, 255, 0.88) !important;
   color: #166534 !important;
   opacity: 1 !important;
