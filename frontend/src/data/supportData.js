@@ -1,4 +1,4 @@
-/** Hero map illustration background — replace file at public/products/in.png */
+/** Hero map illustration — light map graphic at public/products/all.png */
 export const STORE_MAP_BG = "/products/all.png";
 
 export const STORE_LOCATIONS = [

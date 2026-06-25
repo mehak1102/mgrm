@@ -29,6 +29,13 @@
   opacity: 1 !important;
 }
 
+[data-theme="blue"] .home-cardiology-section .rounded-\[42px\].min-h-\[760px\]
+  :is(h1, h2, h3, h4, h5, h6, .font-black, .font-bold):not(.home-cardiology-brand-tagline) {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+  opacity: 1 !important;
+}
+
 [data-theme="blue"] :is(.card, .bg-card, aside.bg-card, article.bg-card, form.bg-card, .theme-panel, .theme-section)
   :is(p, li, .text-gray-500, .text-fg-muted, .text-slate-600, .text-slate-500, .text-slate-700) {
   color: #4f6980 !important;
