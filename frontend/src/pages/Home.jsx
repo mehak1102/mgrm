@@ -176,6 +176,30 @@ export default function Home() {
   },
 ];
 
+const BANDAGE_STAT_PASTELS = [
+  {
+    bg: "#bae6fd",
+    border: "#38bdf8",
+    num: "#0c4a6e",
+    label: "#0369a1",
+    glow: "rgba(14, 165, 233, 0.18)",
+  },
+  {
+    bg: "#ddd6fe",
+    border: "#a78bfa",
+    num: "#5b21b6",
+    label: "#6d28d9",
+    glow: "rgba(139, 92, 246, 0.18)",
+  },
+  {
+    bg: "#fed7aa",
+    border: "#fb923c",
+    num: "#c2410c",
+    label: "#ea580c",
+    glow: "rgba(251, 146, 60, 0.18)",
+  },
+];
+
   const goCategory = (category) => {
     trackCategoryClick(category);
     navigate(`/shop?category=${encodeURIComponent(category)}`);
@@ -494,8 +518,10 @@ export default function Home() {
 
 
         {/* GLOBAL CERTIFICATIONS */}
-<section className="home-expect-best-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
+<section className="home-trust-cert-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
+  <div className="home-trust-cert-bg absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
+  <div className="home-trust-cert-glow-emerald pointer-events-none absolute top-16 right-24 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
+  <div className="home-trust-cert-glow-cyan pointer-events-none absolute bottom-10 left-16 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
 
 
   <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-20 items-center min-h-[720px]">
@@ -510,11 +536,11 @@ export default function Home() {
             <motion.div
               key={`${item.title}-${i}`}
               {...cardRevealTransition(i % certifications.length)}
-              className="w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
+              className="home-trust-cert-card w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
             >
 
 <div
-  className={`rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition ${
+  className={`home-trust-cert-logo rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition ${
     item.image.includes("fda.png") ? "w-36 h-36" : "w-28 h-28"
   }`}
 >
@@ -526,15 +552,15 @@ export default function Home() {
     }`}
   />
 </div>
-              <h3 className="mt-6 text-2xl font-black text-slate-900 dark:text-zinc-100">
+              <h3 className="home-trust-cert-title mt-6 text-2xl font-black text-slate-900 dark:text-zinc-100">
                 {item.title}
               </h3>
 
-              <p className="mt-3 text-slate-500 dark:text-zinc-400 leading-7">
+              <p className="home-trust-cert-subtitle mt-3 text-slate-500 dark:text-zinc-400 leading-7">
                 {item.subtitle}
               </p>
 
-              <div className="mt-5 flex items-center gap-2 text-emerald-600 font-black text-sm">
+              <div className="home-trust-cert-verified mt-5 flex items-center gap-2 text-emerald-600 font-black text-sm">
                 <CheckCircle2 size={16} />
                 Verified Standard
               </div>
@@ -546,20 +572,17 @@ export default function Home() {
 
     {/* RIGHT */}
     <div className="relative">
-      <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
-      <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
-
-      <div className="relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
-        <SectionLabel className="text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
+      <div className="home-trust-cert-panel relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
+        <SectionLabel className="home-trust-cert-label text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
           TRUST & SAFETY
         </SectionLabel>
 
         <SectionHeading
           text="Expect The Best"
-          className="text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
+          className="home-trust-cert-heading text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
         />
 
-        <FadeUpText className="mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
+        <FadeUpText className="home-trust-cert-desc mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
           MGRM’s strong focus on quality ensures every orthopedic and
           recovery product meets internationally recognized healthcare
           standards for comfort, durability and safety.
@@ -590,15 +613,15 @@ export default function Home() {
           ].map((item) => (
             <div
               key={item.text}
-              className={`flex items-center gap-3 rounded-2xl px-4 py-4 ${item.card}`}
+              className={`home-trust-feature flex items-center gap-3 rounded-2xl px-4 py-4 ${item.card}`}
             >
               <div
-                className={`flex h-10 w-10 items-center justify-center rounded-xl ${item.icon}`}
+                className={`home-trust-feature-icon flex h-10 w-10 items-center justify-center rounded-xl ${item.icon}`}
               >
                 <CheckCircle2 size={18} />
               </div>
 
-              <span className="text-sm font-bold text-slate-900 dark:text-zinc-100">
+              <span className="home-trust-feature-text text-sm font-bold text-slate-900 dark:text-zinc-100">
                 {item.text}
               </span>
             </div>
@@ -983,6 +1006,7 @@ export default function Home() {
         <div>
           <h3
             className="
+              home-cardiology-brand-name
               text-4xl
               font-black
               tracking-wide
@@ -996,6 +1020,7 @@ export default function Home() {
 
           <p
             className="
+              home-cardiology-brand-tagline
               text-lg
               font-semibold
               tracking-[8px]
@@ -1029,11 +1054,11 @@ export default function Home() {
   </div>
 </section>
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="home-bandage-section home-expect-best-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-28 overflow-x-clip overflow-hidden min-w-0">
+<section className="home-bandage-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-28 overflow-x-clip overflow-y-visible min-w-0">
 
 
   {/* BACKGROUND */}
-  <div className="absolute inset-0 rounded-[28px] sm:rounded-[40px] lg:rounded-[60px] overflow-hidden">
+  <div className="home-bandage-section-bg absolute inset-0 rounded-[28px] sm:rounded-[40px] lg:rounded-[60px] overflow-hidden">
 
     <ViewportVideo
       autoPlay
@@ -1046,7 +1071,7 @@ export default function Home() {
     />
 
     {/* cinematic overlay */}
-    <div className="absolute inset-0 bg-gradient-to-r from-white/82 via-white/38 to-cyan-50/10 dark:from-slate-950/92 dark:via-slate-950/75 dark:to-zinc-900/40 transition-colors duration-500" />
+    <div className="home-bandage-section-overlay absolute inset-0 bg-gradient-to-r from-white/82 via-white/38 to-cyan-50/10 dark:from-slate-950/92 dark:via-slate-950/75 dark:to-zinc-900/40 transition-colors duration-500" />
 
     {/* light effect */}
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.08),transparent_38%)]" />
@@ -1063,7 +1088,7 @@ export default function Home() {
   <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-12 items-center min-w-0">
 
     {/* LEFT SIDE */}
-    <div className="max-w-3xl min-w-0">
+    <div className="home-bandage-copy max-w-3xl min-w-0">
 
       <motion.div
         initial={{ opacity: 0, y: 35 }}
@@ -1072,30 +1097,30 @@ export default function Home() {
       >
 
         {/* TOP BADGE */}
-        <div className="inline-flex items-center gap-3 rounded-full border border-white/70 dark:border-white/10 bg-white/65 dark:bg-zinc-900/70 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
+        <div className="home-bandage-badge inline-flex items-center gap-3 rounded-full border border-white/70 dark:border-white/10 bg-white/65 dark:bg-zinc-900/70 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
 
           <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
 
-          <span className="text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
+          <span className="home-bandage-badge-label text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
             GLOBAL MEDICAL BRAND
           </span>
         </div>
 
         {/* TITLE */}
 
-        <h2 className="mt-6 text-4xl sm:text-5xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
+        <h2 className="home-bandage-title mt-6 text-4xl sm:text-5xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
           BANDAGE TO
           <br />
           SPLINTAGE™
         </h2>
 
         {/* SUBTITLE */}
-        <h3 className="mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
+        <h3 className="home-bandage-subtitle mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
           Braces • Splintage • Bandage Care
         </h3>
 
         {/* DESC */}
-        <p className="mt-8 text-lg leading-9 text-slate-600 dark:text-zinc-400 max-w-2xl transition-colors duration-300">
+        <p className="home-bandage-desc mt-8 text-lg leading-9 text-slate-600 dark:text-zinc-400 max-w-2xl transition-colors duration-300">
           MGRM products are scientifically engineered to stabilize,
           support and accelerate recovery during injuries and
           rehabilitation. Trusted by hospitals, physiotherapists,
@@ -1107,7 +1132,7 @@ export default function Home() {
 
           <Link
             to="/shop"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-7 sm:px-9 py-3.5 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
+            className="home-bandage-btn-primary group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-7 sm:px-9 py-3.5 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
             <span className="relative z-10">
               Discover Products
@@ -1118,7 +1143,7 @@ export default function Home() {
 
           <Link
             to="/support"
-            className="rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-7 sm:px-9 py-3.5 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
+            className="home-bandage-btn-secondary rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-7 sm:px-9 py-3.5 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
             Partner Program
           </Link>
@@ -1132,124 +1157,131 @@ export default function Home() {
           ["248+", "Products"],
           ["40+", "Countries"],
           ["25+", "Years"],
-        ].map(([num, text], i) => (
+        ].map(([num, text], i) => {
+          const pastel = BANDAGE_STAT_PASTELS[i % BANDAGE_STAT_PASTELS.length];
 
+          return (
           <motion.div
             key={text}
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-[30px] bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_20px_50px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.35)] p-5 sm:p-7 hover:-translate-y-2 hover:bg-white/85 dark:hover:bg-zinc-800/90 transition-all duration-500 min-w-0"
+            className="home-bandage-stat-card home-bandage-stat-pastel rounded-[30px] border-2 p-5 sm:p-7 hover:-translate-y-2 transition-all duration-500 min-w-0"
+            style={{
+              "--bandage-stat-bg": pastel.bg,
+              "--bandage-stat-border": pastel.border,
+              "--bandage-stat-num": pastel.num,
+              "--bandage-stat-label": pastel.label,
+              "--bandage-stat-glow": pastel.glow,
+            }}
           >
 
-            <h3 className="home-expect-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
+            <h3 className="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
               {num}
             </h3>
 
-            <p className="mt-2 text-slate-500 dark:text-zinc-400 font-semibold">
+            <p className="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400">
               {text}
             </p>
 
           </motion.div>
-        ))}
+        );
+        })}
       </div>
     </div>
 
     {/* RIGHT SIDE */}
-    <div className="relative w-full min-w-0 mt-8 lg:mt-0 min-h-[360px] sm:min-h-[480px] lg:h-[680px] flex items-center justify-center lg:justify-start lg:-ml-16">
+    <div className="home-bandage-visual relative w-full min-w-0 mt-8 lg:mt-0 min-h-[400px] sm:min-h-[520px] lg:min-h-[620px] flex items-center justify-center lg:justify-start lg:-ml-16 overflow-visible">
 
-      {/* MAIN IMAGE CARD */}
+      {/* MAIN IMAGE CARD — full finger photo with bottom text overlay */}
       <motion.div
         animate={{ y: [0, -18, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="relative w-full max-w-[500px] mx-auto lg:mx-0 rounded-[32px] sm:rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white/40 dark:bg-zinc-900/50 backdrop-blur-2xl shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
+        className="home-bandage-image-card relative z-10 w-full max-w-[480px] mx-auto lg:mx-0 rounded-[32px] sm:rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
       >
 
-        <img
-          src="/banners/bandage.png"
-          alt="Premium orthopedic support"
-          className="w-full h-[300px] sm:h-[420px] lg:h-[650px] object-cover"
-        />
+        <div className="home-bandage-image-frame relative h-[400px] sm:h-[520px] lg:h-[580px] overflow-hidden">
+          <img
+            src="/banners/bandage.png"
+            alt="Premium orthopedic support"
+            className="w-full h-full object-cover object-center"
+          />
 
-        {/* gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95 dark:to-slate-950/95 transition-colors duration-500" />
+          <div className="home-bandage-image-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/[0.97] to-transparent pt-24 sm:pt-28 pb-5 sm:pb-7 px-5 sm:px-7">
+            <span className="home-bandage-image-label text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.3em] font-black text-[#003262]">
+              PREMIUM ORTHOPEDIC SUPPORT
+            </span>
 
-        {/* content */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
+            <h3 className="home-bandage-image-title mt-2 sm:mt-2.5 text-2xl sm:text-3xl lg:text-[2.1rem] font-black text-[#003262] leading-tight">
+              Expect The Best
+            </h3>
 
-          <span className="text-cyan-600 dark:text-cyan-400 text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] font-black">
-            PREMIUM ORTHOPEDIC SUPPORT
-          </span>
-
-          <h3 className="home-expect-highlight-title mt-2 sm:mt-3 text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-zinc-100">
-            Expect The Best
-          </h3>
-
-          <p className="mt-4 text-slate-600 dark:text-zinc-400 leading-7">
-            Internationally certified recovery and rehabilitation
-            products designed for premium support and comfort.
-          </p>
+            <p className="home-bandage-image-desc mt-3 sm:mt-3.5 text-sm sm:text-[0.95rem] text-slate-500 leading-relaxed">
+              Internationally certified recovery and rehabilitation
+              products designed for premium support and comfort.
+            </p>
+          </div>
         </div>
       </motion.div>
 
-      {/* FLOATING CARD */}
+      {/* FLOATING CARD — global presence */}
       <motion.div
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
-        className="hidden md:block absolute md:-left-12 lg:-left-24 top-10 lg:top-20 w-56 lg:w-72 rounded-[34px] bg-white/80 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-5 lg:p-7 transition-colors duration-300"
+        className="home-bandage-float-card home-bandage-float-card--presence hidden md:block absolute w-52 lg:w-60 rounded-[28px] bg-white dark:bg-white border border-slate-100 dark:border-slate-100 shadow-[0_24px_70px_rgba(15,23,42,0.14)] p-4 lg:p-5 transition-colors duration-300 z-20"
       >
 
-        <p className="text-xs font-black tracking-[0.3em] text-cyan-600 dark:text-cyan-400">
+        <p className="home-bandage-float-label text-[10px] sm:text-xs font-black tracking-[0.28em] text-[#003262]">
           GLOBAL PRESENCE
         </p>
 
-        <h4 className="home-expect-stat-num mt-3 text-4xl font-black text-slate-900 dark:text-zinc-100">
+        <h4 className="home-bandage-stat-num home-bandage-stat-num--highlight mt-1.5 text-3xl lg:text-[2.35rem] font-black text-[#c9a600] leading-none">
           40+
         </h4>
 
-        <p className="text-lg font-bold text-slate-700 dark:text-zinc-200 mt-1">
+        <p className="home-bandage-float-subtitle mt-1 text-base lg:text-lg font-bold text-[#003262]">
           Countries
         </p>
 
-        <p className="mt-4 text-sm leading-7 text-slate-500 dark:text-zinc-400">
+        <p className="home-bandage-float-desc mt-2.5 text-sm leading-6 text-slate-500">
           Expanding partnerships with healthcare providers,
           distributors and hospitals worldwide.
         </p>
       </motion.div>
 
-      {/* FLOATING CARD 2 */}
+      {/* FLOATING CARD — WHO-GMP */}
       <motion.div
         animate={{ y: [0, -16, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="hidden md:block absolute right-0 lg:right-8 bottom-8 lg:bottom-16 w-64 lg:w-80 max-w-[calc(100%-1rem)] rounded-[34px] bg-white/82 dark:bg-zinc-900/85 backdrop-blur-2xl border border-white dark:border-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] p-5 lg:p-7 transition-colors duration-300"
+        className="home-bandage-float-card home-bandage-float-card--cert hidden md:block absolute w-56 lg:w-[17.5rem] max-w-[calc(100%-1rem)] rounded-[28px] bg-white dark:bg-white border border-slate-100 dark:border-slate-100 shadow-[0_24px_70px_rgba(15,23,42,0.14)] p-4 lg:p-5 transition-colors duration-300 z-20"
       >
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3.5 lg:gap-4">
 
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-100 to-blue-100 from-[color-mix(in_srgb,var(--accent-primary)_40%,transparent)] to-[color-mix(in_srgb,var(--accent-secondary)_40%,transparent)] text-cyan-700 text-brand flex items-center justify-center text-2xl font-black">
-            ✓
+          <div className="home-bandage-cert-icon w-14 h-14 lg:w-[3.75rem] lg:h-[3.75rem] rounded-2xl flex items-center justify-center shrink-0">
+            <ShieldCheck className="w-7 h-7 lg:w-8 lg:h-8 text-white" strokeWidth={2.5} />
           </div>
 
-          <div>
-            <h4 className="text-2xl font-black text-slate-900 dark:text-zinc-100">
+          <div className="min-w-0">
+            <h4 className="home-bandage-cert-title text-lg lg:text-2xl font-black text-[#003262] leading-tight">
               WHO-GMP
             </h4>
 
-            <p className="text-sm text-slate-500 dark:text-zinc-400">
+            <p className="home-bandage-cert-subtitle text-sm text-slate-500 mt-0.5">
               Certified Manufacturing
             </p>
           </div>
         </div>
 
-        <div className="mt-6 h-2 rounded-full bg-slate-100 dark:bg-zinc-700 overflow-hidden">
-          <div className="w-[92%] h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+        <div className="home-bandage-cert-track mt-4 lg:mt-5 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+          <div className="home-bandage-cert-progress w-[90%] h-full rounded-full bg-[#f5c518]" />
         </div>
       </motion.div>
     </div>
   </div>
 
   {/* MOVING TAGS */}
-  <div className="relative mt-24 overflow-hidden">
+  <div className="home-bandage-marquee relative mt-24 overflow-hidden">
 
     <div className="flex gap-6 w-max marquee-premium">
 
@@ -1279,7 +1311,7 @@ export default function Home() {
 
           <div
             key={i}
-            className="home-expect-tag rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
+            className="home-bandage-tag rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
           >
             {item}
           </div>
@@ -1404,7 +1436,7 @@ export default function Home() {
         <DeferredSection loader={loadShopByActivity} minHeight={480} />
 
         {/* FEATURED PRODUCTS */}
-        <section className="relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
+        <section className="home-recommended-section relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
@@ -1457,7 +1489,7 @@ export default function Home() {
             <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-7 px-2 sm:px-4 pb-2">
               {products.slice(productStart, productStart + 4).map((p, i) => (
                 <ProductRevealCard key={p._id} index={i}>
-                  <ProductCard product={p} />
+                  <ProductCard product={p} pastelIndex={i} />
                 </ProductRevealCard>
               ))}
             </div>

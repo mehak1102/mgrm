@@ -330,7 +330,7 @@
 }
 
 .fup-btn--view {
-  color: rgb(var(--fup-pastel-glow));
+  color: #000000;
   background: rgba(var(--fup-pastel-glow), 0.1);
   border-color: var(--fup-pastel-border);
   box-shadow: 0 8px 22px rgba(var(--fup-pastel-glow), 0.12);
@@ -345,7 +345,7 @@
 
 .dark .fup-btn--view,
 [data-theme="dark"] .fup-btn--view {
-  color: rgb(var(--fup-pastel-glow));
+  color: #000000;
   background: rgba(var(--fup-pastel-glow), 0.12);
   border-color: var(--fup-pastel-border);
   box-shadow: 0 10px 24px rgba(var(--fup-pastel-glow), 0.14);
@@ -360,7 +360,8 @@
 }
 
 [data-theme="blue"] .fup-btn--view {
-  color: rgb(var(--fup-pastel-glow));
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
   background: rgba(var(--fup-pastel-glow), 0.1);
   border-color: var(--fup-pastel-border);
   box-shadow: 0 10px 24px rgba(var(--fup-pastel-glow), 0.14);
@@ -404,7 +405,8 @@
 }
 
 [data-theme="blue"] .fup-btn--toggle {
-  color: #ffd700;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
   background: rgba(255, 215, 0, 0.1);
   border-color: rgba(255, 215, 0, 0.32);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
@@ -414,6 +416,12 @@
   background: rgba(255, 215, 0, 0.18);
   border-color: rgba(255, 215, 0, 0.48);
   box-shadow: 0 18px 44px rgba(255, 215, 0, 0.16);
+}
+
+[data-theme="blue"] .fup-btn--view svg,
+[data-theme="blue"] .fup-btn--toggle svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

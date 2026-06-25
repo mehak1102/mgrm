@@ -554,6 +554,117 @@ body {
     0 0 0 1px var(--store-border-hover, rgba(6, 182, 212, 0.4));
 }
 
+/* Bandage section — solid pastel stat cards + float placement (section only) */
+.home-bandage-section .home-bandage-stat-pastel {
+  background: var(--bandage-stat-bg) !important;
+  border: 2px solid var(--bandage-stat-border) !important;
+  box-shadow: 0 16px 40px var(--bandage-stat-glow);
+}
+
+.home-bandage-section .home-bandage-stat-pastel:hover {
+  border-color: var(--bandage-stat-border) !important;
+  box-shadow:
+    0 22px 48px var(--bandage-stat-glow),
+    0 0 0 1px var(--bandage-stat-border);
+}
+
+.home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num {
+  color: var(--bandage-stat-num) !important;
+  -webkit-text-fill-color: var(--bandage-stat-num) !important;
+}
+
+.home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-label {
+  color: var(--bandage-stat-label) !important;
+  -webkit-text-fill-color: var(--bandage-stat-label) !important;
+}
+
+.home-bandage-section .home-bandage-float-card--presence {
+  top: -2rem;
+  left: -0.75rem;
+}
+
+.home-bandage-section .home-bandage-float-card--cert {
+  top: auto;
+  bottom: 4.5rem;
+  right: -0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .home-bandage-section .home-bandage-float-card--presence {
+    top: -3.25rem;
+    left: -3.75rem;
+  }
+
+  .home-bandage-section .home-bandage-float-card--cert {
+    bottom: 5.75rem;
+    right: -2.75rem;
+  }
+}
+
+.home-bandage-section .home-bandage-image-overlay {
+  pointer-events: none;
+}
+
+.home-bandage-section .home-bandage-cert-icon {
+  background: linear-gradient(145deg, #0ea5e9 0%, #22d3ee 42%, #84cc16 100%);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.28);
+}
+
+.home-bandage-section .home-bandage-stat-num--highlight {
+  color: #c9a600;
+  -webkit-text-fill-color: #c9a600;
+}
+
+.dark .home-bandage-section .home-bandage-stat-pastel,
+[data-theme="dark"] .home-bandage-section .home-bandage-stat-pastel {
+  background: var(--bandage-stat-bg) !important;
+  border: 2px solid var(--bandage-stat-border) !important;
+}
+
+.dark .home-bandage-section .home-bandage-stat-num--highlight,
+[data-theme="dark"] .home-bandage-section .home-bandage-stat-num--highlight {
+  color: #fbbf24;
+  -webkit-text-fill-color: #fbbf24;
+}
+
+/* Product cards — pastel borders + soft hover glow (Recommended Supports) */
+.product-card--pastel {
+  border-color: var(--pc-pastel-border) !important;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.07);
+}
+
+.product-card--pastel:hover {
+  border-color: var(--pc-pastel-border) !important;
+  box-shadow:
+    0 24px 56px rgba(15, 23, 42, 0.1),
+    0 0 36px var(--pc-pastel-glow);
+}
+
+.dark .product-card--pastel,
+[data-theme="dark"] .product-card--pastel {
+  background: #ffffff;
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28);
+}
+
+.dark .product-card--pastel:hover,
+[data-theme="dark"] .product-card--pastel:hover {
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.32),
+    0 0 40px var(--pc-pastel-glow);
+}
+
+[data-theme="blue"] .home-recommended-section .product-card--pastel {
+  background: #ffffff !important;
+  border-color: var(--pc-pastel-border) !important;
+}
+
+[data-theme="blue"] .home-recommended-section .product-card--pastel:hover {
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.18),
+    0 0 40px var(--pc-pastel-glow) !important;
+}
+
 /* Support nav dropdown — light / dark (blue theme overrides in blue-theme-support.css) */
 .support-nav-dropdown-link {
   color: var(--text-primary, #334155);

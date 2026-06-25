@@ -12,7 +12,7 @@
   box-shadow: 0 12px 40px rgba(18, 50, 74, 0.07) !important;
 }
 
-[data-theme="blue"] .home-cardiology-section h3,
+[data-theme="blue"] .home-cardiology-section h3:not(.home-cardiology-brand-name),
 [data-theme="blue"] .home-cardiology-section .text-slate-900 {
   color: #10304a !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
@@ -55,6 +55,21 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
+}
+
+/* Bottom brand — MGRM black, MEDICARE red (blue theme, this section only) */
+[data-theme="blue"] main.bg-app .home-cardiology-section .home-cardiology-brand-name {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="blue"] main.bg-app .home-cardiology-section .home-cardiology-brand-tagline {
+  color: #ef4444 !important;
+  -webkit-text-fill-color: #ef4444 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
 }
 
 /* ── HOME: Featured Collections glass panels ── */

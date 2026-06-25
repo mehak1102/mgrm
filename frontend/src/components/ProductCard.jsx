@@ -9,7 +9,18 @@ import {
   productPriceSaleProps,
 } from "../utils/productPriceStyle";
 
-export default function ProductCard({ product }) {
+const PASTEL_CARD_PALETTE = [
+  { border: "#f9a8b8", glow: "rgba(249, 168, 184, 0.42)" },
+  { border: "#7dd3fc", glow: "rgba(125, 211, 252, 0.42)" },
+  { border: "#86efac", glow: "rgba(134, 239, 172, 0.42)" },
+  { border: "#fcd34d", glow: "rgba(252, 211, 77, 0.42)" },
+  { border: "#c4b5fd", glow: "rgba(196, 181, 253, 0.42)" },
+  { border: "#f9a8d4", glow: "rgba(249, 168, 212, 0.42)" },
+  { border: "#5eead4", glow: "rgba(94, 234, 212, 0.42)" },
+  { border: "#a5b4fc", glow: "rgba(165, 180, 252, 0.42)" },
+];
+
+export default function ProductCard({ product, pastelIndex }) {
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { isBlue } = useTheme();
@@ -18,9 +29,27 @@ export default function ProductCard({ product }) {
   const price = Number(product.price || 0);
   const discountPrice = Number(product.discountPrice || product.price || 0);
   const liked = isWishlisted(product);
+  const pastel =
+    pastelIndex != null
+      ? PASTEL_CARD_PALETTE[pastelIndex % PASTEL_CARD_PALETTE.length]
+      : null;
 
   return (
-    <div className="group bg-card dark:bg-zinc-900 rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition duration-500 border border-slate-200 dark:border-white/10">
+    <div
+      className={`group relative bg-card dark:bg-zinc-900 rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 ${
+        pastel
+          ? "product-card--pastel border-2"
+          : "border border-slate-200 dark:border-white/10"
+      }`}
+      style={
+        pastel
+          ? {
+              "--pc-pastel-border": pastel.border,
+              "--pc-pastel-glow": pastel.glow,
+            }
+          : undefined
+      }
+    >
       <Link to={`/product/${product.slug}`} className="block relative h-72 bg-card overflow-hidden">
         <img
           src={image}

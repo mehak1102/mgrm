@@ -130,17 +130,19 @@ function PaymentMethodCard({ logo, index, theme, reduce }) {
   );
 }
 
-function socialBtnClass(theme) {
-  const base =
-    "flex h-11 w-11 items-center justify-center rounded-xl border text-fg-muted hover:text-brand hover:border-[var(--accent-primary)]/40 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--accent-primary)_20%,transparent)] transition-colors duration-300";
-  if (theme === "dark") {
-    return `${base} border-white/10 bg-zinc-800/80 backdrop-blur-sm`;
-  }
-  if (theme === "blue") {
-    return `${base} border-edge bg-white/70 backdrop-blur-sm`;
-  }
-  return `${base} border-edge bg-card`;
-}
+const SOCIAL_BRAND_CLASS = {
+  linkedin:
+    "bg-[#0A66C2] border-[#0A66C2] hover:bg-[#0958a8] hover:border-[#0958a8] hover:shadow-[0_8px_24px_rgba(10,102,194,0.45)]",
+  instagram:
+    "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] border-transparent hover:opacity-90 hover:shadow-[0_8px_24px_rgba(221,42,123,0.4)]",
+  facebook:
+    "bg-[#1877F2] border-[#1877F2] hover:bg-[#166fe0] hover:border-[#166fe0] hover:shadow-[0_8px_24px_rgba(24,119,242,0.45)]",
+  youtube:
+    "bg-[#FF0000] border-[#FF0000] hover:bg-[#e60000] hover:border-[#e60000] hover:shadow-[0_8px_24px_rgba(255,0,0,0.4)]",
+};
+
+const socialBtnBase =
+  "footer-social-link flex h-11 w-11 items-center justify-center rounded-xl border text-white hover:!text-white shadow-sm transition-all duration-300";
 
 function FooterLink({ to, children, className = "" }) {
   return (
@@ -158,7 +160,6 @@ export default function Footer() {
   const reduce = useReducedMotion();
   const [email, setEmail] = useState("");
   const surfaceCard = surfaceCardClass(theme);
-  const socialBtn = socialBtnClass(theme);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -212,7 +213,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   whileHover={{ y: -3, scale: 1.08 }}
-                  className={socialBtn}
+                  className={`${socialBtnBase} ${SOCIAL_BRAND_CLASS[id]}`}
                 >
                   <SocialIcon name={id} />
                 </motion.a>
