@@ -153,14 +153,14 @@ export default function Navbar() {
               Shop By Activity <ChevronDown size={15} />
             </button>
 
-            <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999]">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-                <div className="flex justify-between items-center mb-5 gap-4">
+            <div className="activity-nav-dropdown hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 min-h-[calc(92vh-4.25rem)] flex flex-col">
+                <div className="flex justify-between items-center mb-6 gap-4 shrink-0">
                   <div>
                     <p className="text-xs font-bold tracking-widest text-purple-600">
                       SHOP BY ACTIVITY
                     </p>
-                    <h3 className="text-2xl font-black text-gray-900 dark:text-zinc-100">
+                    <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-zinc-100">
                       Choose your lifestyle
                     </h3>
                   </div>
@@ -174,7 +174,7 @@ export default function Navbar() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 flex-1 content-start auto-rows-auto">
                   {activitiess.map((item) => (
                     <button
                       key={item.name}
@@ -184,7 +184,7 @@ export default function Navbar() {
                           `/shop-by-activity?activity=${encodeURIComponent(item.name)}`
                         )
                       }
-                      className="relative h-28 rounded-2xl overflow-hidden group/activity shadow-md hover:shadow-xl transition duration-300 hover:-translate-y-1"
+                      className="relative w-full aspect-[16/10] sm:aspect-[5/3] lg:aspect-[3/2] rounded-2xl overflow-hidden group/activity shadow-md hover:shadow-xl transition duration-300 hover:-translate-y-1"
                     >
                       <img
                         src={item.image}
@@ -193,8 +193,8 @@ export default function Navbar() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute inset-0 opacity-0 group-hover/activity:opacity-100 bg-purple-600/20 transition" />
-                      <div className="absolute bottom-3 left-4 right-4 flex justify-between items-center">
-                        <span className="text-white font-bold text-sm truncate">{item.name}</span>
+                      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
+                        <span className="text-white font-bold text-sm md:text-base truncate">{item.name}</span>
                         <span className="opacity-0 group-hover/activity:opacity-100 translate-x-3 group-hover/activity:translate-x-0 transition text-white text-lg shrink-0">
                           →
                         </span>
