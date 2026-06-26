@@ -134,13 +134,13 @@ function RailProductCard({ product, index, glow, reduce }) {
         </div>
 
         {/* Footer — consistent height across cards */}
-        <div className="relative z-[2] flex flex-1 flex-col border-t border-white/40 dark:border-white/8 bg-white/55 dark:bg-zinc-900/55 px-4 py-4 sm:px-5 sm:py-4 backdrop-blur-lg">
-          <p className="text-sm font-black text-slate-900 dark:text-zinc-50 leading-snug line-clamp-2 min-h-[2.5rem]">
+        <div className="relative z-[2] flex flex-1 flex-col border-t border-white/40 dark:border-white/8 bg-white/55 dark:bg-zinc-900/55 px-4 py-4 sm:px-5 sm:py-4 backdrop-blur-lg home-activity-rail-card-copy">
+          <p className="home-activity-rail-product-name text-sm font-black text-slate-900 dark:text-zinc-50 leading-snug line-clamp-2 min-h-[2.5rem]">
             {product.name}
           </p>
           <Link
             to={`/product/${product.slug}`}
-            className="mt-auto pt-3 inline-flex items-center gap-1.5 text-xs font-black text-cyan-600 dark:text-cyan-400 transition-all ease-out hover:gap-2"
+            className="home-activity-rail-product-link mt-auto pt-3 inline-flex items-center gap-1.5 text-xs font-black text-cyan-600 dark:text-cyan-400 transition-all ease-out hover:gap-2"
             style={{ transitionDuration: `${HOVER_MS}ms` }}
           >
             View Product
@@ -166,7 +166,7 @@ export default function ActivityProductRail({ activity, products, anchorX }) {
           initial={reduce ? false : "hidden"}
           animate={reduce ? undefined : "visible"}
           exit={reduce ? undefined : "exit"}
-          className="relative"
+          className="relative home-activity-rail"
         >
           <ActivityConnector glow={glow} reduce={reduce} anchorX={anchorX} />
 
@@ -180,11 +180,11 @@ export default function ActivityProductRail({ activity, products, anchorX }) {
                 duration: TIMING.labelDuration,
                 ease: LUXURY_EASE,
               }}
-              className="mb-6 text-center text-sm sm:text-base font-black tracking-wide text-slate-500 dark:text-zinc-400"
+              className="home-activity-rail-label mb-6 text-center text-sm sm:text-base font-black tracking-wide text-slate-500 dark:text-zinc-400"
             >
               Featured Supports For{" "}
               <span
-                className="text-slate-900 dark:text-zinc-100"
+                className="home-activity-rail-label-activity text-slate-900 dark:text-zinc-100"
                 style={{ textShadow: `0 0 24px rgba(${glow.rgb}, 0.22)` }}
               >
                 {activity}
