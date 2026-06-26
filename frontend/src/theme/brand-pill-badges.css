@@ -1,0 +1,173 @@
+.brand-pill-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.brand-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0.1rem 0.55rem;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .brand-pill-badge {
+    gap: 0.25rem;
+    padding: 0.12rem 0.65rem;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}
+
+.brand-pill-badge--on-dark {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.brand-pill-badge__sep {
+  opacity: 0.32;
+  font-weight: 400;
+}
+
+.brand-pill-badge__item--braces {
+  color: #0891b2;
+}
+
+.brand-pill-badge__item--bandage {
+  color: #ef4444;
+}
+
+.brand-pill-badge__item--splints {
+  color: #1e293b;
+}
+
+.brand-pill-badge__item--comfort {
+  color: #0d9488;
+}
+
+.brand-pill-badge__item--care {
+  color: #7c3aed;
+}
+
+.brand-pill-badge__item--cure {
+  color: #dc2626;
+}
+
+.dark .brand-pill-badge {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(24, 24, 27, 0.72);
+}
+
+.dark .brand-pill-badge__item--splints {
+  color: #f4f4f5;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--braces {
+  color: #67e8f9;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--bandage {
+  color: #fca5a5;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--splints {
+  color: #f8fafc;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--comfort {
+  color: #5eead4;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--care {
+  color: #c4b5fd;
+}
+
+.brand-pill-badge--on-dark .brand-pill-badge__item--cure {
+  color: #fca5a5;
+}
+
+/* Blue theme */
+[data-theme="blue"] .brand-pill-badge {
+  border-color: rgba(0, 50, 98, 0.2) !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  box-shadow: 0 2px 10px rgba(0, 50, 98, 0.05);
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--braces {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--bandage {
+  color: #ef4444 !important;
+  -webkit-text-fill-color: #ef4444 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--splints {
+  color: #b8860b !important;
+  -webkit-text-fill-color: #b8860b !important;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--comfort {
+  color: #0f766e !important;
+  -webkit-text-fill-color: #0f766e !important;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--care {
+  color: #6d28d9 !important;
+  -webkit-text-fill-color: #6d28d9 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge__item--cure {
+  color: #dc2626 !important;
+  -webkit-text-fill-color: #dc2626 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--braces {
+  color: #7dd3fc !important;
+  -webkit-text-fill-color: #7dd3fc !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--bandage {
+  color: #fca5a5 !important;
+  -webkit-text-fill-color: #fca5a5 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--splints {
+  color: #ffd700 !important;
+  -webkit-text-fill-color: #ffd700 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--comfort {
+  color: #5eead4 !important;
+  -webkit-text-fill-color: #5eead4 !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--care {
+  color: #c4b5fd !important;
+  -webkit-text-fill-color: #c4b5fd !important;
+}
+
+[data-theme="blue"] .brand-pill-badge--on-dark .brand-pill-badge__item--cure {
+  color: #fca5a5 !important;
+  -webkit-text-fill-color: #fca5a5 !important;
+}

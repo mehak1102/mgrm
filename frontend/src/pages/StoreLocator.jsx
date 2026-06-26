@@ -24,6 +24,7 @@ import {
   PRODUCT_TYPES,
 } from "../data/supportData";
 import API from "../api";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import { useTheme } from "../context/ThemeContext";
 
 function MapIllustration() {
@@ -217,16 +218,17 @@ export default function StoreLocator() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeUpBlock>
-              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-4">
+              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
                 STORE LOCATOR
               </p>
+              <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
               text="Find MGRM Near You"
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
-              <p className="text-lg text-fg-muted mt-6 max-w-lg leading-relaxed">
+              <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
                 Locate trusted MGRM stores, clinics and distribution centers across India.
                 Contact your nearest office or email{" "}
                 <a href="mailto:contact@mgrmmedicare.com" className="text-brand font-bold hover:underline">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import { HeroHeading, SectionLabel, FadeUpText } from "../components/typography/TypographyMotion";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import {
   FeaturedBlogReveal,
   BlogCardEditorial,
@@ -68,9 +69,10 @@ export default function Blogs() {
             <SectionLabel className="text-purple-700 font-black tracking-[0.35em] text-sm">
               MGRM HEALTH JOURNAL
             </SectionLabel>
+            <BrandPillBadgeRow className="mt-2" />
             <HeroHeading
               text="Recovery Guides & Expert Insights"
-              className="text-5xl md:text-7xl font-black mt-4 leading-[1.02] text-slate-900 dark:text-zinc-100"
+              className="text-5xl md:text-7xl font-black mt-3 leading-[1.02] text-slate-900 dark:text-zinc-100"
             />
             <FadeUpText delay={0.35} className="text-gray-500 dark:text-zinc-400 mt-6 text-lg max-w-2xl leading-8">
               Editorial guides on orthopedic support, sizing, rehabilitation and daily recovery —

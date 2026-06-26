@@ -27,6 +27,7 @@ import {
   SectionHeading,
   FadeUpText,
 } from "../components/typography/TypographyMotion";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 const colors = ["Black", "White", "Grey", "Black & Green", "Black & Orange", "Beige", "Silver"];
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
@@ -278,6 +279,7 @@ export default function Shop() {
           <section className="min-w-0">
             <div className="flex flex-col md:flex-row justify-between gap-5 mb-7 min-w-0">
               <div className="min-w-0">
+                <BrandPillBadgeRow className="mb-1.5" />
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <SectionHeading
                     text="All Products"

@@ -19,6 +19,7 @@ import {
   HeroHeading,
   FadeUpText,
 } from "../components/typography/TypographyMotion";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 export default function ShopByBody() {
   const navigate = useNavigate();
@@ -57,9 +58,11 @@ export default function ShopByBody() {
               <Sparkles size={16} /> Find Support By Body Area
             </motion.div>
 
+            <BrandPillBadgeRow tone="on-dark" className="mt-2" />
+
             <HeroHeading
               text="Find the right support exactly where you need it."
-              className="text-5xl md:text-7xl font-black leading-[1.02] mt-6 text-white"
+              className="text-5xl md:text-7xl font-black leading-[1.02] mt-4 text-white"
             />
 
             <FadeUpText

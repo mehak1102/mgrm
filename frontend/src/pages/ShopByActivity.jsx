@@ -18,6 +18,7 @@ import {
   productPriceOriginalProps,
   productPriceSaleProps,
 } from "../utils/productPriceStyle";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 const colors = [
   "Black",
@@ -242,6 +243,7 @@ export default function ShopByActivity() {
           <section>
             <div className="flex flex-col md:flex-row justify-between gap-5 mb-7">
               <div>
+                <BrandPillBadgeRow className="mb-1.5" />
                 <h1 className="text-4xl font-black">
                   Shop By Activity{" "}
                   <span className="text-fg-muted/80 text-2xl">

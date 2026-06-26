@@ -29,6 +29,7 @@ import API from "../api";
 import "../theme/about-category-flip.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 import AboutIntroPopup from "../components/about/AboutIntroPopup";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import "../components/about/AboutIntroPopup.css";
 
 const CATEGORY_IMAGE_QUERIES = {
@@ -399,6 +400,7 @@ const AboutUs = () => {
           <div className="mx-auto max-w-7xl px-6">
             {/* <div className="max-w-4xl"> */}
             <div className="max-w-5xl mx-auto text-center">
+              <BrandPillBadgeRow tone="on-dark" className="mb-4 justify-center" />
               <div className="about-hero-company-badge mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
                 <Sparkles className="h-5 w-5 text-cyan-300" />
 

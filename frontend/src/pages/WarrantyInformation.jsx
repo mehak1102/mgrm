@@ -15,6 +15,7 @@ import FloatingLabelField from "../components/support/FloatingLabelField";
 import PolicyAccordion from "../components/support/PolicyAccordion";
 import WarrantyProductCarousel from "../components/support/WarrantyProductCarousel";
 import { HeroHeading, FadeUpBlock } from "../components/typography/TypographyMotion";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import { PremiumReveal, PremiumStagger, PremiumStaggerItem } from "../components/motion/PremiumMotion";
 import { WARRANTY_POLICY_SECTIONS, WARRANTY_COVERAGE_CARDS } from "../data/supportData";
 import API from "../api";
@@ -84,16 +85,17 @@ export default function WarrantyInformation() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeUpBlock>
-              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-4">
+              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
                 WARRANTY & PROTECTION
               </p>
+              <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
               text="Warranty & Product Protection"
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
-              <p className="text-lg text-fg-muted mt-6 max-w-lg leading-relaxed">
+              <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
                 Designed to support your recovery with confidence. Our warranty covers
                 manufacturing defects and ensures you receive the quality care MGRM is known for.
               </p>

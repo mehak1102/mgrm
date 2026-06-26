@@ -27,6 +27,7 @@ import {
 } from "../components/typography/TypographyMotion";
 import { useTheme } from "../context/ThemeContext";
 import "./Careers.css";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 const IMAGE_STRIP = [
   {
@@ -255,10 +256,11 @@ export default function Careers() {
               CAREERS
             </SectionLabel>
           </FadeUpBlock>
+          <BrandPillBadgeRow tone="on-dark" className="mt-2" />
           <HeroHeading
             text="Build Recovery With Us"
             as="h1"
-            className="mt-4 text-white max-w-4xl"
+            className="mt-3 text-white max-w-4xl"
             animateOnMount
           />
           <FadeUpText className="mt-5 text-white/85 max-w-2xl text-base md:text-lg" delay={0.15} animateOnMount>

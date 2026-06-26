@@ -12,6 +12,7 @@ import API from "../api";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import MGRMBrandRing from "../components/brand/MGRMBrandRing";
 import SupportCallPopup from "../components/support/SupportCallPopup";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import {
   SectionLabel,
   HeroHeading,
@@ -141,9 +142,11 @@ export default function Support() {
           CUSTOMER SUPPORT
         </div>
 
+        <BrandPillBadgeRow tone="on-dark" className="mt-2" />
+
         <h1
           className="
-            mt-6
+            mt-4
             text-white
             text-5xl
             md:text-7xl

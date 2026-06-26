@@ -4,6 +4,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { therapySections } from "../data/therapyRecommendationsData";
 import TherapyAnatomyVisual from "../components/recommendation/TherapyAnatomyVisual";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import "./RecommendedByPhysiotherapist.css";
 
 const TherapyChapter = lazy(() => import("../components/recommendation/TherapySection"));
@@ -77,6 +78,8 @@ function TherapyHero({ reduce, onBegin }) {
                   MGRM Clinical Atelier
                 </span>
               </motion.div>
+
+              <BrandPillBadgeRow className="mt-2" />
 
               <motion.h1
                 variants={reduce ? undefined : headlineStagger}

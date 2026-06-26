@@ -23,9 +23,9 @@ import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
 import ViewportVideo from "../components/media/ViewportVideo";
 import "../theme/home-trust-features.css";
 import DeferredSection from "../components/performance/DeferredSection";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import HomeAboutPreview from "../components/home/HomeAboutPreview";
 import {
-  HeroHeading,
   SectionHeading,
   SectionLabel,
   FadeUpText,
@@ -268,19 +268,8 @@ const BANDAGE_STAT_PASTELS = [
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              className="home-hero-product-badge inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-cyan-500/20 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm px-2.5 sm:px-3 py-0.5 text-[10px] sm:text-[11px] font-bold tracking-[0.14em] uppercase mb-2 sm:mb-2.5"
             >
-              <span className="home-hero-badge-item home-hero-badge-item--braces text-cyan-600 dark:text-cyan-400">
-                Braces
-              </span>
-              <span className="opacity-30 font-normal">|</span>
-              <span className="home-hero-badge-item home-hero-badge-item--bandage text-red-500">
-                Bandage
-              </span>
-              <span className="opacity-30 font-normal">|</span>
-              <span className="home-hero-badge-item home-hero-badge-item--splints text-slate-800 dark:text-zinc-100">
-                Splints
-              </span>
+              <BrandPillBadgeRow className="mb-2 sm:mb-2.5" />
             </motion.div>
 
             <motion.h1

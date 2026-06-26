@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTheme } from "../context/ThemeContext";
+import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 const PAYMENT_LOGOS = [
   { name: "UPI", src: "/products/upi.png" },
@@ -199,9 +200,8 @@ export default function Footer() {
                 </span>
               </div>
             </Link>
-            <p className="mt-5 text-sm leading-7 text-fg-muted max-w-sm">
-              <span className="font-semibold text-fg">Comfort. Care. Cure.</span>
-              <br />
+            <BrandPillBadgeRow className="mt-4" />
+            <p className="mt-3 text-sm leading-7 text-fg-muted max-w-sm">
               Advanced orthopedic and rehabilitation solutions trusted across India.
             </p>
             <div className="mt-6 flex gap-3">
