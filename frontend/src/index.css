@@ -616,9 +616,9 @@ body {
 }
 
 .home-bandage-section .home-bandage-cert-icon {
-  background: linear-gradient(145deg, #0ea5e9 0%, #22d3ee 42%, #84cc16 100%);
-  color: #ffffff;
-  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.28);
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .home-bandage-section .home-bandage-stat-num--highlight {

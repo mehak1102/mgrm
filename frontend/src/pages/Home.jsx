@@ -1276,8 +1276,13 @@ const BANDAGE_STAT_PASTELS = [
 
         <div className="flex items-center gap-3.5 lg:gap-4">
 
-          <div className="home-bandage-cert-icon w-14 h-14 lg:w-[3.75rem] lg:h-[3.75rem] rounded-2xl flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-7 h-7 lg:w-8 lg:h-8 text-white" strokeWidth={2.5} />
+          <div className="home-bandage-cert-icon w-14 h-14 lg:w-[3.75rem] lg:h-[3.75rem] rounded-2xl flex items-center justify-center shrink-0 overflow-hidden">
+            <img
+              src="/certifications/who-gmp.png"
+              alt="WHO-GMP certified"
+              className="w-full h-full object-contain p-1"
+              loading="lazy"
+            />
           </div>
 
           <div className="min-w-0">

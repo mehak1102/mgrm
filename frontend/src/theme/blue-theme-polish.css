@@ -438,10 +438,9 @@
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-cert-icon {
-  background: linear-gradient(145deg, #0ea5e9 0%, #22d3ee 42%, #84cc16 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
-  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.32) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 50, 98, 0.1) !important;
+  box-shadow: 0 8px 20px rgba(0, 50, 98, 0.08) !important;
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-cert-track {
