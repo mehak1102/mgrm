@@ -14,12 +14,12 @@
 }
 
 /* ---- About Us sidebar ---- */
-.dark aside a.group[href^="#section"]:not(.about-sidebar-nav-link) {
+.dark aside a.group[href^="#section"] {
   background-color: #27272a !important;
   color: #e4e4e7 !important;
 }
 
-.dark aside a.group[href^="#section"]:not(.about-sidebar-nav-link):hover {
+.dark aside a.group[href^="#section"]:hover {
   background-color: #0f172a !important;
   color: #ffffff !important;
 }

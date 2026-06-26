@@ -8,6 +8,7 @@ import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { DashboardProvider } from "./context/DashboardContext";
+import { ProductStatsProvider } from "./context/ProductStatsContext";
 import { getStoredTheme } from "./theme/tokens";
 import { loadThemeStyles } from "./theme/loadThemeStyles";
 
@@ -21,7 +22,9 @@ async function bootstrap() {
           <DashboardProvider>
             <CartProvider>
               <WishlistProvider>
-                <App />
+                <ProductStatsProvider>
+                  <App />
+                </ProductStatsProvider>
               </WishlistProvider>
             </CartProvider>
           </DashboardProvider>

@@ -13,6 +13,7 @@ import {
 import ProductCard from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
 import { useHomeRecommendations } from "../hooks/useRecommendations";
+import { useProductStats } from "../context/ProductStatsContext";
 import { trackCategoryClick } from "../utils/recommendationBehavior";
 
 import { bodyCategories } from "../data/siteData";
@@ -20,6 +21,7 @@ import { blogPosts } from "../data/blogData";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
 import ViewportVideo from "../components/media/ViewportVideo";
+import "../theme/home-trust-features.css";
 import DeferredSection from "../components/performance/DeferredSection";
 import HomeAboutPreview from "../components/home/HomeAboutPreview";
 import {
@@ -46,8 +48,6 @@ const loadShopByActivity = () => import("../components/home/HomeShopByActivitySe
 const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
-
-const text = "248 top certified products - to cure your body";
 
 function hexToRgbTuple(hex) {
   const n = hex.replace("#", "");
@@ -142,6 +142,16 @@ export default function Home() {
   const { cart } = useCart();
   const { products, loading: recommendationsLoading, strategy } =
     useHomeRecommendations({ cart, limit: 12 });
+  const {
+    categoriesWithCounts,
+    bodyTotal,
+    loading: statsLoading,
+    formatProductCount,
+  } = useProductStats();
+
+  const heroCountLabel = statsLoading ? "—" : String(bodyTotal);
+  const heroText = `${heroCountLabel} MGRM products - to cure your body`;
+  const heroNumLen = heroCountLabel.length;
 
   const certifications = [
   {
@@ -254,13 +264,32 @@ const BANDAGE_STAT_PASTELS = [
 
           <div className="relative max-w-[1500px] mx-auto px-6">
 
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="home-hero-product-badge inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-cyan-500/20 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-sm px-2.5 sm:px-3 py-0.5 text-[10px] sm:text-[11px] font-bold tracking-[0.14em] uppercase mb-2 sm:mb-2.5"
+            >
+              <span className="home-hero-badge-item home-hero-badge-item--braces text-cyan-600 dark:text-cyan-400">
+                Braces
+              </span>
+              <span className="opacity-30 font-normal">|</span>
+              <span className="home-hero-badge-item home-hero-badge-item--bandage text-red-500">
+                Bandage
+              </span>
+              <span className="opacity-30 font-normal">|</span>
+              <span className="home-hero-badge-item home-hero-badge-item--splints text-slate-800 dark:text-zinc-100">
+                Splints
+              </span>
+            </motion.div>
+
             <motion.h1
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="home-hero-title text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 max-w-6xl pt-4 transition-colors duration-300 flex flex-wrap"
+      className="home-hero-title text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 max-w-6xl pt-1 transition-colors duration-300 flex flex-wrap"
     >
-      {text.split("").map((char, index) => (
+      {heroText.split("").map((char, index) => (
         <motion.span
           key={index}
           initial={{
@@ -279,7 +308,7 @@ const BANDAGE_STAT_PASTELS = [
             ease: [0.19, 1, 0.22, 1],
           }}
           className={`inline-block will-change-transform ${
-            index < 3 ? "text-red-500 home-hero-num" : "home-hero-tail"
+            index < heroNumLen ? "text-red-500 home-hero-num" : "home-hero-tail text-slate-700 dark:text-inherit"
           }`}
         >
           {char === " " ? "\u00A0" : char}
@@ -287,7 +316,7 @@ const BANDAGE_STAT_PASTELS = [
       ))}
     </motion.h1>
 
-            <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-14 mb-2">
+            <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-8 mb-2">
               <SectionLabel className="blue-theme-section-label text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
                 TOP CATEGORIES
               </SectionLabel>
@@ -295,7 +324,7 @@ const BANDAGE_STAT_PASTELS = [
 
             <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-6">
               <PremiumStagger className="space-y-4" stagger={0.14} delay={0.2}>
-                {bodyCategories.slice(0, 5).map((cat, index) => (
+                {categoriesWithCounts.slice(0, 5).map((cat, index) => (
                   <PremiumStaggerItem key={cat.name}>
                     <button
                       type="button"
@@ -386,7 +415,7 @@ const BANDAGE_STAT_PASTELS = [
 </div> */}
                 {bodyCategories.slice(0, 15).map((cat, index) => {
                   const positions = [
-                    ["42%", "15%"],
+                    ["58%", "7%"],
                     ["45%", "24%"],
                     ["58%", "28%"],
                     ["55%", "36%"],
@@ -436,7 +465,7 @@ const BANDAGE_STAT_PASTELS = [
               </div>
 
               <PremiumStagger className="space-y-4" stagger={0.14} delay={0.35}>
-                {bodyCategories.slice(5, 10).map((cat, i) => {
+                {categoriesWithCounts.slice(5, 10).map((cat, i) => {
                   const index = i + 5;
 
                   return (
@@ -592,28 +621,28 @@ const BANDAGE_STAT_PASTELS = [
           {[
             {
               text: "Medical Grade Quality",
-              card: "bg-emerald-50 dark:bg-emerald-950/35 border-2 border-emerald-700/35 dark:border-emerald-400/45",
+              tone: "emerald",
               icon: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400",
             },
             {
               text: "International Standards",
-              card: "bg-sky-50 dark:bg-sky-950/35 border-2 border-sky-700/35 dark:border-sky-400/45",
+              tone: "sky",
               icon: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400",
             },
             {
               text: "Premium Materials",
-              card: "bg-violet-50 dark:bg-violet-950/35 border-2 border-violet-700/35 dark:border-violet-400/45",
+              tone: "violet",
               icon: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400",
             },
             {
               text: "Trusted Recovery",
-              card: "bg-amber-50 dark:bg-amber-950/35 border-2 border-amber-700/40 dark:border-amber-400/45",
+              tone: "amber",
               icon: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400",
             },
           ].map((item) => (
             <div
               key={item.text}
-              className={`home-trust-feature flex items-center gap-3 rounded-2xl px-4 py-4 ${item.card}`}
+              className={`home-trust-feature home-trust-feature--${item.tone} flex items-center gap-3 rounded-2xl border-2 px-4 py-4`}
             >
               <div
                 className={`home-trust-feature-icon flex h-10 w-10 items-center justify-center rounded-xl ${item.icon}`}
@@ -690,7 +719,7 @@ const BANDAGE_STAT_PASTELS = [
             delay={0.25}
             className="mt-8 max-w-xl text-base leading-8 text-slate-600 dark:text-zinc-400 md:text-lg"
           >
-            248 world-class certified products designed for
+            {statsLoading ? "—" : bodyTotal} world-class certified products designed for
             relief, recovery and rehabilitation with trusted
             orthopedic and post-surgical support solutions.
           </FadeUpText>
@@ -986,6 +1015,7 @@ const BANDAGE_STAT_PASTELS = [
       {/* BOTTOM */}
       <div
         className="
+          home-cardiology-brand-footer
           mt-20
           flex
           flex-col
@@ -1154,7 +1184,7 @@ const BANDAGE_STAT_PASTELS = [
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
 
         {[
-          ["248+", "Products"],
+          [formatProductCount(bodyTotal), "Products"],
           ["40+", "Countries"],
           ["25+", "Years"],
         ].map(([num, text], i) => {
@@ -1168,7 +1198,6 @@ const BANDAGE_STAT_PASTELS = [
             transition={{ delay: i * 0.08 }}
             className="home-bandage-stat-card home-bandage-stat-pastel rounded-[30px] border-2 p-5 sm:p-7 hover:-translate-y-2 transition-all duration-500 min-w-0"
             style={{
-              "--bandage-stat-bg": pastel.bg,
               "--bandage-stat-border": pastel.border,
               "--bandage-stat-num": pastel.num,
               "--bandage-stat-label": pastel.label,
@@ -1336,7 +1365,7 @@ const BANDAGE_STAT_PASTELS = [
 
           <PremiumReveal variant={ScaleReveal} className="relative overflow-hidden">
             <div className="flex gap-10 w-max marquee py-4">
-              {[...bodyCategories, ...bodyCategories].map((cat, i) => (
+              {[...categoriesWithCounts, ...categoriesWithCounts].map((cat, i) => (
                 <button
                   key={`${cat.name}-${i}`}
                   onClick={() => goCategory(cat.query || cat.category || cat.name)}
@@ -1574,7 +1603,7 @@ const BANDAGE_STAT_PASTELS = [
           </div>
 
           <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
-            <div className="text-3xl font-bold text-cyan-500">248+</div>
+            <div className="text-3xl font-bold text-cyan-500">{formatProductCount(bodyTotal)}</div>
             <div className="text-sm text-slate-500 dark:text-slate-400">
               Certified Products
             </div>

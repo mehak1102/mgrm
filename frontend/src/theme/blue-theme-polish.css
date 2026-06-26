@@ -15,6 +15,25 @@
   opacity: 1 !important;
 }
 
+/* Hero product-type pill — Braces | Bandage | Splints */
+[data-theme="blue"] .home-hero-product-badge {
+  border-color: rgba(0, 50, 98, 0.2) !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  box-shadow: 0 4px 14px rgba(0, 50, 98, 0.06);
+}
+
+[data-theme="blue"] .home-hero-badge-item--braces {
+  color: #003262 !important;
+}
+
+[data-theme="blue"] .home-hero-badge-item--bandage {
+  color: #ef4444 !important;
+}
+
+[data-theme="blue"] .home-hero-badge-item--splints {
+  color: #b8860b !important;
+}
+
 [data-theme="blue"] .blue-theme-gold-accent,
 [data-theme="blue"] .blue-theme-section-label {
   color: #ffd700 !important;
@@ -208,28 +227,7 @@
 }
 
 [data-theme="blue"] .home-trust-cert-section .home-trust-feature {
-  background: rgba(255, 255, 255, 0.72) !important;
-  border-color: rgba(0, 50, 98, 0.12) !important;
-}
-
-[data-theme="blue"] .home-trust-cert-section .home-trust-feature:nth-child(1) {
-  background: rgba(255, 215, 0, 0.14) !important;
-  border-color: rgba(255, 215, 0, 0.32) !important;
-}
-
-[data-theme="blue"] .home-trust-cert-section .home-trust-feature:nth-child(2) {
-  background: rgba(56, 189, 248, 0.14) !important;
-  border-color: rgba(56, 189, 248, 0.28) !important;
-}
-
-[data-theme="blue"] .home-trust-cert-section .home-trust-feature:nth-child(3) {
-  background: rgba(139, 92, 246, 0.12) !important;
-  border-color: rgba(139, 92, 246, 0.26) !important;
-}
-
-[data-theme="blue"] .home-trust-cert-section .home-trust-feature:nth-child(4) {
-  background: rgba(251, 191, 36, 0.14) !important;
-  border-color: rgba(251, 191, 36, 0.3) !important;
+  background: transparent !important;
 }
 
 [data-theme="blue"] .home-trust-cert-section .home-trust-feature-icon {
@@ -331,20 +329,25 @@
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel {
-  background: var(--bandage-stat-bg) !important;
+  background: transparent !important;
   border: 2px solid var(--bandage-stat-border) !important;
-  box-shadow: 0 16px 40px var(--bandage-stat-glow) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel:hover {
+  background: transparent !important;
+  box-shadow: 0 12px 28px var(--bandage-stat-glow) !important;
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num {
-  color: var(--bandage-stat-num) !important;
-  -webkit-text-fill-color: var(--bandage-stat-num) !important;
+  color: var(--bandage-stat-border) !important;
+  -webkit-text-fill-color: var(--bandage-stat-border) !important;
   text-shadow: none !important;
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-label {
-  color: var(--bandage-stat-label) !important;
-  -webkit-text-fill-color: var(--bandage-stat-label) !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.82) !important;
 }
 
 [data-theme="blue"] .home-bandage-section .home-bandage-float-card {

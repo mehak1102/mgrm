@@ -7,6 +7,7 @@ import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
 import { useDashboard } from "../context/DashboardContext";
 import { bodyCategories, activitiess } from "../data/siteData";
+import { useProductStats } from "../context/ProductStatsContext";
 import { trackSearch } from "../utils/recommendationBehavior";
 import Logo3D from "./Logo3D";
 import ThemeSelector from "./ThemeSelector";
@@ -28,6 +29,7 @@ const supportLinks = [
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const { categoriesWithCounts } = useProductStats();
   const location = useLocation();
   const { cartCount, setCartOpen } = useCart();
   const { wishlist } = useWishlist();
@@ -114,7 +116,7 @@ export default function Navbar() {
             </button>
             <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10">
               <div className="max-w-7xl mx-auto grid grid-cols-5 gap-5 p-6">
-                {bodyCategories.map((cat) => (
+                {categoriesWithCounts.map((cat) => (
                   <button
                     key={cat.name}
                     type="button"

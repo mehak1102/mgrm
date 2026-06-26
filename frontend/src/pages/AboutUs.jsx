@@ -27,7 +27,6 @@ import { ABOUT_CATEGORY_PASTELS } from "../data/aboutCategoryPastels";
 import { bodyCategories } from "../data/siteData";
 import API from "../api";
 import "../theme/about-category-flip.css";
-import "../theme/about-sidebar-nav.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import "../components/about/AboutIntroPopup.css";
@@ -220,17 +219,6 @@ const sidebarLinks = [
   'Accessories',
 ];
 
-function sidebarNavPastelStyle(index, theme) {
-  const paletteKey = theme === "dark" ? "dark" : theme === "blue" ? "blue" : "light";
-  const pastel = ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length][paletteKey];
-  return {
-    "--sidebar-nav-bg": pastel.bg,
-    "--sidebar-nav-border": pastel.to,
-    "--sidebar-nav-title": pastel.title,
-    "--sidebar-nav-text": pastel.text,
-  };
-}
-
 const achievements = [
   {
     title: 'Indian Armed Forces',
@@ -338,7 +326,6 @@ const famousPeople = [
 
 const AboutUs = () => {
   const location = useLocation();
-  const { theme } = useTheme();
   const [categoryProducts, setCategoryProducts] = useState({});
 
   useEffect(() => {
@@ -469,17 +456,16 @@ const AboutUs = () => {
               className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
             />
 
-            <div className="about-sidebar-nav-list space-y-4">
+            <div className="space-y-4">
               {sidebarLinks.map((item, index) => (
                 <a
                   key={index}
                   href={`#section-${index}`}
-                  style={sidebarNavPastelStyle(index, theme)}
-                  className="about-sidebar-nav-link group flex items-center justify-between gap-3 rounded-2xl px-4 sm:px-5 py-4 font-medium transition-all duration-300 min-w-0"
+                  className="group flex items-center justify-between gap-3 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
                 >
                   <span className="flex min-w-0 items-center gap-3">
                     <span
-                      className="about-sidebar-nav-num flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-[11px] font-bold tabular-nums transition-colors duration-300"
+                      className="about-sidebar-nav-num flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#002B5B]/10 text-[11px] font-bold tabular-nums text-[#002B5B] transition-colors duration-300 group-hover:bg-white/15 group-hover:text-white dark:bg-cyan-400/10 dark:text-cyan-300 dark:group-hover:bg-white/15 dark:group-hover:text-white"
                       aria-hidden
                     >
                       {String(index + 1).padStart(2, "0")}

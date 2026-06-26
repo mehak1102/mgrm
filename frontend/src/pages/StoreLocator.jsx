@@ -24,8 +24,10 @@ import {
   PRODUCT_TYPES,
 } from "../data/supportData";
 import API from "../api";
+import { useTheme } from "../context/ThemeContext";
 
 function MapIllustration() {
+  const { isBlue } = useTheme();
   const reduced = useReducedMotion();
   const pins = [
     { top: "18%", left: "42%", delay: 0 },
@@ -36,34 +38,46 @@ function MapIllustration() {
   ];
 
   return (
-    <div className="relative w-full aspect-square max-w-md mx-auto">
-      <div className="absolute inset-0 rounded-[36px] overflow-hidden border border-white/60 dark:border-white/10 shadow-[0_30px_80px_rgba(6,182,212,0.15)]">
-        {/* Background image from /products */}
+    <div className="relative w-full aspect-square max-w-md mx-auto support-map-illustration">
+      <div
+        className={`support-map-illustration__frame absolute inset-0 rounded-[36px] overflow-hidden border border-white/60 dark:border-white/10 shadow-[0_30px_80px_rgba(6,182,212,0.15)]${
+          isBlue ? " support-map-illustration__frame--blue" : ""
+        }`}
+      >
         <img
           src={STORE_MAP_BG}
           alt="MGRM India network map"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="support-map-illustration__image absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
             e.currentTarget.src = "/products/pain-area.png";
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/25 via-white/20 to-purple-500/20 dark:from-cyan-950/50 dark:via-slate-900/40 dark:to-purple-950/40" />
-        <div className="absolute inset-0 backdrop-blur-[2px]" />
-
-        <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full opacity-20 dark:opacity-15 pointer-events-none">
-          <path
-            d="M50 200 Q120 80 200 120 T350 180 T280 320 T120 300 Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            className="text-cyan-500/50"
+        {isBlue ? (
+          <div
+            className="support-map-illustration__overlay-blue absolute inset-0 pointer-events-none"
+            aria-hidden
           />
-        </svg>
+        ) : (
+          <>
+            <div className="support-map-illustration__overlay absolute inset-0 bg-gradient-to-br from-cyan-500/25 via-white/20 to-purple-500/20 dark:from-cyan-950/50 dark:via-slate-900/40 dark:to-purple-950/40" />
+            <div className="support-map-illustration__blur absolute inset-0 backdrop-blur-[2px]" />
+
+            <svg viewBox="0 0 400 400" className="support-map-illustration__svg absolute inset-0 w-full h-full opacity-20 dark:opacity-15 pointer-events-none">
+              <path
+                d="M50 200 Q120 80 200 120 T350 180 T280 320 T120 300 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="text-cyan-500/50"
+              />
+            </svg>
+          </>
+        )}
 
         {pins.map((pin, i) => (
           <motion.div
             key={i}
-            className="absolute"
+            className={`absolute ${isBlue ? "z-20" : ""}`}
             style={{ top: pin.top, left: pin.left }}
             animate={reduced ? undefined : { y: [0, -8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, delay: pin.delay, ease: "easeInOut" }}
@@ -75,7 +89,7 @@ function MapIllustration() {
           </motion.div>
         ))}
 
-        <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur-md px-4 py-3 border border-white/50 dark:border-white/10 support-map-badge">
+        <div className={`absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur-md px-4 py-3 border border-white/50 dark:border-white/10 support-map-badge${isBlue ? " z-20" : ""}`}>
           <p className="text-xs font-bold text-brand tracking-widest support-map-badge-label">INDIA NETWORK</p>
           <p className="text-sm font-black text-fg support-map-badge-title">{STORE_LOCATIONS.length} Locations</p>
         </div>

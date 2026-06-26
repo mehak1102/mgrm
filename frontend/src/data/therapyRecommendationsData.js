@@ -7,7 +7,6 @@ function meta(query) {
     label: cat?.name || query,
     color: cat?.color || "#0ea5e9",
     image: cat?.image || "/products/knee2.png",
-    count: cat?.count ?? 0,
   };
 }
 

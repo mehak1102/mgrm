@@ -57,6 +57,35 @@
   box-shadow: 0 8px 24px rgba(18, 50, 74, 0.06) !important;
 }
 
+/* Bottom brand strip — MGRM / MEDICARE on glass card */
+[data-theme="blue"] .home-cardiology-section h3.home-cardiology-brand-name,
+[data-theme="blue"] main.bg-app .home-cardiology-section h3.home-cardiology-brand-name {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-cardiology-section p.home-cardiology-brand-tagline,
+[data-theme="blue"] main.bg-app .home-cardiology-section p.home-cardiology-brand-tagline {
+  color: #dc2626 !important;
+  -webkit-text-fill-color: #dc2626 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-cardiology-section .home-cardiology-brand-footer {
+  border-top-color: rgba(0, 50, 98, 0.16) !important;
+}
+
+[data-theme="blue"] .home-cardiology-section .home-cardiology-brand-footer p.text-slate-600,
+[data-theme="blue"] main.bg-app .home-cardiology-section .home-cardiology-brand-footer p.text-slate-600 {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
 /* ── HOME: Featured Collections glass panels ── */
 [data-theme="blue"] section.max-w-\[1500px\] .rounded-\[48px\] {
   background: rgba(255, 255, 255, 0.72) !important;
@@ -137,19 +166,19 @@
   opacity: 1 !important;
 }
 
-[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link) {
+[data-theme="blue"] .about-us-page aside a {
   background: rgba(255, 255, 255, 0.08) !important;
   color: rgba(255, 255, 255, 0.88) !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link):hover {
+[data-theme="blue"] .about-us-page aside a:hover {
   background: rgba(255, 215, 0, 0.14) !important;
   color: #ffd700 !important;
   border: 1px solid rgba(255, 215, 0, 0.35);
 }
 
-[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link):hover svg {
+[data-theme="blue"] .about-us-page aside a:hover svg {
   color: #ffd700 !important;
 }
 

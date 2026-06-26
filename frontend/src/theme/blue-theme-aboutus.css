@@ -59,6 +59,33 @@
   color: #ffffff !important;
 }
 
+[data-theme="blue"] .about-us-page aside a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="blue"] .about-us-page aside a:hover,
+[data-theme="blue"] .about-us-page aside a:focus-visible {
+  background: rgba(255, 215, 0, 0.14) !important;
+  color: #ffd700 !important;
+  border-color: rgba(255, 215, 0, 0.35) !important;
+}
+
+[data-theme="blue"] .about-us-page aside a .about-sidebar-nav-num {
+  background: #ffffff !important;
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .about-us-page aside a:hover .about-sidebar-nav-num,
+[data-theme="blue"] .about-us-page aside a:focus-visible .about-sidebar-nav-num {
+  background: #ffffff !important;
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
 /* Main content cards */
 [data-theme="blue"] .about-us-page [id^="section-"]:not(#section-1):not(#section-4):not(#section-7) {
   background: rgba(255, 255, 255, 0.12) !important;

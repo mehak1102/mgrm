@@ -96,7 +96,7 @@ export default function SupportCallPopup() {
 
             <p className="support-call-widget__label">Need quick help?</p>
             <h2 id="support-call-title" className="support-call-widget__title">
-              Talk To Our Support Team
+              Your MGRM Assistance Team
             </h2>
             <p id="support-call-desc" className="support-call-widget__text">
               Get guidance for products, orders, recovery support, and assistance.

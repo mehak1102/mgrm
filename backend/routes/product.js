@@ -86,6 +86,23 @@ if (bodyOnly === "true") {
   }
 });
 
+// GET product counts for UI (must be before /:slug)
+router.get("/stats", async (req, res) => {
+  try {
+    const [total, bodyTotal, activityTotal, products] = await Promise.all([
+      Product.countDocuments(),
+      Product.countDocuments({ category: { $exists: true, $ne: "" } }),
+      Product.countDocuments({ activity: { $exists: true, $ne: "" } }),
+      Product.find({}).select("category name activity").lean(),
+    ]);
+
+    res.json({ total, bodyTotal, activityTotal, products });
+  } catch (err) {
+    console.error("Product stats error:", err);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
 // GET categories
 router.get("/categories", async (req, res) => {
   try {

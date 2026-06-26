@@ -14,6 +14,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { bodyCategories } from "../data/siteData";
+import { useProductStats } from "../context/ProductStatsContext";
 import {
   HeroHeading,
   FadeUpText,
@@ -23,12 +24,13 @@ export default function ShopByBody() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [activeCat, setActiveCat] = useState(null);
+  const { categoriesWithCounts, bodyTotal, formatProductCount } = useProductStats();
 
   const filtered = useMemo(() => {
-    return bodyCategories.filter((cat) =>
+    return categoriesWithCounts.filter((cat) =>
       cat.name.toLowerCase().includes(search.toLowerCase())
     );
-  }, [search]);
+  }, [search, categoriesWithCounts]);
 
   const goCategory = (cat) => {
     navigate(`/shop?category=${encodeURIComponent(cat.query || cat.name)}`);
@@ -81,8 +83,8 @@ export default function ShopByBody() {
 
             <div className="grid grid-cols-3 gap-4 mt-8 max-w-2xl">
               {[
-                ["248+", "Certified Products"],
-                ["15", "Body Categories"],
+                [formatProductCount(bodyTotal), "Certified Products"],
+                [String(bodyCategories.length), "Body Categories"],
                 ["24/7", "Support Help"],
               ].map(([num, label]) => (
                 <div key={label} className="bg-white/10 border border-white/15 rounded-3xl p-5 backdrop-blur">

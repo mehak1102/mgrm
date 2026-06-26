@@ -554,18 +554,17 @@ body {
     0 0 0 1px var(--store-border-hover, rgba(6, 182, 212, 0.4));
 }
 
-/* Bandage section — solid pastel stat cards + float placement (section only) */
+/* Bandage section — stat cards: colorful borders only (no fill) */
 .home-bandage-section .home-bandage-stat-pastel {
-  background: var(--bandage-stat-bg) !important;
+  background: transparent !important;
   border: 2px solid var(--bandage-stat-border) !important;
-  box-shadow: 0 16px 40px var(--bandage-stat-glow);
+  box-shadow: none;
 }
 
 .home-bandage-section .home-bandage-stat-pastel:hover {
+  background: transparent !important;
   border-color: var(--bandage-stat-border) !important;
-  box-shadow:
-    0 22px 48px var(--bandage-stat-glow),
-    0 0 0 1px var(--bandage-stat-border);
+  box-shadow: 0 12px 28px var(--bandage-stat-glow);
 }
 
 .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num {
@@ -618,8 +617,22 @@ body {
 
 .dark .home-bandage-section .home-bandage-stat-pastel,
 [data-theme="dark"] .home-bandage-section .home-bandage-stat-pastel {
-  background: var(--bandage-stat-bg) !important;
+  background: transparent !important;
   border: 2px solid var(--bandage-stat-border) !important;
+}
+
+.dark .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num,
+[data-theme="dark"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num,
+[data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-num {
+  color: var(--bandage-stat-border) !important;
+  -webkit-text-fill-color: var(--bandage-stat-border) !important;
+}
+
+.dark .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-label,
+[data-theme="dark"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-label,
+[data-theme="blue"] .home-bandage-section .home-bandage-stat-pastel .home-bandage-stat-label {
+  color: rgba(255, 255, 255, 0.82) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.82) !important;
 }
 
 .dark .home-bandage-section .home-bandage-stat-num--highlight,

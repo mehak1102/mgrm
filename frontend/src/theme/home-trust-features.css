@@ -1,0 +1,82 @@
+/* Trust & Safety — Expect The Best feature cards: colorful borders only */
+
+.home-trust-cert-section .home-trust-feature {
+  background: transparent !important;
+  border-style: solid;
+  border-width: 2px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.home-trust-cert-section .home-trust-feature--emerald {
+  border-color: #10b981;
+}
+
+.home-trust-cert-section .home-trust-feature--sky {
+  border-color: #0ea5e9;
+}
+
+.home-trust-cert-section .home-trust-feature--violet {
+  border-color: #8b5cf6;
+}
+
+.home-trust-cert-section .home-trust-feature--amber {
+  border-color: #f59e0b;
+}
+
+.home-trust-cert-section .home-trust-feature:hover,
+.home-trust-cert-section .home-trust-feature:focus-within {
+  background: transparent !important;
+  transform: translateY(-1px);
+}
+
+.home-trust-cert-section .home-trust-feature--emerald:hover,
+.home-trust-cert-section .home-trust-feature--emerald:focus-within {
+  border-color: #059669;
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.18);
+}
+
+.home-trust-cert-section .home-trust-feature--sky:hover,
+.home-trust-cert-section .home-trust-feature--sky:focus-within {
+  border-color: #0284c7;
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.18);
+}
+
+.home-trust-cert-section .home-trust-feature--violet:hover,
+.home-trust-cert-section .home-trust-feature--violet:focus-within {
+  border-color: #7c3aed;
+  box-shadow: 0 8px 22px rgba(139, 92, 246, 0.18);
+}
+
+.home-trust-cert-section .home-trust-feature--amber:hover,
+.home-trust-cert-section .home-trust-feature--amber:focus-within {
+  border-color: #d97706;
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.18);
+}
+
+.dark .home-trust-cert-section .home-trust-feature,
+[data-theme="dark"] .home-trust-cert-section .home-trust-feature {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .home-trust-cert-section .home-trust-feature {
+  background: transparent !important;
+}
+
+[data-theme="blue"] .home-trust-cert-section .home-trust-feature--emerald {
+  border-color: #10b981 !important;
+}
+
+[data-theme="blue"] .home-trust-cert-section .home-trust-feature--sky {
+  border-color: #0ea5e9 !important;
+}
+
+[data-theme="blue"] .home-trust-cert-section .home-trust-feature--violet {
+  border-color: #8b5cf6 !important;
+}
+
+[data-theme="blue"] .home-trust-cert-section .home-trust-feature--amber {
+  border-color: #f59e0b !important;
+}
