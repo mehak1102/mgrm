@@ -245,22 +245,22 @@ const BANDAGE_STAT_PASTELS = [
 
       <div className="relative z-10">
         {/* HERO */}
-        <section className="relative min-h-[92vh] pt-10 pb-20 overflow-hidden">
+        <section className="home-hero-section relative min-h-[92vh] pt-10 pb-20 overflow-hidden">
     
           <ViewportVideo
             eager
             src="/videos/hero.mp4"
             poster="/banners/bandage.png"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.90]"
+            className="home-hero-video absolute inset-0 w-full h-full object-cover opacity-[0.90]"
             autoPlay
             muted
             loop
             playsInline
           />
 
-          <div className="absolute inset-0 bg-gradient-to-b from-white/78 via-white/60 to-white/82 dark:from-slate-950/88 dark:via-slate-950/72 dark:to-slate-950/90 transition-colors duration-500" />
+          <div className="home-hero-video-overlay absolute inset-0 bg-gradient-to-b from-white/78 via-white/60 to-white/82 dark:from-slate-950/88 dark:via-slate-950/72 dark:to-slate-950/90 transition-colors duration-500" />
 
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
+          <div className="home-hero-video-radial absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,167,220,0.16),transparent_45%)]" />
 
           <div className="relative max-w-[1500px] mx-auto px-6">
 
@@ -346,9 +346,9 @@ const BANDAGE_STAT_PASTELS = [
                 ))}
               </PremiumStagger>
 
-              <div className="relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
-                <div className="absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
-                <div className="absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
+              <div className="home-hero-map-stage relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
+                <div className="home-hero-map-stage-glow absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
+                <div className="home-hero-map-stage-strip absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
                 <HeroAnatomicalRunner className="rounded-[30px]" />
 {/* <video

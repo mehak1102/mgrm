@@ -89,6 +89,44 @@
   opacity: 1 !important;
 }
 
+/* Home hero video — replace light white wash so video shows on blue */
+[data-theme="blue"] .home-hero-section .home-hero-video {
+  opacity: 0.88 !important;
+  filter: brightness(0.72) saturate(0.92) contrast(1.02);
+}
+
+[data-theme="blue"] .home-hero-section .home-hero-video-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 16, 38, 0.68) 0%,
+    rgba(0, 28, 54, 0.52) 48%,
+    rgba(0, 16, 38, 0.72) 100%
+  ) !important;
+}
+
+[data-theme="blue"] .home-hero-section .home-hero-video-radial {
+  background: radial-gradient(
+    circle at center,
+    rgba(34, 211, 238, 0.08),
+    transparent 45%
+  ) !important;
+}
+
+/* Hero body-map stage — remove light-theme white panels in blue */
+[data-theme="blue"] .home-hero-map-stage {
+  background: rgba(0, 40, 78, 0.42) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 35px 120px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-theme="blue"] .home-hero-map-stage-glow {
+  background: rgba(34, 211, 238, 0.14) !important;
+}
+
+[data-theme="blue"] .home-hero-map-stage-strip {
+  display: none !important;
+}
+
 /* ── Expect The Best — yellow accents ── */
 [data-theme="blue"] .home-expect-best-section .home-expect-stat-num,
 [data-theme="blue"] .home-expect-best-section h4.text-4xl.font-black,
