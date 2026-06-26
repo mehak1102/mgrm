@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Sparkles, Star, Settings, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useMotionValue, useTransform } from "framer-motion";
+import { Sparkles, Star, Settings, ArrowUpRight, LayoutGrid } from "lucide-react";
 import API from "../../api";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { useHomeRecommendations } from "../../hooks/useRecommendations";
 import { useCart } from "../../context/CartContext";
 import { useTheme } from "../../context/ThemeContext";
+import { useProductStats } from "../../context/ProductStatsContext";
 import { bodyCategories } from "../../data/siteData";
+import { productMatchesCategory } from "../../utils/categoryProductMatch";
 import { getPosterCardTheme, getPosterWash, POSTER_GLOW } from "./dashboardTheme";
 
 const PRODUCT_NUMBER_COLORS = [
@@ -155,6 +157,73 @@ function CategoryMarquee({ categories, textZone = "32%" }) {
   );
 }
 
+/** Full-bleed product spotlight — image covers entire card */
+function CategoryRotator({ categories, activeIndex, cardTheme, formatProductCount }) {
+  const items = categories.filter((c) => c?.productImage);
+  if (!items.length) return null;
+
+  const index = activeIndex % items.length;
+  const cat = items[index];
+
+  return (
+    <div className="dashboard-catalog-rotator absolute inset-0 z-[15] overflow-hidden pointer-events-none bg-white">
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={cat.query}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.95, ease: [0.45, 0, 0.15, 1] }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <img
+            src={cat.productImage}
+            alt={cat.productName || cat.name}
+            loading="lazy"
+            draggable={false}
+            className="dashboard-catalog-rotator__img"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="absolute inset-x-0 bottom-0 top-1/3 z-[2] bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none" />
+
+      <span
+        className={`absolute top-3 left-3 z-[4] max-w-[80%] truncate text-[9px] font-bold uppercase tracking-wider
+          px-2 py-0.5 rounded-md ${
+            cardTheme.isLight
+              ? "bg-white/92 text-slate-700 shadow-sm"
+              : "bg-black/45 text-white backdrop-blur-sm"
+          }`}
+      >
+        {cat.name}
+      </span>
+      <span
+        className={`absolute top-3 right-3 z-[4] text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md ${
+          cardTheme.isLight ? "bg-violet-600 text-white" : "bg-white/92 text-violet-900"
+        }`}
+      >
+        {formatProductCount(cat.count, { suffix: "" })} products
+      </span>
+
+      <div
+        className="absolute inset-x-0 bottom-0 z-[4] flex justify-center gap-1 pb-2 pt-6
+          bg-gradient-to-t from-black/35 to-transparent"
+        aria-hidden="true"
+      >
+        {items.map((item, i) => (
+          <span
+            key={item.query}
+            className={`h-1 rounded-full transition-all duration-500 ease-out ${
+              i === index ? "w-5 bg-white/90 shadow-[0_0_8px_rgba(255,255,255,0.6)]" : "w-1 bg-white/40"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /** Clean straight grid — no rotation, equal cells */
 function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
   const imgs = sources.filter(Boolean).slice(0, cols * rows);
@@ -225,6 +294,7 @@ function PosterTile({
   subtitle,
   collage,
   categoryMarquee,
+  rotatingCategory,
   carousel,
   onCarouselItemClick,
   gridCols = 2,
@@ -239,6 +309,7 @@ function PosterTile({
   siteTheme,
   ctaLabel,
   subtitleLines = 1,
+  coverImage = false,
   children,
 }) {
   const x = useTransform(parallaxX, (v) => v * depth);
@@ -253,6 +324,13 @@ function PosterTile({
         ? "text-base sm:text-lg"
         : "text-lg sm:text-xl lg:text-2xl";
   const textZone = size === "sm" ? "34%" : size === "md" ? "36%" : "32%";
+  const imageOverlay = coverImage;
+  const scrimClass = imageOverlay
+    ? "bg-gradient-to-t from-black/92 via-black/55 to-transparent"
+    : cardTheme.textScrim;
+  const labelClass = imageOverlay ? "text-white/75" : cardTheme.label;
+  const titleClass = imageOverlay ? "text-white" : cardTheme.title;
+  const subtitleClass = imageOverlay ? "text-white/88" : cardTheme.subtitle;
 
   return (
     <motion.div
@@ -276,9 +354,9 @@ function PosterTile({
     >
       <div
         className={`absolute inset-0 z-0 ${cardTheme.bgBlur}`}
-        style={{ background: wash }}
+        style={{ background: coverImage ? "transparent" : wash }}
       />
-      <div className={`absolute inset-0 z-0 ${cardTheme.bgOverlay}`} />
+      {!coverImage && <div className={`absolute inset-0 z-0 ${cardTheme.bgOverlay}`} />}
 
       {carousel && (
         <ProductCarousel
@@ -288,11 +366,20 @@ function PosterTile({
         />
       )}
 
-      {categoryMarquee && !carousel && (
+      {categoryMarquee && !carousel && !rotatingCategory && (
         <CategoryMarquee categories={categoryMarquee} textZone={textZone} />
       )}
 
-      {collage && !carousel && !categoryMarquee && (
+      {rotatingCategory && !carousel && (
+        <CategoryRotator
+          categories={rotatingCategory.categories}
+          activeIndex={rotatingCategory.activeIndex}
+          cardTheme={cardTheme}
+          formatProductCount={rotatingCategory.formatProductCount}
+        />
+      )}
+
+      {collage && !carousel && !categoryMarquee && !rotatingCategory && (
         <ProductGrid
           sources={collage}
           cols={gridCols}
@@ -319,23 +406,23 @@ function PosterTile({
         </div>
       )}
 
-      <div className={`absolute inset-x-0 bottom-0 z-10 pointer-events-none ${cardTheme.textScrim}`} style={{ height: textZone }} />
+      <div className={`absolute inset-x-0 bottom-0 z-10 pointer-events-none ${scrimClass}`} style={{ height: textZone }} />
       <div className="absolute inset-x-0 top-0 h-px z-10 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
 
       <div className={`relative z-30 h-full min-h-0 ${textPad} flex flex-col justify-end pointer-events-none`}>
         {label && (
-          <span className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] ${cardTheme.label}`}>
+          <span className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] ${labelClass}`}>
             {label}
           </span>
         )}
         {title && (
-          <h3 className={`${titleSize} font-bold ${cardTheme.title} tracking-tight mt-0.5 leading-tight`}>
+          <h3 className={`${titleSize} font-bold ${titleClass} tracking-tight mt-0.5 leading-tight`}>
             {title}
           </h3>
         )}
         {subtitle && (
           <p
-            className={`text-[11px] sm:text-xs ${cardTheme.subtitle} mt-0.5 font-medium ${
+            className={`text-[11px] sm:text-xs ${subtitleClass} mt-0.5 font-medium ${
               subtitleLines > 1 ? "line-clamp-2 leading-snug" : "line-clamp-1"
             }`}
           >
@@ -353,9 +440,11 @@ function PosterTile({
               text-[10px] font-bold uppercase tracking-[0.14em] backdrop-blur-md transition-all duration-300
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 focus-visible:ring-offset-2
               ${
-                cardTheme.isLight
-                  ? "border-slate-200/90 bg-white/95 text-slate-800 shadow-sm hover:bg-white hover:shadow-md"
-                  : "border-white/25 bg-white/15 text-white hover:bg-white/25"
+                imageOverlay
+                  ? "border-white/30 bg-white/15 text-white hover:bg-white/25"
+                  : cardTheme.isLight
+                    ? "border-slate-200/90 bg-white/95 text-slate-800 shadow-sm hover:bg-white hover:shadow-md"
+                    : "border-white/25 bg-white/15 text-white hover:bg-white/25"
               }`}
           >
             {ctaLabel}
@@ -379,11 +468,13 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
   const { cart } = useCart();
   const { theme: siteTheme } = useTheme();
   const cardTheme = getPosterCardTheme(siteTheme);
+  const { categoriesWithCounts, bodyTotal, formatProductCount } = useProductStats();
 
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [profile, setProfile] = useState(null);
   const [recoveryPreview, setRecoveryPreview] = useState(null);
+  const [categoryIndex, setCategoryIndex] = useState(0);
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -401,6 +492,43 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
       })
       .catch(() => {});
   }, []);
+
+  const rotatableCategories = useMemo(() => {
+    const mapped = categoriesWithCounts.map((cat) => {
+      const match = products.find(
+        (p) => p?.images?.[0] && productMatchesCategory(p, cat.query)
+      );
+      return {
+        ...cat,
+        productImage: match?.images?.[0] || null,
+        productName: match?.name || null,
+      };
+    });
+
+    const withProductPhotos = mapped.filter((c) => c.productImage);
+    if (withProductPhotos.length) return withProductPhotos;
+
+    return products
+      .filter((p) => p?.images?.[0])
+      .slice(0, bodyCategories.length)
+      .map((p, i) => ({
+        ...bodyCategories[i % bodyCategories.length],
+        count: 1,
+        productImage: p.images[0],
+        productName: p.name,
+      }));
+  }, [categoriesWithCounts, products]);
+
+  useEffect(() => {
+    if (!rotatableCategories.length) return undefined;
+    const timer = setInterval(() => {
+      setCategoryIndex((i) => (i + 1) % rotatableCategories.length);
+    }, 2200);
+    return () => clearInterval(timer);
+  }, [rotatableCategories.length]);
+
+  const activeCategory =
+    rotatableCategories[categoryIndex % Math.max(rotatableCategories.length, 1)] || null;
 
   const shopCarouselItems = useMemo(
     () =>
@@ -494,25 +622,42 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
         />
 
         <PosterTile
-          className="col-span-5 row-start-1"
+          className="col-span-5 row-start-1 dashboard-catalog-tile"
           size="lg"
           delay={0.18}
-          washKey="categories"
-          glow={POSTER_GLOW.categories}
-          label="Body Parts"
-          title="Categories"
-          subtitle={`${bodyCategories.length} regions`}
-          categoryMarquee={bodyCategories}
-          ctaLabel="Explore regions"
+          washKey="catalog"
+          glow={POSTER_GLOW.catalog}
+          coverImage
+          label="Catalog"
+          title="All Products"
+          subtitle={
+            activeCategory
+              ? `${activeCategory.name} · ${formatProductCount(activeCategory.count, { suffix: "" })} in category`
+              : `${formatProductCount(bodyTotal)} certified products`
+          }
+          rotatingCategory={{
+            categories: rotatableCategories,
+            activeIndex: categoryIndex,
+            formatProductCount,
+          }}
+          ctaLabel="Browse all"
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
-          onClick={() => onRoute("/shop-by-body")}
-        />
+          onClick={() =>
+            onRoute(
+              activeCategory
+                ? `/shop?category=${encodeURIComponent(activeCategory.query)}`
+                : "/shop"
+            )
+          }
+        >
+          <LayoutGrid size={15} className="absolute top-4 right-4 z-30 text-white/85" />
+        </PosterTile>
 
         <PosterTile
-          className="col-span-6 row-start-2"
+          className="col-span-4 row-start-2"
           size="md"
           delay={0.24}
           washKey="featured"
@@ -534,7 +679,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
         </PosterTile>
 
         <PosterTile
-          className="col-span-6 row-start-2"
+          className="col-span-4 row-start-2"
           size="md"
           delay={0.3}
           washKey="recommended"
@@ -553,6 +698,24 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
         >
           <Sparkles size={15} className={`absolute top-4 right-4 z-30 ${cardTheme.iconSparkle}`} />
         </PosterTile>
+
+        <PosterTile
+          className="col-span-4 row-start-2"
+          size="md"
+          delay={0.34}
+          washKey="categories"
+          glow={POSTER_GLOW.categories}
+          label="Body Parts"
+          title="Categories"
+          subtitle={`${bodyCategories.length} regions`}
+          categoryMarquee={bodyCategories}
+          ctaLabel="Explore regions"
+          cardTheme={cardTheme}
+          siteTheme={siteTheme}
+          parallaxX={mx}
+          parallaxY={my}
+          onClick={() => onRoute("/shop-by-body")}
+        />
 
         <PosterTile
           className="col-span-5 row-start-3"

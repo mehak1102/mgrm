@@ -152,6 +152,7 @@ export const POSTER_WASH_DARK = {
   profile: "linear-gradient(145deg, rgba(124,58,237,0.7) 0%, rgba(59,130,246,0.55) 50%, rgba(6,182,212,0.45) 100%)",
   addresses: "linear-gradient(145deg, rgba(6,182,212,0.65) 0%, rgba(59,130,246,0.55) 100%)",
   settings: "linear-gradient(145deg, rgba(30,41,59,0.85) 0%, rgba(51,65,85,0.75) 100%)",
+  catalog: "linear-gradient(145deg, rgba(99,102,241,0.7) 0%, rgba(6,182,212,0.6) 50%, rgba(16,185,129,0.45) 100%)",
 };
 
 /** Light-theme pastel washes */
@@ -166,6 +167,7 @@ export const POSTER_WASH_LIGHT = {
   profile: "linear-gradient(145deg, #ede9fe 0%, #dbeafe 55%, #cffafe 100%)",
   addresses: "linear-gradient(145deg, #cffafe 0%, #dbeafe 100%)",
   settings: "linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%)",
+  catalog: "linear-gradient(145deg, #e0e7ff 0%, #cffafe 50%, #d1fae5 100%)",
 };
 
 export function getPosterWash(siteTheme, key) {
@@ -184,6 +186,7 @@ export const POSTER_GLOW = {
   profile: "0 24px 60px rgba(124,58,237,0.22)",
   addresses: "0 20px 50px rgba(6,182,212,0.18)",
   settings: "0 16px 40px rgba(15,23,42,0.1)",
+  catalog: "0 24px 60px rgba(99,102,241,0.22)",
 };
 
 export const SECTION_LABELS = {
