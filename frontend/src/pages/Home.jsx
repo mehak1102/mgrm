@@ -1628,21 +1628,18 @@ const BANDAGE_STAT_PASTELS = [
 </section>
 
         {/* ================= PRINT ADS ================= */}
-<section className="relative max-w-[1500px] mx-auto px-6 mt-24 mb-10 overflow-hidden">
+<section className="home-print-ads-section relative max-w-[1500px] mx-auto px-6 mt-24 mb-10 overflow-hidden">
 
 
 {/* HEADING */}
 <div className="text-center mb-14">
 
-  <h2 className="mt-4 text-[64px] leading-[0.9] font-black text-slate-900 dark:text-zinc-100">
-    MGRM
-    <br />
-    <span className="bg-gradient-to-r bg-gradient-to-r from-[#374151] via-[#f43f5e] to-[#fb923c] bg-clip-text text-transparent">
-      Medicare
-    </span>
+  <h2 className="home-print-ads-wordmark">
+    <span className="home-print-ads-mgrm">MGRM</span>
+    <span className="home-print-ads-medicare">Medicare</span>
   </h2>
 
-  <p className="mt-5 text-slate-500 text-gray-500 dark:text-zinc-400 text-lg">
+  <p className="home-print-ads-subtitle">
     Advanced respiratory & pain relief solutions designed for everyday comfort.
   </p>
 
