@@ -44,6 +44,65 @@ function useMotionEnabled() {
   return !useReducedMotion();
 }
 
+/** Hero headline — slow letter-by-letter flow */
+const HERO_FLOW = {
+  charStagger: 0.052,
+  charDuration: 0.72,
+  y: 12,
+  delayChildren: 0.18,
+  lineGap: 0.14,
+};
+
+function CharReveal({
+  text,
+  className = "",
+  speed = HERO_FLOW,
+  animateOnMount = false,
+  gradient = false,
+}) {
+  const enabled = useMotionEnabled();
+  const chars = Array.from(text);
+
+  if (!enabled) {
+    return <span className={className}>{text}</span>;
+  }
+
+  const motionProps = animateOnMount
+    ? { initial: "hidden", animate: "visible" }
+    : { initial: "hidden", whileInView: "visible", viewport: VIEWPORT };
+
+  const gradientClass = gradient
+    ? "bg-gradient-to-r from-cyan-300 via-white to-blue-300 bg-clip-text text-transparent"
+    : "";
+
+  return (
+    <motion.span
+      {...motionProps}
+      className={`inline-flex flex-wrap ${className} ${gradientClass}`}
+      variants={staggerContainer(speed.charStagger, speed.delayChildren)}
+      aria-label={text}
+    >
+      {chars.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          variants={{
+            hidden: { opacity: 0, y: speed.y },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: speed.charDuration, ease: EASE_LUXURY },
+            },
+          }}
+          className="inline-block"
+          aria-hidden={char !== " "}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
 function WordReveal({
   text,
   className = "",
@@ -130,10 +189,10 @@ export function HeroKineticLine({
   delay = 0,
 }) {
   return (
-    <WordReveal
+    <CharReveal
       text={text}
       className={className}
-      speed={{ ...SPEEDS.hero, delayChildren: SPEEDS.hero.delayChildren + delay }}
+      speed={{ ...HERO_FLOW, delayChildren: HERO_FLOW.delayChildren + delay }}
       animateOnMount
       gradient={gradient}
     />
@@ -141,18 +200,26 @@ export function HeroKineticLine({
 }
 
 export function HeroTitleBlock({ lines, className = "" }) {
+  let nextDelay = HERO_FLOW.delayChildren;
+
   return (
     <h1 className={className}>
-      {lines.map((line, i) => (
-        <div key={i} className={i > 0 ? "mt-2 md:mt-3" : ""}>
-          <HeroKineticLine
-            text={line.text}
-            className={line.className}
-            gradient={line.gradient}
-            delay={line.delay ?? i * 0.22}
-          />
-        </div>
-      ))}
+      {lines.map((line, i) => {
+        const lineDelay = line.delay ?? nextDelay;
+        const charCount = line.text.length;
+        nextDelay = lineDelay + charCount * HERO_FLOW.charStagger + HERO_FLOW.lineGap;
+
+        return (
+          <div key={i} className={i > 0 ? "mt-2 md:mt-3" : ""}>
+            <HeroKineticLine
+              text={line.text}
+              className={line.className}
+              gradient={line.gradient}
+              delay={lineDelay - HERO_FLOW.delayChildren}
+            />
+          </div>
+        );
+      })}
     </h1>
   );
 }

@@ -360,3 +360,12 @@
   opacity: 1 !important;
   font-weight: 800 !important;
 }
+
+/* Hero pill — company name on light glass badge */
+[data-theme="blue"] .about-us-page .about-hero-company-badge__text,
+[data-theme="blue"] .about-us-page .about-hero-company-badge__text span {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}

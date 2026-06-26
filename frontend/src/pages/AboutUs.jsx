@@ -399,14 +399,14 @@ const AboutUs = () => {
           <div className="mx-auto max-w-7xl px-6">
             {/* <div className="max-w-4xl"> */}
             <div className="max-w-5xl mx-auto text-center">
-              <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
+              <div className="about-hero-company-badge mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
                 <Sparkles className="h-5 w-5 text-cyan-300" />
 
-              <div className="text-lg md:text-xl font-semibold text-white tracking-widest text-center">
+              <div className="about-hero-company-badge__text text-lg md:text-xl font-semibold text-white tracking-widest text-center">
                 <HeroKineticLine
                   text="MGRM Medicare Private Limited"
                   className="justify-center"
-                  delay={0.1}
+                  delay={0.05}
                 />
               </div>
               </div>
@@ -417,26 +417,24 @@ const AboutUs = () => {
                   {
                     text: "Revolutionizing",
                     className: "justify-center max-sm:text-[36px] text-[52px] md:text-[88px]",
-                    delay: 0.35,
+                    delay: 1.05,
                   },
                   {
                     text: "Rehabilitation",
                     className: "justify-center max-sm:text-[40px] text-[58px] md:text-[98px]",
                     gradient: true,
-                    delay: 0.55,
                   },
                   {
                     text: "Since 1994",
                     className:
                       "justify-center max-sm:text-[22px] text-[32px] md:text-[52px] tracking-[4px] sm:tracking-[6px] text-white/85",
-                    delay: 0.75,
                   },
                 ]}
               />
 
               <FadeUpText
                 animateOnMount
-                delay={1.1}
+                delay={3.35}
                 className="mt-10 mx-auto max-w-3xl text-lg leading-9 text-gray-200"
               >
                 India’s leading rehabilitation and orthopedic healthcare
