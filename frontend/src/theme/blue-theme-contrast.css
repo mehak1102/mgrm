@@ -137,19 +137,19 @@
   opacity: 1 !important;
 }
 
-[data-theme="blue"] .about-us-page aside a {
+[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link) {
   background: rgba(255, 255, 255, 0.08) !important;
   color: rgba(255, 255, 255, 0.88) !important;
   opacity: 1 !important;
 }
 
-[data-theme="blue"] .about-us-page aside a:hover {
+[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link):hover {
   background: rgba(255, 215, 0, 0.14) !important;
   color: #ffd700 !important;
   border: 1px solid rgba(255, 215, 0, 0.35);
 }
 
-[data-theme="blue"] .about-us-page aside a:hover svg {
+[data-theme="blue"] .about-us-page aside a:not(.about-sidebar-nav-link):hover svg {
   color: #ffd700 !important;
 }
 

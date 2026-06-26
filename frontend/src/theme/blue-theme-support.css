@@ -187,3 +187,24 @@
   color: #12324a;
   background: #ffffff;
 }
+
+/* Support call widget — readable button labels (beat global gold link color) */
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--blue,
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--blue:hover,
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--blue svg {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .support-call-widget .support-call-widget__btn--secondary,
+[data-theme="blue"] .support-call-widget .support-call-widget__btn--secondary:hover {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+}
+
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--whatsapp,
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--whatsapp:hover,
+[data-theme="blue"] .support-call-widget a.support-call-widget__btn--whatsapp svg {
+  color: #15803d !important;
+  -webkit-text-fill-color: #15803d !important;
+}

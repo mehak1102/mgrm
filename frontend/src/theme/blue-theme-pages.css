@@ -130,13 +130,13 @@
 }
 
 /* ---- About Us sidebar ---- */
-[data-theme="blue"] aside a.group[href^="#section"] {
+[data-theme="blue"] aside a.group[href^="#section"]:not(.about-sidebar-nav-link) {
   background-color: var(--card-bg) !important;
   color: var(--text-secondary) !important;
   backdrop-filter: blur(12px);
 }
 
-[data-theme="blue"] aside a.group[href^="#section"]:hover {
+[data-theme="blue"] aside a.group[href^="#section"]:not(.about-sidebar-nav-link):hover {
   background-color: var(--card-hover) !important;
   border-color: var(--border-hover) !important;
   color: var(--text-primary) !important;
