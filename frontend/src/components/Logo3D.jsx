@@ -58,7 +58,7 @@ function OrbitRing({ orbit, reduceMotion }) {
 export default function Logo3D({ asStatic = false, hideBranding = false, className = "" }) {
   const reduceMotion = useReducedMotion();
 
-  const wrapperClass = `relative shrink-0 flex items-center justify-center w-[150px] sm:w-[180px] lg:w-[215px] h-[52px] sm:h-[58px] lg:h-[64px] overflow-visible ${className}`;
+  const wrapperClass = `relative shrink-0 flex items-center justify-center w-[108px] min-[420px]:w-[150px] sm:w-[180px] lg:w-[215px] h-[48px] min-[420px]:h-[52px] sm:h-[58px] lg:h-[64px] overflow-visible ${className}`;
 
   const inner = (
     <>
@@ -110,7 +110,7 @@ export default function Logo3D({ asStatic = false, hideBranding = false, classNa
       {!hideBranding && (
         <div className="relative z-20 text-center px-1">
           <h1
-            className="text-[21px] sm:text-[23px] lg:text-[24px] font-black tracking-tight leading-none text-fg"
+            className="text-[18px] min-[420px]:text-[21px] sm:text-[23px] lg:text-[24px] font-black tracking-tight leading-none text-fg"
             style={{ textShadow: "0 2px 12px rgba(15,23,42,0.08)" }}
           >
             MGRM

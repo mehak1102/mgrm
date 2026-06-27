@@ -97,10 +97,10 @@ export default function Navbar() {
   return (
     <>
     <header className="sticky top-0 z-50 relative bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3 min-w-0 overflow-x-clip">
+      <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-2.5 min-[420px]:py-3 flex items-center gap-1 min-[420px]:gap-2 sm:gap-3 min-w-0">
         <Logo3D />
 
-        <form onSubmit={handleSearch} className="hidden md:flex flex-1 min-w-0 max-w-xl relative">
+        <form onSubmit={handleSearch} className="hidden md:flex flex-1 min-w-0 max-w-xl relative mx-2">
           <Search className="absolute left-4 top-3.5 text-gray-400 dark:text-zinc-500" size={18} />
           <input
             name="search"
@@ -266,17 +266,17 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <div className="flex gap-1 sm:gap-2 ml-auto items-center shrink-0">
+        <div className="flex gap-0.5 min-[420px]:gap-1 sm:gap-2 ml-auto items-center shrink-0">
           <ThemeSelector />
           <button
             type="button"
             onClick={() => navigate("/wishlist")}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
+            className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
             aria-label="Wishlist"
           >
-            <HeartPulse size={20} />
+            <HeartPulse className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             {wishlist.length > 0 && (
-              <span className="absolute -top-1 -right-1 text-xs bg-pink-500 text-white rounded-full w-5 h-5 grid place-items-center">
+              <span className="absolute -top-0.5 -right-0.5 min-[420px]:-top-1 min-[420px]:-right-1 text-[10px] min-[420px]:text-xs bg-pink-500 text-white rounded-full w-4 h-4 min-[420px]:w-5 min-[420px]:h-5 grid place-items-center">
                 {wishlist.length}
               </span>
             )}
@@ -301,29 +301,29 @@ export default function Navbar() {
             <button
               type="button"
               onClick={handleLogout}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
+              className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
               aria-label="Log out"
             >
-              <LogOut size={20} />
+              <LogOut className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             </button>
           ) : (
             <Link
               to="/login"
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
+              className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
               aria-label="Log in"
             >
-              <User size={20} />
+              <User className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             </Link>
           )}
 
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
+            className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
             aria-label="Open cart"
           >
-            <ShoppingCart size={20} />
-            <span className="absolute -top-1 -right-1 text-xs bg-red-500 text-white rounded-full w-5 h-5 grid place-items-center">
+            <ShoppingCart className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
+            <span className="absolute -top-0.5 -right-0.5 min-[420px]:-top-1 min-[420px]:-right-1 text-[10px] min-[420px]:text-xs bg-red-500 text-white rounded-full w-4 h-4 min-[420px]:w-5 min-[420px]:h-5 grid place-items-center">
               {cartCount}
             </span>
           </button>
@@ -331,10 +331,10 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="lg:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
+            className="lg:hidden p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
             aria-label="Open menu"
           >
-            <Menu size={22} />
+            <Menu className="w-5 h-5 min-[420px]:w-[22px] min-[420px]:h-[22px]" />
           </button>
         </div>
       </div>

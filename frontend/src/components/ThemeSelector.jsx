@@ -28,7 +28,7 @@ export default function ThemeSelector({ className = "" }) {
         aria-label="Select theme"
         aria-expanded={open}
         aria-haspopup="listbox"
-        className="flex items-center gap-2 h-11 px-3 rounded-full border border-edge dark:border-white/10 bg-card dark:bg-zinc-800 hover:bg-surface-hover dark:hover:bg-zinc-700 text-fg dark:text-zinc-100 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]"
+        className="flex items-center gap-1.5 min-[420px]:gap-2 h-9 min-[420px]:h-11 px-2 min-[420px]:px-3 rounded-full border border-edge dark:border-white/10 bg-card dark:bg-zinc-800 hover:bg-surface-hover dark:hover:bg-zinc-700 text-fg dark:text-zinc-100 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]"
       >
         <span className="text-base leading-none" aria-hidden>
           {active.emoji}
@@ -36,7 +36,7 @@ export default function ThemeSelector({ className = "" }) {
         <span className="hidden sm:inline text-sm font-semibold">{active.label}</span>
         <ChevronDown
           size={16}
-          className={`text-gray-500 dark:text-zinc-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`hidden min-[420px]:block text-gray-500 dark:text-zinc-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
