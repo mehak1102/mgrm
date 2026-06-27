@@ -151,6 +151,134 @@ function FeedbackTab() {
   );
 }
 
+function SuggestionsTab() {
+  const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
+  const [readFilter, setReadFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState(null);
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ page, limit: 10 });
+      if (search) params.set("search", search);
+      if (readFilter) params.set("read", readFilter);
+      const res = await API.get(`/suggestions?${params}`);
+      setItems(res.data.suggestions || []);
+      setPages(res.data.pages || 1);
+    } catch {
+      setItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, [page, readFilter]);
+
+  const toggleRead = async (id, isRead) => {
+    await API.patch(`/suggestions/${id}/read`, { isRead });
+    load();
+  };
+
+  const remove = async (id) => {
+    if (!confirm("Delete this suggestion?")) return;
+    await API.delete(`/suggestions/${id}`);
+    load();
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap gap-3">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && (setPage(1), load())}
+          placeholder="Search suggestions..."
+          className="theme-panel rounded-2xl px-4 py-3 flex-1 min-w-[200px]"
+        />
+        <select
+          value={readFilter}
+          onChange={(e) => { setReadFilter(e.target.value); setPage(1); }}
+          className="theme-panel rounded-2xl px-4 py-3"
+        >
+          <option value="">All</option>
+          <option value="false">Unread</option>
+          <option value="true">Read</option>
+        </select>
+        <button type="button" onClick={() => { setPage(1); load(); }} className="btn-primary px-5 py-3 rounded-2xl font-bold">
+          Search
+        </button>
+        <button type="button" onClick={() => exportCsv("/suggestions/export/csv", "suggestions.csv")} className="btn-soft px-5 py-3 rounded-2xl font-bold">
+          Export CSV
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="h-40 card rounded-2xl animate-pulse" />
+      ) : items.length === 0 ? (
+        <div className="card rounded-2xl p-8 text-center text-fg-muted">No suggestions found.</div>
+      ) : (
+        <div className="grid gap-4">
+          {items.map((item) => (
+            <div key={item._id} className={`card rounded-2xl p-5 ${!item.isRead ? "ring-2 ring-rose-500/30" : ""}`}>
+              <div className="flex flex-wrap justify-between gap-3">
+                <div>
+                  <p className="font-black text-fg">{item.name}</p>
+                  <p className="text-sm text-fg-muted">{item.email || "No email"}</p>
+                  <p className="text-sm font-bold text-rose-600 dark:text-rose-400 mt-1">{item.category}</p>
+                </div>
+                <span className={`text-xs font-bold px-3 py-1 rounded-full h-fit ${item.isRead ? "bg-slate-100 dark:bg-slate-800 text-slate-600" : "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300"}`}>
+                  {item.isRead ? "Read" : "Unread"}
+                </span>
+              </div>
+              <p className="text-sm text-fg-muted mt-3 line-clamp-2">{item.message}</p>
+              <p className="text-xs text-fg-muted mt-2">{new Date(item.createdAt).toLocaleString()}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <button type="button" onClick={() => setSelected(item)} className="btn-soft px-4 py-2 rounded-xl text-sm font-bold">
+                  View Details
+                </button>
+                <button type="button" onClick={() => toggleRead(item._id, !item.isRead)} className="btn-primary px-4 py-2 rounded-xl text-sm font-bold">
+                  Mark {item.isRead ? "Unread" : "Read"}
+                </button>
+                <button type="button" onClick={() => remove(item._id)} className="text-red-500 font-bold text-sm ml-auto">
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {pages > 1 && (
+        <div className="flex justify-center gap-2">
+          <button type="button" disabled={page <= 1} onClick={() => setPage((p) => p - 1)} className="btn-soft px-4 py-2 rounded-xl font-bold disabled:opacity-40">Prev</button>
+          <span className="px-4 py-2 text-fg-muted">Page {page} of {pages}</span>
+          <button type="button" disabled={page >= pages} onClick={() => setPage((p) => p + 1)} className="btn-soft px-4 py-2 rounded-xl font-bold disabled:opacity-40">Next</button>
+        </div>
+      )}
+
+      {selected && (
+        <div className="fixed inset-0 z-[500] bg-black/50 backdrop-blur-sm grid place-items-center p-4" onClick={() => setSelected(null)}>
+          <div className="card rounded-3xl p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-2xl font-black text-fg mb-4">Suggestion Details</h3>
+            <p className="font-bold text-fg">{selected.name}</p>
+            <p className="text-sm text-fg-muted">{selected.email || "No email provided"}</p>
+            <p className="mt-2 font-bold text-rose-600 dark:text-rose-400">{selected.category}</p>
+            <p className="mt-4 text-fg-muted whitespace-pre-wrap">{selected.message}</p>
+            <p className="text-xs text-fg-muted mt-4">{new Date(selected.createdAt).toLocaleString()}</p>
+            <button type="button" onClick={() => setSelected(null)} className="btn-primary mt-6 px-6 py-3 rounded-2xl font-bold">Close</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ClaimsTab() {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
@@ -309,7 +437,7 @@ export default function AdminSupportPanel() {
       <div className="card rounded-[32px] p-6">
         <h2 className="text-2xl font-black text-fg mb-2">Support Management</h2>
         <p className="text-sm text-fg-muted mb-4">
-          Manage store locator feedback and warranty claims from customers.
+          Manage store feedback, customer suggestions, and warranty claims.
         </p>
         <div className="flex flex-wrap gap-2">
           <button
@@ -321,6 +449,13 @@ export default function AdminSupportPanel() {
           </button>
           <button
             type="button"
+            onClick={() => setSubTab("suggestions")}
+            className={`px-5 py-2.5 rounded-full text-sm font-bold ${subTab === "suggestions" ? "btn-primary" : "btn-soft"}`}
+          >
+            Suggestions
+          </button>
+          <button
+            type="button"
             onClick={() => setSubTab("claims")}
             className={`px-5 py-2.5 rounded-full text-sm font-bold ${subTab === "claims" ? "btn-primary" : "btn-soft"}`}
           >
@@ -329,7 +464,9 @@ export default function AdminSupportPanel() {
         </div>
       </div>
 
-      {subTab === "feedback" ? <FeedbackTab /> : <ClaimsTab />}
+      {subTab === "feedback" && <FeedbackTab />}
+      {subTab === "suggestions" && <SuggestionsTab />}
+      {subTab === "claims" && <ClaimsTab />}
     </div>
   );
 }

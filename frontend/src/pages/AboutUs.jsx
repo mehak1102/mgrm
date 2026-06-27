@@ -27,6 +27,7 @@ import { ABOUT_CATEGORY_PASTELS } from "../data/aboutCategoryPastels";
 import { bodyCategories } from "../data/siteData";
 import API from "../api";
 import "../theme/about-category-flip.css";
+import "../theme/about-partnerships.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
@@ -205,20 +206,113 @@ const timeline = [
 ];
 
 const sidebarLinks = [
-  'Our History',
-  'Achievements',
-  'Quality Certifications',
-  'MGRM Timelines',
-  'Leadership',
-  'Testimonials',
-  'Cure to Care™',
-  'Partner Program',
-  'Autoclave Sterilizer',
-  'Specifications',
-  'Construction',
-  'Shredder Facility',
-  'Accessories',
+  { label: 'Our History', id: 'section-0' },
+  { label: 'Achievements', id: 'section-1' },
+  { label: 'Quality Certifications', id: 'section-2' },
+  { label: 'MGRM Timelines', id: 'section-3' },
+  { label: 'Leadership', id: 'section-4' },
+  { label: 'Testimonials', id: 'section-5' },
+  { label: 'Cure to Care™', id: 'section-6' },
+  { label: 'Partner Program', id: 'section-7' },
+  { label: 'Partnerships', id: 'section-partnerships' },
+  { label: 'Autoclave Sterilizer', id: 'section-8' },
+  { label: 'Specifications', id: 'section-9' },
+  { label: 'Construction', id: 'section-10' },
+  { label: 'Shredder Facility', id: 'section-11' },
+  { label: 'Accessories', id: 'section-12' },
 ];
+
+const partnerships = [
+  {
+    name: 'Hitachi MGRM Net',
+    url: 'https://www.hitachimgrmnet.com/',
+    image: '/products/partnership-hitachi-mgrm-net.jpg',
+    tagline: 'Technology & Digital Solutions',
+    accent: '#0ea5e9',
+    description: [
+      'A strategic joint venture delivering enterprise IT solutions, digital transformation, and e-governance platforms for government and corporate clients.',
+      'Combining Hitachi’s global technology leadership with MGRM’s domain expertise to build scalable, future-ready digital ecosystems.',
+    ],
+  },
+  {
+    name: 'MGRM Pinnacle',
+    url: 'https://www.mgrmpinnacle.com/',
+    image: '/products/partnership-mgrm-pinnacle.jpg',
+    tagline: 'Educational eGovernance',
+    accent: '#6366f1',
+    description: [
+      'An educational technology company offering end-to-end software products and services across the full learning lifecycle—from pre-K through university.',
+      'Powered by the M-Star suite, its integrated platform supports admissions, school operations, and remote learning with research-driven analytics.',
+    ],
+  },
+  {
+    name: 'MGRM',
+    url: 'https://www.mgrm.com/',
+    image: '/products/partnership-mgrm.jpg',
+    tagline: 'e-Governance & Digital Innovation',
+    accent: '#0284c7',
+    description: [
+      'Empowering good governance through the Master Governance Platform—integrating citizen life cycle needs with efficient government service delivery at every level.',
+      'Delivering need-based products, solutions, and services across education, healthcare, agriculture, and other critical economic domains worldwide.',
+    ],
+  },
+  {
+    name: 'Sunira Designs',
+    url: 'https://www.suniradesigns.com/',
+    image: '/products/partnership-sunira-designs.jpg',
+    tagline: 'Luxury Indian Fashion',
+    accent: '#ec4899',
+    description: [
+      'A destination for hand-crafted luxury Indian designer clothing, offering curated ethnic and contemporary collections online.',
+      'Celebrating artisanal craftsmanship with elegant silhouettes, rich fabrics, and timeless style for the modern wardrobe.',
+    ],
+  },
+];
+
+function PartnershipCard({ partner }) {
+  return (
+    <StaggerItem className="h-full min-w-0">
+      <a
+        href={partner.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="about-partnership-card group"
+        style={{ '--partner-accent': partner.accent }}
+      >
+        <div className="about-partnership-card__media">
+          <div className="about-partnership-card__media-fallback" aria-hidden />
+          <img
+            src={partner.image}
+            alt=""
+            loading="lazy"
+            onError={(event) => {
+              event.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="about-partnership-card__media-overlay" aria-hidden />
+          <span className="about-partnership-card__tag">{partner.tagline}</span>
+        </div>
+
+        <div className="about-partnership-card__body">
+          <h3 className="about-partnership-card__title">{partner.name}</h3>
+
+          <div className="about-partnership-card__text space-y-3">
+            {partner.description.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+
+          <span className="about-partnership-card__link">
+            Visit Website
+            <span className="about-partnership-card__link-icon" aria-hidden>
+              <ChevronRight className="h-4 w-4" />
+            </span>
+          </span>
+        </div>
+      </a>
+    </StaggerItem>
+  );
+}
 
 const achievements = [
   {
@@ -461,8 +555,8 @@ const AboutUs = () => {
             <div className="space-y-4">
               {sidebarLinks.map((item, index) => (
                 <a
-                  key={index}
-                  href={`#section-${index}`}
+                  key={item.id}
+                  href={`#${item.id}`}
                   className="group flex items-center justify-between gap-3 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
                 >
                   <span className="flex min-w-0 items-center gap-3">
@@ -472,7 +566,7 @@ const AboutUs = () => {
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="min-w-0 truncate">{item}</span>
+                    <span className="min-w-0 truncate">{item.label}</span>
                   </span>
 
                   <ChevronRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
@@ -1065,6 +1159,46 @@ const AboutUs = () => {
     </div>
   </div>
 </section>
+
+            {/* ================= PARTNERSHIPS SECTION ================= */}
+            <section
+              id="section-partnerships"
+              className="relative scroll-mt-28 overflow-hidden rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-8 sm:p-10 lg:p-12 transition-colors duration-300"
+            >
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-blue-300/15 blur-3xl"
+                aria-hidden
+              />
+
+              <div className="relative z-10">
+                <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
+                  Partnerships
+                </SectionLabel>
+
+                <CinematicHeading
+                  text="Our Group Companies"
+                  className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
+                />
+
+                <FadeUpText className="mt-5 max-w-3xl text-base leading-8 text-gray-500 dark:text-zinc-400 sm:text-lg">
+                  Explore the MGRM family of companies—each focused on innovation
+                  across healthcare, education, technology, and lifestyle.
+                </FadeUpText>
+
+                <StaggerReveal
+                  className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7"
+                  stagger={0.1}
+                >
+                  {partnerships.map((partner) => (
+                    <PartnershipCard key={partner.url} partner={partner} />
+                  ))}
+                </StaggerReveal>
+              </div>
+            </section>
 
             {/* ================= AUTCLAVE CUM SHREDDER SECTION ================= */}
 <section    id="section-8" className="relative overflow-hidden rounded-[45px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-6 md:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">

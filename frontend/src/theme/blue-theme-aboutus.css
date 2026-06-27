@@ -26,6 +26,7 @@
 [data-theme="blue"] .about-us-page #section-3 h2,   /* Journey Through The Years */
 [data-theme="blue"] .about-us-page #section-5 h2,   /* What Medical Experts Say */
 [data-theme="blue"] .about-us-page #section-6 h2,   /* Complete Eye Care & Rehabilitation Solutions */
+[data-theme="blue"] .about-us-page #section-partnerships h2, /* Our Group Companies */
 [data-theme="blue"] .about-us-page #section-8 h2,   /* Autoclave Cum Shredder Sterilizer */
 [data-theme="blue"] .about-us-page #section-9 h3,   /* Specifications */
 [data-theme="blue"] .about-us-page #section-10 h3,  /* Construction */
@@ -179,6 +180,48 @@
 [data-theme="blue"] .about-us-page #section-5 .about-testimonial-card .dark\:text-zinc-400 {
   color: #4f6980 !important;
   -webkit-text-fill-color: #4f6980 !important;
+}
+
+/* Partnership cards — section-partnerships */
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 20px 60px rgba(0, 23, 46, 0.14) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card:hover {
+  border-color: rgba(255, 215, 0, 0.35) !important;
+  box-shadow: 0 28px 70px rgba(0, 23, 46, 0.2) !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card__title {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card__text {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card__link {
+  color: #0077b6 !important;
+  -webkit-text-fill-color: #0077b6 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card:hover .about-partnership-card__link {
+  color: #003262 !important;
+  -webkit-text-fill-color: #003262 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card__link-icon {
+  background: rgba(0, 119, 182, 0.14) !important;
+  color: #0077b6 !important;
+}
+
+[data-theme="blue"] .about-us-page #section-partnerships .about-partnership-card:hover .about-partnership-card__link-icon {
+  background: #003262 !important;
+  color: #ffffff !important;
 }
 
 /* Specifications / construction / accessories tables */

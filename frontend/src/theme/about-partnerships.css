@@ -1,0 +1,213 @@
+/* ── About Us: Partnership cards (light default) ── */
+.about-partnership-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 1px solid rgb(191 219 254 / 0.7);
+  background: #f8fcff;
+  box-shadow: 0 20px 60px rgb(15 23 42 / 0.06);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.about-partnership-card:hover {
+  transform: translateY(-6px);
+  border-color: rgb(34 211 238 / 0.45);
+  box-shadow: 0 28px 70px rgb(2 43 91 / 0.12);
+}
+
+.about-partnership-card__media {
+  position: relative;
+  height: 11.5rem;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--partner-accent, #0ea5e9) 0%,
+    #002b5b 100%
+  );
+}
+
+@media (min-width: 640px) {
+  .about-partnership-card__media {
+    height: 12.5rem;
+  }
+}
+
+.about-partnership-card__media-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--partner-accent, #0ea5e9) 72%, white) 0%,
+    #002b5b 58%,
+    #00172e 100%
+  );
+}
+
+.about-partnership-card__media img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.about-partnership-card:hover .about-partnership-card__media img {
+  transform: scale(1.06);
+}
+
+.about-partnership-card__media-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgb(0 23 46 / 0.82) 0%,
+    rgb(0 23 46 / 0.2) 52%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.about-partnership-card__tag {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 3;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  background: rgb(255 255 255 / 0.14);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.about-partnership-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.35rem 1.35rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .about-partnership-card__body {
+    padding: 1.5rem 1.6rem 1.65rem;
+  }
+}
+
+.about-partnership-card__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #002b5b;
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  .about-partnership-card__title {
+    font-size: 1.35rem;
+  }
+}
+
+.about-partnership-card__text {
+  flex: 1;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: #64748b;
+  word-break: break-word;
+}
+
+.about-partnership-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: auto;
+  width: fit-content;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0891b2;
+  transition: color 0.25s ease, gap 0.25s ease;
+}
+
+.about-partnership-card:hover .about-partnership-card__link {
+  color: #002b5b;
+  gap: 0.75rem;
+}
+
+.about-partnership-card__link-icon {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgb(34 211 238 / 0.18);
+  color: #0891b2;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.about-partnership-card:hover .about-partnership-card__link-icon {
+  background: #002b5b;
+  color: #fff;
+  transform: translateX(2px);
+}
+
+/* ── Dark theme ── */
+.dark .about-partnership-card,
+[data-theme="dark"] .about-partnership-card {
+  border-color: rgb(255 255 255 / 0.1);
+  background: #18181b;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.28);
+}
+
+.dark .about-partnership-card:hover,
+[data-theme="dark"] .about-partnership-card:hover {
+  border-color: rgb(34 211 238 / 0.35);
+  box-shadow: 0 28px 70px rgb(0 0 0 / 0.38);
+}
+
+.dark .about-partnership-card__title,
+[data-theme="dark"] .about-partnership-card__title {
+  color: #f4f4f5;
+}
+
+.dark .about-partnership-card__text,
+[data-theme="dark"] .about-partnership-card__text {
+  color: #a1a1aa;
+}
+
+.dark .about-partnership-card__link,
+[data-theme="dark"] .about-partnership-card__link {
+  color: #22d3ee;
+}
+
+.dark .about-partnership-card:hover .about-partnership-card__link,
+[data-theme="dark"] .about-partnership-card:hover .about-partnership-card__link {
+  color: #fff;
+}
+
+.dark .about-partnership-card__link-icon,
+[data-theme="dark"] .about-partnership-card__link-icon {
+  background: rgb(34 211 238 / 0.14);
+  color: #22d3ee;
+}
+
+.dark .about-partnership-card:hover .about-partnership-card__link-icon,
+[data-theme="dark"] .about-partnership-card:hover .about-partnership-card__link-icon {
+  background: #22d3ee;
+  color: #0f172a;
+}

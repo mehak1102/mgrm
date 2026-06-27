@@ -7,6 +7,11 @@ import {
   Truck,
   RotateCcw,
   ShieldCheck,
+  Lightbulb,
+  Sparkles,
+  HeartHandshake,
+  CheckCircle2,
+  Send,
 } from "lucide-react";
 import API from "../api";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
@@ -18,6 +23,7 @@ import {
   HeroHeading,
   FadeUpText,
 } from "../components/typography/TypographyMotion";
+import "../theme/support-suggestions.css";
 
 const supportTypes = [
   "Product Help",
@@ -26,6 +32,13 @@ const supportTypes = [
   "Return Request",
   "Bulk Inquiry",
   "Other",
+];
+
+const suggestionCategories = [
+  "Product Idea",
+  "Website Feedback",
+  "Service Improvement",
+  "General Suggestion",
 ];
 
 export default function Support() {
@@ -39,6 +52,15 @@ export default function Support() {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+
+  const [suggestionForm, setSuggestionForm] = useState({
+    name: "",
+    email: "",
+    category: "General Suggestion",
+    message: "",
+  });
+  const [suggestionLoading, setSuggestionLoading] = useState(false);
+  const [suggestionSuccess, setSuggestionSuccess] = useState(false);
 
   const submitSupport = async (e) => {
     e.preventDefault();
@@ -65,8 +87,29 @@ export default function Support() {
     }
   };
 
+  const submitSuggestion = async (e) => {
+    e.preventDefault();
+    setSuggestionLoading(true);
+    setSuggestionSuccess(false);
+
+    try {
+      await API.post("/suggestions", suggestionForm);
+      setSuggestionSuccess(true);
+      setSuggestionForm({
+        name: "",
+        email: "",
+        category: "General Suggestion",
+        message: "",
+      });
+    } catch (err) {
+      alert(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setSuggestionLoading(false);
+    }
+  };
+
   return (
-    <main className="relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
+    <main className="support-page relative bg-[#f6f7fb] bg-app dark:bg-zinc-950 min-h-screen overflow-hidden">
       {/* Full-viewport cinematic hero — first thing users see */}
       {/* <MGRMBrandRing /> */}
 
@@ -323,6 +366,148 @@ export default function Support() {
                 {loading ? "Submitting..." : "Submit"}
               </button>
             </form>
+          </div>
+        </section>
+
+        {/* SUGGESTIONS */}
+        <section className="max-w-7xl mx-auto px-5 pb-16">
+          <div className="support-suggestions-section p-8 md:p-12 lg:p-14">
+            <div
+              className="support-suggestions-section__glow support-suggestions-section__glow--one"
+              aria-hidden
+            />
+            <div
+              className="support-suggestions-section__glow support-suggestions-section__glow--two"
+              aria-hidden
+            />
+
+            <div className="relative z-10 grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+              <div>
+                <div className="support-suggestions-section__label">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                  Your Voice Matters
+                </div>
+
+                <h2 className="support-suggestions-section__title">
+                  We&apos;d love to{" "}
+                  <span className="support-suggestions-section__title-accent">hear from you</span>
+                </h2>
+
+                <p className="support-suggestions-section__intro">
+                  Have a product idea, website improvement, or something we could
+                  do better? Share your suggestions — every insight helps us build
+                  better rehabilitation experiences for everyone.
+                </p>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                  {[
+                    {
+                      title: "Product Ideas",
+                      text: "New braces, features, or innovations you'd like to see.",
+                      icon: Lightbulb,
+                    },
+                    {
+                      title: "Better Experience",
+                      text: "Tell us how we can improve support, shopping, or delivery.",
+                      icon: HeartHandshake,
+                    },
+                    {
+                      title: "Open Feedback",
+                      text: "Any thought that could help MGRM serve patients better.",
+                      icon: MessageCircle,
+                    },
+                  ].map((item) => (
+                    <div key={item.title} className="support-suggestions-section__pill">
+                      <span className="support-suggestions-section__pill-icon" aria-hidden>
+                        <item.icon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <p className="support-suggestions-section__pill-title">{item.title}</p>
+                        <p className="support-suggestions-section__pill-text">{item.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="support-suggestions-form">
+                {suggestionSuccess && (
+                  <div className="support-suggestions-success">
+                    <div>
+                      <span className="support-suggestions-success__icon" aria-hidden>
+                        <CheckCircle2 className="h-9 w-9" />
+                      </span>
+                      <p className="support-suggestions-success__title">Thank you!</p>
+                      <p className="support-suggestions-success__text">
+                        Your suggestion has been received. We truly appreciate you taking the time to share your ideas.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <h3 className="support-suggestions-form__title">Share your suggestion</h3>
+                <p className="support-suggestions-form__subtitle">
+                  Tell us what&apos;s on your mind — big or small, we read every message.
+                </p>
+
+                <form onSubmit={submitSuggestion} className="mt-6 space-y-3">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <input
+                      required
+                      placeholder="Your name"
+                      value={suggestionForm.name}
+                      onChange={(e) =>
+                        setSuggestionForm({ ...suggestionForm, name: e.target.value })
+                      }
+                      className="support-suggestions-field"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email (optional)"
+                      value={suggestionForm.email}
+                      onChange={(e) =>
+                        setSuggestionForm({ ...suggestionForm, email: e.target.value })
+                      }
+                      className="support-suggestions-field"
+                    />
+                  </div>
+
+                  <select
+                    value={suggestionForm.category}
+                    onChange={(e) =>
+                      setSuggestionForm({ ...suggestionForm, category: e.target.value })
+                    }
+                    className="support-suggestions-field"
+                  >
+                    {suggestionCategories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+
+                  <textarea
+                    required
+                    rows="5"
+                    placeholder="Describe your idea or suggestion..."
+                    value={suggestionForm.message}
+                    onChange={(e) =>
+                      setSuggestionForm({ ...suggestionForm, message: e.target.value })
+                    }
+                    className="support-suggestions-field resize-none"
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={suggestionLoading}
+                    className="support-suggestions-submit"
+                  >
+                    {suggestionLoading ? "Sending..." : "Share My Idea"}
+                    {!suggestionLoading && <Send className="h-4 w-4" aria-hidden />}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </section>
 

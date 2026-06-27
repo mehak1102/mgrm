@@ -20,6 +20,7 @@ import userRoutes from "./routes/users.js";
 import careerRoutes from "./routes/careers.js";
 import storeFeedbackRoutes from "./routes/storeFeedback.js";
 import warrantyClaimRoutes from "./routes/warrantyClaims.js";
+import suggestionRoutes from "./routes/suggestions.js";
 
 // dotenv.config();
 console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
@@ -62,6 +63,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/careers", careerRoutes);
 app.use("/api/store-feedback", storeFeedbackRoutes);
 app.use("/api/warranty-claims", warrantyClaimRoutes);
+app.use("/api/suggestions", suggestionRoutes);
 
 async function bootstrap() {
   try {
