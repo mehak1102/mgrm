@@ -11,6 +11,52 @@ import { useProductStats } from "../context/ProductStatsContext";
 import { trackSearch } from "../utils/recommendationBehavior";
 import Logo3D from "./Logo3D";
 import ThemeSelector from "./ThemeSelector";
+import { useTypewriterPlaceholder } from "../hooks/useTypewriterPlaceholder";
+
+const SEARCH_PLACEHOLDER_PHRASE = "Search products, category";
+
+function NavbarSearchField({
+  iconClassName,
+  inputClassName,
+  overlayClassName,
+  iconSize = 17,
+  value,
+  onChange,
+  focused,
+  onFocus,
+  onBlur,
+  animatedText,
+}) {
+  const showOverlay = !value;
+
+  return (
+    <>
+      <Search className={iconClassName} size={iconSize} />
+      <input
+        name="search"
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        placeholder=""
+        aria-label={SEARCH_PLACEHOLDER_PHRASE}
+        autoComplete="off"
+        className={inputClassName}
+      />
+      {showOverlay && (
+        <span
+          className={`${overlayClassName} typewriter-placeholder transition-opacity duration-300 ease-out ${
+            focused ? "opacity-0" : "opacity-100"
+          }`}
+          aria-hidden="true"
+        >
+          <span className="typewriter-placeholder__text">{animatedText}</span>
+          <span className="typewriter-placeholder__cursor" />
+        </span>
+      )}
+    </>
+  );
+}
 
 const aboutLinks = [
   "Our History",
@@ -39,6 +85,21 @@ export default function Navbar() {
   const [mobileBodyOpen, setMobileBodyOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileSupportOpen, setMobileSupportOpen] = useState(false);
+  const [searchDraft, setSearchDraft] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const typewriterPlaceholder = useTypewriterPlaceholder(
+    SEARCH_PLACEHOLDER_PHRASE,
+    !searchDraft
+  );
+
+  const searchFieldProps = {
+    value: searchDraft,
+    onChange: (e) => setSearchDraft(e.target.value),
+    focused: searchFocused,
+    onFocus: () => setSearchFocused(true),
+    onBlur: () => setSearchFocused(false),
+    animatedText: typewriterPlaceholder,
+  };
 
   useEffect(() => {
     setMobileOpen(false);
@@ -97,24 +158,27 @@ export default function Navbar() {
   return (
     <>
     <header className="sticky top-0 z-50 relative bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-2.5 min-[420px]:py-3 flex items-center gap-1 min-[420px]:gap-2 sm:gap-3 min-w-0">
+      <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-2.5 min-[420px]:py-3 flex items-center gap-1.5 min-[420px]:gap-2 lg:gap-2.5 xl:gap-3 min-w-0">
         <Logo3D />
 
-        <form onSubmit={handleSearch} className="hidden md:flex flex-1 min-w-0 max-w-xl relative mx-2">
-          <Search className="absolute left-4 top-3.5 text-gray-400 dark:text-zinc-500" size={18} />
-          <input
-            name="search"
-            placeholder="Search products, category, body part..."
-            className="w-full min-w-0 theme-panel rounded-2xl py-3 pl-11 pr-4 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15 shadow-sm focus:ring-2 focus:ring-cyan-500/40 dark:focus:ring-cyan-400/35 transition-all duration-300"
+        <form
+          onSubmit={handleSearch}
+          className="hidden md:flex flex-1 min-w-[9rem] lg:min-w-[11rem] xl:min-w-[14rem] relative mx-1 sm:mx-2"
+        >
+          <NavbarSearchField
+            {...searchFieldProps}
+            iconClassName="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 pointer-events-none"
+            inputClassName="w-full min-w-0 theme-panel rounded-2xl py-2 xl:py-2.5 pl-9 xl:pl-10 pr-3 text-sm text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15 shadow-sm focus:ring-2 focus:ring-cyan-500/40 dark:focus:ring-cyan-400/35 transition-all duration-300"
+            overlayClassName="absolute left-9 xl:left-10 top-1/2 -translate-y-1/2 pointer-events-none text-sm text-slate-500 dark:text-slate-400 truncate right-3"
           />
         </form>
 
-        <nav className="hidden lg:flex items-center gap-6 font-bold text-sm text-slate-800 dark:text-zinc-200 shrink-0">
-          <div className="group py-5">
+        <nav className="hidden lg:flex items-center gap-2.5 xl:gap-4 font-bold text-[13px] xl:text-sm text-slate-800 dark:text-zinc-200 shrink-0">
+          <div className="group">
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
               Find by Body Area <ChevronDown size={15} />
             </button>
-            <div className="hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10">
+            <div className="hidden group-hover:block absolute left-0 right-0 top-full bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10">
               <div className="max-w-7xl mx-auto grid grid-cols-5 gap-5 p-6">
                 {categoriesWithCounts.map((cat) => (
                   <button
@@ -150,12 +214,12 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="group py-5">
+          <div className="group">
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
               Shop By Activity <ChevronDown size={15} />
             </button>
 
-            <div className="activity-nav-dropdown hidden group-hover:block absolute left-0 right-0 top-[70px] bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto">
+            <div className="activity-nav-dropdown hidden group-hover:block absolute left-0 right-0 top-full bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 min-h-[calc(92vh-4.25rem)] flex flex-col">
                 <div className="flex justify-between items-center mb-6 gap-4 shrink-0">
                   <div>
@@ -230,7 +294,7 @@ export default function Navbar() {
             Blogs
           </NavLink>
 
-          <div className="relative group py-5">
+          <div className="relative group">
             <NavLink
               to="/support"
               className={({ isActive }) =>
@@ -266,7 +330,7 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <div className="flex gap-0.5 min-[420px]:gap-1 sm:gap-2 ml-auto items-center shrink-0">
+        <div className="flex gap-0.5 min-[420px]:gap-1 sm:gap-1.5 items-center shrink-0 ml-auto lg:ml-0">
           <ThemeSelector />
           <button
             type="button"
@@ -283,7 +347,7 @@ export default function Navbar() {
           </button>
 
           {authReady && user?.role === "admin" && (
-            <Link to="/admin" className="font-bold text-sm theme-text hidden md:inline whitespace-nowrap">
+            <Link to="/admin" className="font-bold text-sm theme-text hidden xl:inline whitespace-nowrap">
               Admin
             </Link>
           )}
@@ -291,7 +355,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => openDashboard()}
-              className="font-bold text-sm theme-text hidden md:inline hover:opacity-80 transition whitespace-nowrap"
+              className="font-bold text-sm theme-text hidden xl:inline hover:opacity-80 transition whitespace-nowrap"
             >
               Dashboard
             </button>
@@ -367,11 +431,12 @@ export default function Navbar() {
 
               <div className="flex-1 min-h-0 overflow-y-auto custom-scroll overscroll-contain px-4 py-4 space-y-4">
                 <form onSubmit={handleSearch} className="md:hidden relative">
-                  <Search className="absolute left-3 top-3 text-gray-400 dark:text-zinc-500" size={18} />
-                  <input
-                    name="search"
-                    placeholder="Search products..."
-                    className="w-full min-w-0 theme-panel rounded-2xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15"
+                  <NavbarSearchField
+                    {...searchFieldProps}
+                    iconSize={18}
+                    iconClassName="absolute left-3 top-3 text-gray-400 dark:text-zinc-500 pointer-events-none"
+                    inputClassName="w-full min-w-0 theme-panel rounded-2xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15"
+                    overlayClassName="absolute left-10 top-1/2 -translate-y-1/2 pointer-events-none text-sm text-slate-500 dark:text-slate-400 truncate right-4"
                   />
                 </form>
 

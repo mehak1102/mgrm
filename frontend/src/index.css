@@ -718,3 +718,39 @@ body {
   background: rgba(103, 232, 249, 0.15);
   color: #67e8f9;
 }
+
+.typewriter-placeholder__text {
+  display: inline-block;
+}
+
+.typewriter-placeholder__cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--accent-secondary) 78%, transparent);
+  animation: typewriter-cursor-blink 1.1s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.dark .typewriter-placeholder__cursor {
+  background: color-mix(in srgb, #67e8f9 82%, transparent);
+}
+
+@keyframes typewriter-cursor-blink {
+  0%,
+  42% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50%,
+  88% {
+    opacity: 0.2;
+    transform: scaleY(0.88);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

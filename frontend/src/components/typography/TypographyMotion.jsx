@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useSpring,
+  useMotionValueEvent,
+} from "framer-motion";
 
 /** Global viewport — trigger once when ~25% visible */
 export const VIEWPORT = { once: true, amount: 0.25 };
@@ -463,14 +469,14 @@ export function cardRevealTransition(index = 0) {
   };
 }
 
-/** Statistics — count-up for small numbers, scale-in for years */
+/** Statistics — smooth spring count-up */
 export function AnimatedStat({
   value,
   label,
   className = "",
   valueClassName = "",
   labelClassName = "",
-  duration = 1800,
+  duration = 2200,
 }) {
   const enabled = useMotionEnabled();
   const ref = useRef(null);
@@ -481,31 +487,38 @@ export function AnimatedStat({
   const suffix = match?.[3] ?? "";
   const shouldCount = numeric > 0 && numeric <= 200;
   const [count, setCount] = useState(!enabled || !shouldCount ? numeric : 0);
+  const countSpring = useSpring(0, {
+    stiffness: Math.max(26, Math.min(40, Math.round(75000 / duration))),
+    damping: 24,
+    mass: 0.85,
+    restDelta: 0.25,
+  });
+
+  useMotionValueEvent(countSpring, "change", (latest) => {
+    setCount(Math.round(latest));
+  });
 
   useEffect(() => {
-    if (!enabled || !isInView || !shouldCount) {
+    if (!enabled || !shouldCount) {
+      countSpring.jump(numeric);
       setCount(numeric);
       return;
     }
 
-    let frame;
-    const start = performance.now();
+    if (!isInView) return;
 
-    const tick = (now) => {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * numeric));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
+    countSpring.set(0);
+    const startTimer = window.setTimeout(() => {
+      countSpring.set(numeric);
+    }, 80);
 
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [isInView, numeric, duration, enabled, shouldCount]);
+    return () => window.clearTimeout(startTimer);
+  }, [isInView, numeric, enabled, shouldCount, countSpring]);
 
   if (!enabled) {
     return (
       <div ref={ref} className={className}>
-        <div className={valueClassName}>
+        <div className={`tabular-nums ${valueClassName}`}>
           {prefix}
           {numeric}
           {suffix}
@@ -519,12 +532,12 @@ export function AnimatedStat({
     <motion.div
       ref={ref}
       className={className}
-      initial={{ opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={VIEWPORT}
-      transition={{ duration: 0.75, ease: EASE_LUXURY }}
+      transition={{ duration: 0.7, ease: EASE_SMOOTH }}
     >
-      <div className={valueClassName}>
+      <div className={`tabular-nums ${valueClassName}`}>
         {prefix}
         {count}
         {suffix}
@@ -532,10 +545,10 @@ export function AnimatedStat({
       {label && (
         <motion.p
           className={labelClassName}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
-          transition={{ delay: 0.3, duration: 0.55, ease: EASE_SMOOTH }}
+          transition={{ delay: 0.22, duration: 0.6, ease: EASE_SMOOTH }}
         >
           {label}
         </motion.p>

@@ -30,6 +30,7 @@ import {
   SectionLabel,
   FadeUpText,
   cardRevealTransition,
+  AnimatedStat,
 } from "../components/typography/TypographyMotion";
 import {
   PremiumWordHeader,
@@ -1173,18 +1174,19 @@ const BANDAGE_STAT_PASTELS = [
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
 
         {[
-          [formatProductCount(bodyTotal), "Products"],
-          ["40+", "Countries"],
-          ["25+", "Years"],
-        ].map(([num, text], i) => {
+          { value: statsLoading ? null : formatProductCount(bodyTotal), label: "Products" },
+          { value: "40+", label: "Countries" },
+          { value: "25+", label: "Years" },
+        ].map(({ value, label }, i) => {
           const pastel = BANDAGE_STAT_PASTELS[i % BANDAGE_STAT_PASTELS.length];
 
           return (
           <motion.div
-            key={text}
-            initial={{ opacity: 0, y: 25 }}
+            key={label}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.08 }}
+            transition={{ delay: i * 0.14, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.35 }}
             className="home-bandage-stat-card home-bandage-stat-pastel rounded-[30px] border-2 p-5 sm:p-7 hover:-translate-y-2 transition-all duration-500 min-w-0"
             style={{
               "--bandage-stat-border": pastel.border,
@@ -1193,15 +1195,24 @@ const BANDAGE_STAT_PASTELS = [
               "--bandage-stat-glow": pastel.glow,
             }}
           >
-
-            <h3 className="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
-              {num}
-            </h3>
-
-            <p className="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400">
-              {text}
-            </p>
-
+            {value == null ? (
+              <>
+                <h3 className="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
+                  —
+                </h3>
+                <p className="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400">
+                  {label}
+                </p>
+              </>
+            ) : (
+              <AnimatedStat
+                value={value}
+                label={label}
+                duration={2200 + i * 220}
+                valueClassName="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100"
+                labelClassName="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400"
+              />
+            )}
           </motion.div>
         );
         })}
