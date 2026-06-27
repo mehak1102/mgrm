@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Search, ShoppingCart, HeartPulse, User, LogOut, ChevronDown, Menu, X, Briefcase, MapPin, ShieldCheck } from "lucide-react";
@@ -73,6 +73,8 @@ const supportLinks = [
   { label: "Warranty Information", to: "/support/warranty", Icon: ShieldCheck },
 ];
 
+const NAV_MENU_CLOSE_DELAY = 280;
+
 export default function Navbar() {
   const navigate = useNavigate();
   const { categoriesWithCounts } = useProductStats();
@@ -87,10 +89,26 @@ export default function Navbar() {
   const [mobileSupportOpen, setMobileSupportOpen] = useState(false);
   const [searchDraft, setSearchDraft] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
+  const menuCloseTimerRef = useRef(null);
   const typewriterPlaceholder = useTypewriterPlaceholder(
     SEARCH_PLACEHOLDER_PHRASE,
     !searchDraft
   );
+
+  const handleMenuEnter = (menuId) => {
+    if (menuCloseTimerRef.current) {
+      clearTimeout(menuCloseTimerRef.current);
+      menuCloseTimerRef.current = null;
+    }
+    setOpenMenu(menuId);
+  };
+
+  const handleMenuLeave = () => {
+    menuCloseTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+    }, NAV_MENU_CLOSE_DELAY);
+  };
 
   const searchFieldProps = {
     value: searchDraft,
@@ -106,7 +124,14 @@ export default function Navbar() {
     setMobileBodyOpen(false);
     setMobileAboutOpen(false);
     setMobileSupportOpen(false);
+    setOpenMenu(null);
   }, [location.pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (menuCloseTimerRef.current) clearTimeout(menuCloseTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -174,11 +199,21 @@ export default function Navbar() {
         </form>
 
         <nav className="hidden lg:flex items-center gap-2.5 xl:gap-4 font-bold text-[13px] xl:text-sm text-slate-800 dark:text-zinc-200 shrink-0">
-          <div className="group">
+          <div
+            className="py-3"
+            onMouseEnter={() => handleMenuEnter("body")}
+            onMouseLeave={handleMenuLeave}
+          >
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
               Find by Body Area <ChevronDown size={15} />
             </button>
-            <div className="hidden group-hover:block absolute left-0 right-0 top-full bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10">
+            <div
+              className={`absolute left-0 right-0 top-full -mt-8 pt-8 ${
+                openMenu === "body" ? "block" : "hidden"
+              } bg-app/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999]`}
+              onMouseEnter={() => handleMenuEnter("body")}
+              onMouseLeave={handleMenuLeave}
+            >
               <div className="max-w-7xl mx-auto grid grid-cols-5 gap-5 p-6">
                 {categoriesWithCounts.map((cat) => (
                   <button
@@ -214,12 +249,22 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="group">
+          <div
+            className="py-3"
+            onMouseEnter={() => handleMenuEnter("activity")}
+            onMouseLeave={handleMenuLeave}
+          >
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
               Shop By Activity <ChevronDown size={15} />
             </button>
 
-            <div className="activity-nav-dropdown hidden group-hover:block absolute left-0 right-0 top-full bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto">
+            <div
+              className={`activity-nav-dropdown absolute left-0 right-0 top-full -mt-8 pt-8 ${
+                openMenu === "activity" ? "block" : "hidden"
+              } bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto`}
+              onMouseEnter={() => handleMenuEnter("activity")}
+              onMouseLeave={handleMenuLeave}
+            >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 min-h-[calc(92vh-4.25rem)] flex flex-col">
                 <div className="flex justify-between items-center mb-6 gap-4 shrink-0">
                   <div>
@@ -272,12 +317,24 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="relative group">
+          <div
+            className="relative py-3"
+            onMouseEnter={() => handleMenuEnter("about")}
+            onMouseLeave={handleMenuLeave}
+          >
             <Link to="/about-us" className="whitespace-nowrap">
               About Us
             </Link>
 
-            <div className="about-nav-dropdown absolute top-full left-0 mt-4 w-72 rounded-3xl bg-white/95 dark:bg-slate-900/96 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] border border-slate-200 dark:border-white/14 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4 z-50">
+            <div
+              className={`about-nav-dropdown absolute top-full left-0 -mt-3 pt-3 w-72 rounded-3xl bg-white/95 dark:bg-slate-900/96 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] border border-slate-200 dark:border-white/14 transition-all duration-300 p-4 z-50 ${
+                openMenu === "about"
+                  ? "opacity-100 visible translate-y-0 pointer-events-auto"
+                  : "opacity-0 invisible translate-y-2 pointer-events-none"
+              }`}
+              onMouseEnter={() => handleMenuEnter("about")}
+              onMouseLeave={handleMenuLeave}
+            >
               {aboutLinks.map((item) => (
                 <Link
                   key={item}
@@ -294,7 +351,11 @@ export default function Navbar() {
             Blogs
           </NavLink>
 
-          <div className="relative group">
+          <div
+            className="relative py-3"
+            onMouseEnter={() => handleMenuEnter("support")}
+            onMouseLeave={handleMenuLeave}
+          >
             <NavLink
               to="/support"
               className={({ isActive }) =>
@@ -305,10 +366,24 @@ export default function Navbar() {
                 }`
               }
             >
-              Support <ChevronDown size={15} className="transition-transform duration-250 group-hover:rotate-180" />
+              Support{" "}
+              <ChevronDown
+                size={15}
+                className={`transition-transform duration-250 ${
+                  openMenu === "support" ? "rotate-180" : ""
+                }`}
+              />
             </NavLink>
 
-            <div className="support-nav-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-[22px] bg-white/90 dark:bg-slate-900/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] border border-slate-200/80 dark:border-white/14 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] p-3 z-50">
+            <div
+              className={`support-nav-dropdown absolute top-full left-1/2 -translate-x-1/2 -mt-2 pt-2 w-72 rounded-[22px] bg-white/90 dark:bg-slate-900/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] border border-slate-200/80 dark:border-white/14 transition-all duration-250 ease-[cubic-bezier(0.22,1,0.36,1)] p-3 z-50 ${
+                openMenu === "support"
+                  ? "opacity-100 visible translate-y-0 pointer-events-auto"
+                  : "opacity-0 invisible translate-y-2 pointer-events-none"
+              }`}
+              onMouseEnter={() => handleMenuEnter("support")}
+              onMouseLeave={handleMenuLeave}
+            >
               {supportLinks.map(({ label, to, Icon }) => {
                 const active = location.pathname === to;
                 return (
