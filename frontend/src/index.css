@@ -963,6 +963,25 @@ body {
   }
 }
 
+/* Blue theme — Instagram header reads on deep blue surface (not a light card island) */
+[data-theme="blue"] .instagram-feed {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="blue"] .instagram-feed :is(h2, .text-fg, .font-bold) {
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .instagram-feed :is(.text-fg-muted, p) {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+[data-theme="blue"] .instagram-feed .instagram-feed__tile + .instagram-feed__tile {
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+
 @keyframes typewriter-cursor-blink {
   0%,
   42% {

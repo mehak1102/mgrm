@@ -921,3 +921,24 @@
 [data-theme="blue"] .theme-selector [role="listbox"] .text-gray-500 {
   color: rgba(255, 255, 255, 0.75) !important;
 }
+
+/* Instagram feed — readable white text on deep blue surface */
+[data-theme="blue"] section.instagram-feed.bg-card {
+  background: var(--bg-primary) !important;
+  color: #ffffff !important;
+  border-top-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+[data-theme="blue"] section.instagram-feed.bg-card :is(h2, .text-fg, .font-bold, .tabular-nums) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-theme="blue"] section.instagram-feed.bg-card :is(.text-fg-muted, p) {
+  color: rgba(255, 255, 255, 0.82) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.82) !important;
+}
+
+[data-theme="blue"] section.instagram-feed .instagram-feed__tile + .instagram-feed__tile {
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
