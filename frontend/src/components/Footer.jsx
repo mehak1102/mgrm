@@ -69,7 +69,7 @@ function SocialIcon({ name }) {
 
 const SOCIAL_LINKS = [
   { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com" },
-  { id: "instagram", label: "Instagram", href: "https://instagram.com" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/mgrmmedicare/" },
   { id: "facebook", label: "Facebook", href: "https://facebook.com" },
   { id: "youtube", label: "YouTube", href: "https://youtube.com" },
 ];
@@ -173,7 +173,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative mt-24 border-t border-edge bg-app-muted text-fg transition-colors duration-300">
+    <footer className="relative border-t border-edge bg-app-muted text-fg transition-colors duration-300">
       <div
         className={`pointer-events-none absolute inset-0 ${
           theme === "blue"
@@ -223,7 +223,7 @@ export default function Footer() {
 
           <div className="lg:col-span-2">
             <h3 className="text-sm font-black uppercase tracking-[0.2em] text-brand mb-5">
-              Quick Links
+              NAVIGATION
             </h3>
             <ul className="space-y-3">
               {QUICK_LINKS.map((link) => (

@@ -7,6 +7,7 @@ import CartDrawer from "./components/CartDrawer";
 import FloatingHelp from "./components/FloatingHelp";
 import TidioChat from "./components/TidioChat";
 import Footer from "./components/Footer";
+import InstagramFeed from "./components/InstagramFeed";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedAdmin from "./components/ProtectedAdmin";
 
@@ -118,6 +119,7 @@ export default function App() {
         </Routes>
       </Suspense>
 
+      {!hideLayout && <InstagramFeed />}
       {!hideLayout && <Footer />}
       {!hideLayout && <CartDrawer />}
       {!hideLayout && <FloatingHelp />}

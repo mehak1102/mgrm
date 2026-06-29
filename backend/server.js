@@ -21,6 +21,7 @@ import careerRoutes from "./routes/careers.js";
 import storeFeedbackRoutes from "./routes/storeFeedback.js";
 import warrantyClaimRoutes from "./routes/warrantyClaims.js";
 import suggestionRoutes from "./routes/suggestions.js";
+import instagramRoutes from "./routes/instagram.js";
 import { warmupProductStats } from "./services/productStatsService.js";
 
 // dotenv.config();
@@ -65,6 +66,7 @@ app.use("/api/careers", careerRoutes);
 app.use("/api/store-feedback", storeFeedbackRoutes);
 app.use("/api/warranty-claims", warrantyClaimRoutes);
 app.use("/api/suggestions", suggestionRoutes);
+app.use("/api/instagram", instagramRoutes);
 
 async function bootstrap() {
   try {

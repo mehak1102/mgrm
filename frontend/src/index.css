@@ -738,6 +738,42 @@ body {
   background: color-mix(in srgb, #67e8f9 82%, transparent);
 }
 
+/* Instagram feed — above footer (ACG-style strip) */
+.instagram-feed {
+  margin-top: 6rem;
+}
+
+.instagram-feed__track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.instagram-feed__track::-webkit-scrollbar {
+  display: none;
+}
+
+.instagram-feed__tile + .instagram-feed__tile {
+  border-left: 1px solid color-mix(in srgb, var(--border-color) 80%, transparent);
+}
+
+.dark .instagram-feed__tile + .instagram-feed__tile {
+  border-left-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 640px) {
+  .instagram-feed__scroll-btn--next {
+    right: 0.5rem;
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+
+  .instagram-feed__scroll-btn--prev {
+    left: 0.5rem;
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+}
+
 @keyframes typewriter-cursor-blink {
   0%,
   42% {
