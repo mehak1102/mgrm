@@ -146,11 +146,10 @@ export default function Home() {
   const {
     categoriesWithCounts,
     bodyTotal,
-    loading: statsLoading,
     formatProductCount,
   } = useProductStats();
 
-  const heroCountLabel = statsLoading ? "—" : String(bodyTotal);
+  const heroCountLabel = String(bodyTotal);
   const heroText = `${heroCountLabel} MGRM products - to cure your body`;
   const heroNumLen = heroCountLabel.length;
 
@@ -709,7 +708,7 @@ const BANDAGE_STAT_PASTELS = [
             delay={0.25}
             className="mt-8 max-w-xl text-base leading-8 text-slate-600 dark:text-zinc-400 md:text-lg"
           >
-            {statsLoading ? "—" : bodyTotal} world-class certified products designed for
+            {bodyTotal} world-class certified products designed for
             relief, recovery and rehabilitation with trusted
             orthopedic and post-surgical support solutions.
           </FadeUpText>
@@ -1174,7 +1173,7 @@ const BANDAGE_STAT_PASTELS = [
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
 
         {[
-          { value: statsLoading ? null : formatProductCount(bodyTotal), label: "Products" },
+          { value: formatProductCount(bodyTotal), label: "Products" },
           { value: "40+", label: "Countries" },
           { value: "25+", label: "Years" },
         ].map(({ value, label }, i) => {
@@ -1195,24 +1194,13 @@ const BANDAGE_STAT_PASTELS = [
               "--bandage-stat-glow": pastel.glow,
             }}
           >
-            {value == null ? (
-              <>
-                <h3 className="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100">
-                  —
-                </h3>
-                <p className="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400">
-                  {label}
-                </p>
-              </>
-            ) : (
-              <AnimatedStat
-                value={value}
-                label={label}
-                duration={2200 + i * 220}
-                valueClassName="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100"
-                labelClassName="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400"
-              />
-            )}
+            <AnimatedStat
+              value={value}
+              label={label}
+              duration={2200 + i * 220}
+              valueClassName="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100"
+              labelClassName="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400"
+            />
           </motion.div>
         );
         })}

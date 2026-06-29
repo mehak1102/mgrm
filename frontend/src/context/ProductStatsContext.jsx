@@ -1,33 +1,41 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import API from "../api";
+import {
+  FALLBACK_PRODUCT_STATS,
+  fetchProductStats,
+  getBootstrapProductStats,
+  normalizeProductStats,
+} from "../utils/productStatsLoader";
+import { loadCachedProductStats } from "../utils/productStatsCache";
 import { bodyCategories } from "../data/siteData";
-import { productMatchesCategory } from "../utils/categoryProductMatch";
 
 const ProductStatsContext = createContext(null);
 
+function initialStats() {
+  return getBootstrapProductStats();
+}
+
 export function ProductStatsProvider({ children }) {
-  const [stats, setStats] = useState({
-    total: 0,
-    bodyTotal: 0,
-    activityTotal: 0,
-    products: [],
-  });
-  const [loading, setLoading] = useState(true);
+  const cachedOnMount = !!loadCachedProductStats();
+  const [stats, setStats] = useState(initialStats);
+  const [hasExactStats, setHasExactStats] = useState(cachedOnMount);
 
   useEffect(() => {
     let ignore = false;
 
-    API.get("/products/stats")
-      .then((res) => {
-        if (!ignore) setStats(res.data);
+    fetchProductStats()
+      .then((next) => {
+        if (!ignore) {
+          setStats(next);
+          setHasExactStats(true);
+        }
       })
       .catch(() => {
         if (!ignore) {
-          setStats({ total: 0, bodyTotal: 0, activityTotal: 0, products: [] });
+          setStats({
+            ...FALLBACK_PRODUCT_STATS,
+            categoryCounts: { ...FALLBACK_PRODUCT_STATS.categoryCounts },
+          });
         }
-      })
-      .finally(() => {
-        if (!ignore) setLoading(false);
       });
 
     return () => {
@@ -35,17 +43,7 @@ export function ProductStatsProvider({ children }) {
     };
   }, []);
 
-  const categoryCounts = useMemo(() => {
-    const map = {};
-    for (const cat of bodyCategories) {
-      map[cat.query] = stats.products.filter((p) =>
-        productMatchesCategory(p, cat.query)
-      ).length;
-    }
-    return map;
-  }, [stats.products]);
-
-  const getCategoryCount = (query) => categoryCounts[query] ?? 0;
+  const getCategoryCount = (query) => stats.categoryCounts[query] ?? 0;
 
   const categoriesWithCounts = useMemo(
     () =>
@@ -53,13 +51,16 @@ export function ProductStatsProvider({ children }) {
         ...cat,
         count: getCategoryCount(cat.query),
       })),
-    [categoryCounts]
+    [stats.categoryCounts]
   );
 
   const formatProductCount = (n, { suffix = "+" } = {}) => {
-    if (loading) return "—";
-    if (n === 0) return suffix ? "0" : "0";
-    return suffix ? `${n}${suffix}` : String(n);
+    const value =
+      n == null || (n === 0 && !hasExactStats)
+        ? FALLBACK_PRODUCT_STATS.bodyTotal
+        : n;
+    if (value === 0) return suffix ? "0" : "0";
+    return suffix ? `${value}${suffix}` : String(value);
   };
 
   const value = useMemo(
@@ -67,12 +68,12 @@ export function ProductStatsProvider({ children }) {
       totalProducts: stats.total,
       bodyTotal: stats.bodyTotal,
       activityTotal: stats.activityTotal,
-      loading,
+      hasExactStats,
       getCategoryCount,
       categoriesWithCounts,
       formatProductCount,
     }),
-    [stats, loading, categoryCounts, categoriesWithCounts]
+    [stats, hasExactStats, categoriesWithCounts]
   );
 
   return (

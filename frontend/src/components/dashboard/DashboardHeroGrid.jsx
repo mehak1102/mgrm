@@ -566,7 +566,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
   }, [orders, products]);
 
   const productCountLabel = (count) =>
-    `${count || "—"} MGRM medicare products | Braces | Bandage | Splintage`;
+    `${count || bodyTotal} MGRM medicare products | Braces | Bandage | Splintage`;
 
   const recoverySplit = useMemo(() => {
     if (recoveryPreview?.beforeImage && recoveryPreview?.afterImage) {
@@ -609,7 +609,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           glow={POSTER_GLOW.shop}
           label="Explore"
           title="Shop Products"
-          subtitle={productCountLabel(products.length)}
+          subtitle={productCountLabel(bodyTotal)}
           subtitleLines={2}
           carousel={shopCarouselItems}
           onCarouselItemClick={(slug) => onRoute(`/product/${slug}`)}

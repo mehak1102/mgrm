@@ -21,6 +21,7 @@ import careerRoutes from "./routes/careers.js";
 import storeFeedbackRoutes from "./routes/storeFeedback.js";
 import warrantyClaimRoutes from "./routes/warrantyClaims.js";
 import suggestionRoutes from "./routes/suggestions.js";
+import { warmupProductStats } from "./services/productStatsService.js";
 
 // dotenv.config();
 console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
@@ -69,6 +70,8 @@ async function bootstrap() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Mongo Connected");
+
+    await warmupProductStats();
 
     const port = process.env.PORT || 5000;
     app.listen(port, () => {

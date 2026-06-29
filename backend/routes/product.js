@@ -1,6 +1,10 @@
 import express from "express";
 import Product from "../models/Product.js";
 import { auth, adminOnly } from "../middleware/auth.js";
+import {
+  getProductStats,
+  invalidateProductStatsCache,
+} from "../services/productStatsService.js";
 
 const router = express.Router();
 
@@ -89,14 +93,9 @@ if (bodyOnly === "true") {
 // GET product counts for UI (must be before /:slug)
 router.get("/stats", async (req, res) => {
   try {
-    const [total, bodyTotal, activityTotal, products] = await Promise.all([
-      Product.countDocuments(),
-      Product.countDocuments({ category: { $exists: true, $ne: "" } }),
-      Product.countDocuments({ activity: { $exists: true, $ne: "" } }),
-      Product.find({}).select("category name activity").lean(),
-    ]);
-
-    res.json({ total, bodyTotal, activityTotal, products });
+    const payload = await getProductStats();
+    res.set("Cache-Control", "public, max-age=300");
+    res.json(payload);
   } catch (err) {
     console.error("Product stats error:", err);
     res.status(500).json({ msg: err.message });
@@ -154,6 +153,7 @@ router.post("/", auth, adminOnly, async (req, res) => {
       stock: Number(req.body.stock || 10),
     });
 
+    invalidateProductStatsCache();
     res.status(201).json(product);
   } catch (err) {
     console.error("Product create error:", err);
@@ -198,6 +198,7 @@ router.put("/:id", auth, adminOnly, async (req, res) => {
       return res.status(404).json({ msg: "Product not found" });
     }
 
+    invalidateProductStatsCache();
     res.json(product);
   } catch (err) {
     console.error("Product update error:", err);
@@ -209,6 +210,7 @@ router.put("/:id", auth, adminOnly, async (req, res) => {
 router.delete("/:id", auth, adminOnly, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
+    invalidateProductStatsCache();
     res.json({ msg: "Product deleted" });
   } catch (err) {
     res.status(500).json({ msg: err.message });

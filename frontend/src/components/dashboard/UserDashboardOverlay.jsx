@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, X } from "lucide-react";
-import API from "../../api";
-import { useDashboard } from "../../context/DashboardContext";
 import { useAuth } from "../../context/AuthContext";
+import { useDashboard } from "../../context/DashboardContext";
+import { useProductStats } from "../../context/ProductStatsContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getDashboardTheme, SECTION_LABELS } from "./dashboardTheme";
 
@@ -98,17 +98,12 @@ export default function UserDashboardOverlay() {
   const navigate = useNavigate();
   const dt = getDashboardTheme(theme);
 
+  const { bodyTotal } = useProductStats();
   const [view, setView] = useState("hero");
   const [activeSection, setActiveSection] = useState(null);
   const [isZooming, setIsZooming] = useState(false);
-  const [productCount, setProductCount] = useState(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    API.get("/products")
-      .then((r) => setProductCount((r.data.products || []).length))
-      .catch(() => setProductCount(null));
-  }, [isOpen]);
+  const productCountLabel = `${bodyTotal} MGRM medicare products | Braces | Bandage | Splintage`;
 
   useEffect(() => {
     if (!isOpen) {
@@ -227,7 +222,7 @@ export default function UserDashboardOverlay() {
                     </h2>
                   ) : (
                     <FlowingLetterText
-                      text={`${productCount ?? "—"} MGRM medicare products | Braces | Bandage | Splintage`}
+                      text={productCountLabel}
                       countColor={dt.flowCountColor}
                       textColor={dt.flowTextColor}
                     />

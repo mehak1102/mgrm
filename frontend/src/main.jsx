@@ -11,27 +11,29 @@ import { DashboardProvider } from "./context/DashboardContext";
 import { ProductStatsProvider } from "./context/ProductStatsContext";
 import { getStoredTheme } from "./theme/tokens";
 import { loadThemeStyles } from "./theme/loadThemeStyles";
+import { primeProductStatsFetch } from "./utils/productStatsLoader";
+import { preconnectApi } from "./utils/apiPreconnect";
 
-async function bootstrap() {
-  await loadThemeStyles(getStoredTheme());
+preconnectApi();
+primeProductStatsFetch();
 
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <DashboardProvider>
-            <CartProvider>
-              <WishlistProvider>
-                <ProductStatsProvider>
-                  <App />
-                </ProductStatsProvider>
-              </WishlistProvider>
-            </CartProvider>
-          </DashboardProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
-  );
-}
+// Do not block first paint — theme bundles load in the background.
+loadThemeStyles(getStoredTheme());
 
-bootstrap();
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <ThemeProvider>
+      <AuthProvider>
+        <DashboardProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <ProductStatsProvider>
+                <App />
+              </ProductStatsProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </DashboardProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  </BrowserRouter>
+);

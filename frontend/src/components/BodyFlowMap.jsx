@@ -497,7 +497,7 @@ function CategoryLabel({ item, index, go, categoryCount }) {
 
 export default function BodyFlowMap() {
   const navigate = useNavigate();
-  const { bodyTotal, getCategoryCount, loading: statsLoading } = useProductStats();
+  const { bodyTotal, getCategoryCount } = useProductStats();
 
   const go = (query) => {
     navigate(`/shop?category=${encodeURIComponent(query)}`);
@@ -512,7 +512,7 @@ export default function BodyFlowMap() {
           className="text-center mb-8"
         >
           <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
-            <span className="text-red-500">{statsLoading ? "—" : bodyTotal}</span> world class certified products
+            <span className="text-red-500">{bodyTotal}</span> world class certified products
           </h2>
           <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
             to heal and rehabilitate comfortably
