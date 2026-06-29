@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import CartDrawer from "./components/CartDrawer";
 import FloatingHelp from "./components/FloatingHelp";
+import TidioChat from "./components/TidioChat";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedAdmin from "./components/ProtectedAdmin";
@@ -120,6 +121,7 @@ export default function App() {
       {!hideLayout && <Footer />}
       {!hideLayout && <CartDrawer />}
       {!hideLayout && <FloatingHelp />}
+      <TidioChat />
 
       <Toaster
         position="top-right"
