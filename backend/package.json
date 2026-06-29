@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed:instagram": "node scripts/seedInstagramCache.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.1",
     "multer": "^2.1.1",
+    "pdfkit": "^0.19.1",
     "razorpay": "^2.9.6",
     "streamifier": "^0.1.1"
   },

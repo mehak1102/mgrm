@@ -36,6 +36,7 @@ function apiHost() {
 
 function resolveMediaSrc(url) {
   if (!url) return "/products/logo-mark.png";
+  if (url.includes("res.cloudinary.com")) return url;
   if (url.startsWith("http://") || url.startsWith("https://")) {
     const host = apiHost();
     return `${host}/api/instagram/image?url=${encodeURIComponent(url)}`;

@@ -24,6 +24,7 @@ import {
   Minus,
   Plus,
 } from "lucide-react";
+import ProductShareButton from "../components/product/ProductShareButton";
 import { SectionHeading, FadeUpText } from "../components/typography/TypographyMotion";
 import DeliveryTrustBadge from "../components/DeliveryTrustBadge";
 
@@ -203,6 +204,7 @@ export default function ProductDetail() {
             >
               <ShoppingCart size={18} /> Add To Cart
             </button>
+            <ProductShareButton product={product} compact />
             <button
               type="button"
               onClick={() => toggleWishlist(product)}

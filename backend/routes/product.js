@@ -5,6 +5,7 @@ import {
   getProductStats,
   invalidateProductStatsCache,
 } from "../services/productStatsService.js";
+import { generateProductCatalogPdf } from "../services/catalogPdfService.js";
 
 const router = express.Router();
 
@@ -109,6 +110,23 @@ router.get("/categories", async (req, res) => {
     res.json(categories.filter(Boolean));
   } catch (err) {
     res.status(500).json({ msg: err.message });
+  }
+});
+
+// GET product catalogue PDF (all products)
+router.get("/catalog/pdf", async (req, res) => {
+  try {
+    const pdf = await generateProductCatalogPdf();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="MGRM-Medicare-Product-Catalogue.pdf"'
+    );
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    res.send(pdf);
+  } catch (err) {
+    console.error("Catalog PDF error:", err);
+    res.status(500).json({ msg: "Failed to generate catalogue PDF" });
   }
 });
 

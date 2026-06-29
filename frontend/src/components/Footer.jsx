@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { useTheme } from "../context/ThemeContext";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
+import FooterActionBar from "./footer/FooterActionBar";
 
 const PAYMENT_LOGOS = [
   { name: "UPI", src: "/products/upi.png" },
@@ -174,6 +175,7 @@ export default function Footer() {
 
   return (
     <footer className="relative border-t border-edge bg-app-muted text-fg transition-colors duration-300">
+      <FooterActionBar />
       <div
         className={`pointer-events-none absolute inset-0 ${
           theme === "blue"

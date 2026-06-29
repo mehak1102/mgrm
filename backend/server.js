@@ -23,6 +23,7 @@ import warrantyClaimRoutes from "./routes/warrantyClaims.js";
 import suggestionRoutes from "./routes/suggestions.js";
 import instagramRoutes from "./routes/instagram.js";
 import { warmupProductStats } from "./services/productStatsService.js";
+import { warmupInstagramCache } from "./services/instagramService.js";
 
 // dotenv.config();
 console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
@@ -74,6 +75,7 @@ async function bootstrap() {
     console.log("Mongo Connected");
 
     await warmupProductStats();
+    warmupInstagramCache();
 
     const port = process.env.PORT || 5000;
     app.listen(port, () => {
