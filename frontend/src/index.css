@@ -679,6 +679,25 @@ body {
     0 0 40px var(--pc-pastel-glow);
 }
 
+/* Dark theme — white pastel cards need dark ink (Recommended Supports only) */
+.dark .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black),
+[data-theme="dark"] .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black) {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+.dark .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500),
+[data-theme="dark"] .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500) {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
+.dark .home-recommended-section .product-card--pastel .line-through,
+[data-theme="dark"] .home-recommended-section .product-card--pastel .line-through {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+
 [data-theme="blue"] .home-recommended-section .product-card--pastel {
   background: #ffffff !important;
   border-color: var(--pc-pastel-border) !important;

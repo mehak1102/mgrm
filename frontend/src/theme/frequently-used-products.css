@@ -112,6 +112,25 @@
   color: #64748b !important;
 }
 
+/* Dark theme — white cards need dark ink (Frequently Used Products only) */
+.dark .fup-section .fup-card :is(h3, .text-xl.font-black),
+[data-theme="dark"] .fup-section .fup-card :is(h3, .text-xl.font-black) {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+.dark .fup-section .fup-card p,
+[data-theme="dark"] .fup-section .fup-card p {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
+.dark .fup-section .fup-card .line-through,
+[data-theme="dark"] .fup-section .fup-card .line-through {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+
 .fup-card > *:not(.fup-card__halo) {
   position: relative;
   z-index: 1;
