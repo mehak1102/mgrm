@@ -47,6 +47,7 @@ const loadBodyFlowMap = () => import("../components/BodyFlowMap");
 const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCollectionsSection");
 const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
 const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
+const loadColorCustomize = () => import("../components/home/HomeColorCustomizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
 
@@ -150,7 +151,7 @@ export default function Home() {
   } = useProductStats();
 
   const heroCountLabel = String(bodyTotal);
-  const heroText = `${heroCountLabel} MGRM products - to cure your body`;
+  const heroText = `${heroCountLabel} MGRM medicare products | Braces | Bandage | Splintage`;
   const heroNumLen = heroCountLabel.length;
 
   const certifications = [
@@ -272,11 +273,12 @@ const BANDAGE_STAT_PASTELS = [
               <BrandPillBadgeRow className="mb-2 sm:mb-2.5" />
             </motion.div>
 
+            <div className="overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <motion.h1
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="home-hero-title text-[28px] md:text-[52px] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 max-w-6xl pt-1 transition-colors duration-300 flex flex-wrap"
+      className="home-hero-title w-max max-w-none text-[clamp(0.8125rem,2.65vw,3.25rem)] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 pt-1 transition-colors duration-300 flex flex-nowrap whitespace-nowrap"
     >
       {heroText.split("").map((char, index) => (
         <motion.span
@@ -296,7 +298,7 @@ const BANDAGE_STAT_PASTELS = [
             duration: 1.4,
             ease: [0.19, 1, 0.22, 1],
           }}
-          className={`inline-block will-change-transform ${
+          className={`inline-block shrink-0 will-change-transform ${
             index < heroNumLen ? "text-red-500 home-hero-num" : "home-hero-tail text-slate-700 dark:text-inherit"
           }`}
         >
@@ -304,6 +306,7 @@ const BANDAGE_STAT_PASTELS = [
         </motion.span>
       ))}
     </motion.h1>
+            </div>
 
             <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-8 mb-2">
               <SectionLabel className="blue-theme-section-label text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
@@ -1121,7 +1124,7 @@ const BANDAGE_STAT_PASTELS = [
           <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
 
           <span className="home-bandage-badge-label text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
-            GLOBAL MEDICAL BRAND
+           MGRM - GLOBAL MEDICAL BRAND
           </span>
         </div>
 
@@ -1519,6 +1522,7 @@ const BANDAGE_STAT_PASTELS = [
         </section>
 
         <DeferredSection loader={loadSmartSize} minHeight={560} />
+        <DeferredSection loader={loadColorCustomize} minHeight={640} />
         <DeferredSection loader={loadTestimonials} minHeight={520} />
 
         {/* BLOGS */}

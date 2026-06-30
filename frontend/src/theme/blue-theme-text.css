@@ -58,6 +58,7 @@
     .home-bandage-section,
     .home-trusted-supports-section,
     .home-smart-size-section,
+    .home-color-customize-section,
     .home-trust-cert-section
   ) > .relative {
   color: #12324a;
@@ -67,6 +68,7 @@
     .home-bandage-section,
     .home-trusted-supports-section,
     .home-smart-size-section,
+    .home-color-customize-section,
     .home-trust-cert-section
   ) > .relative
   :is(h1, h2, h3, h4, h5, h6, .font-black) {
@@ -78,6 +80,7 @@
     .home-bandage-section,
     .home-trusted-supports-section,
     .home-smart-size-section,
+    .home-color-customize-section,
     .home-trust-cert-section
   ) > .relative
   :is(p, .text-gray-500, .text-fg-muted, .text-slate-500) {

@@ -550,6 +550,77 @@
   background: #10b981 !important;
 }
 
+/* Customize Your Colour — blue theme */
+[data-theme="blue"] .home-color-customize-section > .absolute.inset-0 {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="blue"] .home-color-customize-section .relative > *:first-child :is([class*="tracking-"], .text-cyan-600) {
+  color: #ffd700 !important;
+}
+
+[data-theme="blue"] .home-color-customize-section .relative > *:first-child :is(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-theme="blue"] .home-color-customize-section .relative > *:first-child p,
+[data-theme="blue"] .home-color-customize-section .relative > *:first-child .text-gray-500,
+[data-theme="blue"] .home-color-customize-section .relative > *:first-child .text-fg-muted {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* White form card — dark ink on glass (blue theme only) */
+[data-theme="blue"] .home-color-customize-form {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #12324a !important;
+}
+
+[data-theme="blue"] .home-color-customize-form :is(
+  h3,
+  .home-color-customize-label,
+  label,
+  .text-slate-900,
+  .text-slate-700,
+  .font-black
+) {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-color-customize-form :is(p, .text-gray-500, .text-zinc-400) {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-color-customize-preview :is(p, .font-black) {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+}
+
+[data-theme="blue"] .home-color-customize-preview :is(.text-xs, .text-gray-500, .font-mono) {
+  color: #4f6980 !important;
+  -webkit-text-fill-color: #4f6980 !important;
+}
+
+[data-theme="blue"] .home-color-customize-form .home-color-customize-success,
+[data-theme="blue"] .home-color-customize-form .home-color-customize-success p {
+  color: #12324a !important;
+  -webkit-text-fill-color: #12324a !important;
+}
+
+[data-theme="blue"] .home-color-customize-form .border-dashed {
+  border-color: rgba(15, 50, 98, 0.22) !important;
+}
+
+[data-theme="blue"] .home-color-customize-form .text-slate-500 {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
 /* ══════════════════════════════════════════════════════════
    YELLOW ACCENTS (restored — not text-visibility pass)
    ══════════════════════════════════════════════════════════ */

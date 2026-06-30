@@ -21,6 +21,7 @@ import careerRoutes from "./routes/careers.js";
 import storeFeedbackRoutes from "./routes/storeFeedback.js";
 import warrantyClaimRoutes from "./routes/warrantyClaims.js";
 import suggestionRoutes from "./routes/suggestions.js";
+import colorCustomizationRoutes from "./routes/colorCustomization.js";
 import instagramRoutes from "./routes/instagram.js";
 import { warmupProductStats } from "./services/productStatsService.js";
 import { warmupInstagramCache } from "./services/instagramService.js";
@@ -67,6 +68,7 @@ app.use("/api/careers", careerRoutes);
 app.use("/api/store-feedback", storeFeedbackRoutes);
 app.use("/api/warranty-claims", warrantyClaimRoutes);
 app.use("/api/suggestions", suggestionRoutes);
+app.use("/api/color-customization", colorCustomizationRoutes);
 app.use("/api/instagram", instagramRoutes);
 
 async function bootstrap() {
