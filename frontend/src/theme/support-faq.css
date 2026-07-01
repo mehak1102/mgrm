@@ -1,0 +1,114 @@
+/* Support page — FAQ accordion */
+
+.support-faq {
+  margin-top: 0.5rem;
+}
+
+.support-faq__title {
+  margin: 0 0 1.75rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary, #0f172a);
+}
+
+.support-faq__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 42rem;
+}
+
+.support-faq__item {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.dark .support-faq__item,
+[data-theme="dark"] .support-faq__item {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.support-faq__trigger {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 1.1rem 0;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-primary, #0f172a);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.support-faq__trigger:hover {
+  color: #25319a;
+}
+
+.dark .support-faq__trigger,
+[data-theme="dark"] .support-faq__trigger {
+  color: #f4f4f5;
+}
+
+.dark .support-faq__trigger:hover,
+[data-theme="dark"] .support-faq__trigger:hover {
+  color: #67e8f9;
+}
+
+.support-faq__chevron {
+  margin-top: 0.15rem;
+  color: #22a7dc;
+  transition: transform 0.25s ease;
+}
+
+.support-faq__chevron--open {
+  transform: rotate(90deg);
+}
+
+.support-faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.28s ease;
+}
+
+.support-faq__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.support-faq__panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.support-faq__answer {
+  margin: 0;
+  padding: 0 0 1.1rem 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary, #64748b);
+}
+
+[data-theme="blue"] .support-faq__title {
+  color: #fff;
+}
+
+[data-theme="blue"] .support-faq__trigger {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+[data-theme="blue"] .support-faq__trigger:hover {
+  color: #ffd700;
+}
+
+[data-theme="blue"] .support-faq__answer {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+[data-theme="blue"] .support-faq__chevron {
+  color: #ffd700;
+}

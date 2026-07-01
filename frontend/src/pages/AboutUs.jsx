@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Award,
@@ -32,6 +33,12 @@ import ViewportVideo from "../components/media/ViewportVideo";
 import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import "../components/about/AboutIntroPopup.css";
+
+const ABOUT_HERO_LINES_EN = {
+  revolutionizing: "Revolutionizing",
+  rehabilitation: "Rehabilitation",
+  since1994: "Since 1994",
+};
 
 const CATEGORY_IMAGE_QUERIES = {
   'abdomen2.png': 'Abdominal',
@@ -75,6 +82,7 @@ function getCategoryNumberColors(index) {
 }
 
 function CategoryFlipCard({ image, index, categoryName, categoryQuery, products, productsLoaded }) {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const palette = ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length][theme]
     || ABOUT_CATEGORY_PASTELS[index % ABOUT_CATEGORY_PASTELS.length].light;
@@ -126,7 +134,7 @@ function CategoryFlipCard({ image, index, categoryName, categoryQuery, products,
               {categoryName}
             </h3>
             <p className="about-category-flip__back-count">
-              {productCount} product{productCount === 1 ? '' : 's'}
+              {t('about.productCount', { count: productCount })}
             </p>
 
             {productsLoaded && previewProducts.length > 0 ? (
@@ -139,7 +147,7 @@ function CategoryFlipCard({ image, index, categoryName, categoryQuery, products,
                 ))}
               </ol>
             ) : productsLoaded ? (
-              <p className="about-category-flip__back-empty">Open the shop to explore this category.</p>
+              <p className="about-category-flip__back-empty">{t('about.openShop')}</p>
             ) : (
               <p className="about-category-flip__back-empty" aria-hidden="true">
                 &nbsp;
@@ -150,7 +158,7 @@ function CategoryFlipCard({ image, index, categoryName, categoryQuery, products,
               to={`/shop?category=${encodeURIComponent(categoryQuery)}`}
               className="about-category-flip__back-btn btn-primary"
             >
-              View Products
+              {t('common.viewProducts')}
             </Link>
           </div>
         </div>
@@ -179,47 +187,29 @@ const productImages = [
 ];
 
 const timeline = [
-  {
-    year: '1994',
-    title: 'MGRM Medicare Incorporated',
-  },
-  {
-    year: '1995',
-    title: 'Manufacturing Started',
-  },
-  {
-    year: '1997',
-    title: 'First US FDA Registration',
-  },
-  {
-    year: '2005',
-    title: 'WHO GMP Certification',
-  },
-  {
-    year: '2007',
-    title: 'NDMA Expert Committee Invitation',
-  },
-  {
-    year: '2008',
-    title: 'Steering Committee Member - NDMA',
-  },
+  { year: '1994', titleKey: 'about.timeline.1994' },
+  { year: '1995', titleKey: 'about.timeline.1995' },
+  { year: '1997', titleKey: 'about.timeline.1997' },
+  { year: '2005', titleKey: 'about.timeline.2005' },
+  { year: '2007', titleKey: 'about.timeline.2007' },
+  { year: '2008', titleKey: 'about.timeline.2008' },
 ];
 
 const sidebarLinks = [
-  { label: 'Our History', id: 'section-0' },
-  { label: 'Achievements', id: 'section-1' },
-  { label: 'Quality Certifications', id: 'section-2' },
-  { label: 'MGRM Timelines', id: 'section-3' },
-  { label: 'Leadership', id: 'section-4' },
-  { label: 'Testimonials', id: 'section-5' },
-  { label: 'Cure to Care™', id: 'section-6' },
-  { label: 'Partner Program', id: 'section-7' },
-  { label: 'Partnerships', id: 'section-partnerships' },
-  { label: 'Autoclave Sterilizer', id: 'section-8' },
-  { label: 'Specifications', id: 'section-9' },
-  { label: 'Construction', id: 'section-10' },
-  { label: 'Shredder Facility', id: 'section-11' },
-  { label: 'Accessories', id: 'section-12' },
+  { key: 'about.nav.history', id: 'section-0' },
+  { key: 'about.nav.achievements', id: 'section-1' },
+  { key: 'about.nav.quality', id: 'section-2' },
+  { key: 'about.nav.timelines', id: 'section-3' },
+  { key: 'about.nav.leadership', id: 'section-4' },
+  { key: 'about.nav.testimonials', id: 'section-5' },
+  { key: 'about.nav.cureToCare', id: 'section-6' },
+  { key: 'about.nav.partnerProgram', id: 'section-7' },
+  { key: 'about.nav.partnerships', id: 'section-partnerships' },
+  { key: 'about.nav.autoclave', id: 'section-8' },
+  { key: 'about.nav.specifications', id: 'section-9' },
+  { key: 'about.nav.construction', id: 'section-10' },
+  { key: 'about.nav.shredder', id: 'section-11' },
+  { key: 'about.nav.accessories', id: 'section-12' },
 ];
 
 const partnerships = [
@@ -227,49 +217,38 @@ const partnerships = [
     name: 'Hitachi MGRM Net',
     url: 'https://www.hitachimgrmnet.com/',
     image: '/products/partnership-hitachi-mgrm-net.jpg',
-    tagline: 'Technology & Digital Solutions',
+    taglineKey: 'about.partnerships.hitachi.tagline',
+    descriptionKeys: ['about.partnerships.hitachi.desc1', 'about.partnerships.hitachi.desc2'],
     accent: '#0ea5e9',
-    description: [
-      'A strategic joint venture delivering enterprise IT solutions, digital transformation, and e-governance platforms for government and corporate clients.',
-      'Combining Hitachi’s global technology leadership with MGRM’s domain expertise to build scalable, future-ready digital ecosystems.',
-    ],
   },
   {
     name: 'MGRM Pinnacle',
     url: 'https://www.mgrmpinnacle.com/',
     image: '/products/partnership-mgrm-pinnacle.jpg',
-    tagline: 'Educational eGovernance',
+    taglineKey: 'about.partnerships.pinnacle.tagline',
+    descriptionKeys: ['about.partnerships.pinnacle.desc1', 'about.partnerships.pinnacle.desc2'],
     accent: '#6366f1',
-    description: [
-      'An educational technology company offering end-to-end software products and services across the full learning lifecycle—from pre-K through university.',
-      'Powered by the M-Star suite, its integrated platform supports admissions, school operations, and remote learning with research-driven analytics.',
-    ],
   },
   {
     name: 'MGRM',
     url: 'https://www.mgrm.com/',
     image: '/products/partnership-mgrm.jpg',
-    tagline: 'e-Governance & Digital Innovation',
+    taglineKey: 'about.partnerships.mgrm.tagline',
+    descriptionKeys: ['about.partnerships.mgrm.desc1', 'about.partnerships.mgrm.desc2'],
     accent: '#0284c7',
-    description: [
-      'Empowering good governance through the Master Governance Platform—integrating citizen life cycle needs with efficient government service delivery at every level.',
-      'Delivering need-based products, solutions, and services across education, healthcare, agriculture, and other critical economic domains worldwide.',
-    ],
   },
   {
     name: 'Sunira Designs',
     url: 'https://www.suniradesigns.com/',
     image: '/products/partnership-sunira-designs.jpg',
-    tagline: 'Luxury Indian Fashion',
+    taglineKey: 'about.partnerships.sunira.tagline',
+    descriptionKeys: ['about.partnerships.sunira.desc1', 'about.partnerships.sunira.desc2'],
     accent: '#ec4899',
-    description: [
-      'A destination for hand-crafted luxury Indian designer clothing, offering curated ethnic and contemporary collections online.',
-      'Celebrating artisanal craftsmanship with elegant silhouettes, rich fabrics, and timeless style for the modern wardrobe.',
-    ],
   },
 ];
 
 function PartnershipCard({ partner }) {
+  const { t } = useTranslation();
   return (
     <StaggerItem className="h-full min-w-0">
       <a
@@ -290,20 +269,20 @@ function PartnershipCard({ partner }) {
             }}
           />
           <div className="about-partnership-card__media-overlay" aria-hidden />
-          <span className="about-partnership-card__tag">{partner.tagline}</span>
+          <span className="about-partnership-card__tag">{t(partner.taglineKey)}</span>
         </div>
 
         <div className="about-partnership-card__body">
           <h3 className="about-partnership-card__title">{partner.name}</h3>
 
           <div className="about-partnership-card__text space-y-3">
-            {partner.description.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {partner.descriptionKeys.map((descKey) => (
+              <p key={descKey}>{t(descKey)}</p>
             ))}
           </div>
 
           <span className="about-partnership-card__link">
-            Visit Website
+            {t('about.visitWebsite')}
             <span className="about-partnership-card__link-icon" aria-hidden>
               <ChevronRight className="h-4 w-4" />
             </span>
@@ -316,21 +295,21 @@ function PartnershipCard({ partner }) {
 
 const achievements = [
   {
-    title: 'Indian Armed Forces',
+    titleKey: 'about.achievements.armedForces',
     image: 'https://images.unsplash.com/photo-1737996159880-84645414d1db?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   },
   {
-    title: 'NDMA Recognition',
+    titleKey: 'about.achievements.ndma',
     image:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfNpw2cQhzbDKfrjS3KGV_9QHJrWAOKEG_kA&s',
   },
   {
-    title: 'Healthcare Innovation',
+    titleKey: 'about.achievements.healthcare',
     image:
       'https://etimg.etb2bimg.com/photo/123819552.cms',
   },
   {
-    title: 'National Quality Awards',
+    titleKey: 'about.achievements.qualityAwards',
     image:
       'https://images.unsplash.com/photo-1697209868660-c5991488f7b1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
@@ -380,26 +359,26 @@ const certifications = [
 
 const testimonials = [
   {
-    name: 'Dr P K Dave - AIIMS',
-    text: 'MGRM products are versatile, light and extremely user friendly.',
+    nameKey: 'about.testimonials.dave.name',
+    textKey: 'about.testimonials.dave.text',
     image:
       'https://static.medigence.com/uploads/doctor/images/80fbbc32a1070d08c2acf558ed4b9281.jpg',
   },
   {
-    name: 'Dr K K Saini - Academician',
-    text: 'Excellent orthopedic supports meeting clinical requirements.',
+    nameKey: 'about.testimonials.saini.name',
+    textKey: 'about.testimonials.saini.text',
     image:
       'https://www.drkksaini.in/images/sp.jpg',
   },
   {
-    name: 'Maj Gen B B Dutta - Academician',
-    text: 'MGRM products are highly appreciated in Armed Forces.',
+    nameKey: 'about.testimonials.dutta.name',
+    textKey: 'about.testimonials.dutta.text',
     image:
       'https://i.ytimg.com/vi/mQZk1n8W-14/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDmLvej3_4GO5mNjX50vacWv1iZZA',
   },
   {
-    name: 'Dr A K Singh - Neurosurgeon',
-    text: 'Their cervical rehabilitation products are outstanding.',
+    nameKey: 'about.testimonials.singh.name',
+    textKey: 'about.testimonials.singh.text',
     image:
       'https://shinonglobal.com/wp-content/uploads/2022/05/Dr.-A.K.-Singh.jpg',
   },
@@ -420,6 +399,7 @@ const famousPeople = [
 
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [categoryProducts, setCategoryProducts] = useState({});
 
@@ -500,7 +480,7 @@ const AboutUs = () => {
 
               <div className="about-hero-company-badge__text text-lg md:text-xl font-semibold text-white tracking-widest text-center">
                 <HeroKineticLine
-                  text="MGRM Medicare Private Limited"
+                  text={t('about.companyName')}
                   className="justify-center"
                   delay={0.05}
                 />
@@ -511,17 +491,17 @@ const AboutUs = () => {
                 className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white"
                 lines={[
                   {
-                    text: "Revolutionizing",
+                    text: ABOUT_HERO_LINES_EN.revolutionizing,
                     className: "justify-center max-sm:text-[36px] text-[52px] md:text-[88px]",
                     delay: 1.05,
                   },
                   {
-                    text: "Rehabilitation",
+                    text: ABOUT_HERO_LINES_EN.rehabilitation,
                     className: "justify-center max-sm:text-[40px] text-[58px] md:text-[98px]",
                     gradient: true,
                   },
                   {
-                    text: "Since 1994",
+                    text: ABOUT_HERO_LINES_EN.since1994,
                     className:
                       "justify-center max-sm:text-[22px] text-[32px] md:text-[52px] tracking-[4px] sm:tracking-[6px] text-white/85",
                   },
@@ -533,9 +513,7 @@ const AboutUs = () => {
                 delay={3.35}
                 className="mt-10 mx-auto max-w-3xl text-lg leading-9 text-gray-200"
               >
-                India’s leading rehabilitation and orthopedic healthcare
-                technology company trusted by doctors, hospitals,
-                defense forces and healthcare institutions nationwide.
+                {t('about.heroCopy')}
               </FadeUpText>
             </div>
           </div>
@@ -548,7 +526,7 @@ const AboutUs = () => {
           {/* SIDEBAR */}
           <aside className="w-full shrink-0 lg:sticky lg:top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-5 sm:p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-colors duration-300 lg:w-[320px]">
             <CinematicHeading
-              text="About Us"
+              text={t("about.title")}
               className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
             />
 
@@ -566,7 +544,7 @@ const AboutUs = () => {
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="min-w-0 truncate">{item.label}</span>
+                    <span className="min-w-0 truncate">{t(item.key)}</span>
                   </span>
 
                   <ChevronRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" />
@@ -585,20 +563,20 @@ const AboutUs = () => {
               <div className="grid min-w-0 lg:grid-cols-2">
                 <div className="p-6 sm:p-10 lg:p-14 min-w-0">
                   <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                    Our History
+                    {t('about.historyTitle')}
                   </SectionLabel>
 
                   <CinematicHeading
-                    text="Transforming Rehabilitation In India"
+                    text={t('about.historyHeading')}
                     className="mt-5 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100 break-words"
                   />
 
                   <ParagraphGroup
                     className="mt-8 space-y-6 text-[16px] leading-8 text-gray-500 dark:text-zinc-400"
                     paragraphs={[
-                      "MGRM Medicare Private Limited was established in 1994 with a vision to revolutionize physical rehabilitation and orthopedic healthcare in India.",
-                      "The company pioneered innovative rehabilitation products and introduced advanced orthopedic splints and rehabilitation technologies across India and South Asia.",
-                      "Today, MGRM serves hospitals, defense forces, institutions, emergency services and millions of patients with world-class rehabilitation solutions.",
+                      t('about.historyP1'),
+                      t('about.historyP2'),
+                      t('about.historyP3'),
                     ]}
                   />
                 </div>
@@ -622,11 +600,11 @@ const AboutUs = () => {
             >
               <FadeUpBlock className="mb-8 sm:mb-12">
                 <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                  Rehabilitation Products
+                  {t('about.rehabProducts')}
                 </SectionLabel>
 
                 <CinematicHeading
-                  text="Orthopedic Product Categories"
+                  text={t('about.orthoCategories')}
                   className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
                 />
               </FadeUpBlock>
@@ -663,11 +641,11 @@ const AboutUs = () => {
               className="rounded-[40px] bg-gradient-to-br from-[#002B5B] via-[#003a75] to-[#0056a6] p-10 text-white"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
-                Achievements
+                {t('about.achievementsTitle')}
               </SectionLabel>
 
               <CinematicHeading
-                text="Trusted Across India"
+                text={t('about.trustedIndia')}
                 className="mt-4 text-4xl font-bold"
               />
 
@@ -693,7 +671,7 @@ const AboutUs = () => {
                         <Award className="mb-3 h-10 w-10 text-cyan-300" />
 
                         <h3 className="text-2xl font-bold">
-                          {item.title}
+                          {t(item.titleKey)}
                         </h3>
                       </div>
                     </div>
@@ -704,15 +682,13 @@ const AboutUs = () => {
               {/* Famous People */}
               <div id="first-citizen" className="mt-20 scroll-mt-28">
                 <CinematicHeading
-                  text="First Citizen to the Common Man"
+                  text={t('about.firstCitizenTitle')}
                   as="h3"
                   className="text-3xl font-bold"
                 />
 
                 <FadeUpText className="mt-6 max-w-5xl text-lg leading-9 text-gray-200">
-                  MGRM products have been trusted by renowned leaders,
-                  healthcare experts, sports personalities and millions
-                  of loyal customers across India.
+                  {t('about.firstCitizenCopy')}
                 </FadeUpText>
 
                 <StaggerReveal className="mt-10 grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" stagger={0.12}>
@@ -736,9 +712,7 @@ const AboutUs = () => {
                           </h4>
 
                           <FadeUpText className="about-famous-person-card__text mt-4 sm:mt-5 text-base sm:leading-8 text-gray-200 break-words">
-                            Recognized personalities and national
-                            leaders have trusted MGRM rehabilitation
-                            and orthopedic products.
+                            {t('about.famousPersonCopy')}
                           </FadeUpText>
                         </div>
                       </div>
@@ -754,11 +728,11 @@ const AboutUs = () => {
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-10 transition-colors duration-300"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                Quality Certifications
+                {t('about.nav.quality')}
               </SectionLabel>
 
               <CinematicHeading
-                text="Global Quality Standards"
+                text={t('about.qualityTitle')}
                 className="mt-4 text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
@@ -795,11 +769,11 @@ const AboutUs = () => {
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 lg:p-10 transition-colors duration-300 min-w-0"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                MGRM Timelines
+                {t('about.nav.timelines')}
               </SectionLabel>
 
               <CinematicHeading
-                text="Journey Through The Years"
+                text={t('about.timelinesTitle')}
                 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
@@ -819,7 +793,7 @@ const AboutUs = () => {
                       />
 
                       <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-gray-500 dark:text-zinc-400 break-words">
-                        {item.title}
+                        {t(item.titleKey)}
                       </p>
                     </div>
                   </TimelineItem>
@@ -833,18 +807,16 @@ const AboutUs = () => {
               className="rounded-[40px] bg-gradient-to-br from-[#00172e] to-[#003a75] p-10 text-white"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-cyan-200">
-                Leadership
+                {t('about.nav.leadership')}
               </SectionLabel>
 
               <CinematicHeading
-                text="Visionary Healthcare Leadership"
+                text={t('about.leadershipTitle')}
                 className="mt-4 text-4xl font-bold"
               />
 
               <FadeUpText className="mt-8 max-w-4xl text-lg leading-9 text-gray-200">
-                MGRM Medicare is led by highly experienced healthcare
-                professionals and rehabilitation experts with decades of
-                expertise in medical technologies, innovation and patient care.
+                {t('about.leadershipCopy')}
               </FadeUpText>
             </section>
 
@@ -854,11 +826,11 @@ const AboutUs = () => {
               className="rounded-[40px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 p-5 sm:p-8 lg:p-10 transition-colors duration-300 min-w-0"
             >
               <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                Testimonials
+                {t('about.nav.testimonials')}
               </SectionLabel>
 
               <CinematicHeading
-                text="What Medical Experts Say"
+                text={t('about.testimonialsTitle')}
                 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
@@ -881,12 +853,12 @@ const AboutUs = () => {
                         <Quote className="h-10 w-10 shrink-0 text-cyan-300 sm:h-12 sm:w-12" />
 
                         <FadeUpQuote
-                          text={`“${item.text}”`}
+                          text={`"${t(item.textKey)}"`}
                           className="mt-4 text-base sm:text-lg leading-relaxed text-gray-500 dark:text-zinc-400 break-words"
                         />
 
                         <h4 className="mt-5 text-lg sm:text-xl font-bold text-[#002B5B] dark:text-zinc-100 break-words">
-                          {item.name}
+                          {t(item.nameKey)}
                         </h4>
                       </div>
                     </div>
@@ -910,25 +882,25 @@ const AboutUs = () => {
     <div>
 
       <SectionLabel className="text-sm font-bold uppercase tracking-[5px] text-cyan-500">
-        Cure to Care™
+        {t('about.nav.cureToCare')}
       </SectionLabel>
 
       <CinematicHeading
-        text="Complete Eye Care & Rehabilitation Solutions"
+        text={t('about.cureToCareHeading')}
         className="mt-5 text-5xl font-black leading-tight text-[#002B5B] dark:text-zinc-100"
       />
 
       <ParagraphGroup
         className="mt-8 space-y-6 text-[17px] leading-9 text-slate-600 text-gray-500 dark:text-zinc-400"
         paragraphs={[
-          "Under the banner of Cure to Care concept, MGRM Medicare has forayed into the distribution and marketing of the complete range of medicines for eye care and rehabilitation catering to the four-phase treatment protocol of prevention, pre-treatment, treatment and post-treatment patient care.",
-          "The products are available in the domestic market and over 50 international markets under the brand name ‘MGRM’.",
+          t('about.cureToCareP1'),
+          t('about.cureToCareP2'),
         ]}
       />
 
       <div className="mt-8 border-l-4 border-cyan-400 pl-6">
         <FadeUpQuote
-          text="“MGRM products are designed to support recovery before surgery and accelerate rehabilitation after surgery.”"
+          text={`"${t('about.cureToCareQuote')}"`}
           className="text-2xl font-semibold italic leading-10 text-[#002B5B] dark:text-zinc-100"
         />
       </div>
@@ -937,19 +909,19 @@ const AboutUs = () => {
       <div className="mt-10 flex flex-wrap gap-4">
 
         {[
-          'Eye Care',
-          'Rehabilitation',
-          'Patient Care',
-          'Global Markets',
-          'Pre & Post Treatment',
-          'Healthcare Solutions',
-        ].map((tag, i) => (
+          'about.cureToCareTagEyeCare',
+          'about.cureToCareTagRehab',
+          'about.cureToCareTagPatientCare',
+          'about.cureToCareTagGlobal',
+          'about.cureToCareTagPrePost',
+          'about.cureToCareTagHealthcare',
+        ].map((tagKey, i) => (
 
           <div
             key={i}
             className="rounded-full border border-cyan-100 border-slate-200 dark:border-white/10 bg-cyan-50 bg-surface-hover px-5 py-3 text-sm font-bold text-[#002B5B] dark:text-zinc-100"
           >
-            {tag}
+            {t(tagKey)}
           </div>
         ))}
       </div>
@@ -964,7 +936,7 @@ const AboutUs = () => {
 
         <img
           src="/about/cure-care.jpg"
-          alt="Cure to Care"
+          alt={t('about.cureToCareImageAlt')}
           // className="h-[520px] w-full object-cover transition duration-700 hover:scale-105"
           className="h-[520px] w-full object-contain bg-[#eef7ff] bg-app dark:bg-zinc-950  transition duration-700 hover:scale-[1.02]"
         />
@@ -975,7 +947,7 @@ const AboutUs = () => {
         <div className="about-cure-markets-card absolute bottom-8 left-8 rounded-[25px] border border-white/20 bg-white/10 px-6 py-5 backdrop-blur-xl">
           <AnimatedStat
             value="50+"
-            label="International Markets"
+            label={t('about.internationalMarkets')}
             valueClassName="about-cure-markets-card__value text-3xl font-black text-white"
             labelClassName="about-cure-markets-card__label mt-1 text-sm text-white/80"
           />
@@ -1096,31 +1068,28 @@ const AboutUs = () => {
     <div className="relative z-10 p-10 md:p-16 text-white">
 
       <SectionLabel className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-400/10 px-5 py-2 text-sm font-bold tracking-[0.25em] text-cyan-300 backdrop-blur-xl">
-        GLOBAL NETWORK
+        {t('about.globalNetwork')}
       </SectionLabel>
 
       <CinematicHeading
-        text="Partner Program"
+        text={t('about.partnerTitle')}
         className="mt-7 text-5xl font-black leading-tight"
       />
 
       <ParagraphGroup
         className="mt-8 space-y-6 text-lg leading-9 text-white/80"
-        paragraphs={[
-          "Interested in becoming our distribution partner? Do you want us to market your product line? MGRM Medicare Limited has successfully launched partnerships with companies all over the world and we’re always looking to expand our network.",
-        ]}
+        paragraphs={[t('about.partnerProgramCopy')]}
       />
 
       <FadeUpText className="mt-6 text-lg leading-9 text-cyan-200 font-medium">
-        Contact us today to learn more and become a part
-        of our growing healthcare ecosystem.
+        {t('about.partnerProgramCta')}
       </FadeUpText>
 
       <StaggerReveal className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-5" stagger={0.12}>
         <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <AnimatedStat
             value="50+"
-            label="Global Markets"
+            label={t('about.globalMarkets')}
             valueClassName="text-4xl font-black text-cyan-300"
             labelClassName="mt-2 text-sm text-white/70"
           />
@@ -1129,7 +1098,7 @@ const AboutUs = () => {
         <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <AnimatedStat
             value="100+"
-            label="Distribution Partners"
+            label={t('about.distributionPartners')}
             valueClassName="text-4xl font-black text-cyan-300"
             labelClassName="mt-2 text-sm text-white/70"
           />
@@ -1138,7 +1107,7 @@ const AboutUs = () => {
         <StaggerItem className="rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <AnimatedStat
             value="30+"
-            label="Years Experience"
+            label={t('about.yearsExperience')}
             valueClassName="text-4xl font-black text-cyan-300"
             labelClassName="mt-2 text-sm text-white/70"
           />
@@ -1176,17 +1145,16 @@ const AboutUs = () => {
 
               <div className="relative z-10">
                 <SectionLabel className="text-sm font-semibold uppercase tracking-[5px] text-[#002B5B] text-brand">
-                  Partnerships
+                  {t('about.nav.partnerships')}
                 </SectionLabel>
 
                 <CinematicHeading
-                  text="Our Group Companies"
+                  text={t('about.partnershipsTitle')}
                   className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
                 />
 
                 <FadeUpText className="mt-5 max-w-3xl text-base leading-8 text-gray-500 dark:text-zinc-400 sm:text-lg">
-                  Explore the MGRM family of companies—each focused on innovation
-                  across healthcare, education, technology, and lifestyle.
+                  {t('about.partnershipsIntro')}
                 </FadeUpText>
 
                 <StaggerReveal
@@ -1214,18 +1182,16 @@ const AboutUs = () => {
     <div className="max-w-5xl">
 
       <SectionLabel className="text-sm font-bold uppercase tracking-[5px] text-cyan-600 text-brand">
-        Medical Equipment and Accessories
+        {t('about.equipmentTitle')}
       </SectionLabel>
 
       <CinematicHeading
-        text="Autoclave Cum Shredder Sterilizer"
+        text={t('about.autoclaveTitle')}
         className="mt-5 pt-2 text-4xl md:text-6xl font-black leading-[1.1] text-slate-900 dark:text-zinc-100"
       />
 
       <FadeUpText className="mt-8 max-w-4xl text-lg leading-9 text-gray-500 dark:text-zinc-400">
-        The Integrated Autoclave with Shredder is designed by our
-        experts with rich experience in the medical industry making
-        use of leading technology as per the market standards.
+        {t('about.autoclaveCopy')}
       </FadeUpText>
     </div>
 
@@ -1253,7 +1219,7 @@ const AboutUs = () => {
 
           <div className="about-autoclave-badge absolute bottom-5 left-5 rounded-full bg-white/10 px-5 py-2 backdrop-blur-xl">
             <p className="about-autoclave-badge__text text-sm font-semibold text-white">
-              Hospital Grade Equipment
+              {t('about.hospitalGrade')}
             </p>
           </div>
         </StaggerItem>
@@ -1267,7 +1233,7 @@ const AboutUs = () => {
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
         <CinematicHeading
-          text="Specifications"
+          text={t('about.specificationsHeading')}
           as="h3"
           className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
         />
@@ -1280,36 +1246,15 @@ const AboutUs = () => {
           <tbody>
 
             {[
-              [
-                'Steriliser Type',
-                'Horizontal Cylindrical High Speed Steam Steriliser',
-              ],
-              ['Chamber Capacity', '150 to 200 litre'],
-              ['Certification', 'Conforms to third party certification'],
-              [
-                'Operation',
-                'Fully automatic steam jacketed suitable for operation on electricity',
-              ],
-              [
-                'Temperature Range',
-                '121°C - 134°C',
-              ],
-              [
-                'Cycle Time',
-                'Configurable working temperature and sterilisation cycle time',
-              ],
-              [
-                'Steam Generator',
-                'Built-in electrically heated Steam Generator made of SS 316 (AISI 316) with low water protection system',
-              ],
-              [
-                'Power Supply',
-                'Works with 3 phase 400/440 V 50 Hz AC supply',
-              ],
-              [
-                'Control System',
-                'Microprocessor Controlled with preselected Sterilisation Programs',
-              ],
+              ['about.spec.steriliserType', 'about.spec.steriliserTypeValue'],
+              ['about.spec.chamberCapacity', 'about.spec.chamberCapacityValue'],
+              ['about.spec.certification', 'about.spec.certificationValue'],
+              ['about.spec.operation', 'about.spec.operationValue'],
+              ['about.spec.temperatureRange', 'about.spec.temperatureRangeValue'],
+              ['about.spec.cycleTime', 'about.spec.cycleTimeValue'],
+              ['about.spec.steamGenerator', 'about.spec.steamGeneratorValue'],
+              ['about.spec.powerSupply', 'about.spec.powerSupplyValue'],
+              ['about.spec.controlSystem', 'about.spec.controlSystemValue'],
             ].map((item, i) => (
 
               <tr
@@ -1318,11 +1263,11 @@ const AboutUs = () => {
               >
 
                 <td className="w-[35%] px-6 py-6 text-[15px] font-bold text-[#002B5B] text-brand">
-                  {item[0]}
+                  {t(item[0])}
                 </td>
 
                 <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
-                  {item[1]}
+                  {t(item[1])}
                 </td>
 
               </tr>
@@ -1340,7 +1285,7 @@ const AboutUs = () => {
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
         <CinematicHeading
-          text="Construction"
+          text={t('about.constructionHeading')}
           as="h3"
           className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
         />
@@ -1353,30 +1298,15 @@ const AboutUs = () => {
           <tbody>
 
             {[
-              ['Provision of Lock', 'Automatic Lock'],
-              ['Type of Door', 'Hinged type'],
-              [
-                'Display Facility',
-                'Chamber Temperature, Cycle Number, Batch Number, Time and Date, Alarm Indicator, Low Water Indicator',
-              ],
-              [
-                'Print Facility',
-                'Yes, by an inbuilt printer unit',
-              ],
-              ['Warranty Period', '3 year'],
-              ['No of Doors', '1'],
-              [
-                'User Interface',
-                'Touch screen interface',
-              ],
-              [
-                'Data Transfer Facility',
-                'Yes, through USB / RS232 port',
-              ],
-              [
-                'Air Removal System',
-                'Pressure/Vacuum pulsing for proper steam penetration',
-              ],
+              ['about.construction.provisionOfLock', 'about.construction.provisionOfLockValue'],
+              ['about.construction.typeOfDoor', 'about.construction.typeOfDoorValue'],
+              ['about.construction.displayFacility', 'about.construction.displayFacilityValue'],
+              ['about.construction.printFacility', 'about.construction.printFacilityValue'],
+              ['about.construction.warrantyPeriod', 'about.construction.warrantyPeriodValue'],
+              ['about.construction.noOfDoors', 'about.construction.noOfDoorsValue'],
+              ['about.construction.userInterface', 'about.construction.userInterfaceValue'],
+              ['about.construction.dataTransfer', 'about.construction.dataTransferValue'],
+              ['about.construction.airRemoval', 'about.construction.airRemovalValue'],
             ].map((item, i) => (
 
               <tr
@@ -1385,11 +1315,11 @@ const AboutUs = () => {
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] text-brand">
-                  {item[0]}
+                  {t(item[0])}
                 </td>
 
                 <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
-                  {item[1]}
+                  {t(item[1])}
                 </td>
 
               </tr>
@@ -1407,7 +1337,7 @@ const AboutUs = () => {
         <div className="h-12 w-2 rounded-full bg-cyan-500" />
 
         <CinematicHeading
-          text="Integrated Shredder Facility"
+          text={t('about.shredderHeading')}
           as="h3"
           className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
         />
@@ -1420,30 +1350,12 @@ const AboutUs = () => {
           <tbody>
 
             {[
-              [
-                'Integrated Shredder',
-                'Yes, with Microprocessor controlled',
-              ],
-              [
-                'Shredder Material',
-                'SS 316 or SS 316L',
-              ],
-              [
-                'Motor Power',
-                '>= 2 HP',
-              ],
-              [
-                'Motor Speed',
-                '>= 1000 RPM',
-              ],
-              [
-                'Motor Supply',
-                '220 V, 50 HZ AC motor',
-              ],
-              [
-                'Waste Handling',
-                'Able to deal with shredding of biomedical waste as per Steriliser capacity',
-              ],
+              ['about.shredder.integrated', 'about.shredder.integratedValue'],
+              ['about.shredder.material', 'about.shredder.materialValue'],
+              ['about.shredder.motorPower', 'about.shredder.motorPowerValue'],
+              ['about.shredder.motorSpeed', 'about.shredder.motorSpeedValue'],
+              ['about.shredder.motorSupply', 'about.shredder.motorSupplyValue'],
+              ['about.shredder.wasteHandling', 'about.shredder.wasteHandlingValue'],
             ].map((item, i) => (
 
               <tr
@@ -1452,11 +1364,11 @@ const AboutUs = () => {
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-cyan-200">
-                  {item[0]}
+                  {t(item[0])}
                 </td>
 
                 <td className="px-6 py-6 leading-8 text-white/90">
-                  {item[1]}
+                  {t(item[1])}
                 </td>
 
               </tr>
@@ -1474,7 +1386,7 @@ const AboutUs = () => {
         <div className="h-12 w-2 rounded-full bg-[#002B5B]" />
 
         <CinematicHeading
-          text="Accessories"
+          text={t('about.accessoriesHeading')}
           as="h3"
           className="text-4xl font-black text-[#002B5B] dark:text-zinc-100"
         />
@@ -1487,12 +1399,12 @@ const AboutUs = () => {
           <tbody>
 
             {[
-              ['Number of Rails', '2'],
-              ['Long Handle', '1'],
-              ['Sterilisation Carriages', '1'],
-              ['Pull out Trays/Tanks', '0'],
-              ['Floor loading carts', '2'],
-              ['Transfer carriages', '1'],
+              ['about.accessories.numberOfRails', '2'],
+              ['about.accessories.longHandle', '1'],
+              ['about.accessories.sterilisationCarriages', '1'],
+              ['about.accessories.pullOutTrays', '0'],
+              ['about.accessories.floorLoadingCarts', '2'],
+              ['about.accessories.transferCarriages', '1'],
             ].map((item, i) => (
 
               <tr
@@ -1501,7 +1413,7 @@ const AboutUs = () => {
               >
 
                 <td className="w-[35%] px-6 py-6 font-bold text-[#002B5B] text-brand">
-                  {item[0]}
+                  {t(item[0])}
                 </td>
 
                 <td className="px-6 py-6 leading-8 text-gray-500 dark:text-zinc-400">
@@ -1520,21 +1432,21 @@ const AboutUs = () => {
     <StaggerReveal className="mt-16 flex flex-wrap gap-4" stagger={0.06}>
 
       {[
-        'Fully Automatic',
-        'Biomedical Waste Management',
-        'Steam Sterilization',
-        'Integrated Shredder',
-        'Hospital Grade',
-        'Touch Screen Interface',
-        'Microprocessor Controlled',
-        'High Speed Steriliser',
-      ].map((tag, i) => (
+        'about.tags.fullyAutomatic',
+        'about.tags.biomedicalWaste',
+        'about.tags.steamSterilization',
+        'about.tags.integratedShredder',
+        'about.tags.hospitalGrade',
+        'about.tags.touchScreen',
+        'about.tags.microprocessor',
+        'about.tags.highSpeed',
+      ].map((tagKey, i) => (
 
         <StaggerItem
           key={i}
           className="rounded-full border border-slate-200 border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 px-6 py-3 text-sm font-bold text-[#002B5B] text-slate-900 dark:text-zinc-100 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
-          {tag}
+          {t(tagKey)}
         </StaggerItem>
       ))}
     </StaggerReveal>

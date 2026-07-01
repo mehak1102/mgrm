@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Search, ShoppingCart, HeartPulse, User, LogOut, ChevronDown, Menu, X, Briefcase, MapPin, ShieldCheck } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -9,11 +10,25 @@ import { useDashboard } from "../context/DashboardContext";
 import { bodyCategories, activitiess } from "../data/siteData";
 import { useProductStats } from "../context/ProductStatsContext";
 import { trackSearch } from "../utils/recommendationBehavior";
+import { normalizeSearchQuery } from "../utils/searchNormalizer";
 import Logo3D from "./Logo3D";
 import ThemeSelector from "./ThemeSelector";
 import { useTypewriterPlaceholder } from "../hooks/useTypewriterPlaceholder";
 
-const SEARCH_PLACEHOLDER_PHRASE = "Search products, category";
+const ABOUT_LINKS = [
+  { key: "nav.aboutLinks.history", slug: "our-history" },
+  { key: "nav.aboutLinks.achievements", slug: "achievements" },
+  { key: "nav.aboutLinks.quality", slug: "quality-certifications" },
+  { key: "nav.aboutLinks.timelines", slug: "mgrm-timelines" },
+  { key: "nav.aboutLinks.leadership", slug: "leadership" },
+  { key: "nav.aboutLinks.testimonials", slug: "testimonials" },
+];
+
+const SUPPORT_LINKS = [
+  { labelKey: "nav.supportLinks.careers", to: "/careers", Icon: Briefcase },
+  { labelKey: "nav.supportLinks.storeLocator", to: "/support/store-locator", Icon: MapPin },
+  { labelKey: "nav.supportLinks.warranty", to: "/support/warranty", Icon: ShieldCheck },
+];
 
 function NavbarSearchField({
   iconClassName,
@@ -26,6 +41,7 @@ function NavbarSearchField({
   onFocus,
   onBlur,
   animatedText,
+  searchAriaLabel,
 }) {
   const showOverlay = !value;
 
@@ -39,7 +55,7 @@ function NavbarSearchField({
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder=""
-        aria-label={SEARCH_PLACEHOLDER_PHRASE}
+        aria-label={searchAriaLabel}
         autoComplete="off"
         className={inputClassName}
       />
@@ -58,25 +74,12 @@ function NavbarSearchField({
   );
 }
 
-const aboutLinks = [
-  "Our History",
-  "Achievements",
-  "Quality Certifications",
-  "MGRM Timelines",
-  "Leadership",
-  "Testimonials",
-];
-
-const supportLinks = [
-  { label: "Careers", to: "/careers", Icon: Briefcase },
-  { label: "Store Locator", to: "/support/store-locator", Icon: MapPin },
-  { label: "Warranty Information", to: "/support/warranty", Icon: ShieldCheck },
-];
-
 const NAV_MENU_CLOSE_DELAY = 280;
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const searchPlaceholder = t("nav.searchPlaceholder");
   const { categoriesWithCounts } = useProductStats();
   const location = useLocation();
   const { cartCount, setCartOpen } = useCart();
@@ -92,7 +95,7 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const menuCloseTimerRef = useRef(null);
   const typewriterPlaceholder = useTypewriterPlaceholder(
-    SEARCH_PLACEHOLDER_PHRASE,
+    searchPlaceholder,
     !searchDraft
   );
 
@@ -117,6 +120,7 @@ export default function Navbar() {
     onFocus: () => setSearchFocused(true),
     onBlur: () => setSearchFocused(false),
     animatedText: typewriterPlaceholder,
+    searchAriaLabel: searchPlaceholder,
   };
 
   useEffect(() => {
@@ -158,8 +162,10 @@ export default function Navbar() {
       return;
     }
 
+    const { display, search: apiQuery } = normalizeSearchQuery(q);
+
     const matchedActivity = activitiess.find((item) =>
-      item.name.toLowerCase().includes(q.toLowerCase())
+      item.name.toLowerCase().includes(apiQuery.toLowerCase())
     );
 
     if (matchedActivity) {
@@ -170,8 +176,8 @@ export default function Navbar() {
       return;
     }
 
-    trackSearch(q);
-    navigate(`/shop?search=${encodeURIComponent(q)}`);
+    trackSearch(display);
+    navigate(`/shop?search=${encodeURIComponent(display)}`);
     setMobileOpen(false);
   };
 
@@ -184,7 +190,28 @@ export default function Navbar() {
     <>
     <header className="sticky top-0 z-50 relative bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-2.5 min-[420px]:py-3 flex items-center gap-1.5 min-[420px]:gap-2 lg:gap-2.5 xl:gap-3 min-w-0">
-        <Logo3D />
+        {/* <Logo3D /> */}
+        {/* <Link to="/" className="flex items-center h-14 overflow-hidden">
+  <img
+    src="/products/logs.png"
+    alt="Logo"
+    className="w-[150px] h-auto object-contain"
+  />
+</Link> */}
+{/* <Link to="/" className="flex items-center h-14">
+  <img
+    src="/products/logs.png"
+    alt="Logo"
+    className="max-h-full w-auto object-contain"
+  />
+</Link> */}
+<Link to="/" className="flex items-center h-14 overflow-hidden">
+  <img
+    src="/products/logs.png"
+    alt="Logo"
+    className="h-[80px] w-auto object-contain"
+  />
+</Link>
 
         <form
           onSubmit={handleSearch}
@@ -205,7 +232,7 @@ export default function Navbar() {
             onMouseLeave={handleMenuLeave}
           >
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
-              Find by Body Area <ChevronDown size={15} />
+              {t("nav.findByBody")} <ChevronDown size={15} />
             </button>
             <div
               className={`absolute left-0 right-0 top-full -mt-8 pt-8 ${
@@ -240,7 +267,7 @@ export default function Navbar() {
                         {cat.name}
                       </p>
                       <p className="body-area-chip-count text-xs text-gray-500 dark:text-zinc-400">
-                        {cat.count} products
+                        {t("common.productsCount", { count: cat.count })}
                       </p>
                     </div>
                   </button>
@@ -255,7 +282,7 @@ export default function Navbar() {
             onMouseLeave={handleMenuLeave}
           >
             <button type="button" className="flex items-center gap-1 whitespace-nowrap">
-              Shop By Activity <ChevronDown size={15} />
+              {t("nav.shopByActivity")} <ChevronDown size={15} />
             </button>
 
             <div
@@ -269,10 +296,10 @@ export default function Navbar() {
                 <div className="flex justify-between items-center mb-6 gap-4 shrink-0">
                   <div>
                     <p className="text-xs font-bold tracking-widest text-purple-600">
-                      SHOP BY ACTIVITY
+                      {t("nav.shopByActivityLabel")}
                     </p>
                     <h3 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-zinc-100">
-                      Choose your lifestyle
+                      {t("nav.chooseLifestyle")}
                     </h3>
                   </div>
 
@@ -281,7 +308,7 @@ export default function Navbar() {
                     onClick={() => navigate("/shop-by-activity")}
                     className="text-sm font-bold text-purple-600 hover:text-purple-800 shrink-0"
                   >
-                    View All →
+                    {t("common.viewAll")}
                   </button>
                 </div>
 
@@ -323,7 +350,7 @@ export default function Navbar() {
             onMouseLeave={handleMenuLeave}
           >
             <Link to="/about-us" className="whitespace-nowrap">
-              About Us
+              {t("nav.aboutUs")}
             </Link>
 
             <div
@@ -335,20 +362,20 @@ export default function Navbar() {
               onMouseEnter={() => handleMenuEnter("about")}
               onMouseLeave={handleMenuLeave}
             >
-              {aboutLinks.map((item) => (
+              {ABOUT_LINKS.map((item) => (
                 <Link
-                  key={item}
-                  to={`/about-us#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  key={item.key}
+                  to={`/about-us#${item.slug}`}
                   className="about-nav-dropdown-link block px-4 py-3 rounded-2xl hover:bg-cyan-50 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-200 hover:text-cyan-700 dark:hover:text-cyan-300 font-medium transition"
                 >
-                  {item}
+                  {t(item.key)}
                 </Link>
               ))}
             </div>
           </div>
 
           <NavLink to="/blogs" className="whitespace-nowrap">
-            Blogs
+            {t("nav.blogs")}
           </NavLink>
 
           <div
@@ -366,7 +393,7 @@ export default function Navbar() {
                 }`
               }
             >
-              Support{" "}
+              {t("nav.support")}{" "}
               <ChevronDown
                 size={15}
                 className={`transition-transform duration-250 ${
@@ -384,7 +411,7 @@ export default function Navbar() {
               onMouseEnter={() => handleMenuEnter("support")}
               onMouseLeave={handleMenuLeave}
             >
-              {supportLinks.map(({ label, to, Icon }) => {
+              {SUPPORT_LINKS.map(({ labelKey, to, Icon }) => {
                 const active = location.pathname === to;
                 return (
                   <Link
@@ -397,7 +424,7 @@ export default function Navbar() {
                     <span className="support-nav-dropdown-icon w-9 h-9 rounded-xl grid place-items-center shrink-0 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-zinc-400">
                       <Icon size={18} />
                     </span>
-                    {label}
+                    {t(labelKey)}
                   </Link>
                 );
               })}
@@ -411,7 +438,7 @@ export default function Navbar() {
             type="button"
             onClick={() => navigate("/wishlist")}
             className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
-            aria-label="Wishlist"
+            aria-label={t("nav.wishlist")}
           >
             <HeartPulse className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             {wishlist.length > 0 && (
@@ -423,7 +450,7 @@ export default function Navbar() {
 
           {authReady && user?.role === "admin" && (
             <Link to="/admin" className="font-bold text-sm theme-text hidden xl:inline whitespace-nowrap">
-              Admin
+              {t("common.admin")}
             </Link>
           )}
           {authReady && user && (
@@ -432,7 +459,7 @@ export default function Navbar() {
               onClick={() => openDashboard()}
               className="font-bold text-sm theme-text hidden xl:inline hover:opacity-80 transition whitespace-nowrap"
             >
-              Dashboard
+              {t("common.dashboard")}
             </button>
           )}
 
@@ -441,7 +468,7 @@ export default function Navbar() {
               type="button"
               onClick={handleLogout}
               className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
-              aria-label="Log out"
+              aria-label={t("nav.logout")}
             >
               <LogOut className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             </button>
@@ -449,7 +476,7 @@ export default function Navbar() {
             <Link
               to="/login"
               className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
-              aria-label="Log in"
+              aria-label={t("nav.login")}
             >
               <User className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             </Link>
@@ -459,7 +486,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setCartOpen(true)}
             className="p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 relative"
-            aria-label="Open cart"
+            aria-label={t("nav.openCart")}
           >
             <ShoppingCart className="w-[18px] h-[18px] min-[420px]:w-5 min-[420px]:h-5" />
             <span className="absolute -top-0.5 -right-0.5 min-[420px]:-top-1 min-[420px]:-right-1 text-[10px] min-[420px]:text-xs bg-red-500 text-white rounded-full w-4 h-4 min-[420px]:w-5 min-[420px]:h-5 grid place-items-center">
@@ -471,7 +498,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setMobileOpen(true)}
             className="lg:hidden p-1.5 min-[420px]:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800"
-            aria-label="Open menu"
+            aria-label={t("nav.openMenu")}
           >
             <Menu className="w-5 h-5 min-[420px]:w-[22px] min-[420px]:h-[22px]" />
           </button>
@@ -485,7 +512,7 @@ export default function Navbar() {
             <button
               type="button"
               className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-              aria-label="Close menu"
+              aria-label={t("nav.closeMenu")}
               onClick={() => setMobileOpen(false)}
             />
             <aside
@@ -493,12 +520,12 @@ export default function Navbar() {
               aria-label="Mobile navigation"
             >
               <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-white/10 shrink-0">
-                <span className="font-bold text-sm text-slate-800 dark:text-zinc-100">Menu</span>
+                <span className="font-bold text-sm text-slate-800 dark:text-zinc-100">{t("common.menu")}</span>
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   className="p-2 rounded-full hover:bg-surface-hover text-slate-800 dark:text-zinc-100"
-                  aria-label="Close menu"
+                  aria-label={t("nav.closeMenu")}
                 >
                   <X size={20} />
                 </button>
@@ -521,7 +548,7 @@ export default function Navbar() {
                     onClick={() => setMobileBodyOpen((v) => !v)}
                     className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
                   >
-                    Find by Body Area
+                    {t("nav.findByBody")}
                     <ChevronDown
                       size={16}
                       className={`transition-transform ${mobileBodyOpen ? "rotate-180" : ""}`}
@@ -534,7 +561,7 @@ export default function Navbar() {
                         onClick={() => go("/shop-by-body")}
                         className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
                       >
-                        View all body areas
+                        {t("nav.viewAllBodyAreas")}
                       </button>
                       {bodyCategories.map((cat) => (
                         <button
@@ -554,7 +581,7 @@ export default function Navbar() {
                     onClick={() => go("/shop-by-activity")}
                     className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
                   >
-                    Shop By Activity
+                    {t("nav.shopByActivity")}
                   </button>
 
                   <button
@@ -562,7 +589,7 @@ export default function Navbar() {
                     onClick={() => setMobileAboutOpen((v) => !v)}
                     className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
                   >
-                    About Us
+                    {t("nav.aboutUs")}
                     <ChevronDown
                       size={16}
                       className={`transition-transform ${mobileAboutOpen ? "rotate-180" : ""}`}
@@ -575,18 +602,16 @@ export default function Navbar() {
                         onClick={() => go("/about-us")}
                         className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
                       >
-                        About overview
+                        {t("nav.aboutOverview")}
                       </button>
-                      {aboutLinks.map((item) => (
+                      {ABOUT_LINKS.map((item) => (
                         <button
-                          key={item}
+                          key={item.key}
                           type="button"
-                          onClick={() =>
-                            go(`/about-us#${item.toLowerCase().replace(/\s+/g, "-")}`)
-                          }
+                          onClick={() => go(`/about-us#${item.slug}`)}
                           className="w-full text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium text-inherit"
                         >
-                          {item}
+                          {t(item.key)}
                         </button>
                       ))}
                     </div>
@@ -597,7 +622,7 @@ export default function Navbar() {
                     onClick={() => go("/blogs")}
                     className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
                   >
-                    Blogs
+                    {t("nav.blogs")}
                   </button>
 
                   <button
@@ -605,7 +630,7 @@ export default function Navbar() {
                     onClick={() => setMobileSupportOpen((v) => !v)}
                     className="w-full flex items-center justify-between px-3 py-3 rounded-xl hover:bg-surface-hover text-left text-inherit"
                   >
-                    Support
+                    {t("nav.support")}
                     <ChevronDown
                       size={16}
                       className={`transition-transform duration-250 ${mobileSupportOpen ? "rotate-180" : ""}`}
@@ -618,9 +643,9 @@ export default function Navbar() {
                         onClick={() => go("/support")}
                         className="w-full text-left px-3 py-2 rounded-lg text-cyan-600 font-bold"
                       >
-                        Contact Support
+                        {t("nav.contactSupport")}
                       </button>
-                      {supportLinks.map(({ label, to, Icon }) => (
+                      {SUPPORT_LINKS.map(({ labelKey, to, Icon }) => (
                         <button
                           key={to}
                           type="button"
@@ -628,7 +653,7 @@ export default function Navbar() {
                           className="w-full flex items-center gap-2 text-left px-3 py-2 rounded-lg hover:bg-surface-hover font-medium text-inherit"
                         >
                           <Icon size={16} className="text-cyan-600 shrink-0" />
-                          {label}
+                          {t(labelKey)}
                         </button>
                       ))}
                     </div>
@@ -638,7 +663,7 @@ export default function Navbar() {
                     onClick={() => go("/shop")}
                     className="w-full text-left px-3 py-3 rounded-xl hover:bg-surface-hover text-inherit"
                   >
-                    Shop
+                    {t("common.shop")}
                   </button>
                 </div>
 
@@ -649,7 +674,7 @@ export default function Navbar() {
                       onClick={() => go("/admin")}
                       className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover text-inherit"
                     >
-                      Admin
+                      {t("common.admin")}
                     </button>
                   )}
                   {authReady && user && (
@@ -661,7 +686,7 @@ export default function Navbar() {
                       }}
                       className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover text-inherit"
                     >
-                      Dashboard
+                      {t("common.dashboard")}
                     </button>
                   )}
                 </div>

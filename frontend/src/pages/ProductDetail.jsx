@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import API from "../api";
 import { useCart } from "../context/CartContext";
@@ -30,6 +31,7 @@ import DeliveryTrustBadge from "../components/DeliveryTrustBadge";
 
 export default function ProductDetail() {
   const { slug } = useParams();
+  const { t } = useTranslation();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { isBlue } = useTheme();
@@ -126,7 +128,7 @@ export default function ProductDetail() {
           transition={{ duration: 0.45, delay: 0.05 }}
         >
           <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">
-            Home › Products › {product.name}
+            {t("common.home")} › {t("productDetail.products")} › {product.name}
           </p>
 
           <SectionHeading text={product.name} as="h1" className="text-3xl font-bold text-fg" />
@@ -136,7 +138,7 @@ export default function ProductDetail() {
             <StarRatingDisplay value={displayRating} size={16} />
             {reviewSummary.totalReviews > 0 && (
               <a href="#customer-reviews" className="text-sm text-brand font-bold hover:underline">
-                ({reviewSummary.totalReviews} reviews)
+                ({reviewSummary.totalReviews} {t("common.reviews")})
               </a>
             )}
           </div>
@@ -164,7 +166,7 @@ export default function ProductDetail() {
 
           {!!product.sizes?.length && (
             <div className="mt-6">
-              <p className="font-semibold mb-2 text-fg">Select Size</p>
+              <p className="font-semibold mb-2 text-fg">{t("productDetail.selectSize")}</p>
               <div className="flex gap-3 flex-wrap">
                 {product.sizes.map((s) => (
                   <button
@@ -183,17 +185,19 @@ export default function ProductDetail() {
           )}
 
           <div className="mt-6">
-            <p className="font-semibold mb-2 text-fg">Quantity</p>
+            <p className="font-semibold mb-2 text-fg">{t("common.quantity")}</p>
             <div className="flex items-center gap-6 bg-gray-100 bg-surface-hover px-4 py-2 rounded-lg w-fit">
-              <button type="button" onClick={decreaseQty} aria-label="Decrease quantity">
+              <button type="button" onClick={decreaseQty} aria-label={t("productDetail.decreaseQty")}>
                 <Minus size={16} />
               </button>
               <span className="font-bold">{qty}</span>
-              <button type="button" onClick={increaseQty} aria-label="Increase quantity">
+              <button type="button" onClick={increaseQty} aria-label={t("productDetail.increaseQty")}>
                 <Plus size={16} />
               </button>
             </div>
-            <p className="text-xs mt-1 text-gray-500 dark:text-zinc-400">Stock: {stock}</p>
+            <p className="text-xs mt-1 text-gray-500 dark:text-zinc-400">
+              {t("productDetail.stock")} {stock}
+            </p>
           </div>
 
           <div className="flex gap-3 mt-6">
@@ -202,7 +206,7 @@ export default function ProductDetail() {
               onClick={() => addToCart(product, qty, size)}
               className="flex-1 bg-purple-700 text-white py-3 rounded-xl font-semibold flex justify-center gap-2 hover:scale-[1.02] transition"
             >
-              <ShoppingCart size={18} /> Add To Cart
+              <ShoppingCart size={18} /> {t("productDetail.addToCart")}
             </button>
             <ProductShareButton product={product} compact />
             <button
@@ -221,11 +225,11 @@ export default function ProductDetail() {
             onClick={() => setSizeFinderOpen(true)}
             className="mt-4 text-cyan-700 dark:text-cyan-400 font-bold hover:underline"
           >
-            Find My Size
+            {t("productDetail.findMySize")}
           </button>
 
           <FadeUpText className="mt-8 text-gray-500 dark:text-zinc-400 leading-7">
-            {product.description || "Premium orthopedic support designed for comfort and recovery."}
+            {product.description || t("productDetail.fallbackDesc")}
           </FadeUpText>
         </motion.section>
       </div>
@@ -247,11 +251,10 @@ export default function ProductDetail() {
         </div>
 
         <RecommendationGrid
-          title="You May Also Like"
-          subtitle="Recommendations based on category, tags, purpose and frequently viewed together products."
+          title={t("productDetail.youMayLike")}
           products={relatedProducts}
           loading={relatedLoading}
-          emptyText="No similar products found right now."
+          emptyText={t("productDetail.noSimilar")}
         />
       </div>
     </main>

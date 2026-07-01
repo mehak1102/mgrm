@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -8,6 +9,7 @@ export default function BeforeAfterSlider({
   className = "",
   compact = false,
 }) {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
   const [position, setPosition] = useState(50);
   const [dragging, setDragging] = useState(false);
@@ -46,14 +48,14 @@ export default function BeforeAfterSlider({
     >
       <img
         src={afterImage}
-        alt="After"
+        alt={t("common.after")}
         className="absolute inset-0 w-full h-full object-cover"
         loading="lazy"
       />
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
         <img
           src={beforeImage}
-          alt="Before"
+          alt={t("common.before")}
           className="absolute inset-0 h-full object-cover"
           style={{ width: containerRef.current?.offsetWidth || "100%" }}
           loading="lazy"
@@ -71,21 +73,22 @@ export default function BeforeAfterSlider({
       </div>
 
       <span className="absolute top-2 left-2 bg-black/50 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-        Before
+        {t("common.before")}
       </span>
       <span className="absolute top-2 right-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-        After
+        {t("common.after")}
       </span>
     </div>
   );
 }
 
 export function RecoveryStoryCard({ story, index = 0 }) {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const text = story.story || story.description || "";
-  const title = story.title || story.patientName || "Recovery Story";
+  const title = story.title || story.patientName || t("global.recoveryStory");
   const duration = story.recoveryDuration || story.timeline || "";
-  const author = story.userId?.name || story.patientName || "Customer";
+  const author = story.userId?.name || story.patientName || t("common.customer");
 
   return (
     <motion.article
@@ -105,7 +108,7 @@ export function RecoveryStoryCard({ story, index = 0 }) {
           <h3 className="font-black text-sm text-fg line-clamp-2">{title}</h3>
           {story.isFeatured && (
             <span className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
-              Featured
+              {t("common.featured")}
             </span>
           )}
         </div>
@@ -126,7 +129,7 @@ export function RecoveryStoryCard({ story, index = 0 }) {
                 onClick={() => setExpanded((p) => !p)}
                 className="text-xs font-bold text-brand mt-1 hover:underline"
               >
-                {expanded ? "Show less" : "Read more"}
+                {expanded ? t("common.showLess") : t("common.readMore")}
               </button>
             )}
           </div>

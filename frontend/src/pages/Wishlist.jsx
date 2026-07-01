@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Heart, Trash2, ShoppingCart } from "lucide-react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
@@ -10,6 +11,7 @@ import {
 } from "../utils/productPriceStyle";
 
 export default function Wishlist() {
+  const { t } = useTranslation();
   const { wishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const { isBlue } = useTheme();
@@ -25,19 +27,18 @@ export default function Wishlist() {
         <div className="flex justify-between items-end mb-10">
           <div>
             <p className="text-purple-700 font-black tracking-widest text-sm">
-              YOUR FAVORITES
+              {t("wishlist.badge")}
             </p>
-            {/* <h1 className="text-5xl font-black mt-2">Wishlist</h1> */}
             <h1 className="text-3xl font-bold">
-  Wishlist ({validWishlist.length})
-</h1>
+              {t("wishlist.title", { count: validWishlist.length })}
+            </h1>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
-              Products you liked are saved here
+              {t("wishlist.subtitle")}
             </p>
           </div>
 
           <div className="bg-card dark:bg-zinc-900 rounded-2xl px-5 py-3 shadow font-bold text-gray-500 dark:text-zinc-400">
-            {wishlist.length} items
+            {t("common.itemsCount", { count: wishlist.length })}
           </div>
         </div>
 
@@ -45,16 +46,16 @@ export default function Wishlist() {
         {wishlist.length === 0 && (
           <div className="bg-card dark:bg-zinc-900 rounded-[30px] p-12 text-center shadow">
             <Heart className="mx-auto text-purple-400" size={50} />
-            <h2 className="text-3xl font-black mt-4">No liked products</h2>
+            <h2 className="text-3xl font-black mt-4">{t("wishlist.emptyTitle")}</h2>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
-              Start exploring and add products you love.
+              {t("wishlist.emptyCopy")}
             </p>
 
             <Link
               to="/shop"
               className="inline-block mt-6 bg-purple-700 text-white px-6 py-3 rounded-full font-bold"
             >
-              Browse Products
+              {t("common.browseProducts")}
             </Link>
           </div>
         )}
@@ -107,7 +108,7 @@ export default function Wishlist() {
                     onClick={() => addToCart(p, 1)}
                     className="flex-1 bg-purple-700 text-white py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-1"
                   >
-                    <ShoppingCart size={16} /> Add
+                    <ShoppingCart size={16} /> {t("common.add")}
                   </button>
 
                   <button

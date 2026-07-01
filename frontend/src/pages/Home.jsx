@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ChevronLeft,
@@ -15,6 +16,7 @@ import { useCart } from "../context/CartContext";
 import { useHomeRecommendations } from "../hooks/useRecommendations";
 import { useProductStats } from "../context/ProductStatsContext";
 import { trackCategoryClick } from "../utils/recommendationBehavior";
+import { splitTextUnits } from "../utils/textUnits";
 
 import { bodyCategories } from "../data/siteData";
 import { blogPosts } from "../data/blogData";
@@ -48,8 +50,11 @@ const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCol
 const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
 const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
 const loadColorCustomize = () => import("../components/home/HomeColorCustomizeSection");
+const loadSizeCustomize = () => import("../components/home/HomeSizeCustomizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
+
+const HERO_TAGLINE_EN = "MGRM medicare products | Braces | Bandage | Splintage";
 
 function hexToRgbTuple(hex) {
   const n = hex.replace("#", "");
@@ -138,6 +143,7 @@ function TrustedSupportCategoryRing({ cat, staggerIndex }) {
 }
 
 export default function Home() {
+  const { t } = useTranslation();
   const [productStart, setProductStart] = useState(0);
   const [blogStart, setBlogStart] = useState(0);
   const navigate = useNavigate();
@@ -151,41 +157,53 @@ export default function Home() {
   } = useProductStats();
 
   const heroCountLabel = String(bodyTotal);
-  const heroText = `${heroCountLabel} MGRM medicare products | Braces | Bandage | Splintage`;
+  const heroText = `${heroCountLabel} ${HERO_TAGLINE_EN}`;
   const heroNumLen = heroCountLabel.length;
 
   const certifications = [
-  {
-    title: "ISO Certified",
-    subtitle: "International quality standards",
-    image: "/certifications/iso.png",
-    glow: "cyan",
-  },
-  {
-    title: "WHO-GMP",
-    subtitle: "Global manufacturing compliance",
-    image: "/certifications/who-gmp.png",
-    glow: "emerald",
-  },
-  {
-    title: "FDA Approved",
-    subtitle: "Trusted medical safety",
-    image: "/certifications/fda.png",
-    glow: "fuchsia",
-  },
-  {
-    title: "Quality Brands",
-    subtitle: "Recognized healthcare excellence",
-    image: "/certifications/quality.png",
-    glow: "orange",
-  },
-  {
-    title: "CE Certified",
-    subtitle: "European conformity standards",
-    image: "/certifications/cee.png",
-    glow: "slate",
-  },
-];
+    {
+      title: t("home.certifications.iso.title"),
+      subtitle: t("home.certifications.iso.subtitle"),
+      image: "/certifications/iso.png",
+      glow: "cyan",
+    },
+    {
+      title: t("home.certifications.who.title"),
+      subtitle: t("home.certifications.who.subtitle"),
+      image: "/certifications/who-gmp.png",
+      glow: "emerald",
+    },
+    {
+      title: t("home.certifications.fda.title"),
+      subtitle: t("home.certifications.fda.subtitle"),
+      image: "/certifications/fda.png",
+      glow: "fuchsia",
+    },
+    {
+      title: t("home.certifications.quality.title"),
+      subtitle: t("home.certifications.quality.subtitle"),
+      image: "/certifications/quality.png",
+      glow: "orange",
+    },
+    {
+      title: t("home.certifications.ce.title"),
+      subtitle: t("home.certifications.ce.subtitle"),
+      image: "/certifications/cee.png",
+      glow: "slate",
+    },
+  ];
+
+  const marqueeTags = [
+    t("home.marquee.welcome"),
+    t("home.marquee.global"),
+    t("home.marquee.expect"),
+    t("home.marquee.partner"),
+    t("home.marquee.orthopedic"),
+    t("home.marquee.medical"),
+    t("home.marquee.rehab"),
+    t("home.marquee.healthcare"),
+    t("home.marquee.quality"),
+  ];
 
 const BANDAGE_STAT_PASTELS = [
   {
@@ -280,7 +298,7 @@ const BANDAGE_STAT_PASTELS = [
       transition={{ duration: 1.2 }}
       className="home-hero-title w-max max-w-none text-[clamp(0.8125rem,2.65vw,3.25rem)] leading-[0.95] font-black tracking-tight text-slate-900 dark:text-zinc-100 pt-1 transition-colors duration-300 flex flex-nowrap whitespace-nowrap"
     >
-      {heroText.split("").map((char, index) => (
+      {splitTextUnits(heroText).map((char, index) => (
         <motion.span
           key={index}
           initial={{
@@ -310,7 +328,7 @@ const BANDAGE_STAT_PASTELS = [
 
             <PremiumReveal variant={FadeUpSlow} delay={0.6} className="mt-8 mb-2">
               <SectionLabel className="blue-theme-section-label text-cyan-600 dark:text-cyan-400 font-black tracking-[0.3em] text-sm">
-                TOP CATEGORIES
+                {t("home.topCategories")}
               </SectionLabel>
             </PremiumReveal>
 
@@ -342,7 +360,7 @@ const BANDAGE_STAT_PASTELS = [
 
                       <div>
                         <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                        <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                        <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: cat.count })}</p>
                       </div>
                     </button>
                   </PremiumStaggerItem>
@@ -486,7 +504,7 @@ const BANDAGE_STAT_PASTELS = [
 
                         <div>
                           <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                          <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{cat.count} products</p>
+                          <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: cat.count })}</p>
                         </div>
                       </button>
                     </PremiumStaggerItem>
@@ -522,10 +540,10 @@ const BANDAGE_STAT_PASTELS = [
         <section className="max-w-[1500px] mx-auto px-6 py-28">
           <PremiumStagger className="grid md:grid-cols-4 gap-5" stagger={0.12}>
             {[
-              ["Certified Products", ShieldCheck],
-              ["Free Shipping", Truck],
-              ["Easy Returns", RotateCcw],
-              ["Original MGRM", BadgeCheck],
+              [t("support.certifiedProducts"), ShieldCheck],
+              [t("home.freeShipping"), Truck],
+              [t("home.easyReturns"), RotateCcw],
+              [t("home.originalMgrm"), BadgeCheck],
             ].map(([label, Icon]) => (
               <PremiumStaggerItem key={label}>
                 <div className="card rounded-3xl p-6 flex items-center gap-4 hover:-translate-y-1 transition duration-500">
@@ -583,7 +601,7 @@ const BANDAGE_STAT_PASTELS = [
 
               <div className="home-trust-cert-verified mt-5 flex items-center gap-2 text-emerald-600 font-black text-sm">
                 <CheckCircle2 size={16} />
-                Verified Standard
+                {t("home.verifiedStandard")}
               </div>
             </motion.div>
           );
@@ -595,39 +613,37 @@ const BANDAGE_STAT_PASTELS = [
     <div className="relative">
       <div className="home-trust-cert-panel relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
         <SectionLabel className="home-trust-cert-label text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
-          TRUST & SAFETY
+          {t("home.trustSafety")}
         </SectionLabel>
 
         <SectionHeading
-          text="Expect The Best"
+          text={t("home.expectBest")}
           className="home-trust-cert-heading text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
         />
 
         <FadeUpText className="home-trust-cert-desc mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
-          MGRM’s strong focus on quality ensures every orthopedic and
-          recovery product meets internationally recognized healthcare
-          standards for comfort, durability and safety.
+          {t("home.trustCopy")}
         </FadeUpText>
 
         <div className="mt-8 grid grid-cols-2 gap-4">
           {[
             {
-              text: "Medical Grade Quality",
+              text: t("home.medicalGrade"),
               tone: "emerald",
               icon: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400",
             },
             {
-              text: "International Standards",
+              text: t("home.intlStandards"),
               tone: "sky",
               icon: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400",
             },
             {
-              text: "Premium Materials",
+              text: t("home.premiumMaterials"),
               tone: "violet",
               icon: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400",
             },
             {
-              text: "Trusted Recovery",
+              text: t("home.trustedRecovery"),
               tone: "amber",
               icon: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400",
             },
@@ -695,13 +711,13 @@ const BANDAGE_STAT_PASTELS = [
         <div>
 
           <SectionHeading
-            text="Attention"
+            text={t("home.attention")}
             as="h2"
             className="text-[58px] font-light tracking-wide text-red-500 md:text-6xl"
           />
 
           <SectionHeading
-            text="Cardiologists"
+            text={t("home.cardiologists")}
             as="h3"
             delay={0.15}
             className="mt-2 text-4xl font-light text-slate-900 dark:text-zinc-100 md:text-6xl"
@@ -711,9 +727,7 @@ const BANDAGE_STAT_PASTELS = [
             delay={0.25}
             className="mt-8 max-w-xl text-base leading-8 text-slate-600 dark:text-zinc-400 md:text-lg"
           >
-            {bodyTotal} world-class certified products designed for
-            relief, recovery and rehabilitation with trusted
-            orthopedic and post-surgical support solutions.
+            {t("home.worldClassCopy", { count: bodyTotal })}
           </FadeUpText>
 
           <motion.div
@@ -1067,9 +1081,7 @@ const BANDAGE_STAT_PASTELS = [
             md:text-right
           "
         >
-          MGRM products are designed to support recovery
-          before surgery and accelerate rehabilitation
-          after surgery.
+          {t("home.cardiologyFooterCopy")}
         </div>
       </div>
     </div>
@@ -1124,29 +1136,26 @@ const BANDAGE_STAT_PASTELS = [
           <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
 
           <span className="home-bandage-badge-label text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
-           MGRM - GLOBAL MEDICAL BRAND
+           {t("home.bandageBadge")}
           </span>
         </div>
 
         {/* TITLE */}
 
         <h2 className="home-bandage-title mt-6 text-4xl sm:text-5xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
-          BANDAGE TO
+          {t("home.bandageTitle1")}
           <br />
-          SPLINTAGE™
+          {t("home.bandageTitle2")}
         </h2>
 
         {/* SUBTITLE */}
         <h3 className="home-bandage-subtitle mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
-          Braces • Splintage • Bandage Care
+          {t("home.bandageSubtitle")}
         </h3>
 
         {/* DESC */}
         <p className="home-bandage-desc mt-8 text-lg leading-9 text-slate-600 dark:text-zinc-400 max-w-2xl transition-colors duration-300">
-          MGRM products are scientifically engineered to stabilize,
-          support and accelerate recovery during injuries and
-          rehabilitation. Trusted by hospitals, physiotherapists,
-          athletes and healthcare providers globally.
+          {t("home.bandageDesc")}
         </p>
 
         {/* BUTTONS */}
@@ -1157,7 +1166,7 @@ const BANDAGE_STAT_PASTELS = [
             className="home-bandage-btn-primary group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-7 sm:px-9 py-3.5 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
             <span className="relative z-10">
-              Discover Products
+              {t("home.discoverProducts")}
             </span>
 
             <span className="absolute inset-0 bg-white/20 scale-x-0 origin-left group-hover:scale-x-100 transition duration-500" />
@@ -1167,7 +1176,7 @@ const BANDAGE_STAT_PASTELS = [
             to="/support"
             className="home-bandage-btn-secondary rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-7 sm:px-9 py-3.5 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
           >
-            Partner Program
+            {t("home.marquee.partner")}
           </Link>
         </div>
       </motion.div>
@@ -1176,9 +1185,9 @@ const BANDAGE_STAT_PASTELS = [
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
 
         {[
-          { value: formatProductCount(bodyTotal), label: "Products" },
-          { value: "40+", label: "Countries" },
-          { value: "25+", label: "Years" },
+          { value: formatProductCount(bodyTotal), label: t("home.statProducts") },
+          { value: "40+", label: t("home.statCountries") },
+          { value: "25+", label: t("home.statYears") },
         ].map(({ value, label }, i) => {
           const pastel = BANDAGE_STAT_PASTELS[i % BANDAGE_STAT_PASTELS.length];
 
@@ -1223,22 +1232,21 @@ const BANDAGE_STAT_PASTELS = [
         <div className="home-bandage-image-frame relative h-[400px] sm:h-[520px] lg:h-[580px] overflow-hidden">
           <img
             src="/banners/bandage.png"
-            alt="Premium orthopedic support"
+            alt={t("home.premiumOrthopedic")}
             className="w-full h-full object-cover object-center"
           />
 
           <div className="home-bandage-image-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/[0.97] to-transparent pt-24 sm:pt-28 pb-5 sm:pb-7 px-5 sm:px-7">
             <span className="home-bandage-image-label text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.3em] font-black text-[#003262]">
-              PREMIUM ORTHOPEDIC SUPPORT
+              {t("home.premiumOrthopedic")}
             </span>
 
             <h3 className="home-bandage-image-title mt-2 sm:mt-2.5 text-2xl sm:text-3xl lg:text-[2.1rem] font-black text-[#003262] leading-tight">
-              Expect The Best
+              {t("home.expectBest")}
             </h3>
 
             <p className="home-bandage-image-desc mt-3 sm:mt-3.5 text-sm sm:text-[0.95rem] text-slate-500 leading-relaxed">
-              Internationally certified recovery and rehabilitation
-              products designed for premium support and comfort.
+              {t("home.bandageImageDesc")}
             </p>
           </div>
         </div>
@@ -1252,7 +1260,7 @@ const BANDAGE_STAT_PASTELS = [
       >
 
         <p className="home-bandage-float-label text-[10px] sm:text-xs font-black tracking-[0.28em] text-[#003262]">
-          GLOBAL PRESENCE
+          {t("home.globalPresence")}
         </p>
 
         <h4 className="home-bandage-stat-num home-bandage-stat-num--highlight mt-1.5 text-3xl lg:text-[2.35rem] font-black text-[#c9a600] leading-none">
@@ -1260,12 +1268,11 @@ const BANDAGE_STAT_PASTELS = [
         </h4>
 
         <p className="home-bandage-float-subtitle mt-1 text-base lg:text-lg font-bold text-[#003262]">
-          Countries
+          {t("home.statCountries")}
         </p>
 
         <p className="home-bandage-float-desc mt-2.5 text-sm leading-6 text-slate-500">
-          Expanding partnerships with healthcare providers,
-          distributors and hospitals worldwide.
+          {t("home.globalPresenceDesc")}
         </p>
       </motion.div>
 
@@ -1293,7 +1300,7 @@ const BANDAGE_STAT_PASTELS = [
             </h4>
 
             <p className="home-bandage-cert-subtitle text-sm text-slate-500 mt-0.5">
-              Certified Manufacturing
+              {t("home.certifiedManufacturing")}
             </p>
           </div>
         </div>
@@ -1310,28 +1317,8 @@ const BANDAGE_STAT_PASTELS = [
 
     <div className="flex gap-6 w-max marquee-premium">
 
-      {[
-        "WELCOME TO MGRM",
-        "GLOBAL PRESENCE",
-        "EXPECT THE BEST",
-        "PARTNER PROGRAM",
-        "ORTHOPEDIC SUPPORT",
-        "MEDICAL GRADE",
-        "REHABILITATION PRODUCTS",
-        "HEALTHCARE SOLUTIONS",
-        "INTERNATIONAL QUALITY",
-      ]
-        .concat([
-          "WELCOME TO MGRM",
-          "GLOBAL PRESENCE",
-          "EXPECT THE BEST",
-          "PARTNER PROGRAM",
-          "ORTHOPEDIC SUPPORT",
-          "MEDICAL GRADE",
-          "REHABILITATION PRODUCTS",
-          "HEALTHCARE SOLUTIONS",
-          "INTERNATIONAL QUALITY",
-        ])
+      {marqueeTags
+        .concat(marqueeTags)
         .map((item, i) => (
 
           <div
@@ -1352,9 +1339,9 @@ const BANDAGE_STAT_PASTELS = [
 
           <div className="relative flex justify-between items-end mb-10">
             <PremiumWordHeader
-              label="BEST SELLERS"
-              title="Most Trusted Supports"
-              description="Most trusted support categories for daily recovery."
+              label={t("home.bestSellers")}
+              title={t("home.mostTrusted")}
+              description={t("home.mostTrustedDesc")}
               style="slideLeft"
             />
           </div>
@@ -1373,7 +1360,7 @@ const BANDAGE_STAT_PASTELS = [
                   />
 
                   <h3 className="mt-5 text-xl font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                  <span className="home-trusted-count-pill">{cat.count} items</span>
+                  <span className="home-trusted-count-pill">{t("common.itemsCount", { count: cat.count })}</span>
                 </button>
               ))}
             </div>
@@ -1386,12 +1373,12 @@ const BANDAGE_STAT_PASTELS = [
         {/* LOCATE PAIN AREA */}
         <section className="home-locate-pain-section relative max-w-[1500px] mx-auto px-6 py-28">
           <div className="text-center mb-12">
-            <p className="home-locate-label text-cyan-600 dark:text-cyan-400 font-black tracking-widest">BODY-BASED SEARCH</p>
+            <p className="home-locate-label text-cyan-600 dark:text-cyan-400 font-black tracking-widest">{t("home.bodySearch")}</p>
             <h2 className="home-locate-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">
-              Locate Your <span className="highlight">Pain Area</span>
+              {t("home.locatePain")} <span className="highlight">{t("home.painArea")}</span>
             </h2>
             <p className="home-locate-desc text-gray-500 dark:text-zinc-400 mt-3 text-lg">
-              Get the right support where you need it
+              {t("home.locatePainDesc")}
             </p>
           </div>
 
@@ -1448,10 +1435,10 @@ const BANDAGE_STAT_PASTELS = [
               ))}
 
             <div className="home-locate-smart-guide absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10 [data-theme=blue]:bg-white/95">
-              <p className="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-black font-black text-sm">SMART GUIDE</p>
-              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-black">Find support faster</h3>
+              <p className="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-black font-black text-sm">{t("home.smartGuide")}</p>
+              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-black">{t("home.findFaster")}</h3>
               <p className="text-gray-500 dark:text-zinc-400 [data-theme=blue]:text-black/80 mt-2">
-                Tap any pain point and jump directly to matching products.
+                {t("home.tapPainPoint")}
               </p>
             </div>
           </div>
@@ -1466,9 +1453,9 @@ const BANDAGE_STAT_PASTELS = [
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
             <PremiumWordHeader
-              label={strategy.startsWith("behavioral") ? "PERSONALIZED FOR YOU" : "TRENDING PICKS"}
-              title="Recommended Supports"
-              description="Dynamic recommendations based on your search, views, categories and cart activity."
+              label={strategy.startsWith("behavioral") ? t("home.personalized") : t("home.trending")}
+              title={t("home.recommended")}
+              description={t("home.recommendedDesc")}
               style="slideRight"
               titleClassName="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100"
             />
@@ -1490,7 +1477,7 @@ const BANDAGE_STAT_PASTELS = [
                 to="/shop"
                 className="btn-primary px-6 py-3 rounded-full font-black shadow-lg"
               >
-                More
+                {t("common.more")}
               </Link>
             </div>
           </div>
@@ -1507,7 +1494,7 @@ const BANDAGE_STAT_PASTELS = [
           ) : products.length === 0 ? (
             <div className="bg-card dark:bg-zinc-900 rounded-3xl px-6 py-12 text-center mx-2 sm:mx-4">
               <p className="text-gray-500 dark:text-zinc-400">
-                Recommendations will appear as you browse or search products.
+                {t("home.noRecommendations")}
               </p>
             </div>
           ) : (
@@ -1522,6 +1509,7 @@ const BANDAGE_STAT_PASTELS = [
         </section>
 
         <DeferredSection loader={loadSmartSize} minHeight={560} />
+        <DeferredSection loader={loadSizeCustomize} minHeight={680} />
         <DeferredSection loader={loadColorCustomize} minHeight={640} />
         <DeferredSection loader={loadTestimonials} minHeight={520} />
 
@@ -1529,8 +1517,8 @@ const BANDAGE_STAT_PASTELS = [
         <section className="max-w-7xl mx-auto px-5 py-28">
           <div className="flex justify-between items-end mb-10">
             <PremiumWordHeader
-              label="LEARN & RECOVER"
-              title="Health Blogs & Guides"
+              label={t("home.learnRecover")}
+              title={t("home.healthBlogs")}
               style="fadeUp"
             />
 
@@ -1551,7 +1539,7 @@ const BANDAGE_STAT_PASTELS = [
                 to="/blogs"
                 className="btn-primary px-6 py-3 rounded-full font-black shadow-lg"
               >
-                More
+                {t("common.more")}
               </Link>
             </div>
           </div>
@@ -1574,35 +1562,32 @@ const BANDAGE_STAT_PASTELS = [
       {/* Left Content */}
       <div>
         <span className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400">
-          Advanced Human Anatomy
+          {t("home.anatomyBadge")}
         </span>
 
         <h2 className="mt-6 text-5xl font-black leading-tight text-slate-900 dark:text-white">
-          Precision Support
+          {t("home.precisionSupport")}
           <span className="block text-cyan-500">
-            Backed By Human Science
+            {t("home.backedByScience")}
           </span>
         </h2>
 
         <p className="mt-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Every MGRM product is designed around real human anatomy,
-          ensuring targeted support, improved mobility and faster recovery.
-          From pain management to rehabilitation, our solutions are built
-          to move naturally with your body.
+          {t("home.anatomyCopy")}
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
           <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
             <div className="text-3xl font-bold text-cyan-500">30+</div>
             <div className="text-sm text-slate-500 dark:text-slate-400">
-              Years Experience
+              {t("home.yearsExperience")}
             </div>
           </div>
 
           <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
             <div className="text-3xl font-bold text-cyan-500">{formatProductCount(bodyTotal)}</div>
             <div className="text-sm text-slate-500 dark:text-slate-400">
-              Certified Products
+              {t("home.certifiedProducts")}
             </div>
           </div>
         </div>
@@ -1637,10 +1622,11 @@ const BANDAGE_STAT_PASTELS = [
 {/* HEADING */}
 <div className="text-center mb-14">
 
-  <h2 className="home-print-ads-wordmark">
-    <span className="home-print-ads-mgrm">MGRM</span>
-    <span className="home-print-ads-medicare">Medicare</span>
-  </h2>
+  <img
+    src="/products/logs.png"
+    alt="MGRM Medicare"
+    className="home-print-ads-logo mx-auto mt-4 w-auto max-w-[min(100%,440px)] h-auto max-h-28 sm:max-h-32 md:max-h-36 lg:max-h-40 object-contain"
+  />
 
   <p className="home-print-ads-subtitle">
     Advanced respiratory & pain relief solutions designed for everyday comfort.
@@ -1666,15 +1652,15 @@ const BANDAGE_STAT_PASTELS = [
       </div>
     </div>
 
-<div className="absolute top-5 right-5 text-right bg-black/40 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+<div className="absolute top-5 left-5 bg-black/40 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 
   <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
     Breathe Easier
     <br />
 
-    <span className="text-cyan-300">
+    {/* <span className="text-cyan-300">
       NOW
-    </span>
+    </span> */}
   </h3>
 
 </div>
@@ -1695,15 +1681,15 @@ const BANDAGE_STAT_PASTELS = [
       </div>
     </div>
 
-<div className="absolute top-5 left-5 bg-black/35 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+<div className="absolute top-5 right-5 text-right bg-black/35 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 
   <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
     Pain Relief
     <br />
 
-    <span className="text-lime-300">
+    {/* <span className="text-lime-300">
       Naturally
-    </span>
+    </span> */}
   </h3>
 
 </div>

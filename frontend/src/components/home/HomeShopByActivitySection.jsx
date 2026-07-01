@@ -182,6 +182,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import API from "../../api";
 // import { activities } from "../../data/siteData";
@@ -199,6 +200,7 @@ function normalizeProduct(p, fallbackImage) {
 }
 
 export default function HomeShopByActivitySection() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const maskRef = useRef(null);
   const [hoveredActivity, setHoveredActivity] = useState(null);
@@ -271,15 +273,15 @@ export default function HomeShopByActivitySection() {
     <section className="home-activity-section max-w-[1500px] mx-auto px-6 py-28">
       <div className="flex justify-between items-end mb-10">
         <div>
-          <p className="home-activity-label text-cyan-600 font-black tracking-widest">LIFESTYLE SUPPORT</p>
-          <h2 className="home-activity-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">Shop By Activity</h2>
+          <p className="home-activity-label text-cyan-600 font-black tracking-widest">{t("homeSections.activityLabel")}</p>
+          <h2 className="home-activity-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">{t("homeSections.activityTitle")}</h2>
         </div>
 
         <Link
           to="/shop-by-activity"
           className="home-activity-cta hidden md:block bg-card shadow-lg rounded-full px-6 py-3 font-black text-cyan-600 hover:bg-cyan-600 hover:text-white transition"
         >
-          View All →
+          {t("common.viewAll")}
         </Link>
       </div>
 

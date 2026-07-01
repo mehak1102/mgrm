@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CheckCircle2, Palette, Send, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 import API from "../../api";
@@ -9,15 +10,15 @@ import {
 } from "../motion/PremiumMotion";
 import "../../theme/home-color-customize.css";
 
-const COLOR_PRESETS = [
-  { label: "Classic Black", value: "#111827" },
-  { label: "Navy Blue", value: "#1e3a8a" },
-  { label: "Medical Grey", value: "#64748b" },
-  { label: "Beige", value: "#d6c4a8" },
-  { label: "Royal Blue", value: "#2563eb" },
-  { label: "Burgundy", value: "#9f1239" },
-  { label: "Olive", value: "#4d7c0f" },
-  { label: "White", value: "#f8fafc" },
+const COLOR_PRESET_KEYS = [
+  { labelKey: "colorCustomize.presetClassicBlack", value: "#111827" },
+  { labelKey: "colorCustomize.presetNavyBlue", value: "#1e3a8a" },
+  { labelKey: "colorCustomize.presetMedicalGrey", value: "#64748b" },
+  { labelKey: "colorCustomize.presetBeige", value: "#d6c4a8" },
+  { labelKey: "colorCustomize.presetRoyalBlue", value: "#2563eb" },
+  { labelKey: "colorCustomize.presetBurgundy", value: "#9f1239" },
+  { labelKey: "colorCustomize.presetOlive", value: "#4d7c0f" },
+  { labelKey: "colorCustomize.presetWhite", value: "#f8fafc" },
 ];
 
 const EMPTY_FORM = {
@@ -29,17 +30,27 @@ const EMPTY_FORM = {
 };
 
 export default function HomeColorCustomizeSection() {
+  const { t } = useTranslation();
   const [form, setForm] = useState(EMPTY_FORM);
-  const [selectedColor, setSelectedColor] = useState(COLOR_PRESETS[0].value);
+  const [selectedColor, setSelectedColor] = useState(COLOR_PRESET_KEYS[0].value);
   const [customColor, setCustomColor] = useState("#25319a");
   const [useCustomPicker, setUseCustomPicker] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const colorPresets = useMemo(
+    () =>
+      COLOR_PRESET_KEYS.map((preset) => ({
+        ...preset,
+        label: t(preset.labelKey),
+      })),
+    [t]
+  );
+
   const activeColor = useCustomPicker ? customColor : selectedColor;
   const activeLabel =
-    COLOR_PRESETS.find((c) => c.value === selectedColor)?.label ||
-    (useCustomPicker ? "Custom colour" : "Selected colour");
+    colorPresets.find((c) => c.value === selectedColor)?.label ||
+    (useCustomPicker ? t("colorCustomize.customColour") : t("colorCustomize.selectedColour"));
 
   const updateField = (key, value) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -49,7 +60,7 @@ export default function HomeColorCustomizeSection() {
     event.preventDefault();
 
     if (!form.name.trim() || !form.message.trim()) {
-      toast.error("Please enter your name and customization request");
+      toast.error(t("colorCustomize.nameMessageRequired"));
       return;
     }
 
@@ -62,9 +73,9 @@ export default function HomeColorCustomizeSection() {
       });
       setSubmitted(true);
       setForm(EMPTY_FORM);
-      toast.success("Request sent! Our team will review your colour preference.");
+      toast.success(t("colorCustomize.success"));
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Could not send request. Please try again.");
+      toast.error(err.response?.data?.msg || t("colorCustomize.sendFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -76,9 +87,9 @@ export default function HomeColorCustomizeSection() {
 
       <div className="relative grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start px-2 sm:px-6">
         <PremiumWordHeader
-          label="PERSONALIZE YOUR SUPPORT"
-          title="Customize Your Colour"
-          description="Want your brace or support in a specific shade? Tell us your product and preferred colour — our team will check if customization is possible and get back to you."
+          label={t("colorCustomize.badge")}
+          title={t("colorCustomize.title")}
+          description={t("colorCustomize.descriptionLong")}
           style="slideRight"
           titleClassName="text-4xl sm:text-[46px] font-black mt-2 text-slate-900 dark:text-zinc-100"
         />
@@ -94,10 +105,10 @@ export default function HomeColorCustomizeSection() {
               </span>
               <div>
                 <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">
-                  Send colour request
+                  {t("colorCustomize.sendColourRequest")}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-zinc-400">
-                  Reviewed by MGRM admin before confirmation
+                  {t("colorCustomize.reviewedByAdmin")}
                 </p>
               </div>
             </div>
@@ -105,34 +116,34 @@ export default function HomeColorCustomizeSection() {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block sm:col-span-2">
                 <span className="home-color-customize-label mb-1.5 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                  Your name *
+                  {t("colorCustomize.yourNameRequired")}
                 </span>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   className="home-color-customize-field"
-                  placeholder="Full name"
+                  placeholder={t("common.fullName")}
                   required
                 />
               </label>
 
               <label className="block">
                 <span className="home-color-customize-label mb-1.5 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                  Email
+                  {t("common.email")}
                 </span>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   className="home-color-customize-field"
-                  placeholder="you@email.com"
+                  placeholder={t("common.enterEmail")}
                 />
               </label>
 
               <label className="block">
                 <span className="home-color-customize-label mb-1.5 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                  Phone
+                  {t("common.phone")}
                 </span>
                 <input
                   type="tel"
@@ -145,24 +156,24 @@ export default function HomeColorCustomizeSection() {
 
               <label className="block sm:col-span-2">
                 <span className="home-color-customize-label mb-1.5 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                  Product name
+                  {t("colorCustomize.productName")}
                 </span>
                 <input
                   type="text"
                   value={form.productName}
                   onChange={(e) => updateField("productName", e.target.value)}
                   className="home-color-customize-field"
-                  placeholder="e.g. Knee Cap, Lumbo Sacral Belt"
+                  placeholder={t("colorCustomize.productPlaceholder")}
                 />
               </label>
             </div>
 
             <div>
               <span className="home-color-customize-label mb-3 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                Preferred colour *
+                {t("colorCustomize.preferredColour")}
               </span>
               <div className="flex flex-wrap gap-3">
-                {COLOR_PRESETS.map((preset) => (
+                {colorPresets.map((preset) => (
                   <button
                     key={preset.value}
                     type="button"
@@ -189,7 +200,7 @@ export default function HomeColorCustomizeSection() {
                       setUseCustomPicker(true);
                     }}
                     className="absolute inset-0 h-[140%] w-[140%] cursor-pointer opacity-0"
-                    aria-label="Pick custom colour"
+                    aria-label={t("colorCustomize.pickCustomColour")}
                   />
                   <Sparkles size={16} className="text-slate-500 dark:text-zinc-400" />
                 </label>
@@ -212,13 +223,13 @@ export default function HomeColorCustomizeSection() {
 
             <label className="block">
               <span className="home-color-customize-label mb-1.5 block text-sm font-bold text-slate-700 dark:text-zinc-200">
-                Your query / special notes *
+                {t("colorCustomize.yourQuery")}
               </span>
               <textarea
                 value={form.message}
                 onChange={(e) => updateField("message", e.target.value)}
                 className="home-color-customize-field min-h-[110px] resize-y"
-                placeholder="Describe the colour shade, quantity, or any reference you have in mind..."
+                placeholder={t("colorCustomize.messagePlaceholder")}
                 required
               />
             </label>
@@ -226,10 +237,7 @@ export default function HomeColorCustomizeSection() {
             {submitted ? (
               <div className="home-color-customize-success flex items-start gap-3 p-4 text-sm font-semibold">
                 <CheckCircle2 size={20} className="shrink-0 mt-0.5" aria-hidden />
-                <p>
-                  Thank you! Your colour customization request has been sent to our admin team.
-                  They will review whether it can be customized and contact you soon.
-                </p>
+                <p>{t("colorCustomize.requestReceivedLong")}</p>
               </div>
             ) : null}
 
@@ -239,7 +247,7 @@ export default function HomeColorCustomizeSection() {
               className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-black disabled:opacity-70"
             >
               <Send size={18} aria-hidden />
-              {submitting ? "Sending request..." : "Submit colour request"}
+              {submitting ? t("colorCustomize.sending") : t("colorCustomize.submit")}
             </button>
           </form>
         </PremiumReveal>

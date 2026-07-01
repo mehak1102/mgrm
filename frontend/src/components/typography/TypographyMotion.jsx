@@ -6,6 +6,7 @@ import {
   useSpring,
   useMotionValueEvent,
 } from "framer-motion";
+import { splitTextUnits } from "../../utils/textUnits";
 
 /** Global viewport — trigger once when ~25% visible */
 export const VIEWPORT = { once: true, amount: 0.25 };
@@ -67,7 +68,7 @@ function CharReveal({
   gradient = false,
 }) {
   const enabled = useMotionEnabled();
-  const chars = Array.from(text);
+  const chars = splitTextUnits(text);
 
   if (!enabled) {
     return <span className={className}>{text}</span>;

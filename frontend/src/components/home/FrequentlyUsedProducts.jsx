@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronRight, Eye, ShoppingCart } from "lucide-react";
 import API from "../../api";
@@ -126,6 +127,7 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
   isBlue,
   isDark,
   onAddToCart,
+  t,
 }) {
   const price = Number(product.price || 0);
   const discountPrice = Number(product.discountPrice || product.price || 0);
@@ -193,7 +195,7 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
             : "text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)]"
         }`}
       >
-        Support • Recovery • Comfort
+        {t("homeSections.frequentTagline")}
       </p>
 
       <div className="mt-4 flex items-baseline gap-2">
@@ -228,14 +230,14 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
           className="fup-btn fup-btn--cart"
         >
           <ShoppingCart size={16} strokeWidth={2.25} />
-          Add to Cart
+          {t("common.addToCart")}
         </button>
         <Link
           to={`/product/${product.slug}`}
           className="fup-btn fup-btn--view"
         >
           <Eye size={16} strokeWidth={2.25} />
-          View
+          {t("common.view")}
         </Link>
       </div>
     </motion.article>
@@ -261,6 +263,7 @@ function LoadingGrid() {
 }
 
 export default function FrequentlyUsedProducts() {
+  const { t } = useTranslation();
   const { addToCart } = useCart();
   const { isBlue, isDark } = useTheme();
   const reduceMotion = useReducedMotion();
@@ -336,9 +339,9 @@ export default function FrequentlyUsedProducts() {
       <div className="relative px-1 sm:px-2">
         <div className="mb-10 sm:mb-12">
           <PremiumWordHeader
-            label="MOST USED"
-            title="Frequently Used Products"
-            description="Everyday recovery essentials chosen most often by patients and active lifestyles."
+            label={t("homeSections.frequentLabel")}
+            title={t("homeSections.frequentTitle")}
+            description={t("homeSections.frequentDesc")}
             style="slideLeft"
             labelClassName="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-xs sm:text-sm"
             titleClassName="text-3xl sm:text-4xl md:text-[52px] font-black mt-2 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]"
@@ -362,6 +365,7 @@ export default function FrequentlyUsedProducts() {
                     isBlue={isBlue}
                     isDark={isDark}
                     onAddToCart={handleAddToCart}
+                    t={t}
                   />
                 ))}
               </AnimatePresence>
@@ -379,7 +383,7 @@ export default function FrequentlyUsedProducts() {
                     size={18}
                     className={`transition-transform duration-500 ${expanded ? "rotate-90" : ""}`}
                   />
-                  {expanded ? "Show Less" : "Show More"}
+                  {expanded ? t("homeSections.showLess") : t("homeSections.showMore")}
                 </button>
               </div>
             )}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   MessageCircle,
   Phone,
@@ -17,6 +18,8 @@ import API from "../api";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import MGRMBrandRing from "../components/brand/MGRMBrandRing";
 import SupportCallPopup from "../components/support/SupportCallPopup";
+import SupportFaq from "../components/support/SupportFaq";
+import SupportWaysStrip from "../components/support/SupportWaysStrip";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import {
   SectionLabel,
@@ -24,24 +27,26 @@ import {
   FadeUpText,
 } from "../components/typography/TypographyMotion";
 import "../theme/support-suggestions.css";
+import "../theme/support-faq.css";
 
-const supportTypes = [
-  "Product Help",
-  "Size Guide",
-  "Order Help",
-  "Return Request",
-  "Bulk Inquiry",
-  "Other",
+const SUPPORT_TYPE_OPTIONS = [
+  { value: "Product Help", key: "support.types.productHelp" },
+  { value: "Size Guide", key: "support.types.sizeGuide" },
+  { value: "Order Help", key: "support.types.orderHelp" },
+  { value: "Return Request", key: "support.types.returnRequest" },
+  { value: "Bulk Inquiry", key: "support.types.bulkInquiry" },
+  { value: "Other", key: "support.types.other" },
 ];
 
-const suggestionCategories = [
-  "Product Idea",
-  "Website Feedback",
-  "Service Improvement",
-  "General Suggestion",
+const SUGGESTION_CATEGORY_OPTIONS = [
+  { value: "Product Idea", key: "support.suggestionCategories.productIdea" },
+  { value: "Website Feedback", key: "support.suggestionCategories.websiteFeedback" },
+  { value: "Service Improvement", key: "support.suggestionCategories.serviceImprovement" },
+  { value: "General Suggestion", key: "support.suggestionCategories.general" },
 ];
 
 export default function Support() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -70,7 +75,7 @@ export default function Support() {
     try {
       await API.post("/support", form);
 
-      setSuccess("Your request has been submitted. Our team will contact you soon.");
+      setSuccess(t("support.submitSuccess"));
       window.dispatchEvent(new Event("mgrm:support-submitted"));
 
       setForm({
@@ -81,7 +86,7 @@ export default function Support() {
         message: "",
       });
     } catch (err) {
-      alert(err.response?.data?.msg || "Something went wrong");
+      alert(err.response?.data?.msg || t("common.somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -102,7 +107,7 @@ export default function Support() {
         message: "",
       });
     } catch (err) {
-      alert(err.response?.data?.msg || "Something went wrong");
+      alert(err.response?.data?.msg || t("common.somethingWrong"));
     } finally {
       setSuggestionLoading(false);
     }
@@ -182,7 +187,7 @@ export default function Support() {
             font-black
           "
         >
-          CUSTOMER SUPPORT
+          {t("support.badge")}
         </div>
 
         <BrandPillBadgeRow tone="on-dark" className="mt-2" />
@@ -197,11 +202,7 @@ export default function Support() {
             leading-[0.96]
           "
         >
-          Need Help
-          <br />
-          Choosing The
-          <br />
-          Right Support?
+          {t("support.heroTitle")}
         </h1>
 
         <p
@@ -212,18 +213,16 @@ export default function Support() {
             max-w-xl
           "
         >
-          Ask us about product selection,
-          sizing, delivery, returns,
-          recovery and bulk orders.
+          {t("support.heroSubtitle")}
         </p>
 
         {/* CHIPS */}
         <div className="flex flex-wrap gap-4 mt-10">
 
           {[
-            "Certified Products",
-            "Size Assistance",
-            "Fast Support",
+            t("support.certifiedProducts"),
+            t("support.sizeAssistance"),
+            t("support.fastSupport"),
           ].map((item) => (
             <div
               key={item}
@@ -281,23 +280,23 @@ export default function Support() {
             {/* LEFT */}
             <div>
               <SectionLabel className="text-purple-700 font-black tracking-widest">
-                CUSTOMER SUPPORT
+                {t("support.badge")}
               </SectionLabel>
 
               <HeroHeading
-                text="Need help choosing the right support?"
+                text={t("support.heroTitle")}
                 className="text-6xl md:text-8xl font-black mt-4 leading-[1.02]"
               />
 
               <FadeUpText className="text-gray-500 dark:text-zinc-400 text-lg mt-6 max-w-2xl">
-                Ask us about product selection, sizing, orders, returns or bulk queries.
+                {t("support.heroSubtitle")}
               </FadeUpText>
 
               <div className="grid sm:grid-cols-3 gap-4 mt-8">
                 {[
-                  ["Certified Products", ShieldCheck],
-                  ["Size Assistance", Ruler],
-                  ["Fast Support", MessageCircle],
+                  [t("support.certifiedProducts"), ShieldCheck],
+                  [t("support.sizeAssistance"), Ruler],
+                  [t("support.fastSupport"), MessageCircle],
                 ].map(([title, Icon]) => (
                   <div key={title} className="bg-card dark:bg-zinc-900 rounded-3xl p-5 shadow">
                     <Icon className="text-purple-700" />
@@ -313,7 +312,7 @@ export default function Support() {
               onSubmit={submitSupport}
               className="bg-card dark:bg-zinc-900 rounded-[38px] p-8 shadow-xl"
             >
-              <h2 className="text-3xl font-black mb-4">Contact Support</h2>
+              <h2 className="text-3xl font-black mb-4">{t("support.contactSupport")}</h2>
 
               {success && (
                 <div className="mb-4 bg-green-50 text-green-700 p-3 rounded-xl">
@@ -323,21 +322,21 @@ export default function Support() {
 
               <input
                 required
-                placeholder="Name"
+                placeholder={t("common.name")}
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full mb-3 px-4 py-3 rounded-xl border"
               />
 
               <input
-                placeholder="Phone"
+                placeholder={t("common.phone")}
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 className="w-full mb-3 px-4 py-3 rounded-xl border"
               />
 
               <input
-                placeholder="Email"
+                placeholder={t("common.email")}
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full mb-3 px-4 py-3 rounded-xl border"
@@ -348,22 +347,24 @@ export default function Support() {
                 onChange={(e) => setForm({ ...form, type: e.target.value })}
                 className="w-full mb-3 px-4 py-3 rounded-xl border"
               >
-                {supportTypes.map((type) => (
-                  <option key={type}>{type}</option>
+                {SUPPORT_TYPE_OPTIONS.map((type) => (
+                  <option key={type.value} value={type.value}>
+                    {t(type.key)}
+                  </option>
                 ))}
               </select>
 
               <textarea
                 required
                 rows="4"
-                placeholder="Message"
+                placeholder={t("common.message")}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className="w-full mb-4 px-4 py-3 rounded-xl border"
               />
 
               <button className="w-full bg-purple-700 text-white py-3 rounded-xl font-bold">
-                {loading ? "Submitting..." : "Submit"}
+                {loading ? t("common.submitting") : t("common.submit")}
               </button>
             </form>
           </div>
@@ -385,35 +386,32 @@ export default function Support() {
               <div>
                 <div className="support-suggestions-section__label">
                   <Sparkles className="h-3.5 w-3.5" aria-hidden />
-                  Your Voice Matters
+                  {t("support.yourVoice")}
                 </div>
 
                 <h2 className="support-suggestions-section__title">
-                  We&apos;d love to{" "}
-                  <span className="support-suggestions-section__title-accent">hear from you</span>
+                  {t("support.hearFromYou")}
                 </h2>
 
                 <p className="support-suggestions-section__intro">
-                  Have a product idea, website improvement, or something we could
-                  do better? Share your suggestions — every insight helps us build
-                  better rehabilitation experiences for everyone.
+                  {t("support.suggestionsIntro")}
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                   {[
                     {
-                      title: "Product Ideas",
-                      text: "New braces, features, or innovations you'd like to see.",
+                      title: t("support.productIdeas"),
+                      text: t("support.productIdeasText"),
                       icon: Lightbulb,
                     },
                     {
-                      title: "Better Experience",
-                      text: "Tell us how we can improve support, shopping, or delivery.",
+                      title: t("support.betterExperience"),
+                      text: t("support.betterExperienceText"),
                       icon: HeartHandshake,
                     },
                     {
-                      title: "Open Feedback",
-                      text: "Any thought that could help MGRM serve patients better.",
+                      title: t("support.openFeedback"),
+                      text: t("support.openFeedbackText"),
                       icon: MessageCircle,
                     },
                   ].map((item) => (
@@ -437,24 +435,24 @@ export default function Support() {
                       <span className="support-suggestions-success__icon" aria-hidden>
                         <CheckCircle2 className="h-9 w-9" />
                       </span>
-                      <p className="support-suggestions-success__title">Thank you!</p>
+                      <p className="support-suggestions-success__title">{t("common.thankYou")}</p>
                       <p className="support-suggestions-success__text">
-                        Your suggestion has been received. We truly appreciate you taking the time to share your ideas.
+                        {t("support.suggestionThanks")}
                       </p>
                     </div>
                   </div>
                 )}
 
-                <h3 className="support-suggestions-form__title">Share your suggestion</h3>
+                <h3 className="support-suggestions-form__title">{t("support.shareSuggestion")}</h3>
                 <p className="support-suggestions-form__subtitle">
-                  Tell us what&apos;s on your mind — big or small, we read every message.
+                  {t("support.shareSubtitle")}
                 </p>
 
                 <form onSubmit={submitSuggestion} className="mt-6 space-y-3">
                   <div className="grid gap-3 sm:grid-cols-2">
                     <input
                       required
-                      placeholder="Your name"
+                      placeholder={t("common.yourName")}
                       value={suggestionForm.name}
                       onChange={(e) =>
                         setSuggestionForm({ ...suggestionForm, name: e.target.value })
@@ -463,7 +461,7 @@ export default function Support() {
                     />
                     <input
                       type="email"
-                      placeholder="Email (optional)"
+                      placeholder={t("common.emailOptional")}
                       value={suggestionForm.email}
                       onChange={(e) =>
                         setSuggestionForm({ ...suggestionForm, email: e.target.value })
@@ -479,9 +477,9 @@ export default function Support() {
                     }
                     className="support-suggestions-field"
                   >
-                    {suggestionCategories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
+                    {SUGGESTION_CATEGORY_OPTIONS.map((category) => (
+                      <option key={category.value} value={category.value}>
+                        {t(category.key)}
                       </option>
                     ))}
                   </select>
@@ -489,7 +487,7 @@ export default function Support() {
                   <textarea
                     required
                     rows="5"
-                    placeholder="Describe your idea or suggestion..."
+                    placeholder={t("support.describeIdea")}
                     value={suggestionForm.message}
                     onChange={(e) =>
                       setSuggestionForm({ ...suggestionForm, message: e.target.value })
@@ -502,7 +500,7 @@ export default function Support() {
                     disabled={suggestionLoading}
                     className="support-suggestions-submit"
                   >
-                    {suggestionLoading ? "Sending..." : "Share My Idea"}
+                    {suggestionLoading ? t("common.sending") : t("support.shareMyIdea")}
                     {!suggestionLoading && <Send className="h-4 w-4" aria-hidden />}
                   </button>
                 </form>
@@ -517,51 +515,51 @@ export default function Support() {
 
             {[
               {
-                title: "WhatsApp Support",
-                text: "Chat instantly",
+                title: t("support.whatsapp"),
+                text: t("support.whatsappText"),
                 icon: MessageCircle,
-                action: "Open WhatsApp",
+                action: t("support.openWhatsapp"),
                 onClick: () =>
                   window.open("https://wa.me/919876543210", "_blank"),
               },
               {
-                title: "Call Support",
-                text: "Talk directly",
+                title: t("support.callSupport"),
+                text: t("support.callText"),
                 icon: Phone,
-                action: "Call Now",
+                action: t("support.callNow"),
                 onClick: () =>
                   (window.location.href = "tel:+919876543210"),
               },
               {
-                title: "Email Support",
-                text: "Send query",
+                title: t("support.emailSupport"),
+                text: t("support.emailText"),
                 icon: Mail,
-                action: "Send Email",
+                action: t("support.sendEmail"),
                 onClick: () =>
                   (window.location.href =
                     "mailto:support@mgrmmedicare.com"),
               },
               {
-                title: "Size Guide",
-                text: "Get help",
+                title: t("support.sizeGuide"),
+                text: t("support.sizeGuideText"),
                 icon: Ruler,
-                action: "Open Form",
+                action: t("support.openForm"),
                 onClick: () =>
                   document.getElementById("support-form")?.scrollIntoView({ behavior: "smooth" }),
               },
               {
-                title: "Shipping",
-                text: "Delivery help",
+                title: t("support.shipping"),
+                text: t("support.shippingText"),
                 icon: Truck,
-                action: "Open Form",
+                action: t("support.openForm"),
                 onClick: () =>
                   document.getElementById("support-form")?.scrollIntoView({ behavior: "smooth" }),
               },
               {
-                title: "Returns",
-                text: "Replacement help",
+                title: t("support.returns"),
+                text: t("support.returnsText"),
                 icon: RotateCcw,
-                action: "Open Form",
+                action: t("support.openForm"),
                 onClick: () =>
                   document.getElementById("support-form")?.scrollIntoView({ behavior: "smooth" }),
               },
@@ -582,7 +580,11 @@ export default function Support() {
           </div>
         </section>
 
+        <SupportFaq />
+
       </div>
+
+      <SupportWaysStrip />
       <SupportCallPopup />
     </main>
   );

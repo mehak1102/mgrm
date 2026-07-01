@@ -1,0 +1,400 @@
+/* Support page — illustrated service strip (retail-banner style) */
+
+.ways-strip {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ways-strip__banner {
+  width: 100%;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1rem, 3vw, 2rem) clamp(1.25rem, 2vw, 1.5rem);
+  background: #fdeef4;
+  border-bottom: 4px solid #c026d3;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+/* Support page only — flush against Instagram (override global 6rem margin) */
+.support-page + .instagram-feed {
+  margin-top: 0;
+  border-top: none;
+}
+
+.ways-strip__heading {
+  margin: 0 auto 2rem;
+  max-width: 54rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  font-size: clamp(0.95rem, 1.9vw, 1.12rem);
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.ways-strip__grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+  max-width: 80rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .ways-strip__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ways-strip__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.ways-strip__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.ways-strip__art {
+  width: 100%;
+  max-width: 108px;
+  min-height: 88px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.ways-strip__label {
+  margin: 0;
+  max-width: 10rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.35;
+  color: #111827;
+}
+
+.ways-strip__footnote {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-size: 0.76rem;
+  color: #374151;
+}
+
+.ways-strip__link {
+  font-weight: 700;
+  color: #c026d3;
+  text-decoration: none;
+}
+
+.ways-strip__link:hover {
+  text-decoration: underline;
+}
+
+/* Illustration tokens */
+.ways-illus {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ways-illus__fill {
+  fill: #fff;
+  stroke: #111827;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.ways-illus__line {
+  stroke: #111827;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ways-illus__line-white {
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ways-illus__accent {
+  fill: #c026d3;
+  stroke: none;
+}
+
+.ways-illus__accent-line {
+  stroke: #c026d3;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ways-illus__badge-text {
+  fill: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.ways-illus__badge-text--sm {
+  font-size: 7px;
+}
+
+.ways-illus__motion path {
+  fill: none;
+  stroke: #111827;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 5 9;
+  animation: waysMotionDash 0.9s linear infinite;
+}
+
+.ways-illus__motion path:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.ways-illus__motion path:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+/* Ring pulses on call icon */
+.ways-illus__ring {
+  fill: none;
+  stroke: #c026d3;
+  stroke-width: 1.6;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ways-illus__ring--a {
+  animation: waysRing 2.2s ease-out infinite;
+}
+
+.ways-illus__ring--b {
+  animation: waysRing 2.2s ease-out 0.7s infinite;
+}
+
+.ways-illus__wheel {
+  fill: #111827;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: waysWheel 1.2s linear infinite;
+}
+
+.ways-illus__wheel--fast {
+  animation-duration: 0.75s;
+}
+
+.ways-illus__bob {
+  animation: waysBob 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.ways-illus__bob-slow {
+  animation: waysBob 3.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.ways-illus__drive {
+  animation: waysDrive 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.ways-illus__wiggle {
+  animation: waysWiggle 2.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.ways-illus__pulse {
+  animation: waysPulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ways-illus__spin-hint {
+  animation: waysSpinHint 7s ease-in-out infinite;
+  transform-origin: 50px 44px;
+}
+
+@keyframes waysMotionDash {
+  from {
+    stroke-dashoffset: 0;
+    opacity: 0.35;
+  }
+  to {
+    stroke-dashoffset: -28;
+    opacity: 1;
+  }
+}
+
+@keyframes waysBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes waysDrive {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes waysWiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2.5deg);
+  }
+  75% {
+    transform: rotate(2.5deg);
+  }
+}
+
+@keyframes waysPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes waysWheel {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes waysRing {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes waysSpinHint {
+  0%,
+  84%,
+  100% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-16deg);
+  }
+  94% {
+    transform: rotate(10deg);
+  }
+}
+
+/* Dark theme */
+.dark .ways-strip__banner,
+[data-theme="dark"] .ways-strip__banner {
+  background: #2a1528;
+  border-bottom-color: #e879f9;
+}
+
+.dark .ways-strip__heading,
+.dark .ways-strip__label,
+[data-theme="dark"] .ways-strip__heading,
+[data-theme="dark"] .ways-strip__label {
+  color: #f9fafb;
+}
+
+.dark .ways-strip__footnote,
+[data-theme="dark"] .ways-strip__footnote {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .ways-illus__fill,
+[data-theme="dark"] .ways-illus__fill {
+  fill: #1f2937;
+  stroke: #f3f4f6;
+}
+
+.dark .ways-illus__line,
+.dark .ways-illus__motion path,
+[data-theme="dark"] .ways-illus__line,
+[data-theme="dark"] .ways-illus__motion path {
+  stroke: #f3f4f6;
+}
+
+.dark .ways-illus__wheel,
+[data-theme="dark"] .ways-illus__wheel {
+  fill: #f3f4f6;
+}
+
+/* Blue theme */
+[data-theme="blue"] .ways-strip__banner {
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom-color: #ffd700;
+}
+
+[data-theme="blue"] .ways-strip__heading,
+[data-theme="blue"] .ways-strip__label {
+  color: #fff;
+}
+
+[data-theme="blue"] .ways-strip__footnote {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="blue"] .ways-strip__link {
+  color: #ffd700;
+}
+
+[data-theme="blue"] .ways-illus__accent,
+[data-theme="blue"] .ways-illus__accent-line {
+  fill: #ffd700;
+  stroke: #ffd700;
+}
+
+[data-theme="blue"] .ways-illus__fill {
+  fill: rgba(255, 255, 255, 0.12);
+  stroke: #fff;
+}
+
+[data-theme="blue"] .ways-illus__line,
+[data-theme="blue"] .ways-illus__motion path {
+  stroke: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ways-illus__motion path,
+  .ways-illus__bob,
+  .ways-illus__bob-slow,
+  .ways-illus__drive,
+  .ways-illus__wiggle,
+  .ways-illus__pulse,
+  .ways-illus__wheel,
+  .ways-illus__spin-hint,
+  .ways-illus__ring--a,
+  .ways-illus__ring--b {
+    animation: none !important;
+  }
+}

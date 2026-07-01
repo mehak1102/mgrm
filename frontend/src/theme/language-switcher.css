@@ -1,0 +1,99 @@
+/* Premium language switcher — light, dark, blue themes */
+
+.language-switcher__thumb {
+  will-change: transform;
+}
+
+.language-switcher__thumb--hi {
+  transform: translateX(calc(100% + 0.25rem));
+}
+
+.language-switcher__segment:disabled {
+  cursor: default;
+}
+
+.language-switcher__segment:not(:disabled) {
+  cursor: pointer;
+}
+
+.language-switcher--floating .language-switcher__segment:hover .language-switcher__flag {
+  transform: scale(1.05);
+}
+
+.language-switcher__flag {
+  object-fit: cover;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  transition: transform 0.2s ease;
+}
+
+[data-theme="dark"] .language-switcher__flag,
+.dark .language-switcher__flag {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.language-switcher--flags {
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] .language-switcher--flags,
+.dark .language-switcher--flags {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.language-switcher__flag-btn--active .language-switcher__flag {
+  border-color: rgba(34, 167, 220, 0.45);
+}
+
+[data-theme="blue"] .language-switcher__track {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="blue"] .language-switcher__thumb {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 215, 0, 0.35);
+}
+
+.language-switcher__menu {
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .language-switcher__menu,
+.dark .language-switcher__menu {
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="blue"] .language-switcher__trigger {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+[data-theme="blue"] .language-switcher__menu {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 50, 98, 0.12);
+  color: #12324a;
+}
+
+[data-theme="blue"] .language-switcher__menu button {
+  color: #12324a;
+}
+
+[data-theme="blue"] .language-switcher__menu button:hover {
+  background: rgba(0, 183, 255, 0.08);
+}
+
+.language-switcher--drawer .language-switcher__drawer-btn--active {
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.12);
+}
+
+[data-theme="blue"] .language-switcher--drawer .language-switcher__drawer-btn--active {
+  background: rgba(0, 183, 255, 0.14);
+  border-color: rgba(0, 183, 255, 0.35);
+  color: #003262;
+}

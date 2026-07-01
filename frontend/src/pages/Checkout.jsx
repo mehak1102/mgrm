@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { CreditCard, MapPin, ShieldCheck } from "lucide-react";
 import API from "../api";
 import { useCart } from "../context/CartContext";
@@ -32,6 +33,7 @@ const paymentOptionClass =
 
 export default function Checkout() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { cart, cartTotal, clearCart } = useCart();
   const { isBlue } = useTheme();
 
@@ -66,7 +68,7 @@ export default function Checkout() {
 
     localStorage.setItem("mgrm_last_order", JSON.stringify(res.data));
 
-    toast.success("Order placed successfully");
+    toast.success(t("orders.successTitle"));
     clearCart();
     navigate("/order-success");
   };
@@ -74,12 +76,12 @@ export default function Checkout() {
   const handlePayment = async (e) => {
     e.preventDefault();
     if (!/^[0-9]{10}$/.test(form.phone)) {
-      toast.error("Phone number must be 10 digits");
+      toast.error(t("checkout.phoneInvalid"));
       return;
     }
 
     if (!/^[0-9]{6}$/.test(form.pincode)) {
-      toast.error("Pincode must be 6 digits");
+      toast.error(t("checkout.pincodeInvalid"));
       return;
     }
 
@@ -102,7 +104,7 @@ export default function Checkout() {
 
       localStorage.setItem("mgrm_last_order", JSON.stringify(res.data));
 
-      toast.success("Order placed successfully");
+      toast.success(t("orders.successTitle"));
 
       clearCart();
       navigate("/order-success");
@@ -110,7 +112,7 @@ export default function Checkout() {
     }
 
     if (!cart.length) {
-      alert("Cart is empty");
+      alert(t("checkout.cartEmpty"));
       return;
     }
 
@@ -136,7 +138,7 @@ export default function Checkout() {
         amount,
         currency,
         name: "MGRM Medicare",
-        description: "Medical support products",
+        description: t("productDetail.medicalSupport"),
         order_id: orderId,
 
         prefill: {
@@ -159,7 +161,7 @@ export default function Checkout() {
           if (verifyRes.data.success) {
             await placeOrderAfterPayment(response);
           } else {
-            alert("Payment verification failed");
+            alert(t("checkout.paymentFailed"));
           }
         },
 
@@ -174,7 +176,7 @@ export default function Checkout() {
       razorpay.open();
     } catch (err) {
       console.error("Payment error:", err);
-      toast.error(err.response?.data?.msg || "Payment failed");
+      toast.error(err.response?.data?.msg || t("checkout.paymentFailed"));
     } finally {
       setLoading(false);
     }
@@ -187,15 +189,15 @@ export default function Checkout() {
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
         <div className="mb-10">
           <SectionLabel className="theme-text text-sm font-black tracking-widest uppercase">
-            SECURE CHECKOUT
+            {t("checkout.badge")}
           </SectionLabel>
           <SectionHeading
-            text="Checkout"
+            text={t("checkout.title")}
             as="h1"
             className="checkout-page-heading text-5xl font-black mt-2 text-fg"
           />
           <FadeUpText className="text-fg-muted mt-2">
-            Pay safely using Razorpay.
+            {t("checkout.subtitle")}
           </FadeUpText>
         </div>
 
@@ -206,8 +208,8 @@ export default function Checkout() {
                 <MapPin />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-fg">Delivery Details</h2>
-                <p className="text-fg-muted">Enter customer and address details.</p>
+                <h2 className="text-3xl font-black text-fg">{t("checkout.deliveryDetails")}</h2>
+                <p className="text-fg-muted">{t("checkout.deliveryCopy")}</p>
               </div>
             </div>
 
@@ -215,7 +217,7 @@ export default function Checkout() {
               <input
                 required
                 type="text"
-                placeholder="Full Name"
+                placeholder={t("checkout.fullName")}
                 value={form.name}
                 onChange={(e) =>
                   setForm({
@@ -229,7 +231,7 @@ export default function Checkout() {
               <input
                 required
                 type="tel"
-                placeholder="Phone Number"
+                placeholder={t("checkout.phoneNumber")}
                 maxLength={10}
                 pattern="[0-9]{10}"
                 value={form.phone}
@@ -245,7 +247,7 @@ export default function Checkout() {
               <input
                 required
                 type="email"
-                placeholder="Email Address"
+                placeholder={t("checkout.emailAddress")}
                 value={form.email}
                 onChange={(e) =>
                   setForm({
@@ -259,7 +261,7 @@ export default function Checkout() {
               <input
                 required
                 type="text"
-                placeholder="City"
+                placeholder={t("checkout.city")}
                 value={form.city}
                 onChange={(e) =>
                   setForm({
@@ -273,7 +275,7 @@ export default function Checkout() {
               <input
                 required
                 type="text"
-                placeholder="Pincode"
+                placeholder={t("checkout.pincode")}
                 maxLength={6}
                 pattern="[0-9]{6}"
                 value={form.pincode}
@@ -288,7 +290,7 @@ export default function Checkout() {
 
               <textarea
                 required
-                placeholder="Full Address"
+                placeholder={t("checkout.fullAddress")}
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
                 className={`${inputClass} md:col-span-2 min-h-32 resize-y`}
@@ -302,8 +304,8 @@ export default function Checkout() {
                 <CreditCard />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-fg">Order Summary</h2>
-                <p className="text-fg-muted">{cart.length} products</p>
+                <h2 className="text-3xl font-black text-fg">{t("checkout.orderSummary")}</h2>
+                <p className="text-fg-muted">{t("checkout.productsCount", { count: cart.length })}</p>
               </div>
             </div>
 
@@ -320,7 +322,7 @@ export default function Checkout() {
                   <div className="flex-1 min-w-0">
                     <p className="font-black text-sm line-clamp-1 text-fg">{item.name}</p>
                     <p className="text-xs text-fg-muted">
-                      Qty: {item.qty} {item.selectedSize ? `• ${item.selectedSize}` : ""}
+                      {t("common.qty")} {item.qty} {item.selectedSize ? `• ${item.selectedSize}` : ""}
                     </p>
                   </div>
 
@@ -337,17 +339,17 @@ export default function Checkout() {
 
             <div className="border-t border-edge dark:border-white/10 mt-6 pt-5 space-y-3">
               <div className="flex justify-between text-fg-muted">
-                <span>Subtotal</span>
+                <span>{t("common.subtotal")}</span>
                 <b {...productPriceSaleProps(isBlue, "text-fg")}>₹{cartTotal}</b>
               </div>
 
               <div className="flex justify-between text-fg-muted">
-                <span>Shipping</span>
-                <b className="text-fg">{shipping === 0 ? "Free" : `₹${shipping}`}</b>
+                <span>{t("common.shipping")}</span>
+                <b className="text-fg">{shipping === 0 ? t("common.free") : `₹${shipping}`}</b>
               </div>
 
               <div className="border-t border-edge dark:border-white/10 pt-4 flex justify-between text-2xl">
-                <span className="font-black text-fg">Total</span>
+                <span className="font-black text-fg">{t("common.total")}</span>
                 <span {...productPriceSaleProps(isBlue, "font-black theme-text")}>
                   ₹{grandTotal}
                 </span>
@@ -356,7 +358,7 @@ export default function Checkout() {
 
             <div className="mt-5 rounded-2xl p-4 flex gap-3 font-bold text-sm bg-emerald-50 text-emerald-800 dark:bg-emerald-950/45 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20">
               <ShieldCheck size={20} className="shrink-0" />
-              Razorpay secure payment enabled.
+              {t("checkout.razorpayNote")}
             </div>
 
             <div className="mt-5 space-y-3">
@@ -369,7 +371,7 @@ export default function Checkout() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                   className="accent-[var(--accent-primary)]"
                 />
-                <span className="font-bold">Pay Online (Razorpay)</span>
+                <span className="font-bold">{t("checkout.payOnline")}</span>
               </label>
 
               <label className={paymentOptionClass}>
@@ -381,7 +383,7 @@ export default function Checkout() {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                   className="accent-[var(--accent-primary)]"
                 />
-                <span className="font-bold">Cash on Delivery (COD)</span>
+                <span className="font-bold">{t("checkout.cod")}</span>
               </label>
             </div>
 
@@ -391,10 +393,10 @@ export default function Checkout() {
               className="btn-primary w-full mt-5 rounded-2xl py-4 font-black transition disabled:opacity-60"
             >
               {loading
-                ? "Processing..."
+                ? t("common.processing")
                 : paymentMethod === "COD"
-                  ? "Place Order"
-                  : `Pay ₹${grandTotal}`}
+                  ? t("checkout.placeOrder")
+                  : t("checkout.payAmount", { amount: grandTotal })}
             </button>
           </aside>
         </form>

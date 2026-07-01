@@ -1,29 +1,9 @@
 /**
- * Home — Print Ads section heading (MGRM / Medicare)
- * Solid colors only — no gradients.
+ * Home — Print Ads section heading
  */
 
-.home-print-ads-wordmark {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 1rem;
-  line-height: 1;
-}
-
-.home-print-ads-mgrm {
-  font-size: clamp(2.75rem, 7vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-}
-
-.home-print-ads-medicare {
-  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-indent: 0.28em;
-  text-transform: uppercase;
+.home-print-ads-logo {
+  display: block;
 }
 
 .home-print-ads-subtitle {
@@ -38,35 +18,17 @@
 /* Light */
 :root,
 [data-theme="light"] {
-  --home-print-ads-mgrm: #0f172a;
-  --home-print-ads-medicare: #25319a;
   --home-print-ads-subtitle: #64748b;
 }
 
 /* Dark */
 [data-theme="dark"] {
-  --home-print-ads-mgrm: #f8fafc;
-  --home-print-ads-medicare: #94a3b8;
   --home-print-ads-subtitle: #a1a1aa;
 }
 
 /* Blue */
 [data-theme="blue"] {
-  --home-print-ads-mgrm: #ffffff;
-  --home-print-ads-medicare: #ffd700;
   --home-print-ads-subtitle: rgba(255, 255, 255, 0.82);
-}
-
-.home-print-ads-section .home-print-ads-mgrm {
-  color: var(--home-print-ads-mgrm);
-  -webkit-text-fill-color: var(--home-print-ads-mgrm);
-}
-
-.home-print-ads-section .home-print-ads-medicare {
-  color: var(--home-print-ads-medicare);
-  -webkit-text-fill-color: var(--home-print-ads-medicare);
-  background: none;
-  background-image: none;
 }
 
 .home-print-ads-section .home-print-ads-subtitle {
@@ -74,25 +36,7 @@
   -webkit-text-fill-color: var(--home-print-ads-subtitle);
 }
 
-/* Beat blue-theme global section overrides */
-[data-theme="blue"] main.bg-app .home-print-ads-section .home-print-ads-mgrm {
-  color: var(--home-print-ads-mgrm) !important;
-  -webkit-text-fill-color: var(--home-print-ads-mgrm) !important;
-}
-
-[data-theme="blue"] main.bg-app .home-print-ads-section .home-print-ads-medicare {
-  color: var(--home-print-ads-medicare) !important;
-  -webkit-text-fill-color: var(--home-print-ads-medicare) !important;
-  background: none !important;
-  background-image: none !important;
-  font-weight: 500 !important;
-}
-
 [data-theme="blue"] main.bg-app .home-print-ads-section .home-print-ads-subtitle {
   color: var(--home-print-ads-subtitle) !important;
   -webkit-text-fill-color: var(--home-print-ads-subtitle) !important;
-}
-
-[data-theme="blue"] main.bg-app .home-print-ads-section h2.home-print-ads-wordmark {
-  color: transparent;
 }

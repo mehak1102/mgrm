@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Zap } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { getDeliveryTrustMessage } from "../utils/deliveryTrust";
@@ -9,7 +11,11 @@ export default function DeliveryTrustBadge({
   lightSurface = false,
 }) {
   const { isBlue } = useTheme();
-  const message = getDeliveryTrustMessage(seed);
+  const { i18n } = useTranslation();
+  const message = useMemo(
+    () => getDeliveryTrustMessage(seed),
+    [seed, i18n.language]
+  );
 
   return (
     <div className={className}>

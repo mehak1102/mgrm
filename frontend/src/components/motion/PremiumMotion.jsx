@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   HeroHeading,
   SectionLabel,
@@ -278,6 +279,7 @@ export function TestimonialCard({ item, index = 0 }) {
 }
 
 export function BlogCardEditorial({ blog, index = 0 }) {
+  const { t } = useTranslation();
   const enabled = usePremiumMotion();
   const isBodyPart = blog.type === "bodyPart";
   const coverSrc = blog.coverImage || blog.image;
@@ -337,14 +339,14 @@ export function BlogCardEditorial({ blog, index = 0 }) {
                 variants={FadeUpMedium}
                 className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2"
               >
-                {blog.readTime} min read
+                {t("blogs.minRead", { count: blog.readTime })}
               </motion.p>
             )}
             <motion.span
               variants={FadeUpMedium}
               className="inline-flex mt-5 font-black text-sm text-purple-700"
             >
-              Read article →
+              {t("blogs.readArticle")}
             </motion.span>
           </>
         ) : (
@@ -360,11 +362,11 @@ export function BlogCardEditorial({ blog, index = 0 }) {
             </p>
             {blog.readTime && (
               <p className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2">
-                {blog.readTime} min read
+                {t("blogs.minRead", { count: blog.readTime })}
               </p>
             )}
             <span className="inline-flex mt-5 font-black text-sm text-purple-700">
-              Read article →
+              {t("blogs.readArticle")}
             </span>
           </>
         )}
@@ -412,6 +414,7 @@ export function BlogCardEditorial({ blog, index = 0 }) {
 }
 
 export function FeaturedBlogReveal({ blog }) {
+  const { t } = useTranslation();
   const enabled = usePremiumMotion();
 
   if (!enabled) {
@@ -423,7 +426,7 @@ export function FeaturedBlogReveal({ blog }) {
         <div className="grid lg:grid-cols-2">
           <img src={blog.image} alt={blog.title} className="h-full min-h-[320px] w-full object-cover" />
           <div className="p-10 lg:p-14 flex flex-col justify-center">
-            <p className="text-purple-700 font-black tracking-[0.3em] text-xs uppercase">Featured Guide</p>
+            <p className="text-purple-700 font-black tracking-[0.3em] text-xs uppercase">{t("blogs.featuredGuide")}</p>
             <h2 className="text-4xl lg:text-5xl font-black mt-4 text-slate-900 dark:text-zinc-100 leading-tight">{blog.title}</h2>
             <p className="mt-6 text-lg text-gray-500 dark:text-zinc-400 leading-8">{blog.excerpt}</p>
           </div>
@@ -453,7 +456,7 @@ export function FeaturedBlogReveal({ blog }) {
           </motion.div>
           <div className="p-10 lg:p-14 flex flex-col justify-center">
             <motion.p variants={FadeUpMedium} className="text-purple-700 font-black tracking-[0.3em] text-xs uppercase">
-              Featured Guide
+              {t("blogs.featuredGuide")}
             </motion.p>
             <motion.h2 variants={SlideLeftLuxury} className="text-4xl lg:text-5xl font-black mt-4 text-slate-900 dark:text-zinc-100 leading-tight">
               {blog.title}
@@ -462,7 +465,7 @@ export function FeaturedBlogReveal({ blog }) {
               {blog.excerpt}
             </motion.p>
             <motion.span variants={FadeUpMedium} className="mt-8 inline-flex font-black text-purple-700">
-              Read featured article →
+              {t("blogs.readFeaturedArticle")}
             </motion.span>
           </div>
         </div>

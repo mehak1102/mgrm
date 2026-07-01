@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Heart,
   Grid2X2,
@@ -28,6 +29,8 @@ import {
   FadeUpText,
 } from "../components/typography/TypographyMotion";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
+import { normalizeSearchQuery } from "../utils/searchNormalizer";
+import useDebouncedValue from "../hooks/useDebouncedValue";
 
 const colors = ["Black", "White", "Grey", "Black & Green", "Black & Orange", "Beige", "Silver"];
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
@@ -46,20 +49,22 @@ function ShopFiltersPanel({
   scrollClass = "h-[calc(100%-72px)]",
   onClose,
 }) {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="p-5 border-b flex justify-between items-center gap-3 shrink-0">
-        <h2 className="text-xl font-black">Filters</h2>
+        <h2 className="text-xl font-black">{t("shop.filterTitle")}</h2>
         <div className="flex items-center gap-2 shrink-0">
           <button type="button" onClick={clearFilters} className="text-purple-600 text-sm font-bold">
-            Clear All
+            {t("common.clearAll")}
           </button>
           {onClose && (
             <button
               type="button"
               onClick={onClose}
               className="p-2 rounded-full hover:bg-surface-hover lg:hidden"
-              aria-label="Close filters"
+              aria-label={t("shop.closeFilters")}
             >
               <X size={18} />
             </button>
@@ -69,7 +74,7 @@ function ShopFiltersPanel({
       <div className={`${scrollClass} overflow-y-auto custom-scroll overscroll-contain`}>
         <div className="p-5 border-b">
           <div className="flex justify-between font-black text-sm mb-4">
-            BODY PART <ChevronDown size={16} />
+            {t("shop.bodyPart")} <ChevronDown size={16} />
           </div>
 
           <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
@@ -85,7 +90,7 @@ function ShopFiltersPanel({
                 !activeCategory ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
               }`}
             >
-              All Products
+              {t("common.allProducts")}
             </button>
 
             {bodyCategories.map((cat) => (
@@ -109,7 +114,7 @@ function ShopFiltersPanel({
 
         <div className="p-5 border-b">
           <div className="flex justify-between font-black text-sm mb-4">
-            COLOR <ChevronDown size={16} />
+            {t("shop.color")} <ChevronDown size={16} />
           </div>
 
           <div className="grid gap-3">
@@ -143,7 +148,7 @@ function ShopFiltersPanel({
 
         <div className="p-5 border-b">
           <div className="flex justify-between font-black text-sm mb-4">
-            SIZE <ChevronDown size={16} />
+            {t("shop.size")} <ChevronDown size={16} />
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -166,10 +171,10 @@ function ShopFiltersPanel({
 
         <div className="p-5">
           <div className="flex justify-between font-black text-sm mb-4">
-            PRICE <ChevronDown size={16} />
+            {t("shop.price")} <ChevronDown size={16} />
           </div>
 
-          <p className="text-sm mb-3">₹100 - ₹{maxPrice}</p>
+          <p className="text-sm mb-3">{t("shop.priceRange", { max: maxPrice })}</p>
           <input
             type="range"
             min="100"
@@ -185,6 +190,7 @@ function ShopFiltersPanel({
 }
 
 export default function Shop() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
@@ -201,12 +207,19 @@ export default function Shop() {
   const [loading, setLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const displaySearch = params.get("search") || "";
+  const debouncedDisplaySearch = useDebouncedValue(displaySearch, 350);
+  const { search: apiSearch } = useMemo(
+    () => normalizeSearchQuery(debouncedDisplaySearch),
+    [debouncedDisplaySearch]
+  );
+
   useEffect(() => {
     setActiveCategory(params.get("category") || "");
-    if (params.get("search")) {
-      trackSearch(params.get("search"));
+    if (displaySearch) {
+      trackSearch(displaySearch);
     }
-  }, [params]);
+  }, [params, displaySearch]);
 
   useEffect(() => {
     setLoading(true);
@@ -214,7 +227,7 @@ export default function Shop() {
     const query = new URLSearchParams();
     query.set("bodyOnly", "true");
 
-    if (params.get("search")) query.set("search", params.get("search"));
+    if (apiSearch) query.set("search", apiSearch);
     if (activeCategory) query.set("category", activeCategory);
     if (selectedColor) query.set("color", selectedColor);
     if (selectedSize) query.set("size", selectedSize);
@@ -223,7 +236,7 @@ export default function Shop() {
       .then((res) => setProducts(res.data.products || []))
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
-  }, [activeCategory, selectedColor, selectedSize, params]);
+  }, [activeCategory, selectedColor, selectedSize, apiSearch, debouncedDisplaySearch]);
 
   useEffect(() => {
     if (!filtersOpen) return;
@@ -268,7 +281,7 @@ export default function Shop() {
     <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300 overflow-x-clip">
       <div className="max-w-[1500px] mx-auto px-4 sm:px-5 py-8 min-w-0">
         <div className="text-sm text-fg-muted mb-6 break-words">
-          Home <span className="mx-2">›</span> All Products
+          {t("common.home")} <span className="mx-2">›</span> {t("shop.breadcrumb")}
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 min-w-0">
@@ -280,9 +293,15 @@ export default function Shop() {
             <div className="flex flex-col md:flex-row justify-between gap-5 mb-7 min-w-0">
               <div className="min-w-0">
                 <BrandPillBadgeRow className="mb-1.5" />
+                {displaySearch && (
+                  <p className="text-sm font-semibold text-brand mb-2">
+                    {t("shop.resultsFor")}{" "}
+                    <span className="text-fg font-black">&ldquo;{displaySearch}&rdquo;</span>
+                  </p>
+                )}
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                   <SectionHeading
-                    text="All Products"
+                    text={t("common.allProducts")}
                     as="h1"
                     className="text-3xl sm:text-4xl font-black"
                   />
@@ -291,7 +310,7 @@ export default function Shop() {
                   </span>
                 </div>
                 <FadeUpText className="text-fg-muted mt-2">
-                  Explore our wide range of support and care products.
+                  {t("shop.exploreRange")}
                 </FadeUpText>
               </div>
 
@@ -302,19 +321,19 @@ export default function Shop() {
                   className="lg:hidden inline-flex items-center gap-2 bg-card border rounded-xl px-4 py-3 text-sm font-bold shrink-0"
                 >
                   <SlidersHorizontal size={18} />
-                  Filters
+                  {t("shop.filters")}
                 </button>
 
-                <label className="text-sm font-semibold shrink-0">Sort By:</label>
+                <label className="text-sm font-semibold shrink-0">{t("shop.sortBy")}</label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
                   className="bg-card border rounded-xl px-3 sm:px-4 py-3 outline-none min-w-0 max-w-full flex-1 sm:flex-none"
                 >
-                  <option value="popularity">Popularity</option>
-                  <option value="low">Price Low to High</option>
-                  <option value="high">Price High to Low</option>
-                  <option value="name">Name A-Z</option>
+                  <option value="popularity">{t("shop.sortPopularity")}</option>
+                  <option value="low">{t("shop.sortLow")}</option>
+                  <option value="high">{t("shop.sortHigh")}</option>
+                  <option value="name">{t("shop.sortName")}</option>
                 </select>
 
                 <div className="bg-card border rounded-xl p-1 flex shrink-0">
@@ -322,7 +341,7 @@ export default function Shop() {
                     type="button"
                     onClick={() => setView("grid")}
                     className={`p-3 rounded-lg ${view === "grid" ? "bg-purple-100 text-purple-700" : ""}`}
-                    aria-label="Grid view"
+                    aria-label={t("shop.gridView")}
                   >
                     <Grid2X2 size={18} />
                   </button>
@@ -330,7 +349,7 @@ export default function Shop() {
                     type="button"
                     onClick={() => setView("list")}
                     className={`p-3 rounded-lg ${view === "list" ? "bg-purple-100 text-purple-700" : ""}`}
-                    aria-label="List view"
+                    aria-label={t("shop.listView")}
                   >
                     <List size={18} />
                   </button>
@@ -346,8 +365,8 @@ export default function Shop() {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow">
-                <h2 className="text-2xl sm:text-3xl font-black">No products found</h2>
-                <p className="text-fg-muted mt-2">Try clearing filters or check product category/colors/sizes in admin.</p>
+                <h2 className="text-2xl sm:text-3xl font-black">{t("shop.noProducts")}</h2>
+                <p className="text-fg-muted mt-2">{t("shop.noProductsHint")}</p>
               </div>
             ) : (
               <div
@@ -377,7 +396,7 @@ export default function Shop() {
                       >
                         {save > 0 && (
                           <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
-                            Save {save}%
+                            {t("common.savePercent", { percent: save })}
                           </span>
                         )}
 
@@ -402,7 +421,7 @@ export default function Shop() {
                         className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center z-10 ${
                           isWishlisted(product) ? "text-red-500" : "text-purple-600"
                         }`}
-                        aria-label="Toggle wishlist"
+                        aria-label={t("shop.toggleWishlist")}
                       >
                         <Heart size={18} fill={isWishlisted(product) ? "currentColor" : "none"} />
                       </button>
@@ -430,14 +449,14 @@ export default function Shop() {
                           )}
                         </div>
 
-                        <p className="text-xs text-fg-muted mt-1">(Incl. of all Taxes)</p>
+                        <p className="text-xs text-fg-muted mt-1">{t("common.inclTaxes")}</p>
 
                         <button
                           type="button"
                           onClick={() => addToCart(product)}
                           className="mt-5 w-full border border-purple-500 text-purple-600 rounded-lg py-3 font-black hover:bg-purple-600 hover:text-white transition flex items-center justify-center gap-2"
                         >
-                          <ShoppingCart size={18} /> Add to Cart
+                          <ShoppingCart size={18} /> {t("common.addToCart")}
                         </button>
                       </div>
                     </article>
@@ -454,7 +473,7 @@ export default function Shop() {
           <button
             type="button"
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            aria-label="Close filters"
+            aria-label={t("shop.closeFilters")}
             onClick={() => setFiltersOpen(false)}
           />
           <aside className="absolute left-0 top-0 bottom-0 w-[min(100vw-2.5rem,320px)] bg-card shadow-2xl flex flex-col overflow-hidden">

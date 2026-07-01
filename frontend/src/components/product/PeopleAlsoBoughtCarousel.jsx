@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,7 +8,7 @@ import { useCart } from "../../context/CartContext";
 import { useTheme } from "../../context/ThemeContext";
 import { productPriceSaleProps } from "../../utils/productPriceStyle";
 
-function AlsoBoughtCard({ product }) {
+function AlsoBoughtCard({ product, t }) {
   const { addToCart } = useCart();
   const { isBlue } = useTheme();
   const image = product.images?.[0] || "/products/knee.png";
@@ -42,7 +43,7 @@ function AlsoBoughtCard({ product }) {
             type="button"
             onClick={() => addToCart(product)}
             className="w-10 h-10 rounded-xl bg-purple-600 text-white grid place-items-center hover:scale-110 transition shadow-md"
-            aria-label="Quick add to cart"
+            aria-label={t("global.quickAdd")}
           >
             <ShoppingCart size={16} />
           </button>
@@ -53,6 +54,7 @@ function AlsoBoughtCard({ product }) {
 }
 
 export default function PeopleAlsoBoughtCarousel({ productId, limit = 10 }) {
+  const { t } = useTranslation();
   const trackRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -99,8 +101,8 @@ export default function PeopleAlsoBoughtCarousel({ productId, limit = 10 }) {
     <section className="relative">
       <div className="flex items-end justify-between gap-4 mb-6">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-brand">Frequently Paired</p>
-          <h2 className="text-3xl md:text-4xl font-black text-fg mt-1">People Also Bought</h2>
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-brand">{t("global.frequentlyPaired")}</p>
+          <h2 className="text-3xl md:text-4xl font-black text-fg mt-1">{t("global.peopleAlsoBought")}</h2>
         </div>
         <div className="hidden sm:flex gap-2">
           <button
@@ -132,7 +134,7 @@ export default function PeopleAlsoBoughtCarousel({ productId, limit = 10 }) {
             transition={{ delay: index * 0.05 }}
             viewport={{ once: true }}
           >
-            <AlsoBoughtCard product={product} />
+            <AlsoBoughtCard product={product} t={t} />
           </motion.div>
         ))}
       </div>

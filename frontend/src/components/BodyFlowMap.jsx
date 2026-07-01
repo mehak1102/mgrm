@@ -390,6 +390,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { mgrmCategories } from "../data/siteData";
 import { useProductStats } from "../context/ProductStatsContext";
 
@@ -456,6 +457,7 @@ function ThumbGrid({ item }) {
 }
 
 function CategoryLabel({ item, index, go, categoryCount }) {
+  const { t } = useTranslation();
   const cat = getCat(item.query);
 
   return (
@@ -488,7 +490,7 @@ function CategoryLabel({ item, index, go, categoryCount }) {
         />
         <div className="text-left">
           <p className="text-sm font-black text-fg">{item.name}</p>
-          <p className="text-xs text-gray-500 dark:text-zinc-400">{categoryCount} products</p>
+          <p className="text-xs text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: categoryCount })}</p>
         </div>
       </div>
     </motion.button>
@@ -496,6 +498,7 @@ function CategoryLabel({ item, index, go, categoryCount }) {
 }
 
 export default function BodyFlowMap() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { bodyTotal, getCategoryCount } = useProductStats();
 
@@ -512,10 +515,10 @@ export default function BodyFlowMap() {
           className="text-center mb-8"
         >
           <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
-            <span className="text-red-500">{bodyTotal}</span> world class certified products
+            <span className="text-red-500">{bodyTotal}</span> {t("home.certifiedProductsLine")}
           </h2>
           <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
-            to heal and rehabilitate comfortably
+            {t("home.healComfortably")}
           </p>
         </motion.div>
 

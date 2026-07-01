@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useMotionValue, useTransform } from "framer-motion";
 import { Sparkles, Star, Settings, ArrowUpRight, LayoutGrid } from "lucide-react";
 import API from "../../api";
@@ -158,7 +159,7 @@ function CategoryMarquee({ categories, textZone = "32%" }) {
 }
 
 /** Full-bleed product spotlight — image covers entire card */
-function CategoryRotator({ categories, activeIndex, cardTheme, formatProductCount }) {
+function CategoryRotator({ categories, activeIndex, cardTheme, formatProductCount, productsLabel }) {
   const items = categories.filter((c) => c?.productImage);
   if (!items.length) return null;
 
@@ -203,7 +204,8 @@ function CategoryRotator({ categories, activeIndex, cardTheme, formatProductCoun
           cardTheme.isLight ? "bg-violet-600 text-white" : "bg-white/92 text-violet-900"
         }`}
       >
-        {formatProductCount(cat.count, { suffix: "" })} products
+        {productsLabel?.(formatProductCount(cat.count, { suffix: "" })) ??
+          formatProductCount(cat.count, { suffix: "" })}
       </span>
 
       <div
@@ -257,26 +259,30 @@ function ProductGrid({ sources, cols, rows, textZone = "36%" }) {
 }
 
 function RecoverySplit({ before, after, cardTheme }) {
+  const { t } = useTranslation();
+  const beforeLabel = t("common.before");
+  const afterLabel = t("common.after");
+
   return (
     <div className="absolute inset-x-0 top-0 z-20 flex pointer-events-none" style={{ bottom: "34%" }}>
       <div className="relative w-1/2 h-full border-r border-white/25 overflow-hidden">
-        <img src={before} alt="Before" loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={before} alt={beforeLabel} loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/10" />
         <span
           className={`absolute top-2.5 left-2.5 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md
             ${cardTheme.isLight ? "bg-white/90 text-slate-700" : "bg-black/40 text-white backdrop-blur-sm"}`}
         >
-          Before
+          {beforeLabel}
         </span>
       </div>
       <div className="relative w-1/2 h-full overflow-hidden">
-        <img src={after} alt="After" loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={after} alt={afterLabel} loading="lazy" draggable={false} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/10" />
         <span
           className={`absolute top-2.5 right-2.5 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md
             ${cardTheme.isLight ? "bg-white/90 text-slate-700" : "bg-black/40 text-white backdrop-blur-sm"}`}
         >
-          After
+          {afterLabel}
         </span>
       </div>
     </div>
@@ -376,6 +382,7 @@ function PosterTile({
           activeIndex={rotatingCategory.activeIndex}
           cardTheme={cardTheme}
           formatProductCount={rotatingCategory.formatProductCount}
+          productsLabel={rotatingCategory.productsLabel}
         />
       )}
 
@@ -463,6 +470,7 @@ function productImages(list) {
 }
 
 export default function DashboardHeroGrid({ onSection, onRoute }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { wishlist } = useWishlist();
   const { cart } = useCart();
@@ -566,7 +574,7 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
   }, [orders, products]);
 
   const productCountLabel = (count) =>
-    `${count || bodyTotal} MGRM medicare products | Braces | Bandage | Splintage`;
+    t("dashboard.productCountLabel", { count: count || bodyTotal });
 
   const recoverySplit = useMemo(() => {
     if (recoveryPreview?.beforeImage && recoveryPreview?.afterImage) {
@@ -607,8 +615,8 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.12}
           washKey="shop"
           glow={POSTER_GLOW.shop}
-          label="Explore"
-          title="Shop Products"
+          label={t("dashboard.grid.explore")}
+          title={t("dashboard.grid.shopProducts")}
           subtitle={productCountLabel(bodyTotal)}
           subtitleLines={2}
           carousel={shopCarouselItems}
@@ -628,19 +636,20 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           washKey="catalog"
           glow={POSTER_GLOW.catalog}
           coverImage
-          label="Catalog"
-          title="All Products"
+          label={t("dashboard.grid.catalog")}
+          title={t("dashboard.grid.allProducts")}
           subtitle={
             activeCategory
-              ? `${activeCategory.name} · ${formatProductCount(activeCategory.count, { suffix: "" })} in category`
-              : `${formatProductCount(bodyTotal)} certified products`
+              ? `${activeCategory.name} · ${formatProductCount(activeCategory.count, { suffix: "" })} ${t("common.inCategory")}`
+              : t("common.certifiedProductsCount", { count: formatProductCount(bodyTotal) })
           }
           rotatingCategory={{
             categories: rotatableCategories,
             activeIndex: categoryIndex,
             formatProductCount,
+            productsLabel: (count) => t("common.productsInRotator", { count }),
           }}
-          ctaLabel="Browse all"
+          ctaLabel={t("dashboard.grid.browseAll")}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
@@ -662,13 +671,13 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.24}
           washKey="featured"
           glow={POSTER_GLOW.featured}
-          label="Therapy"
-          title="Recommended By Physiotherapist"
-          subtitle="Supports organized by recovery specialty"
+          label={t("dashboard.grid.therapy")}
+          title={t("dashboard.grid.recommendedPhysio")}
+          subtitle={t("dashboard.grid.physioSubtitle")}
           collage={therapyCollage}
           gridCols={3}
           gridRows={1}
-          ctaLabel="Explore"
+          ctaLabel={t("dashboard.grid.explore")}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
@@ -684,9 +693,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.3}
           washKey="recommended"
           glow={POSTER_GLOW.recommended}
-          label="For You"
-          title="Recommended"
-          subtitle={recommended[0]?.name || "Personalized picks"}
+          label={t("dashboard.grid.forYou")}
+          title={t("dashboard.grid.recommended")}
+          subtitle={recommended[0]?.name || t("dashboard.grid.personalized")}
           collage={recoCollage}
           gridCols={3}
           gridRows={1}
@@ -705,11 +714,11 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.34}
           washKey="categories"
           glow={POSTER_GLOW.categories}
-          label="Body Parts"
-          title="Categories"
-          subtitle={`${bodyCategories.length} regions`}
+          label={t("dashboard.grid.bodyParts")}
+          title={t("dashboard.grid.categories")}
+          subtitle={t("dashboard.grid.regionsCount", { count: bodyCategories.length })}
           categoryMarquee={bodyCategories}
-          ctaLabel="Explore regions"
+          ctaLabel={t("dashboard.grid.exploreRegions")}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
@@ -723,9 +732,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.36}
           washKey="recovery"
           glow={POSTER_GLOW.recovery}
-          label="Heal & Inspire"
-          title="Recovery Stories"
-          subtitle="Before & after journeys"
+          label={t("dashboard.grid.healInspire")}
+          title={t("dashboard.grid.recoveryStories")}
+          subtitle={t("dashboard.grid.beforeAfter")}
           splitImages={recoverySplit}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
@@ -740,9 +749,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.4}
           washKey="orders"
           glow={POSTER_GLOW.orders}
-          label="Track"
-          title="Orders"
-          subtitle={`${orders.length} total`}
+          label={t("dashboard.grid.track")}
+          title={t("dashboard.grid.orders")}
+          subtitle={t("dashboard.grid.ordersTotal", { count: orders.length })}
           collage={orderCollage}
           gridCols={2}
           gridRows={2}
@@ -759,9 +768,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.44}
           washKey="wishlist"
           glow={POSTER_GLOW.wishlist}
-          label="Saved"
-          title="Wishlist"
-          subtitle={`${wishlist.length} items`}
+          label={t("dashboard.grid.saved")}
+          title={t("dashboard.grid.wishlist")}
+          subtitle={t("common.itemsCount", { count: wishlist.length })}
           collage={wishlistCollage}
           gridCols={2}
           gridRows={2}
@@ -778,9 +787,9 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.48}
           washKey="addresses"
           glow={POSTER_GLOW.addresses}
-          label="Deliver To"
-          title="Addresses"
-          subtitle={`${profile?.addresses?.length || 0} saved`}
+          label={t("dashboard.grid.deliverTo")}
+          title={t("dashboard.grid.addresses")}
+          subtitle={t("dashboard.grid.savedCount", { count: profile?.addresses?.length || 0 })}
           collage={addressCollage}
           gridCols={2}
           gridRows={2}
@@ -797,8 +806,8 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           delay={0.52}
           washKey="profile"
           glow={POSTER_GLOW.profile}
-          label="Account"
-          title={user?.name?.split(" ")[0] || "Your Profile"}
+          label={t("dashboard.grid.account")}
+          title={user?.name?.split(" ")[0] || t("dashboard.grid.yourProfile")}
           subtitle={user?.email}
           profileImage={profileImg}
           cardTheme={cardTheme}

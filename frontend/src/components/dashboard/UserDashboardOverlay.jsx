@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useDashboard } from "../../context/DashboardContext";
 import { useProductStats } from "../../context/ProductStatsContext";
 import { useTheme } from "../../context/ThemeContext";
-import { getDashboardTheme, SECTION_LABELS } from "./dashboardTheme";
+import { getDashboardTheme } from "./dashboardTheme";
 
 const DashboardSections = lazy(() => import("./DashboardSections"));
 const DashboardBackground = lazy(() => import("./DashboardBackground"));
@@ -92,6 +93,7 @@ function FlowingLetterText({ text, countColor, textColor }) {
 }
 
 export default function UserDashboardOverlay() {
+  const { t } = useTranslation();
   const { isOpen, closeDashboard, scrollTarget, setScrollTarget } = useDashboard();
   const { user } = useAuth();
   const { theme } = useTheme();
@@ -103,7 +105,9 @@ export default function UserDashboardOverlay() {
   const [activeSection, setActiveSection] = useState(null);
   const [isZooming, setIsZooming] = useState(false);
 
-  const productCountLabel = `${bodyTotal} MGRM medicare products | Braces | Bandage | Splintage`;
+  const productCountLabel = t("dashboard.productCountLabel", { count: bodyTotal });
+
+  const sectionLabel = (key) => t(`dashboard.sections.${key}`, { defaultValue: t("dashboard.account") });
 
   useEffect(() => {
     if (!isOpen) {
@@ -177,7 +181,7 @@ export default function UserDashboardOverlay() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="MGRM Command Center"
+            aria-label={t("dashboard.commandCenter")}
             className={`fixed inset-0 z-[300] w-screen h-screen overflow-hidden flex flex-col ${dt.shell}`}
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -207,7 +211,7 @@ export default function UserDashboardOverlay() {
                     type="button"
                     onClick={backToHero}
                     className={`w-10 h-10 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
-                    aria-label="Back to grid"
+                    aria-label={t("dashboard.backToGrid")}
                   >
                     <ArrowLeft size={18} />
                   </button>
@@ -218,7 +222,7 @@ export default function UserDashboardOverlay() {
                   </p>
                   {view === "section" ? (
                     <h2 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
-                      {SECTION_LABELS[activeSection] || "Account"}
+                      {sectionLabel(activeSection)}
                     </h2>
                   ) : (
                     <FlowingLetterText
@@ -233,14 +237,16 @@ export default function UserDashboardOverlay() {
               <div className="flex items-center gap-3 sm:gap-5 shrink-0">
                 {view === "hero" && (
                   <p className={`text-sm sm:text-xl font-semibold tracking-tight whitespace-nowrap ${dt.stat}`}>
-                    Hello, {user.name?.split(" ")[0] || "there"}
+                    {t("dashboard.hello", {
+                      name: user.name?.split(" ")[0] || t("common.there"),
+                    })}
                   </p>
                 )}
                 <button
                   type="button"
                   onClick={closeDashboard}
                   className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full grid place-items-center ${dt.closeBtn}`}
-                  aria-label="Close dashboard"
+                  aria-label={t("dashboard.close")}
                 >
                   <X size={20} />
                 </button>

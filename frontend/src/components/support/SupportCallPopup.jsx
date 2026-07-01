@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import { Headphones, MessageCircle, Phone, X } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { useSupportPopup } from "../../hooks/useSupportPopup";
@@ -18,6 +19,7 @@ const telHref = `tel:${supportPhone.replace(/\s/g, "")}`;
 const whatsappHref = `https://wa.me/${whatsappNumber}`;
 
 export default function SupportCallPopup() {
+  const { t } = useTranslation();
   const { isBlue } = useTheme();
   const { isMounted, isOpen, isBubble, open, minimize } = useSupportPopup();
   const panelRef = useRef(null);
@@ -89,17 +91,17 @@ export default function SupportCallPopup() {
               type="button"
               onClick={minimize}
               className="support-call-widget__close"
-              aria-label="Minimize support call widget"
+              aria-label={t("global.minimizeSupport")}
             >
               <X size={18} />
             </button>
 
-            <p className="support-call-widget__label">Need quick help?</p>
+            <p className="support-call-widget__label">{t("global.needHelp")}</p>
             <h2 id="support-call-title" className="support-call-widget__title">
-              Your MGRM Assistance Team
+              {t("global.assistanceTeam")}
             </h2>
             <p id="support-call-desc" className="support-call-widget__text">
-              Get guidance for products, orders, recovery support, and assistance.
+              {t("global.assistanceCopy")}
             </p>
 
             <div className="support-call-widget__actions">
@@ -110,14 +112,14 @@ export default function SupportCallPopup() {
                 }`}
               >
                 <Phone size={18} aria-hidden />
-                Call Now
+                {t("global.callNow")}
               </a>
               <button
                 type="button"
                 onClick={minimize}
                 className="support-call-widget__btn support-call-widget__btn--secondary"
               >
-                Continue Browsing
+                {t("global.continueBrowsing")}
               </button>
               <a
                 href={whatsappHref}
@@ -126,7 +128,7 @@ export default function SupportCallPopup() {
                 className="support-call-widget__btn support-call-widget__btn--whatsapp"
               >
                 <MessageCircle size={18} aria-hidden />
-                WhatsApp
+                {t("global.whatsapp")}
               </a>
             </div>
           </div>
@@ -135,13 +137,13 @@ export default function SupportCallPopup() {
         {isBubble && (
           <div className="support-call-bubble-wrap">
             <span className="support-call-bubble-tooltip" role="tooltip">
-              Need help? Call support
+              {t("global.needHelpCall")}
             </span>
             <button
               type="button"
               onClick={open}
               className="support-call-bubble support-call-bubble--pulse"
-              aria-label="Open support call options"
+              aria-label={t("global.openSupport")}
             >
               <Headphones size={22} />
             </button>

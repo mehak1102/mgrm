@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Download, FileText, Sparkles } from "lucide-react";
 import toast from "react-hot-toast";
 import { getCatalogPdfUrl } from "../../utils/shareProduct";
@@ -50,23 +51,24 @@ const FOLLOW_LINKS = [
 ];
 
 export default function FooterActionBar() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [downloading, setDownloading] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (!email.trim()) {
-      toast.error("Please enter your email");
+      toast.error(t("footer.enterEmailError"));
       return;
     }
-    toast.success("Thank you for subscribing!");
+    toast.success(t("footer.subscribeSuccess"));
     setEmail("");
   };
 
   const handleCatalogDownload = () => {
     setDownloading(true);
     window.open(getCatalogPdfUrl(), "_blank", "noopener,noreferrer");
-    toast.success("Catalogue download started");
+    toast.success(t("footerBar.catalogStarted"));
     setTimeout(() => setDownloading(false), 1400);
   };
 
@@ -79,7 +81,7 @@ export default function FooterActionBar() {
             onClick={handleCatalogDownload}
             disabled={downloading}
             className="footer-catalog-card lg:col-span-4 group relative w-full overflow-hidden rounded-2xl text-left transition disabled:opacity-85"
-            aria-label="Download full product catalogue PDF"
+            aria-label={t("footerBar.downloadCatalog")}
           >
             <span className="footer-catalog-card__glow" aria-hidden />
             <span className="footer-catalog-card__shine" aria-hidden />
@@ -93,23 +95,21 @@ export default function FooterActionBar() {
               <div className="min-w-0 flex-1">
                 <span className="footer-catalog-card__eyebrow inline-flex items-center gap-1.5">
                   <Sparkles size={13} aria-hidden />
-                  Free download
+                  {t("common.freeDownload")}
                 </span>
                 <p className="footer-catalog-card__title mt-1.5">
-                  Download our full
-                  <br />
-                  product catalogue
+                  {t("footerBar.catalogTitle")}
                 </p>
                 <span className="footer-catalog-card__cta mt-3 inline-flex items-center gap-2">
                   {downloading ? (
                     <>
                       <FileText size={16} className="animate-pulse" aria-hidden />
-                      Preparing PDF…
+                      {t("footerBar.preparingPdf")}
                     </>
                   ) : (
                     <>
                       <Download size={16} aria-hidden />
-                      Download catalogue
+                      {t("footerBar.downloadCatalog")}
                     </>
                   )}
                 </span>
@@ -118,7 +118,7 @@ export default function FooterActionBar() {
           </button>
 
           <div className="lg:col-span-3 flex flex-col items-center text-center">
-            <p className="text-sm font-semibold text-fg-muted">Follow us</p>
+            <p className="text-sm font-semibold text-fg-muted">{t("common.followUs")}</p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
               {FOLLOW_LINKS.map(({ id, label, href }) => (
                 <a
@@ -137,28 +137,28 @@ export default function FooterActionBar() {
 
           <div className="lg:col-span-5">
             <p className="text-sm leading-relaxed text-fg-muted text-center lg:text-left">
-              Sign up to find out about our latest products, news and upcoming events.
+              {t("footerBar.signupCopy")}
             </p>
             <form
               onSubmit={handleSubscribe}
               className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch"
             >
               <label htmlFor="footer-action-email" className="sr-only">
-                Email address
+                {t("common.emailAddress")}
               </label>
               <input
                 id="footer-action-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email Address"
+                placeholder={t("common.emailAddress")}
                 className="theme-panel min-h-11 flex-1 rounded-md border border-edge px-4 text-sm outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/35"
               />
               <button
                 type="submit"
                 className="footer-action-bar__signup min-h-11 shrink-0 rounded-md px-6 text-sm font-bold text-white transition hover:brightness-105"
               >
-                Sign up
+                {t("common.signUp")}
               </button>
             </form>
           </div>

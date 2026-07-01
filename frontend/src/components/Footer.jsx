@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
@@ -20,20 +21,20 @@ const PAYMENT_REVEAL = 0.5;
 const PAYMENT_EASE = [0, 0, 0.2, 1];
 
 const QUICK_LINKS = [
-  { label: "Home", to: "/" },
-  { label: "About Us", to: "/about-us" },
-  { label: "Blogs", to: "/blogs" },
-  { label: "Support", to: "/support" },
-  { label: "Careers", to: "/careers" },
-  { label: "Contact", to: "/support" },
+  { labelKey: "footer.quickLinks.home", to: "/" },
+  { labelKey: "footer.quickLinks.about", to: "/about-us" },
+  { labelKey: "footer.quickLinks.blogs", to: "/blogs" },
+  { labelKey: "footer.quickLinks.support", to: "/support" },
+  { labelKey: "footer.quickLinks.careers", to: "/careers" },
+  { labelKey: "footer.quickLinks.contact", to: "/support" },
 ];
 
 const FOOTER_CATEGORIES = [
-  { label: "Knee Support", query: "Knee" },
-  { label: "Back Support", query: "Back" },
-  { label: "Cervical Support", query: "Neck" },
-  { label: "Foot Care", query: "Ankle And Foot" },
-  { label: "Rehabilitation", query: "Orthopedic Aids" },
+  { labelKey: "footer.categoryLinks.knee", query: "Knee" },
+  { labelKey: "footer.categoryLinks.back", query: "Back" },
+  { labelKey: "footer.categoryLinks.cervical", query: "Neck" },
+  { labelKey: "footer.categoryLinks.foot", query: "Ankle And Foot" },
+  { labelKey: "footer.categoryLinks.rehab", query: "Orthopedic Aids" },
 ];
 
 function SocialIcon({ name }) {
@@ -76,9 +77,9 @@ const SOCIAL_LINKS = [
 ];
 
 const LEGAL_LINKS = [
-  { label: "Privacy Policy", to: "/support" },
-  { label: "Terms & Conditions", to: "/support" },
-  { label: "Shipping Policy", to: "/support" },
+  { labelKey: "footer.legal.privacy", to: "/support" },
+  { labelKey: "footer.legal.terms", to: "/support" },
+  { labelKey: "footer.legal.shipping", to: "/support" },
 ];
 
 function surfaceCardClass(theme) {
@@ -158,6 +159,7 @@ function FooterLink({ to, children, className = "" }) {
 }
 
 export default function Footer() {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const reduce = useReducedMotion();
   const [email, setEmail] = useState("");
@@ -166,10 +168,10 @@ export default function Footer() {
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (!email.trim()) {
-      toast.error("Please enter your email");
+      toast.error(t("footer.enterEmailError"));
       return;
     }
-    toast.success("Thank you for subscribing!");
+    toast.success(t("footer.subscribeSuccess"));
     setEmail("");
   };
 
@@ -204,7 +206,7 @@ export default function Footer() {
             </Link>
             <BrandPillBadgeRow className="mt-4" />
             <p className="mt-3 text-sm leading-7 text-fg-muted max-w-sm">
-              Advanced orthopedic and rehabilitation solutions trusted across India.
+              {t("footer.tagline")}
             </p>
             <div className="mt-6 flex gap-3">
               {SOCIAL_LINKS.map(({ id, label, href }) => (
@@ -225,13 +227,13 @@ export default function Footer() {
 
           <div className="lg:col-span-2">
             <h3 className="text-sm font-black uppercase tracking-[0.2em] text-brand mb-5">
-              NAVIGATION
+              {t("footer.navigation")}
             </h3>
             <ul className="space-y-3">
               {QUICK_LINKS.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <FooterLink to={link.to} className="text-sm font-semibold hover:translate-x-0.5 inline-block">
-                    {link.label}
+                    {t(link.labelKey)}
                   </FooterLink>
                 </li>
               ))}
@@ -240,16 +242,16 @@ export default function Footer() {
 
           <div className="lg:col-span-3">
             <h3 className="text-sm font-black uppercase tracking-[0.2em] text-brand mb-5">
-              Categories
+              {t("footer.categories")}
             </h3>
             <ul className="space-y-3">
               {FOOTER_CATEGORIES.map((cat) => (
-                <li key={cat.label}>
+                <li key={cat.labelKey}>
                   <FooterLink
                     to={`/shop?category=${encodeURIComponent(cat.query)}`}
                     className="text-sm font-semibold"
                   >
-                    {cat.label}
+                    {t(cat.labelKey)}
                   </FooterLink>
                 </li>
               ))}
@@ -258,7 +260,7 @@ export default function Footer() {
 
           <div className="lg:col-span-3">
             <h3 className="text-sm font-black uppercase tracking-[0.2em] text-brand mb-5">
-              Contact
+              {t("footer.contact")}
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3">
@@ -266,7 +268,7 @@ export default function Footer() {
                   <Phone size={18} />
                 </span>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">Phone</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">{t("footer.phone")}</p>
                   <a
                     href="tel:+9118001234567"
                     className="text-sm font-semibold text-fg hover:text-brand transition-colors"
@@ -280,7 +282,7 @@ export default function Footer() {
                   <Mail size={18} />
                 </span>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">Email</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">{t("common.email")}</p>
                   <a
                     href="mailto:support@mgrmmedicare.com"
                     className="text-sm font-semibold text-fg hover:text-brand transition-colors break-all"
@@ -294,11 +296,11 @@ export default function Footer() {
                   <MapPin size={18} />
                 </span>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">Address</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-fg-muted">{t("footer.address")}</p>
                   <p className="text-sm font-semibold text-fg leading-relaxed">
-                    MGRM Medicare Pvt. Ltd.
+                    {t("footer.companyAddress")}
                     <br />
-                    New Delhi, India
+                    {t("footer.city")}
                   </p>
                 </div>
               </li>
@@ -326,13 +328,13 @@ export default function Footer() {
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-md">
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand">
-                  Newsletter
+                  {t("footer.newsletter")}
                 </p>
                 <h3 className="footer-newsletter-title mt-2 text-2xl sm:text-3xl font-black text-fg">
-                  Stay Updated With MGRM
+                  {t("footer.stayUpdated")}
                 </h3>
                 <p className="footer-newsletter-copy mt-3 text-sm text-fg-muted leading-relaxed">
-                  Recovery tips, new product launches, and exclusive offers — delivered to your inbox.
+                  {t("footer.newsletterCopy")}
                 </p>
               </div>
 
@@ -341,14 +343,14 @@ export default function Footer() {
                 className="flex w-full max-w-lg flex-col gap-3 sm:flex-row sm:items-stretch"
               >
                 <label htmlFor="footer-email" className="sr-only">
-                  Email address
+                  {t("common.emailAddress")}
                 </label>
                 <input
                   id="footer-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder={t("common.enterEmail")}
                   className="theme-panel flex-1 rounded-2xl px-5 py-3.5 text-sm font-medium outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/40 transition-all duration-300"
                 />
                 <motion.button
@@ -357,7 +359,7 @@ export default function Footer() {
                   whileTap={{ scale: 0.98 }}
                   className="btn-primary inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-black whitespace-nowrap shadow-lg"
                 >
-                  Subscribe
+                  {t("footer.subscribe")}
                   <ArrowRight size={18} />
                 </motion.button>
               </form>
@@ -376,7 +378,7 @@ export default function Footer() {
               transition={{ duration: PAYMENT_REVEAL, ease: PAYMENT_EASE }}
               className="text-center text-sm font-black uppercase tracking-[0.2em] text-brand"
             >
-              Secure Payment Methods
+              {t("footer.securePayments")}
             </motion.h3>
             <div
               className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
@@ -396,7 +398,7 @@ export default function Footer() {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-fg-muted text-center sm:text-left">
-              © 2026 MGRM Medicare. All Rights Reserved.
+              {t("footer.copyright")}
             </p>
             <nav
               className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2"
@@ -404,11 +406,11 @@ export default function Footer() {
             >
               {LEGAL_LINKS.map((link) => (
                 <FooterLink
-                  key={link.label}
+                  key={link.labelKey}
                   to={link.to}
                   className="text-sm font-semibold"
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </FooterLink>
               ))}
             </nav>

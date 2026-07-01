@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import API from "../../api";
@@ -101,7 +102,7 @@ function normalizeApiProduct(product, fallbackImage) {
   return {
     name: product.name,
     slug: product.slug,
-    description: product.description || "Premium MGRM rehabilitation support.",
+    description: product.description || "",
     image: product.images?.[0] || product.image || fallbackImage,
     rating: product.rating ?? 4.7,
     _id: product._id,
@@ -152,7 +153,7 @@ function RatingStars({ rating }) {
   );
 }
 
-function ProductCard({ product, category, index, reduce }) {
+function ProductCard({ product, category, index, reduce, t }) {
   const { isDark } = useTheme();
   const pastel = getPastelForProduct(product, index, isDark);
 
@@ -213,7 +214,7 @@ function ProductCard({ product, category, index, reduce }) {
           </h4>
 
           <p className="mt-2.5 text-xs sm:text-sm text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] leading-relaxed line-clamp-2">
-            {product.description}
+            {product.description || t("homeSections.featuredFallback")}
           </p>
 
           <div className="mt-3.5">
@@ -224,7 +225,7 @@ function ProductCard({ product, category, index, reduce }) {
             to={`/product/${product.slug}`}
             className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 dark:bg-zinc-100 [data-theme=blue]:bg-[var(--accent-primary)] text-white dark:text-zinc-900 [data-theme=blue]:text-white px-5 py-3 text-xs sm:text-sm font-black hover:scale-[1.02] active:scale-[0.98] transition-transform duration-[350ms] ease-out"
           >
-            View Product
+            {t("common.viewProducts")}
             <ArrowRight size={15} className="transition-transform duration-[350ms] group-hover/card:translate-x-1" />
           </Link>
         </div>
@@ -234,6 +235,7 @@ function ProductCard({ product, category, index, reduce }) {
 }
 
 export default function HomeFeaturedCollectionsSection() {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
   const scrollRef = useRef(null);
   const [categories, setCategories] = useState(featuredCollectionCategories);
@@ -283,9 +285,9 @@ export default function HomeFeaturedCollectionsSection() {
 
       <div className="relative mb-12 sm:mb-14 px-2">
         <PremiumWordHeader
-          label="CURATED PICKS"
-          title="Featured Collections"
-          description="Explore our most trusted rehabilitation solutions by category."
+          label={t("homeSections.featuredLabel")}
+          title={t("homeSections.featuredTitle")}
+          description={t("homeSections.featuredDesc")}
           style="slideRight"
         />
       </div>
@@ -294,7 +296,7 @@ export default function HomeFeaturedCollectionsSection() {
         {/* Category list */}
         <nav
           className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory lg:snap-none"
-          aria-label="Featured collection categories"
+          aria-label={t("homeSections.featuredCategories")}
         >
           {categories.map((cat) => {
             const isActive = cat.id === activeId;
@@ -344,7 +346,7 @@ export default function HomeFeaturedCollectionsSection() {
                   ].join(" ")}
                   style={{ color: cat.color }}
                 >
-                  {cat.products.length} products
+                  {t("common.productsCount", { count: cat.products.length })}
                 </span>
               </button>
             );
@@ -369,7 +371,7 @@ export default function HomeFeaturedCollectionsSection() {
                   className="text-[11px] font-black uppercase tracking-[0.26em]"
                   style={{ color: activeCategory.color }}
                 >
-                  Collection
+                  {t("homeSections.collection")}
                 </p>
                 <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-[var(--text-primary)] mt-0.5">
                   {activeCategory.label}
@@ -380,7 +382,7 @@ export default function HomeFeaturedCollectionsSection() {
                 onClick={() => trackCategoryClick(activeCategory.query)}
                 className="hidden sm:inline-flex items-center gap-1.5 text-sm font-black text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] hover:gap-2.5 transition-all duration-300"
               >
-                View all
+                {t("homeSections.featuredViewAll")}
                 <ArrowRight size={16} />
               </Link>
             </div>
@@ -405,6 +407,7 @@ export default function HomeFeaturedCollectionsSection() {
                       category={activeCategory}
                       index={index}
                       reduce={reduce}
+                      t={t}
                     />
                   ))}
                 </motion.div>

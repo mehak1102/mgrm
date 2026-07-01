@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Copy, MessageCircle, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
 import {
@@ -8,6 +9,7 @@ import {
 } from "../../utils/shareProduct";
 
 export default function ProductShareButton({ product, compact = false }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
 
@@ -29,7 +31,7 @@ export default function ProductShareButton({ product, compact = false }) {
   const handleNativeShare = async () => {
     try {
       const result = await shareProductNative(product);
-      if (result === "shared") toast.success("Thanks for sharing!");
+      if (result === "shared") toast.success(t("global.thanksSharing"));
       setOpen(false);
     } catch {
       /* handled in util */
@@ -41,7 +43,7 @@ export default function ProductShareButton({ product, compact = false }) {
       await copyProductLink(product);
       setOpen(false);
     } catch {
-      toast.error("Could not copy link");
+      toast.error(t("global.copyFailed"));
     }
   };
 
@@ -81,7 +83,7 @@ export default function ProductShareButton({ product, compact = false }) {
             onClick={() => setOpen(false)}
           >
             <MessageCircle size={16} aria-hidden />
-            WhatsApp
+            {t("global.whatsapp")}
           </a>
           <button
             type="button"

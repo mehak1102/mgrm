@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
@@ -10,7 +11,6 @@ const HINT_DELAY_MS = 4000;
 const EXIT_MS = 400;
 
 const EASE = [0.22, 1, 0.36, 1];
-const WELCOME_TEXT = "Welcome to";
 
 const ORBS = [
   {
@@ -47,6 +47,7 @@ const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
 }));
 
 function AboutIntroPopup() {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -116,7 +117,7 @@ function AboutIntroPopup() {
           key="about-intro"
           role="dialog"
           aria-modal="true"
-          aria-label="Welcome to MGRM Medicare"
+          aria-label={t("about.introAriaLabel")}
           initial={reduce ? false : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           exit={
@@ -193,7 +194,7 @@ function AboutIntroPopup() {
               close();
             }}
             className="absolute right-4 top-4 z-[10001] group/close flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/20 sm:right-6 sm:top-6"
-            aria-label="Close introduction"
+            aria-label={t("about.introClose")}
           >
             <X
               size={20}
@@ -228,7 +229,9 @@ function AboutIntroPopup() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className="mb-6 text-[0.62rem] font-semibold uppercase tracking-[0.38em] text-white/70">
-              {WELCOME_TEXT.split("").map((char, i) => (
+              {t("global.welcomeTo")
+                .split("")
+                .map((char, i) => (
                 <motion.span
                   key={`${char}-${i}`}
                   className="about-intro-welcome-char"
@@ -296,7 +299,7 @@ function AboutIntroPopup() {
               transition={{ delay: 0.95, duration: 0.9, ease: EASE }}
               className="about-intro-subtitle mt-5 max-w-sm text-sm font-light leading-relaxed tracking-[0.06em] text-white/80 sm:text-base"
             >
-              Transforming Rehabilitation Since{" "}
+              {t("about.introSubtitle")}{" "}
               <motion.span
                 className="about-intro-year font-normal text-white"
                 initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -316,7 +319,7 @@ function AboutIntroPopup() {
                   transition={{ duration: 0.55, ease: EASE }}
                   className="about-intro-hint mt-10 text-[0.65rem] font-medium uppercase tracking-[0.22em] text-white/50"
                 >
-                  Tap anywhere to continue
+                  {t("about.introTapToContinue")}
                 </motion.p>
               )}
             </AnimatePresence>

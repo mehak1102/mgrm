@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BadgeCheck,
@@ -14,11 +15,7 @@ import { useAuth } from "../../context/AuthContext";
 import StarRating, { StarRatingDisplay } from "./StarRating";
 import toast from "react-hot-toast";
 
-const SORT_OPTIONS = [
-  { id: "latest", label: "Latest" },
-  { id: "highest", label: "Highest" },
-  { id: "lowest", label: "Lowest" },
-];
+const SORT_OPTION_IDS = ["latest", "highest", "lowest"];
 
 function RatingBar({ star, count, total }) {
   const pct = total ? Math.round((count / total) * 100) : 0;
@@ -39,6 +36,7 @@ function RatingBar({ star, count, total }) {
 }
 
 export default function ProductReviews({ productId }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
   const [summary, setSummary] = useState({
@@ -64,12 +62,12 @@ export default function ProductReviews({ productId }) {
       setReviews(res.data.reviews || []);
       setSummary(res.data.summary || summary);
     } catch {
-      setError("Could not load reviews.");
+      setError(t("global.couldNotLoadReviews"));
       setReviews([]);
     } finally {
       setLoading(false);
     }
-  }, [productId, sort]);
+  }, [productId, sort, t]);
 
   useEffect(() => {
     fetchReviews();
@@ -79,7 +77,7 @@ export default function ProductReviews({ productId }) {
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
     if (!user) {
-      toast.error("Please login to upload images");
+      toast.error(t("global.loginToUploadImages"));
       return;
     }
 
@@ -96,7 +94,7 @@ export default function ProductReviews({ productId }) {
       }
       setForm((prev) => ({ ...prev, images: [...prev.images, ...urls].slice(0, 6) }));
     } catch {
-      toast.error("Image upload failed");
+      toast.error(t("global.imageUploadFailed"));
     } finally {
       setUploading(false);
     }
@@ -105,7 +103,7 @@ export default function ProductReviews({ productId }) {
   const submitReview = async (e) => {
     e.preventDefault();
     if (!user) {
-      toast.error("Please login to submit a review");
+      toast.error(t("global.loginToSubmitReview"));
       return;
     }
     setSubmitting(true);
@@ -119,23 +117,23 @@ export default function ProductReviews({ productId }) {
       setForm({ rating: 5, comment: "", images: [] });
       setSummary(res.data.summary);
       await fetchReviews();
-      toast.success("Review submitted!");
+      toast.success(t("global.reviewSubmitted"));
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Failed to submit review");
+      toast.error(err.response?.data?.msg || t("global.failedSubmitReview"));
     } finally {
       setSubmitting(false);
     }
   };
 
   const deleteReview = async (id) => {
-    if (!confirm("Delete this review?")) return;
+    if (!confirm(t("global.deleteReviewConfirm"))) return;
     try {
       const res = await API.delete(`/reviews/${id}`);
       setSummary(res.data.summary);
       await fetchReviews();
-      toast.success("Review removed");
+      toast.success(t("global.reviewRemoved"));
     } catch {
-      toast.error("Could not delete review");
+      toast.error(t("global.couldNotDeleteReview"));
     }
   };
 
@@ -145,8 +143,8 @@ export default function ProductReviews({ productId }) {
       <div className="absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-gradient-to-tr from-cyan-300/20 to-purple-300/20 blur-3xl pointer-events-none" />
 
       <div className="relative">
-        <p className="text-xs font-black uppercase tracking-[0.2em] text-brand">Customer Reviews</p>
-        <h2 className="mt-2 text-3xl md:text-4xl font-black text-fg">What buyers are saying</h2>
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-brand">{t("global.customerReviews")}</p>
+        <h2 className="mt-2 text-3xl md:text-4xl font-black text-fg">{t("global.whatBuyersSay")}</h2>
 
         {loading ? (
           <div className="mt-8 grid md:grid-cols-[280px_1fr] gap-8">
@@ -161,7 +159,7 @@ export default function ProductReviews({ productId }) {
           <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 dark:bg-red-950/30 p-6 text-red-600 dark:text-red-300">
             {error}
             <button onClick={fetchReviews} className="ml-3 underline font-bold">
-              Retry
+              {t("common.retry")}
             </button>
           </div>
         ) : (
@@ -173,7 +171,7 @@ export default function ProductReviews({ productId }) {
                 </p>
                 <StarRatingDisplay value={summary.averageRating} size={22} className="mt-2" />
                 <p className="mt-2 text-sm text-fg-muted">
-                  {summary.totalReviews} review{summary.totalReviews !== 1 ? "s" : ""}
+                  {t("global.reviewCount", { count: summary.totalReviews })}
                 </p>
                 <div className="mt-6 space-y-2">
                   {[5, 4, 3, 2, 1].map((star) => (
@@ -191,7 +189,7 @@ export default function ProductReviews({ productId }) {
                 {summary.galleryImages?.length > 0 && (
                   <div className="mb-6">
                     <p className="font-black text-fg mb-3 flex items-center gap-2">
-                      <ImageIcon size={18} /> Buyer photos
+                      <ImageIcon size={18} /> {t("global.buyerPhotos")}
                     </p>
                     <div className="flex gap-3 overflow-x-auto pb-2 custom-scroll">
                       {summary.galleryImages.map((img, idx) => (
@@ -209,18 +207,18 @@ export default function ProductReviews({ productId }) {
                 )}
 
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {SORT_OPTIONS.map((opt) => (
+                  {SORT_OPTION_IDS.map((id) => (
                     <button
-                      key={opt.id}
+                      key={id}
                       type="button"
-                      onClick={() => setSort(opt.id)}
+                      onClick={() => setSort(id)}
                       className={`px-4 py-2 rounded-full text-sm font-bold transition ${
-                        sort === opt.id
+                        sort === id
                           ? "bg-purple-600 text-white shadow-lg"
                           : "bg-slate-100 dark:bg-zinc-800 text-fg-muted hover:text-fg"
                       }`}
                     >
-                      {opt.label}
+                      {t(`global.${id}`)}
                     </button>
                   ))}
                 </div>
@@ -228,8 +226,8 @@ export default function ProductReviews({ productId }) {
                 {reviews.length === 0 ? (
                   <div className="rounded-2xl border border-dashed border-edge p-8 text-center">
                     <MessageSquareQuote className="mx-auto text-fg-muted mb-3" />
-                    <p className="font-bold text-fg">No reviews yet</p>
-                    <p className="text-sm text-fg-muted mt-1">Be the first to share your experience.</p>
+                    <p className="font-bold text-fg">{t("global.noReviewsYet")}</p>
+                    <p className="text-sm text-fg-muted mt-1">{t("global.beFirstReview")}</p>
                   </div>
                 ) : (
                   <div className="space-y-4 max-h-[520px] overflow-y-auto custom-scroll pr-1">
@@ -247,7 +245,7 @@ export default function ProductReviews({ productId }) {
                                 <p className="font-black text-fg">{review.userName}</p>
                                 {review.isVerifiedPurchase && (
                                   <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-1 rounded-full">
-                                    <BadgeCheck size={14} /> Verified Purchase
+                                    <BadgeCheck size={14} /> {t("global.verifiedPurchase")}
                                   </span>
                                 )}
                               </div>
@@ -295,18 +293,18 @@ export default function ProductReviews({ productId }) {
               onSubmit={submitReview}
               className="mt-10 rounded-3xl border border-edge bg-gradient-to-r from-purple-50/80 via-cyan-50/50 to-amber-50/50 dark:from-purple-950/20 dark:via-cyan-950/10 dark:to-amber-950/10 p-6 md:p-8"
             >
-              <h3 className="text-xl font-black text-fg">Write a review</h3>
+              <h3 className="text-xl font-black text-fg">{t("global.writeReview")}</h3>
               {!user ? (
                 <p className="mt-3 text-fg-muted">
                   <Link to="/login" className="text-brand font-bold hover:underline">
-                    Login
+                    {t("common.login")}
                   </Link>{" "}
-                  to rate and review this product.
+                  {t("global.loginToReview")}
                 </p>
               ) : (
                 <>
                   <div className="mt-4">
-                    <p className="text-sm font-bold text-fg mb-2">Your rating</p>
+                    <p className="text-sm font-bold text-fg mb-2">{t("global.yourRating")}</p>
                     <StarRating
                       value={form.rating}
                       onChange={(r) => setForm((p) => ({ ...p, rating: r }))}
@@ -316,14 +314,14 @@ export default function ProductReviews({ productId }) {
                   <textarea
                     value={form.comment}
                     onChange={(e) => setForm((p) => ({ ...p, comment: e.target.value }))}
-                    placeholder="Share your experience with fit, comfort, and recovery..."
+                    placeholder={t("global.reviewCommentPlaceholder")}
                     className="theme-panel w-full mt-4 min-h-[120px] rounded-2xl px-4 py-3 text-fg"
                     maxLength={2000}
                   />
                   <div className="mt-4 flex flex-wrap items-center gap-3">
                     <label className="inline-flex items-center gap-2 btn-soft px-4 py-2 rounded-xl font-bold cursor-pointer">
                       <Camera size={18} />
-                      {uploading ? "Uploading..." : "Add photos"}
+                      {uploading ? t("common.uploading") : t("global.addPhotos")}
                       <input
                         type="file"
                         accept="image/*"
@@ -343,7 +341,7 @@ export default function ProductReviews({ productId }) {
                     className="btn-primary mt-5 px-8 py-3 rounded-2xl font-black inline-flex items-center gap-2"
                   >
                     {submitting ? <Loader2 className="animate-spin" size={18} /> : null}
-                    Submit Review
+                    {t("global.submitReview")}
                   </button>
                 </>
               )}

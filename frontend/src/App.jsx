@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import CartDrawer from "./components/CartDrawer";
 import FloatingHelp from "./components/FloatingHelp";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 import TidioChat from "./components/TidioChat";
 import Footer from "./components/Footer";
 import InstagramFeed from "./components/InstagramFeed";
@@ -123,6 +124,7 @@ export default function App() {
       {!hideLayout && <Footer />}
       {!hideLayout && <CartDrawer />}
       {!hideLayout && <FloatingHelp />}
+      {!hideLayout && <LanguageSwitcher />}
       <TidioChat />
 
       <Toaster

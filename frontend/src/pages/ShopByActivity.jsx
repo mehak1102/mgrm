@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Heart,
   Grid2X2,
@@ -33,6 +34,7 @@ const colors = [
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
 
 export default function ShopByActivity() {
+  const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -110,39 +112,41 @@ export default function ShopByActivity() {
 
   return (
     <main className="bg-[#f7f8fb] bg-app min-h-screen">
-          <FloatingMedicalBg />
+      <FloatingMedicalBg />
       <div className="max-w-[1500px] mx-auto px-5 py-8">
         <div className="text-sm text-fg-muted mb-6">
-          Home <span className="mx-2">›</span> Shop By Activity
+          {t("common.home")} <span className="mx-2">›</span> {t("shopByActivity.breadcrumb")}
         </div>
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
           <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24">
             <div className="p-5 border-b flex justify-between items-center">
-              <h2 className="text-xl font-black">Filters</h2>
-              <button onClick={clearFilters} className="text-purple-600 text-sm font-bold">
-                Clear All
+              <h2 className="text-xl font-black">{t("shop.filterTitle")}</h2>
+              <button type="button" onClick={clearFilters} className="text-purple-600 text-sm font-bold">
+                {t("common.clearAll")}
               </button>
             </div>
 
             <div className="p-5 border-b">
               <div className="flex justify-between font-black text-sm mb-4">
-                ACTIVITY <ChevronDown size={16} />
+                {t("shopByActivity.activity")} <ChevronDown size={16} />
               </div>
 
               <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
                 <button
+                  type="button"
                   onClick={() => selectActivity("")}
                   className={`text-left px-3 py-2 rounded-xl font-semibold ${
                     !activeActivity ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
                   }`}
                 >
-                  All Activity Products
+                  {t("shopByActivity.allActivity")}
                 </button>
 
                 {activities.map((item) => (
                   <button
                     key={item.name}
+                    type="button"
                     onClick={() => selectActivity(item.name)}
                     className={`text-left px-3 py-2 rounded-xl font-semibold ${
                       activeActivity === item.name
@@ -158,13 +162,14 @@ export default function ShopByActivity() {
 
             <div className="p-5 border-b">
               <div className="flex justify-between font-black text-sm mb-4">
-                COLOR <ChevronDown size={16} />
+                {t("shop.color")} <ChevronDown size={16} />
               </div>
 
               <div className="grid gap-3">
                 {colors.map((color) => (
                   <button
                     key={color}
+                    type="button"
                     onClick={() =>
                       setSelectedColor(selectedColor === color ? "" : color)
                     }
@@ -201,13 +206,14 @@ export default function ShopByActivity() {
 
             <div className="p-5 border-b">
               <div className="flex justify-between font-black text-sm mb-4">
-                SIZE <ChevronDown size={16} />
+                {t("shop.size")} <ChevronDown size={16} />
               </div>
 
               <div className="flex flex-wrap gap-2">
                 {sizes.map((size) => (
                   <button
                     key={size}
+                    type="button"
                     onClick={() =>
                       setSelectedSize(selectedSize === size ? "" : size)
                     }
@@ -225,10 +231,10 @@ export default function ShopByActivity() {
 
             <div className="p-5">
               <div className="flex justify-between font-black text-sm mb-4">
-                PRICE <ChevronDown size={16} />
+                {t("shop.price")} <ChevronDown size={16} />
               </div>
 
-              <p className="text-sm mb-3">₹100 - ₹{maxPrice}</p>
+              <p className="text-sm mb-3">{t("shop.priceRange", { max: maxPrice })}</p>
               <input
                 type="range"
                 min="100"
@@ -245,46 +251,50 @@ export default function ShopByActivity() {
               <div>
                 <BrandPillBadgeRow className="mb-1.5" />
                 <h1 className="text-4xl font-black">
-                  Shop By Activity{" "}
+                  {t("shopByActivity.title")}{" "}
                   <span className="text-fg-muted/80 text-2xl">
                     ({filteredProducts.length})
                   </span>
                 </h1>
                 <p className="text-fg-muted mt-2">
                   {activeActivity
-                    ? `Products recommended for ${activeActivity}.`
-                    : "Only activity-based products are shown here."}
+                    ? t("shopByActivity.recommendedFor", { activity: activeActivity })
+                    : t("shopByActivity.showAllOnly")}
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
-                <label className="text-sm font-semibold">Sort By:</label>
+                <label className="text-sm font-semibold">{t("shop.sortBy")}</label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
                   className="bg-card border rounded-xl px-4 py-3 outline-none"
                 >
-                  <option value="popularity">Popularity</option>
-                  <option value="low">Price Low to High</option>
-                  <option value="high">Price High to Low</option>
-                  <option value="name">Name A-Z</option>
+                  <option value="popularity">{t("shop.sortPopularity")}</option>
+                  <option value="low">{t("shop.sortLow")}</option>
+                  <option value="high">{t("shop.sortHigh")}</option>
+                  <option value="name">{t("shop.sortName")}</option>
                 </select>
 
                 <div className="bg-card border rounded-xl p-1 flex">
                   <button
+                    type="button"
                     onClick={() => setView("grid")}
                     className={`p-3 rounded-lg ${
                       view === "grid" ? "bg-purple-100 text-purple-700" : ""
                     }`}
+                    aria-label={t("shop.gridView")}
                   >
                     <Grid2X2 size={18} />
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => setView("list")}
                     className={`p-3 rounded-lg ${
                       view === "list" ? "bg-purple-100 text-purple-700" : ""
                     }`}
+                    aria-label={t("shop.listView")}
                   >
                     <List size={18} />
                   </button>
@@ -300,9 +310,9 @@ export default function ShopByActivity() {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="bg-card rounded-2xl p-12 text-center shadow">
-                <h2 className="text-3xl font-black">No activity products found</h2>
+                <h2 className="text-3xl font-black">{t("shopByActivity.noProducts")}</h2>
                 <p className="text-fg-muted mt-2">
-                  Admin me product ke andar activity field fill karo.
+                  {t("shopByActivity.emptyHint")}
                 </p>
               </div>
             ) : (
@@ -336,7 +346,7 @@ export default function ShopByActivity() {
                       >
                         {save > 0 && (
                           <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
-                            Save {save}%
+                            {t("common.savePercent", { percent: save })}
                           </span>
                         )}
 
@@ -354,10 +364,12 @@ export default function ShopByActivity() {
                       </Link>
 
                       <button
+                        type="button"
                         onClick={() => toggleWishlist(product)}
                         className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center ${
                           isWishlisted(product) ? "text-red-500" : "text-purple-600"
                         }`}
+                        aria-label={t("shop.toggleWishlist")}
                       >
                         <Heart
                           size={18}
@@ -373,7 +385,7 @@ export default function ShopByActivity() {
                         </Link>
 
                         <p className="text-xs text-fg-muted mt-1">
-                          {product.activity || "Activity Support"}
+                          {product.activity || t("shopByActivity.activitySupport")}
                         </p>
 
                         <div className="mt-3">
@@ -393,14 +405,15 @@ export default function ShopByActivity() {
                         </div>
 
                         <p className="text-xs text-fg-muted mt-1">
-                          (Incl. of all Taxes)
+                          {t("common.inclTaxes")}
                         </p>
 
                         <button
+                          type="button"
                           onClick={() => addToCart(product)}
                           className="mt-5 w-full border border-purple-500 text-purple-600 rounded-lg py-3 font-black hover:bg-purple-600 hover:text-white transition flex items-center justify-center gap-2"
                         >
-                          <ShoppingCart size={18} /> Add to Cart
+                          <ShoppingCart size={18} /> {t("common.addToCart")}
                         </button>
                       </div>
                     </article>

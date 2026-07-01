@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   Shield,
@@ -27,7 +28,15 @@ const COVERAGE_ICONS = {
   headphones: Headphones,
 };
 
+const COVERAGE_I18N = {
+  shield: { title: "warranty.coverageLimited", desc: "warranty.coverageLimitedDesc" },
+  refresh: { title: "warranty.coverageReplacement", desc: "warranty.coverageReplacementDesc" },
+  check: { title: "warranty.coverageDefects", desc: "warranty.coverageDefectsDesc" },
+  headphones: { title: "warranty.coverageSupport", desc: "warranty.coverageSupportDesc" },
+};
+
 export default function WarrantyInformation() {
+  const { t } = useTranslation();
   const reduced = useReducedMotion();
   const [claim, setClaim] = useState({
     orderId: "",
@@ -51,9 +60,9 @@ export default function WarrantyInformation() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setImageUrl(res.data.url);
-      toast.success("Image uploaded");
+      toast.success(t("warranty.imageUploaded"));
     } catch {
-      toast.error("Image upload failed");
+      toast.error(t("warranty.imageFailed"));
     } finally {
       setUploading(false);
     }
@@ -67,10 +76,10 @@ export default function WarrantyInformation() {
       setClaimSuccess(true);
       setClaim({ orderId: "", product: "", issue: "", description: "" });
       setImageUrl("");
-      toast.success("Warranty claim submitted successfully");
+      toast.success(t("warranty.claimSuccess"));
       setTimeout(() => setClaimSuccess(false), 5000);
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Failed to submit claim");
+      toast.error(err.response?.data?.msg || t("warranty.submitFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -80,24 +89,22 @@ export default function WarrantyInformation() {
     <main className="support-page relative min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
-      {/* Hero */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeUpBlock>
               <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
-                WARRANTY & PROTECTION
+                {t("warranty.badge")}
               </p>
               <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
-              text="Warranty & Product Protection"
+              text={t("warranty.title")}
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
               <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
-                Designed to support your recovery with confidence. Our warranty covers
-                manufacturing defects and ensures you receive the quality care MGRM is known for.
+                {t("warranty.heroCopy")}
               </p>
             </FadeUpBlock>
           </div>
@@ -125,21 +132,21 @@ export default function WarrantyInformation() {
         </div>
       </section>
 
-      {/* Coverage Cards */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
         <PremiumStagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {WARRANTY_COVERAGE_CARDS.map((card) => {
             const Icon = COVERAGE_ICONS[card.icon] || Shield;
+            const i18n = COVERAGE_I18N[card.icon] || COVERAGE_I18N.shield;
             return (
-              <PremiumStaggerItem key={card.title}>
+              <PremiumStaggerItem key={card.icon}>
                 <div className="h-full card support-glass rounded-[28px] p-6 border border-edge shadow-lg hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)] transition duration-300">
                   <div
                     className={`warranty-coverage-icon w-12 h-12 rounded-2xl bg-gradient-to-br ${card.iconGradient} shadow-md grid place-items-center mb-4`}
                   >
                     <Icon className={`warranty-coverage-icon-svg ${card.iconColor}`} size={24} />
                   </div>
-                  <h3 className="font-black text-lg text-fg">{card.title}</h3>
-                  <p className="text-sm text-fg-muted mt-2 leading-relaxed">{card.description}</p>
+                  <h3 className="font-black text-lg text-fg">{t(i18n.title)}</h3>
+                  <p className="text-sm text-fg-muted mt-2 leading-relaxed">{t(i18n.desc)}</p>
                 </div>
               </PremiumStaggerItem>
             );
@@ -147,27 +154,24 @@ export default function WarrantyInformation() {
         </PremiumStagger>
       </section>
 
-      {/* Policy Details */}
       <section className="relative z-10 max-w-4xl mx-auto px-4 pb-20">
         <PremiumReveal>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-fg">Policy Details</h2>
+            <h2 className="text-3xl font-black text-fg">{t("warranty.policyDetails")}</h2>
             <p className="text-fg-muted mt-3">
-              Applicable to products sold in India, Nepal, Sri Lanka, Malaysia, and Singapore.
+              {t("warranty.policySubtitle")}
             </p>
           </div>
           <PolicyAccordion sections={WARRANTY_POLICY_SECTIONS} />
         </PremiumReveal>
       </section>
 
-      {/* Product Carousel */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
         <PremiumReveal>
           <WarrantyProductCarousel />
         </PremiumReveal>
       </section>
 
-      {/* Warranty Claim Form */}
       <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
         <PremiumReveal>
           <div className="card support-glass rounded-[36px] p-8 md:p-12 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
@@ -176,8 +180,8 @@ export default function WarrantyInformation() {
                 <FileText className="text-brand" size={24} />
               </div>
               <div>
-                <h2 className="text-2xl font-black text-fg">Warranty Claim</h2>
-                <p className="text-sm text-fg-muted">Submit a claim for review by our support team</p>
+                <h2 className="text-2xl font-black text-fg">{t("warranty.claimTitle")}</h2>
+                <p className="text-sm text-fg-muted">{t("warranty.claimSubtitle")}</p>
               </div>
             </div>
 
@@ -189,7 +193,7 @@ export default function WarrantyInformation() {
               >
                 <CheckCircle className="text-emerald-600 shrink-0" size={24} />
                 <p className="text-emerald-800 dark:text-emerald-300 font-bold">
-                  Your warranty claim has been submitted. We&apos;ll review it shortly.
+                  {t("warranty.claimBanner")}
                 </p>
               </motion.div>
             )}
@@ -198,14 +202,14 @@ export default function WarrantyInformation() {
               <div className="grid sm:grid-cols-2 gap-4">
                 <FloatingLabelField
                   id="claim-order"
-                  label="Order ID"
+                  label={t("common.orderId")}
                   value={claim.orderId}
                   onChange={(e) => setClaim({ ...claim, orderId: e.target.value })}
                   required
                 />
                 <FloatingLabelField
                   id="claim-product"
-                  label="Product"
+                  label={t("warranty.product")}
                   value={claim.product}
                   onChange={(e) => setClaim({ ...claim, product: e.target.value })}
                   required
@@ -213,14 +217,14 @@ export default function WarrantyInformation() {
               </div>
               <FloatingLabelField
                 id="claim-issue"
-                label="Issue"
+                label={t("warranty.issue")}
                 value={claim.issue}
                 onChange={(e) => setClaim({ ...claim, issue: e.target.value })}
                 required
               />
               <FloatingLabelField
                 id="claim-desc"
-                label="Description"
+                label={t("common.description")}
                 as="textarea"
                 rows={4}
                 value={claim.description}
@@ -230,16 +234,16 @@ export default function WarrantyInformation() {
 
               <div>
                 <label className="block text-sm font-bold text-fg-muted mb-2">
-                  Upload Image (optional)
+                  {t("common.uploadImage")}
                 </label>
                 <div className="flex flex-wrap items-center gap-4">
                   <label className="cursor-pointer inline-flex items-center gap-2 px-6 py-3 rounded-[22px] border border-dashed border-slate-300 dark:border-white/20 hover:border-cyan-500 transition">
                     <Upload size={18} />
-                    {uploading ? "Uploading..." : "Choose File"}
+                    {uploading ? t("common.uploading") : t("common.chooseFile")}
                     <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                   </label>
                   {imageUrl && (
-                    <img src={imageUrl} alt="Upload preview" className="h-16 w-16 rounded-xl object-cover" />
+                    <img src={imageUrl} alt="" className="h-16 w-16 rounded-xl object-cover" />
                   )}
                 </div>
               </div>
@@ -249,7 +253,7 @@ export default function WarrantyInformation() {
                 disabled={submitting}
                 className="px-8 py-4 rounded-[22px] btn-primary font-black disabled:opacity-60"
               >
-                {submitting ? "Submitting..." : "Submit Warranty Claim"}
+                {submitting ? t("common.submitting") : t("warranty.submitClaim")}
               </button>
             </form>
           </div>

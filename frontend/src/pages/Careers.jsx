@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Award,
   Briefcase,
@@ -31,20 +32,17 @@ import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
 const IMAGE_STRIP = [
   {
-    title: "Rehabilitation Innovation",
-    text: "Work with products that support recovery, mobility, and clinical outcomes.",
+    key: "innovation",
     image:
       "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    title: "Purpose Driven Work",
-    text: "Contribute to a mission centered on movement, dignity, and better care.",
+    key: "purpose",
     image:
       "https://images.unsplash.com/flagged/photo-1576485436509-a7d286952b65?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    title: "Patient Impact",
-    text: "Help families and clinicians access trusted orthopedic support solutions.",
+    key: "impact",
     image:
       "https://plus.unsplash.com/premium_photo-1770249818460-995d59b60df2?q=80&w=1101&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
@@ -156,6 +154,7 @@ const emptyApply = {
 };
 
 export default function Careers() {
+  const { t } = useTranslation();
   const { isBlue } = useTheme();
   const heroRef = useRef(null);
   const positionsRef = useRef(null);
@@ -202,7 +201,7 @@ export default function Careers() {
     e.preventDefault();
     if (!selectedJob) return;
     if (!resumeFile) {
-      toast.error("Please upload your resume");
+      toast.error(t("careers.uploadResume"));
       return;
     }
 
@@ -219,10 +218,10 @@ export default function Careers() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      toast.success("Application submitted successfully");
+      toast.success(t("careers.applicationSent"));
       setSelectedJob(null);
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Could not submit application");
+      toast.error(err.response?.data?.msg || t("careers.submitFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -253,18 +252,18 @@ export default function Careers() {
           <div className="max-w-lg md:max-w-md lg:max-w-lg text-left">
           <FadeUpBlock>
             <SectionLabel className="text-white/90 font-black tracking-[0.28em]">
-              CAREERS
+              {t("careers.badge")}
             </SectionLabel>
           </FadeUpBlock>
           <BrandPillBadgeRow tone="on-dark" className="mt-2" />
           <HeroHeading
-            text="Build Recovery With Us"
+            text={t("careers.heroTitle")}
             as="h1"
             className="mt-3 text-white max-w-4xl"
             animateOnMount
           />
           <FadeUpText className="mt-5 text-white/85 max-w-2xl text-base md:text-lg" delay={0.15} animateOnMount>
-            Join MGRM and help improve movement and recovery across India.
+            {t("careers.heroSubtitle")}
           </FadeUpText>
           <FadeUpBlock delay={0.25} className="mt-8 flex flex-col sm:flex-row gap-3 justify-start">
             <button
@@ -272,14 +271,14 @@ export default function Careers() {
               onClick={() => scrollTo(positionsRef)}
               className={`px-6 py-3 rounded-xl font-black ${primaryBtn}`}
             >
-              View Open Positions
+              {t("careers.openPositions")}
             </button>
             <button
               type="button"
               onClick={() => scrollTo(cultureRef)}
               className={`px-6 py-3 rounded-xl font-black ${outlineBtn}`}
             >
-              Explore Culture
+              {t("careers.exploreCulture")}
             </button>
           </FadeUpBlock>
           </div>
@@ -290,7 +289,7 @@ export default function Careers() {
       <section className="max-w-6xl mx-auto px-5 -mt-10 relative z-20 pb-16">
         <StaggerReveal className="grid md:grid-cols-3 gap-4">
           {IMAGE_STRIP.map((item, index) => (
-            <StaggerItem key={item.title}>
+            <StaggerItem key={item.key}>
               <article
                 className={`careers-card careers-strip-card rounded-3xl overflow-hidden group ${pastelBorder(index)}`}
               >
@@ -306,8 +305,8 @@ export default function Careers() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
                 </div>
                 <div className="careers-strip-body p-5">
-                  <h3 className="font-black text-fg">{item.title}</h3>
-                  <p className="text-sm text-fg-muted mt-2">{item.text}</p>
+                  <h3 className="font-black text-fg">{t(`careers.imageStrip.${item.key}.title`)}</h3>
+                  <p className="text-sm text-fg-muted mt-2">{t(`careers.imageStrip.${item.key}.text`)}</p>
                 </div>
               </article>
             </StaggerItem>
@@ -321,12 +320,12 @@ export default function Careers() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Briefcase className="text-brand" size={20} />
-              <p className="text-xs font-black uppercase tracking-widest text-brand">Opportunities</p>
+              <p className="text-xs font-black uppercase tracking-widest text-brand">{t("careers.opportunities")}</p>
             </div>
-            <h2 className="text-3xl md:text-4xl font-black text-fg">Open Positions</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-fg">{t("careers.openPositions")}</h2>
           </div>
           {!loading && (
-            <p className="text-sm text-fg-muted">{jobs.length} open role{jobs.length === 1 ? "" : "s"}</p>
+            <p className="text-sm text-fg-muted">{t("common.openRoles", { count: jobs.length })}</p>
           )}
         </FadeUpBlock>
 
@@ -338,9 +337,9 @@ export default function Careers() {
           </div>
         ) : jobs.length === 0 ? (
           <div className={`careers-card rounded-3xl p-10 text-center ${pastelBorder(0)}`}>
-            <p className="text-fg font-black text-lg">No open positions right now.</p>
+            <p className="text-fg font-black text-lg">{t("careers.noOpenings")}</p>
             <p className="text-fg-muted mt-2 text-sm max-w-md mx-auto">
-              Share your profile at careers@mgrm.com and we will reach out when a suitable role opens.
+              {t("careers.noOpeningsDetail")}
             </p>
           </div>
         ) : (
@@ -354,7 +353,7 @@ export default function Careers() {
                     <span className="careers-dept-badge inline-flex text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
                       {job.department}
                     </span>
-                    <span className="text-[11px] font-bold text-fg-muted">Competitive package</span>
+                    <span className="text-[11px] font-bold text-fg-muted">{t("common.competitivePackage")}</span>
                   </div>
                   <h3 className="text-xl md:text-2xl font-black text-fg mt-4">{job.title}</h3>
                   <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-fg-muted">
@@ -374,7 +373,7 @@ export default function Careers() {
                     onClick={() => openApply(job)}
                     className={`mt-6 w-full sm:w-auto px-6 py-3 rounded-xl font-black ${primaryBtn}`}
                   >
-                    Apply Now
+                    {t("careers.applyNow")}
                   </button>
                 </article>
               </StaggerItem>
@@ -386,9 +385,9 @@ export default function Careers() {
       {/* WHY JOIN */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">Why Join MGRM</h2>
+          <h2 className="text-3xl font-black text-fg">{t("careers.whyJoin")}</h2>
           <p className="text-fg-muted mt-2 max-w-2xl">
-            A premium healthcare brand where clinical trust, innovation, and people-first culture come together.
+            {t("careers.whyJoinIntro")}
           </p>
         </FadeUpBlock>
         <StaggerReveal className="grid md:grid-cols-3 gap-5">
@@ -402,8 +401,8 @@ export default function Careers() {
                   <div className="careers-icon-chip mb-4">
                     <Icon size={20} />
                   </div>
-                  <h3 className="font-black text-fg">{item.title}</h3>
-                  <p className="text-sm text-fg-muted mt-2 leading-relaxed">{item.text}</p>
+                  <h3 className="font-black text-fg">{t(`careers.whyJoinItems.${["purpose", "clinical", "growth"][index]}.title`)}</h3>
+                  <p className="text-sm text-fg-muted mt-2 leading-relaxed">{t(`careers.whyJoinItems.${["purpose", "clinical", "growth"][index]}.text`)}</p>
                 </div>
               </StaggerItem>
             );
@@ -414,7 +413,7 @@ export default function Careers() {
       {/* BENEFITS */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">Benefits</h2>
+          <h2 className="text-3xl font-black text-fg">{t("careers.benefits")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {BENEFITS.map((item, index) => {
@@ -425,8 +424,8 @@ export default function Careers() {
                   className={`careers-card careers-benefit-card rounded-3xl p-5 flex flex-col ${sectionPastel(BENEFITS_PASTELS, index)}`}
                 >
                   <Icon size={18} className="text-brand mb-3" />
-                  <p className="font-black text-fg">{item.title}</p>
-                  <p className="text-sm text-fg-muted mt-2">{item.text}</p>
+                  <p className="font-black text-fg">{t(`careers.benefitsItems.${["health", "learning", "flexible", "tools", "rewards", "culture"][index]}.title`)}</p>
+                  <p className="text-sm text-fg-muted mt-2">{t(`careers.benefitsItems.${["health", "learning", "flexible", "tools", "rewards", "culture"][index]}.text`)}</p>
                 </div>
               </StaggerItem>
             );
@@ -437,15 +436,15 @@ export default function Careers() {
       {/* PROCESS */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">Recruitment Process</h2>
+          <h2 className="text-3xl font-black text-fg">{t("careers.process")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {PROCESS.map((item, index) => (
             <StaggerItem key={item.step}>
               <div className={`careers-card rounded-3xl p-5 h-full ${sectionPastel(PROCESS_PASTELS, index)}`}>
                 <div className="careers-step-num mb-3">{index + 1}</div>
-                <p className="font-black text-fg text-lg">{item.step}</p>
-                <p className="text-sm text-fg-muted mt-2">{item.text}</p>
+                <p className="font-black text-fg text-lg">{t(`careers.processSteps.${["apply", "review", "interview", "offer"][index]}.step`)}</p>
+                <p className="text-sm text-fg-muted mt-2">{t(`careers.processSteps.${["apply", "review", "interview", "offer"][index]}.text`)}</p>
               </div>
             </StaggerItem>
           ))}
@@ -456,7 +455,7 @@ export default function Careers() {
       <section ref={cultureRef} className="max-w-6xl mx-auto px-5 pb-20 scroll-mt-24">
         <FadeUpBlock className="careers-section-head flex items-center gap-2 mb-8">
           <Users size={22} className="text-brand" />
-          <h2 className="text-3xl font-black text-fg">Employee Culture</h2>
+          <h2 className="text-3xl font-black text-fg">{t("careers.culture")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {CULTURE.map((item, index) => (
@@ -465,7 +464,7 @@ export default function Careers() {
                 className={`careers-card careers-culture-card rounded-3xl p-6 ${sectionPastel(CULTURE_PASTELS, index)}`}
               >
                 <HeartHandshake className="text-brand mb-3" size={22} />
-                <p className="font-black text-fg">{item.title}</p>
+                <p className="font-black text-fg">{t(`careers.cultureItems.${["patient", "precision", "team", "innovation"][index]}`)}</p>
               </div>
             </StaggerItem>
           ))}
@@ -475,19 +474,19 @@ export default function Careers() {
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-5 pb-16">
         <FadeUpBlock className="careers-section-head mb-6">
-          <h2 className="text-3xl font-black text-fg">FAQ</h2>
+          <h2 className="text-3xl font-black text-fg">{t("careers.faq")}</h2>
         </FadeUpBlock>
         <div className="space-y-4">
-          {FAQ.map((item, index) => (
+          {["timeline", "multiple", "india"].map((key, index) => (
             <details
-              key={item.q}
+              key={key}
               className={`careers-card careers-faq rounded-2xl p-5 group ${pastelBorder(index)}`}
             >
               <summary className="font-black text-fg cursor-pointer list-none flex justify-between gap-3">
-                {item.q}
+                {t(`careers.faqItems.${key}.q`)}
                 <span className="text-brand group-open:rotate-45 transition">+</span>
               </summary>
-              <p className="text-sm text-fg-muted mt-3 leading-relaxed">{item.a}</p>
+              <p className="text-sm text-fg-muted mt-3 leading-relaxed">{t(`careers.faqItems.${key}.a`)}</p>
             </details>
           ))}
         </div>
@@ -505,17 +504,17 @@ export default function Careers() {
           >
             <Sparkles className={`mx-auto mb-4 ${isBlue ? "text-[#FFD700]" : "text-brand"}`} size={28} />
             <h2 className={`text-2xl md:text-3xl font-black ${isBlue ? "text-white" : "text-fg"}`}>
-              Ready to build recovery with us?
+              {t("careers.readyCta")}
             </h2>
             <p className={`mt-3 max-w-xl mx-auto ${isBlue ? "text-white/75" : "text-fg-muted"}`}>
-              Explore current openings and take the next step in your healthcare career.
+              {t("careers.readyCtaSub")}
             </p>
             <button
               type="button"
               onClick={() => scrollTo(positionsRef)}
               className={`mt-6 px-7 py-3 rounded-xl font-black ${primaryBtn}`}
             >
-              See Opportunities
+              {t("careers.seeOpportunities")}
             </button>
           </div>
         </FadeUpBlock>
@@ -529,19 +528,19 @@ export default function Careers() {
               type="button"
               onClick={() => setSelectedJob(null)}
               className="absolute top-4 right-4 p-2 rounded-full hover:bg-surface-hover"
-              aria-label="Close application form"
+              aria-label={t("careers.closeApplication")}
             >
               <X size={18} />
             </button>
 
-            <p className="text-xs font-black uppercase tracking-widest text-brand">Application</p>
+            <p className="text-xs font-black uppercase tracking-widest text-brand">{t("careers.application")}</p>
             <h3 className="text-xl font-black text-fg mt-1">{selectedJob.title}</h3>
 
             <form onSubmit={submitApplication} className="mt-5 space-y-3">
               {[
-                ["name", "Full Name", "text"],
-                ["email", "Email", "email"],
-                ["phone", "Phone", "tel"],
+                ["name", t("common.fullName"), "text"],
+                ["email", t("common.email"), "email"],
+                ["phone", t("common.phone"), "tel"],
               ].map(([key, label, type]) => (
                 <input
                   key={key}
@@ -563,7 +562,7 @@ export default function Careers() {
               />
 
               <textarea
-                placeholder="Cover letter (optional)"
+                placeholder={t("careers.coverOptional")}
                 value={applyForm.coverLetter}
                 onChange={(e) => setApplyForm({ ...applyForm, coverLetter: e.target.value })}
                 className="w-full border border-edge rounded-xl px-4 py-3 bg-card text-fg min-h-24"
@@ -574,7 +573,7 @@ export default function Careers() {
                 disabled={submitting}
                 className={`w-full py-3 rounded-xl font-black disabled:opacity-60 ${primaryBtn}`}
               >
-                {submitting ? "Submitting..." : "Submit Application"}
+                {submitting ? t("common.submitting") : t("careers.submitApplication")}
               </button>
             </form>
           </div>

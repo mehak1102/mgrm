@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   User,
@@ -53,7 +54,7 @@ function SectionShell({ subtitle, dt, children }) {
   );
 }
 
-function CompactStoryCard({ story, onDelete, dt }) {
+function CompactStoryCard({ story, onDelete, dt, statusLabel, deleteLabel }) {
   return (
     <div className={`rounded-xl p-3 flex gap-3 ${dt.chip}`}>
       <div className="flex gap-1 shrink-0">
@@ -64,7 +65,7 @@ function CompactStoryCard({ story, onDelete, dt }) {
         <div className="flex justify-between gap-1">
           <p className={`text-xs font-black truncate ${dt.stat}`}>{story.title}</p>
           <span className={`text-[9px] font-bold shrink-0 ${dt.secondary || dt.muted}`}>
-            {STATUS_LABELS[story.status]}
+            {statusLabel(story.status)}
           </span>
         </div>
         <p className={`text-[10px] truncate ${dt.muted}`}>{story.productId?.name}</p>
@@ -73,7 +74,7 @@ function CompactStoryCard({ story, onDelete, dt }) {
         )}
         {["pending", "rejected"].includes(story.status) && (
           <button type="button" onClick={() => onDelete(story._id)} className="text-red-400 text-[10px] font-bold mt-1 flex items-center gap-1">
-            <Trash2 size={10} /> Delete
+            <Trash2 size={10} /> {deleteLabel}
           </button>
         )}
       </div>
@@ -82,6 +83,8 @@ function CompactStoryCard({ story, onDelete, dt }) {
 }
 
 export default function DashboardSections({ dt, onRoute, section }) {
+  const { t } = useTranslation();
+  const statusLabel = (status) => t(`dashboard.status.${status}`, { defaultValue: status });
   const { user } = useAuth();
   const { wishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
@@ -139,9 +142,9 @@ export default function DashboardSections({ dt, onRoute, section }) {
         profileImage: profile.profileImage,
       });
       setProfile(res.data);
-      toast.success("Profile updated");
+      toast.success(t("dashboard.toast.profileUpdated"));
     } catch {
-      toast.error("Could not save profile");
+      toast.error(t("dashboard.toast.profileSaveFailed"));
     }
   };
 
@@ -156,9 +159,9 @@ export default function DashboardSections({ dt, onRoute, section }) {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setProfile((p) => ({ ...p, profileImage: res.data.url }));
-      toast.success("Photo uploaded");
+      toast.success(t("dashboard.toast.photoUploaded"));
     } catch {
-      toast.error("Upload failed");
+      toast.error(t("dashboard.toast.uploadFailed"));
     } finally {
       setUploading(false);
     }
@@ -181,9 +184,9 @@ export default function DashboardSections({ dt, onRoute, section }) {
         pincode: "",
         isDefault: false,
       });
-      toast.success("Address added");
+      toast.success(t("dashboard.toast.addressAdded"));
     } catch {
-      toast.error("Could not add address");
+      toast.error(t("dashboard.toast.addressFailed"));
     }
   };
 
@@ -211,7 +214,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
       });
       setStoryForm((p) => ({ ...p, [field]: res.data.url }));
     } catch {
-      toast.error("Upload failed");
+      toast.error(t("dashboard.toast.uploadFailed"));
     } finally {
       setStoryUploading("");
     }
@@ -231,14 +234,14 @@ export default function DashboardSections({ dt, onRoute, section }) {
       });
       const res = await API.get("/recovery-stories/my");
       setMyStories(res.data.stories || []);
-      toast.success("Submitted for review");
+      toast.success(t("dashboard.toast.submittedReview"));
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Submit failed");
+      toast.error(err.response?.data?.msg || t("dashboard.toast.submitFailed"));
     }
   };
 
   const deleteStory = async (id) => {
-    if (!confirm("Delete?")) return;
+    if (!confirm(t("dashboard.confirmDelete"))) return;
     await API.delete(`/recovery-stories/${id}`);
     const res = await API.get("/recovery-stories/my");
     setMyStories(res.data.stories || []);
@@ -265,7 +268,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
             </div>
             <label className={`px-3 py-2 rounded-xl text-xs font-bold cursor-pointer ${dt.chip}`}>
               <Camera size={14} className="inline mr-1" />
-              {uploading ? "..." : "Photo"}
+              {uploading ? "..." : t("dashboard.grid.photo")}
               <input type="file" accept="image/*" className="hidden" onChange={uploadProfileImage} />
             </label>
           </div>
@@ -273,16 +276,16 @@ export default function DashboardSections({ dt, onRoute, section }) {
             className={inputClass}
             value={profile.name || ""}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-            placeholder="Name"
+            placeholder={t("common.name")}
           />
           <input
             className={inputClass}
             value={profile.phone || ""}
             onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-            placeholder="Phone"
+            placeholder={t("common.phone")}
           />
           <button type="submit" className="btn-primary px-5 py-2.5 rounded-xl text-sm font-black">
-            Save
+            {t("common.save")}
           </button>
         </form>
       </SectionShell>
@@ -292,12 +295,12 @@ export default function DashboardSections({ dt, onRoute, section }) {
       <SectionShell dt={dt}>
         <form onSubmit={submitAddress} className="grid sm:grid-cols-2 gap-2 mb-4">
           {[
-            ["label", "Label"],
-            ["name", "Name"],
-            ["phone", "Phone"],
-            ["line1", "Address"],
-            ["city", "City"],
-            ["pincode", "Pincode"],
+            ["label", t("dashboard.grid.label")],
+            ["name", t("common.name")],
+            ["phone", t("common.phone")],
+            ["line1", t("dashboard.grid.address")],
+            ["city", t("dashboard.grid.city")],
+            ["pincode", t("dashboard.grid.pincode")],
           ].map(([key, ph]) => (
             <input
               key={key}
@@ -309,7 +312,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
             />
           ))}
           <button type="submit" className="sm:col-span-2 btn-primary py-2.5 rounded-xl text-sm font-black">
-            Add Address
+            {t("dashboard.grid.addAddress")}
           </button>
         </form>
         <div className="space-y-2">
@@ -342,7 +345,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
       {section === "orders" && (
       <SectionShell dt={dt}>
         {orders.length === 0 ? (
-          <p className={`text-sm ${dt.muted}`}>No orders yet.</p>
+          <p className={`text-sm ${dt.muted}`}>{t("dashboard.grid.noOrders")}</p>
         ) : (
           <div className="space-y-3">
             {orders.map((order) => (
@@ -370,7 +373,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
       {section === "wishlist" && (
       <SectionShell dt={dt}>
         {validWishlist.length === 0 ? (
-          <p className={`text-sm ${dt.muted}`}>No saved products.</p>
+          <p className={`text-sm ${dt.muted}`}>{t("dashboard.grid.noWishlist")}</p>
         ) : (
           <div className="grid sm:grid-cols-2 gap-2">
             {validWishlist.map((p) => (
@@ -383,10 +386,10 @@ export default function DashboardSections({ dt, onRoute, section }) {
                   <span {...productPriceSaleProps(isBlue, "text-[10px] font-black")}>₹{p.discountPrice || p.price}</span>
                   <div className="flex gap-2 mt-1">
                     <button type="button" onClick={() => addToCart(p)} className={`text-[10px] font-bold px-1 rounded ${subtleActionClass}`}>
-                      <ShoppingCart size={10} className="inline" /> Add
+                      <ShoppingCart size={10} className="inline" /> {t("dashboard.addCartShort")}
                     </button>
                     <button type="button" onClick={() => toggleWishlist(p)} className="text-[10px] font-bold text-red-400">
-                      Remove
+                      {t("dashboard.removeWishlist")}
                     </button>
                   </div>
                 </div>
@@ -398,7 +401,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
       )}
 
       {section === "recovery" && (
-      <SectionShell subtitle="Compact submissions — reviewed before publish" dt={dt}>
+      <SectionShell subtitle={t("dashboard.recoveryCompactSubtitle")} dt={dt}>
         <form onSubmit={submitStory} className="space-y-3 mb-4 pb-4 border-b border-white/10">
           <select
             required
@@ -406,26 +409,26 @@ export default function DashboardSections({ dt, onRoute, section }) {
             onChange={(e) => setStoryForm({ ...storyForm, productId: e.target.value })}
             className={inputClass}
           >
-            <option value="">Product used</option>
+            <option value="">{t("dashboard.productUsed")}</option>
             {products.map((p) => (
               <option key={p._id} value={p._id}>{p.name}</option>
             ))}
           </select>
           <input
             required
-            placeholder="Title"
+            placeholder={t("dashboard.storyTitle")}
             value={storyForm.title}
             onChange={(e) => setStoryForm({ ...storyForm, title: e.target.value })}
             className={inputClass}
           />
           <input
-            placeholder="Recovery duration"
+            placeholder={t("dashboard.recoveryDuration")}
             value={storyForm.recoveryDuration}
             onChange={(e) => setStoryForm({ ...storyForm, recoveryDuration: e.target.value })}
             className={inputClass}
           />
           <textarea
-            placeholder="Your story"
+            placeholder={t("dashboard.yourStory")}
             value={storyForm.story}
             onChange={(e) => setStoryForm({ ...storyForm, story: e.target.value })}
             className={`${inputClass} min-h-20`}
@@ -434,7 +437,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
             {["beforeImage", "afterImage"].map((field) => (
               <label key={field} className={`px-3 py-2 rounded-xl text-xs font-bold cursor-pointer ${dt.chip}`}>
                 {storyUploading === field ? <Loader2 className="animate-spin inline" size={12} /> : null}
-                {field === "beforeImage" ? "Before" : "After"}
+                {field === "beforeImage" ? t("common.before") : t("common.after")}
                 <input type="file" accept="image/*" className="hidden" onChange={(e) => uploadStoryImage(e, field)} />
               </label>
             ))}
@@ -444,12 +447,19 @@ export default function DashboardSections({ dt, onRoute, section }) {
             disabled={!storyForm.beforeImage || !storyForm.afterImage}
             className="btn-primary px-5 py-2 rounded-xl text-sm font-black disabled:opacity-50"
           >
-            Submit
+            {t("dashboard.submitStory")}
           </button>
         </form>
         <div className="grid sm:grid-cols-2 gap-2">
           {myStories.map((story) => (
-            <CompactStoryCard key={story._id} story={story} onDelete={deleteStory} dt={dt} />
+            <CompactStoryCard
+              key={story._id}
+              story={story}
+              onDelete={deleteStory}
+              dt={dt}
+              statusLabel={statusLabel}
+              deleteLabel={t("common.delete")}
+            />
           ))}
         </div>
       </SectionShell>
@@ -459,12 +469,12 @@ export default function DashboardSections({ dt, onRoute, section }) {
       <SectionShell dt={dt}>
         <div className="flex items-center gap-3">
           <Settings size={18} className={dt.muted} />
-          <span className={`text-sm ${dt.muted}`}>Theme</span>
+          <span className={`text-sm ${dt.muted}`}>{t("dashboard.grid.theme")}</span>
           <ThemeSelector />
         </div>
         {user?.role === "admin" && (
           <Link to="/admin" className={`text-sm font-bold mt-4 inline-block ${dt.accent}`}>
-            Admin panel →
+            {t("dashboard.adminPanel")}
           </Link>
         )}
       </SectionShell>

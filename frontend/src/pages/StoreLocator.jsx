@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   MapPin,
@@ -28,6 +29,7 @@ import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import { useTheme } from "../context/ThemeContext";
 
 function MapIllustration() {
+  const { t } = useTranslation();
   const { isBlue } = useTheme();
   const reduced = useReducedMotion();
   const pins = [
@@ -47,7 +49,7 @@ function MapIllustration() {
       >
         <img
           src={STORE_MAP_BG}
-          alt="MGRM India network map"
+          alt={t("storeLocator.mapAlt")}
           className="support-map-illustration__image absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
             e.currentTarget.src = "/products/pain-area.png";
@@ -91,8 +93,8 @@ function MapIllustration() {
         ))}
 
         <div className={`absolute bottom-6 left-6 right-6 rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur-md px-4 py-3 border border-white/50 dark:border-white/10 support-map-badge${isBlue ? " z-20" : ""}`}>
-          <p className="text-xs font-bold text-brand tracking-widest support-map-badge-label">INDIA NETWORK</p>
-          <p className="text-sm font-black text-fg support-map-badge-title">{STORE_LOCATIONS.length} Locations</p>
+          <p className="text-xs font-bold text-brand tracking-widest support-map-badge-label">{t("storeLocator.badge")}</p>
+          <p className="text-sm font-black text-fg support-map-badge-title">{t("storeLocator.locations", { count: STORE_LOCATIONS.length })}</p>
         </div>
       </div>
     </div>
@@ -100,6 +102,7 @@ function MapIllustration() {
 }
 
 function StoreCard({ store, index }) {
+  const { t } = useTranslation();
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.address)}`;
   const accent = STORE_CARD_ACCENTS[index % STORE_CARD_ACCENTS.length];
 
@@ -152,7 +155,7 @@ function StoreCard({ store, index }) {
             className="inline-flex items-center gap-2 mt-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-600 text-white text-sm font-bold hover:shadow-lg transition"
           >
             <Navigation size={16} />
-            Get Directions
+            {t("storeLocator.directions")}
           </a>
         </div>
       </article>
@@ -161,6 +164,7 @@ function StoreCard({ store, index }) {
 }
 
 export default function StoreLocator() {
+  const { t } = useTranslation();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [productType, setProductType] = useState("");
@@ -200,10 +204,10 @@ export default function StoreLocator() {
       await API.post("/store-feedback", feedback);
       setSuccess(true);
       setFeedback({ name: "", email: "", phone: "", subject: "", message: "" });
-      toast.success("Thank you! Your feedback has been submitted.");
+      toast.success(t("storeLocator.feedbackToast"));
       setTimeout(() => setSuccess(false), 4000);
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Failed to submit feedback");
+      toast.error(err.response?.data?.msg || t("storeLocator.feedbackFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -213,28 +217,33 @@ export default function StoreLocator() {
     <main className="support-page relative min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
-      {/* Hero */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <FadeUpBlock>
               <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
-                STORE LOCATOR
+                {t("storeLocator.pageBadge")}
               </p>
               <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
-              text="Find MGRM Near You"
+              text={t("storeLocator.title")}
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
               <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
-                Locate trusted MGRM stores, clinics and distribution centers across India.
-                Contact your nearest office or email{" "}
-                <a href="mailto:contact@mgrmmedicare.com" className="text-brand font-bold hover:underline">
-                  contact@mgrmmedicare.com
-                </a>{" "}
-                to find retail stores near you.
+                <Trans
+                  i18nKey="storeLocator.heroCopy"
+                  values={{ email: "contact@mgrmmedicare.com" }}
+                  components={{
+                    email: (
+                      <a
+                        href="mailto:contact@mgrmmedicare.com"
+                        className="text-brand font-bold hover:underline"
+                      />
+                    ),
+                  }}
+                />
               </p>
             </FadeUpBlock>
             <FadeUpBlock delay={0.25}>
@@ -243,7 +252,7 @@ export default function StoreLocator() {
                 onClick={() => storesRef.current?.scrollIntoView({ behavior: "smooth" })}
                 className="mt-8 px-8 py-4 rounded-[22px] btn-primary font-black shadow-lg hover:shadow-xl hover:scale-[1.02] transition duration-250"
               >
-                Find Nearby
+                {t("storeLocator.findNearby")}
               </button>
             </FadeUpBlock>
           </div>
@@ -253,13 +262,12 @@ export default function StoreLocator() {
         </div>
       </section>
 
-      {/* Search */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
         <PremiumReveal>
           <div className="card support-glass rounded-[36px] p-8 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
             <h2 className="text-2xl font-black text-fg mb-6 flex items-center gap-2">
               <Search className="text-brand" size={24} />
-              Search Stores
+              {t("storeLocator.searchStores")}
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
               <select
@@ -267,7 +275,7 @@ export default function StoreLocator() {
                 onChange={(e) => { setCity(e.target.value); setSearched(true); }}
                 className="theme-panel rounded-[22px] px-5 py-4 text-fg"
               >
-                <option value="">All Cities</option>
+                <option value="">{t("storeLocator.allCities")}</option>
                 {STORE_CITIES.map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
@@ -277,7 +285,7 @@ export default function StoreLocator() {
                 onChange={(e) => { setState(e.target.value); setSearched(true); }}
                 className="theme-panel rounded-[22px] px-5 py-4 text-fg"
               >
-                <option value="">All States</option>
+                <option value="">{t("storeLocator.allStates")}</option>
                 {INDIAN_STATES.map((s) => (
                   <option key={s} value={s}>{s}</option>
                 ))}
@@ -287,9 +295,9 @@ export default function StoreLocator() {
                 onChange={(e) => { setProductType(e.target.value); setSearched(true); }}
                 className="theme-panel rounded-[22px] px-5 py-4 text-fg"
               >
-                <option value="">All Product Types</option>
-                {PRODUCT_TYPES.map((t) => (
-                  <option key={t} value={t}>{t}</option>
+                <option value="">{t("storeLocator.allTypes")}</option>
+                {PRODUCT_TYPES.map((pt) => (
+                  <option key={pt} value={pt}>{pt}</option>
                 ))}
               </select>
             </div>
@@ -298,25 +306,27 @@ export default function StoreLocator() {
               onClick={handleSearch}
               className="mt-6 px-8 py-4 rounded-[22px] btn-primary font-black"
             >
-              Search Stores
+              {t("storeLocator.searchStores")}
             </button>
             {searched && (
               <p className="mt-4 text-sm text-fg-muted">
-                Showing {filteredStores.length} location{filteredStores.length !== 1 ? "s" : ""}
+                {t("storeLocator.showing", {
+                  count: filteredStores.length,
+                  suffix: filteredStores.length !== 1 ? "s" : "",
+                })}
               </p>
             )}
           </div>
         </PremiumReveal>
       </section>
 
-      {/* Store Cards */}
       <section ref={storesRef} className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
         <h2 className="text-3xl font-black text-fg mb-8">
-          Our Locations
+          {t("storeLocator.ourLocations")}
         </h2>
         {filteredStores.length === 0 ? (
           <div className="card rounded-[32px] p-12 text-center text-fg-muted">
-            No stores match your filters. Try adjusting city, state, or product type.
+            {t("storeLocator.noLocations")}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -327,21 +337,19 @@ export default function StoreLocator() {
         )}
       </section>
 
-      {/* Feedback */}
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-24">
         <PremiumReveal>
           <div className="card support-glass rounded-[36px] p-8 md:p-12 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
             <div className="grid lg:grid-cols-2 gap-12">
               <div>
                 <p className="text-xs font-bold tracking-[0.2em] text-brand mb-3">
-                  CONTACT SUPPORT
+                  {t("storeLocator.contactBadge")}
                 </p>
                 <h2 className="text-3xl font-black text-fg">
-                  Share Your Feedback
+                  {t("storeLocator.feedbackTitle")}
                 </h2>
                 <p className="text-fg-muted mt-4 leading-relaxed">
-                  Have suggestions about our stores or need help finding a location?
-                  We&apos;d love to hear from you.
+                  {t("storeLocator.feedbackCopy")}
                 </p>
               </div>
 
@@ -353,22 +361,22 @@ export default function StoreLocator() {
                     className="absolute inset-0 z-10 rounded-[28px] bg-emerald-500/95 backdrop-blur-md grid place-items-center text-white p-8 text-center"
                   >
                     <CheckCircle2 size={56} className="mb-4" />
-                    <p className="text-xl font-black">Thank You!</p>
-                    <p className="mt-2 opacity-90">Your feedback has been received.</p>
+                    <p className="text-xl font-black">{t("common.thankYou")}</p>
+                    <p className="mt-2 opacity-90">{t("storeLocator.feedbackSuccess")}</p>
                   </motion.div>
                 )}
                 <form onSubmit={submitFeedback} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <FloatingLabelField
                       id="fb-name"
-                      label="Name"
+                      label={t("common.name")}
                       value={feedback.name}
                       onChange={(e) => setFeedback({ ...feedback, name: e.target.value })}
                       required
                     />
                     <FloatingLabelField
                       id="fb-email"
-                      label="Email"
+                      label={t("common.email")}
                       type="email"
                       value={feedback.email}
                       onChange={(e) => setFeedback({ ...feedback, email: e.target.value })}
@@ -377,20 +385,20 @@ export default function StoreLocator() {
                   </div>
                   <FloatingLabelField
                     id="fb-phone"
-                    label="Phone"
+                    label={t("common.phone")}
                     type="tel"
                     value={feedback.phone}
                     onChange={(e) => setFeedback({ ...feedback, phone: e.target.value })}
                   />
                   <FloatingLabelField
                     id="fb-subject"
-                    label="Subject"
+                    label={t("common.subject")}
                     value={feedback.subject}
                     onChange={(e) => setFeedback({ ...feedback, subject: e.target.value })}
                   />
                   <FloatingLabelField
                     id="fb-message"
-                    label="Message"
+                    label={t("common.message")}
                     as="textarea"
                     rows={4}
                     value={feedback.message}
@@ -402,10 +410,10 @@ export default function StoreLocator() {
                     disabled={submitting}
                     className="w-full sm:w-auto px-8 py-4 rounded-[22px] btn-primary font-black disabled:opacity-60 flex items-center justify-center gap-2"
                   >
-                    {submitting ? "Submitting..." : (
+                    {submitting ? t("common.submitting") : (
                       <>
                         <Sparkles size={18} />
-                        Submit Feedback
+                        {t("storeLocator.submitFeedback")}
                       </>
                     )}
                   </button>

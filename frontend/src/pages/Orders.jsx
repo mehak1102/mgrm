@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Package,
   Truck,
@@ -34,8 +35,14 @@ const statusIcon = {
 };
 
 export default function Orders() {
+  const { t } = useTranslation();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const translateStatus = (status) => {
+    const normalized = (status || "Placed").toLowerCase();
+    return t(`orders.${normalized}`, status || "Placed");
+  };
 
   const fetchOrders = async () => {
     try {
@@ -60,11 +67,11 @@ export default function Orders() {
       <div className="relative z-10 max-w-7xl mx-auto px-5 py-12">
         <section className="mb-10">
           <p className="text-purple-700 font-black tracking-widest text-sm">
-            PURCHASE HISTORY
+            {t("orders.badge")}
           </p>
-          <h1 className="text-5xl font-black mt-2 text-fg">My Orders</h1>
+          <h1 className="text-5xl font-black mt-2 text-fg">{t("orders.title")}</h1>
           <p className="text-gray-500 dark:text-zinc-400 mt-2">
-            Track your orders, items, payment amount and delivery status.
+            {t("orders.subtitle")}
           </p>
         </section>
 
@@ -80,15 +87,15 @@ export default function Orders() {
         ) : orders.length === 0 ? (
           <div className="bg-card dark:bg-zinc-900 rounded-[34px] p-12 text-center shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
             <ShoppingBag className="mx-auto text-purple-500" size={56} />
-            <h2 className="text-3xl font-black mt-4">No orders yet</h2>
+            <h2 className="text-3xl font-black mt-4">{t("orders.emptyTitle")}</h2>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
-              Start shopping and your orders will appear here.
+              {t("orders.emptyCopy")}
             </p>
             <Link
               to="/shop"
               className="inline-flex items-center gap-2 mt-6 bg-purple-700 text-white px-7 py-4 rounded-full font-black hover:bg-purple-800 transition"
             >
-              Browse Products <ArrowRight size={18} />
+              {t("common.browseProducts")} <ArrowRight size={18} />
             </Link>
           </div>
         ) : (
@@ -104,7 +111,7 @@ export default function Orders() {
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-5 border-b pb-5">
                     <div>
                       <p className="text-xs text-gray-500 dark:text-zinc-400/80 font-bold">
-                        ORDER ID
+                        {t("orders.orderId")}
                       </p>
                       <h2 className="text-xl md:text-2xl font-black mt-1 text-fg">
                         #{order._id}
@@ -123,7 +130,7 @@ export default function Orders() {
                         }`}
                       >
                         <StatusIcon size={17} />
-                        {order.status || "Placed"}
+                        {translateStatus(order.status)}
                       </span>
 
                       <span className="bg-slate-950 text-white px-5 py-2 rounded-full font-black">
@@ -150,8 +157,8 @@ export default function Orders() {
                         <div className="flex-1">
                           <h3 className="font-black text-fg">{item.name}</h3>
                           <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-                            Qty: {item.qty}{" "}
-                            {item.selectedSize ? `• Size: ${item.selectedSize}` : ""}
+                            {t("common.qty")} {item.qty}{" "}
+                            {item.selectedSize ? `• ${t("common.size")} ${item.selectedSize}` : ""}
                           </p>
                         </div>
 
@@ -165,19 +172,19 @@ export default function Orders() {
                   <div className="mt-6 grid md:grid-cols-3 gap-4">
                     <div className="rounded-3xl bg-purple-50 dark:bg-purple-500/15 border border-purple-100 dark:border-purple-400/20 p-5 transition-colors duration-300">
                       <p className="text-sm text-purple-700 dark:text-purple-300 font-black">
-                        CUSTOMER
+                        {t("orders.customer")}
                       </p>
                       <p className="font-black mt-1 text-fg">
-                        {order.userName || "Customer"}
+                        {order.userName || t("orders.customerLabel")}
                       </p>
                       <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                        {order.userEmail || "No email"}
+                        {order.userEmail || t("orders.noEmail")}
                       </p>
                     </div>
 
                     <div className="rounded-3xl bg-cyan-50 dark:bg-cyan-500/15 border border-cyan-100 dark:border-cyan-400/20 p-5 transition-colors duration-300">
   <p className="text-sm text-cyan-700 text-brand font-black">
-    PAYMENT
+    {t("orders.payment")}
   </p>
 
   <p className="font-black mt-1 text-fg">
@@ -185,25 +192,25 @@ export default function Orders() {
   </p>
 
   <p className="text-gray-500 dark:text-zinc-400 text-sm">
-    Status: {order.paymentStatus || "Paid"}
+    {t("orders.status")} {order.paymentStatus || "Paid"}
   </p>
 
   <p className="text-gray-500 dark:text-zinc-400 text-sm">
-    Total paid: ₹{order.total || 0}
+    {t("orders.totalPaid")} ₹{order.total || 0}
   </p>
 </div>
 
                     <div className="rounded-3xl bg-green-50 dark:bg-emerald-500/15 border border-green-100 dark:border-emerald-400/20 p-5 transition-colors duration-300">
                       <p className="text-sm text-green-700 dark:text-emerald-300 font-black">
-                        DELIVERY
+                        {t("orders.delivery")}
                       </p>
                       <p className="font-black mt-1 text-fg">
                         {order.status === "Delivered"
-                          ? "Delivered"
-                          : "In progress"}
+                          ? t("orders.delivered")
+                          : t("orders.inProgress")}
                       </p>
                       <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                        We will update status soon.
+                        {t("orders.statusUpdate")}
                       </p>
                     </div>
                   </div>

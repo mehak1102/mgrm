@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Eye } from "lucide-react";
 import API from "../../api";
@@ -38,6 +39,7 @@ function mergeApiProducts(categories, apiByCategory) {
 }
 
 export default function HomeBestSellersSection() {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
   const [categories, setCategories] = useState(bestSellerCategories);
   const [activeId, setActiveId] = useState(bestSellerCategories[0].id);
@@ -93,9 +95,9 @@ export default function HomeBestSellersSection() {
 
       <div className="relative mb-12 sm:mb-14 px-2">
         <PremiumWordHeader
-          label="BEST SELLERS"
-          title="Most Trusted Supports"
-          description="Hover a category to explore flagship supports — curated for daily recovery and clinical confidence."
+          label={t("home.bestSellers")}
+          title={t("home.mostTrusted")}
+          description={t("home.mostTrustedDesc")}
           style="slideLeft"
         />
       </div>
@@ -104,7 +106,7 @@ export default function HomeBestSellersSection() {
         {/* Category navigation */}
         <nav
           className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory lg:snap-none scrollbar-none"
-          aria-label="Support categories"
+          aria-label={t("homeSections.supportCategories")}
         >
           {categories.map((cat) => {
             const isActive = cat.id === activeId;
@@ -157,7 +159,7 @@ export default function HomeBestSellersSection() {
                   ].join(" ")}
                   style={{ color: cat.color }}
                 >
-                  {cat.products.length} picks
+                  {t("homeSections.bestSellersPicks", { count: cat.products.length })}
                 </span>
               </button>
             );
@@ -213,7 +215,7 @@ export default function HomeBestSellersSection() {
                     className="text-xs font-black uppercase tracking-[0.28em] mb-4"
                     style={{ color: activeCategory.color }}
                   >
-                    {activeCategory.label} Support
+                    {t("homeSections.bestSellersSupport", { category: activeCategory.label })}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-5">
@@ -250,14 +252,14 @@ export default function HomeBestSellersSection() {
                       className="inline-flex items-center gap-2 rounded-full bg-slate-900 dark:bg-zinc-100 [data-theme=blue]:bg-[var(--accent-primary)] text-white dark:text-zinc-900 [data-theme=blue]:text-white px-6 py-3.5 font-black text-sm shadow-[0_16px_40px_rgba(15,23,42,0.18)] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-400"
                     >
                       <Eye size={18} />
-                      Quick View
+                      {t("common.quickView")}
                     </Link>
                     <Link
                       to={`/shop?category=${encodeURIComponent(activeCategory.query)}`}
                       onClick={() => trackCategoryClick(activeCategory.query)}
                       className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/15 [data-theme=blue]:border-[var(--border-color)] bg-white/80 dark:bg-zinc-800/80 [data-theme=blue]:bg-[var(--card-elevated)] text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)] px-6 py-3.5 font-black text-sm hover:bg-cyan-50 dark:hover:bg-zinc-700 [data-theme=blue]:hover:bg-[var(--card-hover)] transition-colors duration-400"
                     >
-                      View Collection
+                      {t("homeSections.viewCollection")}
                       <ArrowRight size={18} />
                     </Link>
                   </div>

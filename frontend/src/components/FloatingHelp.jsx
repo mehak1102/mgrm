@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowUp } from "lucide-react";
 import Logo3D from "./Logo3D";
 
@@ -26,6 +27,7 @@ const whatsappNumber =
 const whatsappHref = `https://wa.me/${whatsappNumber}`;
 
 export default function FloatingHelp() {
+  const { t } = useTranslation();
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function FloatingHelp() {
         target="_blank"
         rel="noopener noreferrer"
         className="floating-help-whatsapp flex w-14 h-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(37,211,102,0.45)] transition hover:scale-110 hover:bg-[#20bd5a]"
-        aria-label="Chat on WhatsApp"
+        aria-label={t("global.chatWhatsapp")}
       >
         <WhatsAppIcon />
       </a>
@@ -69,7 +71,7 @@ export default function FloatingHelp() {
           type="button"
           onClick={scrollTop}
           className="w-12 h-12 shrink-0 rounded-full bg-card dark:bg-zinc-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg hover:scale-110 transition flex items-center justify-center"
-          aria-label="Back to top"
+          aria-label={t("global.backToTop")}
         >
           <ArrowUp size={20} />
         </button>

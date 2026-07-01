@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -10,11 +11,6 @@ import "./RecommendedByPhysiotherapist.css";
 const TherapyChapter = lazy(() => import("../components/recommendation/TherapySection"));
 
 const EASE = [0.16, 1, 0.3, 1];
-const HERO_STATS = [
-  { value: "12", label: "Specialties" },
-  { value: "15", label: "Body regions" },
-  { value: "Live", label: "Inventory" },
-];
 
 const headlineStagger = {
   hidden: {},
@@ -42,6 +38,12 @@ function ChapterFallback() {
 }
 
 function TherapyHero({ reduce, onBegin }) {
+  const { t } = useTranslation();
+  const heroStats = [
+    { value: "12", label: t("therapy.specialties") },
+    { value: "15", label: t("therapy.bodyRegions") },
+    { value: "Live", label: t("therapy.liveInventory") },
+  ];
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -75,7 +77,7 @@ function TherapyHero({ reduce, onBegin }) {
               >
                 <span className="therapy-hero-badge-dot h-1.5 w-1.5 rounded-full" aria-hidden />
                 <span className="text-[0.58rem] font-bold uppercase tracking-[0.28em]">
-                  MGRM Clinical Atelier
+                  {t("therapy.badge")}
                 </span>
               </motion.div>
 
@@ -88,13 +90,13 @@ function TherapyHero({ reduce, onBegin }) {
                 className="therapy-text-primary mt-6 text-[clamp(2.5rem,6.5vw,4.75rem)] font-extralight leading-[0.92] tracking-[-0.035em]"
               >
                 <motion.span variants={reduce ? undefined : headlineWord} className="block">
-                  Recommended
+                  {t("therapy.recommended")}
                 </motion.span>
                 <motion.span
                   variants={reduce ? undefined : headlineWord}
                   className="therapy-hero-title-accent mt-1 block font-light"
                 >
-                  By Physiotherapist
+                  {t("therapy.byPhysio")}
                 </motion.span>
               </motion.h1>
 
@@ -104,8 +106,7 @@ function TherapyHero({ reduce, onBegin }) {
                 transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
                 className="therapy-text-secondary mt-6 max-w-xl text-sm leading-7 sm:text-base sm:leading-8"
               >
-                A specialist-led journey through recovery supports — mapped by body region,
-                curated by physiotherapy discipline, powered by live product data.
+                {t("therapy.heroCopy")}
               </motion.p>
 
               <motion.ul
@@ -114,7 +115,7 @@ function TherapyHero({ reduce, onBegin }) {
                 transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
                 className="therapy-hero-stats mt-8 grid grid-cols-3 gap-3 sm:max-w-md sm:gap-4"
               >
-                {HERO_STATS.map((stat) => (
+                {heroStats.map((stat) => (
                   <li key={stat.label} className="therapy-hero-stat rounded-2xl px-3 py-3 sm:px-4 sm:py-4">
                     <p className="therapy-text-primary text-xl font-light tracking-tight sm:text-2xl">
                       {stat.value}
@@ -137,14 +138,14 @@ function TherapyHero({ reduce, onBegin }) {
                   onClick={() => onBegin(therapySections[0].id)}
                   className="therapy-hero-cta-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  Explore specialties
+                  {t("therapy.exploreSpecialties")}
                   <ArrowDown size={15} strokeWidth={2.25} />
                 </button>
                 <Link
                   to="/shop"
                   className="therapy-hero-cta-secondary inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors"
                 >
-                  Browse shop
+                  {t("therapy.browseShop")}
                   <ArrowRight size={14} />
                 </Link>
               </motion.div>
@@ -161,7 +162,7 @@ function TherapyHero({ reduce, onBegin }) {
                 <TherapyAnatomyVisual
                   src="/cardiology/recomm.png"
                   accent="#ef4444"
-                  alt="Clinical rehabilitation focus"
+                  alt={t("therapy.visualAlt")}
                 />
               </div>
             </motion.div>
@@ -174,7 +175,7 @@ function TherapyHero({ reduce, onBegin }) {
             className="therapy-hero-spectrum mt-10 sm:mt-12"
           >
             <p className="therapy-text-muted mb-3 text-[0.58rem] font-semibold uppercase tracking-[0.22em]">
-              Specialty spectrum
+              {t("therapy.specialtySpectrum")}
             </p>
             <div className="flex h-2 overflow-hidden rounded-full">
               {therapySections.map((section) => (
@@ -185,7 +186,7 @@ function TherapyHero({ reduce, onBegin }) {
                   onClick={() => onBegin(section.id)}
                   className="therapy-hero-spectrum-seg min-w-0 flex-1 transition-opacity hover:opacity-100"
                   style={{ backgroundColor: section.accent, opacity: 0.85 }}
-                  aria-label={`Jump to ${section.title}`}
+                  aria-label={t("therapy.jumpTo", { title: section.title })}
                 />
               ))}
             </div>
@@ -201,7 +202,7 @@ function TherapyHero({ reduce, onBegin }) {
                   {section.shortLabel}
                 </button>
               ))}
-              <span className="therapy-text-muted text-[0.58rem]">+{therapySections.length - 6} more</span>
+              <span className="therapy-text-muted text-[0.58rem]">{t("therapy.more", { count: therapySections.length - 6 })}</span>
             </div>
           </motion.div>
         </div>
@@ -211,10 +212,10 @@ function TherapyHero({ reduce, onBegin }) {
         type="button"
         onClick={() => onBegin(therapySections[0].id)}
         className="therapy-scroll-hint therapy-hero-scroll-btn absolute bottom-6 left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex lg:left-[calc(50%+3.75rem)]"
-        aria-label="Scroll to specialties"
+        aria-label={t("therapy.scrollToSpecialties")}
       >
         <span className="therapy-text-muted text-[0.58rem] font-semibold uppercase tracking-[0.2em]">
-          Scroll
+          {t("therapy.scroll")}
         </span>
         <ArrowDown size={16} className="therapy-text-muted opacity-60" />
       </button>
@@ -223,8 +224,9 @@ function TherapyHero({ reduce, onBegin }) {
 }
 
 function TherapyNavRail({ activeId, onNavigate }) {
+  const { t } = useTranslation();
   return (
-    <nav className="therapy-nav-rail" aria-label="Therapy specialties">
+    <nav className="therapy-nav-rail" aria-label={t("therapy.physioSpecialty")}>
       {therapySections.map((section) => {
         const isActive = activeId === section.id;
         return (
@@ -246,8 +248,9 @@ function TherapyNavRail({ activeId, onNavigate }) {
 }
 
 function TherapyMobileNav({ activeId, onNavigate }) {
+  const { t } = useTranslation();
   return (
-    <div className="therapy-mobile-nav" role="tablist" aria-label="Therapy specialties">
+    <div className="therapy-mobile-nav" role="tablist" aria-label={t("therapy.physioSpecialty")}>
       {therapySections.map((section) => (
         <button
           key={section.id}
@@ -266,6 +269,7 @@ function TherapyMobileNav({ activeId, onNavigate }) {
 }
 
 export default function RecommendedByPhysiotherapist() {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(therapySections[0].id);
   const observerRef = useRef(null);
@@ -317,10 +321,10 @@ export default function RecommendedByPhysiotherapist() {
 
       <footer className="therapy-snap therapy-footer px-5 py-20 text-center sm:px-8 lg:pl-[7.5rem]">
         <p className="therapy-text-muted text-[0.62rem] font-semibold uppercase tracking-[0.28em]">
-          End of collection · {therapySections.length} specialties
+          {t("therapy.endCollection", { count: therapySections.length })}
         </p>
         <p className="therapy-text-secondary mx-auto mt-4 max-w-md text-sm leading-7">
-          All fifteen body categories mapped. Live inventory only — no placeholders.
+          {t("therapy.allMapped")}
         </p>
         <p className="therapy-text-primary mt-8 text-2xl font-extralight tracking-[0.2em] opacity-50">
           MGRM

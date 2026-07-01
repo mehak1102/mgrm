@@ -1,19 +1,24 @@
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
 
 export default function RecommendationGrid({
-  title = "Recommended Products",
+  title,
   subtitle = "",
   products = [],
   loading = false,
-  emptyText = "No recommendations available right now.",
+  emptyText,
   className = "",
 }) {
+  const { t } = useTranslation();
+  const resolvedTitle = title ?? t("global.recommendedProducts");
+  const resolvedEmptyText = emptyText ?? t("global.noRecommendations");
+
   return (
     <section className={className}>
       <div className="mb-8">
         <h2 className="text-4xl sm:text-[58px] font-black mt-2 text-fg">
-          {title}
+          {resolvedTitle}
         </h2>
         {!!subtitle && (
           <p className="text-gray-500 dark:text-zinc-400 mt-3 max-w-xl">{subtitle}</p>
@@ -31,7 +36,7 @@ export default function RecommendationGrid({
         </div>
       ) : products.length === 0 ? (
         <div className="bg-card dark:bg-zinc-900 rounded-3xl p-10 text-center shadow">
-          <p className="text-gray-500 dark:text-zinc-400">{emptyText}</p>
+          <p className="text-gray-500 dark:text-zinc-400">{resolvedEmptyText}</p>
         </div>
       ) : (
         <motion.div

@@ -1,17 +1,6 @@
-const DELIVERY_MESSAGES = [
-  {
-    text: "Fast Dispatch Available",
-    note: "Delivery time varies by location.",
-  },
-  {
-    text: "Ships Quickly Across India",
-    note: "Delivery time varies by location.",
-  },
-  {
-    text: "Express Delivery Available*",
-    note: "Delivery time varies by location.",
-  },
-];
+import i18n from "../i18n";
+
+const DELIVERY_KEYS = ["fast", "ships", "express"];
 
 function hashSeed(seed) {
   const str = String(seed || "mgrm");
@@ -24,6 +13,10 @@ function hashSeed(seed) {
 }
 
 export function getDeliveryTrustMessage(seed = "") {
-  const index = hashSeed(seed) % DELIVERY_MESSAGES.length;
-  return DELIVERY_MESSAGES[index];
+  const index = hashSeed(seed) % DELIVERY_KEYS.length;
+  const key = DELIVERY_KEYS[index];
+  return {
+    text: i18n.t(`delivery.${key}.text`),
+    note: i18n.t(`delivery.${key}.note`),
+  };
 }

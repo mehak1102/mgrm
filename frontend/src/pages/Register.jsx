@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import API from "../api";
@@ -13,6 +14,7 @@ import {
 } from "../components/typography/TypographyMotion";
 
 export default function Register() {
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const navigate = useNavigate();
@@ -27,12 +29,12 @@ export default function Register() {
 
     try {
       await API.post("/auth/register", form);
-      toast.success("Account created successfully");
+      toast.success(t("auth.registerSuccess"));
       // alert("Account created. Please login.");
       navigate("/login");
     } catch (err) {
       // alert(err.response?.data?.msg || "Register failed");
-      toast.error(err.response?.data?.msg || "Register failed");
+      toast.error(err.response?.data?.msg || t("auth.registerFailed"));
     } finally {
       setLoading(false);
     }
@@ -74,15 +76,15 @@ export default function Register() {
           </Link>
 
           <SectionLabel className="text-purple-700 dark:text-cyan-400 font-black tracking-widest text-sm transition-colors duration-300">
-            CREATE ACCOUNT
+            {t("auth.createAccountBadge")}
           </SectionLabel>
           <SectionHeading
-            text="Join MGRM"
+            text={t("auth.joinMgrm")}
             as="h1"
             className="text-5xl font-black mt-3 text-slate-950 dark:text-zinc-50"
           />
           <FadeUpText className="text-gray-500 dark:text-slate-300 mt-3 transition-colors duration-300">
-            Create your account for faster checkout and order tracking.
+            {t("auth.registerCopy")}
           </FadeUpText>
 
           <form onSubmit={submit} className="mt-9 space-y-4">
@@ -90,7 +92,7 @@ export default function Register() {
               <User className="absolute left-5 top-4 text-gray-400 dark:text-slate-400 transition-colors duration-300" size={20} />
               <input
                 required
-                placeholder="Full Name"
+                placeholder={t("common.fullName")}
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl py-4 pl-14 pr-4 outline-none text-slate-900 dark:text-zinc-100 placeholder:text-slate-400 focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400/40 transition-colors duration-300"
@@ -102,7 +104,7 @@ export default function Register() {
               <input
                 required
                 type="email"
-                placeholder="Email"
+                placeholder={t("common.email")}
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl py-4 pl-14 pr-4 outline-none text-slate-900 dark:text-zinc-100 placeholder:text-slate-400 focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400/40 transition-colors duration-300"
@@ -114,7 +116,7 @@ export default function Register() {
               <input
                 required
                 type={show ? "text" : "password"}
-                placeholder="Password"
+                placeholder={t("common.password")}
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl py-4 pl-14 pr-14 outline-none text-slate-900 dark:text-zinc-100 placeholder:text-slate-400 focus:ring-2 focus:ring-purple-500 dark:focus:ring-cyan-400/40 transition-colors duration-300"
@@ -132,14 +134,14 @@ export default function Register() {
               disabled={loading}
               className="w-full btn-primary rounded-2xl py-4 font-black shadow-xl dark:shadow-[0_0_30px_rgba(34,211,238,0.32)] hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"
             >
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? t("auth.creatingAccount") : t("auth.createAccount")}
             </button>
           </form>
 
           <p className="mt-6 text-center text-gray-500 dark:text-slate-300 transition-colors duration-300">
-            Already have an account?{" "}
+            {t("auth.haveAccount")}{" "}
             <Link to="/login" className="font-black text-purple-700 dark:text-cyan-400 transition-colors duration-300">
-              Login
+              {t("auth.login")}
             </Link>
           </p>
         </div>

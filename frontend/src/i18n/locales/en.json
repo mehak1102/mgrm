@@ -1,0 +1,413 @@
+{
+  "common": {
+    "products": "products",
+    "items": "items",
+    "more": "More",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "sending": "Sending...",
+    "save": "Save",
+    "delete": "Delete",
+    "clearAll": "Clear All",
+    "close": "Close",
+    "menu": "Menu",
+    "shop": "Shop",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "viewAll": "View All →",
+    "addToCart": "Add to Cart",
+    "home": "Home",
+    "allProducts": "All Products",
+    "productsCount": "{{count}} products",
+    "itemsCount": "{{count}} items",
+    "inclTaxes": "(Incl. of all Taxes)",
+    "savePercent": "Save {{percent}}%",
+    "somethingWrong": "Something went wrong",
+    "thankYou": "Thank you!",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "message": "Message",
+    "emailOptional": "Email (optional)",
+    "yourName": "Your name",
+    "enterEmail": "Enter your email",
+    "emailAddress": "Email address"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "hindi": "हिंदी",
+    "select": "Select language"
+  },
+  "nav": {
+    "searchPlaceholder": "Search products, category",
+    "findByBody": "Find by Body Area",
+    "shopByActivity": "Shop By Activity",
+    "aboutUs": "About Us",
+    "blogs": "Blogs",
+    "support": "Support",
+    "chooseLifestyle": "Choose your lifestyle",
+    "shopByActivityLabel": "SHOP BY ACTIVITY",
+    "viewAllBodyAreas": "View all body areas",
+    "aboutOverview": "About overview",
+    "contactSupport": "Contact Support",
+    "wishlist": "Wishlist",
+    "login": "Log in",
+    "logout": "Log out",
+    "openCart": "Open cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "aboutLinks": {
+      "history": "Our History",
+      "achievements": "Achievements",
+      "quality": "Quality Certifications",
+      "timelines": "MGRM Timelines",
+      "leadership": "Leadership",
+      "testimonials": "Testimonials"
+    },
+    "supportLinks": {
+      "careers": "Careers",
+      "storeLocator": "Store Locator",
+      "warranty": "Warranty Information"
+    }
+  },
+  "footer": {
+    "tagline": "Advanced orthopedic and rehabilitation solutions trusted across India.",
+    "navigation": "NAVIGATION",
+    "categories": "Categories",
+    "contact": "Contact",
+    "phone": "Phone",
+    "address": "Address",
+    "companyAddress": "MGRM Medicare Pvt. Ltd.",
+    "city": "New Delhi, India",
+    "newsletter": "Newsletter",
+    "stayUpdated": "Stay Updated With MGRM",
+    "newsletterCopy": "Recovery tips, new product launches, and exclusive offers — delivered to your inbox.",
+    "subscribe": "Subscribe",
+    "enterEmailError": "Please enter your email",
+    "subscribeSuccess": "Thank you for subscribing!",
+    "securePayments": "Secure Payment Methods",
+    "copyright": "© 2026 MGRM Medicare. All Rights Reserved.",
+    "quickLinks": {
+      "home": "Home",
+      "about": "About Us",
+      "blogs": "Blogs",
+      "support": "Support",
+      "careers": "Careers",
+      "contact": "Contact"
+    },
+    "categoryLinks": {
+      "knee": "Knee Support",
+      "back": "Back Support",
+      "cervical": "Cervical Support",
+      "foot": "Foot Care",
+      "rehab": "Rehabilitation"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "shipping": "Shipping Policy"
+    }
+  },
+  "shop": {
+    "breadcrumb": "All Products",
+    "exploreRange": "Explore our wide range of support and care products.",
+    "filters": "Filters",
+    "sortBy": "Sort By:",
+    "sortPopularity": "Popularity",
+    "sortLow": "Price Low to High",
+    "sortHigh": "Price High to Low",
+    "sortName": "Name A-Z",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "closeFilters": "Close filters",
+    "filterTitle": "Filters",
+    "bodyPart": "BODY PART",
+    "color": "COLOR",
+    "size": "SIZE",
+    "price": "PRICE",
+    "priceRange": "₹100 - ₹{{max}}",
+    "noProducts": "No products found",
+    "noProductsHint": "Try clearing filters or check product category/colors/sizes in admin.",
+    "resultsFor": "Results for:",
+    "toggleWishlist": "Toggle wishlist"
+  },
+  "home": {
+    "heroTagline": "MGRM medicare products | Braces | Bandage | Splintage",
+    "topCategories": "TOP CATEGORIES",
+    "certifications": {
+      "iso": { "title": "ISO Certified", "subtitle": "International quality standards" },
+      "who": { "title": "WHO-GMP", "subtitle": "Global manufacturing compliance" },
+      "fda": { "title": "FDA Approved", "subtitle": "Trusted medical safety" },
+      "quality": { "title": "Quality Brands", "subtitle": "Recognized healthcare excellence" },
+      "ce": { "title": "CE Certified", "subtitle": "European conformity standards" }
+    },
+    "attention": "Attention",
+    "cardiologists": "Cardiologists",
+    "worldClassCopy": "{{count}} world-class certified products designed for relief, recovery and rehabilitation with trusted orthopedic and post-surgical support solutions.",
+    "bestSellers": "BEST SELLERS",
+    "mostTrusted": "Most Trusted Supports",
+    "mostTrustedDesc": "Most trusted support categories for daily recovery.",
+    "bodySearch": "BODY-BASED SEARCH",
+    "locatePain": "Locate Your",
+    "painArea": "Pain Area",
+    "locatePainDesc": "Get the right support where you need it",
+    "smartGuide": "SMART GUIDE",
+    "findFaster": "Find support faster",
+    "tapPainPoint": "Tap any pain point and jump directly to matching products.",
+    "personalized": "PERSONALIZED FOR YOU",
+    "trending": "TRENDING PICKS",
+    "recommended": "Recommended Supports",
+    "recommendedDesc": "Dynamic recommendations based on your search, views, categories and cart activity.",
+    "noRecommendations": "Recommendations will appear as you browse or search products.",
+    "learnRecover": "LEARN & RECOVER",
+    "healthBlogs": "Health Blogs & Guides",
+    "anatomyBadge": "Advanced Human Anatomy",
+    "precisionSupport": "Precision Support",
+    "backedByScience": "Backed By Human Science",
+    "anatomyCopy": "Every MGRM product is designed around real human anatomy, ensuring targeted support, improved mobility and faster recovery. From pain management to rehabilitation, our solutions are built to move naturally with your body.",
+    "yearsExperience": "Years Experience",
+    "certifiedProducts": "Certified Products",
+    "marquee": {
+      "welcome": "WELCOME TO MGRM",
+      "global": "GLOBAL PRESENCE",
+      "expect": "EXPECT THE BEST",
+      "partner": "PARTNER PROGRAM",
+      "orthopedic": "ORTHOPEDIC SUPPORT",
+      "medical": "MEDICAL GRADE",
+      "rehab": "REHABILITATION PRODUCTS",
+      "healthcare": "HEALTHCARE SOLUTIONS",
+      "quality": "INTERNATIONAL QUALITY"
+    }
+  },
+  "support": {
+    "badge": "CUSTOMER SUPPORT",
+    "heroTitle": "Need help choosing the right support?",
+    "heroSubtitle": "Ask us about product selection, sizing, orders, returns or bulk queries.",
+    "certifiedProducts": "Certified Products",
+    "sizeAssistance": "Size Assistance",
+    "fastSupport": "Fast Support",
+    "contactSupport": "Contact Support",
+    "submitSuccess": "Your request has been submitted. Our team will contact you soon.",
+    "yourVoice": "Your Voice Matters",
+    "hearFromYou": "We'd love to hear from you",
+    "suggestionsIntro": "Have a product idea, website improvement, or something we could do better? Share your suggestions — every insight helps us build better rehabilitation experiences for everyone.",
+    "productIdeas": "Product Ideas",
+    "productIdeasText": "New braces, features, or innovations you'd like to see.",
+    "betterExperience": "Better Experience",
+    "betterExperienceText": "Tell us how we can improve support, shopping, or delivery.",
+    "openFeedback": "Open Feedback",
+    "openFeedbackText": "Any thought that could help MGRM serve patients better.",
+    "suggestionThanks": "Your suggestion has been received. We truly appreciate you taking the time to share your ideas.",
+    "shareSuggestion": "Share your suggestion",
+    "shareSubtitle": "Tell us what's on your mind — big or small, we read every message.",
+    "describeIdea": "Describe your idea or suggestion...",
+    "shareMyIdea": "Share My Idea",
+    "whatsapp": "WhatsApp Support",
+    "whatsappText": "Chat instantly",
+    "openWhatsapp": "Open WhatsApp",
+    "callSupport": "Call Support",
+    "callText": "Talk directly",
+    "callNow": "Call Now",
+    "emailSupport": "Email Support",
+    "emailText": "Send query",
+    "sendEmail": "Send Email",
+    "sizeGuide": "Size Guide",
+    "sizeGuideText": "Get help",
+    "openForm": "Open Form",
+    "shipping": "Shipping",
+    "shippingText": "Delivery help",
+    "returns": "Returns",
+    "returnsText": "Replacement help",
+    "waysStrip": {
+      "heading": "There are many ways to get your MGRM supports — choose WhatsApp chat, phone help, home delivery, express shipping, size guidance, or easy returns:",
+      "items": {
+        "whatsapp": "WhatsApp support in minutes",
+        "call": "Call our support team",
+        "homeDelivery": "Pan-India home delivery",
+        "express": "Express shipping options",
+        "sizeFit": "Size & fit assistance",
+        "returns": "Hassle-free returns"
+      },
+      "footnote": "* Terms & conditions apply — see our",
+      "footnoteLink": "FAQ hub"
+    },
+    "types": {
+      "productHelp": "Product Help",
+      "sizeGuide": "Size Guide",
+      "orderHelp": "Order Help",
+      "returnRequest": "Return Request",
+      "bulkInquiry": "Bulk Inquiry",
+      "other": "Other"
+    },
+    "suggestionCategories": {
+      "productIdea": "Product Idea",
+      "websiteFeedback": "Website Feedback",
+      "serviceImprovement": "Service Improvement",
+      "general": "General Suggestion"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "chooseSupport": {
+          "q": "How do I choose the right brace or support?",
+          "a": "Start with the body area you need support for using Shop by Body, or describe your condition in the support form. Our team can recommend certified MGRM products for pain relief, post-surgery recovery, or daily mobility."
+        },
+        "findSize": {
+          "q": "How do I find the correct product size?",
+          "a": "Check the size chart on each product page and measure as shown in the guide. You can also use the Size Guide option on this page or contact us on WhatsApp — we will help you pick the best fit."
+        },
+        "returns": {
+          "q": "What is your return and replacement policy?",
+          "a": "If you receive a damaged or incorrect item, contact us within 7 days with your order details and photos. Eligible products may be replaced or refunded as per our returns policy."
+        },
+        "shipping": {
+          "q": "How long does delivery take in India?",
+          "a": "Most orders are dispatched within 1–3 business days. Delivery time depends on your city and pin code — typically 3–7 business days across India. Express options may be available at checkout."
+        },
+        "trackOrder": {
+          "q": "Can I track my order after placing it?",
+          "a": "Yes. Once your order ships, you will receive tracking details by SMS or email. You can also view order status from your account dashboard or contact support with your order ID."
+        },
+        "bulkOrders": {
+          "q": "Do you offer bulk orders for hospitals or clinics?",
+          "a": "Yes. MGRM supplies hospitals, physiotherapy centres, pharmacies and institutions. Submit a Bulk Inquiry through the support form or email us for pricing and delivery timelines."
+        },
+        "productCare": {
+          "q": "How should I clean and care for my support?",
+          "a": "Hand-wash with mild soap and lukewarm water unless the product label says otherwise. Air-dry away from direct heat. Do not machine-wash unless specified — this helps maintain elasticity and support."
+        },
+        "warranty": {
+          "q": "Are MGRM products covered by warranty?",
+          "a": "Genuine MGRM products include a limited warranty against manufacturing defects under normal use. See our Warranty Information page for full terms, or ask support with your product name and purchase date."
+        }
+      }
+    }
+  },
+  "careers": {
+    "badge": "CAREERS AT MGRM",
+    "heroTitle": "Build a career in trusted healthcare",
+    "heroSubtitle": "Join a team dedicated to movement, recovery, and better patient outcomes across India.",
+    "openPositions": "Open Positions",
+    "noOpenings": "No open positions right now. Check back soon or send your resume.",
+    "applyNow": "Apply Now",
+    "whyJoin": "Why Join MGRM",
+    "benefits": "Benefits & Perks",
+    "process": "Hiring Process",
+    "culture": "Our Culture",
+    "faq": "FAQ",
+    "applyFor": "Apply for {{title}}",
+    "coverLetter": "Cover letter",
+    "resume": "Resume (PDF)",
+    "submitApplication": "Submit Application",
+    "applicationSent": "Application submitted successfully!",
+    "imageStrip": {
+      "innovation": { "title": "Rehabilitation Innovation", "text": "Work with products that support recovery, mobility, and clinical outcomes." },
+      "purpose": { "title": "Purpose Driven Work", "text": "Contribute to a mission centered on movement, dignity, and better care." },
+      "impact": { "title": "Patient Impact", "text": "Help families and clinicians access trusted orthopedic support solutions." }
+    },
+    "whyJoinItems": {
+      "purpose": { "title": "Purpose-Driven Work", "text": "Help patients and clinicians access trusted orthopedic and rehabilitation solutions." },
+      "clinical": { "title": "Clinical Credibility", "text": "Build your career with a brand focused on movement, recovery, and long-term care outcomes." },
+      "growth": { "title": "Growth & Learning", "text": "Work across product, clinical support, operations, and customer experience." }
+    },
+    "benefitsItems": {
+      "health": { "title": "Health support", "text": "Wellness-first policies for you and your family." },
+      "learning": { "title": "Learning", "text": "Certification assistance and skill development." },
+      "flexible": { "title": "Flexible growth", "text": "Structured pathways across teams and roles." },
+      "tools": { "title": "Modern tools", "text": "Efficient systems that support premium service delivery." },
+      "rewards": { "title": "Performance rewards", "text": "Recognition aligned with impact and excellence." },
+      "culture": { "title": "Team culture", "text": "Collaborative, respectful, and patient-focused teams." }
+    },
+    "processSteps": {
+      "apply": { "step": "Apply", "text": "Submit your profile and resume for an open role." },
+      "review": { "step": "Review", "text": "Our HR and hiring team reviews your experience." },
+      "interview": { "step": "Interview", "text": "Meet the team and discuss fit, skills, and goals." },
+      "offer": { "step": "Offer", "text": "Successful candidates receive a formal offer letter." }
+    },
+    "cultureItems": {
+      "patient": "Patient-First Mindset",
+      "precision": "Precision in Care",
+      "team": "Team Recovery Culture",
+      "innovation": "Innovation with Trust"
+    },
+    "faqItems": {
+      "timeline": { "q": "How long does the hiring process take?", "a": "Most roles are reviewed within 5–10 business days. Interview timelines vary by department." },
+      "multiple": { "q": "Can I apply for more than one role?", "a": "Yes. Submit separate applications for each position that matches your profile." },
+      "india": { "q": "Do you hire across India?", "a": "Yes. MGRM hires for field, clinical support, operations, and corporate roles across major cities." }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "exploreStory": "Explore our story"
+  },
+  "dashboard": {
+    "commandCenter": "MGRM Command Center",
+    "backToGrid": "Back to grid",
+    "close": "Close dashboard",
+    "account": "Account",
+    "sections": {
+      "profile": "Profile",
+      "addresses": "Saved Addresses",
+      "orders": "My Orders",
+      "wishlist": "Wishlist",
+      "recovery": "Recovery Stories",
+      "settings": "Settings"
+    },
+    "status": {
+      "pending": "Pending Review",
+      "approved": "Approved",
+      "published": "Published",
+      "rejected": "Rejected"
+    },
+    "grid": {
+      "explore": "Explore",
+      "shopProducts": "Shop Products",
+      "catalog": "Catalog",
+      "allProducts": "All Products",
+      "browseAll": "Browse all",
+      "therapy": "Therapy",
+      "recommendedPhysio": "Recommended By Physiotherapist",
+      "physioSubtitle": "Supports organized by recovery specialty",
+      "forYou": "For You",
+      "recommended": "Recommended",
+      "personalized": "Personalized picks",
+      "bodyParts": "Body Parts",
+      "categories": "Categories",
+      "exploreRegions": "Explore regions",
+      "healInspire": "Heal & Inspire",
+      "recoveryStories": "Recovery Stories",
+      "beforeAfter": "Before & after journeys",
+      "track": "Track",
+      "orders": "Orders",
+      "saved": "Saved",
+      "wishlist": "Wishlist",
+      "deliverTo": "Deliver To",
+      "addresses": "Addresses",
+      "yourProfile": "Your Profile",
+      "photo": "Photo",
+      "addAddress": "Add Address",
+      "label": "Label",
+      "address": "Address",
+      "city": "City",
+      "pincode": "Pincode",
+      "default": "Default",
+      "setDefault": "Set default",
+      "noOrders": "No orders yet",
+      "noWishlist": "Your wishlist is empty",
+      "theme": "Theme",
+      "settingsSubtitle": "Appearance and preferences"
+    },
+    "toast": {
+      "profileUpdated": "Profile updated",
+      "profileSaveFailed": "Could not save profile",
+      "photoUploaded": "Photo uploaded",
+      "uploadFailed": "Upload failed",
+      "addressAdded": "Address added",
+      "addressFailed": "Could not add address",
+      "submittedReview": "Submitted for review",
+      "submitFailed": "Submit failed"
+    },
+    "confirmDelete": "Delete?"
+  }
+}

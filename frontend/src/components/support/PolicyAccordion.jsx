@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown, Shield, AlertTriangle, RefreshCw, Package, CheckCircle2, Globe } from "lucide-react";
 
@@ -21,6 +22,7 @@ const ICON_STYLES = {
 };
 
 export default function PolicyAccordion({ sections }) {
+  const { t } = useTranslation();
   const [openId, setOpenId] = useState(sections[0]?.id || null);
   const reduced = useReducedMotion();
 
@@ -47,7 +49,7 @@ export default function PolicyAccordion({ sections }) {
                 <Icon className={`policy-accordion-icon-svg warranty-coverage-icon-svg ${style.color}`} size={22} />
               </span>
               <span className="flex-1 font-black text-lg text-fg">
-                {section.title}
+                {t(`warranty.policy.${section.id}.title`, { defaultValue: section.title })}
               </span>
               <ChevronDown
                 size={20}
@@ -65,7 +67,7 @@ export default function PolicyAccordion({ sections }) {
                   className="overflow-hidden"
                 >
                   <p className="px-6 pb-6 pt-0 text-fg-muted leading-relaxed pl-[5.5rem]">
-                    {section.content}
+                    {t(`warranty.policy.${section.id}.content`, { defaultValue: section.content })}
                   </p>
                 </motion.div>
               )}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -21,6 +22,7 @@ const PASTEL_CARD_PALETTE = [
 ];
 
 export default function ProductCard({ product, pastelIndex }) {
+  const { t } = useTranslation();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { isBlue, isDark } = useTheme();
@@ -78,7 +80,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
       <div className="p-5">
         <p className="text-xs font-black text-cyan-600 dark:text-cyan-400 uppercase">
-          {product.category || "Medical Support"}
+          {product.category || t("productDetail.medicalSupport")}
         </p>
 
         <Link to={`/product/${product.slug}`}>
@@ -98,7 +100,7 @@ export default function ProductCard({ product, pastelIndex }) {
             lightPastelInk ? "text-gray-500" : "text-gray-500 dark:text-zinc-400"
           }`}
         >
-          {product.description || "Premium support product for comfort and recovery."}
+          {product.description || t("productDetail.premiumSupport")}
         </p>
 
         <div className="flex items-center gap-1 text-yellow-500 mt-3">

@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -31,26 +33,26 @@ const TRUST_CARD_REVEAL = {
   stagger: 0.2,
 };
 
-const TRUSTED_CARDS = [
+const TRUSTED_CARD_CONFIG = [
   {
-    title: "Indian Armed Forces",
+    titleKey: "homeSections.aboutPreviewArmedForces",
     image:
       "https://images.unsplash.com/photo-1737996159880-84645414d1db?q=80&w=1200&auto=format&fit=crop",
     href: "/about-us#section-1",
   },
   {
-    title: "NDMA Recognition",
+    titleKey: "homeSections.aboutPreviewNdma",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfNpw2cQhzbDKfrjS3KGV_9QHJrWAOKEG_kA&s",
     href: "/about-us#section-1",
   },
   {
-    title: "Healthcare Innovation",
+    titleKey: "homeSections.aboutPreviewHealthcare",
     image: "https://etimg.etb2bimg.com/photo/123819552.cms",
     href: "/about-us#section-1",
   },
   {
-    title: "National Quality Awards",
+    titleKey: "homeSections.aboutPreviewQualityAwards",
     image:
       "https://images.unsplash.com/photo-1697209868660-c5991488f7b1?q=80&w=1200&auto=format&fit=crop",
     href: "/about-us#section-1",
@@ -70,23 +72,20 @@ const CITIZEN_PORTRAITS = [
   },
 ];
 
-const TIMELINE = [
-  { year: "1994", label: "MGRM Incorporated", href: "/about-us#section-3" },
-  { year: "1995", label: "Manufacturing Started", href: "/about-us#section-3" },
-  { year: "1997", label: "US FDA Registration", href: "/about-us#section-3" },
-  { year: "2005", label: "WHO GMP Certified", href: "/about-us#section-3" },
-  { year: "2007", label: "NDMA Expert Committee", href: "/about-us#section-3" },
-  { year: "2008", label: "NDMA Steering Committee", href: "/about-us#section-3" },
+const TIMELINE_CONFIG = [
+  { year: "1994", labelKey: "homeSections.aboutPreviewTimeline1994", href: "/about-us#section-3" },
+  { year: "1995", labelKey: "homeSections.aboutPreviewTimeline1995", href: "/about-us#section-3" },
+  { year: "1997", labelKey: "homeSections.aboutPreviewTimeline1997", href: "/about-us#section-3" },
+  { year: "2005", labelKey: "homeSections.aboutPreviewTimeline2005", href: "/about-us#section-3" },
+  { year: "2007", labelKey: "homeSections.aboutPreviewTimeline2007", href: "/about-us#section-3" },
+  { year: "2008", labelKey: "homeSections.aboutPreviewTimeline2008", href: "/about-us#section-3" },
 ];
 
-const CHIPS = [
-  { label: "Trusted Recovery", icon: "✓" },
-  { label: "Orthopedic Innovation", icon: "⚡" },
-  { label: "Made For Everyday Life", icon: "◎" },
+const CHIP_KEYS = [
+  { labelKey: "home.trustedRecovery", icon: "✓" },
+  { labelKey: "homeSections.aboutPreviewChipOrtho", icon: "⚡" },
+  { labelKey: "homeSections.aboutPreviewChipLife", icon: "◎" },
 ];
-
-const CITIZEN_COPY =
-  "From trusted medical support systems to everyday recovery solutions — MGRM has evolved to make orthopedic care accessible across every stage of life.";
 
 function PreviewImage({ src, alt, className }) {
   return (
@@ -100,7 +99,7 @@ function PreviewImage({ src, alt, className }) {
   );
 }
 
-function PreviewTimeline({ reduce }) {
+function PreviewTimeline({ reduce, timeline, timelineAria }) {
   return (
     <div className="home-about-preview-timeline mt-6 sm:mt-7">
       <Link
@@ -108,7 +107,7 @@ function PreviewTimeline({ reduce }) {
         className={`home-about-preview-timeline-link${
           reduce ? " home-about-preview-timeline-link--static" : " home-about-preview-timeline-link--loop"
         }`}
-        aria-label="View MGRM timeline on About Us"
+        aria-label={timelineAria}
       >
         <div className="home-about-preview-timeline-rail" aria-hidden>
           <div className="home-about-preview-timeline-line-track" />
@@ -116,7 +115,7 @@ function PreviewTimeline({ reduce }) {
         </div>
 
         <div className="home-about-preview-timeline-points">
-          {TIMELINE.map((item) => (
+          {timeline.map((item) => (
             <div key={item.year} className="home-about-preview-timeline-point">
               <span className="home-about-preview-timeline-dot" aria-hidden />
               <span className="home-about-preview-timeline-year">{item.year}</span>
@@ -130,14 +129,41 @@ function PreviewTimeline({ reduce }) {
 }
 
 export default function HomeAboutPreview() {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
+
+  const trustedCards = useMemo(
+    () =>
+      TRUSTED_CARD_CONFIG.map((card) => ({
+        ...card,
+        title: t(card.titleKey),
+      })),
+    [t]
+  );
+
+  const timeline = useMemo(
+    () =>
+      TIMELINE_CONFIG.map((item) => ({
+        ...item,
+        label: t(item.labelKey),
+      })),
+    [t]
+  );
+
+  const chips = useMemo(
+    () =>
+      CHIP_KEYS.map((chip) => ({
+        ...chip,
+        label: t(chip.labelKey),
+      })),
+    [t]
+  );
 
   return (
     <section
       className="home-about-preview relative max-w-[1500px] mx-auto mt-16 sm:mt-20 md:mt-24 px-4 sm:px-6 pt-16 sm:pt-20 pb-24 sm:pb-28 lg:pb-32"
       aria-labelledby="home-about-preview-heading"
     >
-      {/* Depth background */}
       <div className="home-about-preview-bg" aria-hidden>
         <div className="home-about-preview-bg-layer home-about-preview-bg-layer--1" />
         <div className="home-about-preview-bg-layer home-about-preview-bg-layer--2" />
@@ -150,7 +176,6 @@ export default function HomeAboutPreview() {
       </div>
 
       <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-14 xl:gap-16 items-start min-h-0">
-        {/* LEFT — immersive story collage */}
         <div className="home-about-preview-visual order-1 lg:order-none w-full max-w-[580px] lg:max-w-none mx-auto">
           <motion.p
             className="home-about-preview-visual-label text-[10px] sm:text-[11px] font-black uppercase tracking-[0.32em] text-slate-500 dark:text-zinc-400 mb-4 sm:mb-5"
@@ -159,13 +184,13 @@ export default function HomeAboutPreview() {
             viewport={VIEWPORT_PREMIUM}
             transition={{ duration: DURATION, ease: EASE_LUXURY }}
           >
-            Trusted Across India
+            {t("homeSections.aboutPreviewTrustedIndia")}
           </motion.p>
 
           <div className="home-about-preview-trust-strip">
-            {TRUSTED_CARDS.map((card, index) => (
+            {trustedCards.map((card, index) => (
               <motion.div
-                key={card.title}
+                key={card.titleKey}
                 className="home-about-preview-trust-card-wrap"
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -179,7 +204,7 @@ export default function HomeAboutPreview() {
                 <Link
                   to={card.href}
                   className="home-about-preview-trust-card group"
-                  aria-label={`${card.title} — view on About Us`}
+                  aria-label={t("homeSections.aboutPreviewViewAbout", { title: card.title })}
                 >
                   <PreviewImage
                     src={card.image}
@@ -197,7 +222,6 @@ export default function HomeAboutPreview() {
             ))}
           </div>
 
-          {/* First Citizen — portraits only */}
           <motion.div
             className="home-about-preview-citizen-strip mt-6 sm:mt-7"
             custom={0.45}
@@ -209,7 +233,7 @@ export default function HomeAboutPreview() {
             <Link
               to="/about-us#first-citizen"
               className="home-about-preview-citizen-link group"
-              aria-label="First Citizen to the Common Man — view on About Us"
+              aria-label={t("homeSections.aboutPreviewCitizenAria")}
             >
               <div className="home-about-preview-citizen-portraits">
                 <div className="home-about-preview-citizen-portrait home-about-preview-citizen-portrait--left">
@@ -229,11 +253,14 @@ export default function HomeAboutPreview() {
               </div>
             </Link>
 
-            <PreviewTimeline reduce={reduce} />
+            <PreviewTimeline
+              reduce={reduce}
+              timeline={timeline}
+              timelineAria={t("homeSections.aboutPreviewTimelineAria")}
+            />
           </motion.div>
         </div>
 
-        {/* RIGHT — editorial journey copy */}
         <div className="order-2 lg:order-none min-w-0 lg:pt-2">
           <motion.div
             className="home-about-preview-hero-copy"
@@ -243,22 +270,20 @@ export default function HomeAboutPreview() {
             variants={FadeUpSlow}
           >
             <SectionLabel className="home-about-preview-label text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-xs sm:text-sm">
-              OUR JOURNEY
+              {t("homeSections.aboutPreviewOurJourney")}
             </SectionLabel>
 
             <h2
               id="home-about-preview-heading"
               className="home-about-preview-heading mt-5 text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-black leading-[0.92] tracking-[-0.02em] text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]"
             >
-              <span className="block">Transforming</span>
-              <span className="block">Rehabilitation</span>
-              <span className="block">In India</span>
+              <span className="block">{t("homeSections.aboutPreviewTitle1")}</span>
+              <span className="block">{t("homeSections.aboutPreviewTitle2")}</span>
+              <span className="block">{t("homeSections.aboutPreviewTitle3")}</span>
             </h2>
 
             <FadeUpText className="home-about-preview-body mt-7 sm:mt-8 text-base sm:text-lg lg:text-xl leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
-              MGRM has supported recovery journeys through orthopedic innovation,
-              trusted support systems, and patient-first design — helping everyday
-              movement feel possible again.
+              {t("homeSections.aboutPreviewBody")}
             </FadeUpText>
           </motion.div>
 
@@ -273,17 +298,17 @@ export default function HomeAboutPreview() {
             <div className="home-about-preview-story-copy min-w-0">
               <div className="home-about-preview-micro font-black uppercase tracking-tight text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]">
                 <span className="home-about-preview-label block text-[11px] sm:text-xs tracking-[0.32em] text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)]">
-                  First Citizen
+                  {t("homeSections.aboutPreviewFirstCitizen")}
                 </span>
                 <span className="home-about-preview-label block text-xs sm:text-sm font-semibold normal-case tracking-normal text-slate-400 dark:text-zinc-500 [data-theme=blue]:text-[var(--text-muted)] my-1">
-                  to
+                  {t("homeSections.aboutPreviewTo")}
                 </span>
                 <span className="home-about-preview-micro-title block text-xl sm:text-2xl lg:text-[1.65rem] leading-none tracking-tight uppercase">
-                  The Common Man
+                  {t("homeSections.aboutPreviewCommonMan")}
                 </span>
               </div>
               <p className="home-about-preview-body mt-4 sm:mt-5 text-sm sm:text-base leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
-                {CITIZEN_COPY}
+                {t("homeSections.aboutPreviewCitizenCopy")}
               </p>
             </div>
           </motion.div>
@@ -293,8 +318,8 @@ export default function HomeAboutPreview() {
             stagger={0.1}
             delay={0.2}
           >
-            {CHIPS.map((chip) => (
-              <PremiumStaggerItem key={chip.label}>
+            {chips.map((chip) => (
+              <PremiumStaggerItem key={chip.labelKey}>
                 <span className="home-about-preview-pill">
                   <span className="home-about-preview-pill-icon" aria-hidden>
                     {chip.icon}
@@ -316,7 +341,7 @@ export default function HomeAboutPreview() {
               to="/about-us"
               className="home-about-preview-cta btn-primary inline-flex items-center gap-2.5 rounded-full px-7 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-black shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-transform duration-500 dark:!bg-white/10 dark:!text-zinc-100 dark:!border dark:!border-white/20 dark:backdrop-blur-md dark:hover:!bg-white/15 dark:hover:shadow-[0_0_32px_rgba(34,211,238,0.18)]"
             >
-              Read Full Story
+              {t("homeSections.aboutPreviewReadStory")}
               <ArrowRight size={18} className="shrink-0" />
             </Link>
           </motion.div>

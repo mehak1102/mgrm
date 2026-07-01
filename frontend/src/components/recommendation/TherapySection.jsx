@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import TherapyProductCarousel from "./TherapyProductCarousel";
@@ -23,6 +24,7 @@ const MOOD_CLASS = {
 };
 
 function TherapyChapter({ section, index = 0, id }) {
+  const { t } = useTranslation();
   const reduce = useReducedMotion();
   const accent = section.accent || "#0ea5e9";
   const chapterNum = String(index + 1).padStart(2, "0");
@@ -62,7 +64,7 @@ function TherapyChapter({ section, index = 0, id }) {
               transition={{ duration: 0.85, ease: EASE }}
             >
               <p className="therapy-text-muted text-[0.62rem] font-semibold uppercase tracking-[0.28em]">
-                {chapterNum} · Physiotherapy Specialty
+                {chapterNum} · {t("therapy.physioSpecialty")}
               </p>
               <h2
                 className="mt-3 text-[clamp(1.85rem,4vw,3.5rem)] font-light leading-[1.06] tracking-[-0.02em] therapy-text-primary"
@@ -93,7 +95,7 @@ function TherapyChapter({ section, index = 0, id }) {
                 to={therapyShopUrl(section.categories)}
                 className="therapy-cta-link group/cta mt-8 inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em]"
               >
-                Explore specialty
+                {t("therapy.exploreSpecialty")}
                 <span className="transition-transform duration-400 group-hover/cta:translate-x-1">→</span>
               </Link>
 
@@ -117,7 +119,7 @@ function TherapyChapter({ section, index = 0, id }) {
               <TherapyAnatomyVisual
                 src={section.heroImage || "/cardiology/heart.png"}
                 accent={accent}
-                alt={`${section.title} clinical focus`}
+                alt={t("therapy.visualAlt")}
               />
             </motion.div>
           </div>

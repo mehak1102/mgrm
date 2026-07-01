@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   ShoppingCart,
   X,
@@ -16,6 +17,7 @@ import { useTheme } from "../context/ThemeContext";
 import { productPriceSaleProps } from "../utils/productPriceStyle";
 
 export default function CartDrawer() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isBlue } = useTheme();
   const {
@@ -52,10 +54,12 @@ export default function CartDrawer() {
               <div className="bg-white/90 bg-card/90 dark:bg-zinc-900/90 backdrop-blur-xl border-b px-6 py-5 flex items-center justify-between">
                 <div>
                   <p className="text-purple-700 font-black tracking-widest text-xs">
-                    SHOPPING BAG
+                    {t("cart.shoppingBag")}
                   </p>
-                  <h2 className="text-3xl font-black">Your Cart</h2>
-                  <p className="text-gray-500 dark:text-zinc-400 text-sm">{cartCount} items</p>
+                  <h2 className="text-3xl font-black">{t("cart.yourCart")}</h2>
+                  <p className="text-gray-500 dark:text-zinc-400 text-sm">
+                    {t("common.itemsCount", { count: cartCount })}
+                  </p>
                 </div>
 
                 <button
@@ -73,16 +77,16 @@ export default function CartDrawer() {
                       <ShoppingCart size={38} />
                     </div>
 
-                    <h3 className="text-3xl font-black mt-5">Cart is empty</h3>
+                    <h3 className="text-3xl font-black mt-5">{t("cart.emptyTitle")}</h3>
                     <p className="text-gray-500 dark:text-zinc-400 mt-2">
-                      Add products to start shopping.
+                      {t("cart.emptyCopy")}
                     </p>
 
                     <button
                       onClick={() => closeAndGo("/shop")}
                       className="mt-7 inline-flex items-center gap-2 bg-purple-700 text-white px-7 py-4 rounded-full font-black hover:bg-purple-800 transition"
                     >
-                      Browse Products <ArrowRight size={18} />
+                      {t("common.browseProducts")} <ArrowRight size={18} />
                     </button>
                   </div>
                 </div>
@@ -135,8 +139,8 @@ export default function CartDrawer() {
                               </div>
 
                               <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-                                {item.category || "Support Product"}
-                                {item.selectedSize ? ` • Size: ${item.selectedSize}` : ""}
+                                {item.category || t("common.supportProduct")}
+                                {item.selectedSize ? ` • ${t("common.size")} ${item.selectedSize}` : ""}
                               </p>
 
                               <div className="flex items-center justify-between mt-4">
@@ -188,7 +192,7 @@ export default function CartDrawer() {
 
                               {item.qty >= maxStock && (
                                 <p className="text-xs text-red-500 font-bold mt-2">
-                                  Maximum available stock selected.
+                                  {t("cart.maxStock")}
                                 </p>
                               )}
                             </div>
@@ -201,9 +205,9 @@ export default function CartDrawer() {
                   <div className="bg-app dark:bg-zinc-950/95 backdrop-blur-xl border-t px-6 py-5">
                     <div className="grid grid-cols-3 gap-3 mb-5">
                       {[
-                        ["Certified", ShieldCheck],
-                        ["Fast Ship", Truck],
-                        ["Premium", Sparkles],
+                        [t("cart.certified"), ShieldCheck],
+                        [t("cart.fastShip"), Truck],
+                        [t("cart.premium"), Sparkles],
                       ].map(([text, Icon]) => (
                         <div
                           key={text}
@@ -220,23 +224,23 @@ export default function CartDrawer() {
 
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-500 dark:text-zinc-400">Subtotal</span>
+                        <span className="text-gray-500 dark:text-zinc-400">{t("common.subtotal")}</span>
                         <b {...productPriceSaleProps(isBlue)}>₹{cartTotal}</b>
                       </div>
 
                       <div className="flex justify-between">
-                        <span className="text-gray-500 dark:text-zinc-400">Shipping</span>
-                        <b>{shipping === 0 ? "Free" : `₹${shipping}`}</b>
+                        <span className="text-gray-500 dark:text-zinc-400">{t("common.shipping")}</span>
+                        <b>{shipping === 0 ? t("common.free") : `₹${shipping}`}</b>
                       </div>
 
                       {cartTotal > 0 && cartTotal < 499 && (
                         <p className="text-xs text-purple-700 font-bold bg-purple-50 rounded-xl p-3">
-                          Add ₹{499 - cartTotal} more for free shipping.
+                          {t("cart.freeShippingNudge", { amount: 499 - cartTotal })}
                         </p>
                       )}
 
                       <div className="border-t pt-3 flex justify-between text-xl">
-                        <span className="font-black">Total</span>
+                        <span className="font-black">{t("common.total")}</span>
                         <span
                           {...productPriceSaleProps(isBlue, "font-black text-purple-700")}
                         >
@@ -249,14 +253,14 @@ export default function CartDrawer() {
                       onClick={() => closeAndGo("/checkout")}
                       className="mt-5 w-full bg-purple-700 text-white py-4 rounded-2xl font-black hover:bg-purple-800 transition flex items-center justify-center gap-2"
                     >
-                      Checkout <ArrowRight size={18} />
+                      {t("common.checkout")} <ArrowRight size={18} />
                     </button>
 
                     <button
                       onClick={() => closeAndGo("/shop")}
                       className="mt-3 w-full bg-slate-100 bg-surface-hover text-slate-900 dark:text-zinc-100 py-4 rounded-2xl font-black hover:bg-slate-200 transition"
                     >
-                      Continue Shopping
+                      {t("common.continueShopping")}
                     </button>
                   </div>
                 </>

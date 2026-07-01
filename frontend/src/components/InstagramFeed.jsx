@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import API from "../api";
 
@@ -81,6 +82,7 @@ function StatBlock({ value, label }) {
 }
 
 export default function InstagramFeed() {
+  const { t } = useTranslation();
   const trackRef = useRef(null);
   const [profile, setProfile] = useState(EMPTY_PROFILE);
   const [loading, setLoading] = useState(true);
@@ -153,7 +155,7 @@ export default function InstagramFeed() {
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 rounded-full ring-2 ring-[#E1306C]/30 p-0.5 transition hover:ring-[#E1306C]/60"
-            aria-label={`${name} on Instagram`}
+            aria-label={t("global.instagramOnInstagram", { name })}
           >
             <FeedImage
               src={avatar}
@@ -169,7 +171,7 @@ export default function InstagramFeed() {
                 {name}
               </h2>
               {isVerified && (
-                <span className="text-[#0095F6]" title="Verified" aria-label="Verified account">
+                <span className="text-[#0095F6]" title={t("global.verifiedAccount")} aria-label={t("global.verifiedAccount")}>
                   ✓
                 </span>
               )}
@@ -182,9 +184,9 @@ export default function InstagramFeed() {
             ) : null}
 
             <div className="mt-4 flex items-center justify-center gap-6 sm:gap-8 lg:justify-start">
-              <StatBlock value={formatStat(stats.posts)} label="Posts" />
-              <StatBlock value={formatStat(stats.followers)} label="Followers" />
-              <StatBlock value={formatStat(stats.following)} label="Following" />
+              <StatBlock value={formatStat(stats.posts)} label={t("global.instagramPosts")} />
+              <StatBlock value={formatStat(stats.followers)} label={t("global.instagramFollowers")} />
+              <StatBlock value={formatStat(stats.following)} label={t("global.instagramFollowing")} />
             </div>
           </div>
 
@@ -195,7 +197,7 @@ export default function InstagramFeed() {
             className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#0095F6] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#0086dc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0095F6]"
           >
             <InstagramIcon className="h-4 w-4" />
-            Follow
+            {t("global.instagramFollow")}
           </a>
         </div>
 
@@ -204,7 +206,7 @@ export default function InstagramFeed() {
             ref={trackRef}
             className="instagram-feed__track flex overflow-x-auto scroll-smooth"
             role="list"
-            aria-label="MGRM Medicare Instagram posts"
+            aria-label={t("global.instagramPostsAria")}
             aria-busy={loading}
           >
             {loading && !posts.length
@@ -222,7 +224,7 @@ export default function InstagramFeed() {
                     rel="noopener noreferrer"
                     role="listitem"
                     className="instagram-feed__tile group relative block aspect-square w-[calc(100%/3)] min-w-[calc(100%/3)] shrink-0 overflow-hidden sm:w-[calc(100%/4)] sm:min-w-[calc(100%/4)] md:w-[calc(100%/5)] md:min-w-[calc(100%/5)] lg:w-[calc(100%/6)] lg:min-w-[calc(100%/6)]"
-                    aria-label={`View post on Instagram: ${post.alt}`}
+                    aria-label={t("global.instagramViewPost", { alt: post.alt })}
                   >
                     <FeedImage
                       src={post.image}
@@ -231,7 +233,7 @@ export default function InstagramFeed() {
                     />
                     {post.isVideo ? (
                       <span className="pointer-events-none absolute right-2 top-2 rounded bg-black/55 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                        Reel
+                        {t("global.instagramReel")}
                       </span>
                     ) : null}
                     <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition group-hover:bg-black/35 group-hover:opacity-100">
@@ -246,7 +248,7 @@ export default function InstagramFeed() {
               type="button"
               onClick={scrollPrev}
               className="instagram-feed__scroll-btn instagram-feed__scroll-btn--prev absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition hover:bg-black/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              aria-label="Scroll Instagram posts back"
+              aria-label={t("global.instagramScrollBack")}
             >
               <ChevronLeft className="h-5 w-5" aria-hidden />
             </button>
@@ -257,7 +259,7 @@ export default function InstagramFeed() {
               type="button"
               onClick={scrollNext}
               className="instagram-feed__scroll-btn instagram-feed__scroll-btn--next absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur-sm transition hover:bg-black/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              aria-label="Scroll Instagram posts forward"
+              aria-label={t("global.instagramScrollForward")}
             >
               <ChevronRight className="h-5 w-5" aria-hidden />
             </button>

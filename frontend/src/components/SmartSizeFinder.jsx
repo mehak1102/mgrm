@@ -796,6 +796,7 @@
 
 
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   X,
@@ -818,6 +819,7 @@ export default function SmartSizeFinder({
   onSelectSize,
   product,
 }) {
+  const { t } = useTranslation();
   const fileRef = useRef(null);
 
   const [preview, setPreview] = useState("");
@@ -879,8 +881,8 @@ export default function SmartSizeFinder({
     // NECK
     if (hasAny(["neck", "cervical", "collar"])) {
       return {
-        label: "neck circumference",
-        example: "Example: 37",
+        labelKey: "smartSize.fitNeck",
+        exampleKey: "smartSize.exampleNeck",
         chart: [
           { size: "S", max: 33 },
           { size: "M", max: 38 },
@@ -894,8 +896,8 @@ export default function SmartSizeFinder({
     // WRIST
     if (hasAny(["wrist", "forearm"])) {
       return {
-        label: "wrist circumference",
-        example: "Example: 16",
+        labelKey: "smartSize.fitWrist",
+        exampleKey: "smartSize.exampleWrist",
         chart: [
           { size: "S", max: 14 },
           { size: "M", max: 18 },
@@ -909,8 +911,8 @@ export default function SmartSizeFinder({
     // FINGER
     if (hasAny(["finger"])) {
       return {
-        label: "finger circumference",
-        example: "Example: 6",
+        labelKey: "smartSize.fitFinger",
+        exampleKey: "smartSize.exampleFinger",
         chart: [
           { size: "S", max: 5 },
           { size: "M", max: 7 },
@@ -923,8 +925,8 @@ export default function SmartSizeFinder({
     // ARM / SHOULDER
     if (hasAny(["arm", "shoulder", "clavicle"])) {
       return {
-        label: "arm circumference",
-        example: "Example: 30",
+        labelKey: "smartSize.fitArm",
+        exampleKey: "smartSize.exampleArm",
         chart: [
           { size: "S", max: 24 },
           { size: "M", max: 30 },
@@ -938,8 +940,8 @@ export default function SmartSizeFinder({
     // ELBOW
     if (hasAny(["elbow"])) {
       return {
-        label: "elbow circumference",
-        example: "Example: 26",
+        labelKey: "smartSize.fitElbow",
+        exampleKey: "smartSize.exampleElbow",
         chart: [
           { size: "S", max: 22 },
           { size: "M", max: 28 },
@@ -953,8 +955,8 @@ export default function SmartSizeFinder({
     // CHEST
     if (hasAny(["chest", "rib"])) {
       return {
-        label: "chest circumference",
-        example: "Example: 92",
+        labelKey: "smartSize.fitChest",
+        exampleKey: "smartSize.exampleChest",
         chart: [
           { size: "S", max: 85 },
           { size: "M", max: 95 },
@@ -977,8 +979,8 @@ export default function SmartSizeFinder({
       ])
     ) {
       return {
-        label: "waist circumference",
-        example: "Example: 88",
+        labelKey: "smartSize.fitWaist",
+        exampleKey: "smartSize.exampleWaist",
         chart: [
           { size: "S", max: 76 },
           { size: "M", max: 91 },
@@ -993,8 +995,8 @@ export default function SmartSizeFinder({
     // THIGH
     if (hasAny(["thigh"])) {
       return {
-        label: "thigh circumference",
-        example: "Example: 52",
+        labelKey: "smartSize.fitThigh",
+        exampleKey: "smartSize.exampleThigh",
         chart: [
           { size: "S", max: 45 },
           { size: "M", max: 55 },
@@ -1008,8 +1010,8 @@ export default function SmartSizeFinder({
     // KNEE
     if (hasAny(["knee"])) {
       return {
-        label: "knee circumference",
-        example: "Example: 38",
+        labelKey: "smartSize.fitKnee",
+        exampleKey: "smartSize.exampleKnee",
         chart: [
           { size: "S", max: 34 },
           { size: "M", max: 39 },
@@ -1023,8 +1025,8 @@ export default function SmartSizeFinder({
     // CALF / LEG
     if (hasAny(["calf", "leg", "shin"])) {
       return {
-        label: "calf circumference",
-        example: "Example: 36",
+        labelKey: "smartSize.fitCalf",
+        exampleKey: "smartSize.exampleCalf",
         chart: [
           { size: "S", max: 32 },
           { size: "M", max: 38 },
@@ -1038,8 +1040,8 @@ export default function SmartSizeFinder({
     // ANKLE / FOOT
     if (hasAny(["ankle", "foot"])) {
       return {
-        label: "ankle circumference",
-        example: "Example: 23",
+        labelKey: "smartSize.fitAnkle",
+        exampleKey: "smartSize.exampleAnkle",
         chart: [
           { size: "S", max: 20 },
           { size: "M", max: 25 },
@@ -1061,8 +1063,8 @@ export default function SmartSizeFinder({
       ])
     ) {
       return {
-        label: "affected body part circumference",
-        example: "Example: 38",
+        labelKey: "smartSize.fitGeneral",
+        exampleKey: "smartSize.exampleGeneral",
         chart: [
           { size: "SM", max: 34 },
           { size: "Regular", max: 44 },
@@ -1072,7 +1074,6 @@ export default function SmartSizeFinder({
       };
     }
 
-    // SPORTS
     if (
       hasAny([
         "cricket",
@@ -1088,8 +1089,8 @@ export default function SmartSizeFinder({
       ])
     ) {
       return {
-        label: "affected body part circumference",
-        example: "Example: 38",
+        labelKey: "smartSize.fitGeneral",
+        exampleKey: "smartSize.exampleGeneral",
         chart: [
           { size: "S", max: 34 },
           { size: "M", max: 40 },
@@ -1102,8 +1103,8 @@ export default function SmartSizeFinder({
 
     // DEFAULT
     return {
-      label: "affected body part circumference",
-      example: "Example: 38",
+      labelKey: "smartSize.fitGeneral",
+      exampleKey: "smartSize.exampleGeneral",
       chart: [
         { size: "S", max: 34 },
         { size: "M", max: 39 },
@@ -1115,6 +1116,8 @@ export default function SmartSizeFinder({
   };
 
   const fitProfile = getFitProfile();
+  const fitLabel = t(fitProfile.labelKey);
+  const fitExample = t(fitProfile.exampleKey);
 
   const getRecommendedSize = (cm) => {
     const value = Number(cm);
@@ -1132,7 +1135,7 @@ export default function SmartSizeFinder({
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      toast.error("Please upload image file only");
+      toast.error(t("smartSize.imageOnly"));
       return;
     }
 
@@ -1141,12 +1144,12 @@ export default function SmartSizeFinder({
     setPreview(url);
     setRecommended("");
 
-    toast.success("Image uploaded");
+    toast.success(t("smartSize.imageUploaded"));
   };
 
   const analyze = () => {
     if (!measurement) {
-      toast.error("Please enter measurement in cm");
+      toast.error(t("smartSize.enterMeasurementCm"));
       return;
     }
 
@@ -1164,14 +1167,14 @@ export default function SmartSizeFinder({
 
       setLoading(false);
 
-      toast.success(`Recommended size: ${size}`);
+      toast.success(t("smartSize.recommendedSizeToast", { size }));
     }, 1500);
   };
 
   const useSize = () => {
     onSelectSize(recommended);
 
-    toast.success(`Size ${recommended} selected`);
+    toast.success(t("smartSize.sizeSelected", { size: recommended }));
 
     onClose();
   };
@@ -1221,21 +1224,21 @@ export default function SmartSizeFinder({
               {...(!reduce && { variants: FadeUpMedium })}
               className="text-cyan-600 dark:text-cyan-400 font-black tracking-[0.25em] text-[11px]"
             >
-              SMART FIT ANALYZER
+              {t("smartSize.analyzer")}
             </motion.p>
 
             <motion.h2
               {...(!reduce && { variants: FadeUpSlow })}
               className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight"
             >
-              Smart Size Finder
+              {t("smartSize.finder")}
             </motion.h2>
 
             <motion.p
               {...(!reduce && { variants: FadeUpMedium })}
               className="text-slate-500 dark:text-zinc-400 mt-3 text-sm leading-6"
             >
-              Upload a clear image and enter your measurement to get the best recommended size.
+              {t("smartSize.uploadDescription")}
             </motion.p>
 
             <motion.div
@@ -1245,7 +1248,7 @@ export default function SmartSizeFinder({
               {preview ? (
                 <img
                   src={preview}
-                  alt="measurement preview"
+                  alt={t("smartSize.measurementPreview")}
                   className="w-full h-full object-contain bg-white dark:bg-zinc-800"
                 />
               ) : (
@@ -1259,11 +1262,11 @@ export default function SmartSizeFinder({
                   </div>
 
                   <h3 className="text-xl font-black mt-4 text-slate-900 dark:text-zinc-100">
-                    Upload photo
+                    {t("smartSize.uploadPhoto")}
                   </h3>
 
                   <p className="text-slate-400 dark:text-zinc-500 mt-2 text-sm">
-                    Knee, wrist, waist, neck or affected area
+                    {t("smartSize.uploadAreas")}
                   </p>
                 </button>
               )}
@@ -1273,7 +1276,7 @@ export default function SmartSizeFinder({
                   <ScanLine size={40} className="animate-pulse" />
 
                   <p className="font-black mt-4 text-sm tracking-wide">
-                    Analyzing fit...
+                    {t("smartSize.analyzingFit")}
                   </p>
 
                   <div className="mt-4 w-56 h-2 bg-white/20 rounded-full overflow-hidden">
@@ -1301,7 +1304,7 @@ export default function SmartSizeFinder({
                 className="inline-flex items-center gap-2 bg-slate-950 text-white px-5 py-3 rounded-2xl font-black text-sm hover:scale-[1.02] transition duration-500"
               >
                 <Upload size={17} />
-                {preview ? "Change Image" : "Upload Image"}
+                {preview ? t("smartSize.changeImage") : t("common.uploadImage")}
               </button>
 
               {preview && (
@@ -1313,7 +1316,7 @@ export default function SmartSizeFinder({
                   }}
                   className="px-5 py-3 rounded-2xl bg-card border font-black text-sm"
                 >
-                  Remove
+                  {t("common.remove")}
                 </button>
               )}
             </motion.div>
@@ -1334,7 +1337,7 @@ export default function SmartSizeFinder({
             {...(!reduce && { variants: FadeUpMedium })}
             className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-4 py-2 font-black text-xs"
           >
-            {product?.name || "MGRM Product"}
+            {product?.name || t("smartSize.mgrmProduct")}
           </motion.div>
 
           <motion.div
@@ -1347,11 +1350,11 @@ export default function SmartSizeFinder({
 
             <div>
               <h3 className="text-2xl font-black text-slate-900 dark:text-zinc-100">
-                Enter measurement
+                {t("smartSize.enterMeasurement")}
               </h3>
 
               <p className="text-slate-500 dark:text-zinc-400 mt-2 text-sm leading-6">
-                Measure your {fitProfile.label} and enter the value in centimeters.
+                {t("smartSize.measureInstruction", { label: fitLabel })}
               </p>
             </div>
           </motion.div>
@@ -1361,14 +1364,14 @@ export default function SmartSizeFinder({
             className="mt-7"
           >
             <label className="font-black text-slate-900 dark:text-zinc-100 text-sm">
-              Measurement in CM
+              {t("smartSize.measurementCm")}
             </label>
 
             <input
               type="number"
               value={measurement}
               onChange={(e) => setMeasurement(e.target.value)}
-              placeholder={fitProfile.example}
+              placeholder={fitExample}
               className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </motion.div>
@@ -1380,7 +1383,7 @@ export default function SmartSizeFinder({
             {...(!reduce && { variants: FadeUpSlow })}
             className="mt-5 h-14 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-700 text-white font-black shadow-xl hover:scale-[1.02] transition duration-500 disabled:opacity-60"
           >
-            {loading ? "Analyzing..." : "Analyze Size"}
+            {loading ? t("smartSize.analyzing") : t("smartSize.analyzeSize")}
           </motion.button>
 
           {recommended && (
@@ -1392,11 +1395,11 @@ export default function SmartSizeFinder({
             >
               <div className="flex items-center gap-2 text-green-600 font-black text-sm">
                 <CheckCircle2 size={18} />
-                Result ready
+                {t("smartSize.resultReady")}
               </div>
 
               <p className="text-slate-500 dark:text-zinc-400 font-bold mt-4 text-sm">
-                Recommended Size
+                {t("smartSize.recommendedSize")}
               </p>
 
               <h2 className="text-5xl font-black text-slate-900 dark:text-zinc-100 mt-1">
@@ -1408,7 +1411,7 @@ export default function SmartSizeFinder({
                 onClick={useSize}
                 className="mt-5 w-full bg-slate-950 text-white py-3 rounded-2xl font-black hover:scale-[1.02] transition"
               >
-                Use This Size
+                {t("smartSize.useSize")}
               </button>
             </motion.div>
           )}

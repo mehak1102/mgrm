@@ -1,19 +1,21 @@
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 const BADGE_ITEMS = {
   products: [
-    { label: "Braces", itemClass: "brand-pill-badge__item--braces" },
-    { label: "Bandage", itemClass: "brand-pill-badge__item--bandage" },
-    { label: "Splints", itemClass: "brand-pill-badge__item--splints" },
+    { key: "brand.braces", itemClass: "brand-pill-badge__item--braces" },
+    { key: "brand.bandage", itemClass: "brand-pill-badge__item--bandage" },
+    { key: "brand.splints", itemClass: "brand-pill-badge__item--splints" },
   ],
   values: [
-    { label: "Comfort", itemClass: "brand-pill-badge__item--comfort" },
-    { label: "Care", itemClass: "brand-pill-badge__item--care" },
-    { label: "Cure", itemClass: "brand-pill-badge__item--cure" },
+    { key: "brand.comfort", itemClass: "brand-pill-badge__item--comfort" },
+    { key: "brand.care", itemClass: "brand-pill-badge__item--care" },
+    { key: "brand.cure", itemClass: "brand-pill-badge__item--cure" },
   ],
 };
 
 export function BrandPillBadge({ variant = "products", tone = "default", className = "" }) {
+  const { t } = useTranslation();
   const items = BADGE_ITEMS[variant] || BADGE_ITEMS.products;
 
   return (
@@ -22,13 +24,13 @@ export function BrandPillBadge({ variant = "products", tone = "default", classNa
       role="text"
     >
       {items.map((item, index) => (
-        <Fragment key={item.label}>
+        <Fragment key={item.key}>
           {index > 0 ? (
             <span className="brand-pill-badge__sep" aria-hidden>
               |
             </span>
           ) : null}
-          <span className={`brand-pill-badge__item ${item.itemClass}`}>{item.label}</span>
+          <span className={`brand-pill-badge__item ${item.itemClass}`}>{t(item.key)}</span>
         </Fragment>
       ))}
     </span>

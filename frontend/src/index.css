@@ -114,6 +114,10 @@ body {
   color: var(--text);
 }
 
+html[lang="hi"] body {
+  font-family: "Noto Sans Devanagari", Inter, system-ui, sans-serif;
+}
+
 [data-theme="light"] body,
 [data-theme="blue"] body {
   background: var(--bg-primary);

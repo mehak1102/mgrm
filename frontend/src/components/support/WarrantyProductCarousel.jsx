@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Eye } from "lucide-react";
 import API from "../../api";
 
 export default function WarrantyProductCarousel() {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [index, setIndex] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -60,7 +62,7 @@ export default function WarrantyProductCarousel() {
     <div className="relative">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-2xl font-black text-fg">
-          Recommended Products
+          {t("global.recommendedProducts")}
         </h3>
         <div className="flex gap-2">
           <button
@@ -68,7 +70,7 @@ export default function WarrantyProductCarousel() {
             onClick={prev}
             disabled={index === 0}
             className="w-11 h-11 rounded-2xl card border border-edge grid place-items-center disabled:opacity-40 hover:shadow-lg transition text-fg"
-            aria-label="Previous"
+            aria-label={t("common.previous")}
           >
             <ChevronLeft size={20} />
           </button>
@@ -77,7 +79,7 @@ export default function WarrantyProductCarousel() {
             onClick={next}
             disabled={index >= maxIndex}
             className="w-11 h-11 rounded-2xl card border border-edge grid place-items-center disabled:opacity-40 hover:shadow-lg transition text-fg"
-            aria-label="Next"
+            aria-label={t("common.next")}
           >
             <ChevronRight size={20} />
           </button>
@@ -116,14 +118,14 @@ export default function WarrantyProductCarousel() {
                   to={`/product/${product.slug}`}
                   onClick={(e) => dragging && e.preventDefault()}
                   className="absolute top-3 right-3 w-9 h-9 rounded-xl bg-white/90 dark:bg-slate-900/80 grid place-items-center opacity-0 group-hover:opacity-100 transition shadow"
-                  aria-label="Quick view"
+                  aria-label={t("common.quickView")}
                 >
                   <Eye size={16} />
                 </Link>
               </div>
               <div className="p-4">
                 <p className="text-xs font-bold text-brand uppercase tracking-wide">
-                  {product.category || "Support"}
+                  {product.category || t("common.supportProduct")}
                 </p>
                 <h4 className="font-black text-fg mt-1 line-clamp-2">
                   {product.name}
@@ -137,7 +139,7 @@ export default function WarrantyProductCarousel() {
                   onClick={(e) => dragging && e.preventDefault()}
                   className="mt-3 inline-block text-sm font-bold text-brand hover:underline"
                 >
-                  View product →
+                  {t("common.viewProduct")}
                 </Link>
               </div>
             </motion.div>
