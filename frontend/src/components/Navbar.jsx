@@ -14,6 +14,7 @@ import { normalizeSearchQuery } from "../utils/searchNormalizer";
 import Logo3D from "./Logo3D";
 import NavbarBrandMark from "./NavbarBrandMark";
 import ThemeSelector from "./ThemeSelector";
+import { useTheme } from "../context/ThemeContext";
 import "../theme/navbar-logo.css";
 import { useTypewriterPlaceholder } from "../hooks/useTypewriterPlaceholder";
 
@@ -77,9 +78,12 @@ function NavbarSearchField({
 }
 
 const NAV_MENU_CLOSE_DELAY = 280;
+const NAVBAR_LOGO_LIGHT = "/products/logs.png";
+const NAVBAR_LOGO_DARK = "/brand/mgrm-logo-navbar-dark.png";
 
 export default function Navbar() {
   const { t } = useTranslation();
+  const { isLight } = useTheme();
   const navigate = useNavigate();
   const searchPlaceholder = t("nav.searchPlaceholder");
   const { categoriesWithCounts } = useProductStats();
@@ -210,7 +214,7 @@ export default function Navbar() {
 <Link to="/" className="navbar-logo-link flex items-center h-14">
   <NavbarBrandMark />
   <img
-    src="/products/logs.png"
+    src={isLight ? NAVBAR_LOGO_LIGHT : NAVBAR_LOGO_DARK}
     alt="Logo"
     className="navbar-logo-img h-[80px] w-auto object-contain"
   />

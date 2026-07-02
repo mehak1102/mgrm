@@ -64,10 +64,13 @@
   }
 }
 
-.navbar-logo-link .navbar-logo-img {
+.navbar-logo-link .navbar-logo-img,
+.brand-logo__img {
   position: relative;
   z-index: 1;
 }
+
+/* Dark & blue themes: same mark, tuned stroke colors for the dark logo */
 .dark .navbar-brand-mark__track,
 [data-theme="dark"] .navbar-brand-mark__track {
   stroke: rgba(244, 114, 182, 0.22);
@@ -75,6 +78,7 @@
 
 .dark .navbar-brand-mark__draw,
 [data-theme="dark"] .navbar-brand-mark__draw {
+  stroke: var(--nbm-grad-blue);
   filter: drop-shadow(0 0 7px rgba(244, 114, 182, 0.5))
     drop-shadow(0 0 14px rgba(56, 189, 248, 0.4));
 }
@@ -127,4 +131,3 @@
     opacity: 0.5;
   }
 }
-
