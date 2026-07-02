@@ -68,7 +68,6 @@
   position: relative;
   z-index: 1;
 }
-
 .dark .navbar-brand-mark__track,
 [data-theme="dark"] .navbar-brand-mark__track {
   stroke: rgba(244, 114, 182, 0.22);
@@ -128,3 +127,4 @@
     opacity: 0.5;
   }
 }
+
