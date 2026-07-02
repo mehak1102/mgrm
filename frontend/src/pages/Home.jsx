@@ -26,6 +26,7 @@ import ViewportVideo from "../components/media/ViewportVideo";
 import "../theme/home-trust-features.css";
 import DeferredSection from "../components/performance/DeferredSection";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
+import BrandLogo from "../components/BrandLogo";
 import HomeAboutPreview from "../components/home/HomeAboutPreview";
 import {
   SectionHeading,
@@ -48,7 +49,7 @@ import {
 const loadBodyFlowMap = () => import("../components/BodyFlowMap");
 const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCollectionsSection");
 const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
-const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
+// const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
 const loadColorCustomize = () => import("../components/home/HomeColorCustomizeSection");
 const loadSizeCustomize = () => import("../components/home/HomeSizeCustomizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
@@ -1508,7 +1509,7 @@ const BANDAGE_STAT_PASTELS = [
           )}
         </section>
 
-        <DeferredSection loader={loadSmartSize} minHeight={560} />
+        {/* <DeferredSection loader={loadSmartSize} minHeight={560} /> */}
         <DeferredSection loader={loadSizeCustomize} minHeight={680} />
         <DeferredSection loader={loadColorCustomize} minHeight={640} />
         <DeferredSection loader={loadTestimonials} minHeight={520} />
@@ -1622,11 +1623,7 @@ const BANDAGE_STAT_PASTELS = [
 {/* HEADING */}
 <div className="text-center mb-14">
 
-  <img
-    src="/products/logs.png"
-    alt="MGRM Medicare"
-    className="home-print-ads-logo mx-auto mt-4 w-auto max-w-[min(100%,440px)] h-auto max-h-28 sm:max-h-32 md:max-h-36 lg:max-h-40 object-contain"
-  />
+  <BrandLogo size="hero" className="home-print-ads-logo mx-auto mt-4" />
 
   <p className="home-print-ads-subtitle">
     Advanced respiratory & pain relief solutions designed for everyday comfort.

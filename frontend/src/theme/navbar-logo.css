@@ -1,0 +1,45 @@
+/* Navbar logo — soft glow on hover */
+.navbar-logo-link {
+  position: relative;
+  border-radius: 1rem;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbar-logo-link .navbar-logo-img {
+  transition:
+    filter 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
+}
+
+.navbar-logo-link:hover .navbar-logo-img,
+.navbar-logo-link:focus-visible .navbar-logo-img {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 10px rgba(34, 167, 220, 0.55))
+    drop-shadow(0 0 22px rgba(37, 49, 154, 0.35));
+}
+
+.dark .navbar-logo-link:hover .navbar-logo-img,
+[data-theme="dark"] .navbar-logo-link:hover .navbar-logo-img,
+.dark .navbar-logo-link:focus-visible .navbar-logo-img,
+[data-theme="dark"] .navbar-logo-link:focus-visible .navbar-logo-img {
+  filter: drop-shadow(0 0 12px rgba(103, 232, 249, 0.6))
+    drop-shadow(0 0 26px rgba(34, 211, 238, 0.4));
+}
+
+[data-theme="blue"] .navbar-logo-link:hover .navbar-logo-img,
+[data-theme="blue"] .navbar-logo-link:focus-visible .navbar-logo-img {
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.55))
+    drop-shadow(0 0 26px rgba(103, 232, 249, 0.4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-logo-link,
+  .navbar-logo-link .navbar-logo-img {
+    transition: filter 0.3s ease;
+  }
+  .navbar-logo-link:hover .navbar-logo-img,
+  .navbar-logo-link:focus-visible .navbar-logo-img {
+    transform: none;
+  }
+}

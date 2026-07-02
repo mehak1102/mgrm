@@ -1,0 +1,130 @@
+/* Animated MGRM ribbon / infinity draw behind navbar lotus */
+.navbar-logo-link {
+  position: relative;
+  isolation: isolate;
+}
+
+.navbar-brand-mark {
+  position: absolute;
+  left: -0.65rem;
+  top: 0.1rem;
+  width: 6.6rem;
+  height: 3.1rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.navbar-brand-mark__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.navbar-brand-mark__shape {
+  transform: rotate(-2deg);
+  transform-origin: 50% 50%;
+}
+
+.navbar-brand-mark__track {
+  fill: none;
+  stroke: rgba(236, 72, 153, 0.2);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.navbar-brand-mark__draw {
+  fill: none;
+  stroke: var(--nbm-grad);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.45))
+    drop-shadow(0 0 12px rgba(56, 189, 248, 0.35));
+  stroke-dasharray: 0.22 0.78;
+  stroke-dashoffset: 1;
+  animation: navbarBrandMarkDraw 10s linear infinite;
+}
+
+.navbar-brand-mark__glow {
+  fill: none;
+  stroke: rgba(244, 114, 182, 0.38);
+  stroke-width: 8.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0.22 0.78;
+  stroke-dashoffset: 1;
+  animation: navbarBrandMarkDraw 10s linear infinite;
+  filter: blur(4px);
+}
+
+@keyframes navbarBrandMarkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.navbar-logo-link .navbar-logo-img {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .navbar-brand-mark__track,
+[data-theme="dark"] .navbar-brand-mark__track {
+  stroke: rgba(244, 114, 182, 0.22);
+}
+
+.dark .navbar-brand-mark__draw,
+[data-theme="dark"] .navbar-brand-mark__draw {
+  filter: drop-shadow(0 0 7px rgba(244, 114, 182, 0.5))
+    drop-shadow(0 0 14px rgba(56, 189, 248, 0.4));
+}
+
+.dark .navbar-brand-mark__glow,
+[data-theme="dark"] .navbar-brand-mark__glow {
+  stroke: rgba(249, 168, 212, 0.35);
+}
+
+[data-theme="blue"] .navbar-brand-mark__track {
+  stroke: rgba(251, 207, 232, 0.24);
+}
+
+[data-theme="blue"] .navbar-brand-mark__draw {
+  stroke: var(--nbm-grad-blue);
+  filter: drop-shadow(0 0 7px rgba(244, 114, 182, 0.45))
+    drop-shadow(0 0 14px rgba(103, 232, 249, 0.4));
+}
+
+[data-theme="blue"] .navbar-brand-mark__glow {
+  stroke: rgba(244, 114, 182, 0.34);
+}
+
+/* Hero / home — larger infinity behind lotus */
+.navbar-brand-mark--hero {
+  left: -1.55rem;
+  top: 0.55rem;
+  width: clamp(11.5rem, 24vw, 17rem);
+  height: clamp(5.4rem, 11vw, 8rem);
+}
+
+.navbar-brand-mark--hero .navbar-brand-mark__track {
+  stroke-width: 5.5;
+}
+
+.navbar-brand-mark--hero .navbar-brand-mark__draw {
+  stroke-width: 6;
+}
+
+.navbar-brand-mark--hero .navbar-brand-mark__glow {
+  stroke-width: 11;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-brand-mark__draw,
+  .navbar-brand-mark__glow {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}

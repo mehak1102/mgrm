@@ -1,0 +1,58 @@
+/* Shared MGRM brand logo — navbar + hero */
+.brand-logo {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-logo__img {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  object-fit: contain;
+  transition:
+    filter 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-logo--navbar .brand-logo__img {
+  height: 5rem;
+}
+
+.brand-logo--hero .brand-logo__img {
+  height: clamp(9.5rem, 20vw, 14.5rem);
+  max-width: min(100%, 34rem);
+}
+
+.brand-logo--hero:hover .brand-logo__img,
+.brand-logo--hero:focus-within .brand-logo__img {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 14px rgba(236, 72, 153, 0.45))
+    drop-shadow(0 0 28px rgba(56, 189, 248, 0.35));
+}
+
+.dark .brand-logo--hero:hover .brand-logo__img,
+[data-theme="dark"] .brand-logo--hero:hover .brand-logo__img,
+.dark .brand-logo--hero:focus-within .brand-logo__img,
+[data-theme="dark"] .brand-logo--hero:focus-within .brand-logo__img {
+  filter: drop-shadow(0 0 16px rgba(244, 114, 182, 0.5))
+    drop-shadow(0 0 30px rgba(56, 189, 248, 0.4));
+}
+
+[data-theme="blue"] .brand-logo--hero:hover .brand-logo__img,
+[data-theme="blue"] .brand-logo--hero:focus-within .brand-logo__img {
+  filter: drop-shadow(0 0 16px rgba(244, 114, 182, 0.45))
+    drop-shadow(0 0 30px rgba(103, 232, 249, 0.4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo__img {
+    transition: filter 0.3s ease;
+  }
+
+  .brand-logo--hero:hover .brand-logo__img,
+  .brand-logo--hero:focus-within .brand-logo__img {
+    transform: none;
+  }
+}

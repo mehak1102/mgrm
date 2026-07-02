@@ -7,37 +7,25 @@ const LANGUAGES = [
   { code: "hi", labelKey: "language.hindi", native: "हिंदी" },
 ];
 
-function FlagIcon({ code, className = "" }) {
+function LanguageSymbol({ code, className = "" }) {
   if (code === "hi") {
     return (
-      <svg
-        className={className}
-        viewBox="0 0 24 16"
-        xmlns="http://www.w3.org/2000/svg"
+      <span
+        className={`language-switcher__symbol language-switcher__symbol--hi ${className}`}
         aria-hidden
       >
-        <rect width="24" height="16" fill="#fff" />
-        <rect width="24" height="5.33" fill="#FF9933" />
-        <rect y="10.67" width="24" height="5.33" fill="#138808" />
-        <circle cx="12" cy="8" r="2.2" fill="none" stroke="#000080" strokeWidth="0.45" />
-        <circle cx="12" cy="8" r="0.55" fill="#000080" />
-      </svg>
+        अ
+      </span>
     );
   }
 
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 16"
-      xmlns="http://www.w3.org/2000/svg"
+    <span
+      className={`language-switcher__symbol language-switcher__symbol--en ${className}`}
       aria-hidden
     >
-      <rect width="24" height="16" fill="#012169" />
-      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" strokeWidth="3.2" />
-      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#C8102E" strokeWidth="1.6" />
-      <path d="M12,0 V16 M0,8 H24" stroke="#fff" strokeWidth="5" />
-      <path d="M12,0 V16 M0,8 H24" stroke="#C8102E" strokeWidth="3" />
-    </svg>
+      A
+    </span>
   );
 }
 
@@ -75,11 +63,9 @@ function LanguageToggleTrack({ currentCode, switching, onSelect, compact = false
               compact ? "w-10 h-10" : "w-11 h-11"
             } ${selected ? "opacity-100" : "opacity-45 hover:opacity-80"}`}
           >
-            <FlagIcon
+            <LanguageSymbol
               code={lang.code}
-              className={`language-switcher__flag rounded-[4px] shadow-sm ${
-                compact ? "w-6 h-4" : "w-7 h-[1.15rem]"
-              }`}
+              className={compact ? "language-switcher__symbol--compact" : ""}
             />
           </button>
         );

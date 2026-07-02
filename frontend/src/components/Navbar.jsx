@@ -12,7 +12,9 @@ import { useProductStats } from "../context/ProductStatsContext";
 import { trackSearch } from "../utils/recommendationBehavior";
 import { normalizeSearchQuery } from "../utils/searchNormalizer";
 import Logo3D from "./Logo3D";
+import NavbarBrandMark from "./NavbarBrandMark";
 import ThemeSelector from "./ThemeSelector";
+import "../theme/navbar-logo.css";
 import { useTypewriterPlaceholder } from "../hooks/useTypewriterPlaceholder";
 
 const ABOUT_LINKS = [
@@ -205,11 +207,12 @@ export default function Navbar() {
     className="max-h-full w-auto object-contain"
   />
 </Link> */}
-<Link to="/" className="flex items-center h-14 overflow-hidden">
+<Link to="/" className="navbar-logo-link flex items-center h-14">
+  <NavbarBrandMark />
   <img
     src="/products/logs.png"
     alt="Logo"
-    className="h-[80px] w-auto object-contain"
+    className="navbar-logo-img h-[80px] w-auto object-contain"
   />
 </Link>
 

@@ -4,6 +4,7 @@
 
 .home-print-ads-logo {
   display: block;
+  width: fit-content;
 }
 
 .home-print-ads-subtitle {
