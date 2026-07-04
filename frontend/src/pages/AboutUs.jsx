@@ -454,8 +454,7 @@ const AboutUs = () => {
 
       <div className="absolute bottom-[-150px] right-[-150px] h-[450px] w-[450px] rounded-full bg-blue-200/40 blur-3xl" />
 
-      {/* HERO — moved to Home page (top) */}
-      {false && (
+      {/* HERO */}
       <section className="relative h-screen overflow-hidden">
         <ViewportVideo
           eager
@@ -520,7 +519,6 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      )}
 
       {/* MAIN */}
       <section className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-24 min-w-0">

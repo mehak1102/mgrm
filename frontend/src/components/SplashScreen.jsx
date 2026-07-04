@@ -10,8 +10,6 @@ import "../theme/splash-screen.css";
 
 const MARK_SRC = "/brand/splash-mark-clean.png";
 const LOTUS_SRC = "/brand/splash-lotus-cleans.png";
-const RING_RADIUS = 108;
-const RING_CIRC = 2 * Math.PI * RING_RADIUS;
 
 const TIMING = {
   markOut: 1600,
@@ -129,13 +127,6 @@ export default function SplashScreen({ onFinish }) {
         ? "splash-stage__mark--out"
         : "";
 
-  const visualClass =
-    step >= 0 && step < 2
-      ? "splash-stage__visual--ring"
-      : step >= 2
-        ? "splash-stage__visual--ring splash-stage__visual--glow"
-        : "";
-
   return createPortal(
     <div
       className={`splash-screen splash-screen--${theme} ${fading ? "splash-screen--fading" : ""}`}
@@ -145,31 +136,7 @@ export default function SplashScreen({ onFinish }) {
       <div className="splash-screen__bg" aria-hidden="true" />
 
       <div className="splash-stage">
-        <div className={`splash-stage__visual ${visualClass}`}>
-          <svg
-            className="splash-stage__ring"
-            viewBox="0 0 240 240"
-            aria-hidden="true"
-          >
-            <circle
-              className="splash-stage__ring-track"
-              cx="120"
-              cy="120"
-              r={RING_RADIUS}
-            />
-            <circle
-              className="splash-stage__ring-draw"
-              cx="120"
-              cy="120"
-              r={RING_RADIUS}
-              transform="rotate(-90 120 120)"
-              style={{
-                strokeDasharray: RING_CIRC,
-                strokeDashoffset: RING_CIRC,
-              }}
-            />
-          </svg>
-
+        <div className="splash-stage__visual">
           <div className="splash-stage__stack">
             {step < 2 && (
               <div className={`splash-stage__mark ${markClass}`}>
