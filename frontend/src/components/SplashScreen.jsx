@@ -66,14 +66,25 @@ export default function SplashScreen({ onFinish }) {
     if (step < 3) return undefined;
 
     const measure = () => {
-      if (wordmarkRef.current) {
-        setWordmarkWidth(wordmarkRef.current.offsetWidth);
-      }
+      const slot = wordmarkRef.current;
+      if (!slot) return;
+
+      const scaled = slot.querySelector(".splash-stage__wordmark-scale");
+      if (!scaled) return;
+
+      const rect = scaled.getBoundingClientRect();
+      setWordmarkWidth(rect.width);
+      slot.style.height = `${rect.height}px`;
     };
 
     measure();
     const observer = new ResizeObserver(measure);
-    if (wordmarkRef.current) observer.observe(wordmarkRef.current);
+    const slot = wordmarkRef.current;
+    if (slot) {
+      observer.observe(slot);
+      const scaled = slot.querySelector(".splash-stage__wordmark-scale");
+      if (scaled) observer.observe(scaled);
+    }
     window.addEventListener("resize", measure);
 
     return () => {
@@ -176,15 +187,18 @@ export default function SplashScreen({ onFinish }) {
 
         <div className="splash-stage__text">
           <div className="splash-stage__text-inner">
-            <LetterReveal
-              text="MGRM"
-              step={step}
-              stepAt={3}
-              stepDelay={0.22}
-              className="splash-stage__line splash-stage__wordmark"
-              variant="hero"
-              lineRef={wordmarkRef}
-            />
+            <div ref={wordmarkRef} className="splash-stage__wordmark-slot">
+              <div className="splash-stage__wordmark-scale">
+                <LetterReveal
+                  text="MGRM"
+                  step={step}
+                  stepAt={3}
+                  stepDelay={0.22}
+                  className="splash-stage__line splash-stage__wordmark"
+                  variant="hero"
+                />
+              </div>
+            </div>
 
             <LetterReveal
               text="MEDICARE PRIVATE LIMITED"
