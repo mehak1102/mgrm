@@ -30,9 +30,9 @@ import API from "../api";
 import "../theme/about-category-flip.css";
 import "../theme/about-partnerships.css";
 import ViewportVideo from "../components/media/ViewportVideo";
-import AboutIntroPopup from "../components/about/AboutIntroPopup";
+// import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
-import "../components/about/AboutIntroPopup.css";
+// import "../components/about/AboutIntroPopup.css";
 
 const ABOUT_HERO_LINES_EN = {
   revolutionizing: "Revolutionizing",
@@ -448,7 +448,7 @@ const AboutUs = () => {
 
   return (
     <div className="about-us-page relative overflow-x-clip overflow-hidden bg-[#eef7ff] bg-app dark:bg-zinc-950 transition-colors duration-300 max-w-[100vw]">
-      <AboutIntroPopup />
+      {/* <AboutIntroPopup /> */}
       {/* BG */}
       <div className="absolute left-[-150px] top-[-150px] h-[450px] w-[450px] rounded-full bg-cyan-200/40 blur-3xl" />
 

@@ -57,8 +57,8 @@ export default function SplashScreen({ onFinish }) {
   const { theme } = useTheme();
   const [step, setStep] = useState(0);
   const [fading, setFading] = useState(false);
-  const wordmarkRef = useRef(null);
-  const [wordmarkWidth, setWordmarkWidth] = useState(null);
+  // const wordmarkRef = useRef(null);
+  // const [wordmarkWidth, setWordmarkWidth] = useState(null);
   const onFinishRef = useRef(onFinish);
   const finishedRef = useRef(false);
 
@@ -72,36 +72,36 @@ export default function SplashScreen({ onFinish }) {
     onFinishRef.current?.();
   };
 
-  useLayoutEffect(() => {
-    if (step < 3) return undefined;
+  // useLayoutEffect(() => {
+  //   if (step < 3) return undefined;
 
-    const measure = () => {
-      const slot = wordmarkRef.current;
-      if (!slot) return;
+  //   const measure = () => {
+  //     const slot = wordmarkRef.current;
+  //     if (!slot) return;
 
-      const scaled = slot.querySelector(".splash-stage__wordmark-scale");
-      if (!scaled) return;
+  //     const scaled = slot.querySelector(".splash-stage__wordmark-scale");
+  //     if (!scaled) return;
 
-      const rect = scaled.getBoundingClientRect();
-      setWordmarkWidth(rect.width);
-      slot.style.height = `${rect.height}px`;
-    };
+  //     const rect = scaled.getBoundingClientRect();
+  //     setWordmarkWidth(rect.width);
+  //     slot.style.height = `${rect.height}px`;
+  //   };
 
-    measure();
-    const observer = new ResizeObserver(measure);
-    const slot = wordmarkRef.current;
-    if (slot) {
-      observer.observe(slot);
-      const scaled = slot.querySelector(".splash-stage__wordmark-scale");
-      if (scaled) observer.observe(scaled);
-    }
-    window.addEventListener("resize", measure);
+  //   measure();
+  //   const observer = new ResizeObserver(measure);
+  //   const slot = wordmarkRef.current;
+  //   if (slot) {
+  //     observer.observe(slot);
+  //     const scaled = slot.querySelector(".splash-stage__wordmark-scale");
+  //     if (scaled) observer.observe(scaled);
+  //   }
+  //   window.addEventListener("resize", measure);
 
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [step]);
+  //   return () => {
+  //     observer.disconnect();
+  //     window.removeEventListener("resize", measure);
+  //   };
+  // }, [step]);
 
   useEffect(() => {
     if (isSplashSeen()) {
@@ -167,7 +167,7 @@ export default function SplashScreen({ onFinish }) {
 
           <div className="splash-stage__text">
             <div className="splash-stage__text-inner">
-              <div ref={wordmarkRef} className="splash-stage__wordmark-slot">
+              {/* <div ref={wordmarkRef} className="splash-stage__wordmark-slot">
                 <div className="splash-stage__wordmark-scale">
                   <LetterReveal
                     text="MGRM"
@@ -188,7 +188,7 @@ export default function SplashScreen({ onFinish }) {
                 className="splash-stage__line splash-stage__medicare"
                 variant="sub"
                 spread
-                style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+                // style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
               />
 
               <LetterReveal
@@ -199,8 +199,43 @@ export default function SplashScreen({ onFinish }) {
                 className="splash-stage__line splash-stage__tagline"
                 variant="tag"
                 spread
-                style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
-              />
+                // style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+              /> */}
+
+<div className="splash-stage__wordmark-container">
+  <LetterReveal
+    text="MGRM"
+    step={step}
+    stepAt={3}
+    stepDelay={0.22}
+    className="splash-stage__line splash-stage__wordmark"
+    variant="hero"
+  />
+</div>
+
+<div className="splash-stage__medicare-container">
+  <LetterReveal
+    text="MEDICARE PRIVATE LIMITED"
+    step={step}
+    stepAt={4}
+    stepDelay={0.048}
+    className="splash-stage__line splash-stage__medicare"
+    variant="sub"
+    spread
+  />
+</div>
+
+<div className="splash-stage__tagline-container">
+  <LetterReveal
+    text="COMFORT · CARE · CURE"
+    step={step}
+    stepAt={5}
+    stepDelay={0.042}
+    className="splash-stage__line splash-stage__tagline"
+    variant="tag"
+    spread
+  />
+</div>
             </div>
           </div>
         </div>
