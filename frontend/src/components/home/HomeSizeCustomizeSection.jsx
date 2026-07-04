@@ -8,7 +8,9 @@ import {
   PremiumReveal,
   FadeUpSlow,
 } from "../motion/PremiumMotion";
+import Logo3D from "../Logo3D";
 import "../../theme/home-size-customize.css";
+import "../../theme/navbar-logo.css";
 
 const SIZE_KEYS = ["xs", "s", "m", "l", "xl", "xxl", "custom"];
 const BODY_PART_KEYS = [
@@ -95,14 +97,20 @@ export default function HomeSizeCustomizeSection() {
     <section className="home-size-customize-section relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-6 py-24 md:py-28">
       <div className="home-size-customize-section__bg absolute inset-0 rounded-[48px] border border-slate-100/80 dark:border-white/10 [data-theme=blue]:border-[var(--border-color)]" />
 
-      <div className="relative grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start px-2 sm:px-6">
-        <PremiumWordHeader
-          label={t("sizeCustomize.badge")}
-          title={t("sizeCustomize.title")}
-          description={t("sizeCustomize.descriptionLong")}
-          style="slideRight"
-          titleClassName="text-4xl sm:text-[46px] font-black mt-2 text-slate-900 dark:text-zinc-100"
-        />
+      <div className="home-customize-layout relative grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-stretch px-2 sm:px-6">
+        <div className="home-customize-intro flex min-h-0 flex-col">
+          <PremiumWordHeader
+            label={t("sizeCustomize.badge")}
+            title={t("sizeCustomize.title")}
+            description={t("sizeCustomize.descriptionLong")}
+            style="slideRight"
+            titleClassName="text-4xl sm:text-[46px] font-black mt-2 text-slate-900 dark:text-zinc-100"
+          />
+
+          <div className="home-customize-intro__logo">
+            <Logo3D asStatic className="home-customize-brand-logo" />
+          </div>
+        </div>
 
         <PremiumReveal variant={FadeUpSlow} delay={0.15}>
           <form

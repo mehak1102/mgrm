@@ -2,14 +2,27 @@
 .navbar-logo-link {
   position: relative;
   border-radius: 1rem;
+  overflow: visible;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navbar-logo-link .navbar-logo-img {
+  display: block;
+  width: auto;
+  height: 3.5rem;
+  object-fit: contain;
+  transform-origin: left center;
   transition:
     filter 0.4s ease,
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: filter, transform;
+}
+
+/* Dark/blue assets have extra canvas padding — scale visually without growing navbar */
+[data-theme="dark"] .navbar-logo-link .navbar-logo-img,
+.dark .navbar-logo-link .navbar-logo-img,
+[data-theme="blue"] .navbar-logo-link .navbar-logo-img {
+  transform: scale(1.18);
 }
 
 .navbar-logo-link:hover .navbar-logo-img,
@@ -17,6 +30,15 @@
   transform: scale(1.03);
   filter: drop-shadow(0 0 10px rgba(34, 167, 220, 0.55))
     drop-shadow(0 0 22px rgba(37, 49, 154, 0.35));
+}
+
+[data-theme="dark"] .navbar-logo-link:hover .navbar-logo-img,
+.dark .navbar-logo-link:hover .navbar-logo-img,
+[data-theme="dark"] .navbar-logo-link:focus-visible .navbar-logo-img,
+.dark .navbar-logo-link:focus-visible .navbar-logo-img,
+[data-theme="blue"] .navbar-logo-link:hover .navbar-logo-img,
+[data-theme="blue"] .navbar-logo-link:focus-visible .navbar-logo-img {
+  transform: scale(1.215);
 }
 
 .dark .navbar-logo-link:hover .navbar-logo-img,
@@ -38,8 +60,100 @@
   .navbar-logo-link .navbar-logo-img {
     transition: filter 0.3s ease;
   }
+
   .navbar-logo-link:hover .navbar-logo-img,
   .navbar-logo-link:focus-visible .navbar-logo-img {
     transform: none;
   }
+
+  [data-theme="dark"] .navbar-logo-link .navbar-logo-img,
+  .dark .navbar-logo-link .navbar-logo-img,
+  [data-theme="blue"] .navbar-logo-link .navbar-logo-img,
+  [data-theme="dark"] .navbar-logo-link:hover .navbar-logo-img,
+  .dark .navbar-logo-link:hover .navbar-logo-img,
+  [data-theme="dark"] .navbar-logo-link:focus-visible .navbar-logo-img,
+  .dark .navbar-logo-link:focus-visible .navbar-logo-img,
+  [data-theme="blue"] .navbar-logo-link:hover .navbar-logo-img,
+  [data-theme="blue"] .navbar-logo-link:focus-visible .navbar-logo-img {
+    transform: scale(1.18);
+  }
+}
+
+/* Home — Attention Cardiologists footer logo */
+.home-cardiology-brand-logo.navbar-logo-link .navbar-logo-img {
+  height: 3.75rem;
+  transform-origin: center center;
+}
+
+html[data-theme="dark"] .home-cardiology-brand-logo.navbar-logo-link .navbar-logo-img,
+html.dark .home-cardiology-brand-logo.navbar-logo-link .navbar-logo-img,
+html[data-theme="blue"] .home-cardiology-brand-logo.navbar-logo-link .navbar-logo-img {
+  height: 3.75rem;
+  transform: scale(1.22);
+  transform-origin: center center;
+}
+
+html[data-theme="dark"] .home-cardiology-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html.dark .home-cardiology-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html[data-theme="dark"] .home-cardiology-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img,
+html.dark .home-cardiology-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img,
+html[data-theme="blue"] .home-cardiology-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html[data-theme="blue"] .home-cardiology-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img {
+  transform: scale(1.26);
+}
+
+/* Home — Customize Size / Colour section logo (bottom-left of left column) */
+.home-customize-layout {
+  align-items: stretch;
+}
+
+.home-customize-intro {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.home-customize-intro__logo {
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+@media (min-width: 1024px) {
+  .home-customize-intro__logo {
+    margin-top: auto;
+    padding-top: 2.5rem;
+  }
+}
+
+.home-customize-brand-logo.navbar-logo-link,
+.home-customize-brand-logo {
+  align-self: flex-start;
+}
+
+.home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+.home-customize-brand-logo .navbar-logo-img {
+  height: 5rem;
+  transform-origin: left center;
+}
+
+html[data-theme="dark"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+html.dark .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img {
+  height: 5rem;
+  transform: scale(1.22);
+  transform-origin: left center;
+}
+
+.home-customize-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+.home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img {
+  transform: scale(1.04);
+}
+
+html[data-theme="dark"] .home-customize-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html.dark .home-customize-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html[data-theme="dark"] .home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img,
+html.dark .home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img,
+html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link:hover .navbar-logo-img,
+html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img {
+  transform: scale(1.26);
 }

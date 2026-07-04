@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import "../theme/navbar-logo.css";
+
+/*
+
 import { motion, useReducedMotion } from "framer-motion";
 
 const ORBITS = [
@@ -54,8 +59,34 @@ function OrbitRing({ orbit, reduceMotion }) {
     </motion.div>
   );
 }
+*/
 
-export default function Logo3D({ asStatic = false, hideBranding = false, className = "" }) {
+export default function Logo3D({
+  asStatic = false,
+  hideBranding = false,
+  className = "",
+  variant = "default",
+}) {
+  const { isLight } = useTheme();
+
+  if (hideBranding) return null;
+
+  const isFloating =
+    variant === "floating" || className.includes("floating-help-logo");
+
+  const wrapperClass = isFloating
+    ? `floating-help-logo flex items-center shrink-0 ${className}`.trim()
+    : `navbar-logo-link flex items-center shrink-0 ${className}`.trim();
+
+  const logo = (
+    <img
+      src={isLight ? "/products/mgrmlight.png" : "/products/mgrmdark.png"}
+      alt="MGRM Medicare"
+      className={isFloating ? "floating-help-logo-img" : "navbar-logo-img"}
+    />
+  );
+
+  /*
   const reduceMotion = useReducedMotion();
 
   const wrapperClass = `relative shrink-0 flex items-center justify-center w-[108px] min-[420px]:w-[150px] sm:w-[180px] lg:w-[215px] h-[48px] min-[420px]:h-[52px] sm:h-[58px] lg:h-[64px] overflow-visible ${className}`;
@@ -130,6 +161,17 @@ export default function Logo3D({ asStatic = false, hideBranding = false, classNa
   return (
     <Link to="/" aria-label="MGRM Medicare home" className={wrapperClass}>
       {inner}
+    </Link>
+  );
+  */
+
+  if (asStatic) {
+    return <div className={wrapperClass}>{logo}</div>;
+  }
+
+  return (
+    <Link to="/" aria-label="MGRM Medicare home" className={wrapperClass}>
+      {logo}
     </Link>
   );
 }

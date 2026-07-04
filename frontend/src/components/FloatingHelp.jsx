@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUp } from "lucide-react";
 import Logo3D from "./Logo3D";
+import "../theme/floating-help.css";
 
 function WhatsAppIcon({ className = "h-7 w-7" }) {
   return (
@@ -47,12 +48,8 @@ export default function FloatingHelp() {
   };
 
   return (
-    <div className="fixed right-5 bottom-6 z-[999] flex w-14 flex-col items-center gap-3 sm:gap-3.5">
-      <div className="relative flex h-[50px] w-full items-end justify-center overflow-visible pb-1 sm:h-[56px] sm:pb-1.5">
-        <div className="pointer-events-auto absolute bottom-2 left-1/2 -translate-x-1/2 origin-bottom scale-[0.76] sm:bottom-2.5 sm:scale-[0.86]">
-          <Logo3D />
-        </div>
-      </div>
+    <div className="floating-help-stack fixed right-5 bottom-6 z-[999] flex w-14 flex-col items-center gap-3 sm:gap-3.5 overflow-visible">
+      <Logo3D variant="floating" className="shrink-0" />
 
       {/* WhatsApp */}
       <a

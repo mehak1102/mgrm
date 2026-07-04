@@ -234,11 +234,11 @@ export default function Navbar() {
     className="navbar-logo-img h-[80px] w-auto object-contain"
   />
 </Link> */}
-<Link to="/" className="navbar-logo-link flex items-center h-14 shrink-0 overflow-hidden">
+<Link to="/" className="navbar-logo-link flex items-center shrink-0">
   <img
-    src={isLight ? "/products/mgrm.png" : "/products/darkkkk.png"}
+    src={isLight ? "/products/mgrmlight.png" : "/products/mgrmdark.png"}
     alt="MGRM Medicare"
-    className="h-full w-auto max-h-14 object-contain"
+    className="navbar-logo-img"
   />
 </Link>
 

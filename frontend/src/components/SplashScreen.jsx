@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTheme } from "../context/ThemeContext";
 import {
@@ -10,22 +10,38 @@ import "../theme/splash-screen.css";
 
 const MARK_SRC = "/brand/splash-mark-clean.png";
 const LOTUS_SRC = "/brand/splash-lotus-cleans.png";
+const RING_RADIUS = 108;
+const RING_CIRC = 2 * Math.PI * RING_RADIUS;
 
 const TIMING = {
-  markOut: 1400,
-  lotus: 2100,
-  mgrm: 3400,
-  medicare: 5200,
-  tagline: 7800,
-  fade: 9200,
-  done: 9900,
+  markOut: 1600,
+  lotus: 2400,
+  mgrm: 4000,
+  medicare: 5400,
+  tagline: 7200,
+  fade: 9800,
+  done: 10500,
 };
 
-function LetterReveal({ text, step, stepAt, stepDelay, className, variant }) {
+function LetterReveal({
+  text,
+  step,
+  stepAt,
+  stepDelay,
+  className,
+  variant,
+  lineRef,
+  style,
+  spread,
+}) {
   if (step < stepAt) return null;
 
   return (
-    <div className={className}>
+    <div
+      ref={lineRef}
+      className={`${className}${spread ? " splash-stage__line--spread" : ""}`}
+      style={style}
+    >
       {[...text].map((ch, i) => (
         <span
           key={`${variant}-${i}-${ch}`}
@@ -43,6 +59,28 @@ export default function SplashScreen({ onFinish }) {
   const { theme } = useTheme();
   const [step, setStep] = useState(0);
   const [fading, setFading] = useState(false);
+  const wordmarkRef = useRef(null);
+  const [wordmarkWidth, setWordmarkWidth] = useState(null);
+
+  useLayoutEffect(() => {
+    if (step < 3) return undefined;
+
+    const measure = () => {
+      if (wordmarkRef.current) {
+        setWordmarkWidth(wordmarkRef.current.offsetWidth);
+      }
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    if (wordmarkRef.current) observer.observe(wordmarkRef.current);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [step]);
 
   useEffect(() => {
     if (isSplashSeen()) {
@@ -80,6 +118,13 @@ export default function SplashScreen({ onFinish }) {
         ? "splash-stage__mark--out"
         : "";
 
+  const visualClass =
+    step >= 0 && step < 2
+      ? "splash-stage__visual--ring"
+      : step >= 2
+        ? "splash-stage__visual--ring splash-stage__visual--glow"
+        : "";
+
   return createPortal(
     <div
       className={`splash-screen splash-screen--${theme} ${fading ? "splash-screen--fading" : ""}`}
@@ -89,46 +134,80 @@ export default function SplashScreen({ onFinish }) {
       <div className="splash-screen__bg" aria-hidden="true" />
 
       <div className="splash-stage">
-        <div className="splash-stage__stack">
-          {step < 2 && (
-            <div className={`splash-stage__mark ${markClass}`}>
-              <img src={MARK_SRC} alt="" draggable={false} />
-            </div>
-          )}
+        <div className={`splash-stage__visual ${visualClass}`}>
+          <svg
+            className="splash-stage__ring"
+            viewBox="0 0 240 240"
+            aria-hidden="true"
+          >
+            <circle
+              className="splash-stage__ring-track"
+              cx="120"
+              cy="120"
+              r={RING_RADIUS}
+            />
+            <circle
+              className="splash-stage__ring-draw"
+              cx="120"
+              cy="120"
+              r={RING_RADIUS}
+              transform="rotate(-90 120 120)"
+              style={{
+                strokeDasharray: RING_CIRC,
+                strokeDashoffset: RING_CIRC,
+              }}
+            />
+          </svg>
 
-          {step >= 2 && (
-            <div className="splash-stage__lotus splash-stage__lotus--in">
-              <img src={LOTUS_SRC} alt="" draggable={false} />
-            </div>
-          )}
+          <div className="splash-stage__stack">
+            {step < 2 && (
+              <div className={`splash-stage__mark ${markClass}`}>
+                <img src={MARK_SRC} alt="" draggable={false} />
+              </div>
+            )}
+
+            {step >= 2 && (
+              <div className="splash-stage__lotus splash-stage__lotus--in">
+                <img src={LOTUS_SRC} alt="" draggable={false} />
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="splash-stage__text">
-          <LetterReveal
-            text="MGRM"
-            step={step}
-            stepAt={3}
-            stepDelay={0.2}
-            className="splash-stage__wordmark"
-            variant="hero"
-          />
+          <div className="splash-stage__text-inner">
+            <LetterReveal
+              text="MGRM"
+              step={step}
+              stepAt={3}
+              stepDelay={0.22}
+              className="splash-stage__line splash-stage__wordmark"
+              variant="hero"
+              lineRef={wordmarkRef}
+            />
 
-          {step >= 4 && <div className="splash-stage__rule splash-stage__rule--in" />}
+            <LetterReveal
+              text="MEDICARE PRIVATE LIMITED"
+              step={step}
+              stepAt={4}
+              stepDelay={0.048}
+              className="splash-stage__line splash-stage__medicare"
+              variant="sub"
+              spread
+              style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+            />
 
-          <LetterReveal
-            text="MEDICARE PRIVATE LIMITED"
-            step={step}
-            stepAt={4}
-            stepDelay={0.055}
-            className="splash-stage__medicare"
-            variant="sub"
-          />
-
-          {step >= 5 && (
-            <p className="splash-stage__tagline splash-stage__tagline--in">
-              Comfort · Care · Cure
-            </p>
-          )}
+            <LetterReveal
+              text="COMFORT · CARE · CURE"
+              step={step}
+              stepAt={5}
+              stepDelay={0.042}
+              className="splash-stage__line splash-stage__tagline"
+              variant="tag"
+              spread
+              style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+            />
+          </div>
         </div>
       </div>
     </div>,

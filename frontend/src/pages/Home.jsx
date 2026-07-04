@@ -24,9 +24,11 @@ import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import HeroAnatomicalRunner from "../components/HeroAnatomicalRunner";
 import ViewportVideo from "../components/media/ViewportVideo";
 import "../theme/home-trust-features.css";
+import "../theme/navbar-logo.css";
 import DeferredSection from "../components/performance/DeferredSection";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 import BrandLogo from "../components/BrandLogo";
+import Logo3D from "../components/Logo3D";
 import HomeAboutPreview from "../components/home/HomeAboutPreview";
 import {
   SectionHeading,
@@ -1039,7 +1041,10 @@ const BANDAGE_STAT_PASTELS = [
         "
       >
 
-        {/* LOGO TEXT */}
+        {/* LOGO */}
+        <Logo3D className="home-cardiology-brand-logo shrink-0" />
+
+        {/* LOGO TEXT — replaced with theme logo above
         <div>
           <h3
             className="
@@ -1067,6 +1072,7 @@ const BANDAGE_STAT_PASTELS = [
             MEDICARE
           </p>
         </div>
+        */}
 
         {/* DESCRIPTION */}
         <div
@@ -1623,7 +1629,7 @@ const BANDAGE_STAT_PASTELS = [
 {/* HEADING */}
 <div className="text-center mb-14">
 
-  <BrandLogo size="hero" className="home-print-ads-logo mx-auto mt-4" />
+  {/* <BrandLogo size="hero" className="home-print-ads-logo mx-auto mt-4" /> */}
 
   <p className="home-print-ads-subtitle">
     Advanced respiratory & pain relief solutions designed for everyday comfort.
