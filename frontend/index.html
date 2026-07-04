@@ -80,9 +80,26 @@
           Object.keys(t).forEach(function (k) {
             root.style.setProperty("--" + k, t[k]);
           });
+
+          if (sessionStorage.getItem("mgrm_splash_seen") !== "1") {
+            root.classList.add("splash-pending");
+          }
         } catch (e) {}
       })();
     </script>
+    <style>
+      html.splash-pending #root {
+        visibility: hidden;
+      }
+      html.splash-pending body {
+        overflow: hidden;
+      }
+      html.splash-pending[data-theme="light"] body,
+      html.splash-pending[data-theme="dark"] body,
+      html.splash-pending[data-theme="blue"] body {
+        background: #060d1a;
+      }
+    </style>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

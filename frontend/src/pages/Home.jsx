@@ -55,7 +55,7 @@ const loadSizeCustomize = () => import("../components/home/HomeSizeCustomizeSect
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
 
-const HERO_TAGLINE_EN = "MGRM medicare products | Braces | Bandage | Splintage";
+const HERO_TAGLINE_EN = "MGRM medicare products | Braces | Bandage | Splints";
 
 function hexToRgbTuple(hex) {
   const n = hex.replace("#", "");

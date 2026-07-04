@@ -211,14 +211,37 @@ export default function Navbar() {
     className="max-h-full w-auto object-contain"
   />
 </Link> */}
-<Link to="/" className="navbar-logo-link flex items-center h-14">
+{/* <Link to="/" className="flex items-center h-full">
+  <img
+    src="/products/mgrm.png"
+    alt="Logo"
+    className="max-h-full w-auto object-contain"
+  />
+</Link> */}
+{/* <Link to="/" className="flex items-center h-full overflow-visible">
+  <img
+    src="/products/mgrm.png"
+    alt="Logo"
+    className="max-h-full w-auto object-contain scale-125 origin-left"
+  />
+</Link> */}
+
+{/* <Link to="/" className="navbar-logo-link flex items-center h-14">
   <NavbarBrandMark />
   <img
     src={isLight ? NAVBAR_LOGO_LIGHT : NAVBAR_LOGO_DARK}
     alt="Logo"
     className="navbar-logo-img h-[80px] w-auto object-contain"
   />
+</Link> */}
+<Link to="/" className="navbar-logo-link flex items-center h-14 shrink-0 overflow-hidden">
+  <img
+    src={isLight ? "/products/mgrm.png" : "/products/darkkkk.png"}
+    alt="MGRM Medicare"
+    className="h-full w-auto max-h-14 object-contain"
+  />
 </Link>
+
 
         <form
           onSubmit={handleSearch}

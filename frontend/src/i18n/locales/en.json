@@ -133,7 +133,7 @@
     "toggleWishlist": "Toggle wishlist"
   },
   "home": {
-    "heroTagline": "MGRM medicare products | Braces | Bandage | Splintage",
+    "heroTagline": "MGRM medicare products | Braces | Bandage | Splints",
     "topCategories": "TOP CATEGORIES",
     "certifications": {
       "iso": { "title": "ISO Certified", "subtitle": "International quality standards" },
@@ -146,8 +146,8 @@
     "cardiologists": "Cardiologists",
     "worldClassCopy": "{{count}} world-class certified products designed for relief, recovery and rehabilitation with trusted orthopedic and post-surgical support solutions.",
     "bestSellers": "BEST SELLERS",
-    "mostTrusted": "Most Trusted Supports",
-    "mostTrustedDesc": "Most trusted support categories for daily recovery.",
+    "mostTrusted": "MGRM Most Trusted Supports",
+    "mostTrustedDesc": "MGRM Most trusted support categories for daily recovery.",
     "bodySearch": "BODY-BASED SEARCH",
     "locatePain": "Locate Your",
     "painArea": "Pain Area",
