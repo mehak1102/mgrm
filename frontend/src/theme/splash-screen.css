@@ -11,6 +11,7 @@
   justify-content: center;
   overflow: hidden;
   background: #060d1a;
+  cursor: pointer;
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 
@@ -41,18 +42,27 @@
   width: 100%;
   height: 100%;
   padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 4vw, 2.5rem);
-  gap: clamp(1.25rem, 4vh, 2.75rem);
+}
+
+.splash-stage__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.35rem, 1.2vh, 0.75rem);
+  max-width: min(560px, 94vw);
 }
 
 /* ── Image area ── */
 .splash-stage__visual {
   position: relative;
-  width: min(560px, 94vw);
-  height: min(52vh, 520px);
+  width: min(260px, 62vw);
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: default;
+  flex-shrink: 0;
 }
 
 .splash-stage__stack {
@@ -61,8 +71,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 78%;
-  height: 78%;
+  width: 100%;
+  height: auto;
 }
 
 .splash-stage__mark,
@@ -133,7 +143,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: min(560px, 94vw);
 }
 
 .splash-stage__text-inner {
@@ -185,12 +194,13 @@
 }
 
 .splash-stage__wordmark-slot {
-  --mgrm-size: 1.175;
+  --mgrm-size: 1.1;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   width: 100%;
   overflow: visible;
+  min-height: 0;
 }
 
 .splash-stage__wordmark-scale {
@@ -243,13 +253,11 @@
 
 @media (max-width: 480px) {
   .splash-stage__visual {
-    width: min(94vw, 400px);
-    height: min(44vh, 380px);
+    width: min(58vw, 220px);
   }
 
   .splash-stage__stack {
-    width: 82%;
-    height: 82%;
+    width: 100%;
   }
 
   .splash-stage__wordmark {

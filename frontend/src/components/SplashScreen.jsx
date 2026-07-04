@@ -59,6 +59,18 @@ export default function SplashScreen({ onFinish }) {
   const [fading, setFading] = useState(false);
   const wordmarkRef = useRef(null);
   const [wordmarkWidth, setWordmarkWidth] = useState(null);
+  const onFinishRef = useRef(onFinish);
+  const finishedRef = useRef(false);
+
+  onFinishRef.current = onFinish;
+
+  const finishSplash = () => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    clearSplashPending();
+    document.body.style.overflow = "";
+    onFinishRef.current?.();
+  };
 
   useLayoutEffect(() => {
     if (step < 3) return undefined;
@@ -93,8 +105,7 @@ export default function SplashScreen({ onFinish }) {
 
   useEffect(() => {
     if (isSplashSeen()) {
-      clearSplashPending();
-      onFinish?.();
+      finishSplash();
       return undefined;
     }
 
@@ -108,17 +119,14 @@ export default function SplashScreen({ onFinish }) {
       window.setTimeout(() => setStep(4), TIMING.medicare),
       window.setTimeout(() => setStep(5), TIMING.tagline),
       window.setTimeout(() => setFading(true), TIMING.fade),
-      window.setTimeout(() => {
-        clearSplashPending();
-        onFinish?.();
-      }, TIMING.done),
+      window.setTimeout(finishSplash, TIMING.done),
     ];
 
     return () => {
       timers.forEach(clearTimeout);
-      clearSplashPending();
+      document.body.style.overflow = "";
     };
-  }, [onFinish]);
+  }, []);
 
   const markClass =
     step === 0
@@ -132,62 +140,68 @@ export default function SplashScreen({ onFinish }) {
       className={`splash-screen splash-screen--${theme} ${fading ? "splash-screen--fading" : ""}`}
       role="presentation"
       aria-label="MGRM Medicare Private Limited"
+      onClick={finishSplash}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") finishSplash();
+      }}
     >
       <div className="splash-screen__bg" aria-hidden="true" />
 
       <div className="splash-stage">
-        <div className="splash-stage__visual">
-          <div className="splash-stage__stack">
-            {step < 2 && (
-              <div className={`splash-stage__mark ${markClass}`}>
-                <img src={MARK_SRC} alt="" draggable={false} />
-              </div>
-            )}
+        <div className="splash-stage__brand">
+          <div className="splash-stage__visual">
+            <div className="splash-stage__stack">
+              {step < 2 && (
+                <div className={`splash-stage__mark ${markClass}`}>
+                  <img src={MARK_SRC} alt="" draggable={false} />
+                </div>
+              )}
 
-            {step >= 2 && (
-              <div className="splash-stage__lotus splash-stage__lotus--in">
-                <img src={LOTUS_SRC} alt="" draggable={false} />
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="splash-stage__text">
-          <div className="splash-stage__text-inner">
-            <div ref={wordmarkRef} className="splash-stage__wordmark-slot">
-              <div className="splash-stage__wordmark-scale">
-                <LetterReveal
-                  text="MGRM"
-                  step={step}
-                  stepAt={3}
-                  stepDelay={0.22}
-                  className="splash-stage__line splash-stage__wordmark"
-                  variant="hero"
-                />
-              </div>
+              {step >= 2 && (
+                <div className="splash-stage__lotus splash-stage__lotus--in">
+                  <img src={LOTUS_SRC} alt="" draggable={false} />
+                </div>
+              )}
             </div>
+          </div>
 
-            <LetterReveal
-              text="MEDICARE PRIVATE LIMITED"
-              step={step}
-              stepAt={4}
-              stepDelay={0.048}
-              className="splash-stage__line splash-stage__medicare"
-              variant="sub"
-              spread
-              style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
-            />
+          <div className="splash-stage__text">
+            <div className="splash-stage__text-inner">
+              <div ref={wordmarkRef} className="splash-stage__wordmark-slot">
+                <div className="splash-stage__wordmark-scale">
+                  <LetterReveal
+                    text="MGRM"
+                    step={step}
+                    stepAt={3}
+                    stepDelay={0.22}
+                    className="splash-stage__line splash-stage__wordmark"
+                    variant="hero"
+                  />
+                </div>
+              </div>
 
-            <LetterReveal
-              text="COMFORT · CARE · CURE"
-              step={step}
-              stepAt={5}
-              stepDelay={0.042}
-              className="splash-stage__line splash-stage__tagline"
-              variant="tag"
-              spread
-              style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
-            />
+              <LetterReveal
+                text="MEDICARE PRIVATE LIMITED"
+                step={step}
+                stepAt={4}
+                stepDelay={0.048}
+                className="splash-stage__line splash-stage__medicare"
+                variant="sub"
+                spread
+                style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+              />
+
+              <LetterReveal
+                text="COMFORT · CARE · CURE"
+                step={step}
+                stepAt={5}
+                stepDelay={0.042}
+                className="splash-stage__line splash-stage__tagline"
+                variant="tag"
+                spread
+                style={wordmarkWidth ? { width: wordmarkWidth } : undefined}
+              />
+            </div>
           </div>
         </div>
       </div>
