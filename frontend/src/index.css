@@ -672,34 +672,42 @@ html[lang="hi"] body {
 
 .dark .product-card--pastel,
 [data-theme="dark"] .product-card--pastel {
-  background: #ffffff;
-  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(165deg, #1a2744 0%, #152536 52%, #0f1d2e 100%);
+  box-shadow:
+    0 20px 54px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.dark .product-card--pastel__image,
+[data-theme="dark"] .product-card--pastel__image {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .dark .product-card--pastel:hover,
 [data-theme="dark"] .product-card--pastel:hover {
   box-shadow:
-    0 26px 60px rgba(0, 0, 0, 0.32),
+    0 26px 60px rgba(0, 0, 0, 0.48),
     0 0 40px var(--pc-pastel-glow);
 }
 
-/* Dark theme — white pastel cards need dark ink (Recommended Supports only) */
+/* Dark theme — light ink on slate-blue pastel cards (Recommended Supports only) */
 .dark .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black),
 [data-theme="dark"] .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black) {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
 }
 
 .dark .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500),
 [data-theme="dark"] .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500) {
-  color: #64748b !important;
-  -webkit-text-fill-color: #64748b !important;
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
 }
 
 .dark .home-recommended-section .product-card--pastel .line-through,
 [data-theme="dark"] .home-recommended-section .product-card--pastel .line-through {
-  color: #94a3b8 !important;
-  -webkit-text-fill-color: #94a3b8 !important;
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
 }
 
 [data-theme="blue"] .home-recommended-section .product-card--pastel {

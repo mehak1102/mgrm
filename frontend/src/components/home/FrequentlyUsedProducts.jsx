@@ -178,23 +178,11 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
         {product._categoryLabel}
       </span>
 
-      <h3
-        className={`mt-3 text-lg font-black leading-snug line-clamp-2 ${
-          isDark
-            ? "text-slate-900"
-            : "text-slate-900 dark:text-zinc-50 [data-theme=blue]:text-[var(--text-primary)]"
-        }`}
-      >
+      <h3 className="mt-3 text-lg font-black leading-snug line-clamp-2 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]">
         {product.name}
       </h3>
 
-      <p
-        className={`mt-2 text-xs font-semibold tracking-wide ${
-          isDark
-            ? "text-slate-500"
-            : "text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)]"
-        }`}
-      >
+      <p className="mt-2 text-xs font-semibold tracking-wide text-slate-500 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)]">
         {t("homeSections.frequentTagline")}
       </p>
 
@@ -202,9 +190,7 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
         <span
           {...productPriceSaleProps(
             isBlue,
-            isDark
-              ? "text-xl font-black text-slate-900"
-              : "text-xl font-black text-slate-900 dark:text-zinc-100"
+            "text-xl font-black text-slate-900 dark:text-zinc-100"
           )}
         >
           ₹{discountPrice}
@@ -213,9 +199,7 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
           <span
             {...productPriceOriginalProps(
               isBlue,
-              isDark
-                ? "text-sm line-through text-slate-500"
-                : "text-sm line-through text-slate-500 dark:text-zinc-400"
+              "text-sm line-through text-slate-500 dark:text-zinc-400"
             )}
           >
             ₹{price}

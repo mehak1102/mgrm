@@ -1528,7 +1528,7 @@ const BANDAGE_STAT_PASTELS = [
 
         {/* FEATURED PRODUCTS */}
         <section className="home-recommended-section relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-[#0a1220] dark:via-[#0f1a2e] dark:to-[#0a1628] rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
 
           <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
             <PremiumWordHeader

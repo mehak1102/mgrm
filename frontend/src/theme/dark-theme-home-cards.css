@@ -1,57 +1,91 @@
 /**
- * Dark theme — white pastel product cards on home (Recommended + Frequently Used).
+ * Dark theme — pastel product cards on home (Recommended + Frequently Used).
+ * Slate-blue surfaces with light ink (not white cards on dark sections).
  * Loaded last via dark-bundle so it wins over Tailwind dark: utilities.
  */
 
+/* ── Recommended Supports ── */
 html.dark .home-recommended-section .product-card--pastel,
 html[data-theme="dark"] .home-recommended-section .product-card--pastel {
-  background: #ffffff !important;
+  background: linear-gradient(165deg, #1a2744 0%, #152536 52%, #0f1d2e 100%) !important;
+  border-color: var(--pc-pastel-border) !important;
+  box-shadow:
+    0 20px 54px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
 }
 
-html.dark .home-recommended-section .product-card--pastel :is(h3, .text-2xl),
-html[data-theme="dark"] .home-recommended-section .product-card--pastel :is(h3, .text-2xl) {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+html.dark .home-recommended-section .product-card--pastel:hover,
+html[data-theme="dark"] .home-recommended-section .product-card--pastel:hover {
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.48),
+    0 0 40px var(--pc-pastel-glow) !important;
 }
 
-html.dark .home-recommended-section .product-card--pastel p.text-sm,
-html[data-theme="dark"] .home-recommended-section .product-card--pastel p.text-sm {
-  color: #64748b !important;
-  -webkit-text-fill-color: #64748b !important;
+html.dark .home-recommended-section .product-card--pastel__image,
+html[data-theme="dark"] .home-recommended-section .product-card--pastel__image {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html.dark .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black),
+html[data-theme="dark"] .home-recommended-section .product-card--pastel :is(h3, .text-2xl.font-black) {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+html.dark .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500),
+html[data-theme="dark"] .home-recommended-section .product-card--pastel :is(p.text-sm, .text-gray-500, .text-xs.text-gray-500) {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
 }
 
 html.dark .home-recommended-section .product-card--pastel .text-2xl,
 html[data-theme="dark"] .home-recommended-section .product-card--pastel .text-2xl {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
 }
 
 html.dark .home-recommended-section .product-card--pastel .line-through,
 html[data-theme="dark"] .home-recommended-section .product-card--pastel .line-through {
-  color: #94a3b8 !important;
-  -webkit-text-fill-color: #94a3b8 !important;
-}
-
-html.dark .fup-section .fup-card h3,
-html[data-theme="dark"] .fup-section .fup-card h3 {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
-}
-
-html.dark .fup-section .fup-card p.text-xs,
-html[data-theme="dark"] .fup-section .fup-card p.text-xs {
   color: #64748b !important;
   -webkit-text-fill-color: #64748b !important;
 }
 
+/* ── Frequently Used Products ── */
+html.dark .fup-section .fup-card,
+html[data-theme="dark"] .fup-section .fup-card {
+  background: linear-gradient(165deg, #1a2744 0%, #152536 52%, #0f1d2e 100%) !important;
+  box-shadow:
+    0 22px 56px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+html.dark .fup-section .fup-card__image-wrap,
+html[data-theme="dark"] .fup-section .fup-card__image-wrap {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .fup-section .fup-card h3,
+html[data-theme="dark"] .fup-section .fup-card h3 {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+html.dark .fup-section .fup-card p.text-xs,
+html[data-theme="dark"] .fup-section .fup-card p.text-xs {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+
 html.dark .fup-section .fup-card .text-xl,
 html[data-theme="dark"] .fup-section .fup-card .text-xl {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
 }
 
 html.dark .fup-section .fup-card .line-through,
 html[data-theme="dark"] .fup-section .fup-card .line-through {
-  color: #94a3b8 !important;
-  -webkit-text-fill-color: #94a3b8 !important;
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
 }

@@ -21,6 +21,17 @@ const PASTEL_CARD_PALETTE = [
   { border: "#a5b4fc", glow: "rgba(165, 180, 252, 0.42)" },
 ];
 
+const PASTEL_CARD_PALETTE_DARK = [
+  { border: "rgba(251, 113, 133, 0.55)", glow: "rgba(251, 113, 133, 0.32)" },
+  { border: "rgba(56, 189, 248, 0.55)", glow: "rgba(56, 189, 248, 0.32)" },
+  { border: "rgba(74, 222, 128, 0.55)", glow: "rgba(74, 222, 128, 0.32)" },
+  { border: "rgba(251, 191, 36, 0.55)", glow: "rgba(251, 191, 36, 0.32)" },
+  { border: "rgba(167, 139, 250, 0.55)", glow: "rgba(167, 139, 250, 0.32)" },
+  { border: "rgba(244, 114, 182, 0.55)", glow: "rgba(244, 114, 182, 0.32)" },
+  { border: "rgba(45, 212, 191, 0.55)", glow: "rgba(45, 212, 191, 0.32)" },
+  { border: "rgba(129, 140, 248, 0.55)", glow: "rgba(129, 140, 248, 0.32)" },
+];
+
 export default function ProductCard({ product, pastelIndex }) {
   const { t } = useTranslation();
   const { addToCart } = useCart();
@@ -31,19 +42,15 @@ export default function ProductCard({ product, pastelIndex }) {
   const price = Number(product.price || 0);
   const discountPrice = Number(product.discountPrice || product.price || 0);
   const liked = isWishlisted(product);
+  const palette = isDark ? PASTEL_CARD_PALETTE_DARK : PASTEL_CARD_PALETTE;
   const pastel =
     pastelIndex != null
-      ? PASTEL_CARD_PALETTE[pastelIndex % PASTEL_CARD_PALETTE.length]
+      ? palette[pastelIndex % palette.length]
       : null;
-  const lightPastelInk = Boolean(pastel && isDark);
 
   return (
     <div
-      className={`group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 ${
-        lightPastelInk
-          ? "bg-white"
-          : "bg-card dark:bg-zinc-900"
-      } ${
+      className={`group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
         pastel
           ? "product-card--pastel border-2"
           : "border border-slate-200 dark:border-white/10"
@@ -59,7 +66,9 @@ export default function ProductCard({ product, pastelIndex }) {
     >
       <Link
         to={`/product/${product.slug}`}
-        className={`block relative h-72 overflow-hidden ${lightPastelInk ? "bg-white" : "bg-card"}`}
+        className={`block relative h-72 overflow-hidden ${
+          pastel ? "product-card--pastel__image" : "bg-card"
+        }`}
       >
         <img
           src={image}
@@ -71,8 +80,8 @@ export default function ProductCard({ product, pastelIndex }) {
 
       <button
         onClick={() => toggleWishlist(product)}
-        className={`absolute -mt-14 ml-[calc(100%-60px)] w-11 h-11 rounded-full bg-card shadow-lg grid place-items-center transition ${
-          liked ? "text-red-500" : "text-slate-500 hover:text-red-500"
+        className={`absolute -mt-14 ml-[calc(100%-60px)] w-11 h-11 rounded-full bg-card dark:bg-zinc-800 border border-slate-200/80 dark:border-white/10 shadow-lg grid place-items-center transition ${
+          liked ? "text-red-500" : "text-slate-500 dark:text-zinc-400 hover:text-red-500"
         }`}
       >
         <Heart size={20} fill={liked ? "currentColor" : "none"} />
@@ -85,30 +94,20 @@ export default function ProductCard({ product, pastelIndex }) {
 
         <Link to={`/product/${product.slug}`}>
           <h3
-            className={`font-black text-lg mt-2 line-clamp-2 transition ${
-              lightPastelInk
-                ? "text-slate-900 hover:text-purple-600"
-                : "text-slate-900 dark:text-zinc-100 hover:text-purple-600 hover:text-brand"
-            }`}
+            className="font-black text-lg mt-2 line-clamp-2 transition text-slate-900 dark:text-zinc-100 hover:text-purple-600 dark:hover:text-cyan-400"
           >
             {product.name}
           </h3>
         </Link>
 
-        <p
-          className={`text-sm mt-2 line-clamp-2 ${
-            lightPastelInk ? "text-gray-500" : "text-gray-500 dark:text-zinc-400"
-          }`}
-        >
+        <p className="text-sm mt-2 line-clamp-2 text-gray-500 dark:text-zinc-400">
           {product.description || t("productDetail.premiumSupport")}
         </p>
 
         <div className="flex items-center gap-1 text-yellow-500 mt-3">
           <Star size={16} fill="currentColor" />
           <span className="text-sm font-bold">{product.rating || 4.6}</span>
-          <span
-            className={`text-xs ${lightPastelInk ? "text-gray-500" : "text-gray-500 dark:text-zinc-400/80"}`}
-          >
+          <span className="text-xs text-gray-500 dark:text-zinc-400/80">
             (24)
           </span>
         </div>
@@ -116,7 +115,7 @@ export default function ProductCard({ product, pastelIndex }) {
         <DeliveryTrustBadge
           seed={product.slug || product._id || product.name}
           compact
-          lightSurface={lightPastelInk}
+          lightSurface={!isDark}
           className="mt-3"
         />
 
@@ -125,9 +124,7 @@ export default function ProductCard({ product, pastelIndex }) {
             <span
               {...productPriceSaleProps(
                 isBlue,
-                lightPastelInk
-                  ? "text-2xl font-black text-slate-900"
-                  : "text-2xl font-black text-slate-900 dark:text-zinc-100"
+                "text-2xl font-black text-slate-900 dark:text-zinc-100"
               )}
             >
               ₹{discountPrice}
@@ -136,9 +133,7 @@ export default function ProductCard({ product, pastelIndex }) {
               <span
                 {...productPriceOriginalProps(
                   isBlue,
-                  lightPastelInk
-                    ? "ml-2 line-through text-gray-500"
-                    : "ml-2 line-through text-gray-500 dark:text-zinc-400/80"
+                  "ml-2 line-through text-gray-500 dark:text-zinc-400/80"
                 )}
               >
                 ₹{price}
@@ -148,7 +143,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
           <button
             onClick={() => addToCart(product)}
-            className="bg-purple-600 text-white p-3 rounded-2xl hover:scale-110 transition shadow-lg"
+            className="bg-purple-600 dark:bg-sky-600 text-white p-3 rounded-2xl hover:scale-110 hover:bg-purple-700 dark:hover:bg-sky-500 transition shadow-lg"
           >
             <ShoppingCart size={18} />
           </button>

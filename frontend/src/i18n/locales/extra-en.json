@@ -387,7 +387,7 @@
   },
   "customize": {
     "badge": "PERFECT FIT FOR YOU",
-    "title": "Customize Your Size & Support",
+    "title": "Customize Your Size & colour",
     "description": "Need a special size or colour for your MGRM brace? Share your measurements, preferred shade, and product details — our admin team will review and contact you.",
     "formTitle": "Send customization request",
     "reviewedByAdmin": "Reviewed by MGRM admin before confirmation",
@@ -495,7 +495,7 @@
     "featuredFallback": "Premium MGRM rehabilitation support.",
     "activityLabel": "MGRM LIFESTYLE SUPPORT",
     "activityTitle": "Shop By Activity",
-    "frequentLabel": "MGRMMOST USED",
+    "frequentLabel": "MGRM MOST USED",
     "frequentTitle": "Frequently Used Products",
     "frequentDesc": "Popular supports customers reorder most often.",
     "showMore": "Show More",
