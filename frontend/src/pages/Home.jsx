@@ -55,8 +55,7 @@ const loadBodyFlowMap = () => import("../components/BodyFlowMap");
 const loadFeaturedCollections = () => import("../components/home/HomeFeaturedCollectionsSection");
 const loadShopByActivity = () => import("../components/home/HomeShopByActivitySection");
 // const loadSmartSize = () => import("../components/home/HomeSmartSizeSection");
-const loadColorCustomize = () => import("../components/home/HomeColorCustomizeSection");
-const loadSizeCustomize = () => import("../components/home/HomeSizeCustomizeSection");
+const loadCustomize = () => import("../components/home/HomeCustomizeSection");
 const loadTestimonials = () => import("../components/home/HomeTestimonialsSection");
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
 
@@ -1589,8 +1588,7 @@ const BANDAGE_STAT_PASTELS = [
         </section>
 
         {/* <DeferredSection loader={loadSmartSize} minHeight={560} /> */}
-        <DeferredSection loader={loadSizeCustomize} minHeight={680} />
-        <DeferredSection loader={loadColorCustomize} minHeight={640} />
+        <DeferredSection loader={loadCustomize} minHeight={720} />
         <DeferredSection loader={loadTestimonials} minHeight={520} />
 
         {/* BLOGS */}

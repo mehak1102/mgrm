@@ -9,8 +9,8 @@
 .ways-strip__banner {
   width: 100%;
   padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1rem, 3vw, 2rem) clamp(1.25rem, 2vw, 1.5rem);
-  background: #fdeef4;
-  border-bottom: 4px solid #c026d3;
+  background: linear-gradient(180deg, #eef8ff 0%, #e8f4fc 100%);
+  border-bottom: 4px solid #0284c7;
   border-radius: 0;
   margin-bottom: 0;
 }
@@ -92,7 +92,7 @@
 
 .ways-strip__link {
   font-weight: 700;
-  color: #c026d3;
+  color: #0284c7;
   text-decoration: none;
 }
 
@@ -128,12 +128,12 @@
 }
 
 .ways-illus__accent {
-  fill: #c026d3;
+  fill: #0ea5e9;
   stroke: none;
 }
 
 .ways-illus__accent-line {
-  stroke: #c026d3;
+  stroke: #0ea5e9;
   stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -170,7 +170,7 @@
 /* Ring pulses on call icon */
 .ways-illus__ring {
   fill: none;
-  stroke: #c026d3;
+  stroke: #0ea5e9;
   stroke-width: 1.6;
   opacity: 0;
   transform-box: fill-box;
@@ -315,8 +315,8 @@
 /* Dark theme */
 .dark .ways-strip__banner,
 [data-theme="dark"] .ways-strip__banner {
-  background: #2a1528;
-  border-bottom-color: #e879f9;
+  background: linear-gradient(180deg, #0f1d2e 0%, #132536 100%);
+  border-bottom-color: #38bdf8;
 }
 
 .dark .ways-strip__heading,

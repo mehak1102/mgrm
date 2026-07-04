@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTheme } from "../context/ThemeContext";
 import {
@@ -12,13 +12,13 @@ const MARK_SRC = "/brand/splash-mark-clean.png";
 const LOTUS_SRC = "/brand/splash-lotus-cleans.png";
 
 const TIMING = {
-  markOut: 1600,
-  lotus: 2400,
-  mgrm: 4000,
-  medicare: 5400,
-  tagline: 7200,
-  fade: 9800,
-  done: 10500,
+  markOut: 1100,
+  lotus: 1500,
+  mgrm: 2000,
+  medicare: 2600,
+  tagline: 3200,
+  fade: 3650,
+  done: 4000,
 };
 
 function LetterReveal({
@@ -157,8 +157,12 @@ export default function SplashScreen({ onFinish }) {
                 </div>
               )}
 
-              {step >= 2 && (
-                <div className="splash-stage__lotus splash-stage__lotus--in">
+              {step >= 1 && (
+                <div
+                  className={`splash-stage__lotus ${
+                    step >= 1 ? "splash-stage__lotus--in" : ""
+                  }`}
+                >
                   <img src={LOTUS_SRC} alt="" draggable={false} />
                 </div>
               )}
@@ -207,7 +211,7 @@ export default function SplashScreen({ onFinish }) {
     text="MGRM"
     step={step}
     stepAt={3}
-    stepDelay={0.22}
+    stepDelay={0.1}
     className="splash-stage__line splash-stage__wordmark"
     variant="hero"
   />
@@ -218,7 +222,7 @@ export default function SplashScreen({ onFinish }) {
     text="MEDICARE PRIVATE LIMITED"
     step={step}
     stepAt={4}
-    stepDelay={0.048}
+    stepDelay={0.022}
     className="splash-stage__line splash-stage__medicare"
     variant="sub"
     spread
@@ -230,7 +234,7 @@ export default function SplashScreen({ onFinish }) {
     text="COMFORT · CARE · CURE"
     step={step}
     stepAt={5}
-    stepDelay={0.042}
+    stepDelay={0.018}
     className="splash-stage__line splash-stage__tagline"
     variant="tag"
     spread

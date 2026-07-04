@@ -12,7 +12,7 @@
   overflow: hidden;
   background: #060d1a;
   cursor: pointer;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 .splash-screen--fading {
@@ -49,14 +49,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.5rem, 1.6vh, 1rem);
-  max-width: min(760px, 96vw);
+  gap: clamp(0.65rem, 2vh, 1.25rem);
+  max-width: min(860px, 96vw);
 }
 
 /* ── Image area ── */
 .splash-stage__visual {
   position: relative;
-  width: min(520px, 90vw);
+  width: min(620px, 94vw);
   height: auto;
   display: flex;
   align-items: center;
@@ -72,22 +72,30 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: min(42vw, 280px);
   height: auto;
 }
 
 .splash-stage__mark,
 .splash-stage__lotus {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
   opacity: 0;
   width: 100%;
+  will-change: opacity, transform;
 }
 
 .splash-stage__mark--in {
-  animation: splash-mark-in 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: splash-mark-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .splash-stage__mark--out {
   animation: splash-mark-out 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
 }
 
 .splash-stage__mark img {
@@ -106,7 +114,7 @@
 }
 
 .splash-stage__lotus--in {
-  animation: splash-lotus-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: splash-lotus-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes splash-mark-in {
@@ -149,7 +157,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(0.4rem, 1.4vh, 0.65rem);
+  gap: clamp(0.5rem, 1.6vh, 0.85rem);
 }
 
 .splash-stage__line {
@@ -173,7 +181,7 @@
   opacity: 0;
   transform: translateY(-56px) rotateX(-38deg);
   transform-origin: 50% 100%;
-  animation: splash-letter-fall 0.75s cubic-bezier(0.22, 1.15, 0.36, 1) forwards;
+  animation: splash-letter-fall 0.5s cubic-bezier(0.22, 1.15, 0.36, 1) forwards;
 }
 
 @keyframes splash-letter-fall {
@@ -212,14 +220,14 @@
 
 .splash-stage__wordmark {
   font-family: Impact, "Arial Black", sans-serif;
-  font-size: clamp(3.25rem, 9vw, 5.5rem);
+  font-size: clamp(4.8rem, 13vw, 8rem);
   font-weight: 400;
   letter-spacing: 0.02em;
   color: #ffffff;
   line-height: 0.95;
   text-transform: uppercase;
   transform: scaleY(0.5);
-  transform-origin: 50% 100%;
+  transform-origin: center bottom;
 }
 
 .splash-letter--hero {
@@ -228,7 +236,7 @@
 
 .splash-stage__medicare {
   font-family: Montserrat, "Arial Black", sans-serif;
-  font-size: clamp(0.72rem, 2.4vw, 1.05rem);
+  font-size: clamp(0.95rem, 3.2vw, 1.4rem);
   font-weight: 600;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -242,18 +250,11 @@
 
 .splash-stage__tagline {
   font-family: Montserrat, "Arial Black", sans-serif;
-  font-size: clamp(0.68rem, 2vw, 0.92rem);
+  font-size: clamp(0.9rem, 2.9vw, 1.2rem);
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
-/* .splash-stage__tagline {
-  font-family: Montserrat, "Arial Black", sans-serif;
-  font-size: clamp(0.68rem, 2vw, 0.92rem);
-  font-weight: 500;
-  letter-spacing: 0.35em;   
-  text-transform: uppercase;
-} */
 
 .splash-letter--tag {
   color: #67e8f9;
@@ -261,7 +262,7 @@
 
 @media (max-width: 480px) {
   .splash-stage__visual {
-    width: min(88vw, 400px);
+    width: min(92vw, 460px);
   }
 
   .splash-stage__stack {
@@ -269,12 +270,12 @@
   }
 
   .splash-stage__wordmark {
-    font-size: clamp(2.1rem, 11vw, 3.2rem);
+    font-size: clamp(2.85rem, 14vw, 4.25rem);
   }
 
   .splash-stage__medicare,
   .splash-stage__tagline {
-    font-size: clamp(0.62rem, 3.2vw, 0.82rem);
+    font-size: clamp(0.8rem, 4vw, 1.05rem);
   }
 
   .splash-stage__line:not(.splash-stage__line--spread) {
@@ -294,37 +295,22 @@
 
 
 
-.splash-stage__wordmark-container{
-  display:flex;
-  justify-content:center;
-  width:100%;
+.splash-stage__wordmark-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.splash-stage__medicare-container{
-  display:flex;
-  justify-content:center;
-  width:100%;
-  margin-top:6px;
+.splash-stage__medicare-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
 }
 
-.splash-stage__tagline-container{
-  display:flex;
-  justify-content:center;
-  width:100%;
-  margin-top:2px;
-}
-
-.splash-stage__wordmark{
-  font-family: Impact,"Arial Black",sans-serif;
-  font-size: clamp(3.8rem,10vw,6.4rem); /* Increase ONLY MGRM */
-  transform: scaleY(0.5);
-  transform-origin:center bottom;
-}
-
-.splash-stage__medicare{
-  font-size: clamp(.72rem,2.4vw,1.05rem);
-}
-
-.splash-stage__tagline{
-  font-size: clamp(.68rem,2vw,.92rem);
+.splash-stage__tagline-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 4px;
 }
