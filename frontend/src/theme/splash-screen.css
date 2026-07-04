@@ -49,14 +49,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.35rem, 1.2vh, 0.75rem);
-  max-width: min(560px, 94vw);
+  gap: clamp(0.5rem, 1.6vh, 1rem);
+  max-width: min(760px, 96vw);
 }
 
 /* ── Image area ── */
 .splash-stage__visual {
   position: relative;
-  width: min(260px, 62vw);
+  width: min(520px, 90vw);
   height: auto;
   display: flex;
   align-items: center;
@@ -253,7 +253,7 @@
 
 @media (max-width: 480px) {
   .splash-stage__visual {
-    width: min(58vw, 220px);
+    width: min(88vw, 400px);
   }
 
   .splash-stage__stack {
