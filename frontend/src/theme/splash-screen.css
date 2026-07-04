@@ -243,9 +243,9 @@
 }
 
 .splash-stage__wordmark {
-  font-family: Montserrat, "Arial Black", Impact, sans-serif;
+  font-family: Impact, "Arial Black", sans-serif;
   font-size: clamp(3.75rem, 14vw, 7rem);
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0.02em;
   color: #ffffff;
   line-height: 0.95;

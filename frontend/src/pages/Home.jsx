@@ -10,6 +10,7 @@ import {
   RotateCcw,
   BadgeCheck,
   CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
@@ -36,6 +37,8 @@ import {
   FadeUpText,
   cardRevealTransition,
   AnimatedStat,
+  HeroKineticLine,
+  HeroTitleBlock,
 } from "../components/typography/TypographyMotion";
 import {
   PremiumWordHeader,
@@ -58,6 +61,12 @@ const loadTestimonials = () => import("../components/home/HomeTestimonialsSectio
 const loadFrequentlyUsedProducts = () => import("../components/home/FrequentlyUsedProducts");
 
 const HERO_TAGLINE_EN = "MGRM medicare products | Braces | Bandage | Splints";
+
+const ABOUT_HERO_LINES_EN = {
+  revolutionizing: "Revolutionizing",
+  rehabilitation: "Rehabilitation",
+  since1994: "Since 1994",
+};
 
 function hexToRgbTuple(hex) {
   const n = hex.replace("#", "");
@@ -263,6 +272,70 @@ const BANDAGE_STAT_PASTELS = [
 
   return (
     <main className="relative overflow-hidden bg-app dark:bg-zinc-950 transition-colors duration-300">
+      {/* HERO — moved from About Us page */}
+      <section className="relative h-screen overflow-hidden">
+        <ViewportVideo
+          eager
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/products/orth2.png"
+          sources={[{ src: "/videos/slow.mp4", type: "video/mp4" }]}
+          className="absolute inset-0 h-full w-full object-cover brightness-110"
+        />
+
+        <div className="absolute inset-0 bg-[#00172e]/40" />
+
+        <div className="relative z-10 flex h-full items-center">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="max-w-5xl mx-auto text-center">
+              <BrandPillBadgeRow tone="on-dark" className="mb-4 justify-center" />
+              <div className="about-hero-company-badge mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
+                <Sparkles className="h-5 w-5 text-cyan-300" />
+
+                <div className="about-hero-company-badge__text text-lg md:text-xl font-semibold text-white tracking-widest text-center">
+                  <HeroKineticLine
+                    text={t("about.companyName")}
+                    className="justify-center"
+                    delay={0.05}
+                  />
+                </div>
+              </div>
+
+              <HeroTitleBlock
+                className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white"
+                lines={[
+                  {
+                    text: ABOUT_HERO_LINES_EN.revolutionizing,
+                    className: "justify-center max-sm:text-[36px] text-[52px] md:text-[88px]",
+                    delay: 1.05,
+                  },
+                  {
+                    text: ABOUT_HERO_LINES_EN.rehabilitation,
+                    className: "justify-center max-sm:text-[40px] text-[58px] md:text-[98px]",
+                    gradient: true,
+                  },
+                  {
+                    text: ABOUT_HERO_LINES_EN.since1994,
+                    className:
+                      "justify-center max-sm:text-[22px] text-[32px] md:text-[52px] tracking-[4px] sm:tracking-[6px] text-white/85",
+                  },
+                ]}
+              />
+
+              <FadeUpText
+                animateOnMount
+                delay={3.35}
+                className="mt-10 mx-auto max-w-3xl text-lg leading-9 text-gray-200"
+              >
+                {t("about.heroCopy")}
+              </FadeUpText>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <FloatingMedicalBg />
 
       <div className="relative z-10">
