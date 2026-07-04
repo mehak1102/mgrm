@@ -195,7 +195,7 @@ export default function Navbar() {
   return (
     <>
     <header className="sticky top-0 z-50 relative bg-app/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-100 dark:border-white/10 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-2.5 min-[420px]:py-3 flex items-center gap-1.5 min-[420px]:gap-2 lg:gap-2.5 xl:gap-3 min-w-0">
+      <div className="max-w-7xl mx-auto px-2 min-[420px]:px-3 sm:px-4 py-3 min-[420px]:py-3.5 flex items-center gap-1.5 min-[420px]:gap-2 lg:gap-2.5 xl:gap-3 min-w-0">
         {/* <Logo3D /> */}
         {/* <Link to="/" className="flex items-center h-14 overflow-hidden">
   <img
@@ -318,11 +318,11 @@ export default function Navbar() {
             <div
               className={`activity-nav-dropdown absolute left-0 right-0 top-full -mt-8 pt-8 ${
                 openMenu === "activity" ? "block" : "hidden"
-              } bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-4.25rem)] max-h-[calc(92vh-4.25rem)] overflow-y-auto`}
+              } bg-app/95 dark:bg-slate-950/95 backdrop-blur-2xl shadow-2xl border-t border-slate-100 dark:border-white/10 z-[999] min-h-[calc(92vh-6rem)] max-h-[calc(92vh-6rem)] overflow-y-auto`}
               onMouseEnter={() => handleMenuEnter("activity")}
               onMouseLeave={handleMenuLeave}
             >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 min-h-[calc(92vh-4.25rem)] flex flex-col">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 min-h-[calc(92vh-6rem)] flex flex-col">
                 <div className="flex justify-between items-center mb-6 gap-4 shrink-0">
                   <div>
                     <p className="text-xs font-bold tracking-widest text-purple-600">
