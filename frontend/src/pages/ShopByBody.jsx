@@ -19,7 +19,7 @@ import {
 } from "../components/typography/TypographyMotion";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
 
-export default function ShopByBody() {
+export default function ShopByBody({ embedded = false, onCategorySelect }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -46,14 +46,18 @@ export default function ShopByBody() {
   }, [search, categoriesWithCounts]);
 
   const goCategory = (cat) => {
+    if (onCategorySelect) {
+      onCategorySelect(cat);
+      return;
+    }
     navigate(`/shop?category=${encodeURIComponent(cat.query || cat.name)}`);
   };
 
   return (
-    <main className="bg-[#f8fafc] min-h-screen overflow-hidden">
-      <FloatingMedicalBg />
+    <main className={`bg-[#f8fafc] overflow-hidden ${embedded ? "min-h-0" : "min-h-screen"}`}>
+      {!embedded && <FloatingMedicalBg />}
       <div className="relative z-10">
-        <section className="relative pt-20 pb-16">
+        <section className={`relative ${embedded ? "pt-6 pb-10" : "pt-20 pb-16"}`}>
           <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-cyan-900" />
           <div className="absolute -top-24 right-10 w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-purple-500/20 rounded-full blur-3xl" />

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,6 +11,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { getDashboardTheme } from "./dashboardTheme";
 
 const DashboardSections = lazy(() => import("./DashboardSections"));
+const DashboardExplorePanel = lazy(() => import("./DashboardExplorePanel"));
 const DashboardBackground = lazy(() => import("./DashboardBackground"));
 const DashboardHeroGrid = lazy(() => import("./DashboardHeroGrid"));
 
@@ -103,16 +104,53 @@ export default function UserDashboardOverlay() {
   const { bodyTotal } = useProductStats();
   const [view, setView] = useState("hero");
   const [activeSection, setActiveSection] = useState(null);
+  const [exploreTarget, setExploreTarget] = useState(null);
   const [isZooming, setIsZooming] = useState(false);
 
   const productCountLabel = t("dashboard.productCountLabel", { count: bodyTotal });
 
   const sectionLabel = (key) => t(`dashboard.sections.${key}`, { defaultValue: t("dashboard.account") });
 
+  const backToHero = useCallback(() => {
+    setView("hero");
+    setTimeout(() => {
+      setActiveSection(null);
+      setExploreTarget(null);
+    }, 320);
+  }, []);
+
+  const openSection = (id) => {
+    setIsZooming(true);
+    setActiveSection(id);
+    setTimeout(() => {
+      setView("section");
+      setIsZooming(false);
+    }, 280);
+  };
+
+  const openExplore = (target) => {
+    if (view === "explore") {
+      setExploreTarget(target);
+      return;
+    }
+    setIsZooming(true);
+    setExploreTarget(target);
+    setTimeout(() => {
+      setView("explore");
+      setIsZooming(false);
+    }, 280);
+  };
+
+  const goRoute = (path) => {
+    closeDashboard();
+    navigate(path);
+  };
+
   useEffect(() => {
     if (!isOpen) {
       setView("hero");
       setActiveSection(null);
+      setExploreTarget(null);
       setIsZooming(false);
       return;
     }
@@ -131,35 +169,15 @@ export default function UserDashboardOverlay() {
     if (!isOpen) return;
     const onKey = (e) => {
       if (e.key !== "Escape") return;
-      if (view === "section") {
-        setView("hero");
-        setActiveSection(null);
+      if (view === "section" || view === "explore") {
+        backToHero();
       } else {
         closeDashboard();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen, view, closeDashboard]);
-
-  const openSection = (id) => {
-    setIsZooming(true);
-    setActiveSection(id);
-    setTimeout(() => {
-      setView("section");
-      setIsZooming(false);
-    }, 280);
-  };
-
-  const goRoute = (path) => {
-    closeDashboard();
-    navigate(path);
-  };
-
-  const backToHero = () => {
-    setView("hero");
-    setTimeout(() => setActiveSection(null), 320);
-  };
+  }, [isOpen, view, closeDashboard, backToHero]);
 
   if (!user) return null;
 
@@ -169,12 +187,12 @@ export default function UserDashboardOverlay() {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Cinematic backdrop — blur + fade before dashboard */}
+          {/* Light scrim — site stays visible behind dashboard */}
           <motion.div
-            className="fixed inset-0 z-[299] bg-black/50 backdrop-blur-md"
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(12px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-[299] bg-slate-900/10 dark:bg-black/20 backdrop-blur-[3px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.45, ease }}
           />
 
@@ -182,7 +200,7 @@ export default function UserDashboardOverlay() {
             role="dialog"
             aria-modal="true"
             aria-label={t("dashboard.commandCenter")}
-            className={`fixed inset-0 z-[300] w-screen h-screen overflow-hidden flex flex-col ${dt.shell}`}
+            className="fixed inset-0 z-[300] w-screen h-screen overflow-hidden flex flex-col bg-transparent"
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
@@ -206,7 +224,7 @@ export default function UserDashboardOverlay() {
               className={`relative z-20 flex shrink-0 items-center justify-between px-5 sm:px-10 py-3.5 border-b ${dt.headerBorder} backdrop-blur-2xl ${dt.headerBg}`}
             >
               <div className="flex items-center gap-3 min-w-0 flex-1">
-                {view === "section" && (
+                {view !== "hero" && (
                   <button
                     type="button"
                     onClick={backToHero}
@@ -223,6 +241,10 @@ export default function UserDashboardOverlay() {
                   {view === "section" ? (
                     <h2 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
                       {sectionLabel(activeSection)}
+                    </h2>
+                  ) : view === "explore" ? (
+                    <h2 className={`text-base sm:text-xl font-semibold tracking-tight mt-0.5 ${dt.stat}`}>
+                      {exploreTarget?.title || t("dashboard.account")}
                     </h2>
                   ) : (
                     <FlowingLetterText
@@ -258,7 +280,7 @@ export default function UserDashboardOverlay() {
                 className="absolute inset-0 overflow-hidden px-4 sm:px-8 lg:px-10 py-3 sm:py-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={
-                  view === "section" || isZooming
+                  view === "section" || view === "explore" || isZooming
                     ? { opacity: 0.2, y: 0, scale: 0.94, filter: "blur(12px)" }
                     : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
                 }
@@ -271,10 +293,23 @@ export default function UserDashboardOverlay() {
                   transition={{ duration: 0.28, ease }}
                 >
                   <Suspense fallback={null}>
-                    <DashboardHeroGrid onSection={openSection} onRoute={goRoute} />
+                    <DashboardHeroGrid onSection={openSection} onRoute={goRoute} onExplore={openExplore} />
                   </Suspense>
                 </motion.div>
               </motion.div>
+
+              <AnimatePresence>
+                {view === "explore" && exploreTarget && (
+                  <Suspense fallback={null}>
+                    <DashboardExplorePanel
+                      target={exploreTarget}
+                      dt={dt}
+                      onBack={backToHero}
+                      onExplore={openExplore}
+                    />
+                  </Suspense>
+                )}
+              </AnimatePresence>
 
               <AnimatePresence>
                 {view === "section" && activeSection && (
@@ -288,13 +323,37 @@ export default function UserDashboardOverlay() {
                       aria-hidden
                     />
                     <motion.aside
-                      className={`absolute z-30 top-0 right-0 bottom-0 w-full sm:w-[min(520px,92vw)]
+                      className={`absolute z-30 top-0 right-0 bottom-0 w-full
+                        ${activeSection === "orders" ? "sm:w-[min(720px,96vw)]" : "sm:w-[min(520px,92vw)]"}
                         flex flex-col border-l ${dt.headerBorder} ${dt.panelBg} ${dt.panelText} backdrop-blur-3xl`}
                       initial={{ x: "100%", opacity: 0.9 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: "100%", opacity: 0.9 }}
                       transition={{ duration: 0.45, ease }}
                     >
+                      <div
+                        className={`flex shrink-0 items-center justify-between gap-3 px-5 sm:px-7 py-3.5 border-b ${dt.headerBorder}`}
+                      >
+                        <button
+                          type="button"
+                          onClick={backToHero}
+                          className={`w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
+                          aria-label={t("dashboard.backToGrid")}
+                        >
+                          <ArrowLeft size={17} />
+                        </button>
+                        <p className={`text-sm sm:text-base font-semibold tracking-tight truncate ${dt.stat}`}>
+                          {sectionLabel(activeSection)}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={backToHero}
+                          className={`w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
+                          aria-label={t("dashboard.closeSection")}
+                        >
+                          <X size={17} />
+                        </button>
+                      </div>
                       <div className="flex-1 overflow-y-auto custom-scroll overscroll-contain px-5 sm:px-7 py-6 sm:py-8">
                         <Suspense
                           fallback={

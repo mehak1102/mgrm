@@ -344,6 +344,7 @@
   "dashboard": {
     "commandCenter": "MGRM कमांड सेंटर",
     "backToGrid": "ग्रिड पर वापस",
+    "closeSection": "सेक्शन बंद करें",
     "close": "डैशबोर्ड बंद करें",
     "account": "खाता",
     "sections": {
@@ -408,6 +409,22 @@
       "submittedReview": "समीक्षा के लिए जमा किया गया",
       "submitFailed": "जमा करने में विफल"
     },
-    "confirmDelete": "हटाएं?"
+    "confirmDelete": "हटाएं?",
+    "orders": {
+      "statTotal": "कुल ऑर्डर",
+      "statActive": "प्रगति में",
+      "statDelivered": "डिलीवर",
+      "searchPlaceholder": "ऑर्डर ID या उत्पाद खोजें…",
+      "downloadInvoice": "इनवॉइस डाउनलोड करें",
+      "itemCount": "{{count}} आइटम",
+      "moreItems": "+ {{count}} और",
+      "noResults": "कोई ऑर्डर नहीं मिला।",
+      "filter": {
+        "all": "सभी",
+        "active": "सक्रिय",
+        "delivered": "डिलीवर",
+        "cancelled": "रद्द"
+      }
+    }
   }
 }

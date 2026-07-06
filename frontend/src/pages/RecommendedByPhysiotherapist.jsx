@@ -268,7 +268,7 @@ function TherapyMobileNav({ activeId, onNavigate }) {
   );
 }
 
-export default function RecommendedByPhysiotherapist() {
+export default function RecommendedByPhysiotherapist({ embedded = false }) {
   const { t } = useTranslation();
   const reduce = useReducedMotion();
   const [activeId, setActiveId] = useState(therapySections[0].id);
@@ -303,13 +303,13 @@ export default function RecommendedByPhysiotherapist() {
 
   return (
     <motion.div
-      className="therapy-page therapy-scroll"
+      className={`therapy-page therapy-scroll ${embedded ? "therapy-page--embedded" : ""}`}
       initial={reduce ? false : { opacity: 0 }}
       animate={reduce ? undefined : { opacity: 1 }}
       transition={{ duration: 0.7, ease: EASE }}
     >
-      <TherapyNavRail activeId={activeId} onNavigate={scrollToSection} />
-      <TherapyMobileNav activeId={activeId} onNavigate={scrollToSection} />
+      {!embedded && <TherapyNavRail activeId={activeId} onNavigate={scrollToSection} />}
+      {!embedded && <TherapyMobileNav activeId={activeId} onNavigate={scrollToSection} />}
 
       <TherapyHero reduce={reduce} onBegin={scrollToSection} />
 

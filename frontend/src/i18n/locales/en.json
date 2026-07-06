@@ -344,6 +344,7 @@
   "dashboard": {
     "commandCenter": "MGRM Command Center",
     "backToGrid": "Back to grid",
+    "closeSection": "Close section",
     "close": "Close dashboard",
     "account": "Account",
     "sections": {
@@ -408,6 +409,22 @@
       "submittedReview": "Submitted for review",
       "submitFailed": "Submit failed"
     },
-    "confirmDelete": "Delete?"
+    "confirmDelete": "Delete?",
+    "orders": {
+      "statTotal": "Total orders",
+      "statActive": "In progress",
+      "statDelivered": "Delivered",
+      "searchPlaceholder": "Search by order ID or product…",
+      "downloadInvoice": "Download Invoice",
+      "itemCount": "{{count}} items",
+      "moreItems": "+ {{count}} more",
+      "noResults": "No orders match your search.",
+      "filter": {
+        "all": "All",
+        "active": "Active",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      }
+    }
   }
 }

@@ -189,7 +189,7 @@ function ShopFiltersPanel({
   );
 }
 
-export default function Shop() {
+export default function Shop({ embedded = false, initialCategory, onProductSelect }) {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -198,7 +198,9 @@ export default function Shop() {
   const { isBlue } = useTheme();
 
   const [products, setProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(params.get("category") || "");
+  const [activeCategory, setActiveCategory] = useState(
+    embedded && initialCategory ? initialCategory : params.get("category") || ""
+  );
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [sort, setSort] = useState("popularity");
@@ -215,11 +217,27 @@ export default function Shop() {
   );
 
   useEffect(() => {
-    setActiveCategory(params.get("category") || "");
+    if (!embedded) {
+      setActiveCategory(params.get("category") || "");
+    }
     if (displaySearch) {
       trackSearch(displaySearch);
     }
-  }, [params, displaySearch]);
+  }, [params, displaySearch, embedded]);
+
+  useEffect(() => {
+    if (embedded && initialCategory) {
+      setActiveCategory(initialCategory);
+    }
+  }, [embedded, initialCategory]);
+
+  const goProduct = (slug, name) => {
+    if (onProductSelect) {
+      onProductSelect(slug, name);
+      return;
+    }
+    navigate(`/product/${slug}`);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -278,11 +296,13 @@ export default function Shop() {
   };
 
   return (
-    <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300 overflow-x-clip">
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-5 py-8 min-w-0">
+    <main className={`bg-[#f7f8fb] bg-app dark:bg-zinc-950 transition-colors duration-300 overflow-x-clip ${embedded ? "min-h-0" : "min-h-screen"}`}>
+      <div className={`max-w-[1500px] mx-auto px-4 sm:px-5 min-w-0 ${embedded ? "py-4" : "py-8"}`}>
+        {!embedded && (
         <div className="text-sm text-fg-muted mb-6 break-words">
           {t("common.home")} <span className="mx-2">›</span> {t("shop.breadcrumb")}
         </div>
+        )}
 
         <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 min-w-0">
           <aside className="hidden lg:block bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] lg:sticky lg:top-24 lg:h-[calc(100vh-110px)] overflow-hidden min-w-0">
@@ -388,6 +408,35 @@ export default function Shop() {
                         view === "list" ? "flex flex-col sm:flex-row" : ""
                       }`}
                     >
+                      {onProductSelect ? (
+                        <button
+                          type="button"
+                          onClick={() => goProduct(product.slug, product.name)}
+                          className={`relative bg-card block shrink-0 text-left w-full ${
+                            view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-72"
+                          }`}
+                        >
+                          {save > 0 && (
+                            <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
+                              {t("common.savePercent", { percent: save })}
+                            </span>
+                          )}
+
+                          <span className="absolute top-14 left-4 bg-card shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+                            <Star size={13} fill="#fbbf24" className="text-yellow-400" />
+                            {product.rating || 4.8}
+                          </span>
+
+                          <img
+                            src={product.images?.[0] || product.image || "/products/knee.png"}
+                            onError={(e) => {
+                              e.currentTarget.src = "/products/knee.png";
+                            }}
+                            className="w-full h-full object-contain p-5 group-hover:scale-105 transition duration-500"
+                            alt={product.name}
+                          />
+                        </button>
+                      ) : (
                       <Link
                         to={`/product/${product.slug}`}
                         className={`relative bg-card block shrink-0 ${
@@ -414,6 +463,7 @@ export default function Shop() {
                           alt={product.name}
                         />
                       </Link>
+                      )}
 
                       <button
                         type="button"
@@ -427,11 +477,23 @@ export default function Shop() {
                       </button>
 
                       <div className="p-5 flex-1 min-w-0">
+                        {onProductSelect ? (
+                          <button
+                            type="button"
+                            onClick={() => goProduct(product.slug, product.name)}
+                            className="text-left w-full"
+                          >
+                            <h3 className="font-black line-clamp-2 hover:text-purple-600 transition break-words">
+                              {product.name}
+                            </h3>
+                          </button>
+                        ) : (
                         <Link to={`/product/${product.slug}`}>
                           <h3 className="font-black line-clamp-2 hover:text-purple-600 transition break-words">
                             {product.name}
                           </h3>
                         </Link>
+                        )}
 
                         <div className="mt-3 flex flex-wrap items-baseline gap-x-2">
                           <span {...productPriceSaleProps(isBlue, "text-xl font-black")}>

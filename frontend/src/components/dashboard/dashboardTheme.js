@@ -39,18 +39,18 @@ export function getPosterCardTheme(siteTheme) {
 
 export function getDashboardTheme(theme) {
   const vibrantBlobs = [
-    { color: "rgba(59,130,246,0.35)", x: "5%", y: "5%", size: 480 },
-    { color: "rgba(168,85,247,0.32)", x: "88%", y: "12%", size: 420 },
-    { color: "rgba(6,182,212,0.28)", x: "72%", y: "68%", size: 500 },
-    { color: "rgba(236,72,153,0.22)", x: "18%", y: "78%", size: 400 },
-    { color: "rgba(249,115,22,0.18)", x: "48%", y: "42%", size: 360 },
+    { color: "rgba(59,130,246,0.18)", x: "5%", y: "5%", size: 480 },
+    { color: "rgba(168,85,247,0.16)", x: "88%", y: "12%", size: 420 },
+    { color: "rgba(6,182,212,0.14)", x: "72%", y: "68%", size: 500 },
+    { color: "rgba(236,72,153,0.12)", x: "18%", y: "78%", size: 400 },
+    { color: "rgba(249,115,22,0.1)", x: "48%", y: "42%", size: 360 },
   ];
 
   const lightBlobs = [
-    { color: "rgba(191,219,254,0.7)", x: "8%", y: "10%", size: 440 },
-    { color: "rgba(233,213,255,0.65)", x: "85%", y: "15%", size: 400 },
-    { color: "rgba(165,243,252,0.55)", x: "55%", y: "70%", size: 480 },
-    { color: "rgba(254,205,211,0.45)", x: "20%", y: "75%", size: 380 },
+    { color: "rgba(191,219,254,0.28)", x: "8%", y: "10%", size: 440 },
+    { color: "rgba(233,213,255,0.24)", x: "85%", y: "15%", size: 400 },
+    { color: "rgba(165,243,252,0.2)", x: "55%", y: "70%", size: 480 },
+    { color: "rgba(254,205,211,0.18)", x: "20%", y: "75%", size: 380 },
   ];
 
   const base = {
@@ -61,9 +61,9 @@ export function getDashboardTheme(theme) {
     chip: "bg-white/10 border border-white/15 text-white backdrop-blur-xl",
     card: "bg-white/[0.08] backdrop-blur-3xl border border-white/12 shadow-[0_24px_80px_rgba(0,0,0,0.5)]",
     headerBorder: "border-white/10",
-    headerBg: "bg-black/35",
+    headerBg: "bg-black/25 backdrop-blur-xl",
     closeBtn: "bg-white/12 hover:bg-white/20 text-white backdrop-blur-xl",
-    panelBg: "bg-[#0c0c10]/92",
+    panelBg: "bg-[#0c0c10]/75 backdrop-blur-2xl",
     panelText: "text-white",
     secondary: "text-[rgba(255,255,255,0.78)]",
     input:
@@ -78,7 +78,7 @@ export function getDashboardTheme(theme) {
   if (theme === "blue") {
     return {
       id: "blue",
-      shell: "bg-[#020817]",
+      shell: "bg-transparent",
       ...base,
       accent: "text-cyan-300",
       muted: "text-[rgba(255,255,255,0.55)]",
@@ -86,9 +86,9 @@ export function getDashboardTheme(theme) {
       chip: "bg-[#0b1931]/78 border border-cyan-300/20 text-white backdrop-blur-xl",
       card: "bg-[#0a162b]/72 backdrop-blur-3xl border border-cyan-300/18 shadow-[0_22px_70px_rgba(3,10,30,0.55)]",
       headerBorder: "border-cyan-300/16",
-      headerBg: "bg-[#040d1f]/72",
+      headerBg: "bg-[#040d1f]/45 backdrop-blur-xl",
       closeBtn: "bg-cyan-300/14 hover:bg-cyan-300/24 text-white backdrop-blur-xl",
-      panelBg: "bg-[#061020]/96",
+      panelBg: "bg-[#061020]/78 backdrop-blur-2xl",
       panelText: "text-white",
       input:
         "w-full rounded-xl px-3 py-2.5 text-sm bg-[#081a34]/78 border border-cyan-300/25 text-white placeholder:text-white/55 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/25 outline-none",
@@ -101,33 +101,33 @@ export function getDashboardTheme(theme) {
   if (theme === "dark") {
     return {
       id: "dark",
-      shell: "bg-[#050508]",
+      shell: "bg-transparent",
       ...base,
       accent: "text-amber-300",
       flowCountColor: "#f87171",
       flowTextColor: "#f8fafc",
       poster: getPosterCardTheme("dark"),
       blobs: [
-        { color: "rgba(255,136,0,0.28)", x: "8%", y: "8%", size: 460 },
-        { color: "rgba(255,215,0,0.2)", x: "85%", y: "15%", size: 400 },
-        { color: "rgba(168,85,247,0.25)", x: "60%", y: "70%", size: 480 },
-        { color: "rgba(59,130,246,0.2)", x: "20%", y: "75%", size: 380 },
+        { color: "rgba(255,136,0,0.14)", x: "8%", y: "8%", size: 460 },
+        { color: "rgba(255,215,0,0.1)", x: "85%", y: "15%", size: 400 },
+        { color: "rgba(168,85,247,0.12)", x: "60%", y: "70%", size: 480 },
+        { color: "rgba(59,130,246,0.1)", x: "20%", y: "75%", size: 380 },
       ],
     };
   }
   return {
     id: "light",
-    shell: "bg-gradient-to-br from-slate-50 via-blue-50/80 to-violet-100/60",
+    shell: "bg-transparent",
     accent: "text-indigo-600",
     stat: "text-slate-900",
     muted: "text-slate-600",
     label: "text-slate-500",
-    chip: "bg-white/90 border border-slate-200 text-slate-800 shadow-sm",
-    card: "bg-white/90 backdrop-blur-3xl border border-slate-200 shadow-lg",
-    headerBorder: "border-slate-200/80",
-    headerBg: "bg-white/75",
-    closeBtn: "bg-white/90 hover:bg-white text-slate-800 border border-slate-200/80 shadow-sm backdrop-blur-xl",
-    panelBg: "bg-white/95",
+    chip: "bg-white/72 border border-slate-200/80 text-slate-800 shadow-sm backdrop-blur-xl",
+    card: "bg-white/72 backdrop-blur-2xl border border-slate-200/80 shadow-lg",
+    headerBorder: "border-slate-200/60",
+    headerBg: "bg-white/55 backdrop-blur-xl",
+    closeBtn: "bg-white/70 hover:bg-white/90 text-slate-800 border border-slate-200/70 shadow-sm backdrop-blur-xl",
+    panelBg: "bg-white/78 backdrop-blur-2xl",
     panelText: "text-slate-900",
     secondary: "text-slate-600",
     input:

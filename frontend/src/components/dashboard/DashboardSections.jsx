@@ -6,10 +6,10 @@ import {
   Camera,
   Loader2,
   Trash2,
-  Download,
   ShoppingCart,
   Settings,
 } from "lucide-react";
+import OrdersSection from "./OrdersSection";
 import toast from "react-hot-toast";
 import API from "../../api";
 import { useAuth } from "../../context/AuthContext";
@@ -25,25 +25,6 @@ const STATUS_LABELS = {
   published: "Published",
   rejected: "Rejected",
 };
-
-const orderStatusStyle = {
-  Placed: "bg-blue-500/20 text-blue-200",
-  Packed: "bg-amber-500/20 text-amber-200",
-  Shipped: "bg-purple-500/20 text-purple-200",
-  Delivered: "bg-emerald-500/20 text-emerald-200",
-  Cancelled: "bg-red-500/20 text-red-200",
-};
-
-function downloadInvoice(order) {
-  const html = `<!DOCTYPE html><html><head><title>Invoice</title></head><body style="font-family:sans-serif;padding:40px">
-  <h1>MGRM Medicare Invoice</h1><p>Order #${order._id.slice(-6)}</p>
-  <p>${new Date(order.createdAt).toLocaleString()}</p>
-  <h3>Total: ₹${order.total}</h3></body></html>`;
-  const w = window.open("", "_blank");
-  w.document.write(html);
-  w.document.close();
-  w.print();
-}
 
 function SectionShell({ subtitle, dt, children }) {
   return (
@@ -91,7 +72,6 @@ export default function DashboardSections({ dt, onRoute, section }) {
   const { isBlue } = useTheme();
 
   const [profile, setProfile] = useState(null);
-  const [orders, setOrders] = useState([]);
   const [myStories, setMyStories] = useState([]);
   const [products, setProducts] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -123,7 +103,6 @@ export default function DashboardSections({ dt, onRoute, section }) {
 
   useEffect(() => {
     API.get("/users/me").then((r) => setProfile(r.data)).catch(() => {});
-    API.get("/orders/my").then((r) => setOrders(r.data || [])).catch(() => {});
     API.get("/recovery-stories/my").then((r) => setMyStories(r.data.stories || [])).catch(() => {});
     API.get("/products").then((r) => setProducts(r.data.products || [])).catch(() => {});
   }, []);
@@ -342,33 +321,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
       </SectionShell>
       )}
 
-      {section === "orders" && (
-      <SectionShell dt={dt}>
-        {orders.length === 0 ? (
-          <p className={`text-sm ${dt.muted}`}>{t("dashboard.grid.noOrders")}</p>
-        ) : (
-          <div className="space-y-3">
-            {orders.map((order) => (
-              <div key={order._id} className={`rounded-xl p-3 ${dt.chip}`}>
-                <div className="flex justify-between">
-                  <p className={`text-xs font-black ${dt.stat}`}>#{order._id.slice(-6)}</p>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${orderStatusStyle[order.status] || ""}`}>
-                    {order.status}
-                  </span>
-                </div>
-                <p className={`text-[10px] ${dt.muted}`}>{new Date(order.createdAt).toLocaleDateString()}</p>
-                <div className="flex justify-between items-center mt-2">
-                  <span className={`text-sm font-black ${dt.stat}`}>₹{order.total}</span>
-                  <button type="button" onClick={() => downloadInvoice(order)} className={`text-[10px] font-bold flex items-center gap-1 ${secondaryText}`}>
-                    <Download size={12} /> Invoice
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </SectionShell>
-      )}
+      {section === "orders" && <OrdersSection dt={dt} onRoute={onRoute} />}
 
       {section === "wishlist" && (
       <SectionShell dt={dt}>

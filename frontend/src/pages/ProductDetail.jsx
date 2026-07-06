@@ -29,8 +29,9 @@ import ProductShareButton from "../components/product/ProductShareButton";
 import { SectionHeading, FadeUpText } from "../components/typography/TypographyMotion";
 import DeliveryTrustBadge from "../components/DeliveryTrustBadge";
 
-export default function ProductDetail() {
-  const { slug } = useParams();
+export default function ProductDetail({ embedded = false, slug: slugProp }) {
+  const { slug: routeSlug } = useParams();
+  const slug = slugProp || routeSlug;
   const { t } = useTranslation();
   const { addToCart } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -64,7 +65,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <main className="bg-app min-h-screen p-10">
+      <main className={`bg-app p-10 ${embedded ? "min-h-0" : "min-h-screen"}`}>
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-14">
           <div className="h-[620px] rounded-3xl bg-card animate-pulse" />
           <div className="space-y-4">
@@ -88,8 +89,8 @@ export default function ProductDetail() {
   const decreaseQty = () => setQty((p) => Math.max(1, p - 1));
 
   return (
-    <main className="bg-[#f7f7f7] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300">
-      <div className="max-w-[1400px] mx-auto px-6 py-10 grid lg:grid-cols-2 gap-14">
+    <main className={`bg-[#f7f7f7] bg-app dark:bg-zinc-950 transition-colors duration-300 ${embedded ? "min-h-0" : "min-h-screen"}`}>
+      <div className={`max-w-[1400px] mx-auto px-6 grid lg:grid-cols-2 gap-14 ${embedded ? "py-6" : "py-10"}`}>
         <motion.section
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}

@@ -144,7 +144,8 @@
     "shipped": "Shipped",
     "cancelled": "Cancelled",
     "successTitle": "Order Placed Successfully",
-    "continueShopping": "Continue Shopping"
+    "continueShopping": "Continue Shopping",
+    "invoice": "Tax Invoice"
   },
   "productDetail": {
     "products": "Products",
@@ -899,6 +900,22 @@
       "regionsCount": "{{count}} regions",
       "ordersTotal": "{{count}} total",
       "savedCount": "{{count}} saved"
+    },
+    "orders": {
+      "statTotal": "Total orders",
+      "statActive": "In progress",
+      "statDelivered": "Delivered",
+      "searchPlaceholder": "Search by order ID or product…",
+      "downloadInvoice": "Download Invoice",
+      "itemCount": "{{count}} items",
+      "moreItems": "+ {{count}} more",
+      "noResults": "No orders match your search.",
+      "filter": {
+        "all": "All",
+        "active": "Active",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      }
     }
   }
 }

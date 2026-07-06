@@ -1029,3 +1029,17 @@ html[lang="hi"] body {
     transform: scaleY(1);
   }
 }
+
+/* Dashboard explore — embedded page views inside overlay */
+.dashboard-explore-embed .therapy-page--embedded .therapy-hero {
+  min-height: 55vh !important;
+  padding-top: 2rem !important;
+}
+
+.dashboard-explore-embed .therapy-page--embedded .therapy-snap {
+  min-height: auto;
+}
+
+.dashboard-explore-embed .therapy-page--embedded .therapy-footer {
+  padding-bottom: 3rem;
+}

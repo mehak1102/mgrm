@@ -469,7 +469,7 @@ function productImages(list) {
   return list.map((p) => p?.images?.[0]).filter(Boolean);
 }
 
-export default function DashboardHeroGrid({ onSection, onRoute }) {
+export default function DashboardHeroGrid({ onSection, onRoute, onExplore }) {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { wishlist } = useWishlist();
@@ -620,13 +620,24 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           subtitle={productCountLabel(bodyTotal)}
           subtitleLines={2}
           carousel={shopCarouselItems}
-          onCarouselItemClick={(slug) => onRoute(`/product/${slug}`)}
+          onCarouselItemClick={(slug) => {
+            const product = shopCarouselItems.find((p) => p.slug === slug);
+            if (onExplore) {
+              onExplore({ type: "product", slug, title: product?.name || slug });
+            } else {
+              onRoute(`/product/${slug}`);
+            }
+          }}
           cardTheme={cardTheme}
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
           depth={0.1}
-          onClick={() => onRoute("/shop")}
+          onClick={() =>
+            onExplore
+              ? onExplore({ type: "shop", title: t("dashboard.grid.shopProducts") })
+              : onRoute("/shop")
+          }
         />
 
         <PosterTile
@@ -655,11 +666,17 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           parallaxX={mx}
           parallaxY={my}
           onClick={() =>
-            onRoute(
-              activeCategory
-                ? `/shop?category=${encodeURIComponent(activeCategory.query)}`
-                : "/shop"
-            )
+            onExplore
+              ? onExplore({
+                  type: "shop",
+                  category: activeCategory?.query,
+                  title: activeCategory?.name || t("dashboard.grid.allProducts"),
+                })
+              : onRoute(
+                  activeCategory
+                    ? `/shop?category=${encodeURIComponent(activeCategory.query)}`
+                    : "/shop"
+                )
           }
         >
           <LayoutGrid size={15} className="absolute top-4 right-4 z-30 text-white/85" />
@@ -682,7 +699,11 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
-          onClick={() => onRoute("/recommended-by-physiotherapist")}
+          onClick={() =>
+            onExplore
+              ? onExplore({ type: "therapy", title: t("dashboard.grid.recommendedPhysio") })
+              : onRoute("/recommended-by-physiotherapist")
+          }
         >
           <Star size={15} className={`absolute top-4 right-4 z-30 ${cardTheme.iconStar}`} fill="currentColor" />
         </PosterTile>
@@ -703,7 +724,15 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
-          onClick={() => onRoute(recommended[0] ? `/product/${recommended[0].slug}` : "/shop")}
+          onClick={() =>
+            onExplore
+              ? onExplore({
+                  type: recommended[0] ? "product" : "shop",
+                  slug: recommended[0]?.slug,
+                  title: recommended[0]?.name || t("dashboard.grid.recommended"),
+                })
+              : onRoute(recommended[0] ? `/product/${recommended[0].slug}` : "/shop")
+          }
         >
           <Sparkles size={15} className={`absolute top-4 right-4 z-30 ${cardTheme.iconSparkle}`} />
         </PosterTile>
@@ -723,7 +752,11 @@ export default function DashboardHeroGrid({ onSection, onRoute }) {
           siteTheme={siteTheme}
           parallaxX={mx}
           parallaxY={my}
-          onClick={() => onRoute("/shop-by-body")}
+          onClick={() =>
+            onExplore
+              ? onExplore({ type: "categories", title: t("dashboard.grid.categories") })
+              : onRoute("/shop-by-body")
+          }
         />
 
         <PosterTile

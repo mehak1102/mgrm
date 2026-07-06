@@ -5,18 +5,17 @@ export default function DashboardBackground({ dt }) {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
-      <div className={`absolute inset-0 ${dt.shell}`} />
       <div
-        className="absolute inset-0 opacity-40"
+        className="absolute inset-0 opacity-25"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.25), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(6,182,212,0.2), transparent 45%)",
+            "radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.12), transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(6,182,212,0.1), transparent 45%)",
         }}
       />
       {blobs.map((blob, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full blur-[90px] sm:blur-[120px]"
+          className="absolute rounded-full blur-[70px] sm:blur-[90px]"
           style={{
             left: blob.x,
             top: blob.y,
