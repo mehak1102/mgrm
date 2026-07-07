@@ -24,6 +24,8 @@ const userSchema = new mongoose.Schema(
     profileImage: { type: String, default: "" },
     role: { type: String, enum: ["user", "admin"], default: "user" },
     addresses: { type: [addressSchema], default: [] },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
   },
   { timestamps: true }
 );

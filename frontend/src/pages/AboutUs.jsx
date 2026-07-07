@@ -691,30 +691,25 @@ const AboutUs = () => {
                   {t('about.firstCitizenCopy')}
                 </FadeUpText>
 
-                <StaggerReveal className="mt-10 grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" stagger={0.12}>
+                <StaggerReveal className="about-citizen-stack mt-10 md:mt-12" stagger={0.14}>
                   {famousPeople.map((item, index) => (
                     <StaggerItem
-                      key={index}
-                      className="about-famous-person-card min-w-0 overflow-hidden rounded-[35px] bg-white/10 backdrop-blur-xl"
+                      key={item.name}
+                      className={`about-citizen-row${index % 2 === 1 ? " about-citizen-row--reverse" : ""}`}
                     >
-                      <div className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
-                        <div className="relative h-52 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-40 md:w-48">
-                          <img
-                            src={item.image}
-                            alt=""
-                            className="absolute inset-0 h-full w-full object-cover object-top"
-                          />
-                        </div>
+                      <div className="about-citizen-row__media">
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="about-citizen-row__photo"
+                        />
+                      </div>
 
-                        <div className="about-famous-person-card__body min-w-0 flex-1 flex flex-col justify-center p-5 sm:p-6 md:p-8">
-                          <h4 className="text-xl sm:text-2xl md:text-3xl font-bold break-words">
-                            {item.name}
-                          </h4>
-
-                          <FadeUpText className="about-famous-person-card__text mt-4 sm:mt-5 text-base sm:leading-8 text-gray-200 break-words">
-                            {t('about.famousPersonCopy')}
-                          </FadeUpText>
-                        </div>
+                      <div className="about-citizen-row__content">
+                        <h4 className="about-citizen-row__name">{item.name}</h4>
+                        <FadeUpText className="about-citizen-row__text">
+                          {t('about.famousPersonCopy')}
+                        </FadeUpText>
                       </div>
                     </StaggerItem>
                   ))}
@@ -777,27 +772,29 @@ const AboutUs = () => {
                 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
-              <TimelineReveal className="about-timeline-grid relative mt-10 sm:mt-12">
-                {timeline.map((item, index) => (
-                  <TimelineItem
-                    key={index}
-                    index={index}
-                    className="about-timeline-item group relative z-10 flex min-w-0 flex-col items-center text-center"
-                  >
-                    <div className="about-timeline-dot h-7 w-7 shrink-0 rounded-full border-4 border-white bg-[#002B5B] shadow-xl transition duration-300 group-hover:scale-125" />
+              <TimelineReveal className="about-heritage-timeline mt-10 sm:mt-12">
+                <div className="about-heritage-timeline__rail" aria-hidden>
+                  <div className="about-heritage-timeline__line" />
+                </div>
 
-                    <div className="about-timeline-card mt-5 w-full min-w-0 rounded-[24px] sm:rounded-[30px] bg-[#f5fbff] bg-surface-hover p-4 sm:p-6 shadow-xl transition duration-500 group-hover:-translate-y-1">
-                      <AnimatedStat
-                        value={item.year}
-                        valueClassName="text-2xl sm:text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
-                      />
+                <div className="about-heritage-timeline__row">
+                  {timeline.map((item, index) => (
+                    <TimelineItem
+                      key={item.year}
+                      index={index}
+                      className="about-heritage-timeline__item"
+                    >
+                      <div className="about-heritage-timeline__marker" aria-hidden>
+                        <span className="about-heritage-timeline__dot" />
+                      </div>
 
-                      <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-gray-500 dark:text-zinc-400 break-words">
-                        {t(item.titleKey)}
-                      </p>
-                    </div>
-                  </TimelineItem>
-                ))}
+                      <article className="about-heritage-timeline__card">
+                        <p className="about-heritage-timeline__year">{item.year}</p>
+                        <p className="about-heritage-timeline__label">{t(item.titleKey)}</p>
+                      </article>
+                    </TimelineItem>
+                  ))}
+                </div>
               </TimelineReveal>
             </section>
 

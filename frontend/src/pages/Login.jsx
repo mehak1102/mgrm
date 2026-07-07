@@ -182,6 +182,15 @@ export default function Login() {
               </button>
             </div>
 
+            <div className="flex justify-end -mt-1">
+              <Link
+                to="/forgot-password"
+                className="text-sm font-bold text-purple-700 dark:text-cyan-400 transition-colors duration-300"
+              >
+                {t("auth.forgotPassword")}
+              </Link>
+            </div>
+
             <button
               disabled={loading}
               className="w-full btn-primary rounded-2xl py-4 font-black shadow-xl dark:shadow-[0_0_30px_rgba(34,211,238,0.32)] hover:scale-[1.01] transition-all duration-300 disabled:opacity-60"

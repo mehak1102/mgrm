@@ -397,7 +397,7 @@ export default function Support() {
                   {t("support.suggestionsIntro")}
                 </p>
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                <div className="support-suggestions-section__pills mt-8">
                   {[
                     {
                       title: t("support.productIdeas"),
@@ -419,7 +419,7 @@ export default function Support() {
                       <span className="support-suggestions-section__pill-icon" aria-hidden>
                         <item.icon className="h-4 w-4" />
                       </span>
-                      <div>
+                      <div className="support-suggestions-section__pill-body min-w-0">
                         <p className="support-suggestions-section__pill-title">{item.title}</p>
                         <p className="support-suggestions-section__pill-text">{item.text}</p>
                       </div>

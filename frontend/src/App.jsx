@@ -23,6 +23,8 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const Orders = lazy(() => import("./pages/Orders"));
 const ShopByBody = lazy(() => import("./pages/ShopByBody"));
@@ -65,7 +67,10 @@ export default function App() {
   const { user, authReady } = useAuth();
 
   const hideLayout =
-    location.pathname === "/login" || location.pathname === "/register";
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/forgot-password" ||
+    location.pathname === "/reset-password";
 
   const requireAuth = (element) => {
     if (!authReady) return <RouteFallback />;
@@ -104,6 +109,8 @@ export default function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />

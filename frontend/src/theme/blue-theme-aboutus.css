@@ -152,13 +152,15 @@
 /* ── Blue theme: light panels need dark text (section-scoped only) ── */
 
 /* Leadership / famous people cards — section-1 */
-[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card {
+[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card,
+[data-theme="blue"] .about-us-page #section-1 .about-citizen-row {
   background: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid rgba(255, 255, 255, 0.28) !important;
   backdrop-filter: none !important;
 }
 
-[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card :is(h4, p, .about-famous-person-card__text) {
+[data-theme="blue"] .about-us-page #section-1 .about-famous-person-card :is(h4, p, .about-famous-person-card__text),
+[data-theme="blue"] .about-us-page #section-1 .about-citizen-row :is(h4, p, .about-citizen-row__name, .about-citizen-row__text) {
   color: #003262 !important;
   -webkit-text-fill-color: #003262 !important;
   opacity: 1 !important;
@@ -411,4 +413,32 @@
   -webkit-text-fill-color: #003262 !important;
   opacity: 1 !important;
   text-shadow: none !important;
+}
+
+/* Heritage timeline — blue theme */
+[data-theme="blue"] .about-us-page .about-heritage-timeline__line {
+  background: linear-gradient(90deg, #ffd700 0%, #0ea5e9 45%, #ffffff 100%);
+  opacity: 1;
+}
+
+[data-theme="blue"] .about-us-page .about-heritage-timeline__dot {
+  background: #ffd700;
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="blue"] .about-us-page .about-heritage-timeline__card {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  border-left-color: #ffd700;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="blue"] .about-us-page .about-heritage-timeline__year {
+  color: #ffd700 !important;
+  -webkit-text-fill-color: #ffd700 !important;
+}
+
+[data-theme="blue"] .about-us-page .about-heritage-timeline__label {
+  color: rgba(255, 255, 255, 0.9) !important;
 }
