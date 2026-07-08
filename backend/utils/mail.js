@@ -80,6 +80,140 @@
 
 
 
+// import nodemailer from "nodemailer";
+
+// const PLACEHOLDER_HOSTS = new Set([
+//   "smtp.example.com",
+//   "localhost",
+//   "127.0.0.1",
+// ]);
+
+// const PLACEHOLDER_USERS = new Set([
+//   "your@email.com",
+//   "user@example.com",
+// ]);
+
+// const PLACEHOLDER_PASSWORDS = new Set([
+//   "your-password",
+//   "password",
+//   "changeme",
+// ]);
+
+// function isSmtpConfigured() {
+//   const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+
+//   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return false;
+
+//   if (PLACEHOLDER_HOSTS.has(SMTP_HOST.toLowerCase())) return false;
+//   if (PLACEHOLDER_USERS.has(SMTP_USER.toLowerCase())) return false;
+//   if (PLACEHOLDER_PASSWORDS.has(SMTP_PASS)) return false;
+
+//   return true;
+// }
+
+// function getTransporter() {
+//   if (!isSmtpConfigured()) return null;
+
+//   return nodemailer.createTransport({
+//     host: process.env.SMTP_HOST,
+//     port: Number(process.env.SMTP_PORT) || 2525,
+//     secure: process.env.SMTP_SECURE === "true",
+
+//     auth: {
+//       user: process.env.SMTP_USER,
+//       pass: process.env.SMTP_PASS,
+//     },
+//     logger: true,
+// debug: true,
+
+//     connectionTimeout: 10000,
+//     greetingTimeout: 10000,
+//     socketTimeout: 10000,
+//   });
+// }
+
+// function logResetLink(to, resetUrl) {
+//   console.log(`[password-reset] Reset link for ${to}: ${resetUrl}`);
+// }
+
+// export async function sendPasswordResetEmail({
+//   to,
+//   name,
+//   resetUrl,
+// }) {
+//   const transporter = getTransporter();
+
+//   const from =
+//     process.env.SMTP_FROM ||
+//     process.env.SMTP_USER ||
+//     "noreply@mgrmmedicare.com";
+
+//   if (!transporter) {
+//     logResetLink(to, resetUrl);
+//     return {
+//       delivered: false,
+//       logged: true,
+//     };
+//   }
+
+//   try {
+//     await transporter.verify();
+//     console.log("✅ SMTP connection verified");
+
+//     const info = await transporter.sendMail({
+//       from,
+//       to,
+//       subject: "Reset your MGRM Medicare password",
+
+//       text: `
+// Hi ${name || "there"},
+
+// Use the link below to reset your password.
+
+// ${resetUrl}
+
+// This link is valid for 1 hour.
+
+// If you did not request this, you can ignore this email.
+//       `,
+
+//       html: `
+//         <p>Hi ${name || "there"},</p>
+
+//         <p>Click below to reset your password.</p>
+
+//         <p>
+//           <a href="${resetUrl}">
+//             Reset Password
+//           </a>
+//         </p>
+
+//         <p>This link is valid for <b>1 hour</b>.</p>
+
+//         <p>If you didn't request this, simply ignore this email.</p>
+//       `,
+//     });
+
+//     console.log("✅ Email sent:", info.messageId);
+
+//     return {
+//       delivered: true,
+//       messageId: info.messageId,
+//     };
+//   } catch (err) {
+//     console.error("❌ Email send failed:");
+//     console.error(err);
+
+//     logResetLink(to, resetUrl);
+
+//     return {
+//       delivered: false,
+//       logged: true,
+//       error: err.message,
+//     };
+//   }
+// }
+
 import nodemailer from "nodemailer";
 
 const PLACEHOLDER_HOSTS = new Set([
@@ -103,7 +237,6 @@ function isSmtpConfigured() {
   const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return false;
-
   if (PLACEHOLDER_HOSTS.has(SMTP_HOST.toLowerCase())) return false;
   if (PLACEHOLDER_USERS.has(SMTP_USER.toLowerCase())) return false;
   if (PLACEHOLDER_PASSWORDS.has(SMTP_PASS)) return false;
@@ -123,12 +256,6 @@ function getTransporter() {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
-    logger: true,
-debug: true,
-
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
   });
 }
 
@@ -157,16 +284,12 @@ export async function sendPasswordResetEmail({
   }
 
   try {
-    await transporter.verify();
-    console.log("✅ SMTP connection verified");
-
     const info = await transporter.sendMail({
       from,
       to,
       subject: "Reset your MGRM Medicare password",
 
-      text: `
-Hi ${name || "there"},
+      text: `Hi ${name || "there"},
 
 Use the link below to reset your password.
 
@@ -174,35 +297,51 @@ ${resetUrl}
 
 This link is valid for 1 hour.
 
-If you did not request this, you can ignore this email.
-      `,
+If you did not request this, you can safely ignore this email.`,
 
       html: `
         <p>Hi ${name || "there"},</p>
 
-        <p>Click below to reset your password.</p>
+        <p>Click the button below to reset your password.</p>
 
         <p>
-          <a href="${resetUrl}">
+          <a
+            href="${resetUrl}"
+            style="
+              display:inline-block;
+              padding:12px 24px;
+              background:#0d6efd;
+              color:#ffffff;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:600;
+            "
+          >
             Reset Password
           </a>
         </p>
 
-        <p>This link is valid for <b>1 hour</b>.</p>
+        <p>
+          Or copy and paste this link into your browser:
+        </p>
 
-        <p>If you didn't request this, simply ignore this email.</p>
+        <p>${resetUrl}</p>
+
+        <p>This link will expire in <strong>1 hour</strong>.</p>
+
+        <p>If you didn't request this password reset, you can ignore this email.</p>
       `,
     });
 
-    console.log("✅ Email sent:", info.messageId);
+    console.log(`✅ Password reset email sent to ${to}`);
+    console.log(`Message ID: ${info.messageId}`);
 
     return {
       delivered: true,
       messageId: info.messageId,
     };
   } catch (err) {
-    console.error("❌ Email send failed:");
-    console.error(err);
+    console.error("❌ Password reset email failed:", err.message);
 
     logResetLink(to, resetUrl);
 
