@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import dns from "dns";
 
 const PLACEHOLDER_HOSTS = new Set(["smtp.example.com", "localhost", "127.0.0.1"]);
 const PLACEHOLDER_USERS = new Set(["your@email.com", "user@example.com"]);
@@ -17,10 +18,25 @@ function getTransporter() {
   if (!isSmtpConfigured()) return null;
 
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE } = process.env;
+  // return nodemailer.createTransport({
+  //   host: SMTP_HOST,
+  //   port: Number(SMTP_PORT) || 587,
+  //   secure: SMTP_SECURE === "true",
+  //   auth: {
+  //     user: SMTP_USER,
+  //     pass: SMTP_PASS,
+  //   },
+  // });
+
+  dns.setDefaultResultOrder("ipv4first");
+
+
   return nodemailer.createTransport({
     host: SMTP_HOST,
     port: Number(SMTP_PORT) || 587,
-    secure: SMTP_SECURE === "true",
+    secure: false,
+    requireTLS: true,
+    family: 4, // Force IPv4
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS,
