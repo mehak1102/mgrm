@@ -50,7 +50,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
   return (
     <div
-      className={`product-card--catalog group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
+      className={`group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
         pastel
           ? "product-card--pastel border-2"
           : "border border-slate-200 dark:border-white/10"
@@ -67,7 +67,7 @@ export default function ProductCard({ product, pastelIndex }) {
       <div className="relative">
         <Link
           to={`/product/${product.slug}`}
-          className={`product-card__image-wrap block relative overflow-hidden ${
+          className={`product-card__image-wrap block relative overflow-hidden h-44 sm:h-52 lg:h-72 ${
             pastel ? "product-card--pastel__image" : "bg-card"
           }`}
         >

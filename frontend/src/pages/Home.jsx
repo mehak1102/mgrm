@@ -1566,7 +1566,7 @@ const BANDAGE_STAT_PASTELS = [
           </div>
 
           {recommendationsLoading ? (
-            <div className="relative catalog-grid px-2 sm:px-4 pb-2">
+            <div className="home-editorial-grid relative px-2 sm:px-4 pb-2">
               {[1, 2, 3, 4].map((x) => (
                 <div
                   key={x}
@@ -1581,7 +1581,7 @@ const BANDAGE_STAT_PASTELS = [
               </p>
             </div>
           ) : (
-            <div className="relative catalog-grid px-2 sm:px-4 pb-2">
+            <div className="home-editorial-grid relative px-2 sm:px-4 pb-2">
               {products.slice(productStart, productStart + 4).map((p, i) => (
                 <ProductRevealCard key={p._id} index={i}>
                   <ProductCard product={p} pastelIndex={i} />
@@ -1626,7 +1626,7 @@ const BANDAGE_STAT_PASTELS = [
             </div>
           </div>
 
-          <div className="catalog-grid catalog-grid--five">
+          <div className="home-editorial-grid">
             {blogPosts.slice(blogStart, blogStart + 4).map((blog, index) => (
               <BlogCardEditorial key={`${blog.slug}-${index}`} blog={blog} index={index} />
             ))}

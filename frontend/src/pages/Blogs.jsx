@@ -124,7 +124,7 @@ export default function Blogs() {
               {bodyPartBlogs
                 .filter((b) => b.slug !== featuredBlog?.slug)
                 .map((blog, index) => (
-                  <BlogCardEditorial key={blog.slug} blog={blog} index={index} />
+                  <BlogCardEditorial key={blog.slug} blog={blog} index={index} compact />
                 ))}
             </div>
           </section>
@@ -143,7 +143,7 @@ export default function Blogs() {
 
             <div className="catalog-grid catalog-grid--five">
               {activityBlogs.map((blog, index) => (
-                <BlogCardEditorial key={blog.slug} blog={blog} index={index} />
+                <BlogCardEditorial key={blog.slug} blog={blog} index={index} compact />
               ))}
             </div>
           </section>

@@ -278,7 +278,7 @@ export function TestimonialCard({ item, index = 0 }) {
   );
 }
 
-export function BlogCardEditorial({ blog, index = 0 }) {
+export function BlogCardEditorial({ blog, index = 0, compact = false }) {
   const { t } = useTranslation();
   const enabled = usePremiumMotion();
   const isBodyPart = blog.type === "bodyPart";
@@ -381,7 +381,7 @@ export function BlogCardEditorial({ blog, index = 0 }) {
   const card = (
     <Link
       to={`/blogs/${blog.slug}`}
-      className={`blog-card--catalog group relative block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 ${hoverShadow} transition duration-500`}
+      className={`${compact ? "blog-card--catalog " : ""}group relative block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 ${hoverShadow} transition duration-500`}
       style={
         isBodyPart && blog.color
           ? { "--body-glow": blog.color }
