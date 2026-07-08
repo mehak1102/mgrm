@@ -8,6 +8,8 @@ import {
   Star,
   ShoppingCart,
   ChevronDown,
+  SlidersHorizontal,
+  X,
 } from "lucide-react";
 import API from "../api";
 import { activities } from "../data/siteData";
@@ -20,6 +22,10 @@ import {
   productPriceSaleProps,
 } from "../utils/productPriceStyle";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
+import {
+  SectionHeading,
+  FadeUpText,
+} from "../components/typography/TypographyMotion";
 
 const colors = [
   "Black",
@@ -32,6 +38,173 @@ const colors = [
 ];
 
 const sizes = ["S", "M", "L", "XL", "XXL", "UN", "Regular", "Plus", "SM", "LXL"];
+
+function ActivityFiltersPanel({
+  activeActivity,
+  selectActivity,
+  selectedColor,
+  setSelectedColor,
+  selectedSize,
+  setSelectedSize,
+  maxPrice,
+  setMaxPrice,
+  clearFilters,
+  scrollClass = "h-[calc(100%-72px)]",
+  onClose,
+}) {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <div className="p-5 border-b border-edge flex justify-between items-center gap-3 shrink-0">
+        <h2 className="text-xl font-black text-fg">{t("shop.filterTitle")}</h2>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="text-purple-600 dark:text-cyan-400 text-sm font-bold"
+          >
+            {t("common.clearAll")}
+          </button>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-surface-hover lg:hidden"
+              aria-label={t("shop.closeFilters")}
+            >
+              <X size={18} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className={`${scrollClass} overflow-y-auto custom-scroll overscroll-contain`}>
+        <div className="p-5 border-b border-edge">
+          <div className="flex justify-between font-black text-sm mb-4 text-fg">
+            {t("shopByActivity.activity")} <ChevronDown size={16} />
+          </div>
+
+          <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
+            <button
+              type="button"
+              onClick={() => selectActivity("")}
+              className={`text-left px-3 py-2 rounded-xl font-semibold ${
+                !activeActivity
+                  ? "bg-purple-50 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
+                  : "hover:bg-surface-hover text-fg"
+              }`}
+            >
+              {t("shopByActivity.allActivity")}
+            </button>
+
+            {activities.map((item) => (
+              <button
+                key={item.name}
+                type="button"
+                onClick={() => selectActivity(item.name)}
+                className={`text-left px-3 py-2 rounded-xl font-semibold ${
+                  activeActivity === item.name
+                    ? "bg-purple-50 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
+                    : "hover:bg-surface-hover text-fg"
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5 border-b border-edge">
+          <div className="flex justify-between font-black text-sm mb-4 text-fg">
+            {t("shop.color")} <ChevronDown size={16} />
+          </div>
+
+          <div className="grid gap-3">
+            {colors.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() =>
+                  setSelectedColor(selectedColor === color ? "" : color)
+                }
+                className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
+                  selectedColor === color
+                    ? "bg-purple-50 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
+                    : "hover:bg-surface-hover text-fg"
+                }`}
+              >
+                <span className="flex items-center gap-3 min-w-0">
+                  <span
+                    className="w-4 h-4 rounded-full border shrink-0"
+                    style={{
+                      background:
+                        color === "Black"
+                          ? "#000"
+                          : color === "White"
+                          ? "#fff"
+                          : color === "Grey"
+                          ? "#bbb"
+                          : color === "Beige"
+                          ? "#ead5b7"
+                          : color === "Silver"
+                          ? "#c0c0c0"
+                          : "#111",
+                    }}
+                  />
+                  <span className="truncate">{color}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5 border-b border-edge">
+          <div className="flex justify-between font-black text-sm mb-4 text-fg">
+            {t("shop.size")} <ChevronDown size={16} />
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {sizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() =>
+                  setSelectedSize(selectedSize === size ? "" : size)
+                }
+                className={`px-3 sm:px-4 py-2 rounded-lg border text-sm font-bold ${
+                  selectedSize === size
+                    ? "border-purple-600 bg-purple-50 text-purple-700 dark:border-cyan-500 dark:bg-cyan-950/50 dark:text-cyan-300"
+                    : "border-edge hover:border-purple-500 hover:text-purple-600 dark:hover:border-cyan-500 dark:hover:text-cyan-400 text-fg"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-5">
+          <div className="flex justify-between font-black text-sm mb-4 text-fg">
+            {t("shop.price")} <ChevronDown size={16} />
+          </div>
+
+          <p className="text-sm mb-3 text-fg-muted">
+            {t("shop.priceRange", { max: maxPrice })}
+          </p>
+          <input
+            type="range"
+            min="100"
+            max="5000"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
+            className="w-full accent-purple-600 dark:accent-cyan-400"
+          />
+        </div>
+      </div>
+    </>
+  );
+}
 
 export default function ShopByActivity() {
   const { t } = useTranslation();
@@ -48,6 +221,7 @@ export default function ShopByActivity() {
   const [view, setView] = useState("grid");
   const [maxPrice, setMaxPrice] = useState(5000);
   const [loading, setLoading] = useState(true);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     setActiveActivity(params.get("activity") || "");
@@ -72,6 +246,14 @@ export default function ShopByActivity() {
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
   }, [activeActivity, selectedColor, selectedSize]);
+
+  useEffect(() => {
+    if (!filtersOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [filtersOpen]);
 
   const filteredProducts = useMemo(() => {
     let list = products.filter(
@@ -110,165 +292,69 @@ export default function ShopByActivity() {
     setParams({});
   };
 
+  const filterProps = {
+    activeActivity,
+    selectActivity,
+    selectedColor,
+    setSelectedColor,
+    selectedSize,
+    setSelectedSize,
+    maxPrice,
+    setMaxPrice,
+    clearFilters,
+  };
+
   return (
-    <main className="bg-[#f7f8fb] bg-app min-h-screen">
+    <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300 overflow-x-clip">
       <FloatingMedicalBg />
-      <div className="max-w-[1500px] mx-auto px-5 py-8">
-        <div className="text-sm text-fg-muted mb-6">
+      <div className="relative z-10 max-w-[1500px] mx-auto px-4 sm:px-5 py-6 sm:py-8 min-w-0">
+        <div className="text-sm text-fg-muted mb-6 break-words">
           {t("common.home")} <span className="mx-2">›</span> {t("shopByActivity.breadcrumb")}
         </div>
 
-        <div className="grid lg:grid-cols-[280px_1fr] gap-8">
-          <aside className="bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] h-fit sticky top-24">
-            <div className="p-5 border-b flex justify-between items-center">
-              <h2 className="text-xl font-black">{t("shop.filterTitle")}</h2>
-              <button type="button" onClick={clearFilters} className="text-purple-600 text-sm font-bold">
-                {t("common.clearAll")}
-              </button>
-            </div>
-
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                {t("shopByActivity.activity")} <ChevronDown size={16} />
-              </div>
-
-              <div className="grid gap-1 max-h-[300px] overflow-auto pr-1">
-                <button
-                  type="button"
-                  onClick={() => selectActivity("")}
-                  className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                    !activeActivity ? "bg-purple-50 text-purple-700" : "hover:bg-surface-hover"
-                  }`}
-                >
-                  {t("shopByActivity.allActivity")}
-                </button>
-
-                {activities.map((item) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    onClick={() => selectActivity(item.name)}
-                    className={`text-left px-3 py-2 rounded-xl font-semibold ${
-                      activeActivity === item.name
-                        ? "bg-purple-50 text-purple-700"
-                        : "hover:bg-surface-hover"
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                {t("shop.color")} <ChevronDown size={16} />
-              </div>
-
-              <div className="grid gap-3">
-                {colors.map((color) => (
-                  <button
-                    key={color}
-                    type="button"
-                    onClick={() =>
-                      setSelectedColor(selectedColor === color ? "" : color)
-                    }
-                    className={`flex items-center justify-between text-sm rounded-xl px-3 py-2 ${
-                      selectedColor === color
-                        ? "bg-purple-50 text-purple-700"
-                        : "hover:bg-surface-hover"
-                    }`}
-                  >
-                    <span className="flex items-center gap-3">
-                      <span
-                        className="w-4 h-4 rounded-full border"
-                        style={{
-                          background:
-                            color === "Black"
-                              ? "#000"
-                              : color === "White"
-                              ? "#fff"
-                              : color === "Grey"
-                              ? "#bbb"
-                              : color === "Beige"
-                              ? "#ead5b7"
-                              : color === "Silver"
-                              ? "#c0c0c0"
-                              : "#111",
-                        }}
-                      />
-                      {color}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5 border-b">
-              <div className="flex justify-between font-black text-sm mb-4">
-                {t("shop.size")} <ChevronDown size={16} />
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    onClick={() =>
-                      setSelectedSize(selectedSize === size ? "" : size)
-                    }
-                    className={`px-4 py-2 rounded-lg border text-sm font-bold ${
-                      selectedSize === size
-                        ? "border-purple-600 bg-purple-50 text-purple-700"
-                        : "hover:border-purple-500 hover:text-purple-600"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5">
-              <div className="flex justify-between font-black text-sm mb-4">
-                {t("shop.price")} <ChevronDown size={16} />
-              </div>
-
-              <p className="text-sm mb-3">{t("shop.priceRange", { max: maxPrice })}</p>
-              <input
-                type="range"
-                min="100"
-                max="5000"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-purple-600"
-              />
-            </div>
+        <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8 min-w-0">
+          <aside className="hidden lg:block bg-card rounded-[18px] shadow-[0_10px_35px_rgba(15,23,42,0.08)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.35)] lg:sticky lg:top-24 lg:h-[calc(100vh-110px)] overflow-hidden min-w-0 border border-edge">
+            <ActivityFiltersPanel {...filterProps} />
           </aside>
 
-          <section>
-            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7">
-              <div>
+          <section className="min-w-0">
+            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7 min-w-0">
+              <div className="min-w-0">
                 <BrandPillBadgeRow className="mb-1.5" />
-                <h1 className="text-4xl font-black">
-                  {t("shopByActivity.title")}{" "}
-                  <span className="text-fg-muted/80 text-2xl">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <SectionHeading
+                    text={t("shopByActivity.title")}
+                    as="h1"
+                    className="text-3xl sm:text-4xl font-black text-fg"
+                  />
+                  <span className="text-fg-muted/80 text-xl sm:text-2xl font-black">
                     ({filteredProducts.length})
                   </span>
-                </h1>
-                <p className="text-fg-muted mt-2">
+                </div>
+                <FadeUpText className="text-fg-muted mt-2">
                   {activeActivity
                     ? t("shopByActivity.recommendedFor", { activity: activeActivity })
                     : t("shopByActivity.showAllOnly")}
-                </p>
+                </FadeUpText>
               </div>
 
-              <div className="flex items-center gap-4">
-                <label className="text-sm font-semibold">{t("shop.sortBy")}</label>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 min-w-0">
+                <button
+                  type="button"
+                  onClick={() => setFiltersOpen(true)}
+                  className="lg:hidden inline-flex items-center gap-2 bg-card border border-edge rounded-xl px-4 py-3 text-sm font-bold shrink-0 text-fg"
+                >
+                  <SlidersHorizontal size={18} />
+                  {t("shop.filters")}
+                </button>
+
+                <label className="text-sm font-semibold shrink-0 text-fg">
+                  {t("shop.sortBy")}
+                </label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-card border rounded-xl px-4 py-3 outline-none"
+                  className="bg-card border border-edge rounded-xl px-3 sm:px-4 py-3 outline-none min-w-0 max-w-full flex-1 sm:flex-none text-fg"
                 >
                   <option value="popularity">{t("shop.sortPopularity")}</option>
                   <option value="low">{t("shop.sortLow")}</option>
@@ -276,12 +362,14 @@ export default function ShopByActivity() {
                   <option value="name">{t("shop.sortName")}</option>
                 </select>
 
-                <div className="bg-card border rounded-xl p-1 flex">
+                <div className="bg-card border border-edge rounded-xl p-1 flex shrink-0">
                   <button
                     type="button"
                     onClick={() => setView("grid")}
                     className={`p-3 rounded-lg ${
-                      view === "grid" ? "bg-purple-100 text-purple-700" : ""
+                      view === "grid"
+                        ? "bg-purple-100 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
+                        : "text-fg"
                     }`}
                     aria-label={t("shop.gridView")}
                   >
@@ -292,7 +380,9 @@ export default function ShopByActivity() {
                     type="button"
                     onClick={() => setView("list")}
                     className={`p-3 rounded-lg ${
-                      view === "list" ? "bg-purple-100 text-purple-700" : ""
+                      view === "list"
+                        ? "bg-purple-100 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
+                        : "text-fg"
                     }`}
                     aria-label={t("shop.listView")}
                   >
@@ -303,23 +393,23 @@ export default function ShopByActivity() {
             </div>
 
             {loading ? (
-              <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-7">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="h-[430px] bg-card rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[380px] sm:h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="bg-card rounded-2xl p-12 text-center shadow">
-                <h2 className="text-3xl font-black">{t("shopByActivity.noProducts")}</h2>
-                <p className="text-fg-muted mt-2">
-                  {t("shopByActivity.emptyHint")}
-                </p>
+              <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow border border-edge">
+                <h2 className="text-2xl sm:text-3xl font-black text-fg">
+                  {t("shopByActivity.noProducts")}
+                </h2>
+                <p className="text-fg-muted mt-2">{t("shopByActivity.emptyHint")}</p>
               </div>
             ) : (
               <div
                 className={
                   view === "grid"
-                    ? "grid md:grid-cols-2 xl:grid-cols-4 gap-7"
+                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-7"
                     : "grid gap-5"
                 }
               >
@@ -334,23 +424,23 @@ export default function ShopByActivity() {
                   return (
                     <article
                       key={product._id}
-                      className={`relative group bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] hover:-translate-y-1 transition ${
-                        view === "list" ? "flex" : ""
+                      className={`relative group bg-card rounded-[18px] overflow-hidden shadow-[0_12px_35px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.35)] hover:-translate-y-1 transition border border-edge ${
+                        view === "list" ? "flex flex-col sm:flex-row" : ""
                       }`}
                     >
                       <Link
                         to={`/product/${product.slug}`}
-                        className={`relative bg-card block ${
-                          view === "list" ? "w-72 h-72" : "h-72"
+                        className={`relative bg-card block shrink-0 ${
+                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-64 sm:h-72"
                         }`}
                       >
                         {save > 0 && (
-                          <span className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-black px-3 py-2 rounded">
+                          <span className="absolute top-4 left-4 bg-purple-600 dark:bg-cyan-600 text-white text-xs font-black px-3 py-2 rounded">
                             {t("common.savePercent", { percent: save })}
                           </span>
                         )}
 
-                        <span className="absolute top-14 left-4 bg-card shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+                        <span className="absolute top-14 left-4 bg-card shadow text-xs font-bold px-2 py-1 rounded flex items-center gap-1 text-fg">
                           <Star size={13} fill="#fbbf24" className="text-yellow-400" />
                           {product.rating || 4.8}
                         </span>
@@ -366,8 +456,10 @@ export default function ShopByActivity() {
                       <button
                         type="button"
                         onClick={() => toggleWishlist(product)}
-                        className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center ${
-                          isWishlisted(product) ? "text-red-500" : "text-purple-600"
+                        className={`absolute top-4 right-4 w-10 h-10 bg-card rounded-full shadow grid place-items-center z-10 ${
+                          isWishlisted(product)
+                            ? "text-red-500"
+                            : "text-purple-600 dark:text-cyan-400"
                         }`}
                         aria-label={t("shop.toggleWishlist")}
                       >
@@ -377,18 +469,18 @@ export default function ShopByActivity() {
                         />
                       </button>
 
-                      <div className="p-5 flex-1">
+                      <div className="p-4 sm:p-5 flex-1 min-w-0">
                         <Link to={`/product/${product.slug}`}>
-                          <h3 className="font-black line-clamp-2 hover:text-purple-600 transition">
+                          <h3 className="font-black line-clamp-2 hover:text-purple-600 dark:hover:text-cyan-400 transition break-words text-fg">
                             {product.name}
                           </h3>
                         </Link>
 
-                        <p className="text-xs text-fg-muted mt-1">
+                        <p className="text-xs text-fg-muted mt-1 line-clamp-1">
                           {product.activity || t("shopByActivity.activitySupport")}
                         </p>
 
-                        <div className="mt-3">
+                        <div className="mt-3 flex flex-wrap items-baseline gap-x-2">
                           <span {...productPriceSaleProps(isBlue, "text-xl font-black")}>
                             ₹{discountPrice}.00
                           </span>
@@ -396,7 +488,7 @@ export default function ShopByActivity() {
                             <span
                               {...productPriceOriginalProps(
                                 isBlue,
-                                "text-fg-muted/80 line-through ml-2"
+                                "text-fg-muted/80 line-through"
                               )}
                             >
                               ₹{price}.00
@@ -404,14 +496,12 @@ export default function ShopByActivity() {
                           )}
                         </div>
 
-                        <p className="text-xs text-fg-muted mt-1">
-                          {t("common.inclTaxes")}
-                        </p>
+                        <p className="text-xs text-fg-muted mt-1">{t("common.inclTaxes")}</p>
 
                         <button
                           type="button"
                           onClick={() => addToCart(product)}
-                          className="mt-5 w-full border border-purple-500 text-purple-600 rounded-lg py-3 font-black hover:bg-purple-600 hover:text-white transition flex items-center justify-center gap-2"
+                          className="mt-4 sm:mt-5 w-full border border-purple-500 dark:border-cyan-500 text-purple-600 dark:text-cyan-400 rounded-lg py-3 font-black hover:bg-purple-600 dark:hover:bg-cyan-600 hover:text-white transition flex items-center justify-center gap-2"
                         >
                           <ShoppingCart size={18} /> {t("common.addToCart")}
                         </button>
@@ -424,6 +514,24 @@ export default function ShopByActivity() {
           </section>
         </div>
       </div>
+
+      {filtersOpen && (
+        <div className="lg:hidden fixed inset-0 z-[110]">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            aria-label={t("shop.closeFilters")}
+            onClick={() => setFiltersOpen(false)}
+          />
+          <aside className="absolute left-0 top-0 bottom-0 w-[min(100vw-2.5rem,320px)] bg-card shadow-2xl flex flex-col overflow-hidden border-r border-edge">
+            <ActivityFiltersPanel
+              {...filterProps}
+              scrollClass="flex-1"
+              onClose={() => setFiltersOpen(false)}
+            />
+          </aside>
+        </div>
+      )}
     </main>
   );
 }

@@ -467,11 +467,11 @@ function CategoryLabel({ item, index, go, categoryCount }) {
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.35 + index * 0.12 }}
       onClick={() => go(item.query)}
-      className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-card shadow-[0_18px_45px_rgba(15,23,42,0.12)] hover:scale-105 transition"
+      className="absolute z-40 w-44 rounded-2xl overflow-hidden bg-card shadow-[0_18px_45px_rgba(15,23,42,0.12)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:scale-105 transition border border-edge"
       style={{
         left: `${item.label.x}%`,
         top: `${item.label.y}%`,
-        border: `2px solid ${item.color}`,
+        borderColor: item.color,
       }}
     >
       <div
@@ -485,12 +485,53 @@ function CategoryLabel({ item, index, go, categoryCount }) {
         <img
           src={cat.image}
           onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-          className="w-14 h-14 rounded-xl object-cover bg-gray-100"
+          className="w-14 h-14 rounded-xl object-cover bg-gray-100 dark:bg-zinc-800 shrink-0"
           alt={item.name}
         />
-        <div className="text-left">
-          <p className="text-sm font-black text-fg">{item.name}</p>
-          <p className="text-xs text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: categoryCount })}</p>
+        <div className="text-left min-w-0">
+          <p className="text-sm font-black text-fg truncate">{item.name}</p>
+          <p className="text-xs text-gray-500 dark:text-zinc-400">
+            {t("common.productsCount", { count: categoryCount })}
+          </p>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
+
+function BodyPartGridCard({ item, index, go, categoryCount }) {
+  const { t } = useTranslation();
+  const cat = getCat(item.query);
+
+  return (
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      onClick={() => go(item.query)}
+      className="w-full rounded-2xl overflow-hidden bg-card shadow-[0_12px_35px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 transition text-left border-2 border-edge"
+      style={{ borderColor: item.color }}
+    >
+      <div
+        className="py-2.5 px-3 text-center text-sm font-black text-white"
+        style={{ background: item.color }}
+      >
+        {item.name}
+      </div>
+
+      <div className="flex items-center gap-3 p-4">
+        <img
+          src={cat.image}
+          onError={(e) => (e.currentTarget.src = "/products/knee.png")}
+          className="w-16 h-16 rounded-xl object-cover bg-gray-100 dark:bg-zinc-800 shrink-0"
+          alt={item.name}
+        />
+        <div className="min-w-0">
+          <p className="text-base font-black text-fg">{item.name}</p>
+          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-0.5">
+            {t("common.productsCount", { count: categoryCount })}
+          </p>
         </div>
       </div>
     </motion.button>
@@ -507,24 +548,57 @@ export default function BodyFlowMap() {
   };
 
   return (
-    <section className="relative bg-card py-16 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-4">
+    <section className="relative bg-card py-10 sm:py-16 overflow-x-clip">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-5">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-8 sm:mb-10 px-1"
         >
-          <h2 className="text-5xl md:text-7xl font-black text-gray-700 text-fg">
+          <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-gray-700 text-fg leading-tight">
             <span className="text-red-500">{bodyTotal}</span> {t("home.certifiedProductsLine")}
           </h2>
-          <p className="text-2xl md:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
+          <p className="text-lg sm:text-2xl xl:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
             {t("home.healComfortably")}
           </p>
         </motion.div>
 
-        {/* <div className="relative h-[900px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
-         */}
-         <div className="relative h-[940px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden">
+        {/* Mobile & tablet — stacked layout */}
+        <div className="xl:hidden">
+          <div className="bg-card dark:bg-zinc-900 rounded-[28px] sm:rounded-[36px] border border-edge overflow-hidden p-5 sm:p-8">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative mx-auto flex max-w-sm items-center justify-center py-4"
+            >
+              <div className="absolute inset-6 rounded-full bg-cyan-400/10 blur-3xl dark:bg-cyan-400/15" />
+              <img
+                src="/products/in.png"
+                onError={(e) => {
+                  e.currentTarget.src = "/products/image.png";
+                }}
+                className="relative z-10 w-full max-h-[240px] sm:max-h-[320px] object-contain"
+                alt="Human body"
+              />
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 sm:mt-8">
+              {flowItems.map((item, index) => (
+                <BodyPartGridCard
+                  key={item.name}
+                  item={item}
+                  index={index}
+                  go={go}
+                  categoryCount={getCategoryCount(item.query)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop — interactive anatomy map */}
+        <div className="hidden xl:block relative h-[940px] bg-card dark:bg-zinc-900 rounded-[36px] overflow-hidden border border-edge">
           <svg
             className="absolute inset-0 w-full h-full z-0"
             viewBox="0 0 100 100"
@@ -610,18 +684,19 @@ export default function BodyFlowMap() {
             <ThumbGrid key={`${item.name}-thumbs`} item={item} />
           ))}
 
-          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app dark:bg-zinc-950/95 backdrop-blur rounded-2xl p-5 shadow-xl">
+          <div className="absolute right-10 bottom-10 z-40 grid grid-cols-2 gap-3 bg-app dark:bg-zinc-950/95 backdrop-blur rounded-2xl p-5 shadow-xl border border-edge max-w-[320px]">
             {flowItems.map((item) => (
               <button
                 key={item.name}
+                type="button"
                 onClick={() => go(item.query)}
-                className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 text-fg"
+                className="flex items-center gap-2 text-sm font-semibold text-left text-slate-800 text-fg min-w-0"
               >
                 <span
-                  className="w-4 h-4 rounded"
+                  className="w-4 h-4 rounded shrink-0"
                   style={{ background: item.color }}
                 />
-                {item.name}
+                <span className="truncate">{item.name}</span>
               </button>
             ))}
           </div>
