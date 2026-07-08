@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { isAdminEmail } from "../utils/admin.js";
 
 export function auth(req, res, next) {
   const header = req.headers.authorization || "";
@@ -15,7 +16,7 @@ export function auth(req, res, next) {
 }
 
 export function adminOnly(req, res, next) {
-  if (req.user?.role !== "admin") {
+  if (!isAdminEmail(req.user?.email)) {
     return res.status(403).json({ msg: "Admin only" });
   }
   next();

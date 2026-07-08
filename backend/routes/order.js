@@ -1,53 +1,50 @@
 import express from "express";
 import Order from "../models/Order.js";
 import { auth, adminOnly } from "../middleware/auth.js";
+import { validateAndPriceCart, OrderValidationError } from "../utils/orderPricing.js";
 
 const router = express.Router();
 
-// router.post("/", auth, async (req, res) => {
-//   const { items, total, address } = req.body;
-
-//   const order = await Order.create({
-//     userId: req.user.id,
-//     userName: req.user.name,
-//     userEmail: req.user.email,
-//     items,
-//     total,
-//     address,
-//   });
-
-//   res.json(order);
-// });
 router.post("/", auth, async (req, res) => {
-  const {
-    items,
-    total,
-    address,
-    paymentMethod,
-    paymentStatus,
-    razorpayPaymentId,
-    razorpayOrderId,
-    userPhone,
-  } = req.body;
+  try {
+    const {
+      items,
+      address,
+      paymentMethod,
+      paymentStatus,
+      razorpayPaymentId,
+      razorpayOrderId,
+      userPhone,
+    } = req.body;
 
-  const order = await Order.create({
-    userId: req.user.id,
-    userName: req.user.name,
-    userEmail: req.user.email,
-  
-    userPhone,
-    items,
-    total,
-    address,
-  
-    paymentMethod,
-    paymentStatus,
-  
-    razorpayPaymentId,
-    razorpayOrderId,
-  });
+    if (!address?.trim()) {
+      return res.status(400).json({ msg: "Delivery address is required" });
+    }
 
-  res.json(order);
+    const { items: validatedItems, grandTotal } = await validateAndPriceCart(items);
+
+    const order = await Order.create({
+      userId: req.user.id,
+      userName: req.user.name,
+      userEmail: req.user.email,
+      userPhone,
+      items: validatedItems,
+      total: grandTotal,
+      address,
+      paymentMethod,
+      paymentStatus,
+      razorpayPaymentId,
+      razorpayOrderId,
+    });
+
+    res.json(order);
+  } catch (err) {
+    if (err instanceof OrderValidationError) {
+      return res.status(400).json({ msg: err.message });
+    }
+    console.error("Create order error:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
 });
 
 router.get("/my", auth, async (req, res) => {

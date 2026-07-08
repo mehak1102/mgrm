@@ -26,6 +26,7 @@ import sizeCustomizationRoutes from "./routes/sizeCustomization.js";
 import instagramRoutes from "./routes/instagram.js";
 import { warmupProductStats } from "./services/productStatsService.js";
 import { warmupInstagramCache } from "./services/instagramService.js";
+import { formRateLimiter } from "./middleware/rateLimit.js";
 
 // dotenv.config();
 console.log("Razorpay loaded:", !!process.env.RAZORPAY_KEY_ID);
@@ -59,18 +60,18 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
-app.use("/api/support", supportRoutes);
+app.use("/api/support", formRateLimiter, supportRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/recovery-stories", recoveryStoryRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/careers", careerRoutes);
-app.use("/api/store-feedback", storeFeedbackRoutes);
-app.use("/api/warranty-claims", warrantyClaimRoutes);
-app.use("/api/suggestions", suggestionRoutes);
-app.use("/api/color-customization", colorCustomizationRoutes);
-app.use("/api/size-customization", sizeCustomizationRoutes);
+app.use("/api/store-feedback", formRateLimiter, storeFeedbackRoutes);
+app.use("/api/warranty-claims", formRateLimiter, warrantyClaimRoutes);
+app.use("/api/suggestions", formRateLimiter, suggestionRoutes);
+app.use("/api/color-customization", formRateLimiter, colorCustomizationRoutes);
+app.use("/api/size-customization", formRateLimiter, sizeCustomizationRoutes);
 app.use("/api/instagram", instagramRoutes);
 
 async function bootstrap() {

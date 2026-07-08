@@ -1,4 +1,3 @@
-import API from "../api";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { trackCartProducts } from "../utils/recommendationBehavior";
@@ -21,20 +20,10 @@ export function CartProvider({ children }) {
     return Number(product?.stock || product?.quantity || 10);
   };
 
-  const addToCart = async (product, qty = 1, size = "") => {
+  const addToCart = (product, qty = 1, size = "") => {
     const selectedSize = size || product?.sizes?.[0] || "";
     const stock = getStock(product);
     const safeQty = Math.min(stock, Math.max(1, Number(qty) || 1));
-
-    try {
-      await API.post("/cart", {
-        productId: product._id,
-        qty: safeQty,
-        size: selectedSize,
-      });
-    } catch (err) {
-      console.log("Backend cart failed, using local");
-    }
 
     const nextCart = [...cart];
 

@@ -3,6 +3,7 @@ import Review from "../models/Review.js";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import { auth, adminOnly } from "../middleware/auth.js";
+import { isAdminEmail } from "../utils/admin.js";
 
 const router = express.Router();
 
@@ -136,7 +137,7 @@ router.delete("/:id", auth, async (req, res) => {
     }
 
     const isOwner = String(review.userId) === String(req.user.id);
-    const isAdmin = req.user.role === "admin";
+    const isAdmin = isAdminEmail(req.user.email);
     if (!isOwner && !isAdmin) {
       return res.status(403).json({ msg: "Not allowed" });
     }

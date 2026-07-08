@@ -54,12 +54,13 @@ export default function Checkout() {
 
   const placeOrderAfterPayment = async (paymentData) => {
     const res = await API.post("/orders", {
-      userName: form.name,
-      userEmail: form.email,
       userPhone: form.phone,
       address: `${form.address}, ${form.city}, ${form.pincode}`,
-      items: cart,
-      total: grandTotal,
+      items: cart.map((item) => ({
+        _id: item._id,
+        qty: item.qty,
+        selectedSize: item.selectedSize,
+      })),
       paymentMethod,
       paymentStatus: "Paid",
       razorpayPaymentId: paymentData.razorpay_payment_id,
@@ -92,12 +93,13 @@ export default function Checkout() {
 
     if (paymentMethod === "COD") {
       const res = await API.post("/orders", {
-        userName: form.name,
-        userEmail: form.email,
         userPhone: form.phone,
         address: `${form.address}, ${form.city}, ${form.pincode}`,
-        items: cart,
-        total: grandTotal,
+        items: cart.map((item) => ({
+          _id: item._id,
+          qty: item.qty,
+          selectedSize: item.selectedSize,
+        })),
         paymentMethod: "COD",
         paymentStatus: "Pending",
       });
@@ -128,7 +130,11 @@ export default function Checkout() {
       }
 
       const orderRes = await API.post("/payment/create-order", {
-        amount: grandTotal,
+        items: cart.map((item) => ({
+          _id: item._id,
+          qty: item.qty,
+          selectedSize: item.selectedSize,
+        })),
       });
 
       const { key, orderId, amount, currency } = orderRes.data;

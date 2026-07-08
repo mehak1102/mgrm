@@ -1,6 +1,7 @@
 import express from "express";
 import RecoveryStory from "../models/RecoveryStory.js";
 import { auth, adminOnly } from "../middleware/auth.js";
+import { isAdminEmail } from "../utils/admin.js";
 
 const router = express.Router();
 
@@ -72,7 +73,7 @@ router.delete("/:id", auth, async (req, res) => {
     if (!story) return res.status(404).json({ msg: "Story not found" });
 
     const isOwner = String(story.userId) === String(req.user.id);
-    const isAdmin = req.user.role === "admin";
+    const isAdmin = isAdminEmail(req.user.email);
     if (!isAdmin && (!isOwner || !["pending", "rejected"].includes(story.status))) {
       return res.status(403).json({ msg: "Cannot delete this story" });
     }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
-import API from "../api";
+import { useAuth } from "../context/AuthContext";
 import AnimatedLotus from "../components/AnimatedLotus";
 import ThemeSelector from "../components/ThemeSelector";
 import { useTheme } from "../context/ThemeContext";
@@ -18,6 +18,7 @@ export default function Register() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -28,10 +29,9 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await API.post("/auth/register", form);
+      await register(form);
       toast.success(t("auth.registerSuccess"));
-      // alert("Account created. Please login.");
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       // alert(err.response?.data?.msg || "Register failed");
       toast.error(err.response?.data?.msg || t("auth.registerFailed"));

@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { sendPasswordResetEmail } from "../utils/mail.js";
+import { isAdminEmail, syncUserRole } from "../utils/admin.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -44,7 +45,7 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: hashed,
-      role: email === "admin@mgrm.com" ? "admin" : "user",
+      role: isAdminEmail(email) ? "admin" : "user",
     });
 
     res.json({
@@ -65,6 +66,8 @@ router.post("/login", async (req, res) => {
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ msg: "Wrong password" });
+
+    await syncUserRole(user);
 
     res.json({
       token: createToken(user),
@@ -152,11 +155,16 @@ router.post("/reset-password", async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (!user) return res.status(401).json({ msg: "User not found" });
+
+  await syncUserRole(user);
+
   res.json({
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email,
-    role: req.user.role,
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
   });
 });
 

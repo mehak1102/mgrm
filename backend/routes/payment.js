@@ -1,6 +1,8 @@
 import express from "express";
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import { auth } from "../middleware/auth.js";
+import { validateAndPriceCart, OrderValidationError } from "../utils/orderPricing.js";
 
 const router = express.Router();
 
@@ -15,17 +17,15 @@ export const getRazorpay = () => {
   });
 };
 
-router.post("/create-order", async (req, res) => {
+router.post("/create-order", auth, async (req, res) => {
   try {
     const razorpay = getRazorpay();
-    const { amount } = req.body;
+    const { items } = req.body;
 
-    if (!amount || Number(amount) <= 0) {
-      return res.status(400).json({ msg: "Valid amount is required" });
-    }
+    const { grandTotal } = await validateAndPriceCart(items);
 
     const options = {
-      amount: Math.round(Number(amount) * 100),
+      amount: Math.round(grandTotal * 100),
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
     };
@@ -37,8 +37,12 @@ router.post("/create-order", async (req, res) => {
       amount: order.amount,
       currency: order.currency,
       key: process.env.RAZORPAY_KEY_ID,
+      total: grandTotal,
     });
   } catch (err) {
+    if (err instanceof OrderValidationError) {
+      return res.status(400).json({ msg: err.message });
+    }
     console.error("Razorpay create order error:", err);
     res.status(500).json({ msg: err.message });
   }
