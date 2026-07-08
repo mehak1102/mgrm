@@ -230,7 +230,7 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
 
 function LoadingGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+    <div className="catalog-grid">
       {Array.from({ length: INITIAL_VISIBLE }).map((_, i) => (
         <div
           key={i}
@@ -338,7 +338,7 @@ export default function FrequentlyUsedProducts() {
           <>
             <motion.div
               layout={!reduceMotion}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
+              className="catalog-grid"
             >
               <AnimatePresence mode="popLayout">
                 {visibleProducts.map((product, index) => (

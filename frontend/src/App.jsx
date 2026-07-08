@@ -92,11 +92,11 @@ export default function App() {
 
           <Route path="/product/:slug" element={<ProductDetail />} />
 
-          <Route path="/checkout" element={requireAuth(<Checkout />)} />
+          <Route path="/checkout" element={<Checkout />} />
 
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/orders" element={requireAuth(<Orders />)} />
-          <Route path="/dashboard" element={requireAuth(<DashboardRedirect />)} />
+          <Route path="/dashboard" element={<DashboardRedirect />} />
 
           <Route path="/wishlist" element={<Wishlist />} />
 

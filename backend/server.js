@@ -23,6 +23,7 @@ import warrantyClaimRoutes from "./routes/warrantyClaims.js";
 import suggestionRoutes from "./routes/suggestions.js";
 import colorCustomizationRoutes from "./routes/colorCustomization.js";
 import sizeCustomizationRoutes from "./routes/sizeCustomization.js";
+import cartReminderRoutes from "./routes/cartReminders.js";
 import instagramRoutes from "./routes/instagram.js";
 import { warmupProductStats } from "./services/productStatsService.js";
 import { warmupInstagramCache } from "./services/instagramService.js";
@@ -72,6 +73,7 @@ app.use("/api/warranty-claims", formRateLimiter, warrantyClaimRoutes);
 app.use("/api/suggestions", formRateLimiter, suggestionRoutes);
 app.use("/api/color-customization", formRateLimiter, colorCustomizationRoutes);
 app.use("/api/size-customization", formRateLimiter, sizeCustomizationRoutes);
+app.use("/api/cart-reminders", cartReminderRoutes);
 app.use("/api/instagram", instagramRoutes);
 
 async function bootstrap() {

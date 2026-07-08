@@ -191,7 +191,7 @@ export default function ActivityProductRail({ activity, products, anchorX }) {
               </span>
             </motion.p>
 
-            <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-5">
+            <div className="mx-auto grid max-w-4xl grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
               {items.map((product, index) => (
                 <RailProductCard
                   key={`${activity}-${product.slug || product._id || index}`}

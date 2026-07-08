@@ -50,7 +50,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
   return (
     <div
-      className={`group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
+      className={`product-card--catalog group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
         pastel
           ? "product-card--pastel border-2"
           : "border border-slate-200 dark:border-white/10"
@@ -64,47 +64,50 @@ export default function ProductCard({ product, pastelIndex }) {
           : undefined
       }
     >
-      <Link
-        to={`/product/${product.slug}`}
-        className={`block relative h-72 overflow-hidden ${
-          pastel ? "product-card--pastel__image" : "bg-card"
-        }`}
-      >
-        <img
-          src={image}
-          onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-          alt={product.name}
-          className="w-full h-full object-contain p-4 group-hover:scale-110 transition duration-700"
-        />
-      </Link>
+      <div className="relative">
+        <Link
+          to={`/product/${product.slug}`}
+          className={`product-card__image-wrap block relative overflow-hidden ${
+            pastel ? "product-card--pastel__image" : "bg-card"
+          }`}
+        >
+          <img
+            src={image}
+            onError={(e) => (e.currentTarget.src = "/products/knee.png")}
+            alt={product.name}
+            className="w-full h-full object-contain p-3 sm:p-4 group-hover:scale-110 transition duration-700"
+          />
+        </Link>
 
-      <button
-        onClick={() => toggleWishlist(product)}
-        className={`absolute -mt-14 ml-[calc(100%-60px)] w-11 h-11 rounded-full bg-card dark:bg-zinc-800 border border-slate-200/80 dark:border-white/10 shadow-lg grid place-items-center transition ${
-          liked ? "text-red-500" : "text-slate-500 dark:text-zinc-400 hover:text-red-500"
-        }`}
-      >
-        <Heart size={20} fill={liked ? "currentColor" : "none"} />
-      </button>
+        <button
+          onClick={() => toggleWishlist(product)}
+          className={`product-card__wishlist absolute top-2 right-2 z-10 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-card dark:bg-zinc-800 border border-slate-200/80 dark:border-white/10 shadow-lg grid place-items-center transition ${
+            liked ? "text-red-500" : "text-slate-500 dark:text-zinc-400 hover:text-red-500"
+          }`}
+        >
+          <Heart size={16} className="sm:hidden" fill={liked ? "currentColor" : "none"} />
+          <Heart size={20} className="hidden sm:block" fill={liked ? "currentColor" : "none"} />
+        </button>
+      </div>
 
-      <div className="p-5">
-        <p className="text-xs font-black text-cyan-600 dark:text-cyan-400 uppercase">
+      <div className="product-card__body p-5">
+        <p className="product-card__category text-xs font-black text-cyan-600 dark:text-cyan-400 uppercase">
           {product.category || t("productDetail.medicalSupport")}
         </p>
 
         <Link to={`/product/${product.slug}`}>
           <h3
-            className="font-black text-lg mt-2 line-clamp-2 transition text-slate-900 dark:text-zinc-100 hover:text-purple-600 dark:hover:text-cyan-400"
+            className="product-card__title font-black text-lg mt-2 line-clamp-2 transition text-slate-900 dark:text-zinc-100 hover:text-purple-600 dark:hover:text-cyan-400"
           >
             {product.name}
           </h3>
         </Link>
 
-        <p className="text-sm mt-2 line-clamp-2 text-gray-500 dark:text-zinc-400">
+        <p className="product-card__desc text-sm mt-2 line-clamp-2 text-gray-500 dark:text-zinc-400">
           {product.description || t("productDetail.premiumSupport")}
         </p>
 
-        <div className="flex items-center gap-1 text-yellow-500 mt-3">
+        <div className="product-card__rating-row flex items-center gap-1 text-yellow-500 mt-3">
           <Star size={16} fill="currentColor" />
           <span className="text-sm font-bold">{product.rating || 4.6}</span>
           <span className="text-xs text-gray-500 dark:text-zinc-400/80">
@@ -116,7 +119,7 @@ export default function ProductCard({ product, pastelIndex }) {
           seed={product.slug || product._id || product.name}
           compact
           lightSurface={!isDark}
-          className="mt-3"
+          className="product-card__trust mt-3"
         />
 
         <div className="flex justify-between items-end mt-5">
@@ -124,7 +127,7 @@ export default function ProductCard({ product, pastelIndex }) {
             <span
               {...productPriceSaleProps(
                 isBlue,
-                "text-2xl font-black text-slate-900 dark:text-zinc-100"
+                "product-card__price text-2xl font-black text-slate-900 dark:text-zinc-100"
               )}
             >
               ₹{discountPrice}
@@ -143,7 +146,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
           <button
             onClick={() => addToCart(product)}
-            className="bg-purple-600 dark:bg-sky-600 text-white p-3 rounded-2xl hover:scale-110 hover:bg-purple-700 dark:hover:bg-sky-500 transition shadow-lg"
+            className="product-card__cart-btn bg-purple-600 dark:bg-sky-600 text-white p-3 rounded-2xl hover:scale-110 hover:bg-purple-700 dark:hover:bg-sky-500 transition shadow-lg"
           >
             <ShoppingCart size={18} />
           </button>

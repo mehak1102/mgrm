@@ -286,7 +286,7 @@ export function BlogCardEditorial({ blog, index = 0 }) {
 
   const cardInner = (
     <>
-      <div className="h-44 overflow-hidden bg-slate-100 bg-surface-hover relative">
+      <div className="blog-card__image h-44 overflow-hidden bg-slate-100 bg-surface-hover relative">
         {isBodyPart && blog.color && (
           <div
             aria-hidden
@@ -313,7 +313,7 @@ export function BlogCardEditorial({ blog, index = 0 }) {
           />
         )}
       </div>
-      <div className="p-5">
+      <div className="blog-card__body p-5">
         {enabled ? (
           <>
             <motion.p
@@ -324,27 +324,27 @@ export function BlogCardEditorial({ blog, index = 0 }) {
             </motion.p>
             <motion.h3
               variants={FadeUpSlow}
-              className="font-black mt-2 text-lg leading-tight group-hover:text-purple-700 transition"
+              className="blog-card__title font-black mt-2 text-lg leading-tight group-hover:text-purple-700 transition"
             >
               {blog.title}
             </motion.h3>
             <motion.p
               variants={FadeUpMedium}
-              className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed"
+              className="blog-card__excerpt text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed"
             >
               {blog.excerpt}
             </motion.p>
             {blog.readTime && (
               <motion.p
                 variants={FadeUpMedium}
-                className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2"
+                className="blog-card__read-time text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2"
               >
                 {t("blogs.minRead", { count: blog.readTime })}
               </motion.p>
             )}
             <motion.span
               variants={FadeUpMedium}
-              className="inline-flex mt-5 font-black text-sm text-purple-700"
+              className="blog-card__cta inline-flex mt-5 font-black text-sm text-purple-700"
             >
               {t("blogs.readArticle")}
             </motion.span>
@@ -354,18 +354,18 @@ export function BlogCardEditorial({ blog, index = 0 }) {
             <p className="text-xs text-purple-700 font-black uppercase tracking-wider">
               {blog.category}
             </p>
-            <h3 className="font-black mt-2 text-lg leading-tight group-hover:text-purple-700 transition">
+            <h3 className="blog-card__title font-black mt-2 text-lg leading-tight group-hover:text-purple-700 transition">
               {blog.title}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed">
+            <p className="blog-card__excerpt text-sm text-gray-500 dark:text-zinc-400 mt-3 line-clamp-3 leading-relaxed">
               {blog.excerpt}
             </p>
             {blog.readTime && (
-              <p className="text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2">
+              <p className="blog-card__read-time text-[11px] font-semibold text-gray-400 dark:text-zinc-500 mt-2">
                 {t("blogs.minRead", { count: blog.readTime })}
               </p>
             )}
-            <span className="inline-flex mt-5 font-black text-sm text-purple-700">
+            <span className="blog-card__cta inline-flex mt-5 font-black text-sm text-purple-700">
               {t("blogs.readArticle")}
             </span>
           </>
@@ -381,7 +381,7 @@ export function BlogCardEditorial({ blog, index = 0 }) {
   const card = (
     <Link
       to={`/blogs/${blog.slug}`}
-      className={`group relative block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 ${hoverShadow} transition duration-500`}
+      className={`blog-card--catalog group relative block bg-card dark:bg-zinc-900 rounded-[24px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.08)] hover:-translate-y-1.5 ${hoverShadow} transition duration-500`}
       style={
         isBodyPart && blog.color
           ? { "--body-glow": blog.color }

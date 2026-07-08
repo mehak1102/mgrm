@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useDashboard } from "../context/DashboardContext";
 import AnimatedLotus from "../components/AnimatedLotus";
 import ThemeSelector from "../components/ThemeSelector";
 import { useTheme } from "../context/ThemeContext";
@@ -13,16 +14,31 @@ import {
   FadeUpText,
 } from "../components/typography/TypographyMotion";
 
+const DASHBOARD_PENDING_KEY = "mgrm_dashboard_pending";
+
 export default function Register() {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const navigate = useNavigate();
   const { register } = useAuth();
+  const { openDashboard } = useDashboard();
 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(DASHBOARD_PENDING_KEY) !== "1") return;
+    try {
+      const lastOrder = JSON.parse(localStorage.getItem("mgrm_last_order") || "null");
+      if (lastOrder?.userEmail) {
+        setForm((prev) => ({ ...prev, email: lastOrder.userEmail }));
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -31,6 +47,14 @@ export default function Register() {
     try {
       await register(form);
       toast.success(t("auth.registerSuccess"));
+
+      const pendingDashboard = sessionStorage.getItem(DASHBOARD_PENDING_KEY) === "1";
+      sessionStorage.removeItem(DASHBOARD_PENDING_KEY);
+
+      if (pendingDashboard) {
+        openDashboard();
+      }
+
       navigate("/");
     } catch (err) {
       // alert(err.response?.data?.msg || "Register failed");

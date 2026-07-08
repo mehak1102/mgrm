@@ -1,11 +1,13 @@
 import express from "express";
 import Order from "../models/Order.js";
-import { auth, adminOnly } from "../middleware/auth.js";
+import { auth, adminOnly, optionalAuth } from "../middleware/auth.js";
 import { validateAndPriceCart, OrderValidationError } from "../utils/orderPricing.js";
+import { sendOrderConfirmationEmail } from "../utils/mail.js";
+import CartReminder from "../models/CartReminder.js";
 
 const router = express.Router();
 
-router.post("/", auth, async (req, res) => {
+router.post("/", optionalAuth, async (req, res) => {
   try {
     const {
       items,
@@ -15,27 +17,61 @@ router.post("/", auth, async (req, res) => {
       razorpayPaymentId,
       razorpayOrderId,
       userPhone,
+      userName,
+      userEmail,
+      bundleDiscount,
     } = req.body;
 
     if (!address?.trim()) {
       return res.status(400).json({ msg: "Delivery address is required" });
     }
 
-    const { items: validatedItems, grandTotal } = await validateAndPriceCart(items);
+    const isGuest = !req.user;
+    const resolvedName = req.user?.name || userName?.trim();
+    const resolvedEmail = req.user?.email || userEmail?.trim().toLowerCase();
+    const resolvedPhone = userPhone?.trim();
+
+    if (isGuest) {
+      if (!resolvedName || !resolvedEmail || !resolvedPhone) {
+        return res.status(400).json({
+          msg: "Name, email, and phone are required for guest checkout",
+        });
+      }
+      if (!/\S+@\S+\.\S+/.test(resolvedEmail)) {
+        return res.status(400).json({ msg: "Valid email is required" });
+      }
+    } else if (!resolvedPhone) {
+      return res.status(400).json({ msg: "Phone number is required" });
+    }
+
+    const pricing = await validateAndPriceCart(items, { bundleDiscount });
 
     const order = await Order.create({
-      userId: req.user.id,
-      userName: req.user.name,
-      userEmail: req.user.email,
-      userPhone,
-      items: validatedItems,
-      total: grandTotal,
+      userId: req.user?.id || "",
+      userName: resolvedName,
+      userEmail: resolvedEmail,
+      userPhone: resolvedPhone,
+      items: pricing.items,
+      total: pricing.grandTotal,
       address,
       paymentMethod,
       paymentStatus,
       razorpayPaymentId,
       razorpayOrderId,
     });
+
+    if (resolvedEmail) {
+      try {
+        await sendOrderConfirmationEmail({
+          to: resolvedEmail,
+          name: resolvedName,
+          order,
+        });
+        await CartReminder.deleteOne({ email: resolvedEmail });
+      } catch (emailErr) {
+        console.error("Order confirmation email error:", emailErr);
+      }
+    }
 
     res.json(order);
   } catch (err) {
@@ -48,7 +84,10 @@ router.post("/", auth, async (req, res) => {
 });
 
 router.get("/my", auth, async (req, res) => {
-  const orders = await Order.find({ userId: req.user.id }).sort({ createdAt: -1 });
+  const email = req.user.email?.toLowerCase().trim();
+  const orders = await Order.find({
+    $or: [{ userId: req.user.id }, { userEmail: email }],
+  }).sort({ createdAt: -1 });
   res.json(orders);
 });
 

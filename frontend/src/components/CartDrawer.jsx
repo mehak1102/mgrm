@@ -47,7 +47,7 @@ export default function CartDrawer() {
             className="absolute inset-0 bg-slate-950/45 backdrop-blur-sm"
           />
 
-          <aside className="absolute right-0 top-0 h-full w-full sm:w-[470px] bg-[#f6f7fb] bg-app dark:bg-zinc-950 shadow-2xl overflow-hidden">
+          <aside className="cart-drawer-panel absolute right-0 top-0 h-full bg-[#f6f7fb] bg-app dark:bg-zinc-950 shadow-2xl overflow-hidden">
             <FloatingMedicalBg />
 
             <div className="relative z-10 h-full flex flex-col">

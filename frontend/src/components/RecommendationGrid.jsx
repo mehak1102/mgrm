@@ -26,7 +26,7 @@ export default function RecommendationGrid({
       </div>
 
       {loading ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="catalog-grid">
           {[1, 2, 3, 4].map((x) => (
             <div
               key={x}
@@ -44,7 +44,7 @@ export default function RecommendationGrid({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
           viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7"
+          className="catalog-grid"
         >
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />

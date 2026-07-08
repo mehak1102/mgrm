@@ -13,6 +13,7 @@ import {
   clearAllAuthClientState,
   clearAuthStorage,
   getStoredToken,
+  isStoredSessionExpired,
   persistAuth,
 } from "../utils/authStorage";
 
@@ -33,9 +34,18 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [authReady, setAuthReady] = useState(false);
 
-  const applyLoggedOut = useCallback(() => {
-    setUser(null);
-  }, []);
+  const applyLoggedOut = useCallback(
+    (meta) => {
+      setUser(null);
+      if (meta?.expired) {
+        if (window.location.pathname !== "/login") {
+          navigate("/login", { replace: true });
+        }
+        toast.error("Your session has expired. Please log in again.");
+      }
+    },
+    [navigate]
+  );
 
   useEffect(() => {
     setUnauthorizedHandler(applyLoggedOut);
@@ -105,6 +115,32 @@ export function AuthProvider({ children }) {
     navigate("/login", { replace: true });
     toast.success("Logged out successfully");
   }, [navigate]);
+
+  const expireSession = useCallback(
+    (message = "Your session has expired. Please log in again.") => {
+      clearAllAuthClientState();
+      setUser(null);
+      if (window.location.pathname !== "/login") {
+        navigate("/login", { replace: true });
+      }
+      toast.error(message);
+    },
+    [navigate]
+  );
+
+  useEffect(() => {
+    if (!user) return undefined;
+
+    const checkSession = () => {
+      if (isStoredSessionExpired()) {
+        expireSession();
+      }
+    };
+
+    checkSession();
+    const intervalId = window.setInterval(checkSession, 60_000);
+    return () => window.clearInterval(intervalId);
+  }, [user, expireSession]);
 
   const value = useMemo(
     () => ({ user, authReady, login, register, logout }),

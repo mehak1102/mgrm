@@ -81,6 +81,8 @@ const NAV_MENU_CLOSE_DELAY = 280;
 const NAVBAR_LOGO_LIGHT = "/products/logs.png";
 const NAVBAR_LOGO_DARK = "/brand/mgrm-logo-navbar-dark.png";
 
+const DASHBOARD_PENDING_KEY = "mgrm_dashboard_pending";
+
 export default function Navbar() {
   const { t } = useTranslation();
   const { isLight } = useTheme();
@@ -117,6 +119,15 @@ export default function Navbar() {
     menuCloseTimerRef.current = setTimeout(() => {
       setOpenMenu(null);
     }, NAV_MENU_CLOSE_DELAY);
+  };
+
+  const handleDashboardClick = () => {
+    if (!user) {
+      sessionStorage.setItem(DASHBOARD_PENDING_KEY, "1");
+      navigate("/register");
+      return;
+    }
+    openDashboard();
   };
 
   const searchFieldProps = {
@@ -483,10 +494,10 @@ export default function Navbar() {
               {t("common.admin")}
             </Link>
           )}
-          {authReady && user && (
+          {authReady && (
             <button
               type="button"
-              onClick={() => openDashboard()}
+              onClick={handleDashboardClick}
               className="font-bold text-sm theme-text hidden xl:inline hover:opacity-80 transition whitespace-nowrap"
             >
               {t("common.dashboard")}
@@ -546,7 +557,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
             />
             <aside
-              className="mobile-nav-drawer absolute right-0 top-0 bottom-0 w-[min(100vw-3rem,340px)] bg-card dark:bg-slate-950 border-l border-slate-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden z-10 text-fg"
+              className="mobile-nav-drawer overlay-drawer-panel absolute right-0 top-0 bottom-0 bg-white dark:bg-slate-950 border-l border-slate-200 dark:border-white/10 shadow-2xl flex flex-col overflow-hidden z-10 text-fg"
               aria-label="Mobile navigation"
             >
               <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-white/10 shrink-0">
@@ -588,7 +599,7 @@ export default function Navbar() {
                     <div className="pl-2 pb-2 space-y-1 max-h-52 overflow-y-auto custom-scroll">
                       <button
                         type="button"
-                        onClick={() => go("/shop-by-body")}
+                        onClick={() => go("/shop")}
                         className="w-full text-left px-3 py-2 rounded-lg text-purple-600 font-bold"
                       >
                         {t("nav.viewAllBodyAreas")}
@@ -707,11 +718,11 @@ export default function Navbar() {
                       {t("common.admin")}
                     </button>
                   )}
-                  {authReady && user && (
+                  {authReady && (
                     <button
                       type="button"
                       onClick={() => {
-                        openDashboard();
+                        handleDashboardClick();
                         setMobileOpen(false);
                       }}
                       className="w-full text-left px-3 py-2 rounded-xl font-bold hover:bg-surface-hover text-inherit"

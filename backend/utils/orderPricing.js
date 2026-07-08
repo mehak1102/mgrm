@@ -10,7 +10,7 @@ export class OrderValidationError extends Error {
   }
 }
 
-export async function validateAndPriceCart(items) {
+export async function validateAndPriceCart(items, options = {}) {
   if (!Array.isArray(items) || items.length === 0) {
     throw new OrderValidationError("Cart is empty");
   }
@@ -60,7 +60,17 @@ export async function validateAndPriceCart(items) {
   }
 
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD || subtotal === 0 ? 0 : SHIPPING_FEE;
-  const grandTotal = subtotal + shipping;
 
-  return { items: validatedItems, subtotal, shipping, grandTotal };
+  let bundleDiscount = 0;
+  if (validatedItems.length >= 2 && options.bundleDiscount) {
+    const maxBundle = Math.floor(subtotal * 0.05);
+    bundleDiscount = Math.min(
+      Math.max(0, Math.floor(Number(options.bundleDiscount))),
+      maxBundle
+    );
+  }
+
+  const grandTotal = Math.max(0, subtotal + shipping - bundleDiscount);
+
+  return { items: validatedItems, subtotal, shipping, bundleDiscount, grandTotal };
 }

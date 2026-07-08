@@ -1,5 +1,5 @@
 import axios from "axios";
-import { clearAllAuthClientState, getStoredToken } from "./utils/authStorage";
+import { clearAllAuthClientState, getStoredToken, isStoredSessionExpired } from "./utils/authStorage";
 
 const API = axios.create({
   baseURL:
@@ -25,8 +25,9 @@ API.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
+      const expired = isStoredSessionExpired();
       clearAllAuthClientState();
-      onUnauthorized();
+      onUnauthorized({ expired });
     }
     return Promise.reject(err);
   }

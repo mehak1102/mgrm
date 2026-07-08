@@ -1,4 +1,5 @@
 export const SPLASH_STORAGE_KEY = "mgrm_splash_seen";
+export const SPLASH_REPLAY_EVENT = "mgrm-splash-replay";
 
 export function isSplashSeen() {
   try {
@@ -14,6 +15,20 @@ export function markSplashSeen() {
   } catch {
     /* ignore */
   }
+}
+
+export function clearSplashSeen() {
+  try {
+    sessionStorage.removeItem(SPLASH_STORAGE_KEY);
+    localStorage.removeItem(SPLASH_STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function requestSplashReplay() {
+  clearSplashSeen();
+  window.dispatchEvent(new CustomEvent(SPLASH_REPLAY_EVENT));
 }
 
 export function clearSplashPending() {

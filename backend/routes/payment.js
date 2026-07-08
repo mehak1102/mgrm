@@ -1,7 +1,7 @@
 import express from "express";
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import { auth } from "../middleware/auth.js";
+import { optionalAuth } from "../middleware/auth.js";
 import { validateAndPriceCart, OrderValidationError } from "../utils/orderPricing.js";
 
 const router = express.Router();
@@ -17,12 +17,12 @@ export const getRazorpay = () => {
   });
 };
 
-router.post("/create-order", auth, async (req, res) => {
+router.post("/create-order", optionalAuth, async (req, res) => {
   try {
     const razorpay = getRazorpay();
-    const { items } = req.body;
+    const { items, bundleDiscount } = req.body;
 
-    const { grandTotal } = await validateAndPriceCart(items);
+    const { grandTotal } = await validateAndPriceCart(items, { bundleDiscount });
 
     const options = {
       amount: Math.round(grandTotal * 100),

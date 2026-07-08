@@ -937,7 +937,7 @@
   border: none !important;
 }
 
-/* Mobile nav drawer — dark text on glass card in blue theme */
+/* Mobile nav drawer — dark text on solid panel in blue theme */
 [data-theme="blue"] .mobile-nav-drawer,
 [data-theme="blue"] .mobile-nav-drawer button,
 [data-theme="blue"] .mobile-nav-drawer span {
@@ -945,6 +945,35 @@
 }
 
 [data-theme="blue"] .mobile-nav-drawer button.text-purple-600 {
+  color: #7c3aed !important;
+}
+
+/* Overlay drawers — opaque background so menu/filter text stays readable */
+.mobile-nav-drawer,
+.shop-filter-drawer,
+.overlay-drawer-panel {
+  background-color: #ffffff !important;
+  backdrop-filter: none !important;
+}
+
+.dark .mobile-nav-drawer,
+.dark .shop-filter-drawer,
+.dark .overlay-drawer-panel,
+[data-theme="dark"] .mobile-nav-drawer,
+[data-theme="dark"] .shop-filter-drawer,
+[data-theme="dark"] .overlay-drawer-panel {
+  background-color: #020617 !important;
+}
+
+[data-theme="blue"] .shop-filter-drawer,
+[data-theme="blue"] .shop-filter-drawer button,
+[data-theme="blue"] .shop-filter-drawer h2,
+[data-theme="blue"] .shop-filter-drawer span {
+  color: #12324a !important;
+}
+
+[data-theme="blue"] .shop-filter-drawer button.text-purple-600,
+[data-theme="blue"] .shop-filter-drawer .text-purple-600 {
   color: #7c3aed !important;
 }
 

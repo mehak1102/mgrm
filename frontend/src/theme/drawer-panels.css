@@ -1,0 +1,77 @@
+/* Slide-over panels — narrower on phones so backdrop stays visible */
+.mobile-nav-drawer {
+  width: min(72vw, 260px);
+  max-width: 260px;
+}
+
+.shop-filter-drawer {
+  width: min(70vw, 248px);
+  max-width: 248px;
+}
+
+.cart-drawer-panel {
+  width: min(84vw, 300px);
+  max-width: 300px;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav-drawer {
+    width: min(68vw, 300px);
+    max-width: 300px;
+  }
+
+  .shop-filter-drawer {
+    width: min(64vw, 280px);
+    max-width: 280px;
+  }
+
+  .cart-drawer-panel {
+    width: min(88vw, 400px);
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cart-drawer-panel {
+    width: 420px;
+    max-width: 420px;
+  }
+}
+
+/* Tighter filter drawer content on small screens */
+@media (max-width: 639px) {
+  .shop-filter-drawer > div:first-child {
+    padding: 0.85rem 0.75rem;
+  }
+
+  .shop-filter-drawer > div:first-child h2 {
+    font-size: 1rem;
+  }
+
+  .shop-filter-drawer .overflow-y-auto > div {
+    padding: 0.85rem 0.75rem;
+  }
+
+  .mobile-nav-drawer .px-4 {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}
+
+/* Dashboard section drawer — not full bleed on phones */
+.dashboard-section-drawer {
+  width: min(88vw, 320px);
+  max-width: 320px;
+}
+
+@media (min-width: 640px) {
+  .dashboard-section-drawer {
+    width: min(520px, 72vw);
+    max-width: 520px;
+  }
+
+  .dashboard-section-drawer--wide {
+    width: min(720px, 82vw);
+    max-width: 720px;
+  }
+}

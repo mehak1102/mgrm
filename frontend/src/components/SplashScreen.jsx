@@ -244,6 +244,9 @@ export default function SplashScreen({ onFinish }) {
           </div>
         </div>
       </div>
+      <p className="absolute bottom-6 left-0 right-0 text-center text-xs text-white/50 pointer-events-none">
+        Tap or press Enter to skip
+      </p>
     </div>,
     document.body
   );

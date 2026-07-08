@@ -5,11 +5,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { sendPasswordResetEmail } from "../utils/mail.js";
 import { isAdminEmail, syncUserRole } from "../utils/admin.js";
+import { linkGuestOrdersToUser } from "../utils/linkGuestOrders.js";
 import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
 const AUTH_COOKIE_NAMES = ["token", "accessToken", "refreshToken", "auth"];
+const SESSION_TTL = process.env.JWT_EXPIRES_IN || "72h";
 
 const cookieOptions = {
   httpOnly: true,
@@ -28,13 +30,19 @@ function createToken(user) {
   return jwt.sign(
     { id: user._id, role: user.role, email: user.email, name: user.name },
     process.env.JWT_SECRET,
-    { expiresIn: "30d" }
+    { expiresIn: SESSION_TTL }
   );
 }
 
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const name = req.body.name?.trim();
+    const email = req.body.email?.toLowerCase().trim();
+    const password = req.body.password;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ msg: "Name, email, and password are required" });
+    }
 
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ msg: "Email already exists" });
@@ -48,6 +56,8 @@ router.post("/register", async (req, res) => {
       role: isAdminEmail(email) ? "admin" : "user",
     });
 
+    await linkGuestOrdersToUser(user);
+
     res.json({
       token: createToken(user),
       user: { id: user._id, name: user.name, email: user.email, role: user.role },
@@ -59,7 +69,8 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email = req.body.email?.toLowerCase().trim();
+    const password = req.body.password;
 
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ msg: "User not found" });
@@ -68,6 +79,7 @@ router.post("/login", async (req, res) => {
     if (!match) return res.status(400).json({ msg: "Wrong password" });
 
     await syncUserRole(user);
+    await linkGuestOrdersToUser(user);
 
     res.json({
       token: createToken(user),

@@ -29,6 +29,7 @@ import { bodyCategories } from "../data/siteData";
 import API from "../api";
 import "../theme/about-category-flip.css";
 import "../theme/about-partnerships.css";
+import "../theme/home-about-hero.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 // import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
@@ -455,30 +456,29 @@ const AboutUs = () => {
       <div className="absolute bottom-[-150px] right-[-150px] h-[450px] w-[450px] rounded-full bg-blue-200/40 blur-3xl" />
 
       {/* HERO */}
-      <section className="relative h-screen overflow-hidden">
-        <ViewportVideo
-          eager
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/products/orth2.png"
-          sources={[{ src: "/videos/slow.mp4", type: "video/mp4" }]}
-          className="absolute inset-0 h-full w-full object-cover brightness-110"
-        />
+      <section className="home-about-hero">
+        <div className="home-about-hero__media" aria-hidden>
+          <ViewportVideo
+            eager
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/products/orth2.png"
+            sources={[{ src: "/videos/slow.mp4", type: "video/mp4" }]}
+            className="home-about-hero__video"
+          />
+          <div className="home-about-hero__shade" />
+        </div>
 
-        {/* <div className="absolute inset-0 bg-[#00172e]/75" /> */}
-        <div className="absolute inset-0 bg-[#00172e]/40" />
+        <div className="home-about-hero__content">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+            <div className="mx-auto max-w-5xl text-center">
+              <BrandPillBadgeRow tone="on-dark" className="mb-3 sm:mb-4 justify-center" />
+              <div className="about-hero-company-badge mb-5 sm:mb-8 inline-flex max-w-full items-center gap-2 sm:gap-3 rounded-full border border-white/20 bg-white/10 px-4 sm:px-6 py-2.5 sm:py-3 backdrop-blur-xl">
+                <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-cyan-300" />
 
-        <div className="relative z-10 flex h-full items-center">
-          <div className="mx-auto max-w-7xl px-6">
-            {/* <div className="max-w-4xl"> */}
-            <div className="max-w-5xl mx-auto text-center">
-              <BrandPillBadgeRow tone="on-dark" className="mb-4 justify-center" />
-              <div className="about-hero-company-badge mb-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-6 py-3 backdrop-blur-xl">
-                <Sparkles className="h-5 w-5 text-cyan-300" />
-
-              <div className="about-hero-company-badge__text text-lg md:text-xl font-semibold text-white tracking-widest text-center">
+              <div className="about-hero-company-badge__text text-sm sm:text-lg md:text-xl font-semibold text-white tracking-widest text-center">
                 <HeroKineticLine
                   text={t('about.companyName')}
                   className="justify-center"
@@ -488,22 +488,24 @@ const AboutUs = () => {
               </div>
 
               <HeroTitleBlock
-                className="mt-8 text-center font-black leading-[0.92] tracking-[-2px] text-white"
+                className="mt-5 sm:mt-8 text-center font-black leading-[0.92] tracking-[-1px] sm:tracking-[-2px] text-white"
                 lines={[
                   {
                     text: ABOUT_HERO_LINES_EN.revolutionizing,
-                    className: "justify-center max-sm:text-[36px] text-[52px] md:text-[88px]",
+                    className:
+                      "justify-center text-[clamp(1.75rem,8.5vw,5.5rem)]",
                     delay: 1.05,
                   },
                   {
                     text: ABOUT_HERO_LINES_EN.rehabilitation,
-                    className: "justify-center max-sm:text-[40px] text-[58px] md:text-[98px]",
+                    className:
+                      "justify-center text-[clamp(2rem,9.5vw,6.125rem)]",
                     gradient: true,
                   },
                   {
                     text: ABOUT_HERO_LINES_EN.since1994,
                     className:
-                      "justify-center max-sm:text-[22px] text-[32px] md:text-[52px] tracking-[4px] sm:tracking-[6px] text-white/85",
+                      "justify-center text-[clamp(1.125rem,4.2vw,3.25rem)] tracking-[0.2em] sm:tracking-[0.35em] text-white/85",
                   },
                 ]}
               />
@@ -511,7 +513,7 @@ const AboutUs = () => {
               <FadeUpText
                 animateOnMount
                 delay={3.35}
-                className="mt-10 mx-auto max-w-3xl text-lg leading-9 text-gray-200"
+                className="home-about-hero__copy mt-6 sm:mt-10 mx-auto max-w-3xl text-sm sm:text-base md:text-lg leading-relaxed sm:leading-8 text-gray-200 px-1"
               >
                 {t('about.heroCopy')}
               </FadeUpText>
@@ -610,7 +612,7 @@ const AboutUs = () => {
               </FadeUpBlock>
 
               <StaggerReveal
-                className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
+                className="grid min-w-0 grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
                 stagger={0.08}
               >
                 {productImages.map((image, index) => {

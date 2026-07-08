@@ -378,9 +378,9 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
             </div>
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7">
+              <div className="catalog-grid">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="h-[430px] bg-card rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[280px] sm:h-[380px] lg:h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
@@ -392,7 +392,7 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
               <div
                 className={
                   view === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7"
+                    ? "catalog-grid"
                     : "grid gap-5"
                 }
               >
@@ -412,8 +412,8 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
                         <button
                           type="button"
                           onClick={() => goProduct(product.slug, product.name)}
-                          className={`relative bg-card block shrink-0 text-left w-full ${
-                            view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-72"
+                          className={`relative bg-card block shrink-0 text-left w-full shop-catalog-card__image ${
+                            view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : ""
                           }`}
                         >
                           {save > 0 && (
@@ -439,8 +439,8 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
                       ) : (
                       <Link
                         to={`/product/${product.slug}`}
-                        className={`relative bg-card block shrink-0 ${
-                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-72"
+                        className={`relative bg-card block shrink-0 shop-catalog-card__image ${
+                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : ""
                         }`}
                       >
                         {save > 0 && (
@@ -476,20 +476,20 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
                         <Heart size={18} fill={isWishlisted(product) ? "currentColor" : "none"} />
                       </button>
 
-                      <div className="p-5 flex-1 min-w-0">
+                      <div className="shop-catalog-card__body p-5 flex-1 min-w-0">
                         {onProductSelect ? (
                           <button
                             type="button"
                             onClick={() => goProduct(product.slug, product.name)}
                             className="text-left w-full"
                           >
-                            <h3 className="font-black line-clamp-2 hover:text-purple-600 transition break-words">
+                            <h3 className="shop-catalog-card__title font-black line-clamp-2 hover:text-purple-600 transition break-words">
                               {product.name}
                             </h3>
                           </button>
                         ) : (
                         <Link to={`/product/${product.slug}`}>
-                          <h3 className="font-black line-clamp-2 hover:text-purple-600 transition break-words">
+                          <h3 className="shop-catalog-card__title font-black line-clamp-2 hover:text-purple-600 transition break-words">
                             {product.name}
                           </h3>
                         </Link>
@@ -538,7 +538,7 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
             aria-label={t("shop.closeFilters")}
             onClick={() => setFiltersOpen(false)}
           />
-          <aside className="absolute left-0 top-0 bottom-0 w-[min(100vw-2.5rem,320px)] bg-card shadow-2xl flex flex-col overflow-hidden">
+          <aside className="shop-filter-drawer overlay-drawer-panel absolute left-0 top-0 bottom-0 bg-white dark:bg-slate-950 shadow-2xl flex flex-col overflow-hidden border-r border-edge">
             <ShopFiltersPanel {...filterProps} scrollClass="flex-1" onClose={() => setFiltersOpen(false)} />
           </aside>
         </div>

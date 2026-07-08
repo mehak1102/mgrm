@@ -464,3 +464,46 @@
     transform: none;
   }
 }
+
+@media (max-width: 639px) {
+  .catalog-grid .fup-card {
+    padding: 0.65rem !important;
+    border-radius: 1.15rem;
+  }
+
+  .catalog-grid .fup-card__image-wrap {
+    border-radius: 0.85rem;
+    padding: 0.45rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .catalog-grid .fup-card h3 {
+    font-size: 0.78rem;
+    line-height: 1.25;
+    margin-top: 0.35rem;
+  }
+
+  .catalog-grid .fup-card > p {
+    display: none;
+  }
+
+  .catalog-grid .fup-card .mt-4 {
+    margin-top: 0.35rem;
+  }
+
+  .catalog-grid .fup-card .text-xl {
+    font-size: 0.9rem;
+  }
+
+  .catalog-grid .fup-btn-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    margin-top: 0.5rem !important;
+  }
+
+  .catalog-grid .fup-btn {
+    font-size: 0.62rem;
+    padding: 0.4rem 0.45rem;
+    min-height: 0;
+  }
+}

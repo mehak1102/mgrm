@@ -393,9 +393,9 @@ export default function ShopByActivity() {
             </div>
 
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-7">
+              <div className="catalog-grid">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-                  <div key={x} className="h-[380px] sm:h-[430px] bg-card rounded-2xl animate-pulse" />
+                  <div key={x} className="h-[280px] sm:h-[380px] lg:h-[430px] bg-card rounded-2xl animate-pulse" />
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
@@ -409,7 +409,7 @@ export default function ShopByActivity() {
               <div
                 className={
                   view === "grid"
-                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-7"
+                    ? "catalog-grid"
                     : "grid gap-5"
                 }
               >
@@ -430,8 +430,8 @@ export default function ShopByActivity() {
                     >
                       <Link
                         to={`/product/${product.slug}`}
-                        className={`relative bg-card block shrink-0 ${
-                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : "h-64 sm:h-72"
+                        className={`relative bg-card block shrink-0 shop-catalog-card__image ${
+                          view === "list" ? "w-full sm:w-72 h-64 sm:h-72" : ""
                         }`}
                       >
                         {save > 0 && (
@@ -469,9 +469,9 @@ export default function ShopByActivity() {
                         />
                       </button>
 
-                      <div className="p-4 sm:p-5 flex-1 min-w-0">
+                      <div className="shop-catalog-card__body p-4 sm:p-5 flex-1 min-w-0">
                         <Link to={`/product/${product.slug}`}>
-                          <h3 className="font-black line-clamp-2 hover:text-purple-600 dark:hover:text-cyan-400 transition break-words text-fg">
+                          <h3 className="shop-catalog-card__title font-black line-clamp-2 hover:text-purple-600 dark:hover:text-cyan-400 transition break-words text-fg">
                             {product.name}
                           </h3>
                         </Link>
@@ -523,7 +523,7 @@ export default function ShopByActivity() {
             aria-label={t("shop.closeFilters")}
             onClick={() => setFiltersOpen(false)}
           />
-          <aside className="absolute left-0 top-0 bottom-0 w-[min(100vw-2.5rem,320px)] bg-card shadow-2xl flex flex-col overflow-hidden border-r border-edge">
+          <aside className="shop-filter-drawer overlay-drawer-panel absolute left-0 top-0 bottom-0 bg-white dark:bg-slate-950 shadow-2xl flex flex-col overflow-hidden border-r border-edge">
             <ActivityFiltersPanel
               {...filterProps}
               scrollClass="flex-1"

@@ -217,7 +217,7 @@ function ProductCard({ product, category, index, reduce, t }) {
             {product.description || t("homeSections.featuredFallback")}
           </p>
 
-          <div className="mt-3.5">
+          <div className="mt-3.5 featured-collection-card__rating hidden sm:block">
             <RatingStars rating={product.rating} />
           </div>
 
@@ -398,7 +398,7 @@ export default function HomeFeaturedCollectionsSection() {
                   initial={reduce ? false : "hidden"}
                   animate={reduce ? undefined : "visible"}
                   exit={reduce ? undefined : "exit"}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-6 items-start"
+                  className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-6 items-start"
                 >
                   {activeCategory.products.map((product, index) => (
                     <ProductCard

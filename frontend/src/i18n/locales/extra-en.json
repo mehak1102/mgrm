@@ -134,7 +134,21 @@
     "cartEmpty": "Cart is empty",
     "phoneInvalid": "Phone number must be 10 digits",
     "pincodeInvalid": "Pincode must be 6 digits",
-    "paymentFailed": "Payment verification failed"
+    "paymentFailed": "Payment verification failed",
+    "emailInvalid": "Enter a valid email address",
+    "nameRequired": "Full name is required",
+    "guestTitle": "Checking out as guest",
+    "guestCopy": "No account needed — we'll email your order confirmation. Sign in to save addresses and track orders faster.",
+    "bundleDiscount": "Bundle savings (5%)",
+    "trustDeliveryTitle": "Estimated delivery",
+    "trustReturnsTitle": "Easy returns",
+    "trustReturnsCopy": "7-day return window on unused products in original packaging.",
+    "trustSecureTitle": "Secure payments",
+    "trustSecureCopy": "256-bit encryption via Razorpay. Your payment data never touches our servers.",
+    "trustCertifiedTitle": "Certified medical products",
+    "trustCertifiedCopy": "WHO-GMP certified manufacturing you can trust for recovery support.",
+    "trustFooter": "Questions? See our",
+    "returnPolicyLink": "warranty & returns policy"
   },
   "wishlist": {
     "badge": "YOUR FAVORITES",
@@ -182,7 +196,12 @@
     "youMayLike": "You May Also Like",
     "noSimilar": "No similar products found right now.",
     "medicalSupport": "Medical Support",
-    "premiumSupport": "Premium support product for daily recovery and comfort."
+    "premiumSupport": "Premium support product for daily recovery and comfort.",
+    "bundleBadge": "BUNDLE & SAVE",
+    "bundleTitle": "Frequently bought together",
+    "bundleCopy": "Add this pair to your cart and save 5% on the combo.",
+    "bundleSavings": "You save ₹{{amount}}",
+    "bundleCta": "Add bundle to cart"
   },
   "shopByBody": {
     "title": "Find Support By Body Area",

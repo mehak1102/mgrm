@@ -323,9 +323,9 @@ export default function UserDashboardOverlay() {
                       aria-hidden
                     />
                     <motion.aside
-                      className={`absolute z-30 top-0 right-0 bottom-0 w-full
-                        ${activeSection === "orders" ? "sm:w-[min(720px,96vw)]" : "sm:w-[min(520px,92vw)]"}
-                        flex flex-col border-l ${dt.headerBorder} ${dt.panelBg} ${dt.panelText} backdrop-blur-3xl`}
+                      className={`dashboard-section-drawer overlay-drawer-panel absolute z-30 top-0 right-0 bottom-0 ${
+                        activeSection === "orders" ? "dashboard-section-drawer--wide" : ""
+                      } flex flex-col border-l ${dt.headerBorder} ${dt.panelBg} ${dt.panelText} backdrop-blur-3xl`}
                       initial={{ x: "100%", opacity: 0.9 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: "100%", opacity: 0.9 }}

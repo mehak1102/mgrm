@@ -7,6 +7,8 @@ import "./i18n";
 import "./index.css";
 import "./theme/splash-screen.css";
 import "./theme/language-switcher.css";
+import "./theme/catalog-grid.css";
+import "./theme/drawer-panels.css";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider } from "./context/AuthContext";

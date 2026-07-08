@@ -352,3 +352,96 @@ If you did not request this, you can safely ignore this email.`,
     };
   }
 }
+
+function logEmailFallback(type, to, payload) {
+  console.log(`[${type}] Email for ${to}:`, payload);
+}
+
+async function sendMail({ to, subject, text, html }) {
+  const transporter = getTransporter();
+  const from =
+    process.env.SMTP_FROM ||
+    process.env.SMTP_USER ||
+    "noreply@mgrmmedicare.com";
+
+  if (!transporter) {
+    logEmailFallback("email", to, { subject, text });
+    return { delivered: false, logged: true };
+  }
+
+  try {
+    const info = await transporter.sendMail({ from, to, subject, text, html });
+    return { delivered: true, messageId: info.messageId };
+  } catch (err) {
+    console.error(`Email send failed (${subject}):`, err.message);
+    logEmailFallback("email", to, { subject, text });
+    return { delivered: false, logged: true, error: err.message };
+  }
+}
+
+export async function sendOrderConfirmationEmail({ to, name, order }) {
+  const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+  const orderId = order._id?.toString().slice(-8).toUpperCase() || "—";
+  const itemLines = (order.items || [])
+    .map((item) => `• ${item.name} × ${item.qty} — ₹${item.lineTotal ?? item.discountPrice * item.qty}`)
+    .join("\n");
+
+  const subject = `Order confirmed — MGRM Medicare #${orderId}`;
+  const text = `Hi ${name || "there"},
+
+Thank you for your order!
+
+Order #${orderId}
+Total: ₹${order.total}
+Payment: ${order.paymentMethod} (${order.paymentStatus})
+
+${itemLines}
+
+Delivery address:
+${order.address}
+
+Track your orders: ${clientUrl}/orders
+
+— MGRM Medicare`;
+
+  const html = `
+    <p>Hi ${name || "there"},</p>
+    <p>Thank you for your order with <strong>MGRM Medicare</strong>.</p>
+    <p><strong>Order #${orderId}</strong><br/>
+    Total: <strong>₹${order.total}</strong><br/>
+    Payment: ${order.paymentMethod} (${order.paymentStatus})</p>
+    <pre style="font-family:inherit;white-space:pre-wrap">${itemLines}</pre>
+    <p><strong>Delivery address:</strong><br/>${order.address}</p>
+    <p><a href="${clientUrl}/orders">View your orders</a></p>
+  `;
+
+  return sendMail({ to, subject, text, html });
+}
+
+export async function sendAbandonedCartEmail({ to, name, items, total }) {
+  const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+  const subject = "You left items in your cart — MGRM Medicare";
+  const itemLines = (items || [])
+    .slice(0, 5)
+    .map((item) => `• ${item.name} × ${item.qty}`)
+    .join("\n");
+
+  const text = `Hi ${name || "there"},
+
+You still have items waiting in your cart (₹${total}):
+
+${itemLines}
+
+Complete your order: ${clientUrl}/checkout
+
+— MGRM Medicare`;
+
+  const html = `
+    <p>Hi ${name || "there"},</p>
+    <p>You still have items in your cart (total <strong>₹${total}</strong>):</p>
+    <pre style="font-family:inherit;white-space:pre-wrap">${itemLines}</pre>
+    <p><a href="${clientUrl}/checkout">Complete your order</a></p>
+  `;
+
+  return sendMail({ to, subject, text, html });
+}

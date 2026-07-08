@@ -17,6 +17,7 @@ import { trackViewedProduct } from "../utils/recommendationBehavior";
 import ProductReviews from "../components/product/ProductReviews";
 import RecoveryStoriesSection from "../components/product/RecoveryStoriesSection";
 import PeopleAlsoBoughtCarousel from "../components/product/PeopleAlsoBoughtCarousel";
+import FrequentlyBoughtTogether from "../components/product/FrequentlyBoughtTogether";
 import { StarRatingDisplay } from "../components/product/StarRating";
 
 import {
@@ -243,6 +244,7 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
       />
 
       <div className="max-w-[1400px] mx-auto px-6 pb-14 space-y-14">
+        <FrequentlyBoughtTogether productId={product._id} primaryProduct={product} />
         <PeopleAlsoBoughtCarousel productId={product._id} />
 
         <RecoveryStoriesSection productId={product._id} />

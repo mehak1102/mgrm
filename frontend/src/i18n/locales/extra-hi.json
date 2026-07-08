@@ -134,7 +134,21 @@
     "cartEmpty": "कार्ट खाली है",
     "phoneInvalid": "फ़ोन नंबर 10 अंकों का होना चाहिए",
     "pincodeInvalid": "पिनकोड 6 अंकों का होना चाहिए",
-    "paymentFailed": "भुगतान सत्यापन विफल"
+    "paymentFailed": "भुगतान सत्यापन विफल",
+    "emailInvalid": "मान्य ईमेल पता दर्ज करें",
+    "nameRequired": "पूरा नाम आवश्यक है",
+    "guestTitle": "अतिथि के रूप में चेकआउट",
+    "guestCopy": "खाते की ज़रूरत नहीं — हम आपको ऑर्डर की पुष्टि ईमेल करेंगे। पते सहेजने के लिए साइन इन करें।",
+    "bundleDiscount": "बंडल बचत (5%)",
+    "trustDeliveryTitle": "अनुमानित डिलीवरी",
+    "trustReturnsTitle": "आसान रिटर्न",
+    "trustReturnsCopy": "अप्रयुक्त उत्पादों पर 7-दिन की रिटर्न विंडो, मूल पैकेजिंग में।",
+    "trustSecureTitle": "सुरक्षित भुगतान",
+    "trustSecureCopy": "Razorpay के माध्यम से 256-बिट एन्क्रिप्शन।",
+    "trustCertifiedTitle": "प्रमाणित चिकित्सा उत्पाद",
+    "trustCertifiedCopy": "WHO-GMP प्रमाणित निर्माण।",
+    "trustFooter": "प्रश्न? देखें",
+    "returnPolicyLink": "वारंटी और रिटर्न नीति"
   },
   "wishlist": {
     "badge": "आपके पसंदीदा",
@@ -182,7 +196,12 @@
     "youMayLike": "आपको यह भी पसंद आ सकता है",
     "noSimilar": "अभी कोई समान उत्पाद नहीं मिला।",
     "medicalSupport": "मेडिकल सपोर्ट",
-    "premiumSupport": "दैनिक रिकवरी और आराम के लिए प्रीमियम सपोर्ट उत्पाद।"
+    "premiumSupport": "दैनिक रिकवरी और आराम के लिए प्रीमियम सपोर्ट उत्पाद।",
+    "bundleBadge": "बंडल और बचत",
+    "bundleTitle": "अक्सर साथ खरीदे जाते हैं",
+    "bundleCopy": "इस जोड़ी को कार्ट में जोड़ें और 5% बचाएं।",
+    "bundleSavings": "आप ₹{{amount}} बचाते हैं",
+    "bundleCta": "बंडल कार्ट में जोड़ें"
   },
   "shopByBody": {
     "title": "शरीर क्षेत्र के अनुसार सपोर्ट खोजें",
