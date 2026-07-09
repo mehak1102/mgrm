@@ -270,11 +270,11 @@ export default function HomeShopByActivitySection() {
   };
 
   return (
-    <section className="home-activity-section max-w-[1500px] mx-auto px-6 py-28">
-      <div className="flex justify-between items-end mb-10">
+    <section className="home-activity-section max-w-[1500px] mx-auto px-4 sm:px-6 py-12 sm:py-28">
+      <div className="flex justify-between items-end mb-5 sm:mb-10">
         <div>
-          <p className="home-activity-label text-cyan-600 font-black tracking-widest">{t("homeSections.activityLabel")}</p>
-          <h2 className="home-activity-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">{t("homeSections.activityTitle")}</h2>
+          <p className="home-activity-label text-cyan-600 font-black tracking-wider sm:tracking-widest text-[10px] sm:text-sm">{t("homeSections.activityLabel")}</p>
+          <h2 className="home-activity-heading text-2xl sm:text-4xl md:text-[58px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight">{t("homeSections.activityTitle")}</h2>
         </div>
 
         <Link
@@ -290,7 +290,7 @@ export default function HomeShopByActivitySection() {
         className="activity-mask overflow-x-hidden overflow-y-visible relative"
         onMouseLeave={handleLeave}
       >
-        <div className="activity-track flex gap-8 w-max marquee-activity py-8">
+        <div className="activity-track flex gap-4 sm:gap-8 w-max marquee-activity py-4 sm:py-8">
         {[...activities, ...activities].map((item, index) => {
   const activityImage =
     activitiess.find((a) => a.name === item.name)?.image;
@@ -328,7 +328,7 @@ export default function HomeShopByActivitySection() {
                 onClick={() =>
                   navigate(`/shop-by-activity?activity=${encodeURIComponent(item.name)}`)
                 }
-                className="activity-card relative h-72 w-[280px] shrink-0 rounded-[32px] overflow-hidden group shadow-[0_30px_90px_rgba(15,23,42,0.16)]"
+                className="activity-card relative h-44 w-[168px] sm:h-72 sm:w-[280px] shrink-0 rounded-[22px] sm:rounded-[32px] overflow-hidden group shadow-[0_20px_60px_rgba(15,23,42,0.14)] sm:shadow-[0_30px_90px_rgba(15,23,42,0.16)]"
               >
                 {/* <img
                   src={item.image}
@@ -364,7 +364,7 @@ export default function HomeShopByActivitySection() {
 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
-                <span className="home-activity-chip absolute bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-8 py-3 font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition">
+                <span className="home-activity-chip absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 bg-card dark:bg-zinc-900 rounded-full px-3 py-1.5 sm:px-8 sm:py-3 text-[10px] sm:text-base font-black shadow-xl group-hover:bg-fuchsia-600 group-hover:text-white transition whitespace-nowrap max-w-[90%] truncate">
                   {item.name}
                 </span>
               </motion.button>

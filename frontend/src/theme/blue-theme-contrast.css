@@ -4,6 +4,7 @@
  */
 
 /* ── HOME: Attention Cardiologists (blue theme only) ── */
+[data-theme="blue"] .home-cardiology-section .home-cardiology-card,
 [data-theme="blue"] .home-cardiology-section .rounded-\[42px\].min-h-\[760px\] {
   background: rgba(255, 255, 255, 0.84) !important;
   backdrop-filter: blur(20px);

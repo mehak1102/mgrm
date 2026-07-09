@@ -357,3 +357,69 @@
   background: rgba(255, 215, 0, 0.14) !important;
   border-color: rgba(255, 215, 0, 0.35) !important;
 }
+
+/* Mobile — compact customize section */
+@media (max-width: 639px) {
+  .home-customize-form {
+    border-radius: 1.25rem;
+  }
+
+  .home-customize-form-icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 0.75rem;
+  }
+
+  .home-customize-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .home-customize-field {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8125rem;
+    border-radius: 0.75rem;
+  }
+
+  .home-customize-field--unit {
+    flex: 0 0 4.5rem;
+    width: 4.5rem;
+    font-size: 0.75rem;
+  }
+
+  .home-customize-pill {
+    min-width: 2.25rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.7rem;
+  }
+
+  .home-customize-swatch {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .home-customize-divider h4 {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+  }
+
+  .home-customize-divider__icon {
+    height: 1.65rem;
+    width: 1.65rem;
+  }
+
+  .home-customize-divider__icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .home-customize-preview-badge {
+    height: 2.75rem;
+    width: 2.75rem;
+    font-size: 0.875rem;
+  }
+
+  .home-customize-form .min-h-\[110px\] {
+    min-height: 5.5rem;
+  }
+}

@@ -9,7 +9,7 @@ import {
 const PARALLAX_X = 14;
 const PARALLAX_Y = 10;
 
-export default function HeroAnatomicalRunner({ className = "" }) {
+export default function HeroAnatomicalRunner({ className = "", compact = false }) {
   const containerRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
@@ -62,7 +62,9 @@ export default function HeroAnatomicalRunner({ className = "" }) {
       ref={containerRef}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className={`relative z-10 flex h-full min-h-[560px] w-full items-center justify-center [perspective:1400px] ${className}`}
+      className={`relative z-10 flex h-full w-full items-center justify-center [perspective:1400px] ${
+        compact ? "min-h-0" : "min-h-[560px]"
+      } ${className}`}
       aria-hidden
     >
       {/* Holographic base — breathing glow */}
@@ -109,7 +111,7 @@ export default function HeroAnatomicalRunner({ className = "" }) {
         style={{
           x: springX,
           y: springY,
-          marginTop: "40px",
+          marginTop: compact ? "12px" : "40px",
         }}
       >
         <motion.div
@@ -122,7 +124,11 @@ export default function HeroAnatomicalRunner({ className = "" }) {
             alt=""
             decoding="async"
             draggable={false}
-            className="relative mx-auto h-[min(640px,72vh)] w-full max-w-[520px] object-contain drop-shadow-[0_32px_64px_rgba(34,211,238,0.18)] dark:drop-shadow-[0_32px_72px_rgba(34,211,238,0.28)]"
+            className={`relative mx-auto w-full object-contain drop-shadow-[0_32px_64px_rgba(34,211,238,0.18)] dark:drop-shadow-[0_32px_72px_rgba(34,211,238,0.28)] ${
+              compact
+                ? "h-[min(220px,48vw)] max-w-[240px]"
+                : "h-[min(640px,72vh)] max-w-[520px]"
+            }`}
             animate={
               reduceMotion
                 ? {}

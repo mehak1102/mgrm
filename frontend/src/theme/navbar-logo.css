@@ -136,6 +136,21 @@ html[data-theme="blue"] .home-cardiology-brand-logo.navbar-logo-link:focus-visib
   transform-origin: left center;
 }
 
+@media (max-width: 639px) {
+  .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+  .home-customize-brand-logo .navbar-logo-img {
+    height: 3.25rem;
+    transform: none;
+  }
+
+  html[data-theme="dark"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+  html.dark .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
+  html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img {
+    height: 3.25rem;
+    transform: none;
+  }
+}
+
 html[data-theme="dark"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
 html.dark .home-customize-brand-logo.navbar-logo-link .navbar-logo-img,
 html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link .navbar-logo-img {
@@ -156,4 +171,28 @@ html.dark .home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo
 html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link:hover .navbar-logo-img,
 html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link:focus-visible .navbar-logo-img {
   transform: scale(1.26);
+}
+
+/* Site navbar — compact on phones */
+@media (max-width: 639px) {
+  .site-navbar .navbar-logo-link .navbar-logo-img {
+    height: 2.1rem;
+    transform: none;
+  }
+
+  html[data-theme="dark"] .site-navbar .navbar-logo-link .navbar-logo-img,
+  html.dark .site-navbar .navbar-logo-link .navbar-logo-img,
+  html[data-theme="blue"] .site-navbar .navbar-logo-link .navbar-logo-img {
+    height: 2.1rem;
+    transform: none;
+  }
+
+  html[data-theme="dark"] .site-navbar .navbar-logo-link:hover .navbar-logo-img,
+  html.dark .site-navbar .navbar-logo-link:hover .navbar-logo-img,
+  html[data-theme="dark"] .site-navbar .navbar-logo-link:focus-visible .navbar-logo-img,
+  html.dark .site-navbar .navbar-logo-link:focus-visible .navbar-logo-img,
+  html[data-theme="blue"] .site-navbar .navbar-logo-link:hover .navbar-logo-img,
+  html[data-theme="blue"] .site-navbar .navbar-logo-link:focus-visible .navbar-logo-img {
+    transform: none;
+  }
 }

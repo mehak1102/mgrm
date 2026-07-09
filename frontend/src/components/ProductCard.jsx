@@ -50,7 +50,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
   return (
     <div
-      className={`group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
+      className={`product-card group relative rounded-[22px] overflow-hidden shadow-[0_18px_50px_rgba(15,23,42,0.09)] hover:-translate-y-2 transition-all duration-500 bg-card dark:bg-zinc-900 ${
         pastel
           ? "product-card--pastel border-2"
           : "border border-slate-200 dark:border-white/10"
@@ -122,8 +122,8 @@ export default function ProductCard({ product, pastelIndex }) {
           className="product-card__trust mt-3"
         />
 
-        <div className="flex justify-between items-end mt-5">
-          <div>
+        <div className="product-card__footer flex justify-between items-end gap-2 mt-5 min-w-0">
+          <div className="product-card__price-wrap min-w-0">
             <span
               {...productPriceSaleProps(
                 isBlue,
@@ -146,7 +146,7 @@ export default function ProductCard({ product, pastelIndex }) {
 
           <button
             onClick={() => addToCart(product)}
-            className="product-card__cart-btn bg-purple-600 dark:bg-sky-600 text-white p-3 rounded-2xl hover:scale-110 hover:bg-purple-700 dark:hover:bg-sky-500 transition shadow-lg"
+            className="product-card__cart-btn shrink-0 bg-purple-600 dark:bg-sky-600 text-white p-3 rounded-2xl hover:scale-110 hover:bg-purple-700 dark:hover:bg-sky-500 transition shadow-lg"
           >
             <ShoppingCart size={18} />
           </button>

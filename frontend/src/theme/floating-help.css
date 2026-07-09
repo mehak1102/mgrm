@@ -53,6 +53,34 @@ html[data-theme="blue"] .floating-help-logo:focus-visible .floating-help-logo-im
     drop-shadow(0 0 26px rgba(34, 211, 238, 0.4));
 }
 
+@media (max-width: 639px) {
+  .floating-help-logo {
+    width: 2.5rem;
+  }
+
+  .floating-help-logo-img {
+    height: 1.9rem;
+    max-width: 2.15rem;
+  }
+
+  html[data-theme="dark"] .floating-help-logo-img,
+  html.dark .floating-help-logo-img,
+  html[data-theme="blue"] .floating-help-logo-img {
+    height: 2.1rem;
+    max-width: 2.35rem;
+    transform: scale(1.1);
+  }
+
+  html[data-theme="dark"] .floating-help-logo:hover .floating-help-logo-img,
+  html.dark .floating-help-logo:hover .floating-help-logo-img,
+  html[data-theme="dark"] .floating-help-logo:focus-visible .floating-help-logo-img,
+  html.dark .floating-help-logo:focus-visible .floating-help-logo-img,
+  html[data-theme="blue"] .floating-help-logo:hover .floating-help-logo-img,
+  html[data-theme="blue"] .floating-help-logo:focus-visible .floating-help-logo-img {
+    transform: scale(1.12);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .floating-help-logo,
   .floating-help-logo-img {

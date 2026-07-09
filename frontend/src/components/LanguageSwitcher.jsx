@@ -105,7 +105,7 @@ export default function LanguageSwitcher({ variant = "floating", className = "" 
 
   return (
     <div
-      className={`language-switcher language-switcher--floating fixed left-5 bottom-6 z-[999] ${className}`}
+      className={`language-switcher language-switcher--floating fixed left-3 sm:left-5 bottom-4 sm:bottom-6 z-[999] ${className}`}
     >
       <LanguageToggleTrack
         currentCode={currentCode}

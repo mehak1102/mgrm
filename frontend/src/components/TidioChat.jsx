@@ -12,7 +12,7 @@ function positionTidioWidget() {
     "#tidio { right: 5.75rem !important; bottom: 1.5rem !important; }"
   );
   api.adjustStyles(
-    "@media only screen and (max-width: 640px) { #tidio { right: 1rem !important; bottom: 5.5rem !important; } }"
+    "@media only screen and (max-width: 640px) { #tidio { right: 3rem !important; bottom: 4.25rem !important; } #tidio-chat iframe, #button { transform: scale(0.82) !important; transform-origin: bottom right !important; } }"
   );
 }
 

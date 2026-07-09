@@ -307,8 +307,8 @@ export default function ShopByActivity() {
   return (
     <main className="bg-[#f7f8fb] bg-app dark:bg-zinc-950 min-h-screen transition-colors duration-300 overflow-x-clip">
       <FloatingMedicalBg />
-      <div className="relative z-10 max-w-[1500px] mx-auto px-4 sm:px-5 py-6 sm:py-8 min-w-0">
-        <div className="text-sm text-fg-muted mb-6 break-words">
+      <div className="relative z-10 max-w-[1500px] mx-auto px-4 sm:px-5 py-4 sm:py-8 min-w-0">
+        <div className="text-xs sm:text-sm text-fg-muted mb-3 sm:mb-6 break-words">
           {t("common.home")} <span className="mx-2">›</span> {t("shopByActivity.breadcrumb")}
         </div>
 
@@ -318,43 +318,43 @@ export default function ShopByActivity() {
           </aside>
 
           <section className="min-w-0">
-            <div className="flex flex-col md:flex-row justify-between gap-5 mb-7 min-w-0">
+            <div className="shop-page-toolbar flex flex-col md:flex-row justify-between gap-3 sm:gap-5 mb-4 sm:mb-7 min-w-0">
               <div className="min-w-0">
-                <BrandPillBadgeRow className="mb-1.5" />
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <BrandPillBadgeRow className="mb-1 sm:mb-1.5" />
+                <div className="flex flex-wrap items-baseline gap-x-1.5 sm:gap-x-2 gap-y-0.5">
                   <SectionHeading
                     text={t("shopByActivity.title")}
                     as="h1"
-                    className="text-3xl sm:text-4xl font-black text-fg"
+                    className="text-xl sm:text-4xl font-black text-fg leading-tight"
                   />
-                  <span className="text-fg-muted/80 text-xl sm:text-2xl font-black">
+                  <span className="text-fg-muted/80 text-base sm:text-2xl font-black">
                     ({filteredProducts.length})
                   </span>
                 </div>
-                <FadeUpText className="text-fg-muted mt-2">
+                <FadeUpText className="text-fg-muted mt-1 sm:mt-2 text-xs sm:text-base">
                   {activeActivity
                     ? t("shopByActivity.recommendedFor", { activity: activeActivity })
                     : t("shopByActivity.showAllOnly")}
                 </FadeUpText>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 min-w-0">
                 <button
                   type="button"
                   onClick={() => setFiltersOpen(true)}
-                  className="lg:hidden inline-flex items-center gap-2 bg-card border border-edge rounded-xl px-4 py-3 text-sm font-bold shrink-0 text-fg"
+                  className="lg:hidden inline-flex items-center gap-1.5 bg-card border border-edge rounded-lg px-2.5 py-1.5 text-xs font-bold shrink-0 text-fg sm:gap-2 sm:rounded-xl sm:px-4 sm:py-3 sm:text-sm"
                 >
-                  <SlidersHorizontal size={18} />
+                  <SlidersHorizontal className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
                   {t("shop.filters")}
                 </button>
 
-                <label className="text-sm font-semibold shrink-0 text-fg">
+                <label className="hidden sm:inline text-xs sm:text-sm font-semibold shrink-0 text-fg">
                   {t("shop.sortBy")}
                 </label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-card border border-edge rounded-xl px-3 sm:px-4 py-3 outline-none min-w-0 max-w-full flex-1 sm:flex-none text-fg"
+                  className="bg-card border border-edge rounded-lg px-2 py-1.5 text-xs outline-none min-w-[5.5rem] flex-1 sm:flex-none sm:min-w-0 sm:rounded-xl sm:px-4 sm:py-3 sm:text-sm text-fg"
                 >
                   <option value="popularity">{t("shop.sortPopularity")}</option>
                   <option value="low">{t("shop.sortLow")}</option>
@@ -362,31 +362,31 @@ export default function ShopByActivity() {
                   <option value="name">{t("shop.sortName")}</option>
                 </select>
 
-                <div className="bg-card border border-edge rounded-xl p-1 flex shrink-0">
+                <div className="bg-card border border-edge rounded-lg p-0.5 flex shrink-0 sm:rounded-xl sm:p-1">
                   <button
                     type="button"
                     onClick={() => setView("grid")}
-                    className={`p-3 rounded-lg ${
+                    className={`p-1.5 rounded-md sm:p-3 sm:rounded-lg ${
                       view === "grid"
                         ? "bg-purple-100 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
                         : "text-fg"
                     }`}
                     aria-label={t("shop.gridView")}
                   >
-                    <Grid2X2 size={18} />
+                    <Grid2X2 className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setView("list")}
-                    className={`p-3 rounded-lg ${
+                    className={`p-1.5 rounded-md sm:p-3 sm:rounded-lg ${
                       view === "list"
                         ? "bg-purple-100 text-purple-700 dark:bg-cyan-950/50 dark:text-cyan-300"
                         : "text-fg"
                     }`}
                     aria-label={t("shop.listView")}
                   >
-                    <List size={18} />
+                    <List className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                   </button>
                 </div>
               </div>

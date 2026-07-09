@@ -101,7 +101,7 @@ function PreviewImage({ src, alt, className }) {
 
 function PreviewTimeline({ reduce, timeline, timelineAria }) {
   return (
-    <div className="home-about-preview-timeline mt-6 sm:mt-7">
+    <div className="home-about-preview-timeline mt-3 sm:mt-7">
       <Link
         to="/about-us#section-3"
         className={`home-about-preview-timeline-link${
@@ -161,7 +161,7 @@ export default function HomeAboutPreview() {
 
   return (
     <section
-      className="home-about-preview relative max-w-[1500px] mx-auto mt-16 sm:mt-20 md:mt-24 px-4 sm:px-6 pt-16 sm:pt-20 pb-24 sm:pb-28 lg:pb-32"
+      className="home-about-preview relative max-w-[1500px] mx-auto mt-10 sm:mt-20 md:mt-24 px-4 sm:px-6 pt-10 sm:pt-20 pb-16 sm:pb-28 lg:pb-32"
       aria-labelledby="home-about-preview-heading"
     >
       <div className="home-about-preview-bg" aria-hidden>
@@ -175,10 +175,10 @@ export default function HomeAboutPreview() {
         </div>
       </div>
 
-      <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-14 xl:gap-16 items-start min-h-0">
+      <div className="relative grid lg:grid-cols-2 gap-6 sm:gap-12 lg:gap-14 xl:gap-16 items-start min-h-0">
         <div className="home-about-preview-visual order-1 lg:order-none w-full max-w-[580px] lg:max-w-none mx-auto">
           <motion.p
-            className="home-about-preview-visual-label text-[10px] sm:text-[11px] font-black uppercase tracking-[0.32em] text-slate-500 dark:text-zinc-400 mb-4 sm:mb-5"
+            className="home-about-preview-visual-label text-[9px] sm:text-[11px] font-black uppercase tracking-[0.28em] sm:tracking-[0.32em] text-slate-500 dark:text-zinc-400 mb-2 sm:mb-5"
             initial={reduce ? false : { opacity: 0, y: 20 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={VIEWPORT_PREMIUM}
@@ -223,7 +223,7 @@ export default function HomeAboutPreview() {
           </div>
 
           <motion.div
-            className="home-about-preview-citizen-strip mt-6 sm:mt-7"
+            className="home-about-preview-citizen-strip mt-4 sm:mt-7"
             custom={0.45}
             initial={reduce ? false : "hidden"}
             whileInView={reduce ? undefined : "visible"}
@@ -269,26 +269,26 @@ export default function HomeAboutPreview() {
             viewport={VIEWPORT_PREMIUM}
             variants={FadeUpSlow}
           >
-            <SectionLabel className="home-about-preview-label text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-xs sm:text-sm">
+            <SectionLabel className="home-about-preview-label text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-[10px] sm:text-sm">
               {t("homeSections.aboutPreviewOurJourney")}
             </SectionLabel>
 
             <h2
               id="home-about-preview-heading"
-              className="home-about-preview-heading mt-5 text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-black leading-[0.92] tracking-[-0.02em] text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]"
+              className="home-about-preview-heading mt-3 sm:mt-5 text-2xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-black leading-[0.95] sm:leading-[0.92] tracking-[-0.02em] text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]"
             >
               <span className="block">{t("homeSections.aboutPreviewTitle1")}</span>
               <span className="block">{t("homeSections.aboutPreviewTitle2")}</span>
               <span className="block">{t("homeSections.aboutPreviewTitle3")}</span>
             </h2>
 
-            <FadeUpText className="home-about-preview-body mt-7 sm:mt-8 text-base sm:text-lg lg:text-xl leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
+            <FadeUpText className="home-about-preview-body mt-4 sm:mt-8 text-sm sm:text-lg lg:text-xl leading-relaxed sm:leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
               {t("homeSections.aboutPreviewBody")}
             </FadeUpText>
           </motion.div>
 
           <motion.div
-            className="home-about-preview-story-accent mt-10 sm:mt-12 flex gap-5 sm:gap-6"
+            className="home-about-preview-story-accent mt-6 sm:mt-12 flex gap-3 sm:gap-6"
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={VIEWPORT_PREMIUM}
@@ -303,18 +303,18 @@ export default function HomeAboutPreview() {
                 <span className="home-about-preview-label block text-xs sm:text-sm font-semibold normal-case tracking-normal text-slate-400 dark:text-zinc-500 [data-theme=blue]:text-[var(--text-muted)] my-1">
                   {t("homeSections.aboutPreviewTo")}
                 </span>
-                <span className="home-about-preview-micro-title block text-xl sm:text-2xl lg:text-[1.65rem] leading-none tracking-tight uppercase">
+                <span className="home-about-preview-micro-title block text-base sm:text-2xl lg:text-[1.65rem] leading-none tracking-tight uppercase">
                   {t("homeSections.aboutPreviewCommonMan")}
                 </span>
               </div>
-              <p className="home-about-preview-body mt-4 sm:mt-5 text-sm sm:text-base leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
+              <p className="home-about-preview-body mt-3 sm:mt-5 text-xs sm:text-base leading-relaxed sm:leading-[1.75] text-slate-600 dark:text-zinc-400 [data-theme=blue]:text-[var(--text-secondary)] max-w-[620px]">
                 {t("homeSections.aboutPreviewCitizenCopy")}
               </p>
             </div>
           </motion.div>
 
           <PremiumStagger
-            className="home-about-preview-chips mt-9 sm:mt-10 flex flex-wrap gap-3"
+            className="home-about-preview-chips mt-5 sm:mt-10 flex flex-wrap gap-2 sm:gap-3"
             stagger={0.1}
             delay={0.2}
           >
@@ -331,7 +331,7 @@ export default function HomeAboutPreview() {
           </PremiumStagger>
 
           <motion.div
-            className="mt-10 sm:mt-12"
+            className="mt-6 sm:mt-12"
             initial={reduce ? false : { opacity: 0, y: 14 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={VIEWPORT_PREMIUM}
@@ -339,7 +339,7 @@ export default function HomeAboutPreview() {
           >
             <Link
               to="/about-us"
-              className="home-about-preview-cta btn-primary inline-flex items-center gap-2.5 rounded-full px-7 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-black shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-transform duration-500 dark:!bg-white/10 dark:!text-zinc-100 dark:!border dark:!border-white/20 dark:backdrop-blur-md dark:hover:!bg-white/15 dark:hover:shadow-[0_0_32px_rgba(34,211,238,0.18)]"
+              className="home-about-preview-cta btn-primary inline-flex items-center gap-2.5 rounded-full px-5 sm:px-8 py-2.5 sm:py-4 text-xs sm:text-base font-black shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-transform duration-500 dark:!bg-white/10 dark:!text-zinc-100 dark:!border dark:!border-white/20 dark:backdrop-blur-md dark:hover:!bg-white/15 dark:hover:shadow-[0_0_32px_rgba(34,211,238,0.18)]"
             >
               {t("homeSections.aboutPreviewReadStory")}
               <ArrowRight size={18} className="shrink-0" />

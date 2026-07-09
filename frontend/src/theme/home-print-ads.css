@@ -37,6 +37,36 @@
   -webkit-text-fill-color: var(--home-print-ads-subtitle);
 }
 
+@media (max-width: 639px) {
+  .home-print-ads-section .home-print-ads-subtitle {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .home-print-ads-section .home-print-ads-grid {
+    align-items: stretch;
+  }
+
+  .home-print-ads-section .home-print-ads-grid .group {
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  }
+
+  .home-print-ads-section .home-print-ads-image {
+    max-height: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .home-print-ads-section .home-print-ads-image {
+    min-height: 22rem;
+    max-height: 30rem;
+    object-fit: contain;
+  }
+}
+
 [data-theme="blue"] main.bg-app .home-print-ads-section .home-print-ads-subtitle {
   color: var(--home-print-ads-subtitle) !important;
   -webkit-text-fill-color: var(--home-print-ads-subtitle) !important;

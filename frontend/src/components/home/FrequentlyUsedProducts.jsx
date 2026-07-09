@@ -212,16 +212,18 @@ const FrequentlyUsedProductCard = memo(function FrequentlyUsedProductCard({
           type="button"
           onClick={() => onAddToCart(product)}
           className="fup-btn fup-btn--cart"
+          aria-label={t("common.addToCart")}
         >
           <ShoppingCart size={16} strokeWidth={2.25} />
-          {t("common.addToCart")}
+          <span className="fup-btn__label">{t("common.addToCart")}</span>
         </button>
         <Link
           to={`/product/${product.slug}`}
           className="fup-btn fup-btn--view"
+          aria-label={t("common.view")}
         >
           <Eye size={16} strokeWidth={2.25} />
-          {t("common.view")}
+          <span className="fup-btn__label">{t("common.view")}</span>
         </Link>
       </div>
     </motion.article>
@@ -294,7 +296,7 @@ export default function FrequentlyUsedProducts() {
   }
 
   return (
-    <section className="fup-section relative max-w-[1500px] mx-auto mt-16 sm:mt-20 md:mt-24 lg:mt-32 px-4 sm:px-6 py-24 md:py-28 overflow-hidden">
+    <section className="fup-section relative max-w-[1500px] mx-auto mt-10 sm:mt-20 md:mt-24 lg:mt-32 px-4 sm:px-6 pt-10 pb-16 sm:py-24 md:py-28 overflow-hidden">
       <div className="fup-section__bg absolute inset-0 rounded-[48px] border border-slate-100/80 dark:border-white/8 [data-theme=blue]:border-[var(--border-color)]" />
       <div className="fup-section__corner-blur fup-section__corner-blur--tl" aria-hidden="true" />
       <div className="fup-section__corner-blur fup-section__corner-blur--br" aria-hidden="true" />
@@ -321,14 +323,15 @@ export default function FrequentlyUsedProducts() {
       />
 
       <div className="relative px-1 sm:px-2">
-        <div className="mb-10 sm:mb-12">
+        <div className="mb-6 sm:mb-12">
           <PremiumWordHeader
             label={t("homeSections.frequentLabel")}
             title={t("homeSections.frequentTitle")}
             description={t("homeSections.frequentDesc")}
             style="slideLeft"
-            labelClassName="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-xs sm:text-sm"
-            titleClassName="text-3xl sm:text-4xl md:text-[52px] font-black mt-2 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)]"
+            labelClassName="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-[var(--text-accent)] font-black tracking-[0.28em] text-[10px] sm:text-sm"
+            titleClassName="text-2xl sm:text-4xl md:text-[52px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-[var(--text-primary)] leading-tight"
+            descriptionClassName="text-gray-500 dark:text-zinc-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base"
           />
         </div>
 

@@ -82,7 +82,7 @@ function TrustedSupportCategoryRing({ cat, staggerIndex }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="trusted-support-ring relative mx-auto h-48 w-48 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+    <div className="trusted-support-ring relative mx-auto h-28 w-28 sm:h-36 sm:w-36 md:h-48 md:w-48 transition-transform duration-500 ease-out group-hover:scale-[1.02]">
       <motion.div
         className="relative h-full w-full"
         initial={{ opacity: 0, scale: 0.97 }}
@@ -150,6 +150,125 @@ function TrustedSupportCategoryRing({ cat, staggerIndex }) {
           />
         </svg>
       </motion.div>
+    </div>
+  );
+}
+
+function HomeHeroCategoryCard({ cat, index, onSelect }) {
+  const { t } = useTranslation();
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(cat.query || cat.category || cat.name)}
+      className="home-hero-cat-card w-full rounded-2xl lg:rounded-[24px] text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_8px_22px_rgba(15,23,42,0.08)] sm:shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500 flex items-center gap-2 sm:gap-4 p-2.5 sm:p-4"
+    >
+      <span
+        className="font-light shrink-0 text-xl sm:text-3xl"
+        style={{ color: cat.color }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <div
+        className="grid place-items-center shrink-0 rounded-xl lg:rounded-2xl w-10 h-10 sm:w-16 sm:h-16"
+        style={{ background: `${cat.color}22` }}
+      >
+        <img
+          src={cat.image}
+          onError={(e) => {
+            e.currentTarget.src = "/products/knee.png";
+          }}
+          className="object-contain sm:object-cover rounded-lg lg:rounded-xl w-9 h-9 sm:w-14 sm:h-14"
+          alt={cat.name}
+        />
+      </div>
+
+      <div className="min-w-0">
+        <h3 className="font-black text-slate-900 dark:text-zinc-100 text-[11px] sm:text-lg leading-tight line-clamp-2 sm:line-clamp-none">
+          {cat.name}
+        </h3>
+        <p className="home-hero-cat-count text-gray-500 dark:text-zinc-400 text-[10px] sm:text-sm mt-0.5">
+          {t("common.productsCount", { count: cat.count })}
+        </p>
+      </div>
+    </button>
+  );
+}
+
+const HOME_HERO_MAP_POSITIONS = [
+  ["58%", "7%"],
+  ["45%", "24%"],
+  ["58%", "28%"],
+  ["55%", "36%"],
+  ["47%", "38%"],
+  ["53%", "45%"],
+  ["61%", "62%"],
+  ["58%", "84%"],
+  ["43%", "70%"],
+  ["51%", "20%"],
+  ["52%", "76%"],
+  ["41%", "31%"],
+  ["45%", "60%"],
+  ["54%", "55%"],
+  ["49%", "50%"],
+];
+
+function HomeHeroMapStage({ compact = false, onCategorySelect }) {
+  return (
+    <div
+      className={`home-hero-map-stage relative flex justify-center items-center bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden ${
+        compact
+          ? "h-[min(58vw,300px)] sm:h-[360px] rounded-[28px]"
+          : "h-[690px] rounded-[46px]"
+      }`}
+    >
+      <div
+        className={`home-hero-map-stage-glow absolute rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none ${
+          compact ? "w-[280px] h-[280px]" : "w-[560px] h-[560px]"
+        }`}
+      />
+      <div
+        className={`home-hero-map-stage-strip absolute top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none ${
+          compact ? "inset-x-8" : "inset-x-20"
+        }`}
+      />
+
+      <HeroAnatomicalRunner className="rounded-[30px]" compact={compact} />
+
+      {bodyCategories.slice(0, 15).map((cat, index) => {
+        const [left, top] = HOME_HERO_MAP_POSITIONS[index] || ["50%", "50%"];
+
+        return (
+          <motion.button
+            key={cat.name}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35 + index * 0.05 }}
+            onClick={() => onCategorySelect(cat.query || cat.category || cat.name)}
+            className="absolute z-20 group"
+            style={{ left, top }}
+            title={cat.name}
+          >
+            <span
+              className="absolute inset-0 rounded-full animate-ping opacity-30"
+              style={{ background: cat.color }}
+            />
+            <span
+              className={`relative rounded-full border-2 border-white shadow-lg grid place-items-center font-black text-white transition group-hover:scale-125 ${
+                compact ? "w-5 h-5 text-[8px]" : "w-7 h-7 text-[10px]"
+              }`}
+              style={{ background: cat.color }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <span className="home-hero-map-tooltip absolute left-8 top-0 whitespace-nowrap rounded-full bg-black/80 text-white text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition">
+              {cat.name}
+            </span>
+          </motion.button>
+        );
+      })}
     </div>
   );
 }
@@ -412,196 +531,47 @@ const BANDAGE_STAT_PASTELS = [
             </PremiumReveal>
 
             <div className="grid lg:grid-cols-[330px_1fr_330px] gap-10 items-center mt-6">
-              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.2}>
+              <PremiumStagger className="space-y-2 sm:space-y-4" stagger={0.14} delay={0.2}>
                 {categoriesWithCounts.slice(0, 5).map((cat, index) => (
                   <PremiumStaggerItem key={cat.name}>
-                    <button
-                      type="button"
-                      onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="home-hero-cat-card w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
-                    >
-                      <span className="text-3xl font-light" style={{ color: cat.color }}>
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <div
-                        className="w-16 h-16 rounded-2xl grid place-items-center"
-                        style={{ background: `${cat.color}22` }}
-                      >
-                        <img
-                          src={cat.image}
-                          onError={(e) => {
-                            e.currentTarget.src = "/products/knee.png";
-                          }}
-                          className="w-14 h-14 object-cover rounded-xl"
-                        />
-                      </div>
-
-                      <div>
-                        <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                        <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: cat.count })}</p>
-                      </div>
-                    </button>
+                    <HomeHeroCategoryCard cat={cat} index={index} onSelect={goCategory} />
                   </PremiumStaggerItem>
                 ))}
               </PremiumStagger>
 
-              <div className="home-hero-map-stage relative h-[690px] flex justify-center items-center rounded-[46px] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_35px_120px_rgba(15,23,42,0.10)] dark:shadow-[0_35px_120px_rgba(0,0,0,0.35)] overflow-hidden">
-                <div className="home-hero-map-stage-glow absolute w-[560px] h-[560px] rounded-full bg-cyan-100/40 dark:bg-cyan-500/10 blur-3xl pointer-events-none" />
-                <div className="home-hero-map-stage-strip absolute inset-x-20 top-12 h-24 bg-white/70 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
+              <HomeHeroMapStage onCategorySelect={goCategory} />
 
-                <HeroAnatomicalRunner className="rounded-[30px]" />
-{/* <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  className="
-  relative z-10
-  h-[640px]
-  w-full
-  object-cover
-  rounded-[30px]
-  brightness-110
-  contrast-110
-  saturate-125
-  drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
-  "
-
->
-  <source src="/videos/wpp.webm" type="video/webm" />
-</video> */}
-
-{/* <div className="relative flex items-center justify-center">
-  <div className="absolute inset-0 flex items-center justify-center">
-    <div className="h-[500px] w-[500px] rounded-full bg-cyan-400/25 blur-[100px] animate-pulse" />
-  </div>
-
-  <div className="absolute h-[400px] w-[400px] rounded-full bg-blue-500/15 blur-[80px]" />
-
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="
-      relative z-10
-      h-[640px]
-      w-full
-      object-cover
-      rounded-[30px]
-      brightness-100
-      contrast-110
-      saturate-125
-      drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
-    "
-  >
-    <source src="/videos/wpp.webm" type="video/webm" />
-  </video>
-
-  
-  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 h-20 w-[55%] rounded-full bg-cyan-400/20 blur-3xl" />
-</div> */}
-                {bodyCategories.slice(0, 15).map((cat, index) => {
-                  const positions = [
-                    ["58%", "7%"],
-                    ["45%", "24%"],
-                    ["58%", "28%"],
-                    ["55%", "36%"],
-                    ["47%", "38%"],
-                    ["53%", "45%"],
-                    ["61%", "62%"],
-                    ["58%", "84%"],
-                    ["43%", "70%"],
-                    ["51%", "20%"],
-                    ["52%", "76%"],
-                    ["41%", "31%"],
-                    ["45%", "60%"],
-                    ["54%", "55%"],
-                    ["49%", "50%"],
-                  ];
-
-                  const [left, top] = positions[index] || ["50%", "50%"];
-
-                  return (
-                    <motion.button
-                      key={cat.name}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.35 + index * 0.05 }}
-                      onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="absolute z-20 group"
-                      style={{ left, top }}
-                      title={cat.name}
-                    >
-                      <span
-                        className="absolute inset-0 rounded-full animate-ping opacity-30"
-                        style={{ background: cat.color }}
-                      />
-                      <span
-                        className="relative w-7 h-7 rounded-full border-2 border-white shadow-lg grid place-items-center text-[10px] font-black text-white transition group-hover:scale-125"
-                        style={{ background: cat.color }}
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <span className="home-hero-map-tooltip absolute left-8 top-0 whitespace-nowrap rounded-full bg-black/80 text-white text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition">
-                        {cat.name}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-              <PremiumStagger className="space-y-4" stagger={0.14} delay={0.35}>
-                {categoriesWithCounts.slice(5, 10).map((cat, i) => {
-                  const index = i + 5;
-
-                  return (
-                    <PremiumStaggerItem key={cat.name}>
-                      <button
-                        type="button"
-                        onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                        className="home-hero-cat-card w-full rounded-[24px] p-4 flex items-center gap-4 text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500"
-                      >
-                        <span className="text-3xl font-light" style={{ color: cat.color }}>
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-
-                        <div
-                          className="w-16 h-16 rounded-2xl grid place-items-center"
-                          style={{ background: `${cat.color}22` }}
-                        >
-                          <img
-                            src={cat.image}
-                            onError={(e) => {
-                              e.currentTarget.src = "/products/knee.png";
-                            }}
-                            className="w-14 h-14 object-cover rounded-xl"
-                          />
-                        </div>
-
-                        <div>
-                          <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                          <p className="home-hero-cat-count text-sm text-gray-500 dark:text-zinc-400">{t("common.productsCount", { count: cat.count })}</p>
-                        </div>
-                      </button>
-                    </PremiumStaggerItem>
-                  );
-                })}
+              <PremiumStagger className="space-y-2 sm:space-y-4" stagger={0.14} delay={0.35}>
+                {categoriesWithCounts.slice(5, 10).map((cat, i) => (
+                  <PremiumStaggerItem key={cat.name}>
+                    <HomeHeroCategoryCard cat={cat} index={i + 5} onSelect={goCategory} />
+                  </PremiumStaggerItem>
+                ))}
               </PremiumStagger>
             </div>
 
-            <PremiumStagger className="mt-10 flex flex-wrap justify-center gap-3" stagger={0.1} delay={0.5}>
-              {bodyCategories.slice(10).map((cat, i) => {
+            <PremiumStagger
+              className="mt-6 grid grid-cols-2 gap-2 sm:gap-2.5 lg:mt-10 lg:flex lg:flex-wrap lg:justify-center lg:gap-3"
+              stagger={0.1}
+              delay={0.5}
+            >
+              {bodyCategories.slice(10).map((cat, i, arr) => {
                 const index = i + 10;
+                const isLastOdd = arr.length % 2 === 1 && i === arr.length - 1;
 
                 return (
-                  <PremiumStaggerItem key={cat.name}>
+                  <PremiumStaggerItem
+                    key={cat.name}
+                    className={`lg:w-auto ${isLastOdd ? "col-span-2 flex justify-center" : ""}`}
+                  >
                     <button
                       type="button"
                       onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                      className="rounded-full px-6 py-3 font-bold shadow-md hover:scale-105 transition duration-500 bg-white/80 backdrop-blur border"
+                      className={`rounded-full font-bold shadow-sm hover:scale-105 transition duration-500 bg-white/80 backdrop-blur border lg:shadow-md ${
+                        isLastOdd
+                          ? "px-3 py-1.5 text-[10px] sm:text-xs lg:px-6 lg:py-3 lg:text-base"
+                          : "w-full px-2.5 py-1.5 text-[10px] sm:text-xs lg:w-auto lg:px-6 lg:py-3 lg:text-base"
+                      }`}
                       style={{ borderColor: `${cat.color}66`, color: cat.color }}
                     >
                       {String(index + 1).padStart(2, "0")} &nbsp; {cat.name}
@@ -616,8 +586,8 @@ const BANDAGE_STAT_PASTELS = [
         <DeferredSection loader={loadBodyFlowMap} minHeight={520} />
 
         {/* FEATURES */}
-        <section className="max-w-[1500px] mx-auto px-6 py-28">
-          <PremiumStagger className="grid md:grid-cols-4 gap-5" stagger={0.12}>
+        <section className="max-w-[1500px] mx-auto px-4 sm:px-6 py-12 md:py-28">
+          <PremiumStagger className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5" stagger={0.12}>
             {[
               [t("support.certifiedProducts"), ShieldCheck],
               [t("home.freeShipping"), Truck],
@@ -625,9 +595,9 @@ const BANDAGE_STAT_PASTELS = [
               [t("home.originalMgrm"), BadgeCheck],
             ].map(([label, Icon]) => (
               <PremiumStaggerItem key={label}>
-                <div className="card rounded-3xl p-6 flex items-center gap-4 hover:-translate-y-1 transition duration-500">
-                  <Icon className="text-cyan-600" />
-                  <b>{label}</b>
+                <div className="card rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 flex items-center gap-2 sm:gap-3 md:gap-4 hover:-translate-y-1 transition duration-500 h-full">
+                  <Icon className="text-cyan-600 shrink-0 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                  <b className="text-[11px] sm:text-sm md:text-base leading-tight">{label}</b>
                 </div>
               </PremiumStaggerItem>
             ))}
@@ -636,50 +606,50 @@ const BANDAGE_STAT_PASTELS = [
 
 
         {/* GLOBAL CERTIFICATIONS */}
-<section className="home-trust-cert-section relative max-w-[1450px] mx-auto px-6 py-28 overflow-hidden">
-  <div className="home-trust-cert-bg absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
+<section className="home-trust-cert-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-12 md:py-28 overflow-hidden">
+  <div className="home-trust-cert-bg absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[28px] sm:rounded-[48px] transition-colors duration-300" />
   <div className="home-trust-cert-glow-emerald pointer-events-none absolute top-16 right-24 w-64 h-64 bg-emerald-200/40 rounded-full blur-3xl" />
   <div className="home-trust-cert-glow-cyan pointer-events-none absolute bottom-10 left-16 w-64 h-64 bg-cyan-200/40 rounded-full blur-3xl" />
 
 
-  <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-20 items-center min-h-[720px]">
+  <div className="relative grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-20 items-center min-h-0 lg:min-h-[720px]">
     
     {/* LEFT */}
     <div className="overflow-hidden">
-      <div className="flex gap-7 w-max marquee-cert py-4">
+      <div className="flex gap-3 sm:gap-5 lg:gap-7 w-max marquee-cert py-2 sm:py-4">
         {[...certifications, ...certifications].map((item, i) => {
-         
+          const isFda = item.image.includes("fda.png");
 
           return (
             <motion.div
               key={`${item.title}-${i}`}
               {...cardRevealTransition(i % certifications.length)}
-              className="home-trust-cert-card w-[280px] shrink-0 rounded-[34px] bg-white/85 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-7 group hover:-translate-y-2 transition-all duration-500"
+              className="home-trust-cert-card w-[148px] sm:w-[220px] lg:w-[280px] shrink-0 rounded-[20px] sm:rounded-[28px] lg:rounded-[34px] bg-white/85 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 shadow-[0_12px_40px_rgba(15,23,42,0.08)] sm:shadow-[0_25px_70px_rgba(15,23,42,0.10)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.35)] p-3 sm:p-5 lg:p-7 group hover:-translate-y-2 transition-all duration-500"
             >
 
 <div
-  className={`home-trust-cert-logo rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition ${
-    item.image.includes("fda.png") ? "w-36 h-36" : "w-28 h-28"
+  className={`home-trust-cert-logo rounded-[18px] sm:rounded-[24px] lg:rounded-[30px] bg-white dark:bg-zinc-800 shadow-[0_12px_30px_rgba(15,23,42,0.10)] sm:shadow-[0_20px_50px_rgba(15,23,42,0.12)] flex items-center justify-center border border-slate-100 dark:border-white/10 group-hover:scale-110 transition ${
+    isFda ? "w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36" : "w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28"
   }`}
 >
   <img
     src={item.image}
     alt={item.title}
     className={`object-contain ${
-      item.image.includes("fda.png") ? "w-32 h-32" : "w-20 h-20"
+      isFda ? "w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 lg:w-32 lg:h-32" : "w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
     }`}
   />
 </div>
-              <h3 className="home-trust-cert-title mt-6 text-2xl font-black text-slate-900 dark:text-zinc-100">
+              <h3 className="home-trust-cert-title mt-3 sm:mt-4 lg:mt-6 text-sm sm:text-lg lg:text-2xl font-black text-slate-900 dark:text-zinc-100 leading-tight">
                 {item.title}
               </h3>
 
-              <p className="home-trust-cert-subtitle mt-3 text-slate-500 dark:text-zinc-400 leading-7">
+              <p className="home-trust-cert-subtitle mt-1.5 sm:mt-2 lg:mt-3 text-[10px] sm:text-xs lg:text-base text-slate-500 dark:text-zinc-400 leading-snug sm:leading-normal lg:leading-7 line-clamp-2 sm:line-clamp-none">
                 {item.subtitle}
               </p>
 
-              <div className="home-trust-cert-verified mt-5 flex items-center gap-2 text-emerald-600 font-black text-sm">
-                <CheckCircle2 size={16} />
+              <div className="home-trust-cert-verified mt-2 sm:mt-3 lg:mt-5 flex items-center gap-1.5 sm:gap-2 text-emerald-600 font-black text-[10px] sm:text-xs lg:text-sm">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4" />
                 {t("home.verifiedStandard")}
               </div>
             </motion.div>
@@ -690,21 +660,21 @@ const BANDAGE_STAT_PASTELS = [
 
     {/* RIGHT */}
     <div className="relative">
-      <div className="home-trust-cert-panel relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[42px] p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
-        <SectionLabel className="home-trust-cert-label text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-sm">
+      <div className="home-trust-cert-panel relative bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-[28px] sm:rounded-[42px] p-5 sm:p-8 lg:p-12 shadow-[0_30px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.4)] border border-white dark:border-white/10 transition-colors duration-300">
+        <SectionLabel className="home-trust-cert-label text-emerald-600 dark:text-emerald-400 font-black tracking-[0.25em] text-xs sm:text-sm">
           {t("home.trustSafety")}
         </SectionLabel>
 
         <SectionHeading
           text={t("home.expectBest")}
-          className="home-trust-cert-heading text-6xl font-black mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
+          className="home-trust-cert-heading text-3xl sm:text-5xl lg:text-6xl font-black mt-3 sm:mt-5 leading-[1] text-slate-900 dark:text-zinc-100"
         />
 
-        <FadeUpText className="home-trust-cert-desc mt-8 text-xl text-slate-500 dark:text-zinc-400 leading-8">
+        <FadeUpText className="home-trust-cert-desc mt-4 sm:mt-6 lg:mt-8 text-sm sm:text-lg lg:text-xl text-slate-500 dark:text-zinc-400 leading-relaxed sm:leading-8">
           {t("home.trustCopy")}
         </FadeUpText>
 
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-5 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-4">
           {[
             {
               text: t("home.medicalGrade"),
@@ -729,15 +699,15 @@ const BANDAGE_STAT_PASTELS = [
           ].map((item) => (
             <div
               key={item.text}
-              className={`home-trust-feature home-trust-feature--${item.tone} flex items-center gap-3 rounded-2xl border-2 px-4 py-4`}
+              className={`home-trust-feature home-trust-feature--${item.tone} flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl border-2 px-2.5 py-2.5 sm:px-4 sm:py-4`}
             >
               <div
-                className={`home-trust-feature-icon flex h-10 w-10 items-center justify-center rounded-xl ${item.icon}`}
+                className={`home-trust-feature-icon flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl ${item.icon}`}
               >
-                <CheckCircle2 size={18} />
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
               </div>
 
-              <span className="home-trust-feature-text text-sm font-bold text-slate-900 dark:text-zinc-100">
+              <span className="home-trust-feature-text text-[10px] sm:text-sm font-bold text-slate-900 dark:text-zinc-100 leading-tight">
                 {item.text}
               </span>
             </div>
@@ -751,15 +721,16 @@ const BANDAGE_STAT_PASTELS = [
 {/* ================= CARDIOLOGY AWARENESS SECTION ================= */}
 
 
-<section className="home-cardiology-section relative overflow-hidden py-28">
+<section className="home-cardiology-section relative overflow-hidden py-12 md:py-28">
 
-  <div className="relative z-10 mx-auto max-w-[1500px] px-6">
+  <div className="relative z-10 mx-auto max-w-[1500px] px-4 sm:px-6">
 
     {/* MAIN CARD */}
     <div
       className="
-        rounded-[42px]
-         min-h-[760px]
+        home-cardiology-card
+        rounded-[24px] md:rounded-[42px]
+        min-h-0 md:min-h-[760px]
         border
 
         border-black/5
@@ -774,17 +745,18 @@ const BANDAGE_STAT_PASTELS = [
         dark:via-zinc-900
         dark:to-slate-950
 
-        p-8
-        shadow-[0_30px_100px_rgba(0,0,0,0.12)]
+        p-4 sm:p-6
+        shadow-[0_20px_60px_rgba(0,0,0,0.10)]
         dark:shadow-[0_30px_100px_rgba(0,0,0,0.35)]
 
         backdrop-blur-xl
         md:p-12
+        md:shadow-[0_30px_100px_rgba(0,0,0,0.12)]
       "
     >
 
       {/* TOP */}
-      <div className="grid items-center gap-10 lg:grid-cols-2">
+      <div className="grid items-center gap-6 md:gap-10 lg:grid-cols-2">
 
         {/* LEFT */}
         <div>
@@ -792,19 +764,19 @@ const BANDAGE_STAT_PASTELS = [
           <SectionHeading
             text={t("home.attention")}
             as="h2"
-            className="text-[58px] font-light tracking-wide text-red-500 md:text-6xl"
+            className="text-3xl font-light tracking-wide text-red-500 sm:text-4xl md:text-[58px] lg:text-6xl"
           />
 
           <SectionHeading
             text={t("home.cardiologists")}
             as="h3"
             delay={0.15}
-            className="mt-2 text-4xl font-light text-slate-900 dark:text-zinc-100 md:text-6xl"
+            className="mt-1 sm:mt-2 text-2xl font-light text-slate-900 dark:text-zinc-100 sm:text-3xl md:text-4xl lg:text-6xl"
           />
 
           <FadeUpText
             delay={0.25}
-            className="mt-8 max-w-xl text-base leading-8 text-slate-600 dark:text-zinc-400 md:text-lg"
+            className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 dark:text-zinc-400 sm:text-base sm:leading-7 md:mt-8 md:text-lg md:leading-8"
           >
             {t("home.worldClassCopy", { count: bodyTotal })}
           </FadeUpText>
@@ -815,12 +787,12 @@ const BANDAGE_STAT_PASTELS = [
             transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true, amount: 0.25 }}
             style={{ transformOrigin: "left center" }}
-            className="mt-7 h-[3px] w-[160px] rounded-full bg-red-500"
+            className="mt-4 h-[2px] w-20 rounded-full bg-red-500 sm:mt-6 md:mt-7 md:h-[3px] md:w-[160px]"
           />
         </div>
 
         {/* RIGHT HEART */}
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center py-2 sm:py-4 md:py-0">
 
           {/* GLOW */}
           <motion.div
@@ -835,8 +807,12 @@ const BANDAGE_STAT_PASTELS = [
             }}
             className="
               absolute
-              h-[280px]
-              w-[280px]
+              h-[140px]
+              w-[140px]
+              sm:h-[200px]
+              sm:w-[200px]
+              md:h-[280px]
+              md:w-[280px]
               rounded-full
               bg-red-500/30
               blur-3xl
@@ -873,12 +849,14 @@ const BANDAGE_STAT_PASTELS = [
             className="
               relative
               z-10
-              h-[260px]
+              h-[130px]
+              sm:h-[180px]
               cursor-pointer
               object-contain
               transition-all
               duration-500
-              md:h-[320px]
+              md:h-[260px]
+              lg:h-[320px]
             "
           />
 
@@ -886,8 +864,12 @@ const BANDAGE_STAT_PASTELS = [
 <svg
   className="
     absolute
-    h-[340px]
-    w-[340px]
+    h-[170px]
+    w-[170px]
+    sm:h-[240px]
+    sm:w-[240px]
+    md:h-[340px]
+    md:w-[340px]
     -rotate-90
   "
   viewBox="0 0 500 500"
@@ -920,7 +902,7 @@ const BANDAGE_STAT_PASTELS = [
       </div>
 
       {/* MOVING PRODUCTS */}
-      <div className="relative mt-20 overflow-hidden">
+      <div className="relative mt-10 overflow-hidden md:mt-20">
 
         {/* LEFT FADE */}
         <div
@@ -930,7 +912,8 @@ const BANDAGE_STAT_PASTELS = [
             top-0
             z-20
             h-full
-            w-24
+            w-12
+            sm:w-24
 
             bg-gradient-to-r
 
@@ -949,7 +932,8 @@ const BANDAGE_STAT_PASTELS = [
             top-0
             z-20
             h-full
-            w-24
+            w-12
+            sm:w-24
 
             bg-gradient-to-l
 
@@ -970,7 +954,7 @@ const BANDAGE_STAT_PASTELS = [
             repeat: Infinity,
             ease: 'linear',
           }}
-          className="flex w-max gap-7"
+          className="flex w-max gap-4 md:gap-7"
         >
 
           {[
@@ -1027,8 +1011,12 @@ const BANDAGE_STAT_PASTELS = [
                 group
                 relative
                 flex
-                h-[150px]
-                w-[150px]
+                h-[88px]
+                w-[88px]
+                sm:h-[120px]
+                sm:w-[120px]
+                md:h-[150px]
+                md:w-[150px]
                 shrink-0
                 items-center
                 justify-center
@@ -1101,18 +1089,23 @@ const BANDAGE_STAT_PASTELS = [
       <div
         className="
           home-cardiology-brand-footer
-          mt-20
+          mt-10
           flex
           flex-col
           items-center
           justify-between
-          gap-8
+          gap-4
+          sm:gap-6
+          md:mt-20
+          md:gap-8
 
           border-t
           border-black/10
           border-slate-200 dark:border-white/10
 
-          pt-8
+          pt-5
+          sm:pt-6
+          md:pt-8
           md:flex-row
         "
       >
@@ -1155,8 +1148,10 @@ const BANDAGE_STAT_PASTELS = [
           className="
             max-w-xl
             text-center
-            text-sm
-            leading-7
+            text-xs
+            leading-6
+            sm:text-sm
+            sm:leading-7
 
             text-slate-600
             dark:text-zinc-400
@@ -1171,7 +1166,7 @@ const BANDAGE_STAT_PASTELS = [
   </div>
 </section>
 {/* ========================= PREMIUM MGRM SECTION ========================= */}
-<section className="home-bandage-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-28 overflow-x-clip overflow-y-visible min-w-0">
+<section className="home-bandage-section relative max-w-[1450px] mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-28 overflow-x-clip overflow-y-visible min-w-0">
 
 
   {/* BACKGROUND */}
@@ -1214,39 +1209,39 @@ const BANDAGE_STAT_PASTELS = [
       >
 
         {/* TOP BADGE */}
-        <div className="home-bandage-badge inline-flex items-center gap-3 rounded-full border border-white/70 dark:border-white/10 bg-white/65 dark:bg-zinc-900/70 backdrop-blur-2xl px-6 py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
+        <div className="home-bandage-badge inline-flex items-center gap-2 sm:gap-3 rounded-full border border-white/70 dark:border-white/10 bg-white/65 dark:bg-zinc-900/70 backdrop-blur-2xl px-3 py-1.5 sm:px-6 sm:py-3 shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.35)] transition-colors duration-300">
 
-          <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-500 animate-pulse" />
 
-          <span className="home-bandage-badge-label text-[11px] tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
+          <span className="home-bandage-badge-label text-[8px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.35em] font-black text-cyan-700 dark:text-cyan-400">
            {t("home.bandageBadge")}
           </span>
         </div>
 
         {/* TITLE */}
 
-        <h2 className="home-bandage-title mt-6 text-4xl sm:text-5xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
+        <h2 className="home-bandage-title mt-3 sm:mt-6 text-2xl sm:text-4xl md:text-[58px] lg:text-6xl font-black leading-tight text-slate-900 dark:text-zinc-100 transition-colors duration-300 break-words">
           {t("home.bandageTitle1")}
           <br />
           {t("home.bandageTitle2")}
         </h2>
 
         {/* SUBTITLE */}
-        <h3 className="home-bandage-subtitle mt-5 text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
+        <h3 className="home-bandage-subtitle mt-2 sm:mt-5 text-base sm:text-xl md:text-3xl font-black bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent dark:text-cyan-400">
           {t("home.bandageSubtitle")}
         </h3>
 
         {/* DESC */}
-        <p className="home-bandage-desc mt-8 text-lg leading-9 text-slate-600 dark:text-zinc-400 max-w-2xl transition-colors duration-300">
+        <p className="home-bandage-desc mt-3 sm:mt-8 text-sm sm:text-lg leading-relaxed sm:leading-9 text-slate-600 dark:text-zinc-400 max-w-2xl transition-colors duration-300">
           {t("home.bandageDesc")}
         </p>
 
         {/* BUTTONS */}
-        <div className="mt-12 flex flex-wrap gap-4 sm:gap-5">
+        <div className="mt-5 sm:mt-12 flex flex-wrap gap-2.5 sm:gap-5">
 
           <Link
             to="/shop"
-            className="home-bandage-btn-primary group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-7 sm:px-9 py-3.5 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
+            className="home-bandage-btn-primary group relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 px-4 sm:px-9 py-2 sm:py-4 text-white font-black shadow-[0_20px_50px_rgba(34,211,238,0.35)] hover:scale-[1.04] transition duration-300 text-xs sm:text-base"
           >
             <span className="relative z-10">
               {t("home.discoverProducts")}
@@ -1257,7 +1252,7 @@ const BANDAGE_STAT_PASTELS = [
 
           <Link
             to="/support"
-            className="home-bandage-btn-secondary rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-7 sm:px-9 py-3.5 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-sm sm:text-base"
+            className="home-bandage-btn-secondary rounded-full bg-white/78 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-4 sm:px-9 py-2 sm:py-4 text-slate-900 dark:text-zinc-100 font-black shadow-[0_15px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-cyan-500 hover:text-white hover:scale-[1.04] transition duration-300 text-xs sm:text-base"
           >
             {t("home.marquee.partner")}
           </Link>
@@ -1265,7 +1260,7 @@ const BANDAGE_STAT_PASTELS = [
       </motion.div>
 
       {/* STATS */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mt-12 sm:mt-16">
+      <div className="grid grid-cols-3 gap-2 sm:gap-5 mt-6 sm:mt-16">
 
         {[
           { value: formatProductCount(bodyTotal), label: t("home.statProducts") },
@@ -1281,7 +1276,7 @@ const BANDAGE_STAT_PASTELS = [
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.14, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true, amount: 0.35 }}
-            className="home-bandage-stat-card home-bandage-stat-pastel rounded-[30px] border-2 p-5 sm:p-7 hover:-translate-y-2 transition-all duration-500 min-w-0"
+            className="home-bandage-stat-card home-bandage-stat-pastel rounded-2xl sm:rounded-[30px] border-2 p-2.5 sm:p-7 hover:-translate-y-2 transition-all duration-500 min-w-0"
             style={{
               "--bandage-stat-border": pastel.border,
               "--bandage-stat-num": pastel.num,
@@ -1293,8 +1288,8 @@ const BANDAGE_STAT_PASTELS = [
               value={value}
               label={label}
               duration={2200 + i * 220}
-              valueClassName="home-bandage-stat-num text-4xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100"
-              labelClassName="home-bandage-stat-label mt-2 font-semibold text-slate-500 dark:text-zinc-400"
+              valueClassName="home-bandage-stat-num text-xl sm:text-5xl lg:text-[58px] font-black text-slate-900 dark:text-zinc-100"
+              labelClassName="home-bandage-stat-label mt-1 sm:mt-2 text-[9px] sm:text-base font-semibold text-slate-500 dark:text-zinc-400 leading-tight"
             />
           </motion.div>
         );
@@ -1303,32 +1298,32 @@ const BANDAGE_STAT_PASTELS = [
     </div>
 
     {/* RIGHT SIDE */}
-    <div className="home-bandage-visual relative w-full min-w-0 mt-8 lg:mt-0 min-h-[400px] sm:min-h-[520px] lg:min-h-[620px] flex items-center justify-center lg:justify-start lg:-ml-16 overflow-visible">
+    <div className="home-bandage-visual relative w-full min-w-0 mt-6 sm:mt-8 lg:mt-0 min-h-[260px] sm:min-h-[520px] lg:min-h-[620px] flex items-center justify-center lg:justify-start lg:-ml-16 overflow-visible">
 
       {/* MAIN IMAGE CARD — full finger photo with bottom text overlay */}
       <motion.div
         animate={{ y: [0, -18, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="home-bandage-image-card relative z-10 w-full max-w-[480px] mx-auto lg:mx-0 rounded-[32px] sm:rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
+        className="home-bandage-image-card relative z-10 w-full max-w-[480px] mx-auto lg:mx-0 rounded-[22px] sm:rounded-[42px] overflow-hidden border border-white/70 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-[0_35px_100px_rgba(15,23,42,0.14)] dark:shadow-[0_35px_100px_rgba(0,0,0,0.45)] transition-colors duration-300"
       >
 
-        <div className="home-bandage-image-frame relative h-[400px] sm:h-[520px] lg:h-[580px] overflow-hidden">
+        <div className="home-bandage-image-frame relative h-[260px] sm:h-[520px] lg:h-[580px] overflow-hidden">
           <img
             src="/banners/bandage.png"
             alt={t("home.premiumOrthopedic")}
             className="w-full h-full object-cover object-center"
           />
 
-          <div className="home-bandage-image-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/[0.97] to-transparent pt-24 sm:pt-28 pb-5 sm:pb-7 px-5 sm:px-7">
-            <span className="home-bandage-image-label text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.3em] font-black text-[#003262]">
+          <div className="home-bandage-image-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/[0.97] to-transparent pt-14 sm:pt-28 pb-3 sm:pb-7 px-3 sm:px-7">
+            <span className="home-bandage-image-label text-[8px] sm:text-xs tracking-[0.18em] sm:tracking-[0.3em] font-black text-[#003262]">
               {t("home.premiumOrthopedic")}
             </span>
 
-            <h3 className="home-bandage-image-title mt-2 sm:mt-2.5 text-2xl sm:text-3xl lg:text-[2.1rem] font-black text-[#003262] leading-tight">
+            <h3 className="home-bandage-image-title mt-1 sm:mt-2.5 text-lg sm:text-3xl lg:text-[2.1rem] font-black text-[#003262] leading-tight">
               {t("home.expectBest")}
             </h3>
 
-            <p className="home-bandage-image-desc mt-3 sm:mt-3.5 text-sm sm:text-[0.95rem] text-slate-500 leading-relaxed">
+            <p className="home-bandage-image-desc mt-1.5 sm:mt-3.5 text-[11px] sm:text-[0.95rem] text-slate-500 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
               {t("home.bandageImageDesc")}
             </p>
           </div>
@@ -1396,9 +1391,9 @@ const BANDAGE_STAT_PASTELS = [
   </div>
 
   {/* MOVING TAGS */}
-  <div className="home-bandage-marquee relative mt-24 overflow-hidden">
+  <div className="home-bandage-marquee relative mt-10 sm:mt-24 overflow-hidden">
 
-    <div className="flex gap-6 w-max marquee-premium">
+    <div className="flex gap-3 sm:gap-6 w-max marquee-premium">
 
       {marqueeTags
         .concat(marqueeTags)
@@ -1406,7 +1401,7 @@ const BANDAGE_STAT_PASTELS = [
 
           <div
             key={i}
-            className="home-bandage-tag rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-8 py-4 text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
+            className="home-bandage-tag rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white dark:border-white/10 px-4 py-2 sm:px-8 sm:py-4 text-xs sm:text-base text-slate-900 dark:text-zinc-100 font-black tracking-wide whitespace-nowrap shadow-[0_15px_40px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:bg-cyan-500 hover:text-white transition duration-300"
           >
             {item}
           </div>
@@ -1417,33 +1412,36 @@ const BANDAGE_STAT_PASTELS = [
 
 
         {/* BEST SELLERS */}
-        <section className="home-trusted-supports-section relative max-w-[1500px] mx-auto mt-24 px-6 pt-28 pb-28 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[48px] transition-colors duration-300" />
+        <section className="home-trusted-supports-section relative max-w-[1500px] mx-auto mt-12 sm:mt-24 px-4 sm:px-6 pt-12 sm:pt-28 pb-12 sm:pb-28 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-slate-950 rounded-[28px] sm:rounded-[48px] transition-colors duration-300" />
 
-          <div className="relative flex justify-between items-end mb-10">
+          <div className="relative flex justify-between items-end mb-5 sm:mb-10">
             <PremiumWordHeader
               label={t("home.bestSellers")}
               title={t("home.mostTrusted")}
               description={t("home.mostTrustedDesc")}
               style="slideLeft"
+              labelClassName="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-[10px] sm:text-sm"
+              titleClassName="text-2xl sm:text-4xl md:text-[58px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight"
+              descriptionClassName="text-gray-500 dark:text-zinc-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base"
             />
           </div>
 
           <PremiumReveal variant={ScaleReveal} className="relative overflow-hidden">
-            <div className="flex gap-10 w-max marquee py-4">
+            <div className="flex gap-4 sm:gap-7 md:gap-10 w-max marquee py-2 sm:py-4">
               {[...categoriesWithCounts, ...categoriesWithCounts].map((cat, i) => (
                 <button
                   key={`${cat.name}-${i}`}
                   onClick={() => goCategory(cat.query || cat.category || cat.name)}
-                  className="w-52 shrink-0 text-center group"
+                  className="w-28 sm:w-40 md:w-52 shrink-0 text-center group"
                 >
                   <TrustedSupportCategoryRing
                     cat={cat}
                     staggerIndex={i % bodyCategories.length}
                   />
 
-                  <h3 className="mt-5 text-xl font-black text-slate-900 dark:text-zinc-100">{cat.name}</h3>
-                  <span className="home-trusted-count-pill">{t("common.itemsCount", { count: cat.count })}</span>
+                  <h3 className="mt-2 sm:mt-5 text-sm sm:text-xl font-black text-slate-900 dark:text-zinc-100 leading-tight">{cat.name}</h3>
+                  <span className="home-trusted-count-pill text-[10px] sm:text-sm">{t("common.itemsCount", { count: cat.count })}</span>
                 </button>
               ))}
             </div>
@@ -1454,13 +1452,13 @@ const BANDAGE_STAT_PASTELS = [
         <DeferredSection loader={loadFeaturedCollections} minHeight={760} />
 
         {/* LOCATE PAIN AREA */}
-        <section className="home-locate-pain-section relative max-w-[1500px] mx-auto px-6 py-28">
-          <div className="text-center mb-12">
-            <p className="home-locate-label text-cyan-600 dark:text-cyan-400 font-black tracking-widest">{t("home.bodySearch")}</p>
-            <h2 className="home-locate-heading text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100">
+        <section className="home-locate-pain-section relative max-w-[1500px] mx-auto px-4 sm:px-6 py-12 sm:py-28">
+          <div className="text-center mb-6 sm:mb-12">
+            <p className="home-locate-label text-cyan-600 dark:text-cyan-400 font-black tracking-wider sm:tracking-widest text-[10px] sm:text-sm">{t("home.bodySearch")}</p>
+            <h2 className="home-locate-heading text-2xl sm:text-4xl md:text-[58px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight">
               {t("home.locatePain")} <span className="highlight">{t("home.painArea")}</span>
             </h2>
-            <p className="home-locate-desc text-gray-500 dark:text-zinc-400 mt-3 text-lg">
+            <p className="home-locate-desc text-gray-500 dark:text-zinc-400 mt-2 sm:mt-3 text-sm sm:text-lg">
               {t("home.locatePainDesc")}
             </p>
           </div>
@@ -1517,10 +1515,10 @@ const BANDAGE_STAT_PASTELS = [
                 </button>
               ))}
 
-            <div className="home-locate-smart-guide absolute left-8 bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-3xl p-6 max-w-sm shadow-xl border border-white/50 dark:border-white/10 [data-theme=blue]:bg-white/95">
-              <p className="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-black font-black text-sm">{t("home.smartGuide")}</p>
-              <h3 className="text-3xl font-black mt-1 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-black">{t("home.findFaster")}</h3>
-              <p className="text-gray-500 dark:text-zinc-400 [data-theme=blue]:text-black/80 mt-2">
+            <div className="home-locate-smart-guide absolute left-3 bottom-3 sm:left-8 sm:bottom-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-6 max-w-[11rem] sm:max-w-sm shadow-xl border border-white/50 dark:border-white/10 [data-theme=blue]:bg-white/95">
+              <p className="text-cyan-600 dark:text-cyan-400 [data-theme=blue]:text-black font-black text-[10px] sm:text-sm">{t("home.smartGuide")}</p>
+              <h3 className="text-base sm:text-3xl font-black mt-0.5 sm:mt-1 text-slate-900 dark:text-zinc-100 [data-theme=blue]:text-black leading-tight">{t("home.findFaster")}</h3>
+              <p className="text-gray-500 dark:text-zinc-400 [data-theme=blue]:text-black/80 mt-1 sm:mt-2 text-[11px] sm:text-base leading-snug">
                 {t("home.tapPainPoint")}
               </p>
             </div>
@@ -1531,34 +1529,36 @@ const BANDAGE_STAT_PASTELS = [
         <DeferredSection loader={loadShopByActivity} minHeight={480} />
 
         {/* FEATURED PRODUCTS */}
-        <section className="home-recommended-section relative max-w-[1500px] mx-auto px-6 py-28 transition-colors duration-300">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-[#0a1220] dark:via-[#0f1a2e] dark:to-[#0a1628] rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
+        <section className="home-recommended-section relative max-w-[1500px] mx-auto px-4 sm:px-6 py-12 sm:py-28 transition-colors duration-300">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-[#0a1220] dark:via-[#0f1a2e] dark:to-[#0a1628] rounded-[28px] sm:rounded-[48px] border border-slate-100/80 dark:border-white/10 transition-colors duration-300" />
 
-          <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-10 px-2 sm:px-4">
+          <div className="relative flex flex-col lg:flex-row lg:justify-between lg:items-end gap-4 sm:gap-6 mb-6 sm:mb-10 px-1 sm:px-4">
             <PremiumWordHeader
               label={strategy.startsWith("behavioral") ? t("home.personalized") : t("home.trending")}
               title={t("home.recommended")}
               description={t("home.recommendedDesc")}
               style="slideRight"
-              titleClassName="text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100"
+              labelClassName="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-[10px] sm:text-sm"
+              titleClassName="text-2xl sm:text-4xl md:text-[58px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight"
+              descriptionClassName="text-gray-500 dark:text-zinc-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base"
             />
 
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               <button
                 onClick={prevProducts}
-                className="w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-zinc-700 transition-all duration-300"
+                className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-zinc-700 transition-all duration-300"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <button
                 onClick={nextProducts}
-                className="w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-zinc-700 transition-all duration-300"
+                className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg grid place-items-center hover:scale-110 hover:bg-cyan-50 dark:hover:bg-zinc-700 transition-all duration-300"
               >
-                <ChevronRight size={24} />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <Link
                 to="/shop"
-                className="btn-primary px-6 py-3 rounded-full font-black shadow-lg"
+                className="btn-primary px-4 py-2 sm:px-6 sm:py-3 rounded-full font-black shadow-lg text-xs sm:text-base"
               >
                 {t("common.more")}
               </Link>
@@ -1566,11 +1566,11 @@ const BANDAGE_STAT_PASTELS = [
           </div>
 
           {recommendationsLoading ? (
-            <div className="home-editorial-grid relative px-2 sm:px-4 pb-2">
+            <div className="home-editorial-grid relative px-1 sm:px-4 pb-2">
               {[1, 2, 3, 4].map((x) => (
                 <div
                   key={x}
-                  className="h-[430px] rounded-[30px] bg-card animate-pulse"
+                  className="h-[220px] sm:h-[430px] rounded-[20px] sm:rounded-[30px] bg-card animate-pulse"
                 />
               ))}
             </div>
@@ -1581,7 +1581,7 @@ const BANDAGE_STAT_PASTELS = [
               </p>
             </div>
           ) : (
-            <div className="home-editorial-grid relative px-2 sm:px-4 pb-2">
+            <div className="home-editorial-grid relative px-1 sm:px-4 pb-2">
               {products.slice(productStart, productStart + 4).map((p, i) => (
                 <ProductRevealCard key={p._id} index={i}>
                   <ProductCard product={p} pastelIndex={i} />
@@ -1596,79 +1596,83 @@ const BANDAGE_STAT_PASTELS = [
         <DeferredSection loader={loadTestimonials} minHeight={520} />
 
         {/* BLOGS */}
-        <section className="max-w-7xl mx-auto px-5 py-28">
-          <div className="flex justify-between items-end mb-10">
+        <section className="home-blogs-section max-w-7xl mx-auto px-4 sm:px-5 py-12 sm:py-28">
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end mb-6 sm:mb-10">
             <PremiumWordHeader
               label={t("home.learnRecover")}
               title={t("home.healthBlogs")}
               style="fadeUp"
+              labelClassName="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-[10px] sm:text-sm"
+              titleClassName="text-2xl sm:text-4xl md:text-[58px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight"
             />
 
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3 shrink-0 self-end">
               <button
                 onClick={prevBlogs}
-                className="w-12 h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
+                className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
+                aria-label={t("common.previous")}
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <button
                 onClick={nextBlogs}
-                className="w-12 h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
+                className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-card shadow-lg grid place-items-center hover:scale-110 transition"
+                aria-label={t("common.next")}
               >
-                <ChevronRight size={24} />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <Link
                 to="/blogs"
-                className="btn-primary px-6 py-3 rounded-full font-black shadow-lg"
+                className="btn-primary px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base rounded-full font-black shadow-lg"
               >
                 {t("common.more")}
               </Link>
             </div>
           </div>
 
-          <div className="home-editorial-grid">
+          <div className="home-editorial-grid px-0.5 sm:px-0">
             {blogPosts.slice(blogStart, blogStart + 4).map((blog, index) => (
-              <BlogCardEditorial key={`${blog.slug}-${index}`} blog={blog} index={index} />
+              <BlogCardEditorial key={`${blog.slug}-${index}`} blog={blog} index={index} compact />
             ))}
           </div>
         </section>
 
 
-        <section className="relative overflow-hidden py-24">
+        <section className="home-anatomy-section relative overflow-hidden py-12 sm:py-24 pb-16 sm:pb-24">
   {/* Background Glow */}
   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
 
-  <div className="container mx-auto px-6">
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="grid lg:grid-cols-2 gap-6 sm:gap-12 items-center">
 
       {/* Left Content */}
       <div>
-        <span className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400">
+        <span className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-sm font-medium text-cyan-400">
           {t("home.anatomyBadge")}
         </span>
 
-        <h2 className="mt-6 text-5xl font-black leading-tight text-slate-900 dark:text-white">
+        <h2 className="mt-3 sm:mt-6 text-2xl sm:text-5xl font-black leading-tight text-slate-900 dark:text-white">
           {t("home.precisionSupport")}
           <span className="block text-cyan-500">
             {t("home.backedByScience")}
           </span>
         </h2>
 
-        <p className="mt-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+        <p className="mt-3 sm:mt-6 text-sm sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
           {t("home.anatomyCopy")}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
-          <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
-            <div className="text-3xl font-bold text-cyan-500">30+</div>
-            <div className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="mt-4 sm:mt-8 flex flex-wrap gap-2.5 sm:gap-4">
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200 dark:border-zinc-700 px-3.5 py-2.5 sm:px-5 sm:py-4">
+            <div className="text-xl sm:text-3xl font-bold text-cyan-500">30+</div>
+            <div className="text-[11px] sm:text-sm text-slate-500 dark:text-slate-400">
               {t("home.yearsExperience")}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 dark:border-zinc-700 px-5 py-4">
-            <div className="text-3xl font-bold text-cyan-500">{formatProductCount(bodyTotal)}</div>
-            <div className="text-sm text-slate-500 dark:text-slate-400">
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200 dark:border-zinc-700 px-3.5 py-2.5 sm:px-5 sm:py-4">
+            <div className="text-xl sm:text-3xl font-bold text-cyan-500">{formatProductCount(bodyTotal)}</div>
+            <div className="text-[11px] sm:text-sm text-slate-500 dark:text-slate-400">
               {t("home.certifiedProducts")}
             </div>
           </div>
@@ -1678,9 +1682,9 @@ const BANDAGE_STAT_PASTELS = [
       {/* Right Video */}
       <div className="relative">
         {/* Glow */}
-        <div className="absolute inset-0 rounded-[40px] bg-cyan-500/20 blur-3xl" />
+        <div className="absolute inset-0 rounded-2xl sm:rounded-[40px] bg-cyan-500/20 blur-3xl" />
 
-        <div className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl">
           <ViewportVideo
             autoPlay
             muted
@@ -1688,7 +1692,7 @@ const BANDAGE_STAT_PASTELS = [
             playsInline
             poster="/products/knee2.png"
             sources={[{ src: "/videos/de.mp4", type: "video/mp4" }]}
-            className="relative overflow-hidden rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl hover:scale-[1.02] transition-all duration-700"
+            className="relative overflow-hidden rounded-2xl sm:rounded-[40px] border border-cyan-500/20 bg-black/40 backdrop-blur-xl hover:scale-[1.02] transition-all duration-700"
           />
         </div>
       </div>
@@ -1698,11 +1702,11 @@ const BANDAGE_STAT_PASTELS = [
 </section>
 
         {/* ================= PRINT ADS ================= */}
-<section className="home-print-ads-section relative max-w-[1500px] mx-auto px-6 mt-24 mb-10 overflow-hidden">
+<section className="home-print-ads-section relative max-w-[1500px] mx-auto px-4 sm:px-6 mt-12 sm:mt-24 mb-6 sm:mb-10 pb-16 sm:pb-10 overflow-hidden">
 
 
 {/* HEADING */}
-<div className="text-center mb-14">
+<div className="text-center mb-6 sm:mb-14">
 
   {/* <BrandLogo size="hero" className="home-print-ads-logo mx-auto mt-4" /> */}
 
@@ -1713,61 +1717,51 @@ const BANDAGE_STAT_PASTELS = [
 </div>
 
 {/* GRID */}
-<div className="grid md:grid-cols-2 gap-10 max-w-[1100px] mx-auto">
+<div className="home-print-ads-grid grid grid-cols-2 gap-2 sm:gap-6 md:gap-10 max-w-[1100px] mx-auto">
 
   {/* CARD 1 */}
-  <div className="group relative rounded-[42px] overflow-hidden bg-card border border-white/70 border-slate-200 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+  <div className="group relative rounded-xl sm:rounded-[42px] overflow-hidden bg-card border border-white/70 border-slate-200 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
 
     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 
-    <div className="p-5 sm:p-6">
-      <div className="overflow-hidden rounded-[28px] sm:rounded-[36px]">
+    <div className="p-2 sm:p-5 md:p-6">
+      <div className="overflow-hidden rounded-lg sm:rounded-[28px] md:rounded-[36px]">
         <img
           src="/ads/abc.png"
           alt="Nebulizer Ad"
-          className="block h-[460px] w-full object-cover transition duration-700 group-hover:scale-[1.05] sm:h-[480px]"
+          className="home-print-ads-image block w-full h-auto object-contain transition duration-700 group-hover:scale-[1.02] sm:group-hover:scale-[1.05]"
         />
       </div>
     </div>
 
-<div className="absolute top-5 left-5 bg-black/40 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+<div className="home-print-ads-badge absolute top-2 left-2 sm:top-5 sm:left-5 bg-black/40 backdrop-blur-lg px-2 py-1 sm:px-4 sm:py-3 rounded-lg sm:rounded-[22px] border border-white/10 animate-[float_5s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 
-  <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
+  <h3 className="text-[10px] sm:text-[28px] leading-tight sm:leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
     Breathe Easier
-    <br />
-
-    {/* <span className="text-cyan-300">
-      NOW
-    </span> */}
   </h3>
 
 </div>
   </div>
 
   {/* CARD 2 */}
-  <div className="group relative rounded-[42px] overflow-hidden bg-card border border-white/70 border-slate-200 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
+  <div className="group relative rounded-xl sm:rounded-[42px] overflow-hidden bg-card border border-white/70 border-slate-200 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.10)] hover:-translate-y-2 transition duration-500">
 
     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-lime-500/5 opacity-0 group-hover:opacity-100 transition duration-500" />
 
-    <div className="p-5 sm:p-6">
-      <div className="overflow-hidden rounded-[28px] sm:rounded-[36px]">
+    <div className="p-2 sm:p-5 md:p-6">
+      <div className="overflow-hidden rounded-lg sm:rounded-[28px] md:rounded-[36px]">
         <img
           src="/ads/def.png"
           alt="Pain Relief Spray"
-          className="block h-[460px] w-full object-cover transition duration-700 group-hover:scale-[1.05] sm:h-[480px]"
+          className="home-print-ads-image block w-full h-auto object-contain transition duration-700 group-hover:scale-[1.02] sm:group-hover:scale-[1.05]"
         />
       </div>
     </div>
 
-<div className="absolute top-5 right-5 text-right bg-black/35 backdrop-blur-lg px-4 py-3 rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+<div className="home-print-ads-badge absolute top-2 right-2 sm:top-5 sm:right-5 text-right bg-black/35 backdrop-blur-lg px-2 py-1 sm:px-4 sm:py-3 rounded-lg sm:rounded-[22px] border border-white/10 animate-[float_6s_ease-in-out_infinite] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
 
-  <h3 className="text-[28px] leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
+  <h3 className="text-[10px] sm:text-[28px] leading-tight sm:leading-[1] tracking-[-0.03em] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.45)]">
     Pain Relief
-    <br />
-
-    {/* <span className="text-lime-300">
-      Naturally
-    </span> */}
   </h3>
 
 </div>

@@ -469,12 +469,20 @@
   .catalog-grid .fup-card {
     padding: 0.65rem !important;
     border-radius: 1.15rem;
+    overflow: hidden;
   }
 
   .catalog-grid .fup-card__image-wrap {
+    aspect-ratio: auto;
+    height: 6.5rem;
     border-radius: 0.85rem;
-    padding: 0.45rem;
+    padding: 0.4rem;
     margin-bottom: 0.45rem;
+  }
+
+  .catalog-grid .fup-card__image {
+    max-height: 100%;
+    max-width: 100%;
   }
 
   .catalog-grid .fup-card h3 {
@@ -495,15 +503,35 @@
     font-size: 0.9rem;
   }
 
+  .catalog-grid .fup-card span[class*="tracking-"] {
+    font-size: 0.5rem;
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.14em;
+  }
+
   .catalog-grid .fup-btn-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 0.35rem;
     margin-top: 0.5rem !important;
+    min-width: 0;
   }
 
   .catalog-grid .fup-btn {
+    min-width: 0;
+    width: 100%;
     font-size: 0.62rem;
-    padding: 0.4rem 0.45rem;
-    min-height: 0;
+    padding: 0.5rem 0.25rem;
+    min-height: 2rem;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .catalog-grid .fup-btn__label {
+    display: none;
+  }
+
+  .catalog-grid .fup-btn svg {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 }

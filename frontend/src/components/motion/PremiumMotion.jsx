@@ -181,6 +181,7 @@ export function PremiumWordHeader({
   style = "slideLeft",
   titleClassName = "text-4xl sm:text-[58px] font-black mt-2 text-slate-900 dark:text-zinc-100",
   labelClassName = "text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-sm",
+  descriptionClassName = "text-gray-500 dark:text-zinc-400 mt-3 max-w-xl",
   className = "",
 }) {
   const variant = HEADER_VARIANTS[style] || SlideLeftLuxury;
@@ -190,7 +191,7 @@ export function PremiumWordHeader({
       {label && <SectionLabel className={labelClassName}>{label}</SectionLabel>}
       <HeroHeading text={title} className={titleClassName} />
       {description && (
-        <FadeUpText delay={0.2} className="text-gray-500 dark:text-zinc-400 mt-3 max-w-xl">
+        <FadeUpText delay={0.2} className={descriptionClassName}>
           {description}
         </FadeUpText>
       )}
@@ -228,10 +229,10 @@ export function TestimonialCard({ item, index = 0 }) {
 
   if (!enabled) {
     return (
-      <article className="rounded-[34px] border border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
-        <Quote className="h-12 w-12 text-cyan-500" />
-        <p className="mt-6 text-lg leading-9 text-gray-600 dark:text-zinc-300">{item.text}</p>
-        <p className="mt-6 font-black text-slate-900 dark:text-zinc-100">{item.name}</p>
+      <article className="rounded-2xl sm:rounded-[34px] border border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 p-4 sm:p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
+        <Quote className="h-8 w-8 sm:h-12 sm:w-12 text-cyan-500" />
+        <p className="mt-3 sm:mt-6 text-sm sm:text-lg leading-relaxed sm:leading-9 text-gray-600 dark:text-zinc-300">{item.text}</p>
+        <p className="mt-3 sm:mt-6 text-sm sm:text-base font-black text-slate-900 dark:text-zinc-100">{item.name}</p>
       </article>
     );
   }
@@ -257,20 +258,20 @@ export function TestimonialCard({ item, index = 0 }) {
           },
         },
       }}
-      className="rounded-[34px] border border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)]"
+      className="rounded-2xl sm:rounded-[34px] border border-slate-200 dark:border-white/10 bg-card dark:bg-zinc-900 p-4 sm:p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)]"
     >
       <motion.div variants={FadeUpMedium}>
-        <Quote className="h-12 w-12 text-cyan-500" />
+        <Quote className="h-8 w-8 sm:h-12 sm:w-12 text-cyan-500" />
       </motion.div>
       <motion.p
         variants={FadeUpSlow}
-        className="mt-6 text-lg leading-9 text-gray-600 dark:text-zinc-300"
+        className="mt-3 sm:mt-6 text-sm sm:text-lg leading-relaxed sm:leading-9 text-gray-600 dark:text-zinc-300"
       >
         {item.text}
       </motion.p>
       <motion.p
         variants={FadeUpMedium}
-        className="mt-6 font-black text-slate-900 dark:text-zinc-100"
+        className="mt-3 sm:mt-6 text-sm sm:text-base font-black text-slate-900 dark:text-zinc-100"
       >
         {item.name}
       </motion.p>

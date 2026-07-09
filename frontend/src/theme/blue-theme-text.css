@@ -18,6 +18,7 @@
     aside.bg-card,
     article.bg-card,
     form.bg-card,
+    .home-cardiology-section .home-cardiology-card,
     .home-cardiology-section .rounded-\[42px\].min-h-\[760px\]
   ) {
   color: var(--text-on-card);

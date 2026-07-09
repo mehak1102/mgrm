@@ -197,35 +197,38 @@ export default function HomeCustomizeSection() {
     bodyParts.find((p) => p.key === form.bodyPart)?.label || form.bodyPart;
 
   return (
-    <section className="home-customize-section relative max-w-[1500px] mx-auto mt-10 md:mt-14 lg:mt-[72px] px-6 py-24 md:py-28">
-      <div className="home-customize-section__bg absolute inset-0 rounded-[48px] border border-slate-100/80 dark:border-white/10" />
+    <section className="home-customize-section relative max-w-[1500px] mx-auto mt-8 sm:mt-10 md:mt-14 lg:mt-[72px] px-4 sm:px-6 py-12 sm:py-20 lg:py-28 overflow-x-clip">
+      <div className="home-customize-section__bg absolute inset-0 rounded-[28px] sm:rounded-[48px] border border-slate-100/80 dark:border-white/10" />
 
-      <div className="home-customize-layout relative grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-stretch px-2 sm:px-6">
-        <div className="home-customize-intro flex min-h-0 flex-col">
+      <div className="home-customize-layout relative grid gap-6 sm:gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-stretch px-1 sm:px-6 min-w-0">
+        <div className="home-customize-intro flex min-h-0 min-w-0 flex-col">
           <PremiumWordHeader
             label={t("customize.badge")}
             title={t("customize.title")}
             description={t("customize.description")}
             style="slideRight"
-            titleClassName="text-4xl sm:text-[46px] font-black mt-2 text-slate-900 dark:text-zinc-100"
+            labelClassName="text-cyan-600 dark:text-cyan-400 font-black tracking-widest text-[10px] sm:text-sm"
+            titleClassName="text-2xl sm:text-4xl md:text-[46px] font-black mt-1 sm:mt-2 text-slate-900 dark:text-zinc-100 leading-tight"
+            descriptionClassName="text-gray-500 dark:text-zinc-400 mt-2 sm:mt-3 max-w-xl text-xs sm:text-base leading-relaxed"
           />
 
-          <div className="home-customize-intro__logo">
+          <div className="home-customize-intro__logo hidden sm:block">
             <Logo3D asStatic className="home-customize-brand-logo" />
           </div>
         </div>
 
         <PremiumReveal variant={FadeUpSlow} delay={0.15}>
-          <form onSubmit={handleSubmit} className="home-customize-form p-6 sm:p-8 space-y-5">
-            <div className="flex items-center gap-3">
-              <span className="home-customize-form-icon home-customize-form-icon--unified">
-                <Ruler size={20} aria-hidden />
+          <form onSubmit={handleSubmit} className="home-customize-form min-w-0 p-4 sm:p-8 space-y-4 sm:space-y-5">
+            <div className="flex items-start gap-2.5 sm:gap-3 min-w-0">
+              <span className="home-customize-form-icon home-customize-form-icon--unified shrink-0">
+                <Ruler size={18} className="sm:hidden" aria-hidden />
+                <Ruler size={20} className="hidden sm:block" aria-hidden />
               </span>
-              <div>
-                <h3 className="text-lg font-black text-slate-900 dark:text-zinc-100">
+              <div className="min-w-0">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-zinc-100 leading-tight">
                   {t("customize.formTitle")}
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-zinc-400">
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 leading-snug mt-0.5">
                   {t("customize.reviewedByAdmin")}
                 </p>
               </div>
@@ -455,9 +458,10 @@ export default function HomeCustomizeSection() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-black disabled:opacity-70"
+              className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm font-black disabled:opacity-70"
             >
-              <Send size={18} aria-hidden />
+              <Send size={16} className="sm:hidden" aria-hidden />
+              <Send size={18} className="hidden sm:block" aria-hidden />
               {submitting ? t("customize.sending") : t("customize.submit")}
             </button>
           </form>

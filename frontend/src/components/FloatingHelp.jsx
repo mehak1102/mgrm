@@ -48,7 +48,7 @@ export default function FloatingHelp() {
   };
 
   return (
-    <div className="floating-help-stack fixed right-5 bottom-6 z-[999] flex w-14 flex-col items-center gap-3 sm:gap-3.5 overflow-visible">
+    <div className="floating-help-stack fixed right-3 sm:right-5 bottom-4 sm:bottom-6 z-[999] flex w-10 sm:w-14 flex-col items-center gap-2 sm:gap-3.5 overflow-visible">
       <Logo3D variant="floating" className="shrink-0" />
 
       {/* WhatsApp */}
@@ -56,10 +56,10 @@ export default function FloatingHelp() {
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="floating-help-whatsapp flex w-14 h-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(37,211,102,0.45)] transition hover:scale-110 hover:bg-[#20bd5a]"
+        className="floating-help-whatsapp flex w-10 h-10 sm:w-14 sm:h-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_20px_rgba(37,211,102,0.4)] sm:shadow-[0_10px_28px_rgba(37,211,102,0.45)] transition hover:scale-110 hover:bg-[#20bd5a]"
         aria-label={t("global.chatWhatsapp")}
       >
-        <WhatsAppIcon />
+        <WhatsAppIcon className="h-5 w-5 sm:h-7 sm:w-7" />
       </a>
 
       {/* Back to top */}
@@ -67,10 +67,10 @@ export default function FloatingHelp() {
         <button
           type="button"
           onClick={scrollTop}
-          className="w-12 h-12 shrink-0 rounded-full bg-card dark:bg-zinc-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg hover:scale-110 transition flex items-center justify-center"
+          className="w-9 h-9 sm:w-12 sm:h-12 shrink-0 rounded-full bg-card dark:bg-zinc-900 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-zinc-100 shadow-lg hover:scale-110 transition flex items-center justify-center"
           aria-label={t("global.backToTop")}
         >
-          <ArrowUp size={20} />
+          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       )}
     </div>

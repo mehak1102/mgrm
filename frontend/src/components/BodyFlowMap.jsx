@@ -510,26 +510,26 @@ function BodyPartGridCard({ item, index, go, categoryCount }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
       onClick={() => go(item.query)}
-      className="w-full rounded-2xl overflow-hidden bg-card shadow-[0_12px_35px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 transition text-left border-2 border-edge"
+      className="w-full rounded-xl sm:rounded-2xl overflow-hidden bg-card shadow-[0_8px_24px_rgba(15,23,42,0.06)] sm:shadow-[0_12px_35px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 transition text-left border sm:border-2 border-edge"
       style={{ borderColor: item.color }}
     >
       <div
-        className="py-2.5 px-3 text-center text-sm font-black text-white"
+        className="py-1 px-2 text-center text-[10px] leading-tight font-black text-white line-clamp-1 sm:py-2.5 sm:px-3 sm:text-sm sm:leading-normal"
         style={{ background: item.color }}
       >
         {item.name}
       </div>
 
-      <div className="flex items-center gap-3 p-4">
+      <div className="flex items-center gap-1.5 p-2 sm:gap-3 sm:p-4">
         <img
           src={cat.image}
           onError={(e) => (e.currentTarget.src = "/products/knee.png")}
-          className="w-16 h-16 rounded-xl object-cover bg-gray-100 dark:bg-zinc-800 shrink-0"
+          className="w-9 h-9 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl object-cover bg-gray-100 dark:bg-zinc-800 shrink-0"
           alt={item.name}
         />
         <div className="min-w-0">
-          <p className="text-base font-black text-fg">{item.name}</p>
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-0.5">
+          <p className="hidden sm:block text-base font-black text-fg">{item.name}</p>
+          <p className="text-[10px] sm:text-sm text-gray-500 dark:text-zinc-400 sm:mt-0.5 leading-tight">
             {t("common.productsCount", { count: categoryCount })}
           </p>
         </div>
@@ -565,12 +565,12 @@ export default function BodyFlowMap() {
 
         {/* Mobile & tablet — stacked layout */}
         <div className="xl:hidden">
-          <div className="bg-card dark:bg-zinc-900 rounded-[28px] sm:rounded-[36px] border border-edge overflow-hidden p-5 sm:p-8">
+          <div className="bg-card dark:bg-zinc-900 rounded-[28px] sm:rounded-[36px] border border-edge overflow-hidden p-4 sm:p-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="relative mx-auto flex max-w-sm items-center justify-center py-4"
+              className="relative mx-auto flex max-w-sm items-center justify-center py-2 sm:py-4"
             >
               <div className="absolute inset-6 rounded-full bg-cyan-400/10 blur-3xl dark:bg-cyan-400/15" />
               <img
@@ -578,12 +578,12 @@ export default function BodyFlowMap() {
                 onError={(e) => {
                   e.currentTarget.src = "/products/image.png";
                 }}
-                className="relative z-10 w-full max-h-[240px] sm:max-h-[320px] object-contain"
+                className="relative z-10 w-full max-h-[180px] sm:max-h-[320px] object-contain"
                 alt="Human body"
               />
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 sm:mt-8">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 mt-4 sm:mt-8">
               {flowItems.map((item, index) => (
                 <BodyPartGridCard
                   key={item.name}
