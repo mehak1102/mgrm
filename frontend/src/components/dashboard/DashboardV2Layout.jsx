@@ -21,6 +21,7 @@ import {
   Menu,
   X,
   ArrowUpRight,
+  ArrowLeft,
   Medal,
   LogOut,
 } from "lucide-react";
@@ -390,10 +391,18 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
       )}
 
       <aside className={`dashboard-v2__sidebar ${v2.sidebar} ${sidebarOpen ? "dashboard-v2__sidebar--open" : ""}`}>
-        <div className="p-3 pb-2 border-b border-inherit shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 grid place-items-center text-white font-black text-base">M</div>
-            <div>
+        <div className="dashboard-v2__sidebar-head">
+          <div className="dashboard-v2__sidebar-brand">
+            <button
+              type="button"
+              onClick={() => (onClose ? onClose() : onRoute("/"))}
+              className={`dashboard-v2__sidebar-back ${v2.navIdle}`}
+              aria-label={t("common.back")}
+            >
+              <ArrowLeft size={16} strokeWidth={2.25} />
+            </button>
+            <div className="dashboard-v2__sidebar-logo">M</div>
+            <div className="dashboard-v2__sidebar-title">
               <p className={`text-[10px] font-bold tracking-widest uppercase ${v2.accent}`}>MGRM</p>
               <p className={`text-xs font-bold ${v2.stat}`}>MEDICARE</p>
             </div>
