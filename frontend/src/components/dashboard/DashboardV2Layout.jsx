@@ -16,7 +16,6 @@ import {
   Star,
   Truck,
   Shield,
-  Zap,
   Award,
   Menu,
   X,
@@ -319,9 +318,8 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
         trend: orderTrend,
         icon: ShoppingBag,
         color: "#8b5cf6",
-        glow: "rgba(139, 92, 246, 0.55)",
-        cardBg: "rgba(139, 92, 246, 0.1)",
-        cardBorder: "rgba(139, 92, 246, 0.22)",
+        glow: "rgba(139, 92, 246, 0.22)",
+        cardBorder: "rgba(139, 92, 246, 0.45)",
         onClick: () => onSection("orders"),
       },
       {
@@ -332,9 +330,8 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
         trendPlain: true,
         icon: Heart,
         color: "#ec4899",
-        glow: "rgba(236, 72, 153, 0.55)",
-        cardBg: "rgba(236, 72, 153, 0.1)",
-        cardBorder: "rgba(236, 72, 153, 0.22)",
+        glow: "rgba(236, 72, 153, 0.22)",
+        cardBorder: "rgba(236, 72, 153, 0.45)",
         iconFill: true,
         onClick: () => onRoute("/wishlist"),
       },
@@ -345,9 +342,8 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
         trend: deliveredTrend,
         icon: Truck,
         color: "#10b981",
-        glow: "rgba(16, 185, 129, 0.55)",
-        cardBg: "rgba(16, 185, 129, 0.1)",
-        cardBorder: "rgba(16, 185, 129, 0.22)",
+        glow: "rgba(16, 185, 129, 0.22)",
+        cardBorder: "rgba(16, 185, 129, 0.45)",
         onClick: () => onSection("orders"),
       },
       {
@@ -364,9 +360,8 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
         isTextTrend: true,
         icon: Headphones,
         color: "#3b82f6",
-        glow: "rgba(59, 130, 246, 0.55)",
-        cardBg: "rgba(59, 130, 246, 0.1)",
-        cardBorder: "rgba(59, 130, 246, 0.22)",
+        glow: "rgba(59, 130, 246, 0.22)",
+        cardBorder: "rgba(59, 130, 246, 0.45)",
         onClick: () => onRoute("/support"),
       },
     ],
@@ -573,7 +568,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
                     onClick={stat.onClick}
                     className="dashboard-v2__stat"
                     style={{
-                      background: stat.cardBg,
+                      background: "transparent",
                       borderColor: stat.cardBorder,
                     }}
                   >
@@ -582,7 +577,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
                       style={{
                         color: stat.color,
                         background: `${stat.color}22`,
-                        boxShadow: `0 0 28px ${stat.glow}, 0 0 48px ${stat.glow.replace("0.55", "0.2")}`,
+                        boxShadow: `0 0 10px ${stat.glow}`,
                       }}
                     >
                       <stat.icon size={22} strokeWidth={2} fill={stat.iconFill ? stat.color : "none"} />
@@ -636,7 +631,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
                   <button key={item.key} type="button" onClick={() => handleQuickAction(item)} className="dashboard-v2__quick">
                     <div
                       className="dashboard-v2__quick-icon"
-                      style={{ "--quick-accent": item.color, "--quick-glow": `${item.color}70` }}
+                      style={{ "--quick-accent": item.color, "--quick-glow": `${item.color}28` }}
                     >
                       <item.icon size={30} strokeWidth={2.15} />
                   </div>
@@ -790,14 +785,28 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
 
         <footer className={`dashboard-v2__footer border-t ${v2.footer}`}>
           {[
-            { icon: Award, labelKey: "dashboard.v2.premiumQuality" },
-            { icon: Truck, labelKey: "dashboard.v2.fastDelivery" },
-            { icon: Shield, labelKey: "dashboard.v2.securePayments" },
-            { icon: Zap, labelKey: "dashboard.v2.expertRecommended" },
+            {
+              icon: Award,
+              titleKey: "dashboard.v2.premiumQuality",
+              subKey: "dashboard.v2.trustedReliable",
+            },
+            {
+              icon: Truck,
+              titleKey: "dashboard.v2.fastDelivery",
+              subKey: "dashboard.v2.acrossIndia",
+            },
+            {
+              icon: Shield,
+              titleKey: "dashboard.v2.securePayments",
+              subKey: "dashboard.v2.protected100",
+            },
           ].map((item) => (
-            <div key={item.labelKey} className={`dashboard-v2__footer-item ${v2.muted}`}>
-              <item.icon size={12} className={v2.accent} />
-              {t(item.labelKey)}
+            <div key={item.titleKey} className="dashboard-v2__footer-item">
+              <item.icon size={14} className={v2.accent} />
+              <span className="dashboard-v2__footer-copy">
+                <span className={`dashboard-v2__footer-title ${v2.stat}`}>{t(item.titleKey)}</span>
+                <span className={`dashboard-v2__footer-sub ${v2.muted}`}>{t(item.subKey)}</span>
+              </span>
             </div>
           ))}
         </footer>

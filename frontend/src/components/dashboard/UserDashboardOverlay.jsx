@@ -332,12 +332,12 @@ export default function UserDashboardOverlay() {
                       transition={{ duration: 0.45, ease }}
                     >
                       <div
-                        className={`flex shrink-0 items-center justify-between gap-3 px-5 sm:px-7 py-3.5 border-b ${dt.headerBorder}`}
+                        className={`dashboard-section-drawer__header flex shrink-0 items-center justify-between gap-3 px-5 sm:px-7 py-3.5 border-b ${dt.headerBorder}`}
                       >
                         <button
                           type="button"
                           onClick={backToHero}
-                          className={`w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
+                          className={`dashboard-section-drawer__nav-btn w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
                           aria-label={t("dashboard.backToGrid")}
                         >
                           <ArrowLeft size={17} />
@@ -348,7 +348,7 @@ export default function UserDashboardOverlay() {
                         <button
                           type="button"
                           onClick={backToHero}
-                          className={`w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
+                          className={`dashboard-section-drawer__nav-btn w-9 h-9 rounded-full grid place-items-center shrink-0 ${dt.closeBtn}`}
                           aria-label={t("dashboard.closeSection")}
                         >
                           <X size={17} />

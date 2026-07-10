@@ -55,12 +55,13 @@ export function countOpenSupportTickets(messages = []) {
 export function resolveHeroProduct(products = [], recommended = []) {
   const pool = [...recommended, ...products];
   const match =
-    pool.find((p) => p?.slug && /knee/i.test(p.name || "")) ||
+    pool.find((p) => p?.slug && /chest|rib|thoracic/i.test(p.name || "")) ||
+    pool.find((p) => p?.slug && /lumbar|back|belt/i.test(p.name || "")) ||
     pool.find((p) => p?.slug);
 
   return {
     image: DASHBOARD_ASSETS.heroBrace,
-    name: match?.name || "Knee Support Brace",
+    name: match?.name || "Chest Support Brace",
     slug: match?.slug ?? null,
   };
 }

@@ -75,3 +75,26 @@
     max-width: 720px;
   }
 }
+
+/* Blue theme — section drawer header nav (My Orders, etc.) */
+[data-theme="blue"] .dashboard-section-drawer__header {
+  background: #061020;
+  border-bottom-color: rgba(34, 211, 238, 0.28) !important;
+}
+
+[data-theme="blue"] .dashboard-section-drawer__nav-btn {
+  background: #0a2840 !important;
+  border: 1px solid rgba(34, 211, 238, 0.5) !important;
+  color: #e0f2fe !important;
+  box-shadow: 0 2px 10px rgba(3, 10, 30, 0.35);
+}
+
+[data-theme="blue"] .dashboard-section-drawer__nav-btn:hover {
+  background: #0e3a5c !important;
+  border-color: rgba(34, 211, 238, 0.75) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="blue"] .dashboard-section-drawer__header .truncate {
+  color: #f0f9ff !important;
+}

@@ -3,7 +3,7 @@
 import { bodyCategories } from "../../data/siteData";
 
 export const DASHBOARD_ASSETS = {
-  heroBrace: "/dashboard/hero-knee-brace.png",
+  heroBrace: "/dashboard/catalog/catalog-chest.png",
   recoveryRunner: "/dashboard/recovery-runner.png",
   recoveryCardArt: "/dashboard/recovery-card-art.png",
   logoMark: "/products/logo-mark.png",

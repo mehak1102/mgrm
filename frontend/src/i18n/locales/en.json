@@ -480,8 +480,11 @@
       "colDate": "Date",
       "colStatus": "Status",
       "premiumQuality": "Premium Quality",
+      "trustedReliable": "Trusted & Reliable",
       "fastDelivery": "Fast Delivery",
+      "acrossIndia": "Across India",
       "securePayments": "Secure Payments",
+      "protected100": "100% Protected",
       "expertRecommended": "Expert Recommended"
     }
   }
