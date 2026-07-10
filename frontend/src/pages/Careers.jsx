@@ -259,10 +259,10 @@ export default function Careers() {
           <HeroHeading
             text={t("careers.heroTitle")}
             as="h1"
-            className="mt-3 text-white max-w-4xl"
+            className="typo-hero-title mt-3 text-white max-w-4xl"
             animateOnMount
           />
-          <FadeUpText className="mt-5 text-white/85 max-w-2xl text-base md:text-lg" delay={0.15} animateOnMount>
+          <FadeUpText className="mt-4 sm:mt-5 text-white/85 max-w-2xl typo-body-lg" delay={0.15} animateOnMount>
             {t("careers.heroSubtitle")}
           </FadeUpText>
           <FadeUpBlock delay={0.25} className="mt-8 flex flex-col sm:flex-row gap-3 justify-start">
@@ -322,7 +322,7 @@ export default function Careers() {
               <Briefcase className="text-brand" size={20} />
               <p className="text-xs font-black uppercase tracking-widest text-brand">{t("careers.opportunities")}</p>
             </div>
-            <h2 className="text-3xl md:text-4xl font-black text-fg">{t("careers.openPositions")}</h2>
+            <h2 className="typo-section-title text-fg">{t("careers.openPositions")}</h2>
           </div>
           {!loading && (
             <p className="text-sm text-fg-muted">{t("common.openRoles", { count: jobs.length })}</p>
@@ -385,7 +385,7 @@ export default function Careers() {
       {/* WHY JOIN */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">{t("careers.whyJoin")}</h2>
+          <h2 className="typo-section-subtitle text-fg">{t("careers.whyJoin")}</h2>
           <p className="text-fg-muted mt-2 max-w-2xl">
             {t("careers.whyJoinIntro")}
           </p>
@@ -413,7 +413,7 @@ export default function Careers() {
       {/* BENEFITS */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">{t("careers.benefits")}</h2>
+          <h2 className="typo-section-subtitle text-fg">{t("careers.benefits")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {BENEFITS.map((item, index) => {
@@ -436,7 +436,7 @@ export default function Careers() {
       {/* PROCESS */}
       <section className="max-w-6xl mx-auto px-5 pb-20">
         <FadeUpBlock className="careers-section-head mb-8">
-          <h2 className="text-3xl font-black text-fg">{t("careers.process")}</h2>
+          <h2 className="typo-section-subtitle text-fg">{t("careers.process")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {PROCESS.map((item, index) => (
@@ -455,7 +455,7 @@ export default function Careers() {
       <section ref={cultureRef} className="max-w-6xl mx-auto px-5 pb-20 scroll-mt-24">
         <FadeUpBlock className="careers-section-head flex items-center gap-2 mb-8">
           <Users size={22} className="text-brand" />
-          <h2 className="text-3xl font-black text-fg">{t("careers.culture")}</h2>
+          <h2 className="typo-section-subtitle text-fg">{t("careers.culture")}</h2>
         </FadeUpBlock>
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {CULTURE.map((item, index) => (
@@ -474,7 +474,7 @@ export default function Careers() {
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-5 pb-16">
         <FadeUpBlock className="careers-section-head mb-6">
-          <h2 className="text-3xl font-black text-fg">{t("careers.faq")}</h2>
+          <h2 className="typo-section-subtitle text-fg">{t("careers.faq")}</h2>
         </FadeUpBlock>
         <div className="space-y-4">
           {["timeline", "multiple", "india"].map((key, index) => (

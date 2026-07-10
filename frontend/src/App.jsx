@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import CartDrawer from "./components/CartDrawer";
 import FloatingHelp from "./components/FloatingHelp";
-import LanguageSwitcher from "./components/LanguageSwitcher";
+import FloatingSiteControls from "./components/FloatingSiteControls";
 import TidioChat from "./components/TidioChat";
 import Footer from "./components/Footer";
 import InstagramFeed from "./components/InstagramFeed";
@@ -37,7 +37,7 @@ const WarrantyInformation = lazy(() => import("./pages/WarrantyInformation"));
 const Wishlist = lazy(() => import("./pages/Wishlist"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Careers = lazy(() => import("./pages/Careers"));
-const DashboardRedirect = lazy(() => import("./pages/DashboardRedirect"));
+const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const UserDashboardOverlay = lazy(() => import("./components/dashboard/UserDashboardOverlay"));
 
 function RouteFallback() {
@@ -70,7 +70,8 @@ export default function App() {
     location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname === "/forgot-password" ||
-    location.pathname === "/reset-password";
+    location.pathname === "/reset-password" ||
+    location.pathname === "/dashboard";
 
   const requireAuth = (element) => {
     if (!authReady) return <RouteFallback />;
@@ -96,7 +97,7 @@ export default function App() {
 
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/orders" element={requireAuth(<Orders />)} />
-          <Route path="/dashboard" element={<DashboardRedirect />} />
+          <Route path="/dashboard" element={requireAuth(<UserDashboard />)} />
 
           <Route path="/wishlist" element={<Wishlist />} />
 
@@ -131,8 +132,8 @@ export default function App() {
       {!hideLayout && <Footer />}
       {!hideLayout && <CartDrawer />}
       {!hideLayout && <FloatingHelp />}
-      {!hideLayout && <LanguageSwitcher />}
-      <TidioChat />
+      {!hideLayout && <FloatingSiteControls />}
+      {!hideLayout && <TidioChat />}
 
       <Toaster
         position="top-right"

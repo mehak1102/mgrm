@@ -121,6 +121,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
         profileImage: profile.profileImage,
       });
       setProfile(res.data);
+      window.dispatchEvent(new Event("mgrm:profile-updated"));
       toast.success(t("dashboard.toast.profileUpdated"));
     } catch {
       toast.error(t("dashboard.toast.profileSaveFailed"));
@@ -138,6 +139,7 @@ export default function DashboardSections({ dt, onRoute, section }) {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setProfile((p) => ({ ...p, profileImage: res.data.url }));
+      window.dispatchEvent(new Event("mgrm:profile-updated"));
       toast.success(t("dashboard.toast.photoUploaded"));
     } catch {
       toast.error(t("dashboard.toast.uploadFailed"));

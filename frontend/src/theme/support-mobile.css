@@ -1,0 +1,320 @@
+/**
+ * Support page + subpages (store locator, warranty) — mobile compaction
+ */
+
+@media (max-width: 639px) {
+  /* ── Hero sections ── */
+  .support-page section[class*="pt-16"],
+  .support-page section[class*="py-20"] {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .support-page .px-4,
+  .support-page .px-5 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* ── Suggestions section ── */
+  .support-page .support-suggestions-section {
+    padding: 1rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .support-page .support-suggestions-section__title {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .support-page .support-suggestions-section__intro {
+    font-size: 0.8125rem !important;
+    line-height: 1.6 !important;
+    margin-top: 0.65rem !important;
+  }
+
+  .support-page .support-suggestions-section__label {
+    font-size: 0.55rem !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
+  .support-page .support-suggestions-section__pill {
+    padding: 0.65rem 0.75rem !important;
+    border-radius: 0.85rem !important;
+    gap: 0.6rem !important;
+  }
+
+  .support-page .support-suggestions-section__pill-icon {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+
+  .support-page .support-suggestions-section__pill-title {
+    font-size: 0.8125rem !important;
+  }
+
+  .support-page .support-suggestions-section__pill-text {
+    font-size: 0.6875rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .support-page .support-suggestions-form {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .support-page .support-suggestions-form__title {
+    font-size: 1.125rem !important;
+  }
+
+  .support-page .support-suggestions-form__subtitle {
+    font-size: 0.75rem !important;
+  }
+
+  .support-page .support-suggestions-field {
+    font-size: 0.8125rem !important;
+    padding: 0.65rem 0.85rem !important;
+  }
+
+  .support-page .support-suggestions-submit {
+    font-size: 0.8125rem !important;
+    padding: 0.7rem 1rem !important;
+  }
+
+  /* ── FAQ ── */
+  .support-page .support-faq__title {
+    font-size: 1.25rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .support-page .support-faq__trigger {
+    font-size: 0.8125rem !important;
+    padding: 0.75rem 0 !important;
+    gap: 0.5rem !important;
+  }
+
+  .support-page .support-faq__answer {
+    font-size: 0.75rem !important;
+    line-height: 1.55 !important;
+    padding: 0 0 0.75rem 1.25rem !important;
+  }
+
+  /* ── Ways strip ── */
+  .support-page .ways-strip__heading {
+    font-size: 0.8125rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .support-page .ways-strip__grid {
+    gap: 1rem 0.65rem !important;
+  }
+
+  .support-page .ways-strip__art {
+    max-width: 72px !important;
+    min-height: 64px !important;
+  }
+
+  .support-page .ways-strip__label {
+    font-size: 0.6875rem !important;
+    max-width: 7rem !important;
+  }
+
+  .support-page .ways-strip__footnote {
+    font-size: 0.6875rem !important;
+    margin-top: 1rem !important;
+  }
+
+  /* ── Store locator map ── */
+  .support-page .support-map-illustration {
+    max-width: 16rem !important;
+  }
+
+  .support-page .support-map-illustration__frame {
+    border-radius: 1.25rem !important;
+  }
+
+  .support-page .support-map-illustration__image {
+    object-fit: contain !important;
+  }
+
+  .support-page .support-map-badge {
+    padding: 0.45rem 0.65rem !important;
+    bottom: 0.5rem !important;
+    left: 0.5rem !important;
+    right: 0.5rem !important;
+  }
+
+  .support-page .support-map-badge-label {
+    font-size: 0.55rem !important;
+  }
+
+  .support-page .support-map-badge-title {
+    font-size: 0.75rem !important;
+  }
+
+  /* ── Store cards — 2 per row, full images ── */
+  .support-page .support-store-card .relative.h-44 {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .support-page .support-store-card img {
+    height: auto !important;
+    max-height: 7rem !important;
+    object-fit: contain !important;
+    background: #f1f5f9;
+  }
+
+  .dark .support-page .support-store-card img,
+  [data-theme="dark"] .support-page .support-store-card img {
+    background: #18181b;
+  }
+
+  .support-page .support-store-card .store-card-overlay p.text-lg {
+    font-size: 0.8125rem !important;
+  }
+
+  .support-page .support-store-card .p-6 {
+    padding: 0.75rem !important;
+  }
+
+  .support-page .support-store-card .text-sm {
+    font-size: 0.6875rem !important;
+  }
+
+  .support-page .support-store-card a.rounded-2xl {
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.6875rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  /* ── Search / feedback panels ── */
+  .support-page .card.support-glass.rounded-\[36px\] {
+    padding: 1rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .support-page .card.support-glass h2.text-2xl {
+    font-size: 1.125rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .support-page .theme-panel {
+    font-size: 0.8125rem !important;
+    padding: 0.65rem 0.85rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* ── Warranty coverage cards ── */
+  .support-page .warranty-coverage-icon {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    margin-bottom: 0.65rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .support-page .warranty-coverage-icon-svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  .support-page .card.support-glass.rounded-\[28px\] {
+    padding: 0.85rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .support-page .card.support-glass.rounded-\[28px\] h3 {
+    font-size: 0.875rem !important;
+  }
+
+  .support-page .card.support-glass.rounded-\[28px\] p.text-sm {
+    font-size: 0.6875rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  /* ── Warranty hero image grid ── */
+  .support-page .aspect-\[4\/3\] img {
+    object-fit: contain !important;
+    padding: 0.25rem;
+  }
+
+  /* ── Policy accordion ── */
+  .support-page .policy-accordion-item {
+    border-radius: 1rem !important;
+  }
+
+  .support-page .policy-accordion-item button {
+    padding: 0.75rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .support-page .policy-accordion-item .font-black.text-lg {
+    font-size: 0.875rem !important;
+  }
+
+  .support-page .policy-accordion-item p.pl-\[5\.5rem\] {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .support-page .policy-accordion-icon {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  /* ── Action / contact cards on main support ── */
+  .support-page .rounded-3xl.p-6 {
+    padding: 0.85rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .support-page .rounded-3xl.p-6 h3 {
+    font-size: 0.875rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .support-page .rounded-3xl.p-6 p {
+    font-size: 0.6875rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  .support-page .rounded-3xl.p-6 button {
+    font-size: 0.75rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .support-page .rounded-3xl.p-6 svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+
+  /* ── Forms ── */
+  .support-page form.rounded-\[38px\] {
+    padding: 1rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .support-page form input,
+  .support-page form select,
+  .support-page form textarea {
+    font-size: 0.8125rem !important;
+    padding: 0.65rem 0.85rem !important;
+    margin-bottom: 0.5rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .support-page form button {
+    font-size: 0.8125rem !important;
+    padding: 0.7rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  /* Clear floating buttons */
+  .support-page {
+    padding-bottom: 4.5rem;
+  }
+}

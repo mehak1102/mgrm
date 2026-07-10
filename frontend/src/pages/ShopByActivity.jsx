@@ -325,7 +325,7 @@ export default function ShopByActivity() {
                   <SectionHeading
                     text={t("shopByActivity.title")}
                     as="h1"
-                    className="text-xl sm:text-4xl font-black text-fg leading-tight"
+                    className="typo-page-title text-fg leading-tight"
                   />
                   <span className="text-fg-muted/80 text-base sm:text-2xl font-black">
                     ({filteredProducts.length})
@@ -400,7 +400,7 @@ export default function ShopByActivity() {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow border border-edge">
-                <h2 className="text-2xl sm:text-3xl font-black text-fg">
+                <h2 className="typo-section-subtitle text-fg">
                   {t("shopByActivity.noProducts")}
                 </h2>
                 <p className="text-fg-muted mt-2">{t("shopByActivity.emptyHint")}</p>

@@ -29,7 +29,7 @@ export default function Wishlist() {
             <p className="text-purple-700 font-black tracking-widest text-sm">
               {t("wishlist.badge")}
             </p>
-            <h1 className="text-3xl font-bold">
+            <h1 className="typo-page-title font-bold">
               {t("wishlist.title", { count: validWishlist.length })}
             </h1>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
@@ -46,7 +46,7 @@ export default function Wishlist() {
         {wishlist.length === 0 && (
           <div className="bg-card dark:bg-zinc-900 rounded-[30px] p-12 text-center shadow">
             <Heart className="mx-auto text-purple-400" size={50} />
-            <h2 className="text-3xl font-black mt-4">{t("wishlist.emptyTitle")}</h2>
+            <h2 className="typo-section-subtitle mt-4">{t("wishlist.emptyTitle")}</h2>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
               {t("wishlist.emptyCopy")}
             </p>

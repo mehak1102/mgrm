@@ -1,0 +1,458 @@
+/**
+ * About Us — compact mobile layout (matches home hero scale)
+ */
+
+@media (max-width: 639px) {
+  /* ── Hero ── */
+  .about-us-page .home-about-hero__content {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .about-us-page .about-hero-company-badge {
+    margin-bottom: 1rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .about-us-page .about-hero-company-badge__text {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  .about-us-page .home-about-hero__copy {
+    margin-top: 1rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ── Main layout ── */
+  .about-us-page > section:not(.home-about-hero) {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .about-us-page > section:not(.home-about-hero) > .flex {
+    gap: 1.25rem !important;
+  }
+
+  .about-us-page .flex-1.min-w-0 {
+    gap: 1.25rem;
+  }
+
+  .about-us-page .flex-1.min-w-0.space-y-10 {
+    --tw-space-y-reverse: 0;
+  }
+
+  .about-us-page .flex-1.min-w-0.space-y-10 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1.25rem !important;
+  }
+
+  /* ── Sidebar ── */
+  .about-us-page aside {
+    border-radius: 1.25rem !important;
+    padding: 0.85rem !important;
+  }
+
+  .about-us-page aside h2 {
+    margin-bottom: 0.75rem !important;
+    font-size: 1.125rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .about-us-page aside .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.5rem !important;
+  }
+
+  .about-us-page aside a {
+    padding: 0.55rem 0.65rem !important;
+    border-radius: 0.85rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .about-us-page aside .about-sidebar-nav-num {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    font-size: 0.55rem !important;
+  }
+
+  .about-us-page aside svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  /* ── All content sections ── */
+  .about-us-page [id^="section-"],
+  .about-us-page #orthopedic-product-categories {
+    border-radius: 1.15rem !important;
+    padding: 0.85rem !important;
+    scroll-margin-top: 5rem;
+  }
+
+  .about-us-page #section-0 {
+    padding: 0 !important;
+  }
+
+  .about-us-page #section-0 > .grid > div:first-child {
+    padding: 0.85rem !important;
+  }
+
+  .about-us-page #section-0 .relative.min-h-\[240px\] {
+    min-height: 9rem !important;
+  }
+
+  /* Section labels */
+  .about-us-page [class*="tracking-"] {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  /* Headings — align with home section scale */
+  .about-us-page h2,
+  .about-us-page .text-4xl,
+  .about-us-page .text-5xl {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .about-us-page h3,
+  .about-us-page .text-3xl {
+    font-size: 1.125rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-us-page h4,
+  .about-us-page .text-2xl {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-us-page .text-xl {
+    font-size: 0.9375rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .about-us-page .text-lg,
+  .about-us-page [class*="text-\[16px\]"],
+  .about-us-page [class*="text-\[17px\]"] {
+    font-size: 0.8125rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .about-us-page p,
+  .about-us-page .text-base {
+    font-size: 0.75rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .about-us-page .text-sm {
+    font-size: 0.6875rem !important;
+  }
+
+  /* Spacing inside sections */
+  .about-us-page [class*="mt-12"],
+  .about-us-page [class*="mt-16"],
+  .about-us-page [class*="mt-20"] {
+    margin-top: 1rem !important;
+  }
+
+  .about-us-page [class*="mt-8"],
+  .about-us-page [class*="mt-10"] {
+    margin-top: 0.75rem !important;
+  }
+
+  .about-us-page [class*="mt-5"],
+  .about-us-page [class*="mt-6"],
+  .about-us-page [class*="mt-7"] {
+    margin-top: 0.5rem !important;
+  }
+
+  .about-us-page [class*="mb-8"],
+  .about-us-page [class*="mb-12"] {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .about-us-page [class*="space-y-6"] > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.65rem !important;
+  }
+
+  .about-us-page [class*="gap-12"],
+  .about-us-page [class*="gap-7"] {
+    gap: 0.75rem !important;
+  }
+
+  .about-us-page [class*="gap-6"] {
+    gap: 0.65rem !important;
+  }
+
+  /* Category flip cards */
+  .about-us-page .about-category-flip {
+    height: 9.5rem !important;
+    min-height: 9.5rem !important;
+  }
+
+  .about-us-page .about-category-flip__face {
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page .about-category-flip h3 {
+    font-size: 0.75rem !important;
+  }
+
+  .about-us-page .about-category-flip__front-num {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    font-size: 0.65rem !important;
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+  }
+
+  .about-us-page #orthopedic-product-categories .grid {
+    gap: 0.5rem !important;
+  }
+
+  /* Achievement cards */
+  .about-us-page #section-1 .mt-12.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .about-us-page #section-1 [class*="h-\[250px\]"] {
+    height: 8.5rem !important;
+  }
+
+  .about-us-page #section-1 svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  /* Citizen rows */
+  .about-us-page .about-citizen-stack {
+    gap: 0.75rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .about-us-page .about-citizen-row {
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page .about-citizen-row__media,
+  .about-us-page .about-citizen-row__photo {
+    min-height: 8.5rem !important;
+  }
+
+  .about-us-page .about-citizen-row__content {
+    padding: 0.75rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .about-us-page .about-citizen-row__name {
+    font-size: 0.875rem !important;
+  }
+
+  .about-us-page .about-citizen-row__text {
+    font-size: 0.75rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .about-us-page #section-1 #first-citizen {
+    margin-top: 1.25rem !important;
+  }
+
+  /* Cert cards */
+  .about-us-page #section-2 .mt-12.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .about-us-page .about-cert-card {
+    padding: 0.75rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page .about-cert-card__logo img {
+    height: 3rem !important;
+  }
+
+  .about-us-page .about-cert-card__title {
+    margin-top: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* Testimonials — full photo visible, not cropped */
+  .about-us-page #section-5 .about-testimonial-card__media {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .about-us-page #section-5 .about-testimonial-card__photo {
+    position: static !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+    height: auto !important;
+    max-height: 13.75rem !important;
+    width: 100% !important;
+    padding: 0.35rem 0.35rem 0;
+  }
+
+  .about-us-page #section-5 .about-testimonial-card {
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page #section-5 .about-testimonials-grid {
+    gap: 0.75rem !important;
+  }
+
+  .about-us-page #section-5 svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+
+  /* Cure to care */
+  .about-us-page #section-6 [class*="h-\[520px\]"] {
+    height: 11rem !important;
+  }
+
+  .about-us-page #section-6 .about-cure-markets-card {
+    bottom: 0.5rem !important;
+    left: 0.5rem !important;
+    padding: 0.45rem 0.65rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .about-us-page .about-cure-markets-card__value {
+    font-size: 1rem !important;
+  }
+
+  .about-us-page #section-6 [class*="rounded-full"][class*="px-5"] {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  .about-us-page #section-6 [class*="border-l-4"] {
+    padding-left: 0.75rem !important;
+    margin-top: 0.65rem !important;
+  }
+
+  /* Partner program */
+  .about-us-page #section-7 [class*="h-\[520px\]"] {
+    height: 10rem !important;
+  }
+
+  .about-us-page #section-7 .relative.z-10 {
+    padding: 0.85rem !important;
+  }
+
+  /* Partnerships */
+  .about-us-page .about-partnership-card__media {
+    min-height: 7rem !important;
+  }
+
+  .about-us-page .about-partnership-card__body {
+    padding: 0.75rem !important;
+  }
+
+  .about-us-page .about-partnership-card__title {
+    font-size: 0.875rem !important;
+  }
+
+  .about-us-page .about-partnership-card__text {
+    font-size: 0.75rem !important;
+  }
+
+  /* Autoclave / equipment */
+  .about-us-page #section-8 .mt-16.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+    margin-top: 0.85rem !important;
+  }
+
+  .about-us-page #section-8 [class*="h-\[340px\]"] {
+    height: 9rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page #section-8 .relative.z-10 {
+    padding-top: 0 !important;
+  }
+
+  .about-us-page .about-autoclave-badge {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  /* Spec / construction grids */
+  .about-us-page [id="section-9"],
+  .about-us-page [id="section-10"],
+  .about-us-page [id="section-11"],
+  .about-us-page [id="section-12"] {
+    padding: 0 !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .about-us-page #section-8 .mt-20 {
+    margin-top: 1.25rem !important;
+  }
+
+  .about-us-page #section-8 .mt-16 {
+    margin-top: 0.85rem !important;
+  }
+
+  .about-us-page #section-8 .flex.items-center.gap-4 {
+    gap: 0.5rem !important;
+  }
+
+  .about-us-page #section-8 .flex.items-center.gap-4 > div:first-child {
+    height: 1.5rem !important;
+    width: 0.35rem !important;
+  }
+
+  .about-us-page .about-spec-table,
+  .about-us-page .about-shredder-table {
+    margin-top: 0.65rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .about-us-page .about-spec-table td,
+  .about-us-page .about-shredder-table td {
+    padding: 0.5rem 0.65rem !important;
+    font-size: 0.6875rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .about-us-page #section-8 .rounded-full[class*="px-6"] {
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.625rem !important;
+  }
+
+  .about-us-page #section-8 .flex.flex-wrap.gap-4 {
+    gap: 0.4rem !important;
+  }
+
+  .about-us-page #section-9 img,
+  .about-us-page #section-10 img,
+  .about-us-page #section-11 img {
+    max-height: 8rem;
+    object-fit: contain;
+  }
+
+  /* Timeline */
+  .about-us-page .about-heritage-timeline {
+    margin-top: 0.75rem !important;
+  }
+
+  /* Quote icons */
+  .about-us-page .lucide-quote,
+  .about-us-page svg.h-10,
+  .about-us-page svg.h-12 {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+
+  /* Clear floating help / chat buttons */
+  .about-us-page > section:last-of-type {
+    padding-bottom: 4.5rem !important;
+  }
+}

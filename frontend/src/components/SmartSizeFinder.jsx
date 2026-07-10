@@ -840,8 +840,6 @@ export default function SmartSizeFinder({
     ${product?.description || ""}
   `.toLowerCase();
 
-  console.log("SMART SIZE TEXT:", productText);
-
   const sizePriority = [
     "S",
     "SM",
@@ -1118,6 +1116,7 @@ export default function SmartSizeFinder({
   const fitProfile = getFitProfile();
   const fitLabel = t(fitProfile.labelKey);
   const fitExample = t(fitProfile.exampleKey);
+  const chartRows = fitProfile.chart.filter((item) => item.max < 1000);
 
   const getRecommendedSize = (cm) => {
     const value = Number(cm);
@@ -1189,26 +1188,27 @@ export default function SmartSizeFinder({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.45 }}
-      className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9999] bg-slate-950/55 backdrop-blur-md flex items-end sm:items-center justify-center p-2 sm:p-4"
     >
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 24, scale: 0.98 }}
         animate={reduce ? false : { opacity: 1, y: 0, scale: 1 }}
         exit={reduce ? false : { opacity: 0, y: 16, scale: 0.98 }}
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-4xl smart-size-finder-modal bg-card dark:bg-zinc-900 rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr]"
+        className="relative w-full max-w-4xl smart-size-finder-modal bg-card dark:bg-zinc-900 rounded-[20px] sm:rounded-[34px] overflow-hidden shadow-[0_35px_100px_rgba(15,23,42,0.28)] grid lg:grid-cols-[1fr_0.9fr] max-h-[92vh] overflow-y-auto"
       >
 
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full bg-card shadow-lg grid place-items-center hover:scale-105 transition"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card shadow-lg grid place-items-center hover:scale-105 transition"
         >
-          <X size={18} />
+          <X size={16} className="sm:hidden" />
+          <X size={18} className="hidden sm:block" />
         </button>
 
         {/* LEFT */}
-        <section className="relative p-7 bg-gradient-to-br from-cyan-50 via-white to-purple-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-indigo-950 overflow-hidden">
+        <section className="relative p-4 sm:p-7 bg-gradient-to-br from-cyan-50 via-white to-purple-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-indigo-950 overflow-hidden">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-300/25 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-300/25 rounded-full blur-3xl" />
 
@@ -1229,21 +1229,21 @@ export default function SmartSizeFinder({
 
             <motion.h2
               {...(!reduce && { variants: FadeUpSlow })}
-              className="text-3xl md:text-4xl font-black mt-3 text-slate-900 dark:text-zinc-100 leading-tight"
+              className="text-xl sm:text-3xl md:text-4xl font-black mt-2 sm:mt-3 text-slate-900 dark:text-zinc-100 leading-tight"
             >
               {t("smartSize.finder")}
             </motion.h2>
 
             <motion.p
               {...(!reduce && { variants: FadeUpMedium })}
-              className="text-slate-500 dark:text-zinc-400 mt-3 text-sm leading-6"
+              className="text-slate-500 dark:text-zinc-400 mt-2 sm:mt-3 text-xs sm:text-sm leading-6"
             >
               {t("smartSize.uploadDescription")}
             </motion.p>
 
             <motion.div
               {...(!reduce && { variants: FadeUpSlow })}
-              className="mt-6 relative h-[310px] rounded-[28px] bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] grid place-items-center"
+              className="mt-4 sm:mt-6 relative h-[180px] sm:h-[310px] rounded-[18px] sm:rounded-[28px] bg-white dark:bg-zinc-800 border border-slate-200 dark:border-white/10 overflow-hidden shadow-[0_18px_55px_rgba(15,23,42,0.08)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] grid place-items-center"
             >
               {preview ? (
                 <img
@@ -1261,11 +1261,11 @@ export default function SmartSizeFinder({
                     <ImagePlus size={32} />
                   </div>
 
-                  <h3 className="text-xl font-black mt-4 text-slate-900 dark:text-zinc-100">
+                  <h3 className="text-base sm:text-xl font-black mt-3 sm:mt-4 text-slate-900 dark:text-zinc-100">
                     {t("smartSize.uploadPhoto")}
                   </h3>
 
-                  <p className="text-slate-400 dark:text-zinc-500 mt-2 text-sm">
+                  <p className="text-slate-400 dark:text-zinc-500 mt-1.5 sm:mt-2 text-xs sm:text-sm px-4">
                     {t("smartSize.uploadAreas")}
                   </p>
                 </button>
@@ -1296,12 +1296,12 @@ export default function SmartSizeFinder({
 
             <motion.div
               {...(!reduce && { variants: FadeUpMedium })}
-              className="mt-5 flex gap-3"
+              className="mt-3 sm:mt-5 flex flex-wrap gap-2 sm:gap-3"
             >
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="inline-flex items-center gap-2 bg-slate-950 text-white px-5 py-3 rounded-2xl font-black text-sm hover:scale-[1.02] transition duration-500"
+                className="inline-flex items-center gap-2 bg-slate-950 text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm hover:scale-[1.02] transition duration-500"
               >
                 <Upload size={17} />
                 {preview ? t("smartSize.changeImage") : t("common.uploadImage")}
@@ -1324,7 +1324,7 @@ export default function SmartSizeFinder({
         </section>
 
         {/* RIGHT */}
-        <section className="p-7 md:p-8 flex flex-col justify-center">
+        <section className="p-4 sm:p-7 md:p-8 flex flex-col justify-center border-t lg:border-t-0 border-slate-200/80 dark:border-white/10">
           <FormBlock
             className="flex flex-col"
             {...(!reduce && {
@@ -1335,25 +1335,25 @@ export default function SmartSizeFinder({
           >
           <motion.div
             {...(!reduce && { variants: FadeUpMedium })}
-            className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-4 py-2 font-black text-xs"
+            className="inline-flex w-fit bg-purple-50 dark:bg-zinc-800 text-purple-700 dark:text-purple-300 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 font-black text-[10px] sm:text-xs max-w-full truncate"
           >
             {product?.name || t("smartSize.mgrmProduct")}
           </motion.div>
 
           <motion.div
             {...(!reduce && { variants: FadeUpSlow })}
-            className="mt-7 flex items-start gap-4"
+            className="mt-4 sm:mt-7 flex items-start gap-3 sm:gap-4"
           >
-            <div className="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-700 grid place-items-center shrink-0">
-              <Ruler />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-cyan-50 text-cyan-700 grid place-items-center shrink-0">
+              <Ruler size={18} />
             </div>
 
-            <div>
-              <h3 className="text-2xl font-black text-slate-900 dark:text-zinc-100">
+            <div className="min-w-0">
+              <h3 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-zinc-100">
                 {t("smartSize.enterMeasurement")}
               </h3>
 
-              <p className="text-slate-500 dark:text-zinc-400 mt-2 text-sm leading-6">
+              <p className="text-slate-500 dark:text-zinc-400 mt-1.5 sm:mt-2 text-xs sm:text-sm leading-6">
                 {t("smartSize.measureInstruction", { label: fitLabel })}
               </p>
             </div>
@@ -1361,9 +1361,34 @@ export default function SmartSizeFinder({
 
           <motion.div
             {...(!reduce && { variants: FadeUpMedium })}
-            className="mt-7"
+            className="smart-size-chart mt-3 sm:mt-4 rounded-xl border border-cyan-100 dark:border-cyan-500/20 bg-cyan-50/50 dark:bg-cyan-950/20 p-3"
           >
-            <label className="font-black text-slate-900 dark:text-zinc-100 text-sm">
+            <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-cyan-700 dark:text-cyan-300 mb-2">
+              {t("support.sizeGuide")} — {fitLabel}
+            </p>
+            <div className="space-y-1">
+              {chartRows.map((item, index) => {
+                const prevMax = index === 0 ? 0 : chartRows[index - 1].max;
+                return (
+                  <div
+                    key={item.size}
+                    className="smart-size-chart__row flex items-center justify-between gap-2 text-xs sm:text-sm text-slate-600 dark:text-zinc-300 py-0.5 border-b border-cyan-100/80 dark:border-cyan-500/10 last:border-0"
+                  >
+                    <span className="font-black text-slate-900 dark:text-zinc-100">{item.size}</span>
+                    <span>
+                      {prevMax + 1}–{item.max} cm
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          <motion.div
+            {...(!reduce && { variants: FadeUpMedium })}
+            className="mt-4 sm:mt-7"
+          >
+            <label className="font-black text-slate-900 dark:text-zinc-100 text-xs sm:text-sm">
               {t("smartSize.measurementCm")}
             </label>
 
@@ -1372,7 +1397,7 @@ export default function SmartSizeFinder({
               value={measurement}
               onChange={(e) => setMeasurement(e.target.value)}
               placeholder={fitExample}
-              className="mt-3 w-full h-14 rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-5 text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
+              className="mt-2 sm:mt-3 w-full h-11 sm:h-14 rounded-xl sm:rounded-2xl bg-slate-50 bg-card border border-slate-200 dark:border-white/10 px-4 sm:px-5 text-base sm:text-lg font-black outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </motion.div>
 
@@ -1381,7 +1406,7 @@ export default function SmartSizeFinder({
             onClick={analyze}
             disabled={loading}
             {...(!reduce && { variants: FadeUpSlow })}
-            className="mt-5 h-14 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-700 text-white font-black shadow-xl hover:scale-[1.02] transition duration-500 disabled:opacity-60"
+            className="mt-4 sm:mt-5 h-11 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-700 text-white text-sm sm:text-base font-black shadow-xl hover:scale-[1.02] transition duration-500 disabled:opacity-60"
           >
             {loading ? t("smartSize.analyzing") : t("smartSize.analyzeSize")}
           </motion.button>
@@ -1391,25 +1416,25 @@ export default function SmartSizeFinder({
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={reduce ? false : { opacity: 1, y: 0 }}
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 rounded-[26px] bg-gradient-to-br from-cyan-50 to-purple-50 border border-cyan-100 p-6"
+              className="mt-4 sm:mt-6 rounded-[18px] sm:rounded-[26px] bg-gradient-to-br from-cyan-50 to-purple-50 dark:from-cyan-950/30 dark:to-purple-950/20 border border-cyan-100 dark:border-cyan-500/20 p-4 sm:p-6"
             >
-              <div className="flex items-center gap-2 text-green-600 font-black text-sm">
-                <CheckCircle2 size={18} />
+              <div className="flex items-center gap-2 text-green-600 font-black text-xs sm:text-sm">
+                <CheckCircle2 size={16} />
                 {t("smartSize.resultReady")}
               </div>
 
-              <p className="text-slate-500 dark:text-zinc-400 font-bold mt-4 text-sm">
+              <p className="text-slate-500 dark:text-zinc-400 font-bold mt-3 sm:mt-4 text-xs sm:text-sm">
                 {t("smartSize.recommendedSize")}
               </p>
 
-              <h2 className="text-5xl font-black text-slate-900 dark:text-zinc-100 mt-1">
+              <h2 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-zinc-100 mt-1">
                 {recommended}
               </h2>
 
               <button
                 type="button"
                 onClick={useSize}
-                className="mt-5 w-full bg-slate-950 text-white py-3 rounded-2xl font-black hover:scale-[1.02] transition"
+                className="mt-4 sm:mt-5 w-full bg-slate-950 text-white py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-sm sm:text-base font-black hover:scale-[1.02] transition"
               >
                 {t("smartSize.useSize")}
               </button>

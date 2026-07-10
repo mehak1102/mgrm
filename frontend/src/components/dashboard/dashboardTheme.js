@@ -200,3 +200,96 @@ export const SECTION_LABELS = {
 
 // backward compat
 export const POSTER_WASH = POSTER_WASH_DARK;
+
+/** Modern sidebar dashboard (v2) — solid opaque tokens per site theme */
+export function getDashboardV2Theme(theme) {
+  const base = getDashboardTheme(theme);
+
+  const dark = {
+    ...base,
+    id: "dark",
+    pageBg: "bg-[#0a0b1e]",
+    shell: "bg-[#0a0b1e]",
+    accentSolid: "#8b5cf6",
+    glass: "bg-[#151a30] border border-[#252b45]",
+    glassStrong: "bg-[#181e38] border border-[#2a3150]",
+    sidebar: "bg-[#0d1025] border-r border-[#1e2240]",
+    navActive: "bg-[#2a1f5e] text-violet-200 border border-violet-500/40",
+    navIdle: "text-slate-400 hover:text-white hover:bg-[#1a1f35]",
+    heroBg: "bg-gradient-to-br from-[#1f1650] via-[#181e38] to-[#12162b]",
+    statPurple: "bg-[#1a1538] border border-violet-500/25",
+    statPink: "bg-[#221328] border border-pink-500/25",
+    statGreen: "bg-[#0f2218] border border-emerald-500/25",
+    statBlue: "bg-[#0f1a2e] border border-blue-500/25",
+    searchBg: "bg-[#151a30] border-[#252b45] text-white placeholder:text-slate-500",
+    headerBg: "bg-[#0d1025] border-[#1e2240]",
+    headerBorder: "border-[#1e2240]",
+    closeBtn: "bg-[#1a1f35] hover:bg-[#252b45] text-white border border-[#2a3150]",
+    badgeDelivered: "bg-emerald-500/15 text-emerald-300 border-emerald-500/35",
+    badgeShipped: "bg-blue-500/15 text-blue-300 border-blue-500/35",
+    badgeProcessing: "bg-amber-500/15 text-amber-300 border-amber-500/35",
+    footer: "bg-[#0d1025] border-t border-[#1e2240]",
+    chip: "bg-[#1a1f35] border border-[#2a3150] text-slate-300",
+    accent: "text-violet-400",
+    stat: "text-white",
+    muted: "text-slate-400",
+  };
+
+  if (theme === "light") {
+    return {
+      ...dark,
+      id: "light",
+      pageBg: "bg-slate-100",
+      shell: "bg-slate-100",
+      glass: "bg-white border border-slate-200 shadow-sm",
+      glassStrong: "bg-white border border-slate-200 shadow-md",
+      sidebar: "bg-white border-r border-slate-200",
+      navActive: "bg-violet-100 text-violet-700 border border-violet-200",
+      navIdle: "text-slate-600 hover:text-slate-900 hover:bg-slate-100",
+      heroBg: "bg-gradient-to-br from-violet-100 via-white to-blue-50",
+      statPurple: "bg-violet-50 border border-violet-200",
+      statPink: "bg-pink-50 border border-pink-200",
+      statGreen: "bg-emerald-50 border border-emerald-200",
+      statBlue: "bg-blue-50 border border-blue-200",
+      searchBg: "bg-white border-slate-200 text-slate-900 placeholder:text-slate-400",
+      headerBg: "bg-white border-slate-200",
+      headerBorder: "border-slate-200",
+      closeBtn: "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200",
+      badgeDelivered: "bg-emerald-100 text-emerald-700 border-emerald-200",
+      badgeShipped: "bg-blue-100 text-blue-700 border-blue-200",
+      badgeProcessing: "bg-amber-100 text-amber-700 border-amber-200",
+      footer: "bg-white border-t border-slate-200",
+      chip: "bg-slate-100 border border-slate-200 text-slate-600",
+      accent: "text-violet-600",
+      stat: "text-slate-900",
+      muted: "text-slate-500",
+    };
+  }
+
+  if (theme === "blue") {
+    return {
+      ...dark,
+      id: "blue",
+      pageBg: "bg-[#040d1f]",
+      shell: "bg-[#040d1f]",
+      accentSolid: "#22d3ee",
+      glass: "bg-[#0a162b] border border-cyan-900/50",
+      glassStrong: "bg-[#0c1a33] border border-cyan-800/50",
+      sidebar: "bg-[#061020] border-r border-cyan-900/40",
+      navActive: "bg-cyan-950 text-cyan-200 border border-cyan-600/40",
+      navIdle: "text-slate-400 hover:text-white hover:bg-[#0a162b]",
+      heroBg: "bg-gradient-to-br from-[#0a2840] via-[#0c1a33] to-[#061020]",
+      statPurple: "bg-[#0f1a35] border border-cyan-700/30",
+      statPink: "bg-[#121528] border border-cyan-700/30",
+      statGreen: "bg-[#0a2218] border border-cyan-700/30",
+      statBlue: "bg-[#081a30] border border-cyan-600/35",
+      searchBg: "bg-[#0a162b] border-cyan-900/50 text-white",
+      headerBg: "bg-[#061020] border-cyan-900/40",
+      headerBorder: "border-cyan-900/40",
+      footer: "bg-[#061020] border-t border-cyan-900/40",
+      accent: "text-cyan-300",
+    };
+  }
+
+  return dark;
+}

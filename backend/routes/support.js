@@ -1,10 +1,58 @@
 import express from "express";
+import mongoose from "mongoose";
 import SupportMessage from "../models/SupportMessage.js";
-import { auth, adminOnly } from "../middleware/auth.js";
+import { auth, adminOnly, optionalAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizeEmail(email) {
+  return email?.toLowerCase?.()?.trim() || "";
+}
+
+function toObjectId(id) {
+  if (!id || !mongoose.Types.ObjectId.isValid(id)) return null;
+  return new mongoose.Types.ObjectId(id);
+}
+
+function buildUserTicketQuery(user) {
+  const userId = user?.id;
+  const email = normalizeEmail(user?.email);
+  const or = [];
+
+  const objectId = toObjectId(userId);
+  if (objectId) {
+    or.push({ userId: objectId });
+  }
+  if (userId) {
+    or.push({ userId: String(userId) });
+  }
+  if (email) {
+    or.push({ email });
+    or.push({ email: { $regex: new RegExp(`^${escapeRegex(email)}$`, "i") } });
+  }
+
+  return or.length ? { $or: or } : null;
+}
+
+async function linkOrphanedTickets(user) {
+  const email = normalizeEmail(user?.email);
+  const objectId = toObjectId(user?.id);
+  if (!email || !objectId) return;
+
+  await SupportMessage.updateMany(
+    {
+      email: { $regex: new RegExp(`^${escapeRegex(email)}$`, "i") },
+      $or: [{ userId: null }, { userId: { $exists: false } }],
+    },
+    { $set: { userId: objectId, email } }
+  );
+}
+
+router.post("/", optionalAuth, async (req, res) => {
   try {
     const { name, email, phone, type, message } = req.body;
 
@@ -12,12 +60,17 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ msg: "Name and message are required" });
     }
 
+    const accountEmail = normalizeEmail(req.user?.email);
+    const bodyEmail = normalizeEmail(email);
+    const userObjectId = toObjectId(req.user?.id);
+
     const supportMessage = await SupportMessage.create({
-      name,
-      email,
-      phone,
+      name: String(name).trim(),
+      email: accountEmail || bodyEmail,
+      phone: phone || "",
       type,
       message,
+      userId: userObjectId,
     });
 
     res.status(201).json({
@@ -26,6 +79,28 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error("Support create error:", err);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+router.get("/my", auth, async (req, res) => {
+  try {
+    await linkOrphanedTickets(req.user);
+
+    const query = buildUserTicketQuery(req.user);
+    if (!query) {
+      return res.json({ count: 0, openCount: 0, messages: [] });
+    }
+
+    const messages = await SupportMessage.find(query).sort({ createdAt: -1 });
+    const openCount = messages.filter((m) => m.status !== "resolved").length;
+
+    res.json({
+      count: messages.length,
+      openCount,
+      messages,
+    });
+  } catch (err) {
     res.status(500).json({ msg: err.message });
   }
 });

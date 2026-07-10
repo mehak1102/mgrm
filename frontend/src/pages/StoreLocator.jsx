@@ -116,22 +116,22 @@ function StoreCard({ store, index }) {
           "--store-glow": accent.glow,
         }}
       >
-        <div className="relative h-44 overflow-hidden">
+        <div className="relative h-auto sm:h-44 overflow-hidden bg-slate-100 dark:bg-zinc-800">
           <img
             src={store.image}
             alt={store.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+            className="w-full h-auto max-h-28 sm:max-h-none sm:h-full object-contain sm:object-cover group-hover:scale-105 transition duration-700"
             onError={(e) => {
               e.currentTarget.src = "/products/knee.png";
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-4 left-4 right-4 store-card-overlay">
-            <p className="text-white font-black text-lg leading-tight">{store.name}</p>
-            <p className="text-white/80 text-sm">{store.city}, {store.state}</p>
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 store-card-overlay">
+            <p className="text-white font-black text-sm sm:text-lg leading-tight">{store.name}</p>
+            <p className="text-white/80 text-[11px] sm:text-sm">{store.city}, {store.state}</p>
           </div>
         </div>
-        <div className="p-6 space-y-3">
+        <div className="p-4 sm:p-6 space-y-2 sm:space-y-3">
           <p className="text-sm text-fg-muted flex gap-2">
             <MapPin size={16} className="shrink-0 text-brand mt-0.5" />
             {store.address}
@@ -217,21 +217,21 @@ export default function StoreLocator() {
     <main className="support-page relative min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
-      <section className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 pt-10 sm:pt-16 pb-12 sm:pb-20">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
             <FadeUpBlock>
-              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
+              <p className="typo-label text-brand mb-2">
                 {t("storeLocator.pageBadge")}
               </p>
               <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
               text={t("storeLocator.title")}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
+              className="typo-hero-title text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
-              <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
+              <p className="typo-body-lg text-fg-muted mt-4 sm:mt-5 max-w-lg">
                 <Trans
                   i18nKey="storeLocator.heroCopy"
                   values={{ email: "contact@mgrmmedicare.com" }}
@@ -250,7 +250,7 @@ export default function StoreLocator() {
               <button
                 type="button"
                 onClick={() => storesRef.current?.scrollIntoView({ behavior: "smooth" })}
-                className="mt-8 px-8 py-4 rounded-[22px] btn-primary font-black shadow-lg hover:shadow-xl hover:scale-[1.02] transition duration-250"
+                className="mt-5 sm:mt-8 px-5 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-[18px] sm:rounded-[22px] btn-primary font-black shadow-lg hover:shadow-xl hover:scale-[1.02] transition duration-250"
               >
                 {t("storeLocator.findNearby")}
               </button>
@@ -264,9 +264,9 @@ export default function StoreLocator() {
 
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
         <PremiumReveal>
-          <div className="card support-glass rounded-[36px] p-8 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
-            <h2 className="text-2xl font-black text-fg mb-6 flex items-center gap-2">
-              <Search className="text-brand" size={24} />
+          <div className="card support-glass rounded-[20px] sm:rounded-[36px] p-5 sm:p-8 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+            <h2 className="typo-section-subtitle text-fg mb-4 sm:mb-6 flex items-center gap-2">
+              <Search className="text-brand" size={20} />
               {t("storeLocator.searchStores")}
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -321,7 +321,7 @@ export default function StoreLocator() {
       </section>
 
       <section ref={storesRef} className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
-        <h2 className="text-3xl font-black text-fg mb-8">
+        <h2 className="typo-section-subtitle text-fg mb-6 sm:mb-8">
           {t("storeLocator.ourLocations")}
         </h2>
         {filteredStores.length === 0 ? (
@@ -329,7 +329,7 @@ export default function StoreLocator() {
             {t("storeLocator.noLocations")}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {filteredStores.map((store, i) => (
               <StoreCard key={store.id} store={store} index={i} />
             ))}
@@ -345,7 +345,7 @@ export default function StoreLocator() {
                 <p className="text-xs font-bold tracking-[0.2em] text-brand mb-3">
                   {t("storeLocator.contactBadge")}
                 </p>
-                <h2 className="text-3xl font-black text-fg">
+                <h2 className="typo-section-subtitle text-fg">
                   {t("storeLocator.feedbackTitle")}
                 </h2>
                 <p className="text-fg-muted mt-4 leading-relaxed">

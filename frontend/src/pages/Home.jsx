@@ -161,17 +161,17 @@ function HomeHeroCategoryCard({ cat, index, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(cat.query || cat.category || cat.name)}
-      className="home-hero-cat-card w-full rounded-2xl lg:rounded-[24px] text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_8px_22px_rgba(15,23,42,0.08)] sm:shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500 flex items-center gap-2 sm:gap-4 p-2.5 sm:p-4"
+      className="home-hero-cat-card w-full rounded-2xl lg:rounded-[24px] text-left bg-white/78 dark:bg-zinc-900/90 backdrop-blur-xl border border-white dark:border-white/10 hover:border-cyan-500/30 dark:hover:border-cyan-500/30 shadow-[0_8px_22px_rgba(15,23,42,0.08)] sm:shadow-[0_18px_45px_rgba(15,23,42,0.10)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:bg-white dark:hover:bg-zinc-800 transition-all duration-500 flex items-center gap-2.5 sm:gap-4 p-3 sm:p-4"
     >
       <span
-        className="font-light shrink-0 text-xl sm:text-3xl"
+        className="font-light shrink-0 text-2xl sm:text-3xl"
         style={{ color: cat.color }}
       >
         {String(index + 1).padStart(2, "0")}
       </span>
 
       <div
-        className="grid place-items-center shrink-0 rounded-xl lg:rounded-2xl w-10 h-10 sm:w-16 sm:h-16"
+        className="grid place-items-center shrink-0 rounded-xl lg:rounded-2xl w-11 h-11 sm:w-16 sm:h-16"
         style={{ background: `${cat.color}22` }}
       >
         <img
@@ -179,16 +179,16 @@ function HomeHeroCategoryCard({ cat, index, onSelect }) {
           onError={(e) => {
             e.currentTarget.src = "/products/knee.png";
           }}
-          className="object-contain sm:object-cover rounded-lg lg:rounded-xl w-9 h-9 sm:w-14 sm:h-14"
+          className="object-contain sm:object-cover rounded-lg lg:rounded-xl w-10 h-10 sm:w-14 sm:h-14"
           alt={cat.name}
         />
       </div>
 
       <div className="min-w-0">
-        <h3 className="font-black text-slate-900 dark:text-zinc-100 text-[11px] sm:text-lg leading-tight line-clamp-2 sm:line-clamp-none">
+        <h3 className="font-black text-slate-900 dark:text-zinc-100 text-[13px] sm:text-lg leading-snug line-clamp-2 sm:line-clamp-none">
           {cat.name}
         </h3>
-        <p className="home-hero-cat-count text-gray-500 dark:text-zinc-400 text-[10px] sm:text-sm mt-0.5">
+        <p className="home-hero-cat-count text-gray-500 dark:text-zinc-400 text-[11px] sm:text-sm mt-0.5">
           {t("common.productsCount", { count: cat.count })}
         </p>
       </div>

@@ -76,13 +76,13 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
 
               <HeroHeading
                 text={t("shopByBody.heroHeading")}
-                className="text-5xl md:text-7xl font-black leading-[1.02] mt-4 text-white"
+                className="typo-hero-title mt-4 text-white"
               />
 
               <FadeUpText
                 animateOnMount
                 delay={0.35}
-                className="text-white/70 text-lg mt-6 max-w-2xl"
+                className="text-white/70 typo-body-lg mt-4 sm:mt-6 max-w-2xl"
               >
                 {t("shopByBody.heroCopy")}
               </FadeUpText>
@@ -104,8 +104,8 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
                   ["24/7", t("shopByBody.supportHelp")],
                 ].map(([num, label]) => (
                   <div key={label} className="bg-white/10 border border-white/15 rounded-3xl p-5 backdrop-blur">
-                    <p className="text-3xl font-black">{num}</p>
-                    <p className="text-white/60 text-sm mt-1">{label}</p>
+                    <p className="text-xl sm:text-3xl font-black">{num}</p>
+                    <p className="text-white/60 text-xs sm:text-sm mt-1">{label}</p>
                   </div>
                 ))}
               </div>
@@ -142,7 +142,7 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
           <div className="flex flex-col md:flex-row justify-between gap-5 items-start md:items-end mb-10">
             <div>
               <p className="text-cyan-600 font-black tracking-widest">{t("shopByBody.bodyCategoriesTitle")}</p>
-              <h2 className="text-4xl md:text-6xl font-black mt-2">
+              <h2 className="typo-section-title mt-2">
                 {t("shopByBody.choosePain")}
               </h2>
             </div>
@@ -195,7 +195,7 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
                     />
 
                     <div className="relative max-w-[55%]">
-                      <h3 className="text-3xl font-black text-fg">
+                      <h3 className="typo-section-subtitle text-fg">
                         {cat.name}
                       </h3>
                       <p className="text-slate-500 mt-2">{t("common.productsCount", { count: cat.count })}</p>
@@ -228,7 +228,7 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
             <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
               <div>
                 <p className="text-cyan-300 font-black tracking-widest">{t("shopByBody.needHelp")}</p>
-                <h2 className="text-4xl md:text-6xl font-black mt-2">
+                <h2 className="typo-section-title mt-2">
                   {t("shopByBody.notSure")}
                 </h2>
                 <p className="text-white/60 mt-4 max-w-2xl">
@@ -280,7 +280,7 @@ export default function ShopByBody({ embedded = false, onCategorySelect }) {
                   </button>
 
                   <p className="text-cyan-600 font-black tracking-widest">{t("shopByBody.bodyPart")}</p>
-                  <h3 className="text-4xl font-black mt-2">{activeCat.name}</h3>
+                  <h3 className="typo-section-title mt-2">{activeCat.name}</h3>
                   <p className="text-fg-muted mt-4">
                     {t("shopByBody.exploreCount", { count: activeCat.count })}
                   </p>

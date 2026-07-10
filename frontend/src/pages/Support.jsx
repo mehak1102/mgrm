@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   MessageCircle,
@@ -15,6 +15,7 @@ import {
   Send,
 } from "lucide-react";
 import API from "../api";
+import { useAuth } from "../context/AuthContext";
 import FloatingMedicalBg from "../components/FloatingMedicalBg";
 import MGRMBrandRing from "../components/brand/MGRMBrandRing";
 import SupportCallPopup from "../components/support/SupportCallPopup";
@@ -47,6 +48,7 @@ const SUGGESTION_CATEGORY_OPTIONS = [
 
 export default function Support() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -67,13 +69,26 @@ export default function Support() {
   const [suggestionLoading, setSuggestionLoading] = useState(false);
   const [suggestionSuccess, setSuggestionSuccess] = useState(false);
 
+  useEffect(() => {
+    if (!user) return;
+    setForm((current) => ({
+      ...current,
+      name: current.name || user.name || "",
+      email: current.email || user.email || "",
+    }));
+  }, [user]);
+
   const submitSupport = async (e) => {
     e.preventDefault();
     setLoading(true);
     setSuccess("");
 
     try {
-      await API.post("/support", form);
+      await API.post("/support", {
+        ...form,
+        name: form.name?.trim() || user?.name || "",
+        email: user?.email || form.email?.trim() || "",
+      });
 
       setSuccess(t("support.submitSuccess"));
       window.dispatchEvent(new Event("mgrm:support-submitted"));
@@ -120,9 +135,9 @@ export default function Support() {
 
 
       {/* HERO VIDEO */}
-<section className="relative overflow-hidden rounded-[42px] mx-5 mt-6 shadow-[0_40px_120px_rgba(0,0,0,0.12)]">
+<section className="relative overflow-hidden rounded-[24px] sm:rounded-[42px] mx-3 sm:mx-5 mt-4 sm:mt-6 shadow-[0_40px_120px_rgba(0,0,0,0.12)] lg:block">
 
-<div className="relative min-h-[720px]">
+<div className="relative min-h-[280px] sm:min-h-[520px] lg:min-h-[720px]">
 
   {/* VIDEO */}
   <video
@@ -166,7 +181,7 @@ export default function Support() {
   />
 
   {/* CONTENT */}
-  <div className="relative z-10 max-w-7xl mx-auto px-5 py-24">
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-5 py-12 sm:py-24">
 
     <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-center">
 
@@ -177,13 +192,12 @@ export default function Support() {
           className="
             inline-flex
             rounded-full
-            px-4
-            py-2
+            px-3 py-1.5 sm:px-4 sm:py-2
             bg-white/10
             backdrop-blur-xl
             text-cyan-300
-            text-sm
-            tracking-[0.28em]
+            text-[10px] sm:text-sm
+            tracking-[0.2em] sm:tracking-[0.28em]
             font-black
           "
         >
@@ -196,10 +210,7 @@ export default function Support() {
           className="
             mt-4
             text-white
-            text-5xl
-            md:text-7xl
-            font-black
-            leading-[0.96]
+            typo-hero-title
           "
         >
           {t("support.heroTitle")}
@@ -207,9 +218,10 @@ export default function Support() {
 
         <p
           className="
-            mt-6
+            mt-4
+            sm:mt-6
             text-white/80
-            text-lg
+            typo-body-lg
             max-w-xl
           "
         >
@@ -217,7 +229,7 @@ export default function Support() {
         </p>
 
         {/* CHIPS */}
-        <div className="flex flex-wrap gap-4 mt-10">
+        <div className="flex flex-wrap gap-2 sm:gap-4 mt-6 sm:mt-10">
 
           {[
             t("support.certifiedProducts"),
@@ -227,14 +239,14 @@ export default function Support() {
             <div
               key={item}
               className="
-                px-5
-                py-3
+                px-3 py-2 sm:px-5 sm:py-3
                 rounded-full
                 bg-white/10
                 backdrop-blur-xl
                 border
                 border-white/15
                 text-white
+                text-xs sm:text-base
                 font-semibold
               "
             >
@@ -245,11 +257,12 @@ export default function Support() {
         </div>
       </div>
 
-      {/* RIGHT FORM */}
+      {/* RIGHT FORM — desktop only (main form below) */}
       <form
-        id="support-form"
+        id="support-form-video"
         onSubmit={submitSupport}
         className="
+          hidden lg:block
           bg-white/88
           dark:bg-zinc-900/88
           backdrop-blur-3xl
@@ -274,33 +287,33 @@ export default function Support() {
       <div className="relative z-10">
 
         {/* HERO + FORM */}
-        <section className="relative py-20">
-          <div className="max-w-7xl mx-auto px-5 grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
+        <section className="relative py-10 sm:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-5 grid lg:grid-cols-[0.95fr_1.05fr] gap-6 sm:gap-10 items-center">
 
             {/* LEFT */}
             <div>
-              <SectionLabel className="text-purple-700 font-black tracking-widest">
+              <SectionLabel className="typo-label text-purple-700 font-black tracking-widest">
                 {t("support.badge")}
               </SectionLabel>
 
               <HeroHeading
                 text={t("support.heroTitle")}
-                className="text-6xl md:text-8xl font-black mt-4 leading-[1.02]"
+                className="typo-hero-title mt-3 sm:mt-4 leading-[1.05]"
               />
 
-              <FadeUpText className="text-gray-500 dark:text-zinc-400 text-lg mt-6 max-w-2xl">
+              <FadeUpText className="typo-body-lg text-gray-500 dark:text-zinc-400 mt-3 sm:mt-6 max-w-2xl">
                 {t("support.heroSubtitle")}
               </FadeUpText>
 
-              <div className="grid sm:grid-cols-3 gap-4 mt-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
                 {[
                   [t("support.certifiedProducts"), ShieldCheck],
                   [t("support.sizeAssistance"), Ruler],
                   [t("support.fastSupport"), MessageCircle],
                 ].map(([title, Icon]) => (
-                  <div key={title} className="bg-card dark:bg-zinc-900 rounded-3xl p-5 shadow">
-                    <Icon className="text-purple-700" />
-                    <p className="font-black mt-3">{title}</p>
+                  <div key={title} className="bg-card dark:bg-zinc-900 rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow">
+                    <Icon className="text-purple-700 w-5 h-5 sm:w-6 sm:h-6" />
+                    <p className="font-black mt-2 sm:mt-3 text-xs sm:text-base leading-tight">{title}</p>
                   </div>
                 ))}
               </div>
@@ -310,9 +323,9 @@ export default function Support() {
             <form
               id="support-form"
               onSubmit={submitSupport}
-              className="bg-card dark:bg-zinc-900 rounded-[38px] p-8 shadow-xl"
+              className="bg-card dark:bg-zinc-900 rounded-[24px] sm:rounded-[38px] p-5 sm:p-8 shadow-xl"
             >
-              <h2 className="text-3xl font-black mb-4">{t("support.contactSupport")}</h2>
+              <h2 className="typo-section-subtitle mb-3 sm:mb-4">{t("support.contactSupport")}</h2>
 
               {success && (
                 <div className="mb-4 bg-green-50 text-green-700 p-3 rounded-xl">
@@ -371,8 +384,8 @@ export default function Support() {
         </section>
 
         {/* SUGGESTIONS */}
-        <section className="max-w-7xl mx-auto px-5 pb-16">
-          <div className="support-suggestions-section p-8 md:p-12 lg:p-14">
+        <section className="max-w-7xl mx-auto px-4 sm:px-5 pb-10 sm:pb-16">
+          <div className="support-suggestions-section p-5 sm:p-8 md:p-12 lg:p-14">
             <div
               className="support-suggestions-section__glow support-suggestions-section__glow--one"
               aria-hidden
@@ -510,8 +523,8 @@ export default function Support() {
         </section>
 
         {/* ACTION CARDS */}
-        <section className="max-w-7xl mx-auto px-5 pb-20">
-          <div className="grid md:grid-cols-3 gap-6">
+        <section className="max-w-7xl mx-auto px-4 sm:px-5 pb-12 sm:pb-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
 
             {[
               {
@@ -564,14 +577,14 @@ export default function Support() {
                   document.getElementById("support-form")?.scrollIntoView({ behavior: "smooth" }),
               },
             ].map((item) => (
-              <div key={item.title} className="bg-card dark:bg-zinc-900 rounded-3xl p-6 shadow">
-                <item.icon className="text-purple-700" />
-                <h3 className="font-black mt-4">{item.title}</h3>
-                <p className="text-gray-500 dark:text-zinc-400 mt-2">{item.text}</p>
+              <div key={item.title} className="bg-card dark:bg-zinc-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow">
+                <item.icon className="text-purple-700 w-5 h-5 sm:w-6 sm:h-6" />
+                <h3 className="font-black mt-2 sm:mt-4 text-xs sm:text-base leading-tight">{item.title}</h3>
+                <p className="text-gray-500 dark:text-zinc-400 mt-1.5 sm:mt-2 text-[11px] sm:text-base leading-snug">{item.text}</p>
 
                 <button
                   onClick={item.onClick}
-                  className="mt-4 text-purple-700 font-bold"
+                  className="mt-2 sm:mt-4 text-purple-700 font-bold text-[11px] sm:text-base"
                 >
                   {item.action} →
                 </button>

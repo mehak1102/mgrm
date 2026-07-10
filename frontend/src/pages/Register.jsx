@@ -22,7 +22,7 @@ export default function Register() {
   const isDark = theme === "dark";
   const navigate = useNavigate();
   const { register } = useAuth();
-  const { openDashboard } = useDashboard();
+  const { layoutVariant, openDashboard } = useDashboard();
 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -52,7 +52,13 @@ export default function Register() {
       sessionStorage.removeItem(DASHBOARD_PENDING_KEY);
 
       if (pendingDashboard) {
-        openDashboard();
+        if (layoutVariant === "modern") {
+          navigate("/dashboard");
+        } else {
+          openDashboard();
+          navigate("/");
+        }
+        return;
       }
 
       navigate("/");
@@ -105,7 +111,7 @@ export default function Register() {
           <SectionHeading
             text={t("auth.joinMgrm")}
             as="h1"
-            className="text-5xl font-black mt-3 text-slate-950 dark:text-zinc-50"
+            className="typo-hero-title mt-3 text-slate-950 dark:text-zinc-50"
           />
           <FadeUpText className="text-gray-500 dark:text-slate-300 mt-3 transition-colors duration-300">
             {t("auth.registerCopy")}

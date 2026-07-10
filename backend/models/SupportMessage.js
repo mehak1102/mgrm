@@ -11,6 +11,7 @@ const supportMessageSchema = new mongoose.Schema(
       default: "Product Help",
     },
     message: { type: String, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
     status: {
       type: String,
       enum: ["new", "read", "resolved"],

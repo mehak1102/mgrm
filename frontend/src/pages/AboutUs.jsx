@@ -30,6 +30,7 @@ import API from "../api";
 import "../theme/about-category-flip.css";
 import "../theme/about-partnerships.css";
 import "../theme/home-about-hero.css";
+import "../theme/about-us-mobile.css";
 import ViewportVideo from "../components/media/ViewportVideo";
 // import AboutIntroPopup from "../components/about/AboutIntroPopup";
 import { BrandPillBadgeRow } from "../components/brand/BrandPillBadge";
@@ -92,7 +93,7 @@ function CategoryFlipCard({ image, index, categoryName, categoryQuery, products,
   const previewProducts = products.slice(0, BACK_PRODUCT_LINES);
 
   return (
-    <StaggerItem className="about-category-flip min-w-0 w-full h-[260px] sm:h-[280px] md:h-[300px] lg:h-[320px] xl:h-[360px]">
+    <StaggerItem className="about-category-flip min-w-0 w-full h-[200px] sm:h-[280px] md:h-[300px] lg:h-[320px] xl:h-[360px]">
       <div className="about-category-flip__inner">
         <div className="about-category-flip__face about-category-flip__front">
           <span
@@ -493,19 +494,19 @@ const AboutUs = () => {
                   {
                     text: ABOUT_HERO_LINES_EN.revolutionizing,
                     className:
-                      "justify-center text-[clamp(1.75rem,8.5vw,5.5rem)]",
+                      "justify-center text-[clamp(1.35rem,6.5vw,5.5rem)]",
                     delay: 1.05,
                   },
                   {
                     text: ABOUT_HERO_LINES_EN.rehabilitation,
                     className:
-                      "justify-center text-[clamp(2rem,9.5vw,6.125rem)]",
+                      "justify-center text-[clamp(1.5rem,7vw,6.125rem)]",
                     gradient: true,
                   },
                   {
                     text: ABOUT_HERO_LINES_EN.since1994,
                     className:
-                      "justify-center text-[clamp(1.125rem,4.2vw,3.25rem)] tracking-[0.2em] sm:tracking-[0.35em] text-white/85",
+                      "justify-center text-[clamp(0.875rem,3.5vw,3.25rem)] tracking-[0.16em] sm:tracking-[0.35em] text-white/85",
                   },
                 ]}
               />
@@ -523,21 +524,21 @@ const AboutUs = () => {
       </section>
 
       {/* MAIN */}
-      <section className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:py-24 min-w-0">
-        <div className="flex flex-col gap-10 lg:flex-row min-w-0">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:py-24 min-w-0">
+        <div className="flex flex-col gap-6 sm:gap-10 lg:flex-row min-w-0">
           {/* SIDEBAR */}
-          <aside className="w-full shrink-0 lg:sticky lg:top-28 h-fit rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-5 sm:p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-colors duration-300 lg:w-[320px]">
+          <aside className="w-full shrink-0 lg:sticky lg:top-28 h-fit rounded-[20px] sm:rounded-[35px] border border-white/70 border-slate-200 dark:border-white/10 bg-card/80 dark:bg-zinc-900/80 p-3.5 sm:p-7 shadow-[0_20px_80px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition-colors duration-300 lg:w-[320px]">
             <CinematicHeading
               text={t("about.title")}
-              className="mb-8 text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
+              className="mb-4 sm:mb-8 text-xl sm:text-3xl font-bold text-[#002B5B] dark:text-zinc-100"
             />
 
-            <div className="space-y-4">
+            <div className="space-y-2 sm:space-y-4">
               {sidebarLinks.map((item, index) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="group flex items-center justify-between gap-3 rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-4 sm:px-5 py-4 font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
+                  className="group flex items-center justify-between gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-[#f4f9ff] dark:bg-zinc-800 px-3 sm:px-5 py-2.5 sm:py-4 text-xs sm:text-base font-medium text-gray-700 dark:text-zinc-200 transition-all duration-300 hover:bg-[#002B5B] dark:hover:bg-slate-800 hover:text-white min-w-0"
                 >
                   <span className="flex min-w-0 items-center gap-3">
                     <span
@@ -556,7 +557,7 @@ const AboutUs = () => {
           </aside>
 
           {/* CONTENT */}
-          <div className="flex-1 min-w-0 space-y-10">
+          <div className="flex-1 min-w-0 space-y-6 sm:space-y-10">
             {/* HISTORY */}
             <section
               id="section-0"
@@ -833,30 +834,30 @@ const AboutUs = () => {
                 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#002B5B] dark:text-zinc-100"
               />
 
-              <StaggerReveal className="mt-8 sm:mt-12 grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8" stagger={0.12}>
+              <StaggerReveal className="about-testimonials-grid mt-8 sm:mt-12 grid min-w-0 grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-8" stagger={0.12}>
                 {testimonials.map((item, index) => (
                   <StaggerItem
                     key={index}
-                    className="about-testimonial-card min-w-0 overflow-hidden rounded-[28px] sm:rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition duration-300 hover:-translate-y-2"
+                    className="about-testimonial-card min-w-0 overflow-hidden rounded-[20px] sm:rounded-[35px] border border-blue-100 dark:border-white/10 bg-[#f8fcff] dark:bg-zinc-900 shadow-lg transition duration-300 hover:-translate-y-2"
                   >
                     <div className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
-                      <div className="relative h-52 w-full shrink-0 overflow-hidden sm:h-auto sm:min-h-[200px] sm:w-36 md:w-44 lg:w-48">
+                      <div className="about-testimonial-card__media relative w-full shrink-0 overflow-hidden bg-[#eef4fb] dark:bg-zinc-800 sm:h-auto sm:min-h-[200px] sm:w-36 md:w-44 lg:w-48">
                         <img
                           src={item.image}
                           alt=""
-                          className="absolute inset-0 h-full w-full object-cover object-top"
+                          className="about-testimonial-card__photo block h-auto w-full max-h-[220px] object-contain object-top sm:absolute sm:inset-0 sm:max-h-none sm:h-full sm:object-cover sm:object-top"
                         />
                       </div>
 
-                      <div className="min-w-0 flex-1 p-5 sm:p-6">
-                        <Quote className="h-10 w-10 shrink-0 text-cyan-300 sm:h-12 sm:w-12" />
+                      <div className="min-w-0 flex-1 p-4 sm:p-6">
+                        <Quote className="h-7 w-7 shrink-0 text-cyan-300 sm:h-12 sm:w-12" />
 
                         <FadeUpQuote
                           text={`"${t(item.textKey)}"`}
-                          className="mt-4 text-base sm:text-lg leading-relaxed text-gray-500 dark:text-zinc-400 break-words"
+                          className="mt-3 text-sm sm:text-lg leading-relaxed text-gray-500 dark:text-zinc-400 break-words sm:mt-4"
                         />
 
-                        <h4 className="mt-5 text-lg sm:text-xl font-bold text-[#002B5B] dark:text-zinc-100 break-words">
+                        <h4 className="mt-3 text-sm font-bold text-[#002B5B] dark:text-zinc-100 break-words sm:mt-5 sm:text-xl">
                           {t(item.nameKey)}
                         </h4>
                       </div>

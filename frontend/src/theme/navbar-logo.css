@@ -176,14 +176,14 @@ html[data-theme="blue"] .home-customize-brand-logo.navbar-logo-link:focus-visibl
 /* Site navbar — compact on phones */
 @media (max-width: 639px) {
   .site-navbar .navbar-logo-link .navbar-logo-img {
-    height: 2.1rem;
+    height: 2.5rem;
     transform: none;
   }
 
   html[data-theme="dark"] .site-navbar .navbar-logo-link .navbar-logo-img,
   html.dark .site-navbar .navbar-logo-link .navbar-logo-img,
   html[data-theme="blue"] .site-navbar .navbar-logo-link .navbar-logo-img {
-    height: 2.1rem;
+    height: 2.5rem;
     transform: none;
   }
 

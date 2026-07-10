@@ -41,19 +41,19 @@ export default function PolicyAccordion({ sections }) {
             <button
               type="button"
               onClick={() => setOpenId(isOpen ? null : section.id)}
-              className="w-full flex items-center gap-4 px-6 py-5 text-left"
+              className="w-full flex items-center gap-3 sm:gap-4 px-4 py-3.5 sm:px-6 sm:py-5 text-left"
             >
               <span
-                className={`policy-accordion-icon warranty-coverage-icon w-12 h-12 rounded-2xl bg-gradient-to-br ${style.gradient} shadow-md grid place-items-center shrink-0`}
+                className={`policy-accordion-icon warranty-coverage-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br ${style.gradient} shadow-md grid place-items-center shrink-0`}
               >
-                <Icon className={`policy-accordion-icon-svg warranty-coverage-icon-svg ${style.color}`} size={22} />
+                <Icon className={`policy-accordion-icon-svg warranty-coverage-icon-svg ${style.color}`} size={18} />
               </span>
-              <span className="flex-1 font-black text-lg text-fg">
+              <span className="flex-1 font-black text-sm sm:text-lg text-fg leading-tight">
                 {t(`warranty.policy.${section.id}.title`, { defaultValue: section.title })}
               </span>
               <ChevronDown
-                size={20}
-                className={`text-fg-muted transition-transform duration-250 ${isOpen ? "rotate-180" : ""}`}
+                size={18}
+                className={`text-fg-muted transition-transform duration-250 shrink-0 ${isOpen ? "rotate-180" : ""}`}
               />
             </button>
 
@@ -66,7 +66,7 @@ export default function PolicyAccordion({ sections }) {
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-6 pt-0 text-fg-muted leading-relaxed pl-[5.5rem]">
+                  <p className="px-4 pb-4 pt-0 sm:px-6 sm:pb-6 text-xs sm:text-base text-fg-muted leading-relaxed sm:pl-[5.5rem]">
                     {t(`warranty.policy.${section.id}.content`, { defaultValue: section.content })}
                   </p>
                 </motion.div>

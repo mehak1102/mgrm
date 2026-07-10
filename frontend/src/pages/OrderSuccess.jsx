@@ -10,7 +10,7 @@ export default function OrderSuccess() {
     <main className="max-w-4xl mx-auto px-4 py-20 text-center">
       <div className="card rounded-[40px] p-10">
         <CheckCircle className="mx-auto text-green-500" size={70} />
-        <h1 className="text-5xl font-black mt-5">{t("orders.successTitle")}</h1>
+        <h1 className="typo-hero-title mt-5">{t("orders.successTitle")}</h1>
 
         {order && (
           <>

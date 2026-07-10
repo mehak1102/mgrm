@@ -22,7 +22,7 @@ export default function MyOrders() {
     <main className="max-w-5xl mx-auto px-4 py-10">
       <div className="theme-section rounded-[36px] p-8 mb-8">
         <p className="theme-accent font-bold">{t("orders.title").toUpperCase()}</p>
-        <h1 className="text-5xl font-black">{t("orders.historyTitle")}</h1>
+        <h1 className="typo-hero-title">{t("orders.historyTitle")}</h1>
       </div>
 
       <div className="grid gap-4">

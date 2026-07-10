@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "./theme/brand-pill-badges.css";
 @import "./theme/home-print-ads.css";
+@import "./theme/mobile-page-typography.css";
+@import "./theme/support-mobile.css";
+@import "./theme/product-detail-mobile.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

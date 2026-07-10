@@ -9,6 +9,7 @@ import "./theme/splash-screen.css";
 import "./theme/language-switcher.css";
 import "./theme/catalog-grid.css";
 import "./theme/drawer-panels.css";
+import "./theme/dashboard-v2.css";
 import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AuthProvider } from "./context/AuthContext";

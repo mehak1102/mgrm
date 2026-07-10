@@ -69,7 +69,7 @@ export default function Orders() {
           <p className="text-purple-700 font-black tracking-widest text-sm">
             {t("orders.badge")}
           </p>
-          <h1 className="text-5xl font-black mt-2 text-fg">{t("orders.title")}</h1>
+          <h1 className="typo-hero-title mt-2 text-fg">{t("orders.title")}</h1>
           <p className="text-gray-500 dark:text-zinc-400 mt-2">
             {t("orders.subtitle")}
           </p>
@@ -87,7 +87,7 @@ export default function Orders() {
         ) : orders.length === 0 ? (
           <div className="bg-card dark:bg-zinc-900 rounded-[34px] p-12 text-center shadow-[0_25px_80px_rgba(15,23,42,0.09)]">
             <ShoppingBag className="mx-auto text-purple-500" size={56} />
-            <h2 className="text-3xl font-black mt-4">{t("orders.emptyTitle")}</h2>
+            <h2 className="typo-section-subtitle mt-4">{t("orders.emptyTitle")}</h2>
             <p className="text-gray-500 dark:text-zinc-400 mt-2">
               {t("orders.emptyCopy")}
             </p>

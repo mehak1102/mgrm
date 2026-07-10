@@ -48,6 +48,12 @@
   -webkit-text-fill-color: #003262 !important;
 }
 
+/* Warranty claim header — icon on dark navy gradient box */
+[data-theme="blue"] .support-page .support-glass .bg-gradient-to-br[class*="from-cyan"] svg.text-brand {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 /* Colourful warranty coverage icons — keep vivid on all themes */
 [data-theme="blue"] .support-page .warranty-coverage-icon {
   box-shadow: 0 8px 20px rgba(0, 50, 98, 0.12);

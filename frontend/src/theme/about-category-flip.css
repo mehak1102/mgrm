@@ -608,3 +608,9 @@
 .about-testimonial-card {
   word-break: break-word;
 }
+
+@media (max-width: 639px) {
+  .about-us-page .about-testimonial-card:hover {
+    transform: none;
+  }
+}

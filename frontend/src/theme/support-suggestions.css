@@ -364,7 +364,18 @@
   box-shadow: 0 28px 80px rgba(0, 23, 46, 0.18);
 }
 
-[data-theme="blue"] .support-suggestions-section__title,
+/* Left column — light text on glass/dark blue panel */
+[data-theme="blue"] .support-suggestions-section__title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-theme="blue"] .support-suggestions-section__intro {
+  color: rgba(255, 255, 255, 0.86) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+}
+
+/* Right column / white cards — keep dark text */
 [data-theme="blue"] .support-suggestions-form__title,
 [data-theme="blue"] .support-suggestions-section__pill-title,
 [data-theme="blue"] .support-suggestions-success__title {
@@ -380,7 +391,6 @@
   -webkit-text-fill-color: transparent !important;
 }
 
-[data-theme="blue"] .support-suggestions-section__intro,
 [data-theme="blue"] .support-suggestions-form__subtitle,
 [data-theme="blue"] .support-suggestions-section__pill-text,
 [data-theme="blue"] .support-suggestions-success__text {

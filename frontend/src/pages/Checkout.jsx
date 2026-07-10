@@ -256,7 +256,7 @@ export default function Checkout() {
           <SectionHeading
             text={t("checkout.title")}
             as="h1"
-            className="checkout-page-heading text-3xl sm:text-5xl font-black mt-2 text-fg"
+            className="checkout-page-heading typo-page-title mt-2 text-fg"
           />
           <FadeUpText className="text-fg-muted mt-2">{t("checkout.subtitle")}</FadeUpText>
         </div>

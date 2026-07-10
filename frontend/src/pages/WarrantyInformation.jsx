@@ -89,39 +89,39 @@ export default function WarrantyInformation() {
     <main className="support-page relative min-h-screen overflow-hidden">
       <FloatingMedicalBg />
 
-      <section className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 pt-10 sm:pt-16 pb-12 sm:pb-20">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
             <FadeUpBlock>
-              <p className="text-xs font-bold tracking-[0.2em] text-brand mb-2">
+              <p className="typo-label text-brand mb-2">
                 {t("warranty.badge")}
               </p>
               <BrandPillBadgeRow className="mb-3" />
             </FadeUpBlock>
             <HeroHeading
               text={t("warranty.title")}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-fg leading-tight"
+              className="typo-hero-title text-fg leading-tight"
             />
             <FadeUpBlock delay={0.15}>
-              <p className="text-lg text-fg-muted mt-5 max-w-lg leading-relaxed">
+              <p className="typo-body-lg text-fg-muted mt-4 sm:mt-5 max-w-lg">
                 {t("warranty.heroCopy")}
               </p>
             </FadeUpBlock>
           </div>
 
           <FadeUpBlock delay={0.2}>
-            <div className="relative rounded-[36px] overflow-hidden aspect-[4/3] border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(6,182,212,0.15)]">
+            <div className="relative rounded-[20px] sm:rounded-[36px] overflow-hidden aspect-[4/3] border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(6,182,212,0.15)]">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/15 to-blue-500/20 animate-pulse" />
-              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-2 p-2">
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-1.5 sm:gap-2 p-1.5 sm:p-2">
                 {["/products/knee.png", "/products/back.png", "/products/neck.png", "/products/shoulder.png"].map(
                   (src, i) => (
                     <motion.div
                       key={src}
-                      className="rounded-2xl overflow-hidden bg-white/70 dark:bg-slate-900/50 backdrop-blur-md h-full"
+                      className="rounded-xl sm:rounded-2xl overflow-hidden bg-white/70 dark:bg-slate-900/50 backdrop-blur-md h-full"
                       animate={reduced ? undefined : { y: [0, -6, 0] }}
                       transition={{ duration: 3, repeat: Infinity, delay: i * 0.4 }}
                     >
-                      <img src={src} alt="" className="w-full h-full object-cover" />
+                      <img src={src} alt="" className="w-full h-full object-contain p-1 sm:object-cover sm:p-0" />
                     </motion.div>
                   )
                 )}
@@ -133,20 +133,20 @@ export default function WarrantyInformation() {
       </section>
 
       <section className="relative z-10 max-w-7xl mx-auto px-4 pb-20">
-        <PremiumStagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <PremiumStagger className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {WARRANTY_COVERAGE_CARDS.map((card) => {
             const Icon = COVERAGE_ICONS[card.icon] || Shield;
             const i18n = COVERAGE_I18N[card.icon] || COVERAGE_I18N.shield;
             return (
               <PremiumStaggerItem key={card.icon}>
-                <div className="h-full card support-glass rounded-[28px] p-6 border border-edge shadow-lg hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)] transition duration-300">
+                <div className="h-full card support-glass rounded-[16px] sm:rounded-[28px] p-4 sm:p-6 border border-edge shadow-lg hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.12)] transition duration-300">
                   <div
-                    className={`warranty-coverage-icon w-12 h-12 rounded-2xl bg-gradient-to-br ${card.iconGradient} shadow-md grid place-items-center mb-4`}
+                    className={`warranty-coverage-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br ${card.iconGradient} shadow-md grid place-items-center mb-3 sm:mb-4`}
                   >
-                    <Icon className={`warranty-coverage-icon-svg ${card.iconColor}`} size={24} />
+                    <Icon className={`warranty-coverage-icon-svg ${card.iconColor}`} size={20} />
                   </div>
-                  <h3 className="font-black text-lg text-fg">{t(i18n.title)}</h3>
-                  <p className="text-sm text-fg-muted mt-2 leading-relaxed">{t(i18n.desc)}</p>
+                  <h3 className="font-black text-sm sm:text-lg text-fg leading-tight">{t(i18n.title)}</h3>
+                  <p className="text-[11px] sm:text-sm text-fg-muted mt-1.5 sm:mt-2 leading-relaxed">{t(i18n.desc)}</p>
                 </div>
               </PremiumStaggerItem>
             );
@@ -156,9 +156,9 @@ export default function WarrantyInformation() {
 
       <section className="relative z-10 max-w-4xl mx-auto px-4 pb-20">
         <PremiumReveal>
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-fg">{t("warranty.policyDetails")}</h2>
-            <p className="text-fg-muted mt-3">
+          <div className="text-center mb-6 sm:mb-10">
+            <h2 className="typo-section-subtitle text-fg">{t("warranty.policyDetails")}</h2>
+            <p className="typo-body text-fg-muted mt-2 sm:mt-3">
               {t("warranty.policySubtitle")}
             </p>
           </div>
@@ -174,14 +174,14 @@ export default function WarrantyInformation() {
 
       <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
         <PremiumReveal>
-          <div className="card support-glass rounded-[36px] p-8 md:p-12 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-purple-500/15 grid place-items-center">
-                <FileText className="text-brand" size={24} />
+          <div className="card support-glass rounded-[20px] sm:rounded-[36px] p-5 sm:p-8 md:p-12 border border-edge backdrop-blur-xl shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
+            <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-8">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-500/15 to-purple-500/15 grid place-items-center">
+                <FileText className="text-brand" size={20} />
               </div>
               <div>
-                <h2 className="text-2xl font-black text-fg">{t("warranty.claimTitle")}</h2>
-                <p className="text-sm text-fg-muted">{t("warranty.claimSubtitle")}</p>
+                <h2 className="typo-section-subtitle text-fg">{t("warranty.claimTitle")}</h2>
+                <p className="typo-body text-fg-muted">{t("warranty.claimSubtitle")}</p>
               </div>
             </div>
 

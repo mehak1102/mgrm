@@ -323,7 +323,7 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
                   <SectionHeading
                     text={t("common.allProducts")}
                     as="h1"
-                    className="text-xl sm:text-4xl font-black leading-tight"
+                    className="typo-page-title leading-tight"
                   />
                   <span className="text-fg-muted/80 text-base sm:text-2xl font-black">
                     ({filteredProducts.length})
@@ -385,7 +385,7 @@ export default function Shop({ embedded = false, initialCategory, onProductSelec
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="bg-card rounded-2xl p-8 sm:p-12 text-center shadow">
-                <h2 className="text-2xl sm:text-3xl font-black">{t("shop.noProducts")}</h2>
+                <h2 className="typo-section-subtitle">{t("shop.noProducts")}</h2>
                 <p className="text-fg-muted mt-2">{t("shop.noProductsHint")}</p>
               </div>
             ) : (

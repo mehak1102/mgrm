@@ -72,7 +72,7 @@ export default function ForgotPassword() {
           <SectionHeading
             text={t("auth.forgotPasswordTitle")}
             as="h1"
-            className="text-5xl font-black mt-3 text-slate-950 dark:text-zinc-50"
+            className="typo-hero-title mt-3 text-slate-950 dark:text-zinc-50"
           />
           <FadeUpText className="text-gray-500 dark:text-slate-300 mt-3 transition-colors duration-300">
             {sent ? t("auth.forgotPasswordSentCopy") : t("auth.forgotPasswordCopy")}

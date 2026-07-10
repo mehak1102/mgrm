@@ -1,0 +1,182 @@
+/**
+ * Product detail page — mobile compaction
+ */
+
+@media (max-width: 639px) {
+  .product-detail-page {
+    padding-bottom: 5rem;
+  }
+
+  .product-detail-page > div:first-child {
+    padding-top: 1rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 1.25rem !important;
+  }
+
+  .product-detail-page .product-detail-gallery {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .product-detail-page .product-detail-thumbs {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.15rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .product-detail-page .product-detail-thumbs button {
+    width: 3.25rem !important;
+    height: 3.75rem !important;
+    flex-shrink: 0;
+    border-radius: 0.65rem !important;
+  }
+
+  .product-detail-page .product-detail-thumbs img {
+    object-fit: contain !important;
+    background: #f1f5f9;
+  }
+
+  .dark .product-detail-page .product-detail-thumbs img,
+  [data-theme="dark"] .product-detail-page .product-detail-thumbs img {
+    background: #27272a;
+  }
+
+  .product-detail-page .product-detail-main-img-wrap {
+    min-height: 0 !important;
+    padding: 0.75rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .product-detail-page .product-detail-main-img {
+    height: auto !important;
+    max-height: 17.5rem !important;
+    object-fit: contain !important;
+    border-radius: 1rem !important;
+  }
+
+  .product-detail-page .typo-breadcrumb {
+    margin-bottom: 0.65rem !important;
+  }
+
+  .product-detail-page .text-2xl {
+    font-size: 1.125rem !important;
+  }
+
+  .product-detail-page .product-detail-size-btn {
+    padding: 0.4rem 0.65rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .product-detail-page .product-detail-qty {
+    gap: 1rem !important;
+    padding: 0.4rem 0.75rem !important;
+  }
+
+  .product-detail-page .product-detail-actions button {
+    font-size: 0.8125rem !important;
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .product-detail-page .product-detail-actions .w-14 {
+    width: 2.75rem !important;
+  }
+
+  .product-detail-page .product-detail-finder {
+    padding: 0.75rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .product-detail-page .product-detail-finder__title {
+    font-size: 0.8125rem !important;
+  }
+
+  .product-detail-page .product-detail-finder__text {
+    font-size: 0.6875rem !important;
+  }
+
+  .product-detail-page .product-detail-finder__btn {
+    font-size: 0.6875rem !important;
+    padding: 0.45rem 0.75rem !important;
+  }
+
+  .product-detail-page .product-detail-desc {
+    margin-top: 1.25rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .product-detail-page .pb-14 {
+    padding-bottom: 2.5rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 2rem !important;
+  }
+
+  /* Smart size finder modal */
+  .smart-size-finder-modal {
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+    border-radius: 1.25rem !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .smart-size-finder-modal > section {
+    padding: 1rem !important;
+  }
+
+  .smart-size-finder-modal h2.text-3xl {
+    font-size: 1.25rem !important;
+  }
+
+  .smart-size-finder-modal h3.text-2xl {
+    font-size: 1.125rem !important;
+  }
+
+  .smart-size-finder-modal h2.text-5xl {
+    font-size: 2.25rem !important;
+  }
+
+  .smart-size-finder-modal .h-\[310px\] {
+    height: 11rem !important;
+  }
+
+  .smart-size-finder-modal input.h-14,
+  .smart-size-finder-modal button.h-14 {
+    height: 2.75rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  .smart-size-finder-modal .mt-7 {
+    margin-top: 1rem !important;
+  }
+
+  .smart-size-finder-modal .w-12.h-12 {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+  }
+
+  .smart-size-finder-modal .smart-size-chart {
+    margin-top: 0.75rem !important;
+    padding: 0.65rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .smart-size-finder-modal .smart-size-chart__row {
+    font-size: 0.6875rem !important;
+    padding: 0.35rem 0 !important;
+  }
+
+  .smart-size-finder-modal > button.absolute {
+    top: 0.65rem !important;
+    right: 0.65rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+}

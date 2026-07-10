@@ -1,0 +1,216 @@
+/**
+ * Mobile page typography — aligned with Home hero / section scale.
+ * Use these utilities on inner pages for consistent phone sizing.
+ */
+
+.typo-hero-title {
+  font-size: 1.5rem;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.typo-page-title {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.typo-section-title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.typo-section-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.typo-label {
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.typo-body {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.typo-body-lg {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.typo-breadcrumb {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .typo-hero-title {
+    font-size: 3rem;
+    line-height: 1.05;
+  }
+
+  .typo-page-title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  .typo-section-title {
+    font-size: 2.25rem;
+    line-height: 1.15;
+  }
+
+  .typo-section-subtitle {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+
+  .typo-label {
+    font-size: 0.875rem;
+  }
+
+  .typo-body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .typo-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  .typo-breadcrumb {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .typo-hero-title {
+    font-size: 4.5rem;
+    line-height: 1.02;
+  }
+}
+
+/* About Us — scale remaining large headings on phones */
+@media (max-width: 639px) {
+  .about-us-page .text-5xl,
+  .about-us-page .text-4xl {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .about-us-page .text-3xl {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .about-us-page .text-2xl {
+    font-size: 1.125rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-us-page .text-lg {
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Blog detail — compact article body on phones */
+@media (max-width: 639px) {
+  /* Body paragraphs */
+  .blog-detail-page article p {
+    font-size: 0.8125rem !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Lead paragraph */
+  .blog-detail-page article p.text-xl {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Section headings */
+  .blog-detail-page article h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* List items */
+  .blog-detail-page article li {
+    font-size: 0.8125rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Callout / tip / insight / highlight / quote / takeaways / routine blocks */
+  .blog-detail-page article .rounded-3xl,
+  .blog-detail-page article .rounded-2xl {
+    padding: 1rem !important;
+    margin-top: 1.75rem !important;
+    margin-bottom: 1.75rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .blog-detail-page article blockquote p {
+    font-size: 0.9375rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .blog-detail-page article .rounded-3xl p.text-lg,
+  .blog-detail-page article .rounded-3xl p.font-black.text-lg {
+    font-size: 0.875rem !important;
+  }
+
+  .blog-detail-page article .rounded-3xl p.text-base {
+    font-size: 0.8125rem !important;
+  }
+
+  /* Icon tiles inside callouts */
+  .blog-detail-page article .w-11.h-11 {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+  }
+
+  /* Dividers */
+  .blog-detail-page article .my-14 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Support / product cards */
+  .blog-detail-page article .h-52 {
+    height: 9.5rem !important;
+  }
+
+  .blog-detail-page article .px-7.py-6 {
+    padding: 0.85rem 1rem !important;
+  }
+
+  .blog-detail-page article .px-7.py-6 p.text-xl {
+    font-size: 1rem !important;
+  }
+
+  /* FAQ */
+  .blog-detail-page article button span.text-base {
+    font-size: 0.875rem !important;
+  }
+
+  /* Section spacing */
+  .blog-detail-page article .space-y-8 > * + *,
+  .blog-detail-page article .space-y-7 > * + * {
+    margin-top: 1.1rem !important;
+  }
+
+  /* Clear floating buttons */
+  .blog-detail-page article + div,
+  .blog-detail-page section {
+    padding-bottom: 1rem;
+  }
+}

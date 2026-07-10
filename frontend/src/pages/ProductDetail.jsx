@@ -25,6 +25,7 @@ import {
   ShoppingCart,
   Minus,
   Plus,
+  Ruler,
 } from "lucide-react";
 import ProductShareButton from "../components/product/ProductShareButton";
 import { SectionHeading, FadeUpText } from "../components/typography/TypographyMotion";
@@ -90,35 +91,35 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
   const decreaseQty = () => setQty((p) => Math.max(1, p - 1));
 
   return (
-    <main className={`bg-[#f7f7f7] bg-app dark:bg-zinc-950 transition-colors duration-300 ${embedded ? "min-h-0" : "min-h-screen"}`}>
-      <div className={`max-w-[1400px] mx-auto px-6 grid lg:grid-cols-2 gap-14 ${embedded ? "py-6" : "py-10"}`}>
+    <main className={`product-detail-page bg-[#f7f7f7] bg-app dark:bg-zinc-950 transition-colors duration-300 ${embedded ? "min-h-0" : "min-h-screen"}`}>
+      <div className={`max-w-[1400px] mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-6 sm:gap-14 ${embedded ? "py-4 sm:py-6" : "py-6 sm:py-10"}`}>
         <motion.section
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45 }}
-          className="flex gap-6"
+          className="product-detail-gallery flex flex-col sm:flex-row gap-3 sm:gap-6"
         >
-          <div className="flex flex-col gap-4">
+          <div className="product-detail-thumbs flex flex-row sm:flex-col gap-2 sm:gap-4 order-2 sm:order-1">
             {images.map((img) => (
               <button
                 key={img}
                 type="button"
                 onClick={() => setActiveImg(img)}
-                className={`w-20 h-24 rounded-xl overflow-hidden border transition ${
+                className={`w-14 h-16 sm:w-20 sm:h-24 rounded-lg sm:rounded-xl overflow-hidden border transition shrink-0 ${
                   activeImg === img
                     ? "border-purple-600 ring-2 ring-purple-300/40"
                     : "border-gray-200 dark:border-white/10"
                 }`}
               >
-                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
+                <img src={img} alt="" className="w-full h-full object-contain sm:object-cover bg-slate-100 dark:bg-zinc-800" loading="lazy" />
               </button>
             ))}
           </div>
 
-          <div className="flex-1 bg-card dark:bg-zinc-900 rounded-3xl p-6 shadow-sm min-h-[620px] flex items-center justify-center overflow-hidden">
+          <div className="product-detail-main-img-wrap order-1 sm:order-2 flex-1 bg-card dark:bg-zinc-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm min-h-0 sm:min-h-[620px] flex items-center justify-center overflow-hidden">
             <img
               src={activeImg}
-              className="w-full h-[560px] object-cover rounded-2xl transition duration-500 hover:scale-105"
+              className="product-detail-main-img w-full h-auto max-h-[280px] sm:max-h-none sm:h-[560px] object-contain sm:object-cover rounded-xl sm:rounded-2xl transition duration-500 hover:scale-105"
               alt={product.name}
             />
           </div>
@@ -129,33 +130,33 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45, delay: 0.05 }}
         >
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mb-4">
+          <p className="typo-breadcrumb text-gray-500 dark:text-zinc-400 mb-3 sm:mb-4">
             {t("common.home")} › {t("productDetail.products")} › {product.name}
           </p>
 
-          <SectionHeading text={product.name} as="h1" className="text-3xl font-bold text-fg" />
+          <SectionHeading text={product.name} as="h1" className="typo-page-title text-fg" />
 
-          <div className="flex items-center gap-3 mt-2 flex-wrap">
-            <span className="font-semibold text-fg">{displayRating.toFixed(1)}</span>
-            <StarRatingDisplay value={displayRating} size={16} />
+          <div className="flex items-center gap-2 sm:gap-3 mt-1.5 sm:mt-2 flex-wrap">
+            <span className="text-sm sm:text-base font-semibold text-fg">{displayRating.toFixed(1)}</span>
+            <StarRatingDisplay value={displayRating} size={14} />
             {reviewSummary.totalReviews > 0 && (
-              <a href="#customer-reviews" className="text-sm text-brand font-bold hover:underline">
+              <a href="#customer-reviews" className="text-xs sm:text-sm text-brand font-bold hover:underline">
                 ({reviewSummary.totalReviews} {t("common.reviews")})
               </a>
             )}
           </div>
 
-          <div className="mt-5">
+          <div className="mt-3 sm:mt-5">
             <span
               {...productPriceOriginalProps(
                 isBlue,
-                "block text-gray-500 dark:text-zinc-400/80 line-through"
+                "block text-sm sm:text-base text-gray-500 dark:text-zinc-400/80 line-through"
               )}
             >
               ₹{product.price}
             </span>
             <span
-              {...productPriceSaleProps(isBlue, "block text-2xl font-bold text-purple-700")}
+              {...productPriceSaleProps(isBlue, "block text-xl sm:text-2xl font-bold text-purple-700")}
             >
               ₹{product.discountPrice}
             </span>
@@ -163,19 +164,19 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
 
           <DeliveryTrustBadge
             seed={product.slug || product._id}
-            className="mt-4"
+            className="mt-3 sm:mt-4"
           />
 
           {!!product.sizes?.length && (
-            <div className="mt-6">
-              <p className="font-semibold mb-2 text-fg">{t("productDetail.selectSize")}</p>
-              <div className="flex gap-3 flex-wrap">
+            <div className="mt-4 sm:mt-6">
+              <p className="text-sm sm:text-base font-semibold mb-2 text-fg">{t("productDetail.selectSize")}</p>
+              <div className="flex gap-2 sm:gap-3 flex-wrap">
                 {product.sizes.map((s) => (
                   <button
                     key={s}
                     type="button"
                     onClick={() => setSize(s)}
-                    className={`px-4 py-2 border rounded-lg transition ${
+                    className={`product-detail-size-btn px-3 py-1.5 sm:px-4 sm:py-2 text-sm border rounded-lg transition ${
                       size === s ? "border-purple-700 text-purple-700 bg-purple-50 dark:bg-purple-950/30" : "border-edge"
                     }`}
                   >
@@ -186,27 +187,27 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
             </div>
           )}
 
-          <div className="mt-6">
-            <p className="font-semibold mb-2 text-fg">{t("common.quantity")}</p>
-            <div className="flex items-center gap-6 bg-gray-100 bg-surface-hover px-4 py-2 rounded-lg w-fit">
+          <div className="mt-4 sm:mt-6">
+            <p className="text-sm sm:text-base font-semibold mb-2 text-fg">{t("common.quantity")}</p>
+            <div className="product-detail-qty flex items-center gap-4 sm:gap-6 bg-gray-100 bg-surface-hover px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg w-fit">
               <button type="button" onClick={decreaseQty} aria-label={t("productDetail.decreaseQty")}>
                 <Minus size={16} />
               </button>
-              <span className="font-bold">{qty}</span>
+              <span className="font-bold text-sm sm:text-base">{qty}</span>
               <button type="button" onClick={increaseQty} aria-label={t("productDetail.increaseQty")}>
                 <Plus size={16} />
               </button>
             </div>
-            <p className="text-xs mt-1 text-gray-500 dark:text-zinc-400">
+            <p className="text-[11px] sm:text-xs mt-1 text-gray-500 dark:text-zinc-400">
               {t("productDetail.stock")} {stock}
             </p>
           </div>
 
-          <div className="flex gap-3 mt-6">
+          <div className="product-detail-actions flex gap-2 sm:gap-3 mt-4 sm:mt-6">
             <button
               type="button"
               onClick={() => addToCart(product, qty, size)}
-              className="flex-1 bg-purple-700 text-white py-3 rounded-xl font-semibold flex justify-center gap-2 hover:scale-[1.02] transition"
+              className="flex-1 bg-purple-700 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold flex justify-center items-center gap-2 hover:scale-[1.02] transition"
             >
               <ShoppingCart size={18} /> {t("productDetail.addToCart")}
             </button>
@@ -214,7 +215,7 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
             <button
               type="button"
               onClick={() => toggleWishlist(product)}
-              className={`w-14 flex items-center justify-center border rounded-xl transition ${
+              className={`w-11 sm:w-14 flex items-center justify-center border rounded-xl transition ${
                 liked ? "text-red-500 border-red-300" : "border-edge"
               }`}
             >
@@ -222,15 +223,30 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
             </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setSizeFinderOpen(true)}
-            className="mt-4 text-cyan-700 dark:text-cyan-400 font-bold hover:underline"
-          >
-            {t("productDetail.findMySize")}
-          </button>
+          <div className="product-detail-finder mt-4 sm:mt-5 rounded-2xl border border-cyan-200/70 dark:border-cyan-500/20 bg-gradient-to-r from-cyan-50/90 via-white to-purple-50/80 dark:from-cyan-950/30 dark:via-zinc-900 dark:to-purple-950/20 p-4 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 grid place-items-center shrink-0">
+                <Ruler size={18} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="product-detail-finder__title font-black text-cyan-800 dark:text-cyan-300 text-sm sm:text-base">
+                  {t("smartSize.finder")}
+                </p>
+                <p className="product-detail-finder__text text-gray-500 dark:text-zinc-400 text-xs sm:text-sm mt-0.5 leading-snug">
+                  {t("smartSize.description")}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSizeFinderOpen(true)}
+                className="product-detail-finder__btn shrink-0 bg-gradient-to-r from-cyan-600 to-purple-700 text-white px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-black hover:scale-[1.02] transition"
+              >
+                {t("productDetail.findMySize")}
+              </button>
+            </div>
+          </div>
 
-          <FadeUpText className="mt-8 text-gray-500 dark:text-zinc-400 leading-7">
+          <FadeUpText className="product-detail-desc mt-5 sm:mt-8 text-sm sm:text-base text-gray-500 dark:text-zinc-400 leading-relaxed sm:leading-7">
             {product.description || t("productDetail.fallbackDesc")}
           </FadeUpText>
         </motion.section>
@@ -243,7 +259,7 @@ export default function ProductDetail({ embedded = false, slug: slugProp }) {
         product={product}
       />
 
-      <div className="max-w-[1400px] mx-auto px-6 pb-14 space-y-14">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-10 sm:pb-14 space-y-8 sm:space-y-14">
         <FrequentlyBoughtTogether productId={product._id} primaryProduct={product} />
         <PeopleAlsoBoughtCarousel productId={product._id} />
 

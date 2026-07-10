@@ -555,10 +555,10 @@ export default function BodyFlowMap() {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-center mb-8 sm:mb-10 px-1"
         >
-          <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-gray-700 text-fg leading-tight">
+          <h2 className="typo-section-title text-gray-700 text-fg leading-tight">
             <span className="text-red-500">{bodyTotal}</span> {t("home.certifiedProductsLine")}
           </h2>
-          <p className="text-lg sm:text-2xl xl:text-4xl font-black text-gray-500 dark:text-zinc-400 mt-2">
+          <p className="typo-body-lg font-black text-gray-500 dark:text-zinc-400 mt-1 sm:mt-2">
             {t("home.healComfortably")}
           </p>
         </motion.div>

@@ -43,8 +43,8 @@ function LanguageToggleTrack({ currentCode, switching, onSelect, compact = false
     >
       <span
         aria-hidden
-        className={`language-switcher__thumb language-switcher__thumb--${currentCode} pointer-events-none absolute top-1 bottom-1 left-1 rounded-full bg-white dark:bg-zinc-800 shadow-md border border-slate-100 dark:border-white/10 transition-transform duration-300 ease-out ${
-          compact ? "w-[calc(50%-2px)]" : "w-[calc(50%-6px)]"
+        className={`language-switcher__thumb language-switcher__thumb--${currentCode} pointer-events-none absolute rounded-full bg-white dark:bg-zinc-800 shadow-md border border-slate-100 dark:border-white/10 transition-transform duration-300 ease-out ${
+          compact ? "top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)]" : "top-1 bottom-1 left-1 w-[calc(50%-6px)]"
         }`}
       />
 
@@ -60,7 +60,7 @@ function LanguageToggleTrack({ currentCode, switching, onSelect, compact = false
             aria-pressed={selected}
             title={t(lang.labelKey)}
             className={`language-switcher__segment relative z-10 flex items-center justify-center rounded-full transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] ${
-              compact ? "w-10 h-10" : "w-11 h-11"
+              compact ? "w-8 h-8" : "w-11 h-11"
             } ${selected ? "opacity-100" : "opacity-45 hover:opacity-80"}`}
           >
             <LanguageSymbol
@@ -74,7 +74,7 @@ function LanguageToggleTrack({ currentCode, switching, onSelect, compact = false
   );
 }
 
-export default function LanguageSwitcher({ variant = "floating", className = "" }) {
+export default function LanguageSwitcher({ variant = "floating", className = "", compact = false }) {
   const { i18n } = useTranslation();
   const [switching, setSwitching] = useState(false);
 
@@ -94,6 +94,19 @@ export default function LanguageSwitcher({ variant = "floating", className = "" 
   if (variant === "drawer") {
     return (
       <div className={`language-switcher language-switcher--drawer ${className}`}>
+        <LanguageToggleTrack
+          currentCode={currentCode}
+          switching={switching}
+          onSelect={selectLanguage}
+          compact={compact}
+        />
+      </div>
+    );
+  }
+
+  if (variant === "stacked") {
+    return (
+      <div className={`language-switcher language-switcher--stacked ${className}`}>
         <LanguageToggleTrack
           currentCode={currentCode}
           switching={switching}

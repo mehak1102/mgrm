@@ -101,6 +101,89 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
+/* Section headers on blue gradient — Featured Collections, Recommended, Customize intro */
+[data-theme="blue"] .home-featured-collections-section > .relative.mb-6 :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h1 span,
+  .font-black,
+  .text-slate-900,
+  .dark\:text-zinc-100
+),
+[data-theme="blue"] .home-recommended-section > .relative.flex.flex-col :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h1 span,
+  .font-black,
+  .text-slate-900,
+  .dark\:text-zinc-100
+),
+[data-theme="blue"] .home-customize-section .home-customize-intro :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h1 span,
+  .font-black,
+  .text-slate-900,
+  .dark\:text-zinc-100
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-featured-collections-section > .relative.mb-6 :is(
+  [class*="tracking-"],
+  .text-cyan-600,
+  .dark\:text-cyan-400
+),
+[data-theme="blue"] .home-recommended-section > .relative.flex.flex-col :is(
+  [class*="tracking-"],
+  .text-cyan-600,
+  .dark\:text-cyan-400
+),
+[data-theme="blue"] .home-customize-section .home-customize-intro :is(
+  [class*="tracking-"],
+  .text-cyan-600,
+  .dark\:text-cyan-400
+) {
+  color: #ffd700 !important;
+  -webkit-text-fill-color: #ffd700 !important;
+  opacity: 1 !important;
+}
+
+[data-theme="blue"] .home-featured-collections-section > .relative.mb-6 :is(
+  p,
+  .text-gray-500,
+  .dark\:text-zinc-400
+),
+[data-theme="blue"] .home-recommended-section > .relative.flex.flex-col :is(
+  p,
+  .text-gray-500,
+  .dark\:text-zinc-400
+),
+[data-theme="blue"] .home-customize-section .home-customize-intro :is(
+  p,
+  .text-gray-500,
+  .dark\:text-zinc-400
+) {
+  color: rgba(255, 255, 255, 0.86) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.86) !important;
+  opacity: 1 !important;
+}
+
 /* White text only where dark badge overlays exist */
 [data-theme="blue"] .bg-black\/40 h3.text-white,
 [data-theme="blue"] .bg-black\/35 h3.text-white,
