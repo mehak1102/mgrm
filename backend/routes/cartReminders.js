@@ -37,7 +37,7 @@ router.post("/", formRateLimiter, optionalAuth, async (req, res) => {
         items: snapshot,
         total: Number(total) || 0,
       },
-      { upsert: true, new: true, setDefaultsOnInsert: true }
+      { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
     );
 
     const canRemind =

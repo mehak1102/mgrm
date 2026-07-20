@@ -110,7 +110,7 @@ router.patch("/:id", auth, adminOnly, async (req, res) => {
     if (sortOrder !== undefined) updates.sortOrder = sortOrder;
 
     const story = await RecoveryStory.findByIdAndUpdate(req.params.id, updates, {
-      new: true,
+      returnDocument: "after",
     })
       .populate("productId", "name slug")
       .populate("userId", "name email");

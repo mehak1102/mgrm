@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MGRM Medicare — Architecture Flow</title>
+  <style>
+    :root {
+      --ink: #1c1c1c;
+      --muted: #6b6b6b;
+      --rule: #e0e0e0;
+      --line: #9a9a9a;
+      /* pastel fills */
+      --pastel-mint: #d8efe8;
+      --pastel-sky: #d6e8f5;
+      --pastel-lilac: #e8e0f4;
+      --pastel-peach: #f8e4d8;
+      --pastel-butter: #f5efd6;
+      --pastel-rose: #f3dde3;
+      --pastel-sage: #dde8d8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm;
+    }
+
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: #ececec;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .toolbar {
+      text-align: center;
+      padding: 14px 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .toolbar button {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 16px auto;
+      padding: 14mm 16mm;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .sheet:last-of-type {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    .eyebrow {
+      font-size: 8.5pt;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3mm;
+    }
+
+    h1 {
+      font-size: 17pt;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 2mm;
+    }
+
+    .sub {
+      font-size: 9pt;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-bottom: 6mm;
+      max-width: 460px;
+    }
+
+    .rule {
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 7mm;
+    }
+
+    .flow {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .node {
+      width: 100%;
+      max-width: 280px;
+      padding: 9px 14px;
+      background: var(--pastel-mint);
+      border: 1.25px solid var(--ink);
+      border-radius: 3px;
+      text-align: center;
+      font-size: 10pt;
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--ink);
+      white-space: normal;
+      word-wrap: break-word;
+      overflow: visible;
+    }
+
+    .node.decision {
+      max-width: 220px;
+      background: var(--pastel-butter);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-weight: 600;
+    }
+
+    .node.store {
+      border-radius: 40px / 14px;
+      background: var(--pastel-lilac);
+    }
+
+    .node.output {
+      background: var(--pastel-peach);
+      border-style: dashed;
+    }
+
+    .node.sky { background: var(--pastel-sky); }
+    .node.sage { background: var(--pastel-sage); }
+    .node.rose { background: var(--pastel-rose); }
+    .node.peach { background: var(--pastel-peach); }
+    .node.butter { background: var(--pastel-butter); }
+    .node.lilac { background: var(--pastel-lilac); }
+    .node.mint { background: var(--pastel-mint); }
+
+    .arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 0;
+      color: var(--line);
+      font-size: 8pt;
+      line-height: 1.2;
+      min-height: 18px;
+    }
+
+    .arrow::after {
+      content: "";
+      width: 1px;
+      height: 10px;
+      background: var(--line);
+      margin: 1px 0 0;
+    }
+
+    .arrow .label {
+      color: var(--muted);
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 1px;
+    }
+
+    .arrow.down::before {
+      content: "";
+      width: 1px;
+      height: 8px;
+      background: var(--line);
+    }
+
+    .arrow.down::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--line);
+      background: none;
+      margin: 0;
+    }
+
+    .branch {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      max-width: 520px;
+      margin: 2px 0;
+      align-items: start;
+    }
+
+    .branch-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .branch-col .node {
+      max-width: 100%;
+      width: 100%;
+      font-size: 9pt;
+      padding: 8px 10px;
+    }
+
+    .branch-join {
+      width: 100%;
+      max-width: 520px;
+      height: 12px;
+      position: relative;
+      margin: 2px 0 0;
+    }
+
+    .branch-join::before {
+      content: "";
+      position: absolute;
+      left: 16.66%;
+      right: 16.66%;
+      top: 0;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .branch-join::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 12px;
+      background: var(--line);
+      transform: translateX(-50%);
+    }
+
+    .split-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .split-2 .branch-col .node {
+      font-size: 9.5pt;
+    }
+
+    .merge-cap {
+      width: 100%;
+      max-width: 420px;
+      height: 14px;
+      position: relative;
+    }
+
+    .merge-cap::before {
+      content: "";
+      position: absolute;
+      left: 25%;
+      right: 25%;
+      top: 0;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .merge-cap::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 14px;
+      background: var(--line);
+      transform: translateX(-50%);
+    }
+
+    footer {
+      margin-top: 6mm;
+      padding-top: 3.5mm;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      font-size: 8pt;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none !important; }
+      .sheet {
+        margin: 0;
+        box-shadow: none;
+        width: auto;
+        min-height: auto;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="toolbar">
+    Two A4 pages · Frontend then Backend
+    <button type="button" onclick="window.print()">Print / Save PDF</button>
+  </p>
+
+  <!-- PAGE 1: FRONTEND -->
+  <article class="sheet">
+    <p class="eyebrow">MGRM Medicare · Architecture</p>
+    <h1>Frontend flow</h1>
+    <p class="sub">Vite + React SPA. Session via JWT; cart and wishlist in localStorage. Checkout via COD or Razorpay.</p>
+    <div class="rule"></div>
+
+    <div class="flow">
+      <div class="node sky">Boot — main.jsx + providers</div>
+      <div class="arrow down"></div>
+
+      <div class="node decision">Splash seen?</div>
+      <div class="arrow down"><span class="label">No → splash once, then continue</span></div>
+
+      <div class="node mint">Home</div>
+      <div class="arrow down"></div>
+
+      <div class="node sage">Shop / Product detail</div>
+      <div class="arrow down"></div>
+
+      <div class="node store">Cart (localStorage)</div>
+      <div class="arrow down"></div>
+
+      <div class="node peach">Checkout</div>
+      <div class="arrow down"></div>
+
+      <div class="split-2">
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">COD</span></div>
+          <div class="node sky">POST /orders</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">Online</span></div>
+          <div class="node rose">Razorpay → verify</div>
+        </div>
+      </div>
+      <div class="merge-cap"></div>
+
+      <div class="node output">Order success</div>
+      <div class="arrow down"></div>
+
+      <div class="node decision">Authenticated?</div>
+      <div class="arrow down"></div>
+
+      <div class="branch">
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">Guest</span></div>
+          <div class="node butter">Login / Register</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">User</span></div>
+          <div class="node mint">Dashboard</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">Admin</span></div>
+          <div class="node lilac">Admin panel</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>Frontend · React Router · Context API · Axios /api</span>
+      <span>1 / 2</span>
+    </footer>
+  </article>
+
+  <!-- PAGE 2: BACKEND -->
+  <article class="sheet">
+    <p class="eyebrow">MGRM Medicare · Architecture</p>
+    <h1>Backend flow</h1>
+    <p class="sub">Express 5 on Node. JWT auth, MongoDB via Mongoose. Payments, media, and mail via external services.</p>
+    <div class="rule"></div>
+
+    <div class="flow">
+      <div class="node sky">HTTP request — /api/*</div>
+      <div class="arrow down"></div>
+
+      <div class="node sage">JSON parse + CORS</div>
+      <div class="arrow down"></div>
+
+      <div class="node decision">Auth gate</div>
+      <div class="arrow down"></div>
+
+      <div class="branch">
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">Public</span></div>
+          <div class="node mint">No token</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">JWT</span></div>
+          <div class="node rose">Bearer verify</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"><span class="label">Admin</span></div>
+          <div class="node lilac">Email allowlist</div>
+        </div>
+      </div>
+      <div class="branch-join"></div>
+
+      <div class="node peach">Route handler</div>
+      <div class="arrow down"></div>
+
+      <div class="split-2">
+        <div class="branch-col">
+          <div class="arrow down"></div>
+          <div class="node butter">Services / utils</div>
+        </div>
+        <div class="branch-col">
+          <div class="arrow down"></div>
+          <div class="node store">MongoDB</div>
+        </div>
+      </div>
+      <div class="merge-cap"></div>
+
+      <div class="node rose">Razorpay · Cloudinary · SMTP</div>
+      <div class="arrow down"></div>
+
+      <div class="node output">Response — JSON / PDF / image</div>
+      <div class="arrow down"><span class="label">Auth entry</span></div>
+
+      <div class="node sky">Register / Login</div>
+      <div class="arrow down"></div>
+      <div class="node mint">JWT Bearer token → Auth gate</div>
+    </div>
+
+    <footer>
+      <span>Backend · Express · Mongoose · JWT</span>
+      <span>2 / 2</span>
+    </footer>
+  </article>
+</body>
+</html>

@@ -100,7 +100,7 @@ router.put("/:id/status", auth, adminOnly, async (req, res) => {
   const order = await Order.findByIdAndUpdate(
     req.params.id,
     { status: req.body.status },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   res.json(order);

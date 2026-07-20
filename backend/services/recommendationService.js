@@ -292,7 +292,7 @@ export async function saveUserBehavior(userId, payload = {}) {
       cartProductIds,
       keywords,
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 }
 

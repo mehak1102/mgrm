@@ -24,7 +24,7 @@ router.put("/me", auth, async (req, res) => {
         ...(phone !== undefined && { phone }),
         ...(profileImage !== undefined && { profileImage }),
       },
-      { new: true, runValidators: true }
+      { returnDocument: "after", runValidators: true }
     ).select("-password");
     res.json(user);
   } catch (err) {

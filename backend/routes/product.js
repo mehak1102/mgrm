@@ -208,7 +208,7 @@ router.put("/:id", auth, adminOnly, async (req, res) => {
       req.params.id,
       { $set: cleanBody },
       {
-        new: true,
+        returnDocument: "after",
       }
     );
 

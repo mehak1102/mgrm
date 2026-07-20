@@ -355,6 +355,19 @@ export async function warmupInstagramCache() {
     console.warn("Instagram DB warmup failed:", err.message);
   }
 
+  const hasGraphApi =
+    Boolean(process.env.INSTAGRAM_ACCESS_TOKEN) &&
+    Boolean(process.env.INSTAGRAM_USER_ID);
+
+  // Unofficial web scrape often returns 400; skip it when DB cache is already warm
+  // unless Graph API credentials are configured for a real live refresh.
+  if (!hasGraphApi && memoryCache?.data) {
+    console.log(
+      "Instagram live refresh skipped (serving DB cache; set INSTAGRAM_ACCESS_TOKEN + INSTAGRAM_USER_ID for live updates)"
+    );
+    return;
+  }
+
   refreshInstagramCache()
     .then((profile) => {
       console.log(
@@ -362,6 +375,13 @@ export async function warmupInstagramCache() {
       );
     })
     .catch((err) => {
+      if (memoryCache?.data) {
+        console.warn(
+          "Instagram live refresh unavailable; continuing with cached posts:",
+          err.message
+        );
+        return;
+      }
       console.warn("Instagram background refresh skipped:", err.message);
     });
 }
