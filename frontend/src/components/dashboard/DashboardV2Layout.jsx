@@ -380,7 +380,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
   );
 
   return (
-    <div className={`dashboard-v2 flex h-full min-h-0 ${pageMode ? "dashboard-v2--page" : ""} ${v2.pageBg || v2.shell}`}>
+    <div className={`dashboard-v2 flex h-full w-full min-h-0 min-w-0 ${pageMode ? "dashboard-v2--page" : ""} ${v2.pageBg || v2.shell}`}>
       {sidebarOpen && (
         <button type="button" className="dashboard-v2__sidebar-backdrop lg:hidden" onClick={() => setSidebarOpen(false)} aria-hidden />
       )}
@@ -469,7 +469,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
       <div className="dashboard-v2__main-col">
         <header className={`dashboard-v2__topbar border-b ${v2.headerBorder} ${v2.headerBg}`}>
           <button type="button" onClick={() => setSidebarOpen(true)} className={`lg:hidden w-9 h-9 rounded-lg grid place-items-center ${v2.closeBtn}`} aria-label="Menu"><Menu size={18} /></button>
-          <form onSubmit={handleSearch} className="flex-1 max-w-xl">
+          <form onSubmit={handleSearch} className="dashboard-v2__search-form">
             <div className={`dashboard-v2__search border ${v2.searchBg}`}>
               <Search size={16} className={v2.muted} />
               <input type="search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder={t("dashboard.v2.searchPlaceholder", { defaultValue: "Search products, categories..." })} />
@@ -719,7 +719,7 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
                             <td>
                               <div className="flex items-center gap-1.5">
                                 {item?.image && <img src={item.image} alt="" className="w-7 h-7 rounded object-cover" />}
-                                <span className={`dashboard-v2__product-name max-w-[90px] ${v2.stat}`}>{item?.name || t("common.product")}</span>
+                                <span className={`dashboard-v2__product-name ${v2.stat}`}>{item?.name || t("common.product")}</span>
                               </div>
                             </td>
                             <td className={v2.muted}>#{order._id.slice(-6).toUpperCase()}</td>

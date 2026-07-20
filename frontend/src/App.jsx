@@ -66,12 +66,14 @@ export default function App() {
   const location = useLocation();
   const { user, authReady } = useAuth();
 
+  const isDashboard = location.pathname === "/dashboard";
+
   const hideLayout =
     location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname === "/forgot-password" ||
     location.pathname === "/reset-password" ||
-    location.pathname === "/dashboard";
+    isDashboard;
 
   const requireAuth = (element) => {
     if (!authReady) return <RouteFallback />;
@@ -79,7 +81,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300 overflow-x-clip max-w-[100vw]">
+    <div
+      className={`${
+        isDashboard ? "h-dvh max-h-dvh overflow-hidden" : "min-h-screen"
+      } bg-app text-fg dark:bg-slate-950 dark:text-zinc-100 transition-colors duration-300 overflow-x-clip max-w-[100vw]`}
+    >
       {!hideLayout && <Navbar />}
 
       <ScrollToTop />

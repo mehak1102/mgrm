@@ -73,19 +73,29 @@ export default function UserDashboard() {
   const goRoute = (path) => navigate(path);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const applyOverflow = () => {
-      document.body.style.overflow = mq.matches ? "" : "hidden";
+    const mqMobile = window.matchMedia("(max-width: 1023px)");
+    const root = document.documentElement;
+
+    const applyLock = () => {
+      const mobile = mqMobile.matches;
+      root.classList.toggle("dashboard-lock", !mobile);
+      document.body.classList.toggle("dashboard-lock", !mobile);
+      document.body.style.overflow = mobile ? "" : "hidden";
     };
-    applyOverflow();
-    mq.addEventListener("change", applyOverflow);
+
+    applyLock();
+    mqMobile.addEventListener("change", applyLock);
+
     if (scrollTarget && ACCOUNT_SECTIONS.has(scrollTarget)) {
       setActiveSection(scrollTarget);
       setView("section");
       setScrollTarget(null);
     }
+
     return () => {
-      mq.removeEventListener("change", applyOverflow);
+      mqMobile.removeEventListener("change", applyLock);
+      root.classList.remove("dashboard-lock");
+      document.body.classList.remove("dashboard-lock");
       document.body.style.overflow = "";
     };
   }, [scrollTarget, setScrollTarget]);
@@ -108,13 +118,18 @@ export default function UserDashboard() {
       <div className="dashboard-page__shell">
         <div className="dashboard-page__body relative min-h-0 flex-1">
           <motion.div
-            className="absolute inset-0"
+            className="absolute inset-0 w-full h-full overflow-hidden"
             animate={
               view === "section" || view === "explore" || isZooming
-                ? { opacity: 0.12, scale: 0.98, filter: "blur(8px)" }
-                : { opacity: 1, scale: 1, filter: "blur(0px)" }
+                ? { opacity: 0.12, scale: 0.98 }
+                : { opacity: 1, scale: 1 }
             }
             transition={{ duration: 0.4, ease }}
+            style={
+              view === "section" || view === "explore" || isZooming
+                ? { filter: "blur(8px)" }
+                : undefined
+            }
           >
             <Suspense fallback={null}>
               <DashboardV2Layout

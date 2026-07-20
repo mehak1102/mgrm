@@ -87,9 +87,7 @@ router.patch("/:id/status", auth, adminOnly, async (req, res) => {
     if (!["open", "closed"].includes(status)) {
       return res.status(400).json({ msg: "Invalid status" });
     }
-    const job = await Career.findByIdAndUpdate(req.params.id, { status }, {
-      returnDocument: "after",
-    });
+    const job = await Career.findByIdAndUpdate(req.params.id, { status }, { new: true });
     if (!job) return res.status(404).json({ msg: "Job not found" });
     res.json({ job });
   } catch (err) {
