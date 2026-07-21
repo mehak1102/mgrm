@@ -17,6 +17,8 @@ import ThemeSelector from "./ThemeSelector";
 import { useTheme } from "../context/ThemeContext";
 import "../theme/navbar-logo.css";
 import { useTypewriterPlaceholder } from "../hooks/useTypewriterPlaceholder";
+import useSearchSuggestions from "../hooks/useSearchSuggestions";
+import SearchSuggestionsDropdown from "./SearchSuggestionsDropdown";
 
 const ABOUT_LINKS = [
   { key: "nav.aboutLinks.history", slug: "our-history" },
@@ -40,13 +42,19 @@ function NavbarSearchField({
   iconSize = 17,
   value,
   onChange,
+  onKeyDown,
   focused,
   onFocus,
   onBlur,
   animatedText,
   searchAriaLabel,
+  listboxId,
+  expanded,
+  activeSuggestionIndex = -1,
 }) {
   const showOverlay = !value;
+  const activeOptionId =
+    activeSuggestionIndex >= 0 ? `${listboxId}-opt-${activeSuggestionIndex}` : undefined;
 
   return (
     <>
@@ -55,10 +63,16 @@ function NavbarSearchField({
         name="search"
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder=""
         aria-label={searchAriaLabel}
+        aria-autocomplete="list"
+        aria-controls={listboxId}
+        aria-expanded={expanded}
+        aria-activedescendant={activeOptionId}
+        role="combobox"
         autoComplete="off"
         className={inputClassName}
       />
@@ -100,12 +114,19 @@ export default function Navbar() {
   const [mobileSupportOpen, setMobileSupportOpen] = useState(false);
   const [searchDraft, setSearchDraft] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
+  const [activeSuggestion, setActiveSuggestion] = useState(-1);
   const [openMenu, setOpenMenu] = useState(null);
   const menuCloseTimerRef = useRef(null);
   const typewriterPlaceholder = useTypewriterPlaceholder(
     searchPlaceholder,
     !searchDraft
   );
+  const { suggestions } = useSearchSuggestions(searchDraft, {
+    enabled: true,
+  });
+  const suggestionsOpen =
+    searchFocused && searchDraft.trim().length > 0 && suggestions.length > 0;
+  const searchListboxId = "navbar-search-suggestions";
 
   const handleMenuEnter = (menuId) => {
     if (menuCloseTimerRef.current) {
@@ -131,14 +152,134 @@ export default function Navbar() {
     navigate("/dashboard");
   };
 
+  useEffect(() => {
+    setActiveSuggestion(-1);
+  }, [searchDraft, suggestions]);
+
+  const navigateFromQuery = (rawQuery, suggestionType, slug) => {
+    const q = String(rawQuery || "").trim();
+    if (!q) {
+      navigate("/shop");
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    const { display, search: apiQuery } = normalizeSearchQuery(q);
+
+    if (suggestionType === "product" && slug) {
+      trackSearch(display);
+      navigate(`/product/${encodeURIComponent(slug)}`);
+      setSearchDraft(display);
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    if (suggestionType === "activity") {
+      trackSearch(display);
+      navigate(`/shop-by-activity?activity=${encodeURIComponent(display)}`);
+      setSearchDraft(display);
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    if (suggestionType === "category") {
+      trackSearch(display);
+      navigate(`/shop?category=${encodeURIComponent(display)}`);
+      setSearchDraft(display);
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    const matchedActivity = activitiess.find(
+      (item) => item.name.toLowerCase() === apiQuery.toLowerCase()
+    );
+
+    if (matchedActivity) {
+      trackSearch(matchedActivity.name);
+      navigate(
+        `/shop-by-activity?activity=${encodeURIComponent(matchedActivity.name)}`
+      );
+      setSearchDraft(matchedActivity.name);
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    const matchedCategory = bodyCategories.find(
+      (item) => item.query.toLowerCase() === apiQuery.toLowerCase()
+    );
+
+    if (matchedCategory && suggestionType !== "product" && suggestionType !== "query") {
+      trackSearch(matchedCategory.name);
+      navigate(`/shop?category=${encodeURIComponent(matchedCategory.query)}`);
+      setSearchDraft(matchedCategory.name);
+      setMobileOpen(false);
+      setSearchFocused(false);
+      return;
+    }
+
+    trackSearch(display);
+    navigate(`/shop?search=${encodeURIComponent(display)}`);
+    setSearchDraft(display);
+    setMobileOpen(false);
+    setSearchFocused(false);
+  };
+
+  const selectSuggestion = (item) => {
+    if (!item?.text) return;
+    navigateFromQuery(item.text, item.type, item.slug);
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (!suggestionsOpen) {
+      if (e.key === "Escape") {
+        e.target.blur();
+      }
+      return;
+    }
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveSuggestion((i) => (i + 1) % suggestions.length);
+      return;
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveSuggestion((i) => (i <= 0 ? suggestions.length - 1 : i - 1));
+      return;
+    }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setActiveSuggestion(-1);
+      setSearchFocused(false);
+      e.target.blur();
+      return;
+    }
+    if (e.key === "Enter" && activeSuggestion >= 0 && suggestions[activeSuggestion]) {
+      e.preventDefault();
+      selectSuggestion(suggestions[activeSuggestion]);
+    }
+  };
+
   const searchFieldProps = {
     value: searchDraft,
     onChange: (e) => setSearchDraft(e.target.value),
+    onKeyDown: handleSearchKeyDown,
     focused: searchFocused,
     onFocus: () => setSearchFocused(true),
-    onBlur: () => setSearchFocused(false),
+    onBlur: () => {
+      // Delay so suggestion mousedown/click can fire first
+      setTimeout(() => setSearchFocused(false), 150);
+    },
     animatedText: typewriterPlaceholder,
     searchAriaLabel: searchPlaceholder,
+    listboxId: searchListboxId,
+    expanded: suggestionsOpen,
+    activeSuggestionIndex: activeSuggestion,
   };
 
   useEffect(() => {
@@ -171,32 +312,11 @@ export default function Navbar() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    const q = e.target.search.value.trim();
-
-    if (!q) {
-      navigate("/shop");
-      setMobileOpen(false);
+    if (activeSuggestion >= 0 && suggestions[activeSuggestion]) {
+      selectSuggestion(suggestions[activeSuggestion]);
       return;
     }
-
-    const { display, search: apiQuery } = normalizeSearchQuery(q);
-
-    const matchedActivity = activitiess.find((item) =>
-      item.name.toLowerCase().includes(apiQuery.toLowerCase())
-    );
-
-    if (matchedActivity) {
-      navigate(
-        `/shop-by-activity?activity=${encodeURIComponent(matchedActivity.name)}`
-      );
-      setMobileOpen(false);
-      return;
-    }
-
-    trackSearch(display);
-    navigate(`/shop?search=${encodeURIComponent(display)}`);
-    setMobileOpen(false);
+    navigateFromQuery(e.target.search?.value ?? searchDraft);
   };
 
   const go = (path) => {
@@ -264,6 +384,15 @@ export default function Navbar() {
             iconClassName="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-zinc-500 pointer-events-none"
             inputClassName="w-full min-w-0 theme-panel rounded-2xl py-2 xl:py-2.5 pl-9 xl:pl-10 pr-3 text-sm text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15 shadow-sm focus:ring-2 focus:ring-cyan-500/40 dark:focus:ring-cyan-400/35 transition-all duration-300"
             overlayClassName="absolute left-9 xl:left-10 top-1/2 -translate-y-1/2 pointer-events-none text-sm text-slate-500 dark:text-slate-400 truncate right-3"
+          />
+          <SearchSuggestionsDropdown
+            open={suggestionsOpen}
+            suggestions={suggestions}
+            query={searchDraft}
+            activeIndex={activeSuggestion}
+            onSelect={selectSuggestion}
+            onHover={setActiveSuggestion}
+            listId={searchListboxId}
           />
         </form>
 
@@ -577,10 +706,20 @@ export default function Navbar() {
                 <form onSubmit={handleSearch} className="md:hidden relative">
                   <NavbarSearchField
                     {...searchFieldProps}
+                    listboxId={`${searchListboxId}-mobile`}
                     iconSize={18}
                     iconClassName="absolute left-3 top-3 text-gray-400 dark:text-zinc-500 pointer-events-none"
                     inputClassName="w-full min-w-0 theme-panel rounded-2xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-white/15"
                     overlayClassName="absolute left-10 top-1/2 -translate-y-1/2 pointer-events-none text-sm text-slate-500 dark:text-slate-400 truncate right-4"
+                  />
+                  <SearchSuggestionsDropdown
+                    open={suggestionsOpen}
+                    suggestions={suggestions}
+                    query={searchDraft}
+                    activeIndex={activeSuggestion}
+                    onSelect={selectSuggestion}
+                    onHover={setActiveSuggestion}
+                    listId={`${searchListboxId}-mobile`}
                   />
                 </form>
 

@@ -6,6 +6,11 @@ import {
   invalidateProductStatsCache,
 } from "../services/productStatsService.js";
 import { generateProductCatalogPdf } from "../services/catalogPdfService.js";
+import {
+  getSearchSuggestions,
+  getSuggestIndex,
+  invalidateSuggestCache,
+} from "../services/searchSuggestService.js";
 
 const router = express.Router();
 
@@ -113,6 +118,36 @@ router.get("/categories", async (req, res) => {
   }
 });
 
+// GET lightweight catalog for client-side dynamic suggestions (before /:slug)
+router.get("/suggest-index", async (req, res) => {
+  try {
+    const products = await getSuggestIndex(Product);
+    res.set("Cache-Control", "public, max-age=120");
+    res.json({ products });
+  } catch (err) {
+    console.error("Product suggest-index error:", err);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+// GET Amazon-style search suggestions from every product (before /:slug)
+router.get("/suggest", async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim();
+    if (!q) {
+      return res.json({ suggestions: [] });
+    }
+    const suggestions = await getSearchSuggestions(Product, q, {
+      limit: req.query.limit,
+    });
+    res.set("Cache-Control", "public, max-age=60");
+    res.json({ suggestions });
+  } catch (err) {
+    console.error("Product suggest error:", err);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
 // GET product catalogue PDF (all products)
 router.get("/catalog/pdf", async (req, res) => {
   try {
@@ -172,6 +207,7 @@ router.post("/", auth, adminOnly, async (req, res) => {
     });
 
     invalidateProductStatsCache();
+    invalidateSuggestCache();
     res.status(201).json(product);
   } catch (err) {
     console.error("Product create error:", err);
@@ -217,6 +253,7 @@ router.put("/:id", auth, adminOnly, async (req, res) => {
     }
 
     invalidateProductStatsCache();
+    invalidateSuggestCache();
     res.json(product);
   } catch (err) {
     console.error("Product update error:", err);
@@ -229,6 +266,7 @@ router.delete("/:id", auth, adminOnly, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     invalidateProductStatsCache();
+    invalidateSuggestCache();
     res.json({ msg: "Product deleted" });
   } catch (err) {
     res.status(500).json({ msg: err.message });
