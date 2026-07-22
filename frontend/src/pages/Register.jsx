@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-import { useDashboard } from "../context/DashboardContext";
 import AnimatedLotus from "../components/AnimatedLotus";
 import ThemeSelector from "../components/ThemeSelector";
 import { useTheme } from "../context/ThemeContext";
@@ -22,7 +21,6 @@ export default function Register() {
   const isDark = theme === "dark";
   const navigate = useNavigate();
   const { register } = useAuth();
-  const { layoutVariant, openDashboard } = useDashboard();
 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -52,12 +50,7 @@ export default function Register() {
       sessionStorage.removeItem(DASHBOARD_PENDING_KEY);
 
       if (pendingDashboard) {
-        if (layoutVariant === "modern") {
-          navigate("/dashboard");
-        } else {
-          openDashboard();
-          navigate("/");
-        }
+        navigate("/dashboard");
         return;
       }
 

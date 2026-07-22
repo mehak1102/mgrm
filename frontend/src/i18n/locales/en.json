@@ -427,11 +427,6 @@
       }
     },
     "v2": {
-      "layoutToggle": "Switch dashboard layout",
-      "classicView": "Classic poster dashboard",
-      "modernView": "New glass dashboard",
-      "classicShort": "Old",
-      "modernShort": "New",
       "searchPlaceholder": "Search products, categories, orders...",
       "navDashboard": "Dashboard",
       "navProducts": "Products",

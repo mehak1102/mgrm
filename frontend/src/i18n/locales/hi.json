@@ -427,11 +427,6 @@
       }
     },
     "v2": {
-      "layoutToggle": "डैशबोर्ड लेआउट बदलें",
-      "classicView": "क्लासिक पोस्टर डैशबोर्ड",
-      "modernView": "नया ग्लास डैशबोर्ड",
-      "classicShort": "पुराना",
-      "modernShort": "नया",
       "navDashboard": "डैशबोर्ड",
       "navProducts": "उत्पाद",
       "navCategories": "श्रेणियां",

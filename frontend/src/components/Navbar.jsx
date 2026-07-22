@@ -107,7 +107,7 @@ export default function Navbar() {
   const { cartCount, setCartOpen } = useCart();
   const { wishlist } = useWishlist();
   const { user, logout, authReady } = useAuth();
-  const { closeDashboard, setLayoutVariant } = useDashboard();
+  const { closeDashboard } = useDashboard();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileBodyOpen, setMobileBodyOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
@@ -143,7 +143,6 @@ export default function Navbar() {
   };
 
   const handleDashboardClick = () => {
-    setLayoutVariant("modern");
     if (!user) {
       sessionStorage.setItem(DASHBOARD_PENDING_KEY, "1");
       navigate("/register");

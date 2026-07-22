@@ -32,7 +32,6 @@ import { useTheme } from "../../context/ThemeContext";
 import { useHomeRecommendations } from "../../hooks/useRecommendations";
 import { productPriceSaleProps } from "../../utils/productPriceStyle";
 import LanguageSwitcher from "../LanguageSwitcher";
-import DashboardLayoutToggle from "./DashboardLayoutToggle";
 import DashboardV2ThemeToggle from "./DashboardV2ThemeToggle";
 import DashboardV2Hero from "./DashboardV2Hero";
 import DashboardV2CategoryCarousel from "./DashboardV2CategoryCarousel";
@@ -462,7 +461,6 @@ export default function DashboardV2Layout({ pageMode = true, onSection, onRoute,
 
         <div className="dashboard-v2__sidebar-bottom">
           <LanguageSwitcher variant="drawer" compact className="language-switcher--sidebar" />
-          {pageMode && <DashboardLayoutToggle inline compact />}
         </div>
       </aside>
 
